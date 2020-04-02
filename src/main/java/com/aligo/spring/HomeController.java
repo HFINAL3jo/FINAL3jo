@@ -23,11 +23,6 @@ public class HomeController {
 		return "main";
 	}
 	
-	@RequestMapping("theme.do")
-	public String theme() {
-		return "theme/categoryList";
-	}
-	
 	@RequestMapping("post.do")
 	public String post() {
 		return "board/post";
