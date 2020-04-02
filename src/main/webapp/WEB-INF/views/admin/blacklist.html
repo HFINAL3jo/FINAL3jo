@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+
+  <link rel="stylesheet" href="css/basic.css">
+  <link rel="stylesheet" href="css/button.css">
+  <link rel="stylesheet" href="css/margin.css">
+  <link rel="stylesheet" href="css/table.css">
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>BlackList</title>
+
+<style>
+
+table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+    text-align: center;
+  }
+  thead tr {
+    background-color: #77AAAD;
+    color: #ffffff;
+  }
+  tbody tr:nth-child(2n) {
+    background-color: #D8E6E7;
+  }
+  tbody tr:nth-child(2n+1) {
+    background-color: #EDECF0;
+  }
+
+
+
+</style>
+
+
+
+</head>
+<body>
+    <div class="BlacklistPage">
+
+      <h2>블랙리스트</h2>
+      <hr>
+        <div class="BlacklistTable">
+
+    <table>
+        <thead>
+        <tr>
+            <th>아이디</th>
+            <th>신고사유</th>
+            <th>처리</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>kh1</td>
+            <td>신고합니다</td>
+            <td><input type="checkbox"></checkbox></td>
+        </tr>
+
+        <tr>
+            <td>kh2</td>
+            <td>신고합니다2</td>
+            <td><input type="checkbox"></checkbox></td>
+        </tr>
+
+    </tbody>
+    </table>
+
+    <br>
+
+    <div class="button" align="right">
+        <button>처리하기</button>
+    </div>
+
+    <div class=Pagenation>
+
+      <ul id="pagenation" align="center" style="margin-left:-90px; display:inline-block;">
+        <li><button class="listbtn" value="-1">&lt;</button></li>
+        <li><button class="listbtn" value="1">1</button></li>
+        <li><button class="listbtn" value="2">2</button></li>
+        <li><button class="listbtn" value="3">3</button></li>
+        <li><button class="listbtn" value="+1">&gt;</button></li>
+    </ul>
+
+  </div>
+
+    </div>
+
+</div>
+</div>
+
+</body>
+</html>
