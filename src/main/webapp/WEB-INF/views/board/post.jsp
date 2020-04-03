@@ -7,7 +7,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>aranoz</title>
+  <title>Post ALigo</title>
   
   <link rel="stylesheet" href="resources/css/lightslider.min.css">
 
