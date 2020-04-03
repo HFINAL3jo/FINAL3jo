@@ -162,6 +162,23 @@
     <script src="resources/js/price_rangs.js"></script>
   
     <div id="goDown"/>
-</body>
 
+   <script>
+        window.onmousewheel = function(e){
+        	e.preventDefault;
+        	var aa = $(window).scrollTop();
+        	var bb = $(document).height();
+        	var cc = $(window).height();
+        	if(Math.floor((aa / (bb - cc)) * 100) >= 75){
+        	   var data = new Array(6);   
+        	
+        	   for(var i in data){
+        		   data[i] = document.createElement('div');
+        		   data[i].classList.add('col-lg-4 col-sm-6');
+        		   $('.col-lg-9').append(data[i]);
+        	   }
+          	}
+       };
+    </script>
+</body>
 </html>
