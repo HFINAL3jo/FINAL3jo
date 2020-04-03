@@ -44,7 +44,10 @@
                                         <a href="blacklist.html">블랙리스트</a>
                                         <span></span>
                                     </li>
-                                  
+                                  	 <li>
+                                        <a href="statistics.do">통계 리스트</a>
+                                        <span></span>
+                                    </li>
                                 </ul>
                             </div>
                         </aside>
@@ -138,8 +141,8 @@
                             </div>
                         </aside> -->
                     </div>
+               	  <div class="col-lg-9" id="inset_1"></div>
                 </div>
-               
     </section>    
 	
     <!-- jquery plugins here-->
