@@ -83,4 +83,9 @@ public class HomeController {
 		return "admin/reportlist";
 	}
 	
+	@RequestMapping("statistics.do")
+	public String statistics() {
+		return "admin/statistics";
+	}
+	
 }
