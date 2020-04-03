@@ -56,7 +56,7 @@
        	<!-- 인클루드 asside -->
        	<%@ include file="../common/assidetheme.jsp" %>
                 
-                <div class="col-lg-9">
+                <div id="tList" class="col-lg-9">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="product_top_bar d-flex justify-content-between align-items-center">
@@ -80,7 +80,7 @@
                         </div>
                     </div>
 
-                    <div class="row align-items-center latest_product_inner">
+                    <div id="aList" class="row align-items-center latest_product_inner">
                         <div class="col-lg-4 col-sm-6">
                             <div class="single_product_item">
                                 <img src="resources/TestImg/test1.jpg"style="width: 100%; height: 170px">
@@ -164,20 +164,24 @@
     <div id="goDown"/>
 
    <script>
+      	//스크롤 70% 스크립트 및 div 추가 
         window.onmousewheel = function(e){
         	e.preventDefault;
-        	var aa = $(window).scrollTop();
-        	var bb = $(document).height();
-        	var cc = $(window).height();
-        	if(Math.floor((aa / (bb - cc)) * 100) >= 75){
-        	   var data = new Array(6);   
-        	
-        	   for(var i in data){
-        		   data[i] = document.createElement('div');
-        		   data[i].classList.add('col-lg-4 col-sm-6');
-        		   $('.col-lg-9').append(data[i]);
-        	   }
-          	}
+            
+        	var aa = $(window).height();
+            var bb = $(document).height();
+            var cc = $(window).scrollTop();
+  				
+        	if(Math.floor((aa / (bb-cc))*100 > 65 && e.deltaY === 100)){
+
+          		var testData1 = $('#aList').html();
+          		var testData = $('#aList');
+            	testData.append(testData1);
+            
+        	/* $.each(testData,function(index,item){
+				  				      		
+        	}); */
+        	}
        };
     </script>
 </body>
