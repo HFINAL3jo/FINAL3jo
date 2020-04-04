@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="KOR">
+<html lang="ko">
 
 <head>
 <!-- Required meta tags -->
@@ -68,7 +68,7 @@
 
 						<div class="single_product_menu">
 							<p>
-								결과에 맞는 데이터가 <span>300</span> 입니다.
+								결과에 맞는 데이터가 <span>${pi.listCount}</span> 입니다.
 							</p>
 							<p>여행 테마 -> 전통 -> 고궁</p>
 						</div>
@@ -90,18 +90,21 @@
 			</div>
 
 			<div id="aList" class="row align-items-center latest_product_inner">
+			    <c:forEach var="t" items="${list }" begin="0" end="5">
 				<div class="col-lg-4 col-sm-6">
 					<div class="single_product_item">
-						<img src="resources/TestImg/test1.jpg"
+						<img src="resources/tuploadFiles/${t.tModifyFile }"
 							style="width: 100%; height: 170px">
 						<div class="single_product_text">
-							<h4>Quartz Belt Watch</h4>
-							<h3>$150.00</h3>
+							<h4>${t.tTitle }</h4>
+							<h3><b style="color:rgba(121,125,237,0.9)">#${t.tName}</b></h3>
+							<h5></h5>
 							<a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 col-sm-6">
+				</c:forEach>
+				<!-- <div class="col-lg-4 col-sm-6">
 					<div class="single_product_item">
 						<img src="resources/TestImg/test2.jpg"
 							style="width: 100%; height: 170px">
@@ -155,12 +158,18 @@
 							<a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 			</div>
+			
+		<c:url var="theme" value="theme.do">
 			<div align="center">
+				  <c:param name="currentPage" value="${pi.currentPage }"/>
+				  <c:param name="pageLimit" value="${pi.pageLimit }"/>	
 				<button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:#ebc5e4;">Lord More..</button>
 			</div>
+		</c:url>
+			
 		</div>
 		<div class="floatdiv">
 			<a href="#goUp" class="fas fa-chevron-up" style="font-size: 50px;"></a>
@@ -186,7 +195,6 @@
 	
 		var testData1 = $('#aList').html();
 		var testData = $('#aList');
-		
 		//버튼 스크롤 추가
 		$('#alb').on("click", function() {
 			testData.append(testData1);
@@ -200,7 +208,15 @@
 			var cc = $(window).scrollTop();
 			
 			if (Math.floor((aa / (bb - cc)) * 100 > 75 && e.deltaY === 100)) {
-
+				$.ajax({
+					url:"theme.do",
+					type:"post",
+					success:function(data){
+						
+					},error:function(){
+						
+					}
+				});
 				testData.append(testData1);
 
 				/* $.each(testData,function(index,item){
