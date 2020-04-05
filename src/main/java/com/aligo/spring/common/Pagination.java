@@ -4,17 +4,14 @@ import com.aligo.spring.theme.model.vo.PageInfo;
 
 public class Pagination {
 	
-	public static PageInfo getPageInfo(int currentPage,int listCount, int pageLimit) {
+	public static PageInfo getPageInfo(int currentPage,int listCount, int themeLimit) {
 		
 		PageInfo pi = null;
-		
-		pageLimit = pageLimit + 1;
 		
 		int maxPage;
 		int startPage;
 		int endPage;
-						
-		int themeLimit = 6;
+		int pageLimit = 1;
 		
 		maxPage = (int)Math.ceil((double)listCount / themeLimit);
 		

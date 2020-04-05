@@ -88,9 +88,9 @@
 					</div>
 				</div>
 			</div>
-
+			    
 			<div id="aList" class="row align-items-center latest_product_inner">
-			    <c:forEach var="t" items="${list }" begin="0" end="5">
+			    <c:forEach var="t" items="${list }" begin="0" end="${pi.themeLimit}">
 				<div class="col-lg-4 col-sm-6">
 					<div class="single_product_item">
 						<img src="resources/tuploadFiles/${t.tModifyFile }"
@@ -104,71 +104,11 @@
 					</div>
 				</div>
 				</c:forEach>
-				<!-- <div class="col-lg-4 col-sm-6">
-					<div class="single_product_item">
-						<img src="resources/TestImg/test2.jpg"
-							style="width: 100%; height: 170px">
-						<div class="single_product_text">
-							<h4>Quartz Belt Watch</h4>
-							<h3>$150.00</h3>
-							<a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-sm-6">
-					<div class="single_product_item">
-						<img src="resources/TestImg/test3.png"
-							style="width: 100%; height: 170px">
-						<div class="single_product_text">
-							<h4>Quartz Belt Watch</h4>
-							<h3>$150.00</h3>
-							<a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-sm-6">
-					<div class="single_product_item">
-						<img src="resources/TestImg/test4.png"
-							style="width: 100%; height: 170px">
-						<div class="single_product_text">
-							<h4>Quartz Belt Watch</h4>
-							<h3>$150.00</h3>
-							<a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-sm-6">
-					<div class="single_product_item">
-						<img src="resources/TestImg/test5.png"
-							style="width: 100%; height: 170px">
-						<div class="single_product_text">
-							<h4>Quartz Belt Watch</h4>
-							<h3>$150.00</h3>
-							<a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-sm-6">
-					<div class="single_product_item">
-						<img src="resources/TestImg/test6.png"
-							style="width: 100%; height: 170px">
-						<div class="single_product_text">
-							<h4>Quartz Belt Watch</h4>
-							<h3>$150.00</h3>
-							<a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-						</div>
-					</div>
-				</div> -->
-
 			</div>
-			
-		<c:url var="theme" value="theme.do">
+			<input id="tl" type="hidden" value="${pi.themeLimit }" name="themeLimit">
 			<div align="center">
-				  <c:param name="currentPage" value="${pi.currentPage }"/>
-				  <c:param name="pageLimit" value="${pi.pageLimit }"/>	
-				<button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:#ebc5e4;">Lord More..</button>
+				<a href="javascript:void(0)" onclick="ex();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:#ebc5e4;">Lord More..</button></a>
 			</div>
-		</c:url>
 			
 		</div>
 		<div class="floatdiv">
@@ -192,13 +132,53 @@
 	<div id="goDown" />
 
 	<script>
-	
+	function ex(){
+		$.ajax({
+			url:"pagination.do",
+			data:{themeLimit:themeLimit},
+			dataType:"json",
+			success:function(data){
+			   $div = $('#aList');
+			   $div.html("");
+			   $div.addClass('row align-items-center latest_product_inner');
+			   
+			   for(var i in data){
+								
+				  var $diva = $('<div>').addClass('col-lg-4 col-sm-6'); 
+				  var $divb = $('<div>').addClass('single_product_item');
+				  var $img = $('<img>').attr('src',data[i].tModifyFile).css({"width":"100%","height":"170px"});
+				  var $divc = $('<div>').addClass("single_product_text");
+				  var $h4 = $('<h4>').text(data[i].tTitle);
+				  var $h3 = $('<h3>');
+				  var $b  = $('<b>').css({"color":"rgba(121,125,237,0.9)"}).text(data[i].tName);
+				  var $h5 = $('<h5></h5>');
+				  var $a = $('<a>').attr('href','#').addClass('add_cart').text('+ add to cart');
+				  var $i = $('<i>').addClass('ti-heart');
+
+				  $div.append($diva);
+				  $diva.append($divb);
+				  $divb.append($divc);
+				  $divb.append($img);
+				  $divb.append($divc);
+				  $divc.append($h4);
+				  $h3.append($b);
+				  $divc.append($h3);
+				  $divc.append($h5);
+				  $a.append($i);
+				  $divc.append($a);
+			   }
+							
+			},error:function(){
+				
+			}
+	});
+	}
+		var pageLimit = $('#pl').val();
+		var themeLimit = $('#tl').val();
 		var testData1 = $('#aList').html();
 		var testData = $('#aList');
 		//버튼 스크롤 추가
-		$('#alb').on("click", function() {
-			testData.append(testData1);
-		});
+		
 		
 		//스크롤 70% 스크립트 및 div 추가 
 		window.onmousewheel = function(e) {
@@ -208,22 +188,10 @@
 			var cc = $(window).scrollTop();
 			
 			if (Math.floor((aa / (bb - cc)) * 100 > 75 && e.deltaY === 100)) {
-				$.ajax({
-					url:"theme.do",
-					type:"post",
-					success:function(data){
-						
-					},error:function(){
-						
-					}
-				});
-				testData.append(testData1);
-
-				/* $.each(testData,function(index,item){
-					  				      		
-				}); */
+				
+				ex();
+				}
 			}
-		}
 		
 	</script>
 </body>

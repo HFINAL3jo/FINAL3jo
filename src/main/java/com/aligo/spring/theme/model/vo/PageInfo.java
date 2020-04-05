@@ -70,7 +70,7 @@ public class PageInfo implements Serializable {
 	}
 
 	public int getThemeLimit() {
-		return themeLimit;
+		if(themeLimit==5) return themeLimit+1; else return themeLimit+6;
 	}
 
 	public void setThemeLimit(int themeLimit) {
