@@ -20,7 +20,7 @@
    
 
     <!--================Category Product Area =================-->
-    <section class="cat_product_area section_padding">
+    <section class="cat_product_area section_padding" style="padding-bottom: 65px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -141,7 +141,7 @@
                             </div>
                         </aside> -->
                     </div>
-               	  <div class="col-lg-9" id="inset_1"></div>
+               	  <div class="col-lg-9" id="inset_1" style="padding-bottom: 30px"></div>
                 </div>
     </section>    
 	
