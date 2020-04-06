@@ -2,13 +2,14 @@ package com.aligo.spring.theme.model.vo;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Theme implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 9062238090566590849L;
-	
+
 	private int tId;
 	private String tWriter;
 	private String tTitle;
@@ -24,6 +25,10 @@ public class Theme implements Serializable {
 	private String tOriginalFile;
 	private String tModifyFile;
 	private String tName;
+	private int tCodeNumber;
+
+	private ArrayList<TFile> tFileList;
+	private ArrayList<TName> tNameList;
 
 	public Theme() {
 	}
@@ -148,9 +153,34 @@ public class Theme implements Serializable {
 		this.tName = tName;
 	}
 
+	public int gettCodeNumber() {
+		return tCodeNumber;
+	}
+
+	public void settCodeNumber(int tCodeNumber) {
+		this.tCodeNumber = tCodeNumber;
+	}
+
+	public ArrayList<TFile> gettFileList() {
+		return tFileList;
+	}
+
+	public void settFileList(ArrayList<TFile> tFileList) {
+		this.tFileList = tFileList;
+	}
+
+	public ArrayList<TName> gettNameList() {
+		return tNameList;
+	}
+
+	public void settNameList(ArrayList<TName> tNameList) {
+		this.tNameList = tNameList;
+	}
+
 	public Theme(int tId, String tWriter, String tTitle, String tContent, String tAddress, Date tCreateDate,
 			Date tModifyDate, int tViews, int tLikes, String tKeyword, String tStatus, String tCode,
-			String tOriginalFile, String tModifyFile, String tName) {
+			String tOriginalFile, String tModifyFile, String tName, int tCodeNumber, ArrayList<TFile> tFileList,
+			ArrayList<TName> tNameList) {
 		super();
 		this.tId = tId;
 		this.tWriter = tWriter;
@@ -167,6 +197,9 @@ public class Theme implements Serializable {
 		this.tOriginalFile = tOriginalFile;
 		this.tModifyFile = tModifyFile;
 		this.tName = tName;
+		this.tCodeNumber = tCodeNumber;
+		this.tFileList = tFileList;
+		this.tNameList = tNameList;
 	}
 
 	@Override
@@ -175,7 +208,8 @@ public class Theme implements Serializable {
 				+ ", tAddress=" + tAddress + ", tCreateDate=" + tCreateDate + ", tModifyDate=" + tModifyDate
 				+ ", tViews=" + tViews + ", tLikes=" + tLikes + ", tKeyword=" + tKeyword + ", tStatus=" + tStatus
 				+ ", tCode=" + tCode + ", tOriginalFile=" + tOriginalFile + ", tModifyFile=" + tModifyFile + ", tName="
-				+ tName + "]";
+				+ tName + ", tCodeNumber=" + tCodeNumber + ", tFileList=" + tFileList + ", tNameList=" + tNameList
+				+ "]";
 	}
 
 }

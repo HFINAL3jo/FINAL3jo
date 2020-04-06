@@ -20,7 +20,7 @@
    
 
     <!--================Category Product Area =================-->
-    <section class="cat_product_area section_padding">
+    <section class="cat_product_area section_padding" style="padding-bottom: 65px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -44,7 +44,10 @@
                                         <a href="blacklist.html">블랙리스트</a>
                                         <span></span>
                                     </li>
-                                  
+                                  	 <li>
+                                        <a href="statistics.do">통계 리스트</a>
+                                        <span></span>
+                                    </li>
                                 </ul>
                             </div>
                         </aside>
@@ -138,8 +141,8 @@
                             </div>
                         </aside> -->
                     </div>
+               	  <div class="col-lg-9" id="inset_1" style="padding-bottom: 30px"></div>
                 </div>
-               
     </section>    
 	
     <!-- jquery plugins here-->

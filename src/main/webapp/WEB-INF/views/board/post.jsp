@@ -7,7 +7,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>aranoz</title>
+  <title>Post ALigo</title>
   
   <link rel="stylesheet" href="resources/css/lightslider.min.css">
 
@@ -100,10 +100,10 @@
           <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment"
             aria-selected="false">Comments</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review"
             aria-selected="false">Reviews</a>
-        </li>
+        </li> -->
       </ul>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade" id="description" role="tabpanel" aria-labelledby="description-tab">
@@ -247,6 +247,8 @@
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
   <script>
       $(document).ready(function(){
+    	 $('#description-tab').click();
+    	  
         $('.img_view').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -266,6 +268,7 @@
         autoplayspeed:5000
       });
     });
+      
     $('.list').hover(function(){
        $(this).css('cursor','pointer');
     }).click(function(){
