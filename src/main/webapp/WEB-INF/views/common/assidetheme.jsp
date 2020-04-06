@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<span style="text-align: center;"><h2>여행은 언제나 돈의 문제가 아니라 용기의 문제다. -파올로 코엘료-</h2></span>
+	<span style="text-align: center;"><h2>Example</h2></span>
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">

@@ -8,6 +8,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>aranoz</title>
+<style>
+	ul[class~=social-icons]>li{
+		font-size:2em;
+		display:inline;
+	}
+</style>
 </head>
 
 <body>
@@ -69,9 +75,9 @@
                                     </div>
                                     <br>
                                     <ul class="social-icons text-right">
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fas fa-globe"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-facebook-f">&nbsp;&nbsp;</i></a></li>
+                                        <li><a href="#"><i class="fab fa-twitter">&nbsp;&nbsp;</i></a></li>
+                                        <li><a href="#"><i class="fas fa-globe">&nbsp;&nbsp;</i></a></li>
                                      </ul>
                                     <button type="submit" value="submit" class="btn_3">
                                         log in

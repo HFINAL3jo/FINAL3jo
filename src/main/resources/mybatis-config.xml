@@ -8,4 +8,14 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	
+	<typeAliases>
+		<typeAlias type="com.aligo.spring.theme.model.vo.Theme" alias="Theme"/>
+		<typeAlias type="com.aligo.spring.theme.model.vo.TFile" alias="TFile"/>
+		<typeAlias type="com.aligo.spring.theme.model.vo.TName" alias="TName"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mappers/theme-mapper.xml"/>
+	</mappers>
+	
 </configuration>
