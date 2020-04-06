@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="recomMapper">
+	<resultMap type="Recom" id="recomResultSet">
+		<id property="recomCode" column="RCODE"/>
+		<result property="recomContent" column="RQCONTENT"/>
+		<result property="keyword1" column="RQKEYWORD1"/>
+		<result property="Keyword1Content" column="KEYWORD1_CONTENT"/>
+		<result property="keyword2" column="RQKEYWORD2"/>
+		<result property="Keyword2Content" column="KEYWROD2_CONTENT"/>
+	</resultMap>
+	
+	<select id="selectQA" resultMap="recomResultSet">
+		SELECT *
+		FROM RECOMMEND_Q
+		WHERE R_STATUS='Y'
+		ORDER BY RQCODE ASC
+	</select>
+
+
+
+</mapper>
