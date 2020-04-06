@@ -115,7 +115,7 @@
           </p>
         </div>
         <!-- Location-->
-        <div class="tab-pane fade" id="location" role="tabpanel" aria-labelledby="location-tab">
+        <div class="tab-pane fade" id="location" role="tabpanel" aria-labelledby="location-tab" align="center">
           <div class="table-responsive">
             <table class="table">
               <tbody>
@@ -131,8 +131,7 @@
             </table>
           </div>
           <!--지도-->
-        
-          <div id="kmap" align="center" style="width:1200px;height:400px;"></div>
+        	<div id="map" style="width:900px;height:100%;position:relative;overflow:hidden;"></div>
         </div>
         <!--Comment-->
         <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">
@@ -243,7 +242,7 @@
   <script src="resources/js/swiper.jquery.js"></script>
   <script src="resources/js/stellar.js"></script>
   <!--지도 api script-->
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2b212c5cd9c783a273b91ad33e453caf"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=645218c0e569303936c79803cc2aa695"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
   <script>
       $(document).ready(function(){
@@ -297,13 +296,35 @@
       });
     });
     //지도 api 
-     var container = document.getElementById('kmap'); //지도를 담을 영역의 DOM 레퍼런스
-     var options = { //지도를 생성할 때 필요한 기본 옵션
-	   center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-	   level: 3 //지도의 레벨(확대, 축소 정도)
-       };
-
-  var kmap = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   </script>
   
   <%@ include file="../common/footer.jsp" %>
