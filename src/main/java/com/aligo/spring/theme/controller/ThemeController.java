@@ -27,35 +27,30 @@ public class ThemeController {
 	
 	@RequestMapping("theme.do")
 	public ModelAndView themeList(ModelAndView mv,
-			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
-			@RequestParam(value="themeLimit",required=false,defaultValue="5") int themeLimit) {
-		
+			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
 		int listCount = tService.getListCount();
 		
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, themeLimit);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
 		ArrayList<Theme> list = tService.selectList(pi);
 		
 		mv.addObject("list",list);
 		mv.addObject("pi",pi);
 		mv.setViewName("theme/categoryList");
-		System.out.println(pi);
 		return mv;
 	}
 	
 	@RequestMapping("pagination.do")
 	public void pagination(HttpServletResponse response,
-			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
-			@RequestParam(value="themeLimit",required=false,defaultValue="5") int themeLimit) throws IOException {
-	  
+		@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage)throws IOException {
+			
 		response.setContentType("application/json; charset=UTF-8");
 	  
 		int listCount = tService.getListCount();
-	
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, themeLimit);
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage,listCount);
 	
 		ArrayList<Theme> list = tService.selectList(pi);
-
 		JSONArray jArr = new JSONArray();
 		
 		for(Theme t: list) {
