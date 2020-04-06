@@ -83,4 +83,9 @@ public class HomeController {
 		return "admin/statistics";
 	}
 	
+	@RequestMapping("themeInsertView.do")
+	public String themeInsertView() {
+		return "board/boardInsertView";
+	}
+	
 }

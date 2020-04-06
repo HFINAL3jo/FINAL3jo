@@ -79,6 +79,15 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="contactView.do">Q & A</a>
                                 </li>
+                                 <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdown_1"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        themePosting Test
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                        <a class="dropdown-item" href="themeInsertView.do">Test1</a>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex">
