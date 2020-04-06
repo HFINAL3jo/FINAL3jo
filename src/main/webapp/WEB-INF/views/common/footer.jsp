@@ -59,11 +59,11 @@
                     <div class="col-lg-8">
                         <div class="copyright_text">
                             <P><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | 조 이름
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | aligo
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></P>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <!-- <div class="col-lg-4">
                         <div class="footer_icon social_icon">
                             <ul class="list-unstyled">
                                 <li><a href="#" class="single_social_icon"><i class="fab fa-facebook-f"></i></a></li>
@@ -72,7 +72,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                 <li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

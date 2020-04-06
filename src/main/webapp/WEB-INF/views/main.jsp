@@ -47,6 +47,7 @@
 
         .home-cards img {
 	        width: 100%;
+	        max-height: 240px;
 	        margin-bottom: 20px;
         }
 
@@ -280,9 +281,5 @@
     <%@ include file="common/footer.jsp" %>
     <!--::footer_part end::-->
 
-    <!-- jquery plugins here-->
- 
-    <!-- custom js -->
-    <script src="resources/js/custom.js"></script>
 </body>
 </html>

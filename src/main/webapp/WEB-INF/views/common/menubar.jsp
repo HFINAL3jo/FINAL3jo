@@ -48,9 +48,9 @@
 
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" href="main.do">Home</a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="" id="navbarDropdown_1"
                                         role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,17 +71,11 @@
                                         Posting
                                     </a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdown_3"
-                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="recommend.do">
                                         Recommended
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_3">
-                                        <a class="dropdown-item" href="recommend.do">Restaurants</a>
-                                        <a class="dropdown-item" href="recommend.do">Places</a>
-                                    </div>
                                 </li>
-                                
                                 <li class="nav-item">
                                     <a class="nav-link" href="contactView.do">Q & A</a>
                                 </li>
@@ -92,6 +86,7 @@
                             <!-- 로그인 전 -->
                                                         
                             <a href="loginView.do" style="color:rgba(0,0,0,.9);">
+                           	<a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
                                 <span data-balloon="Sign In" data-balloon-pos="down-right">
                                     <i class="fas fa-sign-in-alt" style="margin-left: 0px;"></i> Sign-In
                                 </span>
@@ -123,6 +118,15 @@
                         </div>
                     </nav>
                 </div>
+            </div>
+        </div>
+        <div class="search_input" id="search_input_box">
+            <div class="container ">
+                <form class="d-flex justify-content-between search-inner">
+                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                    <button type="submit" class="btn"></button>
+                    <span class="ti-close" id="close_search" title="Close Search"></span>
+                </form>
             </div>
         </div>
     </header>
