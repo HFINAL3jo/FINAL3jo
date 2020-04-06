@@ -7501,7 +7501,9 @@ h6 {
 /**********************footer part css*******************/
 /* line 2, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
 .footer_part {
-  padding: 130px 0px 25px;
+  padding: 45px 0px 25px;
+  background-color: #F1F1F4;
+  border-top: 1px solid lightgray;
 }
 
 @media (max-width: 576px) {

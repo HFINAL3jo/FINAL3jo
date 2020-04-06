@@ -47,6 +47,7 @@
 
         .home-cards img {
 	        width: 100%;
+	        max-height: 240px;
 	        margin-bottom: 20px;
         }
 
