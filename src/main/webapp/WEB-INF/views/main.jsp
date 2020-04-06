@@ -47,7 +47,7 @@
 
         .home-cards img {
 	        width: 100%;
-	        max-height: 240px;
+	        max-height: 220px;
 	        margin-bottom: 20px;
         }
 
@@ -69,7 +69,6 @@
         /* card section css start */
         body { 
 	        color: #111;
-	        font-family: 'Roboto', sans-serif;
 	        background: #F1F1F4;
         }
 
@@ -167,9 +166,9 @@
       <!-- Showcase -->
       <div class="showcase">
           <div id="showcas-div">
-        <h2>서울에 오신 것을 환영합니다.</h2>
+        <h2>Welcome to SEOUL!</h2>
         <p>
-            당신의 여행에 영감을 얻으세요!
+			Get inspired by your travels!
         </p>
         <!-- <a href="#" class="btn">
           Shop Now <i class="fas fa-chevron-right"></i>
@@ -178,27 +177,27 @@
         </div>
       <!-- card section start -->
       <div class="card-section">
-        <h1 style="margin:10px 0px">가봐야 할 서울</h1>
-        <h4>aligo에서 추천하는 핫한 서울의 명소들을 확인해보세요</h4>
+        <h1 style="margin:10px 0px">Where you have to go</h1>
+        <h4>Please check out the hot places aligo recommed</h4>
         <div class="card-list">
           <div class="card">
-            <img src="https://images.unsplash.com/photo-1433446787703-42d5bf446876?w=320"/>
+            <img src="${ contextPath }/resources/images/recommend_place_bibimbab.jpg"/>
             <span>테스트 일번</span>
           </div>
           <div class="card">
-            <img src="https://images.unsplash.com/photo-1584645511189-2a471d586ac2?w=320"/>
+            <img src="${ contextPath }/resources/images/recommend_place_lottetower.jpg"/>
             <span>테스트 일번</span>
           </div>
           <div class="card">
-            <img src="https://images.unsplash.com/photo-1580237754524-f26ed36fa85c?w=320"/>
+            <img src="${ contextPath }/resources/images/recommend_place_chunggyechun.jpg"/>
             <span>테스트 일번</span>
           </div>
           <div class="card">
-            <img src="https://images.unsplash.com/photo-1583132648336-a4f3a079a526?w=320"/>
+            <img src="${ contextPath }/resources/images/recommend_place_gyungbokgung.jpg"/>
             <span>테스트 일번</span>
           </div>
           <div class="card">
-            <img src="https://images.unsplash.com/photo-1468082547792-d37c6c74003e?w=320"/>
+            <img src="${ contextPath }/resources/images/recommend_place_hanriverpark.jpg"/>
             <span>테스트 일번</span>
           </div>
         </div>
@@ -230,8 +229,7 @@
       <!-- Home cards 1 -->
       <div id="home-cards-title">
         <h1>aligo theme</h1>
-        <h4>문화, 먹거리, 쇼핑, 액티비티 등 다양한 즐길거리부터 <br>
-            먹거리 그리고 휴식까지 다양한 정보를 만나보세요</h4>
+        <h4 style="color:#999">Please check out a variety of information about culture, local food, shopping, activity and take a rest</h4>
         </div>
       <section class="home-cards">
             <div>
@@ -273,7 +271,7 @@
                     2020.04 exmple title4
                 </p>
                 <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
-                </div>
+            </div>
       </section>
     </div>
 
