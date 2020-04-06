@@ -281,9 +281,5 @@
     <%@ include file="common/footer.jsp" %>
     <!--::footer_part end::-->
 
-    <!-- jquery plugins here-->
- 
-    <!-- custom js -->
-    <script src="resources/js/custom.js"></script>
 </body>
 </html>
