@@ -83,4 +83,8 @@ public class HomeController {
 		return "admin/statistics";
 	}
 	
+	@RequestMapping("signUp.do")
+	public String signupView() {
+		return "member/signUp";
+	}
 }
