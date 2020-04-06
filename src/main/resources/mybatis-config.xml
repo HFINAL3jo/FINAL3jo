@@ -12,10 +12,12 @@
 		<typeAlias type="com.aligo.spring.theme.model.vo.Theme" alias="Theme"/>
 		<typeAlias type="com.aligo.spring.theme.model.vo.TFile" alias="TFile"/>
 		<typeAlias type="com.aligo.spring.theme.model.vo.TName" alias="TName"/>
+		<typeAlias type="com.aligo.spring.recom.model.vo.Recommend" alias="Recom"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/theme-mapper.xml"/>
+		<mapper resource="mappers/recommend-mapper.xml"/>
 	</mappers>
 	
 </configuration>
