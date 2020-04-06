@@ -465,15 +465,14 @@
         					keyword5 : $('input[name="keyword5"]:checked').val()
         				},
         				success : function(data){
-        					console.log(data);
+        					return false;
         				},
         				error : function(){
         					alert("Recommend keyword update error");
+        					return true;
         				}
         			});
         		}
-        		
-        		return true;
         	}
         }
     </script>

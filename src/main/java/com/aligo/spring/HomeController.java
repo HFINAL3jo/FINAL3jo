@@ -83,4 +83,9 @@ public class HomeController {
 		return "admin/statistics";
 	}
 	
+	@RequestMapping("recomAdminView.do")
+	public String recomAdminView() {
+		return "admin/recomAdminView";
+	}
+	
 }
