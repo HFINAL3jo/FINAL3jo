@@ -9,7 +9,7 @@ import com.aligo.spring.theme.model.dao.ThemeDao;
 import com.aligo.spring.theme.model.vo.PageInfo;
 import com.aligo.spring.theme.model.vo.Theme;
 
-@Service
+@Service("tService")
 public class ThemeServiceImpl implements ThemeService {
 	
 	@Autowired
@@ -17,12 +17,12 @@ public class ThemeServiceImpl implements ThemeService {
 	
 	@Override
 	public int getListCount() {
-		return 0;
+		return tDao.getListCount();
 	}
 
 	@Override
 	public ArrayList<Theme> selectList(PageInfo pi) {
-		return null;
+		return tDao.selectList(pi);
 	}
 
 }

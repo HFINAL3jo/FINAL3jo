@@ -1,12 +1,23 @@
 package com.aligo.spring.theme.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aligo.spring.common.Pagination;
 import com.aligo.spring.theme.model.service.ThemeService;
+import com.aligo.spring.theme.model.vo.PageInfo;
+import com.aligo.spring.theme.model.vo.Theme;
 
 @Controller
 public class ThemeController {
@@ -15,17 +26,51 @@ public class ThemeController {
 	private ThemeService tService;
 	
 	@RequestMapping("theme.do")
-	public ModelAndView getListCount(ModelAndView mv,
-			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
+	public ModelAndView themeList(ModelAndView mv,
+			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
+			@RequestParam(value="themeLimit",required=false,defaultValue="5") int themeLimit) {
 		
 		int listCount = tService.getListCount();
 		
-		if(listCount > 0) {
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, themeLimit);
+		
+		ArrayList<Theme> list = tService.selectList(pi);
+		
+		mv.addObject("list",list);
+		mv.addObject("pi",pi);
+		mv.setViewName("theme/categoryList");
+		System.out.println(pi);
+		return mv;
+	}
+	
+	@RequestMapping("pagination.do")
+	public void pagination(HttpServletResponse response,
+			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
+			@RequestParam(value="themeLimit",required=false,defaultValue="5") int themeLimit) throws IOException {
+	  
+		response.setContentType("application/json; charset=UTF-8");
+	  
+		int listCount = tService.getListCount();
+	
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, themeLimit);
+	
+		ArrayList<Theme> list = tService.selectList(pi);
+
+		JSONArray jArr = new JSONArray();
+		
+		for(Theme t: list) {
+			JSONObject jobj = new JSONObject();
+			jobj.put("tModifyFile","resources/tuploadFiles/"+t.gettModifyFile());
+			jobj.put("tTitle", t.gettTitle());
+			jobj.put("tName","#"+t.gettName());
 			
+			jArr.add(jobj);
 		}
 		
-		mv.setViewName("theme/categoryList");
+		PrintWriter out = response.getWriter();
 		
-		return mv;
+		out.print(jArr);
+		out.flush();
+		out.close();
 	}
 }

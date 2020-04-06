@@ -3,12 +3,11 @@ package com.aligo.spring.theme.model.vo;
 import java.io.Serializable;
 
 public class PageInfo implements Serializable {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 9044755568311632797L;
-	
 
 	private int startPage;
 	private int endPage;
@@ -16,10 +15,11 @@ public class PageInfo implements Serializable {
 	private int listCount;
 	private int pageLimit;
 	private int currentPage;
-	
-	private int boardLimit;
-	
-	public PageInfo() {}
+
+	private int themeLimit;
+
+	public PageInfo() {
+	}
 
 	public int getStartPage() {
 		return startPage;
@@ -69,16 +69,27 @@ public class PageInfo implements Serializable {
 		this.currentPage = currentPage;
 	}
 
-	public int getBoardLimit() {
-		return boardLimit;
+	public int getThemeLimit() {
+		if(themeLimit==5) return themeLimit+1; else return themeLimit+6;
 	}
 
-	public void setBoardLimit(int boardLimit) {
-		this.boardLimit = boardLimit;
+	public void setThemeLimit(int themeLimit) {
+		this.themeLimit = themeLimit;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	@Override
+	public String toString() {
+		return "PageInfo [startPage=" + startPage + ", endPage=" + endPage + ", maxPage=" + maxPage + ", listCount="
+				+ listCount + ", pageLimit=" + pageLimit + ", currentPage=" + currentPage + ", themeLimit=" + themeLimit
+				+ "]";
 	}
 
 	public PageInfo(int startPage, int endPage, int maxPage, int listCount, int pageLimit, int currentPage,
-			int boardLimit) {
+			int themeLimit) {
 		super();
 		this.startPage = startPage;
 		this.endPage = endPage;
@@ -86,14 +97,7 @@ public class PageInfo implements Serializable {
 		this.listCount = listCount;
 		this.pageLimit = pageLimit;
 		this.currentPage = currentPage;
-		this.boardLimit = boardLimit;
+		this.themeLimit = themeLimit;
 	}
 
-	@Override
-	public String toString() {
-		return "PageInfo [startPage=" + startPage + ", endPage=" + endPage + ", maxPage=" + maxPage + ", listCount="
-				+ listCount + ", pageLimit=" + pageLimit + ", currentPage=" + currentPage + ", boardLimit=" + boardLimit
-				+ "]";
-	}
-	
 }

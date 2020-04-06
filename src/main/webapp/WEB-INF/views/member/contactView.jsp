@@ -8,6 +8,30 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>aranaz</title>
+  <style>
+
+table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+    text-align: center;
+  }
+  thead tr {
+    background-color: #77AAAD;
+    color: #ffffff;
+  }
+  tbody tr:nth-child(2n) {
+    background-color: #D8E6E7;
+  }
+  tbody tr:nth-child(2n+1) {
+    background-color: #EDECF0;
+  }
+
+</style>
 </head>
 
 <body>
@@ -36,7 +60,7 @@
   <!-- ================ contact section start ================= -->
   <section class="contact-section padding_top">
     <div class="container">
-      <div class="d-none d-sm-block mb-5 pb-4">
+      <!-- <div class="d-none d-sm-block mb-5 pb-4">
         <div id="map" style="height: 480px;"></div>
         <script>
           function initMap() {
@@ -76,8 +100,53 @@
           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&callback=initMap">
         </script>
 
-      </div>
+      </div> -->
+ <div class="qnaPage">
+     
+      <h2>문의게시판</h2>
+      <hr>
+        <div class="qnaPageTable">
 
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>글번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>날짜</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>문의합니다</td>
+            <td>유승제</td>
+            <td>sysdate</td>
+        </tr>
+
+        <tr>
+            <td>2</td>
+            <td>다시 문의합니다</td>
+            <td>유승제</td>
+            <td>sysdate</td>
+        </tr>
+
+    </tbody>
+    </table>
+
+    <div class=Pagenation>
+
+        <ul id="pagenation" align="center" style="margin-left:-90px;">
+          <li><button class="listbtn" value="-1">&lt;</button></li>
+          <li><button class="listbtn" value="1">1</button></li>
+          <li><button class="listbtn" value="2">2</button></li>
+          <li><button class="listbtn" value="3">3</button></li>
+          <li><button class="listbtn" value="+1">&gt;</button></li>
+      </ul>
+  
+</div>
+</div>
 
       <div class="row">
         <div class="col-12">
