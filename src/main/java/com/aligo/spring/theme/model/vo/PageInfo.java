@@ -10,12 +10,10 @@ public class PageInfo implements Serializable {
 	private static final long serialVersionUID = 9044755568311632797L;
 
 	private int startPage;
-	private int endPage;
 	private int maxPage;
 	private int listCount;
 	private int pageLimit;
 	private int currentPage;
-
 	private int themeLimit;
 
 	public PageInfo() {
@@ -27,14 +25,6 @@ public class PageInfo implements Serializable {
 
 	public void setStartPage(int startPage) {
 		this.startPage = startPage;
-	}
-
-	public int getEndPage() {
-		return endPage;
-	}
-
-	public void setEndPage(int endPage) {
-		this.endPage = endPage;
 	}
 
 	public int getMaxPage() {
@@ -70,34 +60,27 @@ public class PageInfo implements Serializable {
 	}
 
 	public int getThemeLimit() {
-		if(themeLimit==5) return themeLimit+1; else return themeLimit+6;
+		return themeLimit;
 	}
 
 	public void setThemeLimit(int themeLimit) {
 		this.themeLimit = themeLimit;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	@Override
-	public String toString() {
-		return "PageInfo [startPage=" + startPage + ", endPage=" + endPage + ", maxPage=" + maxPage + ", listCount="
-				+ listCount + ", pageLimit=" + pageLimit + ", currentPage=" + currentPage + ", themeLimit=" + themeLimit
-				+ "]";
-	}
-
-	public PageInfo(int startPage, int endPage, int maxPage, int listCount, int pageLimit, int currentPage,
-			int themeLimit) {
+	public PageInfo(int startPage, int maxPage, int listCount, int pageLimit, int currentPage, int themeLimit) {
 		super();
 		this.startPage = startPage;
-		this.endPage = endPage;
 		this.maxPage = maxPage;
 		this.listCount = listCount;
 		this.pageLimit = pageLimit;
 		this.currentPage = currentPage;
 		this.themeLimit = themeLimit;
+	}
+
+	@Override
+	public String toString() {
+		return "PageInfo [startPage=" + startPage + ", maxPage=" + maxPage + ", listCount="
+				+ listCount + ", pageLimit=" + pageLimit + ", currentPage=" + currentPage + ", themeLimit=" + themeLimit + "]";
 	}
 
 }
