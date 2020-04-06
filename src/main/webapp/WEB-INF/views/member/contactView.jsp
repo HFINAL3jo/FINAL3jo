@@ -10,7 +10,7 @@
   <title>aranaz</title>
   <style>
 
-table {
+  table {
     width: 100%;
     border-top: 1px solid #444444;
     border-collapse: collapse;
@@ -29,6 +29,10 @@ table {
   }
   tbody tr:nth-child(2n+1) {
     background-color: #EDECF0;
+  }
+
+	ul[id~=pagenation]>li{
+  	display:inline;
   }
 
 </style>
@@ -138,11 +142,11 @@ table {
     <div class=Pagenation>
 
         <ul id="pagenation" align="center" style="margin-left:-90px;">
-          <li><button class="listbtn" value="-1">&lt;</button></li>
-          <li><button class="listbtn" value="1">1</button></li>
-          <li><button class="listbtn" value="2">2</button></li>
-          <li><button class="listbtn" value="3">3</button></li>
-          <li><button class="listbtn" value="+1">&gt;</button></li>
+          <li><button class="listbtn" value="-1">&lt;&nbsp;</button></li>
+          <li><button class="listbtn" value="1">1&nbsp;</button></li>
+          <li><button class="listbtn" value="2">2&nbsp;</button></li>
+          <li><button class="listbtn" value="3">3&nbsp;</button></li>
+          <li><button class="listbtn" value="+1">&gt;&nbsp;</button></li>
       </ul>
   
 </div>

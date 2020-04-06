@@ -25,7 +25,7 @@ public class HomeController {
 	
 	@RequestMapping("post.do")
 	public String post() {
-		return "board/mapTest";
+		return "board/mapTest2";
 	}
 	
 	@RequestMapping("recommend.do")
@@ -83,9 +83,16 @@ public class HomeController {
 		return "admin/statistics";
 	}
 	
+
 	@RequestMapping("recomAdminView.do")
 	public String recomAdminView() {
 		return "admin/recomAdminView";
 	}
 	
+
+	@RequestMapping("signUp.do")
+	public String signupView() {
+		return "member/signUp";
+	}
+
 }

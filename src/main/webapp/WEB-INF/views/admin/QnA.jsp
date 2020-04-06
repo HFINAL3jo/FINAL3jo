@@ -28,8 +28,8 @@
     background-color: #EDECF0;
   }
   
-  #pagenation li{
-  	display:inline-block;
+  ul[id~=pagenation]>li{
+  	display:inline;
   }
  </style>
 </head>
@@ -62,14 +62,14 @@
         <tr>
             <td>1</td>
             <td>문의합니다</td>
-            <td>유승제</td>
+            <td>sj</td>
             <td>sysdate</td>
         </tr>
 
         <tr>
             <td>2</td>
             <td>다시 문의합니다</td>
-            <td>유승제</td>
+            <td>sj</td>
             <td>sysdate</td>
         </tr>
 
