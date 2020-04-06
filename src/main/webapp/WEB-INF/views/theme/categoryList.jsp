@@ -105,7 +105,8 @@
 				</div>
 				</c:forEach>
 			</div>
-			<input id="tl" type="hidden" value="${pi.themeLimit }" name="themeLimit">
+			<input id="tc" type="hidden" value="${pi.currentPage }">
+			<input id="tm" type="hidden" value="${pi.maxPage }">
 			<div align="center">
 				<a href="javascript:void(0)" onclick="ex();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:#ebc5e4;">Lord More..</button></a>
 			</div>
@@ -117,6 +118,7 @@
 				style="font-size: 50px;"></a>
 		</div>
 	</section>
+	<br>
 
 	<!--::footer_part start::-->
 
@@ -132,16 +134,21 @@
 	<div id="goDown" />
 
 	<script>
+		var currentPage = $('#tc').val();
+		var maxPage = $('#tm').val();
+		
 	function ex(){
+		if(maxPage == currentPage){
+			$('#alb').text("End");
+		}else{ 
+		currentPage = (parseInt(currentPage) + 1);
 		$.ajax({
 			url:"pagination.do",
-			data:{themeLimit:themeLimit},
+			data:{currentPage:currentPage},
 			dataType:"json",
 			success:function(data){
 			   $div = $('#aList');
-			   $div.html("");
 			   $div.addClass('row align-items-center latest_product_inner');
-			   
 			   for(var i in data){
 								
 				  var $diva = $('<div>').addClass('col-lg-4 col-sm-6'); 
@@ -167,19 +174,12 @@
 				  $a.append($i);
 				  $divc.append($a);
 			   }
-							
 			},error:function(){
 				
 			}
 	});
 	}
-		var pageLimit = $('#pl').val();
-		var themeLimit = $('#tl').val();
-		var testData1 = $('#aList').html();
-		var testData = $('#aList');
-		//버튼 스크롤 추가
-		
-		
+	}
 		//스크롤 70% 스크립트 및 div 추가 
 		window.onmousewheel = function(e) {
 			e.preventDefault;

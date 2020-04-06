@@ -24,7 +24,7 @@ public class ThemeDao {
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getThemeLimit();
 		
-		RowBounds rowBounds = new RowBounds(offset, pi.getThemeLimit());
+		RowBounds rowBounds = new RowBounds(offset,pi.getThemeLimit());
 		
 		return (ArrayList)sqlSession.selectList("themeMapper.selectList",null,rowBounds);
 	}

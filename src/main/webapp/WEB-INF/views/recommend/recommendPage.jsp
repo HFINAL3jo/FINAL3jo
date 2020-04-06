@@ -139,7 +139,7 @@
         justify-content: flex-end;
         /* padding-bottom: 50px; */
         /* margin-bottom: 20px; */
-        background-image: url('${contextPath}/resources/images/Recom_showcase2.jpg');
+        background-image: url('${contextPath}/resources/images/Recom_showcase4.jpg');
         background-size: 100% 100%;
 	}	
        
@@ -148,7 +148,7 @@
 	        width: 100%;
 	        height: 100%;
 	        position: relative;
-	        background: rgba(0, 0, 0, 0.2);
+	        background: rgba(0, 0, 0, 0.3);
 	        
 	}
        
@@ -201,26 +201,26 @@
 
     <!-- survey part start -->
     <div class="feature_part">
-        <form action="">
+        <form action="rResultList.do" onsubmit="return check()">
             <!-- 질문 1번 -->
             <div>
                 <div class="area">
                     <div class="justify-content-center" style="width: 80%; margin: 100px auto; margin-bottom: 50px;" data-aos="fade-zoom-in" data-aos-duration="1500">
-                        <h2 class="q-title">Travle propensity</h2>
+                        <h2 class="q-title" id="que1"></h2>
                     </div>
                     <div class="rb-box" data-aos="fade-zoom-in" data-aos-duration="1500">
                         <div class="row align-items-center justify-content-between">
                             <div class="select_box">
-                                <input type="radio" id="tpFamily" name="ans1" value="tpFamily">
-                                <label for="tpFamily">
-                                    <h3>익숙함을 추구한다 글자가 길어지면 어떻게 나올지 궁금해서 쳐보는 글자</h3>
+                                <input type="radio" id="keyword1_1" name="keyword1" value="">
+                                <label for="keyword1_1">
+                                    <h3></h3>
                                 </label>
                             </div>
                             <img src="resources/images/vs.png" width="200" height="200" style="margin: auto; opacity: .7;">
                             <div class="select_box">
-                                <input type="radio" id="tpNew" name="ans1" value="tpNew">
-                                <label for="tpNew">
-                                    <h3>새로운 경험을 추구한다.</h3>
+                                <input type="radio" id="keyword1_2" name="keyword1" value="">
+                                <label for="keyword1_2">
+                                    <h3></h3>
                                 </label>
                             </div>
                         </div>
@@ -237,21 +237,21 @@
             <div>
                 <div class="area">
                     <div class="justify-content-center" style="width: 80%; margin: 100px auto; margin-bottom: 50px;" data-aos="fade-zoom-in" data-aos-duration="1500">
-                        <h2 class="q-title">Travle propensity 2</h2>
+                        <h2 class="q-title" id="que2"></h2>
                     </div>
                     <div class="rb-box" data-aos="fade-zoom-in" data-aos-duration="1500">
                         <div class="row align-items-center justify-content-between">
                             <div class="select_box">
-                                <input type="radio" id="tp2Famous" name="ans2" value="tp2Famous">
-                                <label for="tp2Famous">
-                                    <h3>유명한 곳</h3>
+                                <input type="radio" id="keyword2_1" name="keyword2" value="">
+                                <label for="keyword2_1">
+                                    <h3></h3>
                                 </label>
                             </div>
                             <img src="resources/images/vs.png" width="200" height="200" style="margin: auto; opacity: .7;">
                             <div class="select_box">
-                                <input type="radio" id="tp2NotFamous" name="ans2" value="tp2NotFamous">
-                                <label for="tp2NotFamous">
-                                    <h3>유명하지 않은 곳</h3>
+                                <input type="radio" id="keyword2_2" name="keyword2" value="">
+                                <label for="keyword2_2">
+                                    <h3></h3>
                                 </label>
                             </div>
                         </div>
@@ -268,21 +268,21 @@
             <div>
                 <div class="area">
                     <div class="justify-content-center" style="width: 80%; margin: 100px auto; margin-bottom: 50px;" data-aos="fade-zoom-in" data-aos-duration="1500">
-                        <h2 class="q-title">Purpose of Travle </h2>
+                        <h2 class="q-title" id="que3"></h2>
                     </div>
                     <div class="rb-box" data-aos="fade-zoom-in" data-aos-duration="1500">
                         <div class="row align-items-center justify-content-between">
                             <div class="select_box">
-                                <input type="radio" id="recreation" name="ans3" value="recreation">
-                                <label for="recreation">
-                                   <h3>휴양</h3>
+                                <input type="radio" id="keyword3_1" name="keyword3" value="">
+                                <label for="keyword3_1">
+                                   <h3></h3>
                                 </label>
                             </div>
                             <img src="resources/images/vs.png" width="200" height="200" style="margin: auto; opacity: .7;">
                             <div class="select_box">
-                                <input type="radio" id="tourist" name="ans3" value="tourist">
-                                <label for="tourist">
-                                   <h3>관광</h3>
+                                <input type="radio" id="keyword3_2" name="keyword3" value="">
+                                <label for="keyword3_2">
+                                   <h3></h3>
                                 </label>
                             </div>
                         </div>
@@ -298,21 +298,21 @@
             <div>
                 <div class="area">
                     <div class="justify-content-center" style="width: 80%; margin: 100px auto; margin-bottom: 50px;" data-aos="fade-zoom-in" data-aos-duration="1500">
-                        <h2 class="q-title">Travle sensibility</h2>
+                        <h2 class="q-title" id="que4"></h2>
                     </div>
                     <div class="rb-box" data-aos="fade-zoom-in" data-aos-duration="1500">
                         <div class="row align-items-center justify-content-between">
                             <div class="select_box">
-                                <input type="radio" id="calm" name="ans4" value="calm">
-                                <label for="calm">
-                                    <h3>차분함</h3>
+                                <input type="radio" id="keyword4_1" name="keyword4" value="">
+                                <label for="keyword4_1">
+                                    <h3></h3>
                                 </label>
                             </div>
                             <img src="resources/images/vs.png" width="200" height="200" style="margin: auto; opacity: .7;">
                             <div class="select_box">
-                                <input type="radio" id="active" name="ans4" value="active">
-                                <label for="active">
-                                    <h3>활동적</h3>
+                                <input type="radio" id="keyword4_2" name="keyword4" value="">
+                                <label for="keyword4_2">
+                                    <h3></h3>
                                 </label>
                             </div>
                         </div>
@@ -328,27 +328,27 @@
             <div>
                 <div class="area">
                     <div class="justify-content-center" style="width: 80%; margin: 100px auto; margin-bottom: 50px;" data-aos="fade-zoom-in" data-aos-duration="1500">
-                        <h2 class="q-title">Travle sensibility 2</h2>
+                        <h2 class="q-title" id="que5"></h2>
                     </div>
                     <div class="rb-box" data-aos="fade-zoom-in" data-aos-duration="1500">
                         <div class="row align-items-center justify-content-between">
                             <div class="select_box">
-                                <input type="radio" id="urban" name="ans5" value="urban">
-                                <label for="urban">
-                                    <h3>도시적인</h3>
+                                <input type="radio" id="keyword5_1" name="keyword5" value="">
+                                <label for="keyword5_1">
+                                    <h3></h3>
                                 </label>
                             </div>
                             <img src="resources/images/vs.png" width="200" height="200" style="margin: auto; opacity: .7;">
                             <div class="select_box">
-                                <input type="radio" id="natural" name="ans5" value="natural">
-                                <label for="natural">
-                                    <h3>자연적인</h3>
+                                <input type="radio" id="keyword5_2" name="keyword5" value="">
+                                <label for="keyword5_2">
+                                    <h3></h3>
                                 </label>
                             </div>
                         </div>
                     </div>
                     <div class="row justify-content-center margin-center" style="margin-top: 50px; margin-bottom: 20px;" data-aos="fade-zoom-in" data-aos-duration="1500">
-                        <input type="submit" value="RESULT" class="genric-btn primary e-large" style="width: 300px; font-size: 15px;">
+                        <input type="submit" value="RESULT" class="genric-btn primary e-large" style="width: 300px; font-size: 15px; margin-bottom: 10%;">
                     </div>
                 </div>
             </div>
@@ -364,7 +364,37 @@
     <!-- custom js -->
     <script>
         $(function(){
+        	
+        	// ajax로 질문/ 답변 DB에서 꺼내옴
+            $.ajax({
+            	
+            	url : "rSelectQA.do",
+            	dataType : "json",
+            	success : function(data){
+            		$.each(data, function(index, value){
 
+	           			var count = 1;
+            			var que = "#que" + (index+1);
+	            		var keyword1 = "#keyword" + (index+1) + "_1"; 
+	            		var keyword2 = "#keyword" + (index+1) + "_2";
+	            		
+	            		$(que).text(value.recomContent);
+	            		$(keyword1).val(value.keyword1);
+	            		$(keyword1).siblings().children().text(value.Keyword1Content);
+	            		$(keyword2).val(value.keyword2);
+	            		$(keyword2).siblings().children().text(value.Keyword2Content);
+            		});
+            	},
+            	error : function(){
+            		alert('Failed to load value! \n Please refresh');
+            	}
+            	
+            	
+            });
+        	
+        	
+
+        	//	페이지 이동 animate script
             $('.down').on('click',function(){
                 
                 var offset = $(this).parent().parent().parent().next().children().offset();
@@ -372,13 +402,12 @@
                 $('html').animate({scrollTop : offset.top - 110}, 1000);
             });
             
+        	//	클릭 시 색상 변화 animate script
             $('.select_box').on('click',function(){
             	
             	var click = $(this).children("input[type=radio]");
             	
 	            if(click.prop('checked') == true){
-	            	console.log(121212);
-	            	
 	            	click.parent().css({
 	            		'background':'rgba(0,10,10,.8)'
 	            	});
@@ -390,13 +419,63 @@
 	            	click.parent().siblings().children('label').children().css({
 	            		'color':'black'
 	            	});
-	            	
 	            }
             });
             
-            
-            
         });
+        
+        function check(){
+        	
+        	if(!$('input[name="keyword1"]:checked').val()){
+        		alert('Please choose all items and try again');
+        		var offset = $('input[name="ans1"]').parent().parent().parent().parent().offset();
+        		$('html').animate({scrollTop : offset.top - 110}, 1000);
+        		return false;
+        	}else if(!$('input[name="keyword2"]:checked').val()){
+        		alert('Please choose all items and try again');
+        		var offset = $('input[name="ans2"]').parent().parent().parent().parent().offset();
+        		$('html').animate({scrollTop : offset.top - 110}, 1000);
+        		return false;
+        	}else if(!$('input[name="keyword3"]:checked').val()){
+        		alert('Please choose all items and try again');
+        		var offset = $('input[name="ans3"]').parent().parent().parent().parent().offset();
+        		$('html').animate({scrollTop : offset.top - 110}, 1000);
+        		return false;
+        	}else if(!$('input[name="keyword4"]:checked').val()){
+        		alert('Please choose all items and try again');
+        		var offset = $('input[name="ans4"]').parent().parent().parent().parent().offset();
+        		$('html').animate({scrollTop : offset.top - 110}, 1000);
+        		return false;
+        	}else if(!$('input[name="keyword5"]:checked').val()){
+        		alert('Please choose all items and try again');
+        		var offset = $('input[name="ans5"]').parent().parent().parent().parent().offset();
+        		$('html').animate({scrollTop : offset.top - 110}, 1000);
+        		return false;
+        	}else{
+        		
+        		var saveYN = confirm("Would you like to update your taste information?");
+        		if(saveYN){
+        			$.ajax({
+        				url : "rUserUpdate.do",
+        				data : {
+        					keyword1 : $('input[name="keyword1"]:checked').val(),
+        					keyword2 : $('input[name="keyword2"]:checked').val(),
+        					keyword3 : $('input[name="keyword3"]:checked').val(),
+        					keyword4 : $('input[name="keyword4"]:checked').val(),
+        					keyword5 : $('input[name="keyword5"]:checked').val()
+        				},
+        				success : function(data){
+        					console.log(data);
+        				},
+        				error : function(){
+        					alert("Recommend keyword update error");
+        				}
+        			});
+        		}
+        		
+        		return true;
+        	}
+        }
     </script>
 
     
