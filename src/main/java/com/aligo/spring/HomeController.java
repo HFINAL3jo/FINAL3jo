@@ -97,4 +97,10 @@ public class HomeController {
 	public String signupView() {
 		return "member/signUp";
 	}
+	
+	@RequestMapping("blogdetail.do")
+	public String postdetail() {
+		return "board/blogdetail";
+	}
+	
 }

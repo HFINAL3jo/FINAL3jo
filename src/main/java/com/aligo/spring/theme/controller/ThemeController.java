@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aligo.spring.common.Pagination;
@@ -67,5 +68,22 @@ public class ThemeController {
 		out.print(jArr);
 		out.flush();
 		out.close();
+	}
+	
+	@RequestMapping("themeInsert.do")
+	public String insertTheme(Theme t,HttpServletResponse response,
+			@RequestParam(name="uploadFile",required=false) MultipartFile file) {
+		
+		if(file.getOriginalFilename().equals("")) {
+			
+			String renameFilename;
+		}
+		
+		return null;
+	}
+	
+	public String saveFile() {
+		
+		return null;
 	}
 }
