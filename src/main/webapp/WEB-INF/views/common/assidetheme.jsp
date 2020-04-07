@@ -31,6 +31,7 @@
                                         <label for="confirm-switch"></label>
                                     </div>
                                 </div>
+                                <c:if test="${loginUser.userId eq 'ADMIN'}"><button>Write</button></c:if>
                             </div>
                         </aside>
 

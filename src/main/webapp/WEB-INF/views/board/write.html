@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Write Post</title>
-<script type="text/javascript" src="js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<style>
+
+</style>
 </head>
 <body>
     <form action="" method="post" id="gosubmit">
@@ -22,9 +25,10 @@
     </select></label>&nbsp;&nbsp;&nbsp;
     <label>Writer</label>&nbsp;
     <input type="text" name="writer" size="15" value="" readonly>
-    <br><br>    
+    <br><br>
+      
 	<textarea name="ir1" id="contents" rows="10" cols="100"></textarea>
-
+	
     <br>
     <button class="btn btn-light" type="reset">Cancle</button>
     <button class="btn btn-light" onclick="goSaveAndSubmit();">Write</button>
@@ -35,7 +39,7 @@
 	nhn.husky.EZCreator.createInIFrame({
 	 oAppRef: oEditors,
 	 elPlaceHolder: "contents",
-	 sSkinURI: "SmartEditor2Skin.html",
+	 sSkinURI: "resources/se2/SmartEditor2Skin.html",
 	 fCreator: "createSEditor2"
 	});
 	
