@@ -5,16 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="resources/js/jquery-3.4.1.min.js"></script>
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-	
+	<br><br><br><br><br>
 	<%@ include file="../common/assidebp.jsp" %>
 	
 	<div align="center">
-	<%@ include file="write.html" %>
+	<%@ include file="write.jsp" %>
 	</div>
-	
+	</div>
+	</div>
 	
 	
 	

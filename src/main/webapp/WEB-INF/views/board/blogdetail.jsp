@@ -7,13 +7,17 @@
    <!-- Required meta tags -->
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
    <title>aranoz</title>
 </head>
 
 <body>
    <!--::header part start::-->
-   
+   			<%@ include file="../common/menubar.jsp" %>
+   			<br><br><br><br>
+   			<%@ include file="../common/assidebp.jsp" %>
             <!--blog-->
+            
             <div align="center" style="display:block; width:70%; height:auto; margin-top:50px; padding:20px; border:1px solid black;">
             <span style="float:left;">category name</span><br><br>
             <h1>Title Here!</h1>
@@ -24,6 +28,6 @@
             <!--content-->
 
             </div>
-   
+   			<%@ include file ="../common/footer.jsp" %>
 </body>
 </html>
