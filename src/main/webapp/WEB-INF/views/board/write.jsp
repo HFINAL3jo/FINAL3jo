@@ -6,9 +6,6 @@
 <meta charset="UTF-8">
 <title>Write Post</title>
 <script type="text/javascript" src="resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-<style>
-
-</style>
 </head>
 <body>
     <form action="themeInsert.do" method="POST" id="gosubmit" enctype="multipart/form-data">
@@ -28,9 +25,9 @@
     
     <div style="width:300px; height:100%; display:inline-block; border:1px solid black; margin-left:-30px;">
       	<table id="flist" style="align-content:center; width:100%;">
-      		<thead>파일목록</thead>
+      		<thead>File List</thead>
       		<tbody align="center">
-      		
+      			
       		</tbody>
         </table>
     </div>
@@ -60,27 +57,29 @@
 	   $('#gosubmit').submit();
 		
 	  }
-	 
-	  $('#file_select').change(function(){
-		  
-		 for(var i=0; i< $(this).get(0).files.length;i++){
-		 var name = $(this).get(0).files[i].name;
-		 var $tbody = $('#flist tbody');
-		 var $tr = $('<tr>');
-		 var $td = $('<td>');
-		 $td.text(name);
-		 $tr.append($td);
-		 $tbody.append($tr);
+ </script>
+ <script>
+ 			var fl = 0;
+	  $('#fa').click(function(){
 		 
-		 }
-		 
+			 var file = $('#file_select');
+			 var fname = file.get(0).files[0].name;
+			 var $tbody = $('#flist tbody');
+			 var $tr = $('<tr>');
+			 var $td = $('<td>');
+			 $td.text(fname);
+			 $tr.append($td);
+			 $tbody.append($tr);
+			 var $input = $('<input>');
+			 
+	  });
+	  $('#fd').click(function(){
+		 $('#flist tr').last().remove();
 	  });
 	  $('#cancel').click(function(){
 		  $('#flist tbody').html("");
 	  });
 	  
-	  $('#fd').click(function(){
-	  });
- </script>
+</script>
 </body>
 </html>
