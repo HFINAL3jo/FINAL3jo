@@ -1,9 +1,12 @@
 package com.aligo.spring.theme.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
@@ -82,8 +85,33 @@ public class ThemeController {
 		return null;
 	}
 	
-	public String saveFile() {
+	public String saveFile(HttpServletRequest request, MultipartFile file,String tt) {
 		
-		return null;
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String savePath = root + "\\tuploadFiles"+tt;
+		
+		File folder = new File(savePath);
+		
+		if(!folder.exists()) {
+			folder.mkdir();
+		}
+		
+		String originFilename = file.getOriginalFilename();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		
+		String renameFilename = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
+		+ originFilename.substring(originFilename.lastIndexOf(".")+1);
+
+		String renamePath = folder + "\\" + renameFilename;
+		
+		try {
+			file.transferTo(new File(renamePath));
+		} catch (Exception e) {
+			System.out.println("파일 전송 에러 : " + e.getMessage());
+		}
+		
+		return renameFilename;
 	}
 }

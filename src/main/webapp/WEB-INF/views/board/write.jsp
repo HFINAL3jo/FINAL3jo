@@ -24,15 +24,19 @@
 	<textarea name="ir1" id="contents" rows="30" cols="104"></textarea>
 	
     <br><br>
-    <input type="file" multiple="multiple" id="file_select" name="uploadFile" style="float: left;">
-    <input id="fd" type="button" value="file delete" style="float:right;">
-    <div style="width:300px; height:100%; border:1px solid black;">
+    <input type="file" id="file_select" name="uploadFile" style="float:left; width:190px;">
+    
+    <div style="width:300px; height:100%; display:inline-block; border:1px solid black; margin-left:-30px;">
       	<table id="flist" style="align-content:center; width:100%;">
       		<thead>파일목록</thead>
-      		<tbody>
+      		<tbody align="center">
       		
       		</tbody>
         </table>
+    </div>
+    <div style="display:inline-block; margin-left:50px; font-size:1em;">
+    <input id="fa" type="button" value="+" class="btn btn-default" style="background:rgb(206, 219, 240);">
+    <input id="fd" type="button" value="-" class="btn btn-default" style="background:rgb(206, 219, 240);">
     </div>
     <br><br>
     <button id="cancel" class="btn btn-light" type="reset">Cancle</button>
@@ -60,16 +64,14 @@
 	  $('#file_select').change(function(){
 		  
 		 for(var i=0; i< $(this).get(0).files.length;i++){
-		 
+		 var name = $(this).get(0).files[i].name;
 		 var $tbody = $('#flist tbody');
 		 var $tr = $('<tr>');
 		 var $td = $('<td>');
-		 $td.text($(this).get(0).files[i].name);
+		 $td.text(name);
 		 $tr.append($td);
 		 $tbody.append($tr);
 		 
-		 /* }else if($(this).get(0).files.length > 1){
-			 for(var i in $('#file_select').get(0).files[2].name;) */
 		 }
 		 
 	  });
