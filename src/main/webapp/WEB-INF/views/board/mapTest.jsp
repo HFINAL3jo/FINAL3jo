@@ -44,19 +44,19 @@
 	// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다	 
 	var positions = [
 	    {
-	        content: '<div style="height: 100px;"><b>Thursday Party</b><br>address<br>서울특별시 용산구 이태원1동 이태원로27길 6</div>', 
+	        content: '<div style="height: 100px;"><b>Thursday Party<br>address</b><br>서울특별시 용산구 이태원1동 이태원로27길 6</div>', 
 	        latlng: new kakao.maps.LatLng(37.5349871,126.9934046)
 	    },
 	    {
-	        content: '<div style="height: 100px;"><b>MANSUM HOF<b><br>address<br>서울특별시 중구 을지로3가 을지로13길 19</div>', 
+	        content: '<div style="height: 100px;"><b>MANSUM HOF<br>address</b><br>서울특별시 중구 을지로3가 을지로13길 19</div>', 
 	        latlng: new kakao.maps.LatLng(37.5672609,126.9895685)
 	    },
 	    {
-	        content: '<div style="height: 100px;"><b>CHOSUN JUMAKM</b><br>address<br>서울특별시 광진구 화양동 아차산로33길 28-4</div>', 
+	        content: '<div style="height: 100px;"><b>CHOSUN JUMAKM<br>address</b><br>서울특별시 광진구 화양동 아차산로33길 28-4</div>', 
 	        latlng: new kakao.maps.LatLng(37.5414226,127.0684444)
 	    },
 	    {
-	        content: '<div style="height: 100px;"><b>3C5花  :Korea liquor</b><br>address<br>서울특별시 마포구 마포동 303-8</div>',
+	        content: '<div style="height: 100px;"><b>3C5花  :Korea liquor<br>address</b><br>서울특별시 마포구 마포동 303-8</div>',
 	        latlng: new kakao.maps.LatLng(37.5377023,126.9424273)
 	    }
 	];
