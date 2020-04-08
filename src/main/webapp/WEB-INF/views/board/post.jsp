@@ -108,10 +108,7 @@
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade" id="description" role="tabpanel" aria-labelledby="description-tab">
           <p>
-           Content Here!
-          </p>
-          <p>
-           Content Here!
+          
           </p>
         </div>
         <!-- Location-->

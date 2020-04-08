@@ -32,6 +32,7 @@ public class ThemeController {
 	@RequestMapping("theme.do")
 	public ModelAndView themeList(ModelAndView mv,
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
+		
 		int listCount = tService.getListCount();
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
@@ -74,22 +75,30 @@ public class ThemeController {
 	}
 	
 	@RequestMapping("themeInsert.do")
-	public String insertTheme(Theme t,HttpServletResponse response,
+	public String insertTheme(Theme t,HttpServletRequest request,
 			@RequestParam(name="uploadFile",required=false) MultipartFile file) {
+		
 		
 		if(file.getOriginalFilename().equals("")) {
 			
-			String renameFilename;
+			String renameFilename = saveFile(request, file);
+			
+			if(renameFilename != null) {
+				t.settOriginalFile(file.getOriginalFilename());
+				t.settModifyFile(renameFilename);
+			}
 		}
 		
-		return null;
+		int result = tService.insertTheme(t);
+		
+		if(result >0) return "redirect:theme.do"; else return "";
 	}
 	
-	public String saveFile(HttpServletRequest request, MultipartFile file,String tt) {
+	public String saveFile(HttpServletRequest request, MultipartFile file) {
 		
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		
-		String savePath = root + "\\tuploadFiles"+tt;
+		String savePath = root + "\\tuploadFiles";
 		
 		File folder = new File(savePath);
 		
