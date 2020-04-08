@@ -54,4 +54,10 @@
 		WHERE T_STATUS='Y'
 		ORDER BY TID DESC
 	</select>
+	
+	<insert id="insertTheme" parameterType="Theme">
+		INSERT INTO THEME_LIST VALUES(SEQ_TNO.NEXTVAL,${tWriter},${tTitle},
+		${tContent},${tAddress},${tContent},${tAddress},DEFAULT,DEFAULT,
+		DEFAULT,DEFAULT,${tKeyword},DEFAULT,${tCode})
+	</insert>
 </mapper>
