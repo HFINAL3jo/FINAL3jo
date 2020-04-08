@@ -1,4 +1,4 @@
-df<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -9,6 +9,8 @@ df<%@ page language="java" contentType="text/html; charset=UTF-8"
   
 </head>
 <body>
+<div class="container">
+            <div class="row">
     <div class="col-lg-3">
         <div class="left_sidebar_area">
             <aside class="left_widgets p_filter_widgets">
@@ -143,9 +145,6 @@ df<%@ page language="java" contentType="text/html; charset=UTF-8"
         </div>
      </div>
  <script>
- 	$('#wb').click(function(){
- 		location.href="blogInsert.do";	
- 	});
  </script>
 </body>
 </html>

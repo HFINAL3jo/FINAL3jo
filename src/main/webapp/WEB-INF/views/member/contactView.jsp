@@ -64,81 +64,34 @@
   <!-- ================ contact section start ================= -->
   <section class="contact-section padding_top">
     <div class="container">
-      <!-- <div class="d-none d-sm-block mb-5 pb-4">
-        <div id="map" style="height: 480px;"></div>
-        <script>
-          function initMap() {
-            var uluru = {
-              lat: -25.363,
-              lng: 131.044
-            };
-            var grayStyles = [{
-                featureType: "all",
-                stylers: [{
-                    saturation: -90
-                  },
-                  {
-                    lightness: 50
-                  }
-                ]
-              },
-              {
-                elementType: 'labels.text.fill',
-                stylers: [{
-                  color: '#ccdee9'
-                }]
-              }
-            ];
-            var map = new google.maps.Map(document.getElementById('map'), {
-              center: {
-                lat: -31.197,
-                lng: 150.744
-              },
-              zoom: 9,
-              styles: grayStyles,
-              scrollwheel: false
-            });
-          }
-        </script>
-        <script
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&callback=initMap">
-        </script>
-
-      </div> -->
- <div class="qnaPage">
+ 	<div class="qnaPage">
      
       <h2>문의게시판</h2>
       <hr>
         <div class="qnaPageTable">
 
-    <table class="table table-striped">
+    <table align="center" class="table table-striped">
         <thead>
         <tr>
             <th>글번호</th>
             <th>제목</th>
             <th>작성자</th>
             <th>날짜</th>
+            <th>처리 여부</th>
         </tr>
     </thead>
-
+	<c:forEach var="q" items="${ list }">
     <tbody>
         <tr>
-            <td>1</td>
-            <td>문의합니다</td>
-            <td>유승제</td>
-            <td>sysdate</td>
+            <td>${ q.qId }</td>
+            <td>${ q.qTitle }</td>
+            <td>${ q.qWriter }</td>
+            <td>${ q.qCreateDate }</td>
+            <td>${ q.qStatus }</td>
         </tr>
-
-        <tr>
-            <td>2</td>
-            <td>다시 문의합니다</td>
-            <td>유승제</td>
-            <td>sysdate</td>
-        </tr>
-
     </tbody>
     </table>
-
+	</c:forEach>
     <div class=Pagenation>
 
         <ul id="pagenation" align="center" style="margin-left:-90px;">

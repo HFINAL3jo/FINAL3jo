@@ -11,7 +11,7 @@
 <body>
 <h1>키워드 검색</h1>
 <div class="map_wrap">
-    <div id="map" style="width:70%;height:100%;position:relative;overflow:hidden;"></div>
+    <div id="map" style="width:70%;height:400px;position:relative;overflow:hidden;"></div>
 
     <div id="menu_wrap" class="bg_white">
         <div class="option">
