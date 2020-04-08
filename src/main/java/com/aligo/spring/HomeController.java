@@ -25,7 +25,7 @@ public class HomeController {
 	
 	@RequestMapping("post.do")
 	public String post() {
-		return "board/mapTest3";
+		return "board/post";
 	}
 	
 	@RequestMapping("recommend.do")
