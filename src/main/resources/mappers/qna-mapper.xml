@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="qnaMapper">
+	<resultMap id="qnaResultSet" type="QnA">
+	 <id property="qId" column="QID"/>
+	 
+	 <result property="qTitle" column="QTITLE" />
+	 <result property="qContent" column="QCONTENT" />
+	 <result property="tWriter" column="TWRITER" />
+	 <result property="qCreateDate" column="Q_CREATE_DATE" />
+	 <result property="qAnswerDate" column="Q_ANSWER_DATE" />
+	 <result property="qStatus" column="Q_STATUS" />
+	 
+	 <collection property="tFileList" javaType="java.util.ArrayList" resultMap="themeFileResultSet"/>
+	 <collection property="tNameList" javaType="java.util.ArrayList" resultMap="themeNameResultSet"/>
+	</resultMap>
+	
+	<resultMap type="TFile" id="themeFileResultSet">
+		<id property="tCodeNumber" column="T_CODE_NUMBER"/>
+		
+		<result property="tOriginalFile" column="T_ORIGINAL_FILE"/>
+		<result property="tModifyFile" column="T_MODIFY_FILE"/>
+	
+	</resultMap>
+	
+	<resultMap type="TName" id="themeNameResultSet">
+		<id property="tCode" column="TCODE" />
+		
+		<result property="tName" column="TNAME"/>	
+	</resultMap>
+		
+	<select id="selectList" resultMap="qnaResultSet">
+		SELECT *
+		FROM QNA 
+		ORDER BY QID DESC
+	</select>
+</mapper>

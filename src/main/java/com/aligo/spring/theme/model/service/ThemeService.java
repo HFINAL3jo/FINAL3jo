@@ -19,5 +19,12 @@ public interface ThemeService {
 	 * @return
 	 */
 	ArrayList<Theme> selectList(PageInfo pi);
+
+	/**
+	 * 테마글 작성
+	 * @param t
+	 * @return
+	 */
+	int insertTheme(Theme t);
 	
 }

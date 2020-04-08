@@ -9,6 +9,8 @@
   
 </head>
 <body>
+<div class="container">
+            <div class="row">
     <div class="col-lg-3">
         <div class="left_sidebar_area">
             <aside class="left_widgets p_filter_widgets">
@@ -143,9 +145,6 @@
         </div>
      </div>
  <script>
- 	$('#wb').click(function(){
- 		location.href="blogInsert.do";	
- 	});
  </script>
 </body>
 </html>

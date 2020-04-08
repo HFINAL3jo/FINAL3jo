@@ -45,6 +45,7 @@
 <body>
 
   <%@ include file="../common/menubar.jsp" %>
+  
   <!-- breadcrumb start-->
   
   <!-- breadcrumb start-->
@@ -93,7 +94,7 @@
             aria-selected="true">Description</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="location-tab" data-toggle="tab" href="#location" role="tab" aria-controls="location"
+          <a class="nav-link" id="location-tab" data-toggle="tab" href="#location" role="tab" aria-controls="location" 
             aria-selected="false">Location</a>
         </li>
         <li class="nav-item">
@@ -108,15 +109,14 @@
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade" id="description" role="tabpanel" aria-labelledby="description-tab">
           <p>
-           Content Here!
+          
           </p>
-          <p>
-           Content Here!
-          </p>
+       
         </div>
         <!-- Location-->
         <div class="tab-pane fade" id="location" role="tabpanel" aria-labelledby="location-tab" align="center">
           <div class="table-responsive">
+         
             <table class="table">
               <tbody>
                 <tr>
@@ -131,7 +131,7 @@
             </table>
           </div>
           <!--지도-->
-        	<div id="map" style="width:900px;height:100%;position:relative;overflow:hidden;"></div>
+        <div id="map" style="width:70%;height:400px;position:relative;overflow:hidden;"></div>
         </div>
         <!--Comment-->
         <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">
@@ -242,89 +242,125 @@
   <script src="resources/js/swiper.jquery.js"></script>
   <script src="resources/js/stellar.js"></script>
   <!--지도 api script-->
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=645218c0e569303936c79803cc2aa695"></script>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=645218c0e569303936c79803cc2aa695&libraries=services,clusterer,drawing"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=645218c0e569303936c79803cc2aa695&libraries=LIBRARY"></script>  
   <script>
-      $(document).ready(function(){
-    	 $('#description-tab').click();
-    	  
-        $('.img_view').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows:true,
-        fade: true,
-        asNavFor: '.img_slide'
-      });
-      $('.img_slide').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        asNavFor: '.img_view',
-        arrows:true,
-        dots: true,
-        centerMode: true,
-        focusOnSelect: true,
-        autoplay:true,
-        autoplayspeed:5000
-      });
-    });
-      
-    $('.list').hover(function(){
-       $(this).css('cursor','pointer');
-    }).click(function(){
-       $('#modalist').css("display","block");
-         
-         if(!($('.modal_layer')).click(function(){
-             $('#modalist').css('display','none');
-         }));
-       });
-    $('#fav,#save,#print,#share').mouseenter(function(){
-        $(this).css('cursor','pointer');
-    }).click(function(){
-      var i = $(this).attr('id');
-      switch(i){
+	$(function(){
+  		//지도 api
+	    var mapContainer = document.getElementById('map');
 
-      }
-    });
-    $('#thumb').hover(function(){
-      $(this).css('cursor','pointer')
-      .click(function(){
-        if($('#thumb').attr('src')=='resources/img/product/example/like.svg'){  
-          $(this).attr('src','resources/img/product/example/heart.svg');
-        }else{
-          $(this).attr('src','resources/img/product/example/like.svg');
-        }  
+		var mapOption = {
+		    center: new daum.maps.LatLng(37.566826, 126.9786567),
+		    level: 8
+		};  
+		
+		var map = new daum.maps.Map(mapContainer, mapOption);
+		
+		//지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+		var zoomControl = new kakao.maps.ZoomControl();
+		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+		map.relayout();
+		
+		// 주소-좌표 변환 객체 생성
+		var geocoder = new daum.maps.services.Geocoder();
+		
+		var listData = [
+		    '서울특별시 송파구 오금로13길 8',
+		    '서울특별시 송파구 올림픽로 25',
+		    '서울특별시 광진구 동일로18길 80',
+		    '서울특별시 종로구 지봉로 25',
+		    '서울특별시 성북구 인촌로 73'
+		];
+		
+		listData.forEach(function(addr, index) {
+		    geocoder.addressSearch(addr, function(result, status) {
+		        if (status === daum.maps.services.Status.OK) {
+		            var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+		
+		            var marker = new daum.maps.Marker({
+		                map: map,
+		                position: coords
+		            });
+		            var infowindow = new daum.maps.InfoWindow({
+		                content: '<div style="width:150px;text-align:center;padding:6px 0;">' + listData[index] + '</div>',
+		                disableAutoPan: true
+		            });
+		            //infowindow.open(map, marker);
+			        kakao.maps.event.addListener(marker, 'click', function() {
+			            // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+			            infowindow.setContent('<div style="width:150px;text-align:center;padding:6px 0;">' + listData[index] + '</div>');
+			            infowindow.open(map, marker);
+			            
+			            
+			        });
+		        }
+		    });
+		
+		});
+   	  	    	
+		function relayout() {    
+		 // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
+		 // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
+		 // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
+		 map.relayout();
+  		}
+		
+		$("#location-tab").on("click",function(){
+			map.relayout();
+		});
+  		
+   	   	$('#description-tab').click();
+   	  
+       $('.img_view').slick({
+		 slidesToShow: 1,
+		 slidesToScroll: 1,
+		 arrows:true,
+		 fade: true,
+		 asNavFor: '.img_slide'
+     	});
+       
+     $('.img_slide').slick({
+       slidesToShow: 3,
+       slidesToScroll: 1,
+       asNavFor: '.img_view',
+       arrows:true,
+       dots: true,
+       centerMode: true,
+       focusOnSelect: true,
+       autoplay:true,
+       autoplayspeed:5000
+     });
+   });
+     
+   $('.list').hover(function(){
+      $(this).css('cursor','pointer');
+   }).click(function(){
+      $('#modalist').css("display","block");
+        
+        if(!($('.modal_layer')).click(function(){
+            $('#modalist').css('display','none');
+        }));
       });
-    });
-    //지도 api 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   $('#fav,#save,#print,#share').mouseenter(function(){
+       $(this).css('cursor','pointer');
+   }).click(function(){
+     var i = $(this).attr('id');
+     switch(i){
+
+     }
+   });
+	   $('#thumb').hover(function(){
+	     $(this).css('cursor','pointer')
+	     .click(function(){
+	       if($('#thumb').attr('src')=='resources/img/product/example/like.svg'){  
+	         $(this).attr('src','resources/img/product/example/heart.svg');
+	       }else{
+	         $(this).attr('src','resources/img/product/example/like.svg');
+	       }  
+	     });
+  	});
+  
+
   </script>
   
   <%@ include file="../common/footer.jsp" %>

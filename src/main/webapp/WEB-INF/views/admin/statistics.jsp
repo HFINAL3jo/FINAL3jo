@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="kor">
 <head>
 
@@ -17,7 +18,7 @@
 <style>
  table {
 	width: 100%;
-	height: 86%;
+ 	height: 100%;
 	border-top: 1px solid #444444;
 	border-collapse: collapse;
 }
@@ -42,31 +43,37 @@ tbody tr:nth-child(2n+1) {
 }
 
 .div_left {
-	width: 550px;
-	height: 400px;
-	float: left;
-	margin-bottom: 15px;
+/* 	width: 500px;
+	float: left; */
+	height: 500px;
+	margin-bottom: 4%;
 	background-color: snow;
 	box-sizing: border-box;
 }
 
 .div_right {
-	width: 570px;
-	height: 400px;
-	float: right;
-	margin-bottom: 15px;
+/* 	width: 400px; */
+	height: 700px; 
+/* 	float: right;  */
+	margin-bottom: 10px;
 	background-color: snow;
 	box-sizing: border-box;
 	padding: 0px;
-	margin-left: 20px
+	margin-left: 10px
 }
 
 .button_header {
-	width: 170px;
-	height: 130px;
+	width: 20%;
+	height: 110px;
 	padding: 0px;
 	margin: 5px;
 	margin-left: 5px;
+}
+
+.button_body_chart_div{
+	margin-bottom: 1%;
+    width: 99%;
+    height: 12%;
 }
 
 .button_body_chart {
@@ -75,7 +82,13 @@ tbody tr:nth-child(2n+1) {
 }
 </style>
 
-<!-- c3.js 차트 사용 하기위한 스크립트 -->
+<!-- <script>
+	(function () { 
+		if(!document.referrer.includes("goodStatistic.do")){
+			location.href="goodStatistic.do";
+		}	
+	})()
+</script> --> 
 
 <!-- 
 	c3가 기본으로 제공하는 디자인 형식인 c3.min.css 파일을 <head> 부분에 추가한다. 
@@ -83,52 +96,51 @@ tbody tr:nth-child(2n+1) {
 	CDN을 이용해서 간편하게 사용하겠다면 다음과 같이 추가하면 될 것이다.
  -->
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" />
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 
 </head>
 <body style="">
 	<%@ include file="../common/menubar.jsp"%>
-	<%@ include file="assideAdmin.jsp"%>
 
-	<!--  조아요 / 조회수 / 검색 키워드 별 버튼으로 구현 -->
-	<script>
-  // <a href='#' class='genric-btn success-border e-large'>Large</a>&nbsp; &nbsp;
-  (function(){
-	  document.getElementById("inset_1")
-	  .innerHTML += 
-		  	"<p style='font-size:20px; padding-top: 20px;'>간단한 통계 자료</P>"
-	  		+"<div class='row align-items-center latest_product_inner' style='padding-top: 10px;'>"
-	  			 +"<button class='genric-btn success-border e-large button_header'> <p class='showLetter'>조아요</p></button>"
-	  			 +"<button class='genric-btn success-border e-large button_header'> <p class='showLetter'>조회수</p></button>"
-	  			 +"<button class='genric-btn success-border e-large button_header'> <p class='showLetter'>검색 키워드</p></button>"
-	  			 +"<button class='genric-btn success-border e-large button_header'> Large </button>";   
- 			+"</div>"
-  })();
-  </script>
-	<!-- <a href='#' -->
+	<!-- 먼저 조아요. 내용 저장 -->
+	<input type="hidden" id="list" value=${list} >
+	<input type="hidden" id="charValue" value=${charValue} >
+	<input type="hidden" id="jObj" value=${jObj} >
+
 	<!-- 통계를 보여주는 공간 -->
-
-	<section>
+	<!-- 인포그램에서 도넛, 바, 파이, 그래프을 보여 줘야 되므로 조아요, 조회수, 검색 키워드 등 컬럼명 마다 ~~ -->
+	<section class="cat_product_area section_padding" style="">
 		<div class="container" style="margin-bottom: 15px;">
 			<div class="row" style="margin-left: 0px;">
+				<%@ include file="assideAdmin.jsp" %>
 				<!-- <button>원 차트 보기</button> 은  -->
+			<div class="col-lg-10">
+				<!--  조아요 / 조회수 / 검색 키워드 별 버튼으로 구현 -->
+				<p style='font-size:20px; padding-top: 20px;'>간단한 통계 자료</P><br>
+				<div class='row align-items-center latest_product_inner' style='padding-top: 10px; width: 100%; margin-left: 8%; margin-bottom: 4%;'>
+					<button class='genric-btn success-border e-large button_header' id='uPbtn1'> <p class='showLetter'>조아요</p></button>
+					<button class='genric-btn success-border e-large button_header' id='uPbtn2'> <p class='showLetter'>조회수</p></button>
+					<button class='genric-btn success-border e-large button_header' id='uPbtn3'> <p class='showLetter'>검색 키워드</p></button>
+					<button class='genric-btn success-border e-large button_header' id='uPbtn4'> Large </button>
+				</div>
+				
+				<detalist>
+					<option value="Inter"/>
+					<option value="Hello"/>
+				</detalist>
 				<div class="div_left">
-					<div style="padding-bottom: 15px;">
-						<button class="genric-btn success large button_body_chart">Doughut
-							Chart</button>
+					<div class="button_body_chart_div">
+						<button class="genric-btn success large button_body_chart">Doughut Chart</button>
 						&nbsp;&nbsp;
-						<button class="genric-btn success large button_body_chart">Pie
-							Chart</button>
+						<button class="genric-btn success large button_body_chart">Pie Chart</button>
 						&nbsp;&nbsp;
-						<button class="genric-btn success large button_body_chart">Single
-							Bar Chart</button>
+						<button class="genric-btn success large button_body_chart">Single Bar Chart</button>
 						&nbsp;&nbsp;
 					</div>
-					<!-- c3.js 예제 2 -->
-					<div id="pie"></div>
+					<!-- c3.js 적용 차트 그리는 공간-->
+					<div id="chart"></div>
 				</div>
 
 				<div class="div_right">
@@ -147,7 +159,7 @@ tbody tr:nth-child(2n+1) {
 					<table style="border: 1px solid;">
 						<thead>
 							<tr>
-								<th style="width: 10%">순 위</th>
+								<th style="width: 30%">순 위</th>
 								<th>HELLO</th>
 							</tr>
 						</thead>
@@ -171,7 +183,7 @@ tbody tr:nth-child(2n+1) {
 							<tr>
 								<td>5</td>
 								<td>HELLO</td>
-							</tr>
+							</tr>			
 							<tr>
 								<td>6</td>
 								<td>HELLO</td>
@@ -191,100 +203,23 @@ tbody tr:nth-child(2n+1) {
 							<tr>
 								<td>10</td>
 								<td>HELLO</td>
-							</tr>						
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</section>
-	<br>
-	<!-- 게시판, 통계 자료 페이징 처리한 게시판 -->		
-		<div class="container" style="background-color: snow;">
-			<div class="cart_inner">
-				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>번 호</th>
-								<th>테이블 명</th>
-								<th>자료 형태</th>
-								<th>날 짜</th>
-								<th>컬 럼(1)</th>
-								<th>데이터</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>테 마 1</td>
-								<td>String</td>
-								<td>2020-04-03</td>
-								<td>검색 키워드</td>
-								<td>음 뭐가 들어 가야 되나 음 길이 도 생각해야 되네?</td>
-							</tr>
+							</tr>	
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
 
+	<!-- 게시판, 통계 자료 페이징 처리한 게시판 -->		
+	</section>
 	<%@ include file="../common/footer.jsp"%>
 
-	<!-- 나중에 따로 스크립트 파일로 뺄것 -->
-	<script>
-  var pieData = {
-		  사과: 500,
-		  호두: 200,
-		  블루베리: 666,
-		  치즈: 54,
-		  딸기: 120
-		};
-		var chartDonut = c3.generate({
-		  bindto: "#pie",
-		  data: {
-		    json: [pieData],
-		    keys: {
-		      value: Object.keys(pieData),
-		    },
-		    type: "donut",
-		  },
-		  donut: {
-		    title: "Hello my world",
-		  },
-		});
+<!-- 이벤트 처리를 위한 스크립트 -->
+<!-- 버튼 상단 -->
+<script src="resources/js/statisticsButtonRegist.js"></script>
+<!-- 버튼 상단 이벤트 처리 -->
+<script src="resources/js/statistics.js"></script>
 
-		var chartDonutColors = chartDonut.data.colors();
-		$("#text-apple").css("color", chartDonutColors["사과"]);
-		$("#text-walnut").css("color", chartDonutColors["호두"]);
-		$("#text-berry").css("color", chartDonutColors["블루베리"]);
-		$("#text-cheese").css("color", chartDonutColors["치즈"]);
-		$("#text-strawberry").css("color", chartDonutColors["딸기"]);
-		
-  </script>
-
-	<script>
-  var chart = c3.generate({
-	  bindto: "#linechart",
-	  data: {
-	    json: [
-	      {result_value:1.026653, calc_value:1},{result_value:1.030348, calc_value:0}
-	    ],
-	    keys: {
-	      value: ['result_value','calc_value']
-	    }
-	  },
-	  axis: {
-	    x: {
-	      type: 'category',
-	      show: false,
-	      categories: [
-	        '2017-10-31','2017-11-01','2017-11-02','2017-11-03'
-	      ]
-	    }
-	  }
-	});
-  </script>
 </body>
 </html>
 
