@@ -13,11 +13,12 @@ public class QnAController {
 	@Autowired
 	private QnAService qService;
 	
-	@RequestMapping("contactView.do")
-	public ModelAndView boardList(ModelAndView mv) {
-		
-		return mv;
-	}
+	/*
+	 * @RequestMapping("contactView.do") public ModelAndView boardList(ModelAndView
+	 * mv) {
+	 * 
+	 * return mv; }
+	 */
 	
 	
 	

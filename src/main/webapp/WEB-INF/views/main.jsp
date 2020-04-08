@@ -227,7 +227,7 @@
       					
       					var card = "#card" + (index + 1);	
       					
-      					$(card).children('img').attr('src',"/spring/resources/images/"+value.tOriginalFile);
+      					$(card).children('img').attr('src',"/spring/resources/tuploadFiles/"+value.tModifyFile);
       					$(card).children('span').html(value.tTitle);
       					$(card).on("click",function(){
       						location.href="topListDetail.do";
@@ -333,10 +333,8 @@
       			success:function(data){
       				$.each(data,function(index, value){
       					var theme = "#theme" + (index + 1);
-      					console.log(data);
-      					console.log(value);	
       					
-      					$(theme).children('img').attr('src','/spring/resources/images/'+value.tOriginalFile);
+      					$(theme).children('img').attr('src','/spring/resources/tuploadFiles/'+value.tModifyFile);
       					$(theme).children('h3').html(value.tTitle);
       					$(theme).children('p').html(value.tCreateDate);
       					$(theme).on("click",function(){
