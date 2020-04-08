@@ -29,7 +29,6 @@
     <!-- Font Awesome link -->
     <link rel="stylesheet" href="resources/css/balloon.min.css">
     <!-- balloon css -->
-    
 </head>
 <body>
 	<c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
@@ -86,6 +85,7 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
                                         <a class="dropdown-item" href="themeInsertView.do">Test1</a>
+                                        <a class="dropdown-item" href="blogdetail.do">Test2</a>
                                     </div>
                                 </li>
                             </ul>
