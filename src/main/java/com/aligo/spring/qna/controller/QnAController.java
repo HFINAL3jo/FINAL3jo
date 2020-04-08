@@ -39,14 +39,6 @@ public class QnAController {
 		
 		return mv;
 	}
-	/*
-	 * @RequestMapping("contactView.do") public ModelAndView boardList(ModelAndView
-	 * mv) {
-	 * 
-	 * return mv; }
-	 */
->>>>>>> branch 'master' of https://github.com/HFINAL3jo/FINAL3jo.git
-	
 	
 	
 }
