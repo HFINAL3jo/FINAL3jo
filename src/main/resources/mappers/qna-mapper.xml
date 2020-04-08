@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="themeMapper">
+	<resultMap type="Theme" id="themeResultSet">
+	 <id property="tId" column="TID"/>
+	 
+	 <result property="tWriter" column="TWRITER" />
+	 <result property="tTitle" column="TTITLE" />
+	 <result property="tContent" column="TCONTENT" />
+	 <result property="tAddress" column="TADDRESS" />
+	 <result property="tCreateDate" column="T_CREATE_DATE" />
+	 <result property="tModifyDate" column="T_MODIFY_DATE" />
+	 <result property="tViews" column="T_VIEWS" />
+	 <result property="tLikes" column="T_LIKES" />
+	 <result property="tKeyword" column="TKEYWORD" />
+	 <result property="tStatus" column="T_STATUS" />
+	 <result property="tCode" column="TCODE" />
+	 <result property="tOriginalFile" column="T_ORIGINAL_FILE"/>
+	 <result property="tModifyFile" column="T_MODIFY_FILE"/>
+	 <result property="tName" column="TNAME"/>
+	 
+	 <collection property="tFileList" javaType="java.util.ArrayList" resultMap="themeFileResultSet"/>
+	 <collection property="tNameList" javaType="java.util.ArrayList" resultMap="themeNameResultSet"/>
+	</resultMap>
+	
+	<resultMap type="TFile" id="themeFileResultSet">
+		<id property="tCodeNumber" column="T_CODE_NUMBER"/>
+		
+		<result property="tOriginalFile" column="T_ORIGINAL_FILE"/>
+		<result property="tModifyFile" column="T_MODIFY_FILE"/>
+	
+	</resultMap>
+	
+	<resultMap type="TName" id="themeNameResultSet">
+		<id property="tCode" column="TCODE" />
+		
+		<result property="tName" column="TNAME"/>	
+	</resultMap>
+	
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM THEME_LIST
+		WHERE T_STATUS='Y'
+	</select>
+	
+	<select id="selectList" resultMap="themeResultSet">
+		SELECT *
+		FROM THEME_LIST 
+		JOIN THEME_CODE USING(TCODE)
+		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
+		WHERE T_STATUS='Y'
+		ORDER BY TID DESC
+	</select>
+</mapper>
