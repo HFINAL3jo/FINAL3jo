@@ -1,7 +1,11 @@
 package com.aligo.spring;
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,10 +37,10 @@ public class HomeController {
 		return "recommend/recommendPage";
 	}
 	
-	@RequestMapping("contactView.do")
-	public String contactView() {
-		return "member/contactView";
-	}
+	/*
+	 * @RequestMapping("contactView.do") public String contactView() { return
+	 * "member/contactView"; }
+	 */
 	
 	@RequestMapping("loginView.do")
 	public String loginView() {
@@ -101,6 +105,11 @@ public class HomeController {
 	@RequestMapping("blogdetail.do")
 	public String postdetail() {
 		return "board/blogdetail";
+	}
+	
+	@RequestMapping("postdetail.do")
+	public String postv() {
+		return "board/post";
 	}
 	
 }

@@ -82,7 +82,13 @@ tbody tr:nth-child(2n+1) {
 }
 </style>
 
-<!-- c3.js 차트 사용 하기위한 스크립트 -->
+<!-- <script>
+	(function () { 
+		if(!document.referrer.includes("goodStatistic.do")){
+			location.href="goodStatistic.do";
+		}	
+	})()
+</script> --> 
 
 <!-- 
 	c3가 기본으로 제공하는 디자인 형식인 c3.min.css 파일을 <head> 부분에 추가한다. 
@@ -90,8 +96,7 @@ tbody tr:nth-child(2n+1) {
 	CDN을 이용해서 간편하게 사용하겠다면 다음과 같이 추가하면 될 것이다.
  -->
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" />
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 
@@ -100,9 +105,9 @@ tbody tr:nth-child(2n+1) {
 	<%@ include file="../common/menubar.jsp"%>
 
 	<!-- 먼저 조아요. 내용 저장 -->
-	<input type="hidden" id="list" value="${list}"/>
-	<input type="hidden" id="bindto" value="${bindto}"/>
-	<input type="hidden" id="jArr" value="${jArr}"/>
+	<input type="hidden" id="list" value=${list} >
+	<input type="hidden" id="charValue" value=${charValue} >
+	<input type="hidden" id="jObj" value=${jObj} >
 
 	<!-- 통계를 보여주는 공간 -->
 	<!-- 인포그램에서 도넛, 바, 파이, 그래프을 보여 줘야 되므로 조아요, 조회수, 검색 키워드 등 컬럼명 마다 ~~ -->
@@ -121,6 +126,10 @@ tbody tr:nth-child(2n+1) {
 					<button class='genric-btn success-border e-large button_header' id='uPbtn4'> Large </button>
 				</div>
 				
+				<detalist>
+					<option value="Inter"/>
+					<option value="Hello"/>
+				</detalist>
 				<div class="div_left">
 					<div class="button_body_chart_div">
 						<button class="genric-btn success large button_body_chart">Doughut Chart</button>
@@ -130,8 +139,8 @@ tbody tr:nth-child(2n+1) {
 						<button class="genric-btn success large button_body_chart">Single Bar Chart</button>
 						&nbsp;&nbsp;
 					</div>
-					<!-- c3.js 예제 2 -->
-					<div id="pie"></div>
+					<!-- c3.js 적용 차트 그리는 공간-->
+					<div id="chart"></div>
 				</div>
 
 				<div class="div_right">
@@ -205,32 +214,12 @@ tbody tr:nth-child(2n+1) {
 	</section>
 	<%@ include file="../common/footer.jsp"%>
 
-	<!-- 나중에 따로 스크립트 파일로 뺄것 -->
-
+<!-- 이벤트 처리를 위한 스크립트 -->
+<!-- 버튼 상단 -->
+<script src="resources/js/statisticsButtonRegist.js"></script>
+<!-- 버튼 상단 이벤트 처리 -->
 <script src="resources/js/statistics.js"></script>
 
- <script>
-  var chart = c3.generate({
-	  bindto: "#linechart",
-	  data: {
-	    json: [
-	      {result_value:1.026653, calc_value:1},{result_value:1.030348, calc_value:0}
-	    ],
-	    keys: {
-	      value: ['result_value','calc_value']
-	    }
-	  },
-	  axis: {
-	    x: {
-	      type: 'category',
-	      show: false,
-	      categories: [
-	        '2017-10-31','2017-11-01','2017-11-02','2017-11-03'
-	      ]
-	    }
-	  }
-	});
-  </script>
 </body>
 </html>
 

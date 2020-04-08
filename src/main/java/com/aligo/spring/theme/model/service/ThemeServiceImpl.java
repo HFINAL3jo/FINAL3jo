@@ -25,4 +25,9 @@ public class ThemeServiceImpl implements ThemeService {
 		return tDao.selectList(pi);
 	}
 
+	@Override
+	public int insertTheme(Theme t) {
+		return tDao.insertTheme(t);
+	}
+
 }

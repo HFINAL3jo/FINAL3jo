@@ -66,9 +66,7 @@
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="post.do">
-                                        Posting
-                                    </a>
+                                    <a class="nav-link" href="post.do">Posting</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="recommend.do">
