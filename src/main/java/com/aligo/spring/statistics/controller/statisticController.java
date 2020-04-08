@@ -37,22 +37,22 @@ public class statisticController {
 		ArrayList<statistics> list = serviceStatics.AllGoodStatistic();
 		
 		// list를 JSonArray로 담는다.
-		JSONArray jArr = new JSONArray();
+		//JSONArray jArr = new JSONArray();
+		
+		// JSONObject에서 통계를 쓰기 위한 데이터 값만 받는다.
+		JSONObject jObj = new JSONObject();
 		for(statistics out : list) {
-			JSONObject jObj = new JSONObject();
 			
-			jObj.put("number", out.getNumber());
-			jObj.put("tableName", out.getTableName());
-			jObj.put("DoughtDate", out.getDoughtDate());
-			jObj.put("DoughtColumnName", out.getTableName());
-			jObj.put("DoughtColumnNumber", out.getDoughtColumnNumber());
+			//jObj.put("number", out.getNumber());
+			//jObj.put("tableName", out.getTableName());
+			//jObj.put("DoughtDate", out.getDoughtDate());
+			jObj.put(out.getDoughtColumnName(), out.getDoughtColumnNumber());
 			
-			jArr.add(jObj);
 		}
 		
 		mav.addObject("list", list);
-		mav.addObject("jArr",  jArr);
-		mav.addObject("bindto", "#pie"); // 어떤 차트(인포그램/통계)를 사용 할 것지 표시
+		mav.addObject("jObj",  jObj);
+		mav.addObject("charValue", "donut"); // 어떤 차트(인포그램/통계)를 사용 할 것지 표시
 		mav.setViewName("admin/statistics");
 		return mav;
 	}
