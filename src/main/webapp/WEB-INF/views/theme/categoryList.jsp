@@ -91,10 +91,13 @@
 			    
 			<div id="aList" class="row align-items-center latest_product_inner">
 			    <c:forEach var="t" items="${list }" begin="0" end="${pi.themeLimit}">
+			    <c:url var="post" value="postdetail.do">
+				 <c:param name="tId" value="${t.tId }"/>
+				</c:url>
+				<a href="${post }">
 				<div class="col-lg-4 col-sm-6">
 					<div class="single_product_item">
-						<img src="resources/tuploadFiles/${t.tModifyFile }"
-							style="width: 100%; height: 170px">
+						<img src="resources/tuploadFiles/${t.tModifyFile }"	style="width: 100%; height: 170px">
 						<div class="single_product_text">
 							<h4>${t.tTitle }</h4>
 							<h3><b style="color:rgba(121,125,237,0.9)">#${t.tName}</b></h3>
@@ -103,6 +106,7 @@
 						</div>
 					</div>
 				</div>
+				</a>
 				</c:forEach>
 			</div>
 			<input id="tc" type="hidden" value="${pi.currentPage }">
@@ -192,7 +196,9 @@
 				ex();
 				}
 			}
-		
+	 $('.col-lg-4 col-sm-6').click(function(){
+		 
+	 });
 	</script>
 </body>
 </html>
