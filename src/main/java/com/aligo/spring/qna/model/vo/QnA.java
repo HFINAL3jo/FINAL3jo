@@ -1,9 +1,14 @@
 package com.aligo.spring.qna.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class QnA {
+public class QnA implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3273850703847794953L;
 	private int qId;
 	private String qTitle;
 	private String qContent;
