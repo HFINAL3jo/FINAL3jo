@@ -12,13 +12,13 @@ import com.aligo.spring.member.model.vo.Member;
 public class MemberController {
 	
 	@Autowired
-	private MemberService mService;
+	private MemberService memService;
 	
 	
 	@RequestMapping("insertMem.do")
 	public String insertMember(Member m, Model model) {
 		
-		int result = mService.insertMember(m);
+		int result = memService.insertMember(m);
 		
 		if(result > 0) {
 			return "redirect:main.jsp";
