@@ -145,7 +145,8 @@ CREATE TABLE RECOMMEND_Q(
  RQKEYWORD1 VARCHAR2(500),
  KEYWORD1_CONTENT VARCHAR2(300),
  RQKEYWORD2 VARCHAR2(500),
- KEYWROD2_CONTENT VARCHAR2(300) 
+ KEYWROD2_CONTENT VARCHAR2(300),
+ R_STATUS VARCHAR2(5) DEFAULT 'Y' CHECK(R_STATUS IN('Y', 'N'))
 );
 
 --THEME_LIST 테스트용 THEME_CODE 먼저 입력해야함 
@@ -199,4 +200,21 @@ CREATE TABLE QNA(
 IINSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'식사하셨어요?','식사 하셨는지 궁금합니다.','hyhihi',DEFAULT,NULL,DEFAULT);
 INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'한강 좋아하세요?','한강 이쁘지 않아요?ㅎㅎㅎ.','hooni',DEFAULT,NULL,DEFAULT);
 INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'서울에서 어딜 제일 좋아하세요?','저는 한강이 제일 좋아요','mama',DEFAULT,NULL,DEFAULT);
+
+INSERT INTO RECOMMEND_Q VALUES('RQ001', 'Choose your travel inclination', 'Something familiar', 
+                'Seek something familiar.', 'Something new', 'Seeking something new.', DEFAULT);
+                
+INSERT INTO RECOMMEND_Q VALUES('RQ002', 'Choose your travel inclination 2', 'Famous', 
+                'Pursue famous places.', 'Not Famous', 'Pursue a place that is not famous.', DEFAULT);
+                
+INSERT INTO RECOMMEND_Q VALUES('RQ003', 'Choose your travel purpose', 'Vacation', 
+                'For vacation', 'Tourism', 'For tourism', DEFAULT);
+                
+INSERT INTO RECOMMEND_Q VALUES('RQ004', 'Choose your personality', 'Calm', 
+                'It is a calm character.', 'Active', 'It is an active personality.', DEFAULT);
+            
+INSERT INTO RECOMMEND_Q VALUES('RQ005', 'Choose the destination you want to go', 'Urban', 
+                'An urban destination', 'Natural', 'Natural destination', DEFAULT);
+
+
 COMMIT;
