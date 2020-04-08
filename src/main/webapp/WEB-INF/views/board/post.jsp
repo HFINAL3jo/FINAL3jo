@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="zxx">
+<html lang="ko">
 
 <head>
   <!-- Required meta tags -->
@@ -52,13 +52,13 @@
   <!--================End Home Banner Area =================-->
   <!--이미지 슬라이드-->
   <br><br><br><br>
-  <h1 align="center">Title Here</h1>
+  <h1 align="center">${t.tTitle}</h1>
   <br>
   <section class="img_board_view">
     
      <div class="img_view" align="center" style="width:500px; height:300px; position:relative; margin:auto;">
           
-      <div><h3><img src="resources/img/product/example/example.jpg" style="width:500px; height:300px;" alt=""></h3></div>
+      <div><h3><img src="resources/tuploadFiles/${t.tModifyFile }" style="width:500px; height:300px;" alt=""></h3></div>
       <div><h3><img src="resources/img/product/example/example2.jpg" style="width:500px; height:300px;" alt=""></h3></div>
       <div><h3><img src="resources/img/product/example/example3.jpg" style="width:500px; height:300px;" alt=""></h3></div>
       <div><h3><img src="resources/img/product/example/example4.jpg" style="width:500px; height:300px;" alt=""></h3></div>
@@ -66,7 +66,7 @@
   </div>
   <br><br>
   <div class="img_slide" align="center" style="width:1200px; height:300px; position:relative; margin:auto;">
-      <div><h3><img src="resources/img/product/example/example.jpg" style="width:200px; height:200px;" alt=""></h3></div>
+      <div><h3><img src="resources/tuploadFiles/${t.tModifyFile }" style="width:200px; height:200px;" alt=""></h3></div>
     <div><h3><img src="resources/img/product/example/example2.jpg"style="width:200px; height:200px;" alt=""></h3></div>
     <div><h3><img src="resources/img/product/example/example3.jpg"style="width:200px; height:200px;" alt=""></h3></div>
     <div><h3><img src="resources/img/product/example/example4.jpg"style="width:200px; height:200px;" alt=""></h3></div>
@@ -109,7 +109,7 @@
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade" id="description" role="tabpanel" aria-labelledby="description-tab">
           <p>
-          
+          ${t.tContent}
           </p>
        
         </div>
@@ -120,19 +120,27 @@
             <table class="table">
               <tbody>
                 <tr>
-                  <td>Address</td>
-                  <td>Data</td>
+                  <td>Writer : ${t.tWriter }</td>
+                  <td>Address : ${t.tAddress}</td>
                 </tr>
                 <tr>
-                  <td>Test</td>
-                  <td>Where to go</td>
+                  <td>Views : ${t.tViews }</td>
+                  <td>Likes : ${t.tLikes}</td>
                 </tr>
+                <tr>
+                  <td>Keyword : ${t.tKeyword }</td>
+                  <td>HashTagName : ${t.tName }</td>
+                </tr>
+                <tr>
+                   <td>PostDate : ${t.tCreateDate }</td>
+                   <td>ModifyDate : ${t.tModifyDate }</td>	
               </tbody>
             </table>
           </div>
           <!--지도-->
-        <div id="map" style="width:70%;height:400px;position:relative;overflow:hidden;"></div>
-        </div>
+          <br>
+        <div id="map" style="width:80%;height:400px;position:relative;overflow:hidden;"></div>
+        </div>	
         <!--Comment-->
         <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">
           <div class="row">
@@ -306,7 +314,10 @@
   		}
 		
 		$("#location-tab").on("click",function(){
-			map.relayout();
+			
+			window.setTimeout(function() {
+			    map.relayout();
+			},200);
 		});
   		
    	   	$('#description-tab').click();

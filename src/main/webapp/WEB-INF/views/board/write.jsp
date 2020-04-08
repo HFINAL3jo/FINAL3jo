@@ -24,16 +24,18 @@
     <label>Writer</label>&nbsp;
     <input type="text" name="tWriter" size="40" value="${loginUser.email }" style="border:none;">
     <br><br>
-    <select name="tCode">
-    	<option value="T1">History</option>
-    	<option value="T2">Food</option>
-    	<option value="T3">Shopping</option>
-    	<option value="T4">Fastival</option>
-    	<option value="T5">Night View</option>
-    	<option value="T6">Museum</option>
-    	<option value="T7">Exotic</option>
-    </select>&nbsp;&nbsp;&nbsp;
-    <input type="text" name="tKeyword">  
+    <span style="float:left;">Theme &nbsp;<input type="search" list="tcl" name="tCode"></span>
+    <datalist id="tcl">
+    	<option value="History">History</option>
+    	<option value="Food">Food</option>
+    	<option value="Shopping">Shopping</option>
+    	<option value="Fastival">Fastival</option>
+    	<option value="Night View">Night View</option>
+    	<option value="Museum">Museum</option>
+    	<option value="Exotic">Exotic</option>
+    </datalist>&nbsp;&nbsp;&nbsp;
+    Keyword &nbsp;&nbsp;<input type="text" name="tKeyword" style="margin-right:-10px;">
+    <br><br>  
 	<textarea name="tContent" id="contents" rows="30" cols="104"></textarea>
 	
     <br><br>

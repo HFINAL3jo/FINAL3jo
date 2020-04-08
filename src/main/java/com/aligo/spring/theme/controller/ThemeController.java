@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.aligo.spring.common.Pagination;
 import com.aligo.spring.theme.model.service.ThemeService;
 import com.aligo.spring.theme.model.vo.PageInfo;
+import com.aligo.spring.theme.model.vo.TFile;
 import com.aligo.spring.theme.model.vo.Theme;
 
 @Controller
@@ -77,19 +78,20 @@ public class ThemeController {
 	@RequestMapping("themeInsert.do")
 	public String insertTheme(Theme t,HttpServletRequest request,
 			@RequestParam(name="uploadFile",required=false) MultipartFile file) {
+		TFile tf = new TFile();
 		
-		
-		if(file.getOriginalFilename().equals("")) {
+		if(!file.getOriginalFilename().equals("")) {
 			
 			String renameFilename = saveFile(request, file);
 			
 			if(renameFilename != null) {
 				t.settOriginalFile(file.getOriginalFilename());
 				t.settModifyFile(renameFilename);
+				tf.settOriginalFile(file.getOriginalFilename());
+				tf.settModifyFile(renameFilename);
 			}
 		}
-		
-		int result = tService.insertTheme(t);
+		int result = tService.insertTheme(t,tf);
 		
 		if(result >0) return "redirect:theme.do"; else return "";
 	}
@@ -122,5 +124,15 @@ public class ThemeController {
 		}
 		
 		return renameFilename;
+	}
+	
+	@RequestMapping("postdetail.do")
+	public ModelAndView themeDetailView(ModelAndView mv, 
+			@RequestParam(value="tId") int bId) {
+		
+		Theme t = tService.selectTheme(bId);
+		mv.addObject("t",t);
+		mv.setViewName("board/post");		
+		return mv;
 	}
 }

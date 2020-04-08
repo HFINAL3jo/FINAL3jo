@@ -56,8 +56,19 @@
 	</select>
 	
 	<insert id="insertTheme" parameterType="Theme">
-		INSERT INTO THEME_LIST VALUES(SEQ_TNO.NEXTVAL,${tWriter},${tTitle},
-		${tContent},${tAddress},${tContent},${tAddress},DEFAULT,DEFAULT,
-		DEFAULT,DEFAULT,${tKeyword},DEFAULT,${tCode})
+		INSERT INTO THEME_LIST VALUES(SEQ_TNO.NEXTVAL,#{tWriter},#{tTitle},
+		#{tContent},#{tAddress},DEFAULT,DEFAULT,DEFAULT,DEFAULT,#{tKeyword},DEFAULT,#{tCode})
 	</insert>
+	
+	<insert id="insertThemeFiles" parameterType="TFile">
+		INSERT INTO THEME_FILES VALUES(SEQ_TNO.CURRVAL,#{tOriginalFile},#{tModifyFile})
+	</insert>
+	
+	<select id="selectTheme" resultMap="themeResultSet">
+		SELECT * 
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
+		WHERE TID=#{tId}	
+	</select>	
 </mapper>

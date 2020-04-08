@@ -197,7 +197,7 @@ CREATE TABLE QNA(
 );
 
 
-IINSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'식사하셨어요?','식사 하셨는지 궁금합니다.','hyhihi',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'식사하셨어요?','식사 하셨는지 궁금합니다.','hyhihi',DEFAULT,NULL,DEFAULT);
 INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'한강 좋아하세요?','한강 이쁘지 않아요?ㅎㅎㅎ.','hooni',DEFAULT,NULL,DEFAULT);
 INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'서울에서 어딜 제일 좋아하세요?','저는 한강이 제일 좋아요','mama',DEFAULT,NULL,DEFAULT);
 

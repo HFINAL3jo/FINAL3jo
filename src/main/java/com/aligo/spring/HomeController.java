@@ -101,10 +101,4 @@ public class HomeController {
 	public String postdetail() {
 		return "board/blogdetail";
 	}
-	
-	@RequestMapping("postdetail.do")
-	public String postv() {
-		return "board/post";
-	}
-	
 }

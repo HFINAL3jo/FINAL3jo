@@ -3,6 +3,7 @@ package com.aligo.spring.theme.model.service;
 import java.util.ArrayList;
 
 import com.aligo.spring.theme.model.vo.PageInfo;
+import com.aligo.spring.theme.model.vo.TFile;
 import com.aligo.spring.theme.model.vo.Theme;
 
 public interface ThemeService {
@@ -25,6 +26,13 @@ public interface ThemeService {
 	 * @param t
 	 * @return
 	 */
-	int insertTheme(Theme t);
+	int insertTheme(Theme t,TFile tf);
+
+	/**
+	 * 테마글 상세보기
+	 * @param bId
+	 * @return
+	 */
+	Theme selectTheme(int bId);
 	
 }
