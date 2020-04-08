@@ -82,13 +82,6 @@ public class HomeController {
 	public String statistics() {
 		return "admin/statistics";
 	}
-	
-
-	@RequestMapping("recomAdminView.do")
-	public String recomAdminView() {
-		return "admin/recomAdminView";
-	}
-	
 
 	@RequestMapping("signUp.do")
 	public String signupView() {

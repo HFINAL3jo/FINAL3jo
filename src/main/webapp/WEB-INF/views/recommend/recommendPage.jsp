@@ -164,16 +164,27 @@
 	}
        
       .down{
-      		color: #FF4081;
+      		color: darkgray;
       		cursor: pointer;
 	}
        
-       
-       
-    
+	.mybtn {
+	  color: #0067b8; 
+	  border:1px solid #0067b8; 
+	  background: white; 
+	  width: 20em;
+	  height: 3em; 
+	  font-size: 15px; 
+	  margin-bottom: 10%;
+	}
+	
+	.mybtn:hover {
+	  color: snow;
+	  border: 1px solid #0067b8;
+	  background: #0067b8;
+	}
 </style>
     <script src="resources/js/jquery-3.4.1.min.js"></script>
-
 </head>
 <body>
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -348,7 +359,7 @@
                         </div>
                     </div>
                     <div class="row justify-content-center margin-center" style="margin-top: 50px; margin-bottom: 20px;" data-aos="fade-zoom-in" data-aos-duration="1500">
-                        <input type="submit" value="RESULT" class="genric-btn primary e-large" style="width: 300px; font-size: 15px; margin-bottom: 10%;">
+                        <input type="submit" value="RESULT" class="mybtn e-large">
                     </div>
                 </div>
             </div>
@@ -380,9 +391,9 @@
 	            		
 	            		$(que).text(value.recomContent);
 	            		$(keyword1).val(value.keyword1);
-	            		$(keyword1).siblings().children().text(value.Keyword1Content);
+	            		$(keyword1).siblings().children().text(value.keyword1Content);
 	            		$(keyword2).val(value.keyword2);
-	            		$(keyword2).siblings().children().text(value.Keyword2Content);
+	            		$(keyword2).siblings().children().text(value.keyword2Content);
             		});
             	},
             	error : function(){
@@ -428,27 +439,27 @@
         	
         	if(!$('input[name="keyword1"]:checked').val()){
         		alert('Please choose all items and try again');
-        		var offset = $('input[name="ans1"]').parent().parent().parent().parent().offset();
+        		var offset = $('input[name="keyword1"]').parent().parent().parent().parent().offset();
         		$('html').animate({scrollTop : offset.top - 110}, 1000);
         		return false;
         	}else if(!$('input[name="keyword2"]:checked').val()){
         		alert('Please choose all items and try again');
-        		var offset = $('input[name="ans2"]').parent().parent().parent().parent().offset();
+        		var offset = $('input[name="keyword2"]').parent().parent().parent().parent().offset();
         		$('html').animate({scrollTop : offset.top - 110}, 1000);
         		return false;
         	}else if(!$('input[name="keyword3"]:checked').val()){
         		alert('Please choose all items and try again');
-        		var offset = $('input[name="ans3"]').parent().parent().parent().parent().offset();
+        		var offset = $('input[name="keyword3"]').parent().parent().parent().parent().offset();
         		$('html').animate({scrollTop : offset.top - 110}, 1000);
         		return false;
         	}else if(!$('input[name="keyword4"]:checked').val()){
         		alert('Please choose all items and try again');
-        		var offset = $('input[name="ans4"]').parent().parent().parent().parent().offset();
+        		var offset = $('input[name="keyword4"]').parent().parent().parent().parent().offset();
         		$('html').animate({scrollTop : offset.top - 110}, 1000);
         		return false;
         	}else if(!$('input[name="keyword5"]:checked').val()){
         		alert('Please choose all items and try again');
-        		var offset = $('input[name="ans5"]').parent().parent().parent().parent().offset();
+        		var offset = $('input[name="keyword5"]').parent().parent().parent().parent().offset();
         		$('html').animate({scrollTop : offset.top - 110}, 1000);
         		return false;
         	}else{
@@ -474,6 +485,7 @@
         			});
         		}
         	}
+        	
         }
     </script>
 
