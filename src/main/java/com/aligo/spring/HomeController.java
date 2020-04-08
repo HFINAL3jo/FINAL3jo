@@ -33,10 +33,10 @@ public class HomeController {
 		return "recommend/recommendPage";
 	}
 	
-	@RequestMapping("contactView.do")
-	public String contactView() {
-		return "member/contactView";
-	}
+	/*
+	 * @RequestMapping("contactView.do") public String contactView() { return
+	 * "member/contactView"; }
+	 */
 	
 	@RequestMapping("loginView.do")
 	public String loginView() {
