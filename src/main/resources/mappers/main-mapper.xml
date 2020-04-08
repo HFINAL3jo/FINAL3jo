@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mainMapper">
+	<resultMap type="Theme" id="themeResultSet">
+		<id property="tId" column="TID"/>
+		<result property="tWriter" column="TWRITER"/>
+		<result property="tTitle" column="TTITLE"/>
+		<result property="tCreateDate" column="T_CREATE_DATE"/>
+		<result property="tModifyDate" column="T_MODIFY_DATE"/>
+		<result property="tLikes" column="T_LIKES"/>
+		<result property="tStatus" column="T_STATUS"/>
+		<result property="tCode" column="TCODE"/>
+		<result property="tOriginalFile" column="T_ORIGINAL_FILE"/>
+		<result property="tModifyFile" column="T_MODIFY_FILE"/>
+		
+		<collection property="tFileList" javaType="java.util.ArrayList" resultMap="themeFileResultSet"/>
+		
+	</resultMap>
+	
+	<resultMap type="TFile" id="themeFileResultSet">
+		<id property="tCodeNumber" column="T_CODE_NUMBER"/>
+		
+		<result property="tOriginalFile" column="T_ORIGINAL_FILE"/>
+		<result property="tModifyFile" column="T_MODIFY_FILE"/>
+	</resultMap>
+	
+	<select id="selectTopList" resultMap="themeResultSet">
+		<![CDATA[SELECT *
+		FROM (SELECT *
+			  FROM THEME_LIST
+			  ORDER BY T_LIKES DESC)
+	    JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
+	    WHERE ROWNUM <= 6
+	    AND T_STATUS='Y']]>
+	</select>
+	
+	<select id="selectThemeList" resultMap="themeResultSet">
+		SELECT TWRITER, TTITLE, TCONTENT, TADDRESS, T_CREATE_DATE, T_MODIFY_DATE, T_VIEWS, T_LIKES, TKEYWORD, T_STATUS, TID, TCODE
+FROM
+(SELECT TCODE || MAX(TID) xx
+FROM THEME_LIST
+GROUP BY TCODE) A
+join
+(SELECT TCODE || TID yy, TWRITER, TTITLE, TCONTENT, TADDRESS, T_CREATE_DATE, T_MODIFY_DATE, T_VIEWS, T_LIKES, TKEYWORD, T_STATUS, TID, TCODE
+FROM THEME_LIST) B on (A.xx = B.yy)
+	</select>
+</mapper>

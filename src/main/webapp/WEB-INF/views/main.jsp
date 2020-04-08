@@ -127,6 +127,7 @@
 	        transform: scale(1.05);
 	        transition: all 0.2s ease-out, transform 0.2s ease-out, filter 0.75s ease-out;
 	        filter: blur(0px);
+	        cursor:pointer;
         }
 
         .card > span {
@@ -136,6 +137,7 @@
             color: white;
             font-size: 1.4em;
             font-weight: 600;
+            cursor:pointer;
 
         }
 
@@ -178,30 +180,62 @@
       <!-- card section start -->
       <div class="card-section">
         <h1 style="margin:10px 0px">Where you have to go</h1>
-        <h4>Please check out the hot places aligo recommed</h4>
+        <h4>Please check out the hot places aligo recommend</h4>
         <div class="card-list">
-          <div class="card">
+          <div class="card" id="card1">
             <img src="${ contextPath }/resources/images/recommend_place_bibimbab.jpg"/>
             <span>테스트 일번</span>
           </div>
-          <div class="card">
+          <div class="card" id="card2">
             <img src="${ contextPath }/resources/images/recommend_place_lottetower.jpg"/>
             <span>테스트 일번</span>
           </div>
-          <div class="card">
+          <div class="card" id="card3">
             <img src="${ contextPath }/resources/images/recommend_place_chunggyechun.jpg"/>
             <span>테스트 일번</span>
           </div>
-          <div class="card">
+          <div class="card" id="card4">
             <img src="${ contextPath }/resources/images/recommend_place_gyungbokgung.jpg"/>
             <span>테스트 일번</span>
           </div>
-          <div class="card">
+          <div class="card" id="card5">
+            <img src="${ contextPath }/resources/images/recommend_place_hanriverpark.jpg"/>
+            <span>테스트 일번</span>
+          </div>
+          <div class="card" id="card6">
             <img src="${ contextPath }/resources/images/recommend_place_hanriverpark.jpg"/>
             <span>테스트 일번</span>
           </div>
         </div>
       </div>
+      <script>
+      	 $(function(){
+      		topList();
+      		
+      		$('.card').on("click",function(){
+      			location.href="/spring/categoryList.jsp";
+      		});
+      		
+      	});
+      	
+      	function topList(){
+      		$.ajax({
+      			url:"topList.do",
+      			dataType:"json",
+      			success:function(data){
+      				$.each(data, function(index, value){
+      					
+      					var card = "#card" + (index + 1);
+      					
+      					$(card).children('img').attr('src',"/spring/resources/images/"+value.tOriginalFile);
+      					$(card).children('span').html(value.tTitle);
+      				});
+      			},error:function(){
+      				alert('Failed to load value!');
+      			}
+      		});
+      	}
+      </script>
       
       <!-- <div class="card-section">
         <h1>aligo theme</h1>
@@ -232,7 +266,7 @@
         <h4 style="color:#999">Please check out a variety of information about culture, local food, shopping, activity and take a rest</h4>
         </div>
       <section class="home-cards">
-            <div>
+            <div class="theme1">
             <img src="${ contextPath }/resources/images/chicken_food.jpg" alt="">
             <h3>#example_Seoul_Posting</h3>
             <p>
@@ -240,7 +274,7 @@
             </p>
             <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
             </div>
-            <div>
+            <div class="theme2">
             <img src="${ contextPath }/resources/images/gyungbok_palace.jpg" alt="" />
             <h3>#example_Seoul_Posting2</h3>
             <p>
@@ -248,7 +282,7 @@
             </p>
             <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
             </div>
-            <div>
+            <div class="theme3">
             <img src="${ contextPath }/resources/images/night_street.jpg" alt="" />
             <h3>#example_Seoul_Posting3</h3>
             <p>
@@ -256,7 +290,7 @@
             </p>
             <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
             </div>
-            <div>
+            <div class="theme4">
             <img src="${ contextPath }/resources/images/korea_market.jpg" alt="" />
             <h3>#example_Seoul_Posting4</h3>
             <p>
@@ -264,7 +298,15 @@
             </p>
             <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
             </div>
-            <div>
+            <div class="theme5">
+                <img src="${ contextPath }/resources/images/samsung_library.jpg" alt="" />
+                <h3>#example_Seoul_Posting4</h3>
+                <p>
+                    2020.04 exmple title4
+                </p>
+                <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="theme6">
                 <img src="${ contextPath }/resources/images/samsung_library.jpg" alt="" />
                 <h3>#example_Seoul_Posting4</h3>
                 <p>
@@ -273,6 +315,33 @@
                 <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
             </div>
       </section>
+      <script>
+      	$(function(){
+      		themeList();
+      		
+      		
+      	});
+      	
+      	function themeList(){
+      		$.ajax({
+      			url:"themeList.do",
+      			dataType:"json",
+      			success:function(data){
+      				$.each(data,function(index, value){
+      					var theme = "#theme" + (index + 1);
+      					console.log(data);
+      					console.log(value);	
+      					
+      					$(theme).children('img').attr('src','/spring/resources/images/'+value.tOriginalFile);
+      					$(theme).children('h3').html(value.tTitle);
+      					$(theme).children('p').html(value.tCreateDate);
+      				});
+      			},error:function(){
+      				alert("page load failed");
+      			}
+      		});
+      	};
+      </script>
     </div>
 
     <!--::footer_part start::-->
