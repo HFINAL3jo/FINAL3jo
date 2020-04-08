@@ -225,13 +225,17 @@
       			success:function(data){
       				$.each(data, function(index, value){
       					
-      					var card = "#card" + (index + 1);
+      					var card = "#card" + (index + 1);	
       					
       					$(card).children('img').attr('src',"/spring/resources/images/"+value.tOriginalFile);
       					$(card).children('span').html(value.tTitle);
+      					$(card).on("click",function(){
+      						location.href="topListDetail.do";
+      					});
       				});
       			},error:function(){
-      				alert('Failed to load value!');
+      				/* alert('Failed to load value!'); */
+      				console.log("error card section");
       			}
       		});
       	}
@@ -266,7 +270,7 @@
         <h4 style="color:#999">Please check out a variety of information about culture, local food, shopping, activity and take a rest</h4>
         </div>
       <section class="home-cards">
-            <div class="theme1">
+            <div class="theme1" id="theme1">
             <img src="${ contextPath }/resources/images/chicken_food.jpg" alt="">
             <h3>#example_Seoul_Posting</h3>
             <p>
@@ -274,7 +278,7 @@
             </p>
             <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
             </div>
-            <div class="theme2">
+            <div class="theme2" id="theme2">
             <img src="${ contextPath }/resources/images/gyungbok_palace.jpg" alt="" />
             <h3>#example_Seoul_Posting2</h3>
             <p>
@@ -282,7 +286,7 @@
             </p>
             <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
             </div>
-            <div class="theme3">
+            <div class="theme3" id="theme3">
             <img src="${ contextPath }/resources/images/night_street.jpg" alt="" />
             <h3>#example_Seoul_Posting3</h3>
             <p>
@@ -290,7 +294,7 @@
             </p>
             <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
             </div>
-            <div class="theme4">
+            <div class="theme4" id="theme4">
             <img src="${ contextPath }/resources/images/korea_market.jpg" alt="" />
             <h3>#example_Seoul_Posting4</h3>
             <p>
@@ -298,7 +302,7 @@
             </p>
             <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
             </div>
-            <div class="theme5">
+            <div class="theme5" id="theme5">
                 <img src="${ contextPath }/resources/images/samsung_library.jpg" alt="" />
                 <h3>#example_Seoul_Posting4</h3>
                 <p>
@@ -306,7 +310,7 @@
                 </p>
                 <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
             </div>
-            <div class="theme6">
+            <div class="theme6" id="theme6">
                 <img src="${ contextPath }/resources/images/samsung_library.jpg" alt="" />
                 <h3>#example_Seoul_Posting4</h3>
                 <p>
@@ -335,9 +339,13 @@
       					$(theme).children('img').attr('src','/spring/resources/images/'+value.tOriginalFile);
       					$(theme).children('h3').html(value.tTitle);
       					$(theme).children('p').html(value.tCreateDate);
+      					$(theme).on("click",function(){
+      						location.href="themeDetail.do";
+      					});
       				});
       			},error:function(){
-      				alert("page load failed");
+      				/* alert("page load failed"); */
+      				console.log("error");
       			}
       		});
       	};
