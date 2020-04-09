@@ -91,83 +91,6 @@
                         <div class="hearer_icon d-flex">
                                 
                             <!-- 로그인 전 -->
-                                                        
-                            <a href="loginView.do" style="color:rgba(0,0,0,.9);">
-                           	<a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
-                                <span data-balloon="Sign In" data-balloon-pos="down-right">
-                                    <i class="fas fa-sign-in-alt" style="margin-left: 0px;"></i> Sign-In
-                                </span>
-                            </a>
-                           
-                            <!-- 로그인 후 -->
-                             <a href="adminView.do">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span data-balloon="Admin" data-balloon-pos="down-right">
-                                    <i class="fas fa-user-circle" style="margin-left: 0px;"></i>
-                                </span>
-                            </a>
-                                                            
-                            <a href="myPage.do">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span data-balloon="My Page" data-balloon-pos="down-right">
-                                    <i class="fas fa-user-circle" style="margin-left: 0px;"></i>
-                                </span>
-                            </a>
-                            <a href="likedList.do">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span data-balloon="Likes" data-balloon-pos="down-right">
-                                    <i class="far fa-heart" style="margin-left: 0px;"></i>
-                                </span>
-                            </a>
-                            <a href="">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span data-balloon="Sign Out" data-balloon-pos="down-right">
-                                    <i class="fas fa-sign-out-alt" style="margin-left: 0px;"></i>
-                                </span>
-                            </a>
-                            
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <div class="search_input" id="search_input_box">
-            <div class="container ">
-                <form class="d-flex justify-content-between search-inner">
-                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
-                    <button type="submit" class="btn"></button>
-                    <span class="ti-close" id="close_search" title="Close Search"></span>
-                </form>
-            </div>
-        </div>
-    </header>
-    <!-- Header part end-->
-
-<<<<<<< HEAD
-    <!-- jquery plugins here-->
-    <script src="resources/js/jquery-1.12.1.min.js"></script>
-    <!-- popper js -->
-    <script src="resources/js/popper.min.js"></script>
-    <!-- bootstrap js -->
-    <script src="resources/js/bootstrap.min.js"></script>
-    <!-- easing js -->
-    <script src="resources/js/jquery.magnific-popup.js"></script>
-    <!-- swiper js -->
-    <script src="resources/js/swiper.min.js"></script>
-    <!-- swiper js -->
-    <script src="resources/js/masonry.pkgd.js"></script>
-    <!-- particles js -->
-    <script src="resources/js/owl.carousel.min.js"></script>
-    <script src="resources/js/jquery.nice-select.min.js"></script>
-    <!-- slick js -->
-    <script src="resources/js/slick.min.js"></script>
-    <script src="resources/js/jquery.counterup.min.js"></script>
-    <script src="resources/js/waypoints.min.js"></script>
-    <script src="resources/js/contact.js"></script>
-    <script src="resources/js/jquery.ajaxchimp.min.js"></script>
-    <script src="resources/js/jquery.form.js"></script>
-    <script src="resources/js/jquery.validate.min.js"></script>
-    <script src="resources/js/mail-script.js"></script>
-    <!-- custom js -->
-    <script src="resources/js/custom.js"></script>
-=======
-							<!-- 로그인 전 -->
 							<c:if test="${ empty sessionScope.loginUser }">
 							 <i
 								class="fas fa-sign-in-alt" style="margin-left: 0px;">
@@ -199,52 +122,49 @@
 							</span>
 							</a>
 							</c:if>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="search_input" id="search_input_box">
+            <div class="container ">
+                <form class="d-flex justify-content-between search-inner">
+                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                    <button type="submit" class="btn"></button>
+                    <span class="ti-close" id="close_search" title="Close Search"></span>
+                </form>
+            </div>
+        </div>
+    </header>
+    <!-- Header part end-->
 
-						</div>
-					</nav>
-				</div>
-			</div>
-		</div>
-		<div class="search_input" id="search_input_box">
-			<div class="container ">
-				<form class="d-flex justify-content-between search-inner">
-					<input type="text" class="form-control" id="search_input"
-						placeholder="Search Here">
-					<button type="submit" class="btn"></button>
-					<span class="ti-close" id="close_search" title="Close Search"></span>
-				</form>
-			</div>
-		</div>
-	</header>
-	<!-- Header part end-->
-
-	<!-- jquery plugins here-->
-	<script src="resources/js/jquery-1.12.1.min.js"></script>
-	<!-- popper js -->
-	<script src="resources/js/popper.min.js"></script>
-	<!-- bootstrap js -->
-	<script src="resources/js/bootstrap.min.js"></script>
-	<!-- easing js -->
-	<script src="resources/js/jquery.magnific-popup.js"></script>
-	<!-- swiper js -->
-	<script src="resources/js/swiper.min.js"></script>
-	<!-- swiper js -->
-	<script src="resources/js/masonry.pkgd.js"></script>
-	<!-- particles js -->
-	<script src="resources/js/owl.carousel.min.js"></script>
-	<script src="resources/js/jquery.nice-select.min.js"></script>
-	<!-- slick js -->
-	<script src="resources/js/slick.min.js"></script>
-	<script src="resources/js/jquery.counterup.min.js"></script>
-	<script src="resources/js/waypoints.min.js"></script>
-	<script src="resources/js/contact.js"></script>
-	<script src="resources/js/jquery.ajaxchimp.min.js"></script>
-	<script src="resources/js/jquery.form.js"></script>
-	<script src="resources/js/jquery.validate.min.js"></script>
-	<script src="resources/js/mail-script.js"></script>
-	<!-- custom js -->
-	<script src="resources/js/custom.js"></script>
->>>>>>> branch 'master' of https://github.com/HFINAL3jo/FINAL3jo.git
+    <!-- jquery plugins here-->
+    <script src="resources/js/jquery-1.12.1.min.js"></script>
+    <!-- popper js -->
+    <script src="resources/js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="resources/js/bootstrap.min.js"></script>
+    <!-- easing js -->
+    <script src="resources/js/jquery.magnific-popup.js"></script>
+    <!-- swiper js -->
+    <script src="resources/js/swiper.min.js"></script>
+    <!-- swiper js -->
+    <script src="resources/js/masonry.pkgd.js"></script>
+    <!-- particles js -->
+    <script src="resources/js/owl.carousel.min.js"></script>
+    <script src="resources/js/jquery.nice-select.min.js"></script>
+    <!-- slick js -->
+    <script src="resources/js/slick.min.js"></script>
+    <script src="resources/js/jquery.counterup.min.js"></script>
+    <script src="resources/js/waypoints.min.js"></script>
+    <script src="resources/js/contact.js"></script>
+    <script src="resources/js/jquery.ajaxchimp.min.js"></script>
+    <script src="resources/js/jquery.form.js"></script>
+    <script src="resources/js/jquery.validate.min.js"></script>
+    <script src="resources/js/mail-script.js"></script>
+    <!-- custom js -->
+    <script src="resources/js/custom.js"></script>
 
 
 </body>
