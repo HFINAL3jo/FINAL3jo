@@ -185,9 +185,9 @@ input:checked+label:after {
 								</div>
 								<div class="col-md-12 form-group p_star" id="input-group">
 									<input type="radio" name="gender" value="male" id="gender-male" />
-									<label for="gender-male">Male</label> <input type="radio"
-										name="gender" value="female" id="gender-female" /> <label
-										for="gender-female">Female</label>
+									<!-- <label for="gender-male"> -->Male<!-- </label> --> <input type="radio"
+										name="gender" value="female" id="gender-female" /> <!-- <label
+										for="gender-female"> -->Female<!-- </label> -->
 								</div>
 
 								<div class="col-md-12 form-group p_star">
