@@ -15,7 +15,8 @@
     <link type="text/css" rel="stylesheet" href="https://101.livere.co.kr/css/default_actionwidzet8_gzip.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=645218c0e569303936c79803cc2aa695&libraries=services"></script>
-    
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=645218c0e569303936c79803cc2aa695&libraries=LIBRARY"></script>      
+ 
     <style>
         .loction{
             width: 100%;
@@ -344,7 +345,7 @@
                         <p>&nbsp;</p>
                         <div class="cnt-blockquote">
                             <dl><dt>주소</dt>
-                                <dd>서울 송파구 잠실동</dd>
+                                <dd>서울특별시 송파구 잠실동 47</dd>
                             </dl>
                             <dl><dt>지하철</dt>
                                 <dd>2호선 잠실역 3번 출구</dd>
@@ -360,12 +361,12 @@
                             </dl>
                         </div>
                         <p>&nbsp;</p>
-                        <div id="map" style="width:70%;height:400px;"></div>
+                        <div id="map" style="width:100%;height:400px;"></div>
                <script>
 				var mapContainer = document.getElementById('map');
 				var mapOption = {
 				    center: new daum.maps.LatLng(37.566826, 126.9786567),
-				    level: 8
+				    level: 5
 				};  
 				
 				var map = new daum.maps.Map(mapContainer, mapOption); 
@@ -376,8 +377,34 @@
 				
 				// 주소-좌표 변환 객체 생성
 				var geocoder = new daum.maps.services.Geocoder();
+				var adrs = '서울특별시 송파구 잠실동 47'
 				
-				var listData = [
+				// 주소로 좌표를 검색합니다
+				geocoder.addressSearch(adrs , function(result, status) {
+
+				    // 정상적으로 검색이 완료됐으면 
+				     if (status === kakao.maps.services.Status.OK) {
+
+				        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+				        // 결과값으로 받은 위치를 마커로 표시합니다
+				        var marker = new kakao.maps.Marker({
+				            map: map,
+				            position: coords
+				        });
+
+				        // 인포윈도우로 장소에 대한 설명을 표시합니다
+				        var infowindow = new kakao.maps.InfoWindow({
+				            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+adrs+'</div>'
+				        });
+				        infowindow.open(map, marker);
+
+				        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+				        map.setCenter(coords);
+				    } 
+				});
+				
+				/* var listData = [
 					{	content :'디뮤지엄',
 						address :'서울특별시 용산구 한남동 독서당로29길 5-6'},
 					{	content :'로우앤슬로우',
@@ -409,7 +436,7 @@
 				            infowindow.open(map, marker);
 				        });
 				    });
-				});
+				}); */
 				
 				
 				</script>
