@@ -17,7 +17,7 @@
 
 <insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER
-		VALUES (#{mid},#{email},#{password},#{nickname},#{gender},#{age},DEFAULT,#{recommend})
+		VALUES (SEQ_MNO.NEXTVAL,#{email},#{password},#{nickname},#{gender},#{age},DEFAULT,#{recommend})
 </insert>
 
 </mapper>

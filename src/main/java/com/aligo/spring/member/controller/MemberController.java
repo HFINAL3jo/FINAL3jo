@@ -20,7 +20,11 @@ public class MemberController {
 	public String insertMember(Member m) {
 		
 		int result = memService.insertMember(m);
+		
+		System.out.println(m);
 		return "main";
+		
+
 		
 		/*
 		 * if(result > 0) { return "redirect:main.jsp"; } else {
