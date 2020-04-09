@@ -187,28 +187,33 @@ input:checked+label:after {
 									<input type="text" class="form-control" id="nickname"
 										name="nickname" placeholder="Nickname">
 								</div>
+								<div class="col-md-12 form-group p_star">
+									<input type="number" class="form-control" id="age" name="age"
+										placeholder="age">
+								</div>
+
+
+
 								<div class="col-md-12 form-group p_star" id="input-group">
 									<input type="radio" name="gender" value="M" id="M" /> <label
 										for="M">Male</label> <input type="radio" name="gender"
 										value="F" id="F" /> <label for="F">Female</label>
 								</div>
 
-								<div class="col-md-12 form-group p_star">
-									<input type="number" class="form-control" id="age" name="age"
-										placeholder="age">
-								</div>
+
 
 								<div class="col-md-12 form-group p_star">
-									<input type="button" class="btn_3" value="취향선택하러가기"><a href="recommend.do"></a>
+									<input type="button" class="btn_3" value="취향선택하러가기"><a
+										href="recommend.do"></a>
 								</div>
-								
+
 								<div class="col-md-12 form-group">
-<!-- 									<div class="creat_account d-flex align-items-center">
+									<!-- 									<div class="creat_account d-flex align-items-center">
 										<input type="checkbox" id="f-option" name="selector">
 										<label for="f-option">Remember me</label>
 									</div> -->
 									<br>
-<!-- 									<ul class="social-icons text-right">
+									<!-- 									<ul class="social-icons text-right">
 										<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
 										<li><a href="#"><i class="fab fa-twitter"></i></a></li>
 										<li><a href="#"><i class="fas fa-globe"></i></a></li>
