@@ -141,6 +141,7 @@
                    <td>PostDate : ${t.tCreateDate }</td>
                    <td>ModifyDate : ${t.tModifyDate }</td>	
               </tbody>
+              <input type="hidden" id="th" value="${t.tAddressH }">
             </table>
           </div>
           <!--지도-->

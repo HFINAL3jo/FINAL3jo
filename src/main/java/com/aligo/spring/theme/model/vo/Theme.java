@@ -26,6 +26,7 @@ public class Theme implements Serializable {
 	private String tModifyFile;
 	private String tName;
 	private int tCodeNumber;
+	private String tAddressH;
 
 	private ArrayList<TFile> tFileList;
 	private ArrayList<TName> tNameList;
@@ -161,6 +162,14 @@ public class Theme implements Serializable {
 		this.tCodeNumber = tCodeNumber;
 	}
 
+	public String gettAddressH() {
+		return tAddressH;
+	}
+
+	public void settAddressH(String tAddressH) {
+		this.tAddressH = tAddressH;
+	}
+
 	public ArrayList<TFile> gettFileList() {
 		return tFileList;
 	}
@@ -179,8 +188,8 @@ public class Theme implements Serializable {
 
 	public Theme(int tId, String tWriter, String tTitle, String tContent, String tAddress, Date tCreateDate,
 			Date tModifyDate, int tViews, int tLikes, String tKeyword, String tStatus, String tCode,
-			String tOriginalFile, String tModifyFile, String tName, int tCodeNumber, ArrayList<TFile> tFileList,
-			ArrayList<TName> tNameList) {
+			String tOriginalFile, String tModifyFile, String tName, int tCodeNumber, String tAddressH,
+			ArrayList<TFile> tFileList, ArrayList<TName> tNameList) {
 		super();
 		this.tId = tId;
 		this.tWriter = tWriter;
@@ -198,6 +207,7 @@ public class Theme implements Serializable {
 		this.tModifyFile = tModifyFile;
 		this.tName = tName;
 		this.tCodeNumber = tCodeNumber;
+		this.tAddressH = tAddressH;
 		this.tFileList = tFileList;
 		this.tNameList = tNameList;
 	}
@@ -208,8 +218,8 @@ public class Theme implements Serializable {
 				+ ", tAddress=" + tAddress + ", tCreateDate=" + tCreateDate + ", tModifyDate=" + tModifyDate
 				+ ", tViews=" + tViews + ", tLikes=" + tLikes + ", tKeyword=" + tKeyword + ", tStatus=" + tStatus
 				+ ", tCode=" + tCode + ", tOriginalFile=" + tOriginalFile + ", tModifyFile=" + tModifyFile + ", tName="
-				+ tName + ", tCodeNumber=" + tCodeNumber + ", tFileList=" + tFileList + ", tNameList=" + tNameList
-				+ "]";
+				+ tName + ", tCodeNumber=" + tCodeNumber + ", tAddressH=" + tAddressH + ", tFileList=" + tFileList
+				+ ", tNameList=" + tNameList + "]";
 	}
 
 }
