@@ -227,6 +227,9 @@ tbody tr:nth-child(2n+1) {
 <!-- 이벤트 처리를 위한 스크립트 -->
 <!-- 버튼 상단 이벤트 처리 -->
 <!-- 버튼 상단 -->
+<script>
+	var str = "<c:out value='${jObj}' />"
+</script>
 <script src="resources/js/statisticsButtonRegist.js"></script>
 <script src="resources/js/statistics.js"></script>
 <script>
