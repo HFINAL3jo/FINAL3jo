@@ -20,5 +20,37 @@ public class RecomServiceImple implements RecomService{
 		return rDao.selectRecommendQA();
 	}
 
+	@Override
+	public Recommend selectRecomFirst() {
+
+		return rDao.selectRecomFirst();
+	}
+
+	@Override
+	public Recommend selectRecomNum(int recomNum) {
+
+		return rDao.selectRecomNum(recomNum);
+	}
+
+	@Override
+	public int deleteRecomQA(String recomCode) {
+
+		return rDao.deleteRecomQA(recomCode);
+	}
+
+	@Override
+	public String selectLastCode() {
+
+		return rDao.selectLastCode();
+	}
+
+	@Override
+	public int insertRecomQA(Recommend r) {
+
+		return rDao.insertRecomQA(r);
+	}
+	
+	
+
 	
 }

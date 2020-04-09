@@ -22,6 +22,31 @@ public class RecomDao {
 		
 		return (ArrayList)sqlSession.selectList("recomMapper.selectQA");
 	}
+
+	public Recommend selectRecomFirst() {
+
+		return (Recommend)sqlSession.selectOne("recomMapper.selectFirst");
+	}
+
+	public Recommend selectRecomNum(int recomNum) {
+
+		return (Recommend)sqlSession.selectOne("recomMapper.selectNum", recomNum);
+	}
+
+	public int deleteRecomQA(String recomCode) {
+
+		return sqlSession.update("recomMapper.deleteQA", recomCode);
+	}
+
+	public String selectLastCode() {
+
+		return (String)sqlSession.selectOne("recomMapper.lastRQCODE");
+	}
+
+	public int insertRecomQA(Recommend r) {
+
+		return sqlSession.insert("recomMapper.insertRQ", r);
+	}
 	
 	
 }

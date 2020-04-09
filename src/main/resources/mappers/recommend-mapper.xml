@@ -5,12 +5,13 @@
 
 <mapper namespace="recomMapper">
 	<resultMap type="Recom" id="recomResultSet">
-		<id property="recomCode" column="RCODE"/>
+		<id property="recomCode" column="RQCODE"/>
 		<result property="recomContent" column="RQCONTENT"/>
 		<result property="keyword1" column="RQKEYWORD1"/>
-		<result property="Keyword1Content" column="KEYWORD1_CONTENT"/>
+		<result property="keyword1Content" column="KEYWORD1_CONTENT"/>
 		<result property="keyword2" column="RQKEYWORD2"/>
-		<result property="Keyword2Content" column="KEYWROD2_CONTENT"/>
+		<result property="keyword2Content" column="KEYWROD2_CONTENT"/>
+		<result property="rStatus" column="R_STATUS"/>
 	</resultMap>
 	
 	<select id="selectQA" resultMap="recomResultSet">
@@ -19,6 +20,46 @@
 		WHERE R_STATUS='Y'
 		ORDER BY RQCODE ASC
 	</select>
+	
+	<select id="selectFirst" resultMap="recomResultSet">
+		SELECT RQCODE, RQCONTENT, RQKEYWORD1, KEYWORD1_CONTENT,
+			RQKEYWORD2, KEYWROD2_CONTENT, R_STATUS
+		FROM (SELECT ROWNUM, R.*
+		        FROM RECOMMEND_Q R
+		        WHERE R_STATUS='Y'
+		        ORDER BY RQCODE ASC)
+		WHERE ROWNUM = '1'
+	</select>
+	
+	<select id="selectNum" parameterType="_int" resultMap="recomResultSet">
+		<![CDATA[
+		select RQCODE, RQCONTENT, RQKEYWORD1, KEYWORD1_CONTENT,
+			RQKEYWORD2, KEYWROD2_CONTENT, R_STATUS
+		from (select *
+		        from (select ROWNUM, R.*
+		                from RECOMMEND_Q R
+		                WHERE R_STATUS='Y'
+		                ORDER BY RQCODE ASC)
+		        WHERE ROWNUM <= #{ recomNum }
+		        ORDER BY ROWNUM DESC)
+		WHERE ROWNUM=1
+		]]>
+	</select>
+	
+	<update id="deleteQA">
+		UPDATE RECOMMEND_Q SET R_STATUS='N'
+		WHERE RQCODE=#{ recomCode }
+	</update>
+	
+	<select id="lastRQCODE" resultType="string">
+		SELECT MAX(RQCODE) RQCODE
+		FROM RECOMMEND_Q
+	</select>
+	
+	<insert id="insertRQ">
+		INSERT INTO RECOMMEND_Q
+		VALUES ( #{recomCode}, #{recomContent}, #{keyword1}, #{keyword1Content}, #{keyword2}, #{keyword2Content}, DEFAULT )
+	</insert>
 
 
 

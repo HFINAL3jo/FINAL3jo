@@ -5,9 +5,9 @@ public class Recommend {
 	private String recomCode;			//	질문 코드
 	private String recomContent;		//	질문 내용
 	private String keyword1;			//	질문에 대한 키워드 1 (답변 1)
-	private String Keyword1Content;		//	키워드 1 내용 (화면에 보여질 내용)
+	private String keyword1Content;		//	키워드 1 내용 (화면에 보여질 내용)
 	private String keyword2;			//	질문에 대한 키워드 2 (답변 2)
-	private String Keyword2Content;		//	키워드 2 내용 (화면에 보여질 내용)
+	private String keyword2Content;		//	키워드 2 내용 (화면에 보여질 내용)
 	private String rStatus;				//	상태
 	
 	public Recommend() {
@@ -20,9 +20,9 @@ public class Recommend {
 		this.recomCode = recomCode;
 		this.recomContent = recomContent;
 		this.keyword1 = keyword1;
-		Keyword1Content = keyword1Content;
+		this.keyword1Content = keyword1Content;
 		this.keyword2 = keyword2;
-		Keyword2Content = keyword2Content;
+		this.keyword2Content = keyword2Content;
 		this.rStatus = rStatus;
 	}
 
@@ -51,11 +51,11 @@ public class Recommend {
 	}
 
 	public String getKeyword1Content() {
-		return Keyword1Content;
+		return keyword1Content;
 	}
 
 	public void setKeyword1Content(String keyword1Content) {
-		Keyword1Content = keyword1Content;
+		this.keyword1Content = keyword1Content;
 	}
 
 	public String getKeyword2() {
@@ -67,13 +67,13 @@ public class Recommend {
 	}
 
 	public String getKeyword2Content() {
-		return Keyword2Content;
+		return keyword2Content;
 	}
 
 	public void setKeyword2Content(String keyword2Content) {
-		Keyword2Content = keyword2Content;
+		this.keyword2Content = keyword2Content;
 	}
-	
+
 	public String getrStatus() {
 		return rStatus;
 	}
@@ -85,10 +85,11 @@ public class Recommend {
 	@Override
 	public String toString() {
 		return "Recommend [recomCode=" + recomCode + ", recomContent=" + recomContent + ", keyword1=" + keyword1
-				+ ", Keyword1Content=" + Keyword1Content + ", keyword2=" + keyword2 + ", Keyword2Content="
-				+ Keyword2Content + ", rStatus=" + rStatus + "]";
+				+ ", keyword1Content=" + keyword1Content + ", keyword2=" + keyword2 + ", keyword2Content="
+				+ keyword2Content + ", rStatus=" + rStatus + "]";
 	}
-	
+
+
 	
 	
 }
