@@ -17,8 +17,4 @@ public class MemberServiceImpl implements MemberService {
 		return memDao.insertMember(m);
 	}
 	
-
-	
-	
-
 }
