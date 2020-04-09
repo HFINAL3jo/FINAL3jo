@@ -89,7 +89,7 @@
 						<div class="hearer_icon d-flex">
 
 							<!-- 로그인 전 -->
-
+							<c:if test="${ empty sessionScope.loginUser }">
 							 <i
 								class="fas fa-sign-in-alt" style="margin-left: 0px;">
 								<a href="loginView.do" style="color: rgba(0, 0, 0, .9);">
@@ -98,9 +98,10 @@
 								<a id="search_1" href="javascript:void(0)"><i
 									class="ti-search"></i></a> <span data-balloon="Sign In"
 								data-balloon-pos="down-right"> </span>
-						
+							</c:if>
 
 							<!-- 로그인 후 -->
+							<c:if test="${ !empty sessionScope.loginUser }">
 							<a href="adminView.do"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
 								data-balloon="Admin" data-balloon-pos="down-right"> <i
 									class="fas fa-user-circle" style="margin-left: 0px;"></i>
@@ -118,6 +119,7 @@
 									class="fas fa-sign-out-alt" style="margin-left: 0px;"></i>
 							</span>
 							</a>
+							</c:if>
 
 						</div>
 					</nav>

@@ -62,6 +62,8 @@ public class RecomController {
 	public void recomUserUpdate(HttpSession session, RecomKeyword rk) {
 
 		System.out.println("rk1 : " + rk);
+		
+		
 	}
 
 	/**

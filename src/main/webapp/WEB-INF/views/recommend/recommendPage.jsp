@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -92,6 +93,11 @@
         clear: both;
         padding: 30px 0;
     }
+    
+    .area{
+	    margin: auto;
+	    max-width: 1600px;
+    }
 
     .select_box>label{
         width: 100%;
@@ -139,16 +145,16 @@
         justify-content: flex-end;
         /* padding-bottom: 50px; */
         /* margin-bottom: 20px; */
-        background-image: url('${contextPath}/resources/images/Recom_showcase4.jpg');
+        background-image: url('${contextPath}/resources/images/Recom_showcase6.jpg');
         background-size: 100% 100%;
 	}	
        
-       .showcase_content{
-       		/* background-color: white; */
-	        width: 100%;
-	        height: 100%;
-	        position: relative;
-	        background: rgba(0, 0, 0, 0.3);
+    .showcase_content{
+    		/* background-color: white; */
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background: rgba(0, 0, 0, 0.3);
 	        
 	}
        

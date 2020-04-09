@@ -2,18 +2,18 @@ package com.aligo.spring.member.model.vo;
 
 public class Member {
 	
-	private int mid;
+	private String mid;
 	private String email;
 	private String password;
 	private String nickname;
 	private String gender;
-	private String age;
+	private int age;
 	private String mStatus;
 	private String recommend;
 
 	public Member() {}
 
-	public Member(int mid, String email, String password, String nickname, String gender, String age, String mStatus,
+	public Member(String mid, String email, String password, String nickname, String gender, int age, String mStatus,
 			String recommend) {
 		super();
 		this.mid = mid;
@@ -26,11 +26,11 @@ public class Member {
 		this.recommend = recommend;
 	}
 
-	public int getMid() {
+	public String getMid() {
 		return mid;
 	}
 
-	public void setMid(int mid) {
+	public void setMid(String mid) {
 		this.mid = mid;
 	}
 
@@ -66,11 +66,11 @@ public class Member {
 		this.gender = gender;
 	}
 
-	public String getAge() {
+	public int getAge() {
 		return age;
 	}
 
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 
