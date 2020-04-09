@@ -2,9 +2,9 @@ package com.aligo.spring.statistics.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

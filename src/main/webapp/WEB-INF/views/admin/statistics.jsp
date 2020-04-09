@@ -82,14 +82,6 @@ tbody tr:nth-child(2n+1) {
 }
 </style>
 
-<!-- <script>
-	(function () { 
-		if(!document.referrer.includes("goodStatistic.do")){
-			location.href="goodStatistic.do";
-		}	
-	})();
-</script> -->
-
 <!-- 
 	c3가 기본으로 제공하는 디자인 형식인 c3.min.css 파일을 <head> 부분에 추가한다. 
 	그리고 c3.js는 d3.js 기반에서 돌아가므로 d3.min.js를 먼저 자바스크립트 파트에 추가해 준 뒤에 c3.min.js를 추가하면 될 것이다. 
@@ -101,7 +93,7 @@ tbody tr:nth-child(2n+1) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 
 </head>
-<body style="">
+<body>
 	<%@ include file="../common/menubar.jsp"%>
 
 	<!-- 먼저 조아요. 내용 저장 -->
