@@ -184,10 +184,10 @@ input:checked+label:after {
 										name="nickname" placeholder="Nickname">
 								</div>
 								<div class="col-md-12 form-group p_star" id="input-group">
-									<input type="radio" name="gender" value="male" id="gender-male" />
-									<!-- <label for="gender-male"> -->Male<!-- </label> --> <input type="radio"
-										name="gender" value="female" id="gender-female" /> <!-- <label
-										for="gender-female"> -->Female<!-- </label> -->
+									<input type="radio" name="gender" value="M" id="M" />
+									<label for="M">Male</label> <input type="radio"
+										name="gender" value="F" id="F" /> <label
+										for="F">Female</label>
 								</div>
 
 								<div class="col-md-12 form-group p_star">

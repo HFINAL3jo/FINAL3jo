@@ -22,7 +22,7 @@
 		<mapper resource="mappers/recommend-mapper.xml"/>
 		<mapper resource="mappers/main-mapper.xml"/>
 		<mapper resource="mappers/member-mapper.xml"/>
-		<mapper resource="mappers/statistics-mapper.xml"/>
+		<mapper resource="mappers/statistics-mapper.xml"/>  
 	</mappers>
 	
 </configuration>
