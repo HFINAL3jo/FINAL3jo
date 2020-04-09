@@ -2,23 +2,36 @@ package com.aligo.spring.member.model.vo;
 
 public class Member {
 	
+	private int mid;
 	private String email;
-	private String pwd;
-	private String nick;
+	private String password;
+	private String nickname;
 	private String gender;
 	private String age;
-	private String fav;
+	private String mStatus;
+	private String recommend;
 
 	public Member() {}
 
-	public Member(String email, String pwd, String nick, String gender, String age, String fav) {
+	public Member(int mid, String email, String password, String nickname, String gender, String age, String mStatus,
+			String recommend) {
 		super();
+		this.mid = mid;
 		this.email = email;
-		this.pwd = pwd;
-		this.nick = nick;
+		this.password = password;
+		this.nickname = nickname;
 		this.gender = gender;
 		this.age = age;
-		this.fav = fav;
+		this.mStatus = mStatus;
+		this.recommend = recommend;
+	}
+
+	public int getMid() {
+		return mid;
+	}
+
+	public void setMid(int mid) {
+		this.mid = mid;
 	}
 
 	public String getEmail() {
@@ -29,20 +42,20 @@ public class Member {
 		this.email = email;
 	}
 
-	public String getPwd() {
-		return pwd;
+	public String getpassword() {
+		return password;
 	}
 
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	public void setpassword(String password) {
+		this.password = password;
 	}
 
-	public String getNick() {
-		return nick;
+	public String getnickname() {
+		return nickname;
 	}
 
-	public void setNick(String nick) {
-		this.nick = nick;
+	public void setnickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public String getGender() {
@@ -61,20 +74,26 @@ public class Member {
 		this.age = age;
 	}
 
-	public String getFav() {
-		return fav;
+	public String getmStatus() {
+		return mStatus;
 	}
 
-	public void setFav(String fav) {
-		this.fav = fav;
+	public void setmStatus(String mStatus) {
+		this.mStatus = mStatus;
+	}
+
+	public String getrecommend() {
+		return recommend;
+	}
+
+	public void setrecommend(String recommend) {
+		this.recommend = recommend;
 	}
 
 	@Override
 	public String toString() {
-		return "Member [email=" + email + ", pwd=" + pwd + ", nick=" + nick + ", gender=" + gender + ", age=" + age
-				+ ", fav=" + fav + "]";
+		return "Member [mid=" + mid + ", email=" + email + ", password=" + password + ", nickname=" + nickname + ", gender=" + gender
+				+ ", age=" + age + ", mStatus=" + mStatus + ", recommend=" + recommend + "]";
 	}
-	
-	
 
 }
