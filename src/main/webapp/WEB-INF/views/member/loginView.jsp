@@ -64,15 +64,13 @@ ul[class~=social-icons]>li {
 							<h3>
 								Welcome Back ! <br> Please Sign in now
 							</h3>
-							<form class="row contact_form" action="#" method="post"
-								novalidate="novalidate">
+							<form class="row contact_form" action="login.do" method="post">
 								<div class="col-md-12 form-group p_star">
-									<input type="text" class="form-control" id="name" name="name"
-										value="" placeholder="Username">
+									<input type="text" class="form-control" id="email" name="email" placeholder="e-mail">
 								</div>
 								<div class="col-md-12 form-group p_star">
 									<input type="password" class="form-control" id="password"
-										name="password" value="" placeholder="Password">
+										name="password" placeholder="Password">
 								</div>
 								<div class="col-md-12 form-group">
 									<div class="creat_account d-flex align-items-center">
@@ -87,6 +85,8 @@ ul[class~=social-icons]>li {
 									</ul>
 									<button type="submit" value="submit" class="btn_3">
 										log in</button>
+										
+										
 									<input type="button" class="btn_3" id="bs" value="Sign up">
 									  
 									<a class="lost_pass" href="#">forget password?</a>
@@ -108,9 +108,11 @@ ul[class~=social-icons]>li {
 	<script src="resources/js/stellar.js"></script>
 	<script src="resources/js/price_rangs.js"></script>
 	<script>
-	 $('#bs').click(function(){
-		location.href="signUp.do";
-	 });
+		 $('#bs').click(function(){
+			location.href="signUp.do";
+		 });
+		 
+		 
 	</script>
 </body>
 
