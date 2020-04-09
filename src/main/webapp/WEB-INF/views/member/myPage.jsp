@@ -30,20 +30,7 @@
                                     <div class="mt-10">
                                         <input type="text" name="nickname" placeholder="Nickname" onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = 'Last Name'" required class="single-input">
-                                    </div>
-                                    <label style="margin-top :5%; margin-bottom: 0;">Country</label>*수정불가? 회원 수정 넣을게 넘 없어서 문제쓰
-                                    <div class="input-group-icon mt-10">                                        
-                                        <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
-                                        <div class="form-select" id="default-select_1">
-                                            <select name="country">
-                                                <option value="">Country</option>
-                                                <option value="usa">USA</option>
-                                                <option value="china">China</option>
-                                                <option value="england">England</option>
-                                                <option value="vietnam">Vietnam</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    </div>                                    
                                     <br><br>
                                     <input class="genric-btn success-border small" type="submit" value="finish" style="margin : 10%">
                                     <input class="genric-btn primary-border small" type="button" value="Delete Account" style="margin: 10px;" onclick="return deletemember()">                                    

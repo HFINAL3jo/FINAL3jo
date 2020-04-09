@@ -171,8 +171,8 @@ input:checked+label:after {
 							<form class="row contact_form" method="post"
 								novalidate="novalidate">
 								<div class="col-md-12 form-group p_star">
-									<input type="email" class="form-control" id="email" name="email"
-										value="" placeholder="E-mail">
+									<input type="email" class="form-control" id="email"
+										name="email" value="" placeholder="E-mail">
 									<button type="button" class="btn_3">인증하기</button>
 								</div>
 								<div class="col-md-12 form-group p_star">
@@ -180,31 +180,44 @@ input:checked+label:after {
 										name="password" value="" placeholder="Password">
 								</div>
 								<div class="col-md-12 form-group p_star">
+									<input type="password" class="form-control" id="passwordchk"
+										name="passwordchk" value="" placeholder="Password check">
+								</div>
+								<div class="col-md-12 form-group p_star">
 									<input type="text" class="form-control" id="nickname"
 										name="nickname" placeholder="Nickname">
 								</div>
-								<div class="col-md-12 form-group p_star" id="input-group">
-									<input type="radio" name="gender" value="M" id="M" />
-									<label for="M">Male</label> <input type="radio"
-										name="gender" value="F" id="F" /> <label
-										for="F">Female</label>
-								</div>
-
 								<div class="col-md-12 form-group p_star">
 									<input type="number" class="form-control" id="age" name="age"
 										placeholder="age">
 								</div>
+
+
+
+								<div class="col-md-12 form-group p_star" id="input-group">
+									<input type="radio" name="gender" value="M" id="M" /> <label
+										for="M">Male</label> <input type="radio" name="gender"
+										value="F" id="F" /> <label for="F">Female</label>
+								</div>
+
+
+
+								<div class="col-md-12 form-group p_star">
+									<input type="button" class="btn_3" value="취향선택하러가기"><a
+										href="recommend.do"></a>
+								</div>
+
 								<div class="col-md-12 form-group">
-									<div class="creat_account d-flex align-items-center">
+									<!-- 									<div class="creat_account d-flex align-items-center">
 										<input type="checkbox" id="f-option" name="selector">
 										<label for="f-option">Remember me</label>
-									</div>
+									</div> -->
 									<br>
-									<ul class="social-icons text-right">
+									<!-- 									<ul class="social-icons text-right">
 										<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
 										<li><a href="#"><i class="fab fa-twitter"></i></a></li>
 										<li><a href="#"><i class="fas fa-globe"></i></a></li>
-									</ul>
+									</ul> -->
 									<button type="submit" value="submit" class="btn_3">
 										SIGN UP</button>
 									<a class="lost_pass" href="#">forget password?</a>
