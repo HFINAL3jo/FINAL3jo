@@ -89,17 +89,17 @@
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex">
-                                
+
+							<a id="search_1" href="javascript:void(0)"><i
+								class="ti-search"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <!-- 로그인 전 -->
 							<c:if test="${ empty sessionScope.loginUser }">
-							 <i
-								class="fas fa-sign-in-alt" style="margin-left: 0px;">
+							<span data-balloon="Sign In"
+								data-balloon-pos="down-right">
 								<a href="loginView.do" style="color: rgba(0, 0, 0, .9);">
-								Sign-In </a>	</i>
-								
-								<a id="search_1" href="javascript:void(0)"><i
-									class="ti-search"></i></a> <span data-balloon="Sign In"
-								data-balloon-pos="down-right"> </span>
+							 <i class="fas fa-sign-in-alt" style="margin-left: 0px;">
+								Sign-In </i></a>
+								 </span> 
 							</c:if>
 
 							<!-- 로그인 후 -->
