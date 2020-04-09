@@ -87,8 +87,8 @@ tbody tr:nth-child(2n+1) {
 		if(!document.referrer.includes("goodStatistic.do")){
 			location.href="goodStatistic.do";
 		}	
-	})()
-</script> --> 
+	})();
+</script> -->
 
 <!-- 
 	c3가 기본으로 제공하는 디자인 형식인 c3.min.css 파일을 <head> 부분에 추가한다. 
@@ -115,8 +115,8 @@ tbody tr:nth-child(2n+1) {
 		<div class="container" style="margin-bottom: 15px;">
 			<div class="row" style="margin-left: 0px;">
 				<%@ include file="assideAdmin.jsp" %>
-				<!-- <button>원 차트 보기</button> 은  -->
-			<div class="col-lg-10">
+				
+				<div class="col-lg-10">
 				<!--  조아요 / 조회수 / 검색 키워드 별 버튼으로 구현 -->
 				<p style='font-size:20px; padding-top: 20px;'>간단한 통계 자료</P><br>
 				<div class='row align-items-center latest_product_inner' style='padding-top: 10px; width: 100%; margin-left: 8%; margin-bottom: 4%;'>
@@ -126,19 +126,29 @@ tbody tr:nth-child(2n+1) {
 					<button class='genric-btn success-border e-large button_header' id='uPbtn4'> Large </button>
 				</div>
 				
-				<detalist>
-					<option value="Inter"/>
-					<option value="Hello"/>
-				</detalist>
 				<div class="div_left">
-					<div class="button_body_chart_div">
-						<button class="genric-btn success large button_body_chart">Doughut Chart</button>
+<!-- 				<div class="button_body_chart_div">
+ 						<button class="genric-btn success large button_body_chart">Doughut Chart</button>
 						&nbsp;&nbsp;
 						<button class="genric-btn success large button_body_chart">Pie Chart</button>
 						&nbsp;&nbsp;
 						<button class="genric-btn success large button_body_chart">Single Bar Chart</button>
 						&nbsp;&nbsp;
-					</div>
+				</div> -->
+				
+				<span style="float:left;">차트 검색 &nbsp;<input type="search" list="tcl" id="whatChart"></span>
+			    <datalist id="tcl">
+			    	<option value="donut"> Doughut Chart </option>
+			    	<option value="pie">Pie Chart</option>
+			    	<option value="bar">Bar Chart</option>
+			    </datalist>&nbsp;&nbsp;&nbsp;
+			    <!--  -->
+			    <span style="float:left; margin-left: 5%;">데이터 검색 &nbsp;<input type="search" list="chartTcl" id="whatData"></span>
+			    <datalist id="chartTcl">
+			    	<option value="address">주 소</option>
+			    	<option value="themaName">테 마</option>
+			    </datalist>&nbsp;&nbsp;&nbsp;
+			    <button id="ChangeChart">변 경</button>
 					<!-- c3.js 적용 차트 그리는 공간-->
 					<div id="chart"></div>
 				</div>
@@ -214,12 +224,35 @@ tbody tr:nth-child(2n+1) {
 	</section>
 	<%@ include file="../common/footer.jsp"%>
 
+<script>
+	(function () { 
+		if(!document.referrer.includes("goodStatistic.do")){
+			location.href="goodStatistic.do";
+		}	
+	})();
+</script>
+
 <!-- 이벤트 처리를 위한 스크립트 -->
+<!-- 버튼 상단 이벤트 처리 -->
 <!-- 버튼 상단 -->
 <script src="resources/js/statisticsButtonRegist.js"></script>
-<!-- 버튼 상단 이벤트 처리 -->
 <script src="resources/js/statistics.js"></script>
-
+<script>
+//ChangeChart
+document.getElementById('ChangeChart').onclick = function(){
+	console.log("ChangeChart");
+	var check1 = document.getElementById('whatChart').value;
+	var check2 = document.getElementById('whatData').value;
+	
+	if((check1 == "" || check1 == null) || (check2 == "" || check2 == null)){
+		alert("데이터 입력이 되지 않았습니다. 다시 입력 해주세요.");
+		return;
+	}
+	
+	// ajax 구현
+	
+}	
+</script>
 </body>
 </html>
 
