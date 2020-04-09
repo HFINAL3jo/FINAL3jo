@@ -5,15 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Write Post</title>
-<script type="text/javascript" src="resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-	<!-- jQuery와 Postcodify를 로딩한다. -->
-<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-<script>
-	// 검색 단추를 누르면 팝업 레이어가 열리도록 설정한다.
-	$(function(){
-		$("#postcodify_search_button").postcodifyPopUp();
-	});
-</script>
+ <style>
+ 	input[class~=adi]{
+ 		width:150%;
+ 	}
+ </style>
 </head>
 <body>
     <form action="themeInsert.do" method="POST" id="gosubmit" enctype="multipart/form-data">
@@ -54,31 +50,108 @@
     <input id="fd" type="button" value="-" class="btn btn-default" style="background:rgb(206, 219, 240);">
     </div>
     <br><br>
-    <table>
+    <table align="center">
     <tr>
 		<td>우편번호</td>
 		<td>
-			<input type="text" id="pn" name="post" class="postcodify_postcode5" size="6">
-			<button type="button" id="postcodify_search_button">검색</button>
+			<input type="text" id="postcode" placeholder="우편번호" size="6">
+			<button type="button" id="ars">검색</button>
 		</td>
 	</tr>
 	<tr>
 		<td>도로명 주소</td>
-		<td><input type="text" name="address1" class="postcodify_address"></td>
+		<td><input type="text" id="da" placeholder="도로명주소" class="adi"></td>
 	</tr>
 	<tr>
-		<td>상세 주소</td>
-		<td><input type="text" name="address2" class="postcodify_extra_info"></td>
+		<td>영문 도로명 주소</td>
+		<td><input type="text" id="ja" name="tAddress" placeholder="영문 도로명 주소" class="adi"></td>
 	</tr>
-	
+	<tr>
+		<td>영문 지번 주소</td>
+		<td><input type="text" id="ad" placeholder="영문 지번 주소" class="adi"></td>
+	</tr>
+	<tr>
+		<td>상세 주소 </td>
+		<td><input type="text" id="sample4_extraAddress" placeholder="참고항목"></td>
+	</tr>
 	</table>
     <button id="cancel" class="btn btn-light" type="reset">Cancle</button>
     <button class="btn btn-light" onclick="goSaveAndSubmit();">Write</button>
-    <input type="hidden" id="pv" name="tAddress" value="ABC">
 	</div>
     </form>
     
-    <%-- <%@ include file="/popup/juso.jsp" %> --%>
+<script type="text/javascript" src="resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false&autoMapping=false"></script>
+<script>
+	$('#ars').click(function(){
+    daum.postcode.load(function(){
+        new daum.Postcode({
+            oncomplete: function(data) {
+            	
+            	// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var roadAddrEng = data.roadAddressEnglish;
+                var roadAddr = data.roadAddress; 
+                var jibunAddrEng = data.jibunAddressEnglish; 
+                var extraRoadAddr = "";
+                
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById('da').value = roadAddr;
+                document.getElementById("ja").value = roadAddrEng;
+                document.getElementById("ad").value = jibunAddrEng;
+                
+                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+                if(roadAddr !== ''){
+                    document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+                } else {
+                    document.getElementById("sample4_extraAddress").value = '';
+                }
+
+                var guideTextBox = document.getElementById("guide");
+                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                if(data.autoRoadAddress) {
+                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                    guideTextBox.style.display = 'block';
+
+                } else if(data.autoJibunAddress) {
+                    var expJibunAddr = data.autoJibunAddress;
+                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                    guideTextBox.style.display = 'block';
+                }
+            }
+        }).open();
+        new daum.Postcode({
+            onclose: function(state) {
+                //state는 우편번호 찾기 화면이 어떻게 닫혔는지에 대한 상태 변수 이며, 상세 설명은 아래 목록에서 확인하실 수 있습니다.
+                if(state === 'FORCE_CLOSE'){
+                    //사용자가 브라우저 닫기 버튼을 통해 팝업창을 닫았을 경우, 실행될 코드를 작성하는 부분입니다.
+
+                } else if(state === 'COMPLETE_CLOSE'){
+                    //사용자가 검색결과를 선택하여 팝업창이 닫혔을 경우, 실행될 코드를 작성하는 부분입니다.
+                    //oncomplete 콜백 함수가 실행 완료된 후에 실행됩니다.
+                }
+            }
+        });
+    });
+	});
+</script>
    <script type="text/javascript">
 	var oEditors = [];
 	nhn.husky.EZCreator.createInIFrame({
@@ -107,7 +180,7 @@
 			 $tr.append($td);
 			 $tbody.append($tr);
 			 var $img = $('<img>');
-			 $('.se2_inputarea ').html($img);
+			 
 	  });
 	  $('#fd').click(function(){
 		 $('#flist tr').last().remove();
@@ -115,11 +188,11 @@
 	  $('#cancel').click(function(){
 		  $('#flist tbody').html("");
 	  });
-	  
-	  $("postcodify_search_button").change(function(){
-		  $('#pv').val($('input[name=address1]').val() + " " + $('input[name=address2]').val());
-		  console.log($('#pv'));
+
+	  $("#postcode").on("textchange",function(){
+		
 	  });
+	  
 </script>
 </body>
 </html>
