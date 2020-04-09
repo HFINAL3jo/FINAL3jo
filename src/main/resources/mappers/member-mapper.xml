@@ -6,18 +6,18 @@
 	
 		<id property="mId" column="MID"/>
 		<result property="email" column="EMAIL"/>
-		<result property="pwd" column="PASSWORD"/>
+		<result property="password" column="PASSWORD"/>
 		<result property="nick" column="NICKNAME"/>
 		<result property="gender" column="GENDER"/>	
 		<result property="age" column="AGE"/>	
 		<result property="mStatus" column="M_STATUS"/>	
-		<result property="fav" column="RECOMMEND"/>
+		<result property="recommend" column="RECOMMEND"/>
 	</resultMap>
 
 
 <insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER
-		VALUES (#{email},#{password},#{nick},#{gender},#{age},DEFAULT,#{recommend})
+		VALUES (#{mid},#{email},#{password},#{nickname},#{gender},#{age},DEFAULT,#{recommend})
 </insert>
 
 </mapper>

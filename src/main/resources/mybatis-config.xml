@@ -14,6 +14,7 @@
 		<typeAlias type="com.aligo.spring.theme.model.vo.TName" alias="TName"/>
 		<typeAlias type="com.aligo.spring.recom.model.vo.Recommend" alias="Recom"/>
 		<typeAlias type="com.aligo.spring.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.aligo.spring.statistics.model.vo.Statistics" alias="Statistics"/>
 	</typeAliases>
 	
 	<mappers>
@@ -21,6 +22,7 @@
 		<mapper resource="mappers/recommend-mapper.xml"/>
 		<mapper resource="mappers/main-mapper.xml"/>
 		<mapper resource="mappers/member-mapper.xml"/>
+		<mapper resource="mappers/statistics-mapper.xml"/>  
 	</mappers>
 	
 </configuration>

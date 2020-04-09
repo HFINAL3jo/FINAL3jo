@@ -66,7 +66,7 @@
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="themeDetailView.do">Posting</a>
+                                    <a class="nav-link" href="/views/theme/themeDetailView.jsp">Posting</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="recommend.do">

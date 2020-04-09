@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.aligo.spring.statistics.model.dao.statisticsDao;
+import com.aligo.spring.statistics.model.dao.StatisticsDao;
 
 @Service("serviceStatics")
-public class statisticsServiceImpl implements statisticsService {
+public class StatisticsServiceImpl implements StatisticsService {
 
 	@Autowired
-	private statisticsDao statisticsDao;
+	private StatisticsDao statisticsDao;
 	
 	@Override
 	public ArrayList AllGoodStatistic() {

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="themeStatisticsMapper">
+	<resultMap type="Statistics" id="themeStatisticsResult">
+		 
+		 <result property="number" column="TCODE" />
+		 <result property="ColumnAddressName" column="TADDRESS" />
+		 <result property="ColumnAddressNumber" column="ColumnAddressNumber" />
+		 <result property="ColumnTnameName" column="TNAME" />
+		 <result property="ColumnTnameNumber" column="ColumnTnameNumber" />
+		 <result property="ColumnTKeywordName" column="TKEYWORD" />
+		 <result property="ColumnTKeywordNumber" column="ColumnTKeywordNumber" />
+		 <result property="registDate" column="T_MODIFY_DATE" />
+		 
+	</resultMap>
+
+	<!-- 조아요. 장소에 대한 데이터를 가져온다. -->
+	<select id="AllGoodStatistic" resultMap="themeStatisticsResult">
+		SELECT TADDRESS, SUM(T_LIKES) as ColumnAddressNumber
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		GROUP BY  TADDRESS
+		ORDER BY TADDRESS
+	</select>
+
+</mapper>
+
+    
