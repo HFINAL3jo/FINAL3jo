@@ -7,11 +7,11 @@
   <style>
   	/* Showcase */
         .showcase {
-	        margin-top: 5.5%;
 	        width: 100%;
 	        margin-left: auto;
 	        margin-right: auto;
-	        height: 400px;
+	        height: 450px;
+	        margin-top:1%;
         /* background: url('https://i.ibb.co/zGSDGCL/slide1.png') no-repeat center center/cover; */
 	        display: flex;
 	        flex-direction: column;
