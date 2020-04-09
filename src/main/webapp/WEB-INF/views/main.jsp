@@ -46,7 +46,7 @@
         }
 
         .home-cards img {
-	        width: 100%;
+	        width: 90%;
 	        max-height: 220px;
 	        margin-bottom: 20px;
         }
@@ -170,7 +170,7 @@
           <div id="showcas-div">
         <h2>Welcome to SEOUL!</h2>
         <p>
-			Get inspired by your travels!
+			Get inspired for your journey!
         </p>
         <!-- <a href="#" class="btn">
           Shop Now <i class="fas fa-chevron-right"></i>
@@ -179,8 +179,8 @@
         </div>
       <!-- card section start -->
       <div class="card-section">
-        <h1 style="margin:10px 0px">Where you have to go</h1>
-        <h4>Please check out the hot places aligo recommend</h4>
+        <h1 style="margin:10px 0px">Must-visit in Seoul</h1>
+        <h4>Please check out the latest travel contents recommended by aligo!</h4>
         <div class="card-list">
           <div class="card" id="card1">
             <img src="${ contextPath }/resources/images/recommend_place_bibimbab.jpg"/>
