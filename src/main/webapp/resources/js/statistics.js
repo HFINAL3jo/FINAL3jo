@@ -24,6 +24,8 @@ var Data = {
 		  "딸기": 120
 		};
 var charValue = "donut";
+str=str.replace(/&#034;/g, '\"');
+Data = JSON.parse(str);
 //
 var chartDonut = c3.generate({
   bindto: "#chart",

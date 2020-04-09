@@ -34,7 +34,6 @@ public class StatisticController {
 	@RequestMapping(value="goodStatistic.do", method=RequestMethod.GET)
 	public ModelAndView goodStatistic(ModelAndView mav, HttpServletResponse response, HttpServletRequest request) {
 		
-		System.out.println("goodStatistic.do 실행");
 		ArrayList<Statistics> list = null;
 		if(request.getParameter("first") == "" || request.getParameter("first") == null) {
 			list = serviceStatics.AllGoodStatistic();
@@ -49,11 +48,9 @@ public class StatisticController {
 		
 		// JSONObject에서 통계를 쓰기 위한 데이터 값만 받는다.
 		JSONObject jObj = new JSONObject();
+		
 		for(Statistics out : list) {
 			
-			//jObj.put("number", out.getNumber());
-			//jObj.put("tableName", out.getTableName());
-			//jObj.put("DoughtDate", out.getDoughtDate());
 			jObj.put(out.getColumnAddressName() , out.getColumnAddressNumber());
 			
 		}
