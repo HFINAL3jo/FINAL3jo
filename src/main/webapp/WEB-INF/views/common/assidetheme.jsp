@@ -31,7 +31,7 @@
                                         <label for="confirm-switch"></label>
                                     </div>
                                 </div>
-                                <c:if test="${loginUser.userId eq 'ADMIN'}"><button>Write</button></c:if>
+                               <%--  <c:if test="${loginUser.userId eq 'ADMIN'}"><button>Write</button></c:if> --%>
                             </div>
                         </aside>
 
@@ -41,37 +41,58 @@
                             </div>
                             <div class="widgets_inner">
                                 <ul class="list">
-                                    <li> 여행 조건 선택 1 </li>
-                                    <li> 여행 조건 선택 2 </li>
-                                    <li> 여행 조건 선택 3 </li>
-                                    <li> 여행 조건 선택 4 </li>
-                                    <li> 여행 조건 선택 5 </li>
+                                    <li> user 맞춤 테마 목록 뿌려주기만 버튼 X </li>
+                                    <li> 사용자 테마1 </li>
+                                    <li> 사용자 테마2 </li>
+                                    <li> 사용자 테마3 </li>
+                                    <li> 사용자 테마4 </li>
                                 </ul>
                                 <ul class="list">
-                                    <li> 테마 별 선택 시 </li>
+                                    <h5>By Place</h5><br>
                                     <li>
-                                        <h6>배고파(음식).</h6>
+                                        <label>History</label>
                                         <div class="confirm-radio">
                                             <input type="checkbox" id="ha">
                                             <label for="ha"></label>
                                         </div>
                                     </li>
                                     <li>
-                                        <h6>맞기전 까지는 계획이 있다.</h6>
+                                        <h6>Food</h6>
                                         <div class="confirm-radio">
                                             <input type="checkbox" id="ha2">
                                             <label for="ha2"></label>
                                         </div>
                                     </li>
                                     <li>
-                                        <h6>Hellow World.</h6>
+                                        <h6>Shopping</h6>
                                         <div class="confirm-radio">
                                             <input type="checkbox" id="ha3">
                                             <label for="ha3"></label>
                                         </div>
                                     </li>
                                     <li>
-                                        <h6>이제 자자 피곤하다.</h6>
+                                        <h6>Festival</h6>
+                                        <div class="confirm-radio">
+                                            <input type="checkbox" id="ha4">
+                                            <label for="ha4"></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <h6>Night View</h6>
+                                        <div class="confirm-radio">
+                                            <input type="checkbox" id="ha4">
+                                            <label for="ha4"></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <h6>Museum</h6>
+                                        <div class="confirm-radio">
+                                            <input type="checkbox" id="ha4">
+                                            <label for="ha4"></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <h6>Exotic</h6>
                                         <div class="confirm-radio">
                                             <input type="checkbox" id="ha4">
                                             <label for="ha4"></label>

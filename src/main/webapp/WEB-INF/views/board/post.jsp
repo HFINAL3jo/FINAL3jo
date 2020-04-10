@@ -12,6 +12,42 @@
   <link rel="stylesheet" href="resources/css/lightslider.min.css">
 
  <style>
+ 
+ .heart {
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  background-image:url(  'https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png');
+  background-repeat:no-repeat;
+  background-size:2900%;
+ }
+.heart-liked {
+  background-position: right;
+ }
+.heart-unliked {
+  background-position: left;
+ }
+
+ .heart:hover {
+  background-position:right;
+ }
+
+ .animating-liked {
+  animation: heart-burst-liked .8s steps(28) 1;
+ }
+ .animating-unliked {
+  animation: heart-burst-unliked 4s steps(28) 1;
+ }
+
+ @keyframes heart-burst-liked {
+ from {background-position:left;}
+ to { background-position:right;}
+ }
+ @keyframes heart-burst-unliked {
+ from {background-position:right;}
+ to { background-position:left;}
+ }
+ 
   #modalist {
     border:2px solid gray;
     display:none;
@@ -80,7 +116,8 @@
   <br>
   <!--모달 팝업 및 좋아요 아이콘-->
   <img class="list" src="resources/img/product/example/list.svg" class="modal_content" align="right" widht="40px" height="40px" style="margin-right:10%;">
-  <br><br><br>
+  <br>
+  <div class="heart heart-unliked"></div>
   <img id="thumb" src="resources/img/product/example/heart.svg" widht="40px" height="40px" align="right" style="margin-right:10%;">
     <div id="modalist">
      <div id="fav"><img src="resources/img/product/example/star.svg" class="modal_content" widht="40px" height="40px">&nbsp;즐겨찾기</div>
@@ -111,9 +148,10 @@
           <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review"
             aria-selected="false">Reviews</a>
         </li> -->
-      </ul>
+      </ul>      
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade" id="description" role="tabpanel" aria-labelledby="description-tab">
+         
           <p>
           ${t.tContent}
           </p>
@@ -425,6 +463,27 @@
 	     });
   	});
   
+	   
+	   
+	   $(".heart-unliked").on('click touchstart', function(){
+		   $(this).toggleClass('animating-liked');
+		 });
+
+		 $(".heart-liked").on('click touchstart', function(){
+		   $(this).toggleClass('animating-unliked');
+		 });
+
+		 $(".heart-liked").on('animationend', function(){
+		   $(this).toggleClass('animating-unliked');
+		       $(this).toggleClass('heart-liked');
+		   $(this).toggleClass('heart-unliked');
+		 });
+
+		 $(".heart-unliked").on('animationend', function(){
+		   $(this).toggleClass('animating-liked');
+		       $(this).toggleClass('heart-liked');
+		   $(this).toggleClass('heart-unliked');
+		 });
 
   </script>
   
