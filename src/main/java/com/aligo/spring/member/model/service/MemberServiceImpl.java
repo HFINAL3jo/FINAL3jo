@@ -16,5 +16,10 @@ public class MemberServiceImpl implements MemberService {
 	public int insertMember(Member m) {
 		return memDao.insertMember(m);
 	}
+
+	@Override
+	public int idCheck(String email) {
+		return memDao.idCheck(email);
+	}
 	
 }
