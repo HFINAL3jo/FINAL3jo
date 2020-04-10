@@ -218,15 +218,23 @@
   <%@ include file="../common/footer.jsp"%>
    <!--::footer_part end::-->
 
-</body>
-<script type="text/javascript">
-	$(document).ready(function(){
+<script>
+	function getReplyList(){
+		var before = ${ before };
+		var pageSelect = ${ p };
+		var next = ${ next };
 		
-		//페이지 번호 이동
-		$('#pagingDiv a').click(function(e){
-			e.preventDefault();
-			$('#pageNum')
+		$.ajax({
+			url:"contactView.do",
+			data:{currentPage:currentPage},
+			dataType:"json",
+			success:function(data){
+				
+			},error:function(){
+				console.log("전송실패");
+			}
 		});
-	});
+	}
 </script>
+</body>
 </html>
