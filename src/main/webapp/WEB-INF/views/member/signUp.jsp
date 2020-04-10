@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!doctype html>
 <html lang="zxx">
 <!-- @import 'https://fonts.googleapis.com/css?family=Dosis|Roboto:300,400';
@@ -116,6 +118,8 @@ input:checked+label:after {
 
 /* ---//여기까지가 녹색 */
 </style>
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script> 
+
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"
@@ -172,8 +176,12 @@ input:checked+label:after {
 								novalidate="novalidate">
 								<div class="col-md-12 form-group p_star">
 									<input type="email" class="form-control" id="email"
-										name="email" value="" placeholder="E-mail">
+										name="email" value="" placeholder="E-mail"> <span
+										class="guide ok">사용가능</span> <span class="guide error">사용불가능</span>
+									<input type="hidden" name="idDuplicateCheck"
+										id="idDuplicateCheck" value="0">
 									<button type="button" class="btn_3">인증하기</button>
+
 								</div>
 								<div class="col-md-12 form-group p_star">
 									<input type="password" class="form-control" id="password"
@@ -188,7 +196,7 @@ input:checked+label:after {
 										name="nickname" placeholder="Nickname">
 								</div>
 								<div class="col-md-12 form-group p_star">
-									<input type="number" class="form-control" id="age" name="age"
+									<input type="number" max="99" min="10" class="form-control" id="age" name="age"
 										placeholder="age">
 								</div>
 
@@ -237,6 +245,33 @@ input:checked+label:after {
 
 	<script src="resources/js/stellar.js"></script>
 	<script src="resources/js/price_rangs.js"></script>
-</body>
 
-</html>
+
+
+	<!-- ■■■■■■■■■■■■ Script part ■■■■■■■■■■■■-->
+
+
+
+
+
+	<script>
+	function validate(){
+		
+		// 아이디 중복 체크 여부
+		if($("idDuplicateCheck").val()==0){
+			// $ : 제이쿼리가 필요하다.
+			// 상단에 제이쿼리 적용하지 않았다. 근데 왜 사용가능한가?
+			// 상단에 인클루드 된 메뉴바.jsp에 제이쿼리가 적용되어 있기 때문에
+			
+			alert("사용 가능한 아이디를 입력해주세요");
+			$("#userId").focus();
+			return false;
+		} else{
+			return true;	 // 왜그런지 녹음강의 확인
+		}
+	}
+
+		</body>
+
+		</html>
+	
