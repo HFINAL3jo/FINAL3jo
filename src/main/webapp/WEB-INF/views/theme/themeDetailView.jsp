@@ -18,6 +18,52 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=645218c0e569303936c79803cc2aa695&libraries=LIBRARY"></script>      
  
     <style>
+    .like-content {
+	    display: inline-block;
+	    width: 100%;
+	    margin: 40px 0 0;
+	    padding: 40px 0 0;
+	    font-size: 18px;
+	    border-top: 10px dashed #eee;
+	    text-align: center;
+	}
+	.like-content span {
+		color: #9d9da4;
+		font-family: monospace;
+	}
+	.like-content .btn-secondary {
+		display: block;
+		margin: 40px auto 0px;
+	    text-align: center;
+	    background: #ed2553;
+	    border-radius: 3px;
+	    box-shadow: 0 10px 20px -8px rgb(240, 75, 113);
+	    padding: 10px 17px;
+	    font-size: 18px;
+	    cursor: pointer;
+	    border: none;
+	    outline: none;
+	    color: #ffffff;
+	    text-decoration: none;
+	    -webkit-transition: 0.3s ease;
+	    transition: 0.3s ease;
+	}
+	.like-content .btn-secondary:hover {
+		  transform: translateY(-3px);
+	}
+	.like-content .btn-secondary .fa {
+		  margin-right: 5px;
+	}
+	.animate-like {
+		animation-name: likeAnimation;
+		animation-iteration-count: 1;
+		animation-fill-mode: forwards;
+		animation-duration: 0.65s;
+	}
+	@keyframes likeAnimation {
+	  0%   { transform: scale(30); }
+	  100% { transform: scale(1); }
+	}
         .loction{
             width: 100%;
             max-width: 1200px;
@@ -83,6 +129,11 @@
             background-color: #ddd;
         }
 
+    </style>
+    <style>
+    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
+      
+    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
     </style>
     <style>
           .sub-contents-inner p {
@@ -305,13 +356,12 @@
                 <section class="infor-element">
                     <div class="text-type">
                        		공원&amp;정원</div>
-                    <h3 class="h3 textcenter">낮과 밤 모두 완벽한 이곳, 석촌호수!</h3>
+                    <h3 class="h3 textcenter">낮과 밤 모두 완벽한 이곳, 석촌호수!</h3>                    
 
                     <div class="post-element">
                         <span>제작일 : 2020.02.18 / 수정일 : 2020.02.18</span>
                     </div>
                     <div class="text-area">
-                        
                         <p>도심 속에서 즐기는 여유는 특별한 감성을 가져다준다.
                             <br>그곳이 고요한 호수의 산책이라면 더 훌륭하다.
                             <br>
@@ -437,11 +487,31 @@
 				        });
 				    });
 				}); */
-				
-				
 				</script>
 					<br>
-					<hr>
+					<div class="like-content" align="center">
+						<span>
+    					Did you like this review? Press like to make it easier for others to see
+  						</span>
+  
+  						<button class="btn-secondary like-review">
+    					<i class="fa fa-heart" aria-hidden="true"></i> Like
+  						</button>
+					</div>
+					<script type="text/javascript">
+				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
+				    $(function(){
+						$(document).on('click', '.like-review', function(e) {
+							$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this');
+							$(this).children('.fa-heart').addClass('animate-like');
+						});
+						/*
+							자바스크립트로 조아요 버튼 값을 받아서 밸류 체크후 클릭
+							해보쟈~~~~
+						*/
+					});
+				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
+					</script>
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
@@ -522,6 +592,14 @@
                             livereReply.site = current_url;
                             livereReply.description = current_url;
                             livereLib.start();
+                   
+                        </script>
+                        <script>
+                        $(function() {
+                        	  $(".heart").on("click", function() {
+                        	    $(this).toggleClass("is-active");
+                        	  });
+                        	});
                         </script>
                         <div id="liverePlugIn">
                             <h3 class="livereNone">소셜댓글 라이브리 영역. SNS 계정으로 로그인해 댓글을 작성하고 SNS로 전송할 수 있습니다</h3>
@@ -586,6 +664,7 @@
                 </div>
                 <!--// livere -->
             </div>
+            <div class="heart heart-unliked"></div>
             <%@ include file="../common/footer.jsp" %>
 </body>
 

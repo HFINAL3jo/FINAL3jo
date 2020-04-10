@@ -80,7 +80,7 @@
 									style="width: 100%; height: 90%;">Latest Posting</button>
 
 							</div>
-							&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;
 							<div class="input-group">
 								<button class="genric-btn success-border medium"
 									style="width: 100%; height: 90%;">Most Liked</button>
