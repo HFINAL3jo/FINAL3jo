@@ -126,7 +126,8 @@ public class ThemeController {
 		}
 		
 		return renameFilename;
-	}
+	}	
+	
 	
 	@RequestMapping("postdetail.do")
 	public ModelAndView themeDetailView(ModelAndView mv, 
