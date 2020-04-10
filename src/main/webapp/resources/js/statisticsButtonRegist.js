@@ -7,7 +7,7 @@
 	// 조아요
 	document.getElementById('uPbtn1').onclick = function(){
 		//console.log("실행");
-		location.href="goodStatistic.do?check=first";
+		location.href="goodStatistic.do?choose=good";
 	}		
 	
 	// 조회수
@@ -15,21 +15,21 @@
 		console.log("실행");
 //		location.href="goodStatistic.do";
 	}	
+		
+	document.getElementById('btn1').onclick = function(){
+		console.log("btn1 실행");
+	}	
 	
+	document.getElementById('btn2').onclick = function(){
+		console.log("btn2 실행");
+	}	
 	
+	document.getElementById('btn3').onclick = function(){
+		console.log("btn3 실행");
+	}	
 	
-	//ChangeChart
-//	document.getElementById('ChangeChart').onclick = function(){
-//		console.log("ChangeChart");
-//		var check1 = document.getElementById('whatChart').value;
-//		var check2 = document.getElementById('whatData').value;
-//		
-//		if((check1 == "" || check1 == null) || (check2 == "" || check2 == null)){
-//			alert("데이터 입력이 되지 않았습니다. 다시 입력 해주세요.");
-//			return;
-//		}
-//		
-//		// ajax 구현
-//	}	
-	
-	
+//
+// 표를 그리는 이벤트 처리
+	function showTopList(data){
+		
+	}
