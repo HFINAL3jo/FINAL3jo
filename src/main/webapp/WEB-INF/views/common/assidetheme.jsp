@@ -14,11 +14,11 @@
                     <div class="left_sidebar_area">
                         <aside class="left_widgets p_filter_widgets">
                             <div class="l_w_title">
-                                <h3>어디로 가고 싶으세요.</h3>
+                                <!-- <h3>어디로 가고 싶으세요.</h3> -->
                             </div>
                             <div class="widgets_inner">
                                 <div class="switch-wrap d-flex justify-content-between">
-                                    <p>테마별 선택</p>
+                                    <p>View by Theme</p>
                                     <div class="primary-switch">
                                         <input type="checkbox" id="primary-switch" checked="">
                                         <label for="primary-switch"></label>
