@@ -7,12 +7,12 @@
 	<resultMap type="Statistics" id="themeStatisticsResult">
 		 
 		 <result property="number" column="TCODE" />
-		 <result property="ColumnAddressName" column="TADDRESS" />
-		 <result property="ColumnAddressNumber" column="ColumnAddressNumber" />
-		 <result property="ColumnTnameName" column="TNAME" />
-		 <result property="ColumnTnameNumber" column="ColumnTnameNumber" />
-		 <result property="ColumnTKeywordName" column="TKEYWORD" />
-		 <result property="ColumnTKeywordNumber" column="ColumnTKeywordNumber" />
+		 <result property="columnAddressName" column="TADDRESS" />
+		 <result property="columnAddressNumber" column="ColumnAddressNumber" />
+		 <result property="columnTnameName" column="TNAME" />
+		 <result property="columnTnameNumber" column="ColumnTnameNumber" />
+		 <result property="columnTKeywordName" column="TKEYWORD" />
+		 <result property="columnTKeywordNumber" column="ColumnTKeywordNumber" />
 		 <result property="registDate" column="T_MODIFY_DATE" />
 		 
 	</resultMap>
@@ -23,7 +23,7 @@
 		FROM THEME_LIST
 		JOIN THEME_CODE USING(TCODE)
 		GROUP BY  TADDRESS
-		ORDER BY TADDRESS
+		ORDER BY ColumnAddressNumber DESC
 	</select>
 
 </mapper>
