@@ -8,6 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>aranaz</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
   <style>
 
   table {
@@ -21,7 +22,7 @@
     text-align: center;
   }
   thead tr {
-    background-color: #77AAAD;
+    background-color: #3B4CF7;
     color: #ffffff;
   }
   tbody tr:nth-child(2n) {
@@ -71,7 +72,7 @@
         <div class="qnaPageTable">
 
     <table align="center" class="table table-striped">
-        <thead>
+        <thead align="center">
         <tr>
             <th>글번호</th>
             <th>제목</th>
@@ -84,24 +85,65 @@
     <tbody>
         <tr>
             <td>${ q.qId }</td>
-            <td>${ q.qTitle }</td>
+            <td>
+            	<c:url var="qdetail" value="qdetail.do">
+            		<c:param name="qId" value="${ q.qId }"/>
+            		<c:param name="currentPage" value="${ pi.currentPage }"/> 
+            	</c:url>
+            	<c:if test="${ empty loginUser }">
+            		${ q.qTitle }
+            	</c:if>
+            </td>
             <td>${ q.qWriter }</td>
             <td>${ q.qCreateDate }</td>
             <td>${ q.qStatus }</td>
         </tr>
-    </tbody>
-    </table>
 	</c:forEach>
-    <div class=Pagenation>
-
-        <ul id="pagenation" align="center" style="margin-left:-90px;">
-          <li><button class="listbtn" value="-1">&lt;&nbsp;</button></li>
-          <li><button class="listbtn" value="1">1&nbsp;</button></li>
-          <li><button class="listbtn" value="2">2&nbsp;</button></li>
-          <li><button class="listbtn" value="3">3&nbsp;</button></li>
-          <li><button class="listbtn" value="+1">&gt;&nbsp;</button></li>
-      </ul>
+    </tbody>
+    
+    <!-- 페이징 처리 -->
+    <tr id="pagingDiv" align="center" height="20">
+    	<td colspan="6">
+    	
+    	<!-- [이전] -->
+    	<c:if test="${ pi.currentPage eq 1 }">
+    		[이전] &nbsp;
+    	</c:if>
+    	<c:if test="${ pi.currentPage ne 1 }">
+    		<c:url var="before" value="contactView.do">
+    			<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+    		</c:url>
+    		<a href="${ before }">[이전]</a> &nbsp;
+    	</c:if>
+    	
+    	<!-- 페이지 -->
+    	<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+    		<c:if test="${ p eq pi.currentPage }">
+    			<font color="pink" size="4"><b>[${ p }]</b></font>
+    		</c:if>
+    		
+    		<c:if test="${ p ne pi.currentPage }">
+    			<c:url var="pagination" value="contactView.do">
+    				<c:param name="currentPage" value="${ p }"/>
+    			</c:url>
+    			<a href="${ pagination }">${ p }</a> &nbsp;
+    		</c:if>
+    	</c:forEach>
+    	
+    	<!-- [다음] -->
+    	<c:if test="${ pi.currentPage eq pi.maxPage }">
+    		[다음]
+    	</c:if>
+    	<c:if test="${ pi.currentPage ne pi.maxPage }">
+    		<c:url var="next" value="contactView.do">
+    			<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+    		</c:url>
+    		<a href="${ next }">[다음]</a>
+    	</c:if>
   
+  
+	</td>
+    </table>
 </div>
 </div>
 
@@ -177,5 +219,14 @@
    <!--::footer_part end::-->
 
 </body>
-
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		//페이지 번호 이동
+		$('#pagingDiv a').click(function(e){
+			e.preventDefault();
+			$('#pageNum')
+		});
+	});
+</script>
 </html>

@@ -16,6 +16,10 @@ public class QnADao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
+	public int getListCount() {
+		return sqlSession.selectOne("qnaMapper.getListCount");
+	}
+	
 	public ArrayList<QnA> selectList(QnAPageInfo pi) {
 		
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
@@ -23,5 +27,6 @@ public class QnADao {
 		
 		return (ArrayList)sqlSession.selectList("qnaMapper.selectList",null,rowBounds);
 	}
+
 	
 }
