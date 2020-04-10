@@ -96,10 +96,20 @@ tbody tr:nth-child(2n+1) {
 <body>
 	<%@ include file="../common/menubar.jsp"%>
 
-	<!-- 먼저 조아요. 내용 저장 -->
-	<input type="hidden" id="list" value=${list} >
-	<input type="hidden" id="charValue" value=${charValue} >
-	<input type="hidden" id="jObj" value=${jObj} >
+	<!-- 내용 저장 위의 버튼(맨위의 조아요등 ) 클릭시 저장하는 값-->
+<!-- 리스트 형태로 html태그에 저장시 공백을 처리하지 않으면 값이 공백에서 끝어져 .vlaue; 시에 데이터가 끝어서 나온다. -->
+	<input type="hidden" id="list" value=${list} > 			<!-- StatisticController의 list 값을 가져온다. -->
+	<input type="hidden" id="whatChoose" value=${choose} >	<!-- StatisticController에서 어떤 차트를 섰는지 표시 가져온다. -->
+	<input type="hidden" id="chartValue" value=${chartValue} ><!-- StatisticController의 조아요/조회수.키워트 중 하나에 대한 데이터를 값을 가져왔다는 것을s 의미. -->
+	<input type="hidden" id="jObj" value=${jObj} >			<!-- StatisticController의 차트에 쓰일 JSON 값을 가져온다. -->
+	<input type="hidden" id="reverTableData" value=${reverTableData} ><!-- StatisticController의 역순 차트에 쓰일 JSON 값을 가져온다. -->
+	<!-- test -->
+<%-- 	<c:set var ="listTest" value="${list}" />
+	<c:set var ="jObjTest" value="${jObj}" />
+	
+	<input type="hidden" id="clist" value=${list} >
+	<input type="hidden" id="cjObj" value=${jObj} > --%>
+
 
 	<!-- 통계를 보여주는 공간 -->
 	<!-- 인포그램에서 도넛, 바, 파이, 그래프을 보여 줘야 되므로 조아요, 조회수, 검색 키워드 등 컬럼명 마다 ~~ -->
@@ -119,28 +129,20 @@ tbody tr:nth-child(2n+1) {
 				</div>
 				
 				<div class="div_left">
-<!-- 				<div class="button_body_chart_div">
- 						<button class="genric-btn success large button_body_chart">Doughut Chart</button>
-						&nbsp;&nbsp;
-						<button class="genric-btn success large button_body_chart">Pie Chart</button>
-						&nbsp;&nbsp;
-						<button class="genric-btn success large button_body_chart">Single Bar Chart</button>
-						&nbsp;&nbsp;
-				</div> -->
 				
-				<span style="float:left;">차트 검색 &nbsp;<input type="search" list="tcl" id="whatChart"></span>
-			    <datalist id="tcl">
-			    	<option value="donut"> Doughut Chart </option>
-			    	<option value="pie">Pie Chart</option>
-			    	<option value="bar">Bar Chart</option>
-			    </datalist>&nbsp;&nbsp;&nbsp;
-			    <!--  -->
-			    <span style="float:left; margin-left: 5%;">데이터 검색 &nbsp;<input type="search" list="chartTcl" id="whatData"></span>
-			    <datalist id="chartTcl">
-			    	<option value="address">주 소</option>
-			    	<option value="themaName">테 마</option>
-			    </datalist>&nbsp;&nbsp;&nbsp;
-			    <button id="ChangeChart">변 경</button>
+					<span style="float:left;">차트 검색 &nbsp;<input type="search" list="tcl" id="whatChart"></span>
+				    <datalist id="tcl">
+				    	<option value="donut"> Doughut Chart </option>
+				    	<option value="pie">Pie Chart</option>
+				    	<option value="bar">Bar Chart</option>
+				    </datalist>&nbsp;&nbsp;&nbsp;
+				    <!--  -->
+				    <span style="float:left; margin-left: 5%;">데이터 검색 &nbsp;<input type="search" list="chartTcl" id="whatData"></span>
+				    <datalist id="chartTcl">
+				    	<option value="address">주 소</option>
+				    	<option value="themaName">테 마</option>
+				    </datalist>&nbsp;&nbsp;&nbsp;
+				    <button id="ChangeChart">변 경</button>
 					<!-- c3.js 적용 차트 그리는 공간-->
 					<div id="chart"></div>
 				</div>
@@ -149,13 +151,11 @@ tbody tr:nth-child(2n+1) {
 					<!-- c3.js 예제 1 -->
 					<!--  <div id="linechart"></div> -->
 					<div style="height: 50px; padding-bottom: 5px;">
-						<button class="genric-btn success large button_body_chart">기 타</button>
+						<button class="genric-btn success large button_body_chart" id="btn1">Low list 10</button>
 						&nbsp;&nbsp;
-						<button class="genric-btn success large button_body_chart">Low list 10</button>
+						<button class="genric-btn success large button_body_chart" id="btn2">TOP list 10</button>
 						&nbsp;&nbsp;
-						<button class="genric-btn success large button_body_chart">TOP list 10</button>
-						&nbsp;&nbsp;
-						<button class="genric-btn success large button_body_chart">Average</button>
+						<button class="genric-btn success large button_body_chart" id="btn3">Average</button>
 						&nbsp;&nbsp;
 					</div>
 					<table style="border: 1px solid;">
@@ -165,47 +165,19 @@ tbody tr:nth-child(2n+1) {
 								<th>HELLO</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="chartDataTable">
+						<!-- c jstl로 작성, 자바 스크립트로 제어 -->
+						<script>
+							var list = "<c:out value='${list}' />";
+						</script>
+						<c:if test="">
+						<c:forEach var="s" items="${list}">
 							<tr>
-								<td>1</td>
-								<td>HELLO</td>
+ 								<td>${s.columnAddressName}</td>
+								<td>${s.columnAddressNumber}</td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td>HELLO</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>HELLO</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>HELLO</td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>HELLO</td>
-							</tr>			
-							<tr>
-								<td>6</td>
-								<td>HELLO</td>
-							</tr>
-							<tr>
-								<td>7</td>
-								<td>HELLO</td>
-							</tr>
-							<tr>
-								<td>8</td>
-								<td>HELLO</td>
-							</tr>
-							<tr>
-								<td>9</td>
-								<td>HELLO</td>
-							</tr>	
-							<tr>
-								<td>10</td>
-								<td>HELLO</td>
-							</tr>	
+						</c:forEach>
+						</c:if>
 						</tbody>
 					</table>
 				</div>
@@ -215,27 +187,25 @@ tbody tr:nth-child(2n+1) {
 	<!-- 게시판, 통계 자료 페이징 처리한 게시판 -->		
 	</section>
 	<%@ include file="../common/footer.jsp"%>
-
-<script>
-	(function () { 
-		if(!document.referrer.includes("goodStatistic.do")){
-			location.href="goodStatistic.do";
-		}	
-	})();
-</script>
-
+	
 <!-- 이벤트 처리를 위한 스크립트 -->
-<!-- 버튼 상단 이벤트 처리 -->
-<!-- 버튼 상단 -->
 <script>
-	var str = "<c:out value='${jObj}' />"
-</script>
-<script src="resources/js/statisticsButtonRegist.js"></script>
-<script src="resources/js/statistics.js"></script>
-<script>
-//ChangeChart
+//var str = "<c:out value='${jObj}' />";
+window.onload = function(){
+	
+	// 왼쪽 바를 선택헤서 들어오면 무조건 여기서 부터 값을 가져 오게 한다.
+	if(!document.referrer.includes("goodStatistic.do")){
+		location.href="goodStatistic.do?first=good";
+	}
+	// 콘솔 출력시에  "<c:out value='${jObj}' />" 로 나온다 즉 jstl이 파싱이 되지 않는다.
+	// var str = "<c:out value='${jObj}'/>";	
+}
+
+// {} 등에서 jstl이 파싱이 되지 않는 것 같다.
+var str = "<c:out value='${jObj}' />";
+
 document.getElementById('ChangeChart').onclick = function(){
-	console.log("ChangeChart");
+	console.log("ChangeChart");	
 	var check1 = document.getElementById('whatChart').value;
 	var check2 = document.getElementById('whatData').value;
 	
@@ -248,6 +218,10 @@ document.getElementById('ChangeChart').onclick = function(){
 	
 }	
 </script>
+<!-- 버튼 상단 이벤트 처리 -->
+<!-- 버튼 상단 -->
+<script src="resources/js/statisticsButtonRegist.js"></script>
+<script src="resources/js/statistics.js"></script>
 </body>
 </html>
 

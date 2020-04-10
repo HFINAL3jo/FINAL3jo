@@ -13,33 +13,33 @@ public class Statistics implements Serializable{
 	private int number; 					// TCODE
 	//private String tableName = "파이";		 실제 테이블명이 아니라 어느 차트에 쓰는 것지 표시	
 	private Date registDate;				// 날짜			
-	private String ColumnAddressName; 		// 장소(TADDRESS) DB에서 가져오는 이름 컬럼
-	private int ColumnAddressNumber;		// 장소(TADDRESS) DB에서 가져오는 이름에 해당하는 값
-	private String ColumnTnameName; 		// 1차분류(TNAME) DB에서 가져오는 이름 컬럼
-	private int ColumnTnameNumber;			// 1차분류(TNAME) DB에서 가져오는 이름에 해당하는 값
-	private String ColumnTKeywordName; 		// 1차분류의 세부 사항(TKEYWORD) DB에서 가져오는 이름 컬럼
-	private int ColumnTKeywordNumber;		// 1차분류의 세부 사항(TKEYWORD) DB에서 가져오는 이름에 해당하는 값
+	private String columnAddressName; 		// 장소(TADDRESS) DB에서 가져오는 이름 컬럼
+	private int columnAddressNumber;		// 장소(TADDRESS) DB에서 가져오는 이름에 해당하는 값
+	private String columnTnameName; 		// 1차분류(TNAME) DB에서 가져오는 이름 컬럼
+	private int columnTnameNumber;			// 1차분류(TNAME) DB에서 가져오는 이름에 해당하는 값
+	private String columnTKeywordName; 		// 1차분류의 세부 사항(TKEYWORD) DB에서 가져오는 이름 컬럼
+	private int columnTKeywordNumber;		// 1차분류의 세부 사항(TKEYWORD) DB에서 가져오는 이름에 해당하는 값
 	
 	public Statistics() {}
 
 	public Statistics(String columnAddressName, int columnAddressNumber) {
 		super();
-		ColumnAddressName = columnAddressName;
-		ColumnAddressNumber = columnAddressNumber;
+		this.columnAddressName = columnAddressName;
+		this.columnAddressNumber = columnAddressNumber;
 	}
 
 	public Statistics(Date registDate, String columnAddressName, int columnAddressNumber) {
 		super();
 		this.registDate = registDate;
-		ColumnAddressName = columnAddressName;
-		ColumnAddressNumber = columnAddressNumber;
+		this.columnAddressName = columnAddressName;
+		this.columnAddressNumber = columnAddressNumber;
 	}
 	
 	public Statistics(int number, String columnAddressName, int columnAddressNumber) {
 		super();
 		this.number = number;
-		ColumnAddressName = columnAddressName;
-		ColumnAddressNumber = columnAddressNumber;
+		this.columnAddressName = columnAddressName;
+		this.columnAddressNumber = columnAddressNumber;
 	}
 
 	public int getNumber() {
@@ -59,61 +59,60 @@ public class Statistics implements Serializable{
 	}
 
 	public String getColumnAddressName() {
-		return ColumnAddressName;
+		return columnAddressName;
 	}
 
 	public void setColumnAddressName(String columnAddressName) {
-		ColumnAddressName = columnAddressName;
+		this.columnAddressName = columnAddressName;
 	}
 
 	public int getColumnAddressNumber() {
-		return ColumnAddressNumber;
+		return columnAddressNumber;
 	}
 
 	public void setColumnAddressNumber(int columnAddressNumber) {
-		ColumnAddressNumber = columnAddressNumber;
+		this.columnAddressNumber = columnAddressNumber;
 	}
 
 	public String getColumnTnameName() {
-		return ColumnTnameName;
+		return columnTnameName;
 	}
 
 	public void setColumnTnameName(String columnTnameName) {
-		ColumnTnameName = columnTnameName;
+		this.columnTnameName = columnTnameName;
 	}
 
 	public int getColumnTnameNumber() {
-		return ColumnTnameNumber;
+		return columnTnameNumber;
 	}
 
 	public void setColumnTnameNumber(int columnTnameNumber) {
-		ColumnTnameNumber = columnTnameNumber;
+		this.columnTnameNumber = columnTnameNumber;
 	}
 
 	public String getColumnTKeywordName() {
-		return ColumnTKeywordName;
+		return columnTKeywordName;
 	}
 
 	public void setColumnTKeywordName(String columnTKeywordName) {
-		ColumnTKeywordName = columnTKeywordName;
+		this.columnTKeywordName = columnTKeywordName;
 	}
 
 	public int getColumnTKeywordNumber() {
-		return ColumnTKeywordNumber;
+		return columnTKeywordNumber;
 	}
 
 	public void setColumnTKeywordNumber(int columnTKeywordNumber) {
-		ColumnTKeywordNumber = columnTKeywordNumber;
+		this.columnTKeywordNumber = columnTKeywordNumber;
 	}
 
 	@Override
 	public String toString() {
-		return "Statistics [number=" + number + ", registDate=" + registDate + ", ColumnAddressName="
-				+ ColumnAddressName + ", ColumnAddressNumber=" + ColumnAddressNumber + ", ColumnTnameName="
-				+ ColumnTnameName + ", ColumnTnameNumber=" + ColumnTnameNumber + ", ColumnTKeywordName="
-				+ ColumnTKeywordName + ", ColumnTKeywordNumber=" + ColumnTKeywordNumber + "]";
+		return "Statistics [number=" + number + ", registDate=" + registDate + ", columnAddressName="
+				+ columnAddressName + ", columnAddressNumber=" + columnAddressNumber + ", columnTnameName="
+				+ columnTnameName + ", columnTnameNumber=" + columnTnameNumber + ", columnTKeywordName="
+				+ columnTKeywordName + ", columnTKeywordNumber=" + columnTKeywordNumber + "]";
 	}
 
-	
 	
 }
