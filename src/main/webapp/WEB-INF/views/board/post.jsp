@@ -414,6 +414,11 @@
 	     .click(function(){
 	       if($('#thumb').attr('src')=='resources/img/product/example/like.svg'){  
 	         $(this).attr('src','resources/img/product/example/heart.svg');
+	         
+	         $.ajax({
+	        	 
+	         });
+	         
 	       }else{
 	         $(this).attr('src','resources/img/product/example/like.svg');
 	       }  
