@@ -23,11 +23,7 @@ public class QnAController {
 	public ModelAndView boardList(ModelAndView mv,
 			@RequestParam(value="currentPage",required=false,defaultValue="1")int currentPage) {
 		
-		System.out.println(currentPage);
-		
 		int listCount = qService.getListCount();
-		
-		System.out.println("listCount : " +listCount);
 		
 		QnAPageInfo pi = QnAPagination.getQnAPageInfo(currentPage, listCount);
 		

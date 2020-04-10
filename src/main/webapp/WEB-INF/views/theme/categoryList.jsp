@@ -42,9 +42,9 @@
 				<div class="col-lg-8">
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item">
-							<h2>Shop Category</h2>
+							<h2>THEME</h2>
 							<p>
-								Home <span>-</span> Shop Category
+								Home <span>-</span> Theme
 							</p>
 						</div>
 					</div>
@@ -67,22 +67,23 @@
 						class="product_top_bar d-flex justify-content-between align-items-center">
 
 						<div class="single_product_menu">
-							<p>
-								결과에 맞는 데이터가 <span>${pi.listCount}</span> 입니다.
+							<p>								
+								Number of posts <span>${pi.listCount}</span>
 							</p>
-							<p>여행 테마 -> 전통 -> 고궁</p>
+							<!-- <p>여행 테마 -> 전통 -> 고궁</p> -->
 						</div>
 
 						<div class="single_product_menu d-flex">
 							<div class="input-group">
 
-								<button class="genric-btn success-border"
-									style="width: 90%; height: 100%;">최신순</button>
+								<button class="genric-btn success-border medium"
+									style="width: 100%; height: 90%;">Latest Posting</button>
 
 							</div>
+							&nbsp;&nbsp;&nbsp;
 							<div class="input-group">
-								<button class="genric-btn success-border"
-									style="width: 90%; height: 100%;">추전순</button>
+								<button class="genric-btn success-border medium"
+									style="width: 100%; height: 90%;">Most Liked</button>
 							</div>
 						</div>
 					</div>

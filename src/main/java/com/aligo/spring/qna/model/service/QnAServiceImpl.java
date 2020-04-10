@@ -14,14 +14,16 @@ public class QnAServiceImpl implements QnAService{
 
 	@Autowired
 	private QnADao qDao;
-
+	
+	@Override
+	public int getListCount() {
+		return qDao.getListCount();
+	}
+	
 	@Override
 	public ArrayList<QnA> selectList(QnAPageInfo pi) {
 		return qDao.selectList(pi);
 	}
 	
-	@Override
-		public int getListCount() {
-			return 0;
-		}
+	
 }
