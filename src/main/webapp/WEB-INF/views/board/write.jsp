@@ -32,8 +32,9 @@
     </datalist>&nbsp;&nbsp;&nbsp;
     Keyword &nbsp;&nbsp;<input type="text" name="tKeyword" style="margin-right:-10px;">
     <br><br>  
-	<div id="contents" style="resize:none; width:100%; height:100%" contentEditable="true"><br><br>내용입력<br><br></div>
-	<input type="hidden" id="tval" name="tContent" value="">
+	<!-- <div id="contents" style="resize:none; width:100%; height:100%" contentEditable="true"><br><br>내용입력<br><br></div> -->
+	<textarea name="tContent" id="smarteditor" rows="30" cols="104"></textarea>
+	<!-- <input type="hidden" id="tval" name="tContent" value=""> -->
     <br><br>
     <input type="file" id="file_select" name="uploadFile" style="float:left; width:190px;">
     
@@ -76,19 +77,42 @@
 	</tr>
 	</table>
     <button id="cancel" class="btn btn-light" type="reset">Cancle</button>
-    <button class="btn btn-light" onclick="goSaveAndSubmit();">Write</button>
+    <button class="btn btn-light" id="sbtn">Write</button>
 	</div>
     </form>
     
 <script type="text/javascript" src="resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false&autoMapping=false"></script>
 <script>
-	function goSaveAndSubmit(){
-		$('#tval').val($('#contents').val());
-		console.log($('#tval').val());
-		
-		submit;
-	}
+var oEditors = [];
+nhn.husky.EZCreator.createInIFrame({
+ oAppRef: oEditors,
+ elPlaceHolder: "smarteditor",
+ sSkinURI: "resources/se2/SmartEditor2Skin.html",
+ fCreator: "createSEditor2"
+});
+
+   $('#sbtn').click(function(){
+	   
+    
+   oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD",[]);
+   
+   if(validation()) {
+	   $('#sbtn').submit();
+   }
+   });
+   
+   function validation(){ 
+	   var contents = $.trim(oEditors[0].getContents()); 
+	   if(contents === '<p>&bnsp;</p>' || contents === ''){ // 기본적으로 아무것도 입력하지 않아도 값이 입력되어 있음. 
+		   alert("내용을 입력하세요."); 
+	   
+	   oEditors.getById['smarteditor'].exec('FOCUS'); 
+	   return false; 
+	 }else{
+	   return true;
+	 }
+  }
 
 	$('#ars').click(function(){
     daum.postcode.load(function(){
@@ -181,7 +205,7 @@
 		  $('#flist tbody').html("");
 	  });
 
-	  var upload = document.querySelector('#file_select');
+	 /*  var upload = document.querySelector('#file_select');
       var reader = new FileReader();
 	 
       reader.onload = (function () {
@@ -202,7 +226,7 @@
 	        }
 	 		
 	        $('#contents').append(image);
-	    })
+	    }) */
 </script>
 </body>
 </html>
