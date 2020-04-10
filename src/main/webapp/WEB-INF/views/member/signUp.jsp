@@ -177,7 +177,7 @@ input:checked+label:after {
 								<div class="col-md-12 form-group p_star">
 									<input type="email" class="form-control" id="email"
 										name="email" value="" placeholder="E-mail"> <span
-										class="guide ok">사용가능</span> <span class="guide error">사용불가능</span>
+										class="guide ok">사용가능 합니다</span> <span class="guide error">중복 된 이메일이 있습니다</span>
 									<input type="hidden" name="idDuplicateCheck"
 										id="idDuplicateCheck" value="0">
 									<button type="button" class="btn_3">인증하기</button>
@@ -250,26 +250,60 @@ input:checked+label:after {
 
 	<!-- ■■■■■■■■■■■■ Script part ■■■■■■■■■■■■-->
 
-
-
-
-
 	<script>
-	function validate(){
-		
-		// 아이디 중복 체크 여부
-		if($("idDuplicateCheck").val()==0){
-			// $ : 제이쿼리가 필요하다.
-			// 상단에 제이쿼리 적용하지 않았다. 근데 왜 사용가능한가?
-			// 상단에 인클루드 된 메뉴바.jsp에 제이쿼리가 적용되어 있기 때문에
+		function validate(){
 			
-			alert("사용 가능한 아이디를 입력해주세요");
-			$("#userId").focus();
-			return false;
-		} else{
-			return true;	 // 왜그런지 녹음강의 확인
+			// 아이디 중복 체크 여부
+			if($("idDuplicateCheck").val()==0){
+				// $ : 제이쿼리가 필요하다.
+				// 상단에 제이쿼리 적용하지 않았다. 근데 왜 사용가능한가?
+				// 상단에 인클루드 된 메뉴바.jsp에 제이쿼리가 적용되어 있기 때문에
+				
+				alert("사용 가능한 아이디를 입력해주세요");
+				$("#email").focus();
+				return false;
+			} else{
+				return true;	 // 왜그런지 녹음강의 확인
+			}
 		}
-	}
+		
+		$(function(){
+			
+			$('#email').on("keyup",function(){
+							// 키가 눌렸다 떼어졌을 때 이벤트 발생
+				var userId = $(this).val();
+							
+				if(userId.length <5){
+					$(".guide").hide();
+					$("#idDuplicateCheck").val(0);
+					
+					return; // 길이제한 관련
+				}
+				
+				$.ajax({
+					url:"idCheck.do",
+					data:{email:email}, // 넘겨주는데이터? .. 다시 음성강의 확인해보기
+					type:"post",
+					success:function(data){ // 성공했을때의 데이터
+						console.log(data);
+					if(data == "ok"){
+						$(".error").hide();
+						$(".ok").show();
+						$("#idDuplicateCheck").val(1);
+					} else{
+						$(".ok").hide();
+						$(".error").show();
+						$("#idDuplicateCheck").val(0);
+					}
+						
+					},error:function(){
+						console.log("ajax 처리 실패")
+					}
+				});
+			});
+		});
+	
+	</script>
 
 		</body>
 

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aligo.spring.member.model.service.MemberService;
 import com.aligo.spring.member.model.vo.Member;
@@ -40,6 +41,26 @@ public class MemberController {
 			return "common/errorPage.jsp";
 		}
 
+	}
+	
+	
+	/**
+	 * @param email
+	 * @return
+	 * 이메일 중복관련
+	 */
+	@ResponseBody
+	@RequestMapping("idCheck.do")
+	public String idCheck(String email) {
+		
+		int result = memService.idCheck(email);
+		
+		if(result >0) {
+			return "fail";
+		}else {
+			return "ok";
+		}
+		
 	}
 
 
