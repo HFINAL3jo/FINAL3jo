@@ -16,9 +16,9 @@
 <title>BlackList</title>
 
 <style>
- table {
+table {
 	width: 100%;
- 	height: 100%;
+	height: 100%;
 	border-top: 1px solid #444444;
 	border-collapse: collapse;
 }
@@ -43,7 +43,7 @@ tbody tr:nth-child(2n+1) {
 }
 
 .div_left {
-/* 	width: 500px;
+	/* 	width: 500px;
 	float: left; */
 	height: 500px;
 	margin-bottom: 4%;
@@ -52,9 +52,9 @@ tbody tr:nth-child(2n+1) {
 }
 
 .div_right {
-/* 	width: 400px; */
-	height: 700px; 
-/* 	float: right;  */
+	/* 	width: 400px; */
+	height: 700px;
+	/* 	float: right;  */
 	margin-bottom: 10px;
 	background-color: snow;
 	box-sizing: border-box;
@@ -70,10 +70,10 @@ tbody tr:nth-child(2n+1) {
 	margin-left: 5px;
 }
 
-.button_body_chart_div{
+.button_body_chart_div {
 	margin-bottom: 1%;
-    width: 99%;
-    height: 12%;
+	width: 99%;
+	height: 12%;
 }
 
 .button_body_chart {
@@ -88,23 +88,35 @@ tbody tr:nth-child(2n+1) {
 	CDN을 이용해서 간편하게 사용하겠다면 다음과 같이 추가하면 될 것이다.
  -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" />
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+
+<!-- 버튼 상단 이벤트 처리 -->
+<script src="resources/js/statistics.js"></script>
 
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp"%>
-
 	<!-- 내용 저장 위의 버튼(맨위의 조아요등 ) 클릭시 저장하는 값-->
-<!-- 리스트 형태로 html태그에 저장시 공백을 처리하지 않으면 값이 공백에서 끝어져 .vlaue; 시에 데이터가 끝어서 나온다. -->
-	<input type="hidden" id="list" value=${list} > 			<!-- StatisticController의 list 값을 가져온다. -->
-	<input type="hidden" id="whatChoose" value=${choose} >	<!-- StatisticController에서 어떤 차트를 섰는지 표시 가져온다. -->
-	<input type="hidden" id="chartValue" value=${chartValue} ><!-- StatisticController의 조아요/조회수.키워트 중 하나에 대한 데이터를 값을 가져왔다는 것을s 의미. -->
-	<input type="hidden" id="jObj" value=${jObj} >			<!-- StatisticController의 차트에 쓰일 JSON 값을 가져온다. -->
-	<input type="hidden" id="reverTableData" value=${reverTableData} ><!-- StatisticController의 역순 차트에 쓰일 JSON 값을 가져온다. -->
-	<!-- test -->
-<%-- 	<c:set var ="listTest" value="${list}" />
+	<!-- 리스트 형태로 html태그에 저장시 공백을 처리하지 않으면 값이 공백에서 끝어져 .vlaue; 시에 데이터가 끝어서 나온다. -->
+	
+	<input type="hidden" id="list" value=${list} ><!-- StatisticController의 list 값을 가져온다. -->
+	<!--<input type="hidden" id="reverTableData" value=${reverTableData} > --><!-- StatisticController의 역순 차트 값을 가져온다. -->
+
+	<input type="hidden" id="jObj" value=${jObj} ><!-- StatisticController의 차트에 쓰일 JSON 값을 가져온다. -->
+	<!-- 	<input type="hidden" id="JsonReverseList" value=${JsonReverseList} > --><!-- StatisticController의 차트에 쓰일  내림 차순 JSON 값을 가져온다. -->
+
+	<input type="hidden" id="jObjArray" value=${jObjArray} >
+	<input type="hidden" id="JsonReverseArray" value=${JsonReverseArray}>
+	
+	<input type="hidden" id="choose" value=${choose} ><!-- StatisticController의 조아요/조회수.키워트 중 하나에 대한 데이터를 값을 가져왔는 확인. -->
+	<input type="hidden" id="chartValue" value=${chartValue} ><!-- StatisticController에서 어떤 차트를 섰는지 표시 가져온다. -->
+	
+<!--	<input type="hidden" id="tableValue" value="1"> 테이블의 형식(오름/내림/average)을 변경(기본 1: 내림차군, 2:오름 차순, 3:average)-->
+
+	<%-- 	<c:set var ="listTest" value="${list}" />
 	<c:set var ="jObjTest" value="${jObj}" />
 	
 	<input type="hidden" id="clist" value=${list} >
@@ -116,80 +128,97 @@ tbody tr:nth-child(2n+1) {
 	<section class="cat_product_area section_padding" style="">
 		<div class="container" style="margin-bottom: 15px;">
 			<div class="row" style="margin-left: 0px;">
-				<%@ include file="assideAdmin.jsp" %>
-				
-				<div class="col-lg-10">
-				<!--  조아요 / 조회수 / 검색 키워드 별 버튼으로 구현 -->
-				<p style='font-size:20px; padding-top: 20px;'>간단한 통계 자료</P><br>
-				<div class='row align-items-center latest_product_inner' style='padding-top: 10px; width: 100%; margin-left: 8%; margin-bottom: 4%;'>
-					<button class='genric-btn success-border e-large button_header' id='uPbtn1'> <p class='showLetter'>조아요</p></button>
-					<button class='genric-btn success-border e-large button_header' id='uPbtn2'> <p class='showLetter'>조회수</p></button>
-					<button class='genric-btn success-border e-large button_header' id='uPbtn3'> <p class='showLetter'>검색 키워드</p></button>
-					<button class='genric-btn success-border e-large button_header' id='uPbtn4'> Large </button>
-				</div>
-				
-				<div class="div_left">
-				
-					<span style="float:left;">차트 검색 &nbsp;<input type="search" list="tcl" id="whatChart"></span>
-				    <datalist id="tcl">
-				    	<option value="donut"> Doughut Chart </option>
-				    	<option value="pie">Pie Chart</option>
-				    	<option value="bar">Bar Chart</option>
-				    </datalist>&nbsp;&nbsp;&nbsp;
-				    <!--  -->
-				    <span style="float:left; margin-left: 5%;">데이터 검색 &nbsp;<input type="search" list="chartTcl" id="whatData"></span>
-				    <datalist id="chartTcl">
-				    	<option value="address">주 소</option>
-				    	<option value="themaName">테 마</option>
-				    </datalist>&nbsp;&nbsp;&nbsp;
-				    <button id="ChangeChart">변 경</button>
-					<!-- c3.js 적용 차트 그리는 공간-->
-					<div id="chart"></div>
-				</div>
+				<%@ include file="assideAdmin.jsp"%>
 
-				<div class="div_right">
-					<!-- c3.js 예제 1 -->
-					<!--  <div id="linechart"></div> -->
-					<div style="height: 50px; padding-bottom: 5px;">
-						<button class="genric-btn success large button_body_chart" id="btn1">Low list 10</button>
-						&nbsp;&nbsp;
-						<button class="genric-btn success large button_body_chart" id="btn2">TOP list 10</button>
-						&nbsp;&nbsp;
-						<button class="genric-btn success large button_body_chart" id="btn3">Average</button>
-						&nbsp;&nbsp;
+				<div class="col-lg-10">
+					<!--  조아요 / 조회수 / 검색 키워드 별 버튼으로 구현 -->
+					<p style='font-size: 20px; padding-top: 20px;'>간단한 통계 자료</P>
+					<br>
+					<div class='row align-items-center latest_product_inner'
+						style='padding-top: 10px; width: 100%; margin-left: 8%; margin-bottom: 4%;'>
+						<button class='genric-btn success-border e-large button_header'
+							id='uPbtn1'>
+							<p class='showLetter'>조아요</p>
+						</button>
+						<button class='genric-btn success-border e-large button_header'
+							id='uPbtn2'>
+							<p class='showLetter'>조회수</p>
+						</button>
+						<button class='genric-btn success-border e-large button_header'
+							id='uPbtn3'>
+							<p class='showLetter'>검색 키워드</p>
+						</button>
+						<button class='genric-btn success-border e-large button_header'
+							id='uPbtn4'>Large</button>
 					</div>
-					<table style="border: 1px solid;">
-						<thead>
-							<tr>
-								<th style="width: 30%">순 위</th>
-								<th>HELLO</th>
-							</tr>
-						</thead>
-						<tbody id="chartDataTable">
-						<!-- c jstl로 작성, 자바 스크립트로 제어 -->
-						<script>
-							var list = "<c:out value='${list}' />";
-						</script>
-						<c:if test="">
-						<c:forEach var="s" items="${list}">
-							<tr>
- 								<td>${s.columnAddressName}</td>
-								<td>${s.columnAddressNumber}</td>
-							</tr>
-						</c:forEach>
-						</c:if>
-						</tbody>
-					</table>
+
+					<div class="div_left">
+
+						<span style="float: left;">차트 검색 &nbsp;<input type="search"
+							list="tcl" id="whatChart"></span>
+						<datalist id="tcl">
+							<option value="donut">Doughut Chart</option>
+							<option value="pie">Pie Chart</option>
+							<option value="bar">Bar Chart</option>
+						</datalist>
+						&nbsp;&nbsp;&nbsp;
+						<!--  -->
+						<span style="float: left; margin-left: 5%;">데이터 검색 &nbsp;<input
+							type="search" list="chartTcl" id="whatData"></span>
+						<datalist id="chartTcl">
+							<option value="address">주 소</option>
+							<option value="themaName">테 마</option>
+						</datalist>
+						&nbsp;&nbsp;&nbsp;
+						<button id="ChangeChart">변 경</button>
+						<!-- c3.js 적용 차트 그리는 공간-->
+						<div id="chart"></div>
+					</div>
+
+					<div class="div_right">
+						<!-- c3.js 예제 1 -->
+						<!--  <div id="linechart"></div> -->
+						<div style="height: 50px; padding-bottom: 5px;">
+							<button class="genric-btn success large button_body_chart"
+								id="btn1">Low list 10</button>
+							&nbsp;&nbsp;
+							<button class="genric-btn success large button_body_chart"
+								id="btn2">TOP list 10</button>
+							&nbsp;&nbsp;
+							<button class="genric-btn success large button_body_chart"
+								id="btn3">Average</button>
+							&nbsp;&nbsp;
+						</div>
+						<table style="border: 1px solid;">
+							<thead>
+								<tr>
+									<th style="width: 30%">순 위</th>
+									<th>HELLO</th>
+								</tr>
+							</thead>
+							<tbody id="chartDataTable">
+								<c:set var="count" value="1" />
+								<c:forEach var="s" items="${list}">
+									<tr>
+										<td>${count}</td>
+										<td>${s.columnAddressName}</td>
+										<td>${s.columnAddressNumber}</td>
+										<c:set var="count" value="${count+1}" />
+									</tr>
+								</c:forEach>
+
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
-		</div>
 
-	<!-- 게시판, 통계 자료 페이징 처리한 게시판 -->		
+			<!-- 게시판, 통계 자료 페이징 처리한 게시판 -->
 	</section>
 	<%@ include file="../common/footer.jsp"%>
-	
-<!-- 이벤트 처리를 위한 스크립트 -->
-<script>
+
+	<!-- 이벤트 처리를 위한 스크립트 -->
+	<script>
 //var str = "<c:out value='${jObj}' />";
 window.onload = function(){
 	
@@ -203,25 +232,53 @@ window.onload = function(){
 
 // {} 등에서 jstl이 파싱이 되지 않는 것 같다.
 var str = "<c:out value='${jObj}' />";
+showChart(str);
 
 document.getElementById('ChangeChart').onclick = function(){
 	console.log("ChangeChart");	
 	var check1 = document.getElementById('whatChart').value;
 	var check2 = document.getElementById('whatData').value;
 	
-	if((check1 == "" || check1 == null) || (check2 == "" || check2 == null)){
+	if(!(check1 == "" || check1 == null) ){
+		console.log("check1");	
+		var chart= document.getElementById('chartValue').value = check1;
+		showChart(chart, str);
+		
+	}else if((check1 == "" || check1 == null) || (check2 == "" || check2 == null)){
 		alert("데이터 입력이 되지 않았습니다. 다시 입력 해주세요.");
 		return;
-	}
+	}else{
+		
+		var str1
+		var str2
+		var chartValue = document.getElementById('chartValue').value;
+		
+		// ajax 구현
+		$.ajax({
+    		url: "",
+   			type: "",
+    		cache: "",
+    		dataType: "",
+    		data: "",
+    		success: function(data){
+
+    		},
+
+		    error: function (request, status, error){        
+
+    		}
+
+  		});
+
+	} // end if
 	
-	// ajax 구현
+	
+	
 	
 }	
 </script>
-<!-- 버튼 상단 이벤트 처리 -->
-<!-- 버튼 상단 -->
-<script src="resources/js/statisticsButtonRegist.js"></script>
-<script src="resources/js/statistics.js"></script>
+	<!-- 버튼 상단 -->
+	<script src="resources/js/statisticsButtonRegist.js"></script>
 </body>
 </html>
 
