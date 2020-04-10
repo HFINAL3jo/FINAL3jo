@@ -80,6 +80,8 @@ public class ThemeController {
 			@RequestParam(name="uploadFile",required=false) MultipartFile file) {
 		TFile tf = new TFile();
 		
+		System.out.println(t.gettContent());
+		
 		if(!file.getOriginalFilename().equals("")) {
 			
 			String renameFilename = saveFile(request, file);

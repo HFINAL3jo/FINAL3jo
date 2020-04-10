@@ -32,8 +32,8 @@
     </datalist>&nbsp;&nbsp;&nbsp;
     Keyword &nbsp;&nbsp;<input type="text" name="tKeyword" style="margin-right:-10px;">
     <br><br>  
-	<textarea name="tContent" id="contents" rows="30" cols="104"></textarea>
-	
+	<div id="contents" style="resize:none; width:100%; height:100%" contentEditable="true"><br><br>내용입력<br><br></div>
+	<input type="hidden" id="tval" name="tContent" value="">
     <br><br>
     <input type="file" id="file_select" name="uploadFile" style="float:left; width:190px;">
     
@@ -60,7 +60,7 @@
 	</tr>
 	<tr>
 		<td>도로명 주소</td>
-		<td><input type="text" id="da" placeholder="도로명주소" class="adi"></td>
+		<td><input type="text" id="da" name="tAddressH" placeholder="도로명주소" class="adi"></td>
 	</tr>
 	<tr>
 		<td>영문 도로명 주소</td>
@@ -83,6 +83,13 @@
 <script type="text/javascript" src="resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false&autoMapping=false"></script>
 <script>
+	function goSaveAndSubmit(){
+		$('#tval').val($('#contents').val());
+		console.log($('#tval').val());
+		
+		submit;
+	}
+
 	$('#ars').click(function(){
     daum.postcode.load(function(){
         new daum.Postcode({
@@ -151,26 +158,10 @@
         });
     });
 	});
-</script>
-   <script type="text/javascript">
-	var oEditors = [];
-	nhn.husky.EZCreator.createInIFrame({
-	 oAppRef: oEditors,
-	 elPlaceHolder: "contents",
-	 sSkinURI: "resources/se2/SmartEditor2Skin.html",
-	 fCreator: "createSEditor2"
-	});
-	
-	  function goSaveAndSubmit(){
-	    
-	   oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD",[]);
-	   
-	   $('#gosubmit').submit();
-		
-	  }
+   
  	  var fl = 0;
 	  $('#fa').click(function(){
-		 
+		 	 		
 			 var file = $('#file_select');
 			 var fname = file.get(0).files[0].name;
 			 var $tbody = $('#flist tbody');
@@ -182,6 +173,7 @@
 			 var $img = $('<img>');
 			 
 	  });
+	  
 	  $('#fd').click(function(){
 		 $('#flist tr').last().remove();
 	  });
@@ -189,10 +181,28 @@
 		  $('#flist tbody').html("");
 	  });
 
-	  $("#postcode").on("textchange",function(){
-		
-	  });
-	  
+	  var upload = document.querySelector('#file_select');
+      var reader = new FileReader();
+	 
+      reader.onload = (function () {
+	 
+	  this.image = document.createElement('img');
+	    var vm = this;
+	        
+	    return function (e) {
+           vm.image.src = e.target.result
+	       }
+	    })()
+	 
+	    upload.addEventListener('change',function (e) {
+	        var get_file = e.target.files;
+	 
+	        if(get_file){
+	            reader.readAsDataURL(get_file[0]);
+	        }
+	 		
+	        $('#contents').append(image);
+	    })
 </script>
 </body>
 </html>
