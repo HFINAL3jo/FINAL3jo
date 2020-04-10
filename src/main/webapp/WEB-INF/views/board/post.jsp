@@ -37,7 +37,13 @@
     height:100%;
     background:rgba(0, 0, 0, 0.3);
     z-index:-1;
-  }   
+  }
+  
+  #infoD{
+  	width: 150px;
+  	height: 50px;  	
+  }
+  
   </style>
 <link rel="stylesheet" type="text/css" href="resources/css/slick-theme.css" />
 </head>
@@ -135,6 +141,7 @@
                    <td>PostDate : ${t.tCreateDate }</td>
                    <td>ModifyDate : ${t.tModifyDate }</td>	
               </tbody>
+              <input type="hidden" id="th" value="${t.tAddressH }">
             </table>
           </div>
           <!--지도-->
@@ -254,58 +261,100 @@
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=645218c0e569303936c79803cc2aa695&libraries=LIBRARY"></script>  
   <script>
 	$(function(){
-  		//지도 api
+  		/* //지도 api
 	    var mapContainer = document.getElementById('map');
-
 		var mapOption = {
 		    center: new daum.maps.LatLng(37.566826, 126.9786567),
 		    level: 8
-		};  
-		
-		var map = new daum.maps.Map(mapContainer, mapOption);
-		
+		};
+		var map = new daum.maps.Map(mapContainer, mapOption);		
 		//지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 		var zoomControl = new kakao.maps.ZoomControl();
 		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-		map.relayout();
-		
 		// 주소-좌표 변환 객체 생성
-		var geocoder = new daum.maps.services.Geocoder();
-		
+		var geocoder = new daum.maps.services.Geocoder();		
 		var listData = [
 		    '서울특별시 송파구 오금로13길 8',
 		    '서울특별시 송파구 올림픽로 25',
+		    '서울특별시 성북구 인촌로 73',
 		    '서울특별시 광진구 동일로18길 80',
-		    '서울특별시 종로구 지봉로 25',
-		    '서울특별시 성북구 인촌로 73'
-		];
-		
+		    '서울특별시 종로구 지봉로 25'
+		];		
 		listData.forEach(function(addr, index) {
 		    geocoder.addressSearch(addr, function(result, status) {
 		        if (status === daum.maps.services.Status.OK) {
-		            var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-		
+		            var coords = new daum.maps.LatLng(result[0].y, result[0].x);		
 		            var marker = new daum.maps.Marker({
 		                map: map,
 		                position: coords
 		            });
 		            var infowindow = new daum.maps.InfoWindow({
-		                content: '<div style="width:150px;text-align:center;padding:6px 0;">' + listData[index] + '</div>',
+		                //content: '<div style="width:150px;text-align:center;padding:6px 0;">' + listData[index] + '</div>',
 		                disableAutoPan: true
 		            });
 		            //infowindow.open(map, marker);
 			        kakao.maps.event.addListener(marker, 'click', function() {
 			            // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
 			            infowindow.setContent('<div style="width:150px;text-align:center;padding:6px 0;">' + listData[index] + '</div>');
-			            infowindow.open(map, marker);
-			            
-			            
+			            infowindow.open(map, marker); 
 			        });
 		        }
-		    });
+		    });		
+		}); */
 		
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = { 
+			center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+			level: 3 // 지도의 확대 레벨
+		};
+		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		var positions = [
+			{
+				title: '경남경찰청 성폭력 특수수사대', 
+				addr: '경남 창원시 의창구 상남로 289 '
+			},
+			{
+				title: '창원가정상담센터', 
+				addr: '경남 창원시 성산구 창이대로 663번길 7'
+			},
+			{
+				title: '창원성폭력상담소', 
+				addr: '경남 창원시 의창구 신월로 42 토월복합상가 725호'
+			},
+			{
+				title: '여성긴급전화경남센터',
+				addr: '경남 창원시 의창구 북면 동전로179-18'
+			}
+		];  
+		// 주소-좌표 변환 객체를 생성합니다.
+		positions.forEach(function(v,i){
+			var geocoder = new kakao.maps.services.Geocoder();
+			var bounds = new kakao.maps.LatLngBounds();
+			geocoder.addressSearch(positions[i].addr, function(result, status) {
+				// 정상적으로 검색이 완료됐으면 
+				if (status === kakao.maps.services.Status.OK) {	
+					var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+					// 결과값으로 받은 위치를 마커로 표시합니다
+        			var marker = new kakao.maps.Marker({
+            			map: map,
+            			position: coords
+        			});
+					
+        			// 결과값으로 받은 위치를 마커로 표시합니다
+					var infoDiv = 	'<div id="infoD">'
+									+positions[i].title+positions[i].addr+
+									'</div>';
+					// 인포윈도우로 장소에 대한 설명을 표시합니다
+					var infowindow = new kakao.maps.InfoWindow({
+					    content: infoDiv
+					});
+					infowindow.open(map, marker);			
+					
+			} 		
 		});
-   	  	    	
+	});   	  	    	
 		function relayout() {    
 		 // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
 		 // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 

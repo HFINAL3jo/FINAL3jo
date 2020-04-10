@@ -130,12 +130,11 @@
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-	
 	<section class="cat_product_area section_padding" style="padding-bottom: 65px;">
         <div class="container">
             <div class="row">
 			<%@ include file="assideAdmin.jsp" %>
-			<div class="col-lg-10">
+			<div class="col-lg-10" style="margin: auto; max-width: 80%;">
 				<div class="justify-content-center" style="width: 80%; margin: auto; margin-bottom: 50px;" data-aos="fade-zoom-in" data-aos-duration="1500">
 					<input type="text" id="code" value="${ r.recomCode }" hidden/>
 				    <h2 class="q-title search_1" id="que">${ r.recomContent }</h2>
@@ -302,6 +301,7 @@
 						},
 						success : function(data){
 							alert(data);
+							location.reload();
 						}
 					});
 				}else{

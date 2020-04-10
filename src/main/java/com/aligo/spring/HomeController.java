@@ -101,4 +101,9 @@ public class HomeController {
 	public String postdetail() {
 		return "board/blogdetail";
 	}
+	
+	@RequestMapping("themeDetailView.do")
+	public String themeDetailView() {
+		return "theme/themeDetailView";
+	}
 }

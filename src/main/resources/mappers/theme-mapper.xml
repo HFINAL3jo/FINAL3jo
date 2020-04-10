@@ -11,6 +11,7 @@
 	 <result property="tTitle" column="TTITLE" />
 	 <result property="tContent" column="TCONTENT" />
 	 <result property="tAddress" column="TADDRESS" />
+	 <result property="tAddressH" column="TADDRESSH" />
 	 <result property="tCreateDate" column="T_CREATE_DATE" />
 	 <result property="tModifyDate" column="T_MODIFY_DATE" />
 	 <result property="tViews" column="T_VIEWS" />
@@ -57,7 +58,7 @@
 	
 	<insert id="insertTheme" parameterType="Theme">
 		INSERT INTO THEME_LIST VALUES(SEQ_TNO.NEXTVAL,#{tWriter},#{tTitle},
-		#{tContent},#{tAddress},DEFAULT,DEFAULT,DEFAULT,DEFAULT,#{tKeyword},DEFAULT,#{tCode})
+		#{tContent},#{tAddress},#{tAddressH},DEFAULT,DEFAULT,DEFAULT,DEFAULT,#{tKeyword},DEFAULT,#{tCode})
 	</insert>
 	
 	<insert id="insertThemeFiles" parameterType="TFile">

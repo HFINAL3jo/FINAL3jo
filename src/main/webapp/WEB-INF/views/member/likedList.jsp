@@ -45,35 +45,7 @@
                             <div class="product_top_bar d-flex justify-content-between align-items-center">                                
                                 <div class="single_product_menu">
                                     <p><span>31 </span> Posting Found</p>
-                                </div>
-                                <div class="single_product_menu d-flex">
-                                    <h5>short by : </h5>
-                                    <select>
-                                        <option data-display="Select">Latest Posting</option>
-                                        <option value="latest">Latest Posting</option>
-                                        <option value="most">Most Liked</option>
-                                    </select>
-                                </div>
-                                <!-- <div class="single_product_menu d-flex">
-                                    <h5>show :</h5>
-                                    <div class="top_pageniation">
-                                        <ul>
-                                            <li>1</li>
-                                            <li>2</li>
-                                            <li>3</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="single_product_menu d-flex">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="search"
-                                            aria-describedby="inputGroupPrepend">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroupPrepend"><i
-                                                    class="ti-search"></i></span>
-                                        </div>
-                                    </div>
-                                </div> -->
+                                </div>                                
                             </div>
                         </div>
                     </div>

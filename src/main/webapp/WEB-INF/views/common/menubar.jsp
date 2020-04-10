@@ -66,7 +66,7 @@
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="post.do">Posting</a>
+                                    <a class="nav-link" href="themeDetailView.do">Posting</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="recommend.do">
@@ -89,39 +89,39 @@
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex">
-                                
+
+							<a id="search_1" href="javascript:void(0)"><i
+								class="ti-search"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <!-- 로그인 전 -->
-                                                        
-                            <a href="loginView.do" style="color:rgba(0,0,0,.9);">
-                           	<a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
-                                <span data-balloon="Sign In" data-balloon-pos="down-right">
-                                    <i class="fas fa-sign-in-alt" style="margin-left: 0px;"></i> Sign-In
-                                </span>
-                            </a>
-                           
-                            <!-- 로그인 후 -->
-                             <a href="adminView.do">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span data-balloon="Admin" data-balloon-pos="down-right">
-                                    <i class="fas fa-user-circle" style="margin-left: 0px;"></i>
-                                </span>
-                            </a>
-                                                            
-                            <a href="myPage.do">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span data-balloon="My Page" data-balloon-pos="down-right">
-                                    <i class="fas fa-user-circle" style="margin-left: 0px;"></i>
-                                </span>
-                            </a>
-                            <a href="likedList.do">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span data-balloon="Likes" data-balloon-pos="down-right">
-                                    <i class="far fa-heart" style="margin-left: 0px;"></i>
-                                </span>
-                            </a>
-                            <a href="">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span data-balloon="Sign Out" data-balloon-pos="down-right">
-                                    <i class="fas fa-sign-out-alt" style="margin-left: 0px;"></i>
-                                </span>
-                            </a>
-                            
+							<c:if test="${ empty sessionScope.loginUser }">
+							<span data-balloon="Sign In"
+								data-balloon-pos="down-right">
+								<a href="loginView.do" style="color: rgba(0, 0, 0, .9);">
+							 <i class="fas fa-sign-in-alt" style="margin-left: 0px;">
+								Sign-In </i></a>
+								 </span> 
+							</c:if>
+
+							<!-- 로그인 후 -->
+							<c:if test="${ !empty sessionScope.loginUser }">
+							<a href="adminView.do"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+								data-balloon="Admin" data-balloon-pos="down-right"> <i
+									class="fas fa-user-circle" style="margin-left: 0px;"></i>
+							</span>
+							</a> <a href="myPage.do"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+								data-balloon="My Page" data-balloon-pos="down-right"> <i
+									class="fas fa-user-circle" style="margin-left: 0px;"></i>
+							</span>
+							</a> <a href="likedList.do"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+								data-balloon="Likes" data-balloon-pos="down-right"> <i
+									class="far fa-heart" style="margin-left: 0px;"></i>
+							</span>
+							</a> <a href=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+								data-balloon="Sign Out" data-balloon-pos="down-right"> <i
+									class="fas fa-sign-out-alt" style="margin-left: 0px;"></i>
+							</span>
+							</a>
+							</c:if>
                         </div>
                     </nav>
                 </div>

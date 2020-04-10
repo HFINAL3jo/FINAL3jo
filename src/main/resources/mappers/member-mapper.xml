@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
 <mapper namespace="memberMapper">
 
 	<resultMap type="Member" id="memberResultSet">
-	
-		<id property="mId" column="MID"/>
+		<id property="mid" column="MID"/>
 		<result property="email" column="EMAIL"/>
-		<result property="pwd" column="PASSWORD"/>
-		<result property="nick" column="NICKNAME"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="nickname" column="NICKNAME"/>
 		<result property="gender" column="GENDER"/>	
 		<result property="age" column="AGE"/>	
 		<result property="mStatus" column="M_STATUS"/>	
-		<result property="fav" column="RECOMMEND"/>
+		<result property="recommend" column="RECOMMEND"/>
 	</resultMap>
 
 
 <insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER
-		VALUES (#{email},#{password},#{nick},#{gender},#{age},DEFAULT,#{recommend})
+		VALUES (SEQ_MNO.NEXTVAL,#{email},#{password},#{nickname},#{gender},#{age},DEFAULT,#{recommend})
 </insert>
 
+	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		WHERE EMAIL = #{ email }
+			AND PASSWORD = #{ password }
+			AND M_STATUS = 'Y'
+	</select>
+	
 </mapper>
