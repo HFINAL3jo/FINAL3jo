@@ -44,5 +44,13 @@ public interface RecomService {
 	 * @return
 	 */
 	int insertRecomQA(Recommend r);
+
+	/**
+	 * 	7.	Member 의 Recommend 컬럼 Update
+	 * @param mid
+	 * @param recomStr
+	 * @return
+	 */
+	int rUserUpdate(Object m);
 	
 }

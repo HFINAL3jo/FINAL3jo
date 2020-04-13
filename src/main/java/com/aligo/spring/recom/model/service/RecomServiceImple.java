@@ -49,6 +49,12 @@ public class RecomServiceImple implements RecomService{
 
 		return rDao.insertRecomQA(r);
 	}
+
+	@Override
+	public int rUserUpdate(Object m) {
+
+		return rDao.rUserUpdate(m);
+	}
 	
 	
 

@@ -7,16 +7,17 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.javassist.compiler.ast.Keyword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aligo.spring.member.model.vo.Member;
 import com.aligo.spring.recom.model.service.RecomService;
 import com.aligo.spring.recom.model.vo.RecomKeyword;
 import com.aligo.spring.recom.model.vo.Recommend;
+import com.aligo.spring.theme.model.vo.Theme;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 
@@ -50,6 +51,8 @@ public class RecomController {
 		
 		System.out.println("rk2 : " + rk);
 		
+		
+		
 		return null;
 	}
 	
@@ -57,13 +60,31 @@ public class RecomController {
 	 * 	session 로그인 유저로 keyword 저장
 	 * @param session
 	 * @param rk
+	 * @throws IOException 
 	 */
+	@ResponseBody
 	@RequestMapping("rUserUpdate.do")
-	public void recomUserUpdate(HttpSession session, RecomKeyword rk) {
+	public void recomUserUpdate(HttpSession session, HttpServletResponse response, RecomKeyword rk) throws IOException {
 
-		System.out.println("rk1 : " + rk);
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
 		
+		Member m = (Member)session.getAttribute("loginUser");
+
+		String recomStr = rk.getKeyword1() + ", " + rk.getKeyword2() + ", "
+						+ rk.getKeyword3() + ", " + rk.getKeyword4() + ", " + rk.getKeyword5();
 		
+		m.setrecommend(recomStr);
+		
+		int result = rService.rUserUpdate(m);
+		
+		if( result == 1 ) 
+			out.print(true);		//	성공
+		else 
+			out.print(false);		//	실패
+
+		out.flush();
+		out.close();
 	}
 
 	/**
