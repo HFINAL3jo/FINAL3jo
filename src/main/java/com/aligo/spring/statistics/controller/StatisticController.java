@@ -32,25 +32,36 @@ public class StatisticController {
 	private StatisticsService serviceStatics;
 
 	// 자바스크립트로 보낼때 기본 값이 GET 으로 되어 있어 method=RequestMethod.GET를 설정 해야 된다.
+	// 뷰에서 최 상단 버튼 조아요/조회수.키워트 중 하나를 클릭시에 작동하는 StatisticController
 	@RequestMapping(value = "goodStatistic.do", method = RequestMethod.GET)
 	public ModelAndView goodStatistic(ModelAndView mav, HttpServletResponse response, HttpServletRequest request) {
 
 		ArrayList<Statistics> list = null;
-		ArrayList<Statistics> reversList = null;
 		ArrayList<Statistics> reverTableData = null; 			// 표에 보여줄 데이터를 가져온다.
+		
 		JSONObject jObj = null;
-		String chartValue = "";									// 어떤 모양의 차트의 도표 그릴것지 선택 
-		//String tableChange = "";							 
+		JSONObject JsonReverseList = null;
+		
+		JSONArray jObjArray = null;
+		JSONArray JsonReverseArray = null;
+		
+		String chartValue = "donut";							// 어떤 모양의 차트의 도표 그릴것지 선택 
+		String choose = "";							 			// StatisticController의 조아요/조회수.키워트 중 하나에 대한 데이터를 값을 뷰에 보여주는지 확인.
 		// 
 		if (request.getParameter("first").equals("good") || request.getParameter("first") != null) {
 			list = serviceStatics.AllGoodStatistic();
 			
 			int limit = 9;			// 차트에 쓰일 자료의 갯수를 10개이하로 끝는다.
 			chartValue = "donut";	// 바에서 선택시 기본값으로 차트에 도표는 처음에는 donut 으로 지정.
+			choose="good";
 
-			reverTableData = cut(limit, list);
-			reverseSort(reverTableData, "address"); //(오름 차순)역순 정렬
+//			reverseSort(reverTableData = cut(limit, list), "address"); //(오름 차순)역순 정렬	
+//			JsonReverseList = ConvertJson(reverTableData, "address");
 			jObj = ConvertJson(cut(limit, list), "address");
+			
+			jObjArray = ConvertJsonArray(cut(limit, list), "address");
+			reverseSort((reverTableData = cut(limit, list)), "address");
+			JsonReverseArray =   ConvertJsonArray(reverTableData, "address");
 		}
 
 		// JSONObject에서 통계를 쓰기 위한 데이터 값만 받는다.
@@ -60,9 +71,17 @@ public class StatisticController {
 //		}
 
 		mav.addObject("list", list);
-		mav.addObject("reverTableData", reverTableData);
+//		mav.addObject("reverTableData", reverTableData);
+		
 		mav.addObject("jObj", jObj);
-		mav.addObject("chartValue", "donut"); // 어떤 차트(인포그램/통계)를 사용 할 것지 표시
+		mav.addObject("JsonReverseList", JsonReverseList);
+		
+		mav.addObject("jObjArray", jObjArray);
+		mav.addObject("JsonReverseArray", JsonReverseArray);//
+		
+		mav.addObject("chartValue", chartValue); 			// 어떤 차트(인포그램/통계)를 사용 할 것지 표시
+		mav.addObject("choose", choose); 					// StatisticController의 조아요/조회수.키워트 중 하나에 대한 데이터를 값을 뷰에 보여주는지 확인.
+		
 		mav.setViewName("admin/statistics");
 		return mav;
 	}
@@ -151,4 +170,29 @@ public class StatisticController {
         });
 	} //end reverseSort
 
+	
+	public JSONArray ConvertJsonArray(ArrayList<Statistics> list, String property) {
+
+		JSONArray jArr = new JSONArray();
+		if (property.equals("address")) {
+			for (Statistics out : list) {
+				JSONObject JsonData = new JSONObject();
+				JsonData.put(out.getColumnAddressName().replaceAll(" ", ""), out.getColumnAddressNumber());
+				jArr.add(JsonData);
+			}
+			return jArr;
+
+		} else if (property.equals("themaName")) {
+			for (Statistics out : list) {
+				JSONObject JsonData = new JSONObject();
+				JsonData.put(out.getColumnTnameName().replaceAll(" ", ""), out.getColumnTnameNumber());
+				jArr.add(JsonData);
+			}
+			return jArr;
+			
+		}else {
+			// 조건에 없을 시에 null 반환
+			return null;
+		}
+	}
 }

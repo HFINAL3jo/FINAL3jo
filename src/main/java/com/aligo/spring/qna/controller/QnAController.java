@@ -2,6 +2,8 @@ package com.aligo.spring.qna.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +22,10 @@ public class QnAController {
 	private QnAService qService;
 	
 	@RequestMapping("contactView.do")
-	public ModelAndView boardList(ModelAndView mv,
+	public ModelAndView boardList(HttpServletResponse response, ModelAndView mv,
 			@RequestParam(value="currentPage",required=false,defaultValue="1")int currentPage) {
+		
+		response.setContentType("application/json; charset=utf-8");
 		
 		int listCount = qService.getListCount();
 		

@@ -110,10 +110,10 @@
     		[이전] &nbsp;
     	</c:if>
     	<c:if test="${ pi.currentPage ne 1 }">
-    		<c:url var="before" value="contactView.do">
+    		<c:url var="prev" value="contactView.do">
     			<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
     		</c:url>
-    		<a href="${ before }">[이전]</a> &nbsp;
+    		<a href="${ prev }">[이전]</a> &nbsp;
     	</c:if>
     	
     	<!-- 페이지 -->
@@ -218,15 +218,23 @@
   <%@ include file="../common/footer.jsp"%>
    <!--::footer_part end::-->
 
-</body>
-<script type="text/javascript">
-	$(document).ready(function(){
+<script>
+	function getReplyList(){
+		var prev = ${ prev };
+		var pageSelect = ${ p };
+		var next = ${ next };
 		
-		//페이지 번호 이동
-		$('#pagingDiv a').click(function(e){
-			e.preventDefault();
-			$('#pageNum')
+		$.ajax({
+			url:"contactView.do",
+			data:{currentPage:currentPage},
+			dataType:"json",
+			success:function(data){
+				location.href="contactView.do";
+			},error:function(){
+				console.log("전송실패");
+			}
 		});
-	});
+	}
 </script>
+</body>
 </html>

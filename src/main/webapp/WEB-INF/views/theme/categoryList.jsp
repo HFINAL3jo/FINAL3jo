@@ -80,7 +80,7 @@
 									style="width: 100%; height: 90%;">Latest Posting</button>
 
 							</div>
-							&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;
 							<div class="input-group">
 								<button class="genric-btn success-border medium"
 									style="width: 100%; height: 90%;">Most Liked</button>
@@ -102,8 +102,8 @@
 						<div class="single_product_text">
 							<h4>${t.tTitle }</h4>
 							<h3><b style="color:rgba(121,125,237,0.9)">#${t.tName}</b></h3>
-							<h5></h5>
-							<a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+							<!-- h5자리 -->
+							<a href="#" class="add_cart">+ add to cart</a>
 						</div>
 					</div>
 				</div>
@@ -163,9 +163,8 @@
 				  var $h4 = $('<h4>').text(data[i].tTitle);
 				  var $h3 = $('<h3>');
 				  var $b  = $('<b>').css({"color":"rgba(121,125,237,0.9)"}).text(data[i].tName);
-				  var $h5 = $('<h5></h5>');
+				  //var $h5 = $('<h5></h5>');
 				  var $a = $('<a>').attr('href','#').addClass('add_cart').text('+ add to cart');
-				  var $i = $('<i>').addClass('ti-heart');
 
 				  $div.append($diva);
 				  $diva.append($divb);
@@ -175,8 +174,7 @@
 				  $divc.append($h4);
 				  $h3.append($b);
 				  $divc.append($h3);
-				  $divc.append($h5);
-				  $a.append($i);
+				  //$divc.append($h5);
 				  $divc.append($a);
 			   }
 			},error:function(){
