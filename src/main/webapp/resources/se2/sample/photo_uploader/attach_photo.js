@@ -10,7 +10,7 @@
 	var nMaxTotalImageSize = 50*1024*1024;
 	var nMaxImageCount = 10;
 	var nImageFileCount = 0;
-	var bSupportDragAndDropAPI = false;
+	var bSupportDragAndDropAPI = true;
 	var oFileUploader;
 	var bAttachEvent = false;
 
@@ -335,7 +335,7 @@
     		sUploadURL;
     	
     	//sUploadURL= 'file_uploader_html5.php'; 	//upload URL
-    	sUploadURL= 'multifileUpload.do'; 	//upload URL
+    	sUploadURL= '/spring/multiplePhotoUpload.do'; 	//upload URL
     	
     	//파일을 하나씩 보내고, 결과를 받음.
     	for(var j=0, k=0; j < nImageInfoCnt; j++) {
@@ -481,7 +481,7 @@
  		oFileUploader = new jindo.FileUploader(jindo.$("uploadInputBox"),{
 // 			sUrl  : location.href.replace(/\/[^\/]*$/, '') + '/file_uploader.php',	//샘플 URL입니다.
 // 			sCallback : location.href.replace(/\/[^\/]*$/, '') + '/callback.html',	//업로드 이후에 iframe이 redirect될 콜백페이지의 주소
- 			sUrl : 'fileupload.do',								//파일업로드를 처리하는 페이지
+ 			sUrl : '/spring/photoUpload.do',								//파일업로드를 처리하는 페이지
  			sCallback : 'resources/se2/sample/photo_uploader/callback.html',		//업로드 이후에 iframe이 redirect될 콜백페이지의 주소
  	    	sFiletype : "*.jpg;*.png;*.bmp;*.gif",						//허용할 파일의 형식. ex) "*", "*.*", "*.jpg", 구분자(;)	
  	    	sMsgNotAllowedExt : 'JPG, GIF, PNG, BMP 확장자만 가능합니다',	//허용할 파일의 형식이 아닌경우에 띄워주는 경고창의 문구
