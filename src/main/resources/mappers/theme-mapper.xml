@@ -61,8 +61,8 @@
 		#{tContent},#{tAddress},#{tAddressH},DEFAULT,DEFAULT,DEFAULT,DEFAULT,#{tKeyword},DEFAULT,#{tCode})
 	</insert>
 	
-	<insert id="insertThemeFiles" parameterType="TFile">
-		INSERT INTO THEME_FILES VALUES(SEQ_TNO.CURRVAL,#{tOriginalFile},#{tModifyFile})
+	<insert id="insertImg" parameterType="TFile">
+		INSERT INTO THEME_FILES VALUES(#{tCodeNumber},#{tOriginalFile},#{tModifyFile})
 	</insert>
 	
 	<select id="selectTheme" resultMap="themeResultSet">
@@ -71,5 +71,20 @@
 		JOIN THEME_CODE USING(TCODE)
 		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
 		WHERE TID=#{tId}	
-	</select>	
+	</select>
+	
+	<select id="getTNum" resultType="_int">
+		SELECT LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME = 'SEQ_TNO'
+	</select>
+	
+	<select id="getTCount" resultType="_int">
+		SELECT COUNT(*) FROM THEME_FILES WHERE T_CODE_NUMBER = #{tCodeNumber}
+	</select>
+	
+	<update id="updateImg" parameterType="TFile">
+		UPDATE THEME_FILES SET T_ORIGINAL_FILE 
+		= T_ORIGINAL_FILE ||','|| #{tOriginalFile}, 
+		T_MODIFY_FILE = T_MODIFY_FILE ||','|| #{tModifyFile}
+		WHERE T_CODE_NUMBER = #{tCodeNumber}
+	</update>
 </mapper>

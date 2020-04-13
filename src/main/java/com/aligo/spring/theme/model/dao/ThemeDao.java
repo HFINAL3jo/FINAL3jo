@@ -30,15 +30,27 @@ public class ThemeDao {
 		return (ArrayList)sqlSession.selectList("themeMapper.selectList",null,rowBounds);
 	}
 
-	public int insertTheme(Theme t,TFile tf) {
-		int result1 = sqlSession.insert("themeMapper.insertTheme",t);
-		int result2 = 0;
-		if(result1>0) result2 = sqlSession.insert("themeMapper.insertThemeFiles",tf);
-		
-		return result1 + result2;
+	public int insertTheme(Theme t) {	
+		return sqlSession.insert("themeMapper.insertTheme",t);
 	}
 
 	public Theme selectTheme(int bId) {
 		return sqlSession.selectOne("themeMapper.selectTheme",bId);
+	}
+
+	public int insertImg(TFile tf) {
+		return sqlSession.insert("themeMapper.insertImg",tf);
+	}
+
+	public int getTNum() {
+		return sqlSession.selectOne("themeMapper.getTNum");
+	}
+
+	public int getTCount(TFile tf) {
+		return sqlSession.selectOne("themeMapper.getTCount",tf);
+	}
+
+	public int updateImg(TFile tf) {
+		return sqlSession.update("themeMapper.updateImg",tf);
 	}
 }

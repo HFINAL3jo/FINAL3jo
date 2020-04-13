@@ -26,7 +26,7 @@ public interface ThemeService {
 	 * @param t
 	 * @return
 	 */
-	int insertTheme(Theme t,TFile tf);
+	int insertTheme(Theme t);
 
 	/**
 	 * 테마글 상세보기
@@ -34,5 +34,17 @@ public interface ThemeService {
 	 * @return
 	 */
 	Theme selectTheme(int bId);
+
+	/**
+	 * theme img 삽입
+	 * @return
+	 */
+	int insertImg(TFile tf);
+
+	/**
+	 * theme 번호 조회
+	 * @return
+	 */
+	int getTNum();
 	
 }
