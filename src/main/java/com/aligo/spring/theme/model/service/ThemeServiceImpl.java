@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.aligo.spring.theme.model.dao.ThemeDao;
 import com.aligo.spring.theme.model.vo.PageInfo;
+import com.aligo.spring.theme.model.vo.SearchCondition;
 import com.aligo.spring.theme.model.vo.TFile;
 import com.aligo.spring.theme.model.vo.Theme;
 
@@ -22,8 +23,8 @@ public class ThemeServiceImpl implements ThemeService {
 	}
 
 	@Override
-	public ArrayList<Theme> selectList(PageInfo pi) {
-		return tDao.selectList(pi);
+	public ArrayList<Theme> selectList(PageInfo pi,SearchCondition sc) {
+		return tDao.selectList(pi,sc);
 	}
 
 	@Override

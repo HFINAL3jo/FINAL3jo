@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.aligo.spring.theme.model.vo.PageInfo;
+import com.aligo.spring.theme.model.vo.SearchCondition;
 import com.aligo.spring.theme.model.vo.TFile;
 import com.aligo.spring.theme.model.vo.Theme;
 
@@ -21,13 +22,13 @@ public class ThemeDao {
 		return sqlSession.selectOne("themeMapper.getListCount");
 	}
 
-	public ArrayList<Theme> selectList(PageInfo pi) {
+	public ArrayList<Theme> selectList(PageInfo pi,SearchCondition sc) {
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getThemeLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset,pi.getThemeLimit());
 		
-		return (ArrayList)sqlSession.selectList("themeMapper.selectList",null,rowBounds);
+		return (ArrayList)sqlSession.selectList("themeMapper.selectList",sc,rowBounds);
 	}
 
 	public int insertTheme(Theme t) {	

@@ -3,6 +3,7 @@ package com.aligo.spring.theme.model.service;
 import java.util.ArrayList;
 
 import com.aligo.spring.theme.model.vo.PageInfo;
+import com.aligo.spring.theme.model.vo.SearchCondition;
 import com.aligo.spring.theme.model.vo.TFile;
 import com.aligo.spring.theme.model.vo.Theme;
 
@@ -19,7 +20,7 @@ public interface ThemeService {
 	 * @param pi
 	 * @return
 	 */
-	ArrayList<Theme> selectList(PageInfo pi);
+	ArrayList<Theme> selectList(PageInfo pi,SearchCondition sc);
 
 	/**
 	 * 테마글 작성

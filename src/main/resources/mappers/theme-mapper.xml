@@ -52,8 +52,12 @@
 		FROM THEME_LIST 
 		JOIN THEME_CODE USING(TCODE)
 		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
-		WHERE T_STATUS='Y'
-		ORDER BY TID DESC
+		WHERE T_STATUS='Y' 
+		<choose>
+			<when test="searchValue == 2">ORDER BY TO_NUMBER(TO_CHAR(T_MODIFY_DATE,'YYMMDD')) DESC</when>
+			<when test="searchValue == 3">ORDER BY T_LIKES DESC</when>
+			<otherwise>ORDER BY TID DESC</otherwise>
+		</choose>
 	</select>
 	
 	<insert id="insertTheme" parameterType="Theme">

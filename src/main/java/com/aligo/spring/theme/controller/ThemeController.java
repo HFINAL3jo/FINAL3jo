@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.javassist.expr.Instanceof;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import com.aligo.spring.common.Pagination;
 import com.aligo.spring.theme.model.service.ThemeService;
 import com.aligo.spring.theme.model.vo.PageInfo;
 import com.aligo.spring.theme.model.vo.PhotoVo;
+import com.aligo.spring.theme.model.vo.SearchCondition;
 import com.aligo.spring.theme.model.vo.TFile;
 import com.aligo.spring.theme.model.vo.Theme;
 
@@ -34,7 +36,6 @@ public class ThemeController extends TFile{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6137904105279348852L;
 	@Autowired
 	private ThemeService tService;
 	
@@ -45,26 +46,31 @@ public class ThemeController extends TFile{
 		int listCount = tService.getListCount();
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		SearchCondition sc = new SearchCondition();
+		sc.setSearchValue(1);
 		
-		ArrayList<Theme> list = tService.selectList(pi);
+		ArrayList<Theme> list = tService.selectList(pi,sc);
 		
 		mv.addObject("list",list);
 		mv.addObject("pi",pi);
+		mv.addObject("sc",sc);
 		mv.setViewName("theme/categoryList");
 		return mv;
 	}
 	
 	@RequestMapping("pagination.do")
 	public void pagination(HttpServletResponse response,
-		@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage)throws IOException {
-			
+		@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
+		SearchCondition sc)throws IOException {
+		System.out.println(sc);	
 		response.setContentType("application/json; charset=UTF-8");
 	  
 		int listCount = tService.getListCount();
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage,listCount);
 	
-		ArrayList<Theme> list = tService.selectList(pi);
+		ArrayList<Theme> list = tService.selectList(pi,sc);
+		
 		JSONArray jArr = new JSONArray();
 		
 		for(Theme t: list) {
@@ -75,10 +81,18 @@ public class ThemeController extends TFile{
 			
 			jArr.add(jobj);
 		}
+			jArr.add(new JSONObject().put("sc",sc));
+		
 		
 		PrintWriter out = response.getWriter();
 		
 		out.print(jArr);
+
+		if(sc.getSearchValue() > 1) {
+			out.print("<script>");
+			out.print("$('#aList').html('')");
+			out.print("</script>");
+		}
 		out.flush();
 		out.close();
 	}
@@ -176,7 +190,7 @@ public class ThemeController extends TFile{
 		         // 정보 출력
 		         sFileInfo += "&bNewLine=true";
 		         // img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
-		         sFileInfo += "&sFileName="+ originFilename;
+		         sFileInfo += "&sFileName="+originFilename;
 		         sFileInfo += "&sFileURL="+"/spring/resources/tuploadFiles/"+ renameFilename;
 		         PrintWriter print = response.getWriter();
 		         print.print(sFileInfo);
@@ -188,15 +202,12 @@ public class ThemeController extends TFile{
 		         TFile.tOriginalFile = originFilename;
 		         TFile.tModifyFile = renameFilename;
 		         TFile.tCodeNumber = tService.getTNum();
-		         System.out.println(originFilename);
-		         System.out.println(renameFilename);
-		         System.out.println(tf);
 		         
 		         int result = tService.insertImg(tf);
 		         
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
-		}	
-
+		}
+		
 }
