@@ -26,10 +26,10 @@
     color: #ffffff;
   }
   tbody tr:nth-child(2n) {
-    background-color: #D8E6E7;
+    background-color: #FAFAFA;
   }
   tbody tr:nth-child(2n+1) {
-    background-color: #EDECF0;
+    background-color: #24ACF2;
   }
 
 	ul[id~=pagenation]>li{

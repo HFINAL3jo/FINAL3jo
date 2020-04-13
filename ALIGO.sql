@@ -202,6 +202,18 @@ CREATE TABLE QNA(
 INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'식사하셨어요?','식사 하셨는지 궁금합니다.','hyhihi',DEFAULT,NULL,DEFAULT);
 INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'한강 좋아하세요?','한강 이쁘지 않아요?ㅎㅎㅎ.','hooni',DEFAULT,NULL,DEFAULT);
 INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'서울에서 어딜 제일 좋아하세요?','저는 한강이 제일 좋아요','mama',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'식사하셨어요?','식사 하셨는지 궁금합니다.','hyhihi',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'한강 좋아하세요?','한강 이쁘지 않아요?ㅎㅎㅎ.','hooni',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'안녕하세요?','저는 한강이 제일 좋아요','ma8ma',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'감사함을 느낍니다','감사합시다!^^','ma7ma',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'마라향궈 마라탕 드셔보셨어요?','좋더라구요~^^','ma6ma',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'어디 치킨이 제일 좋아요?','저는 처갓집이 제일 좋아요','ma5ma',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'아따맘마 보셨어요?','조금 봤어요~^^','mama',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'어느 공원이 제일 좋은가요?','저는 한강이 제일 좋아요','ma4ma',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'배고프지 않아요?','배고파요','mama',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'정말 감사하지 않아요?','저는 감사함을 느낍니다.^^','ma2ma',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'무슨 꿈 꾸셨어요?','딸기 케익 위의 딸기가 시들었어요.','ma3ma',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'몇 살로 돌아가고 싶으세요?','저는 16살이요','ma1ma',DEFAULT,NULL,DEFAULT);
 
 INSERT INTO RECOMMEND_Q VALUES('RQ001', 'Choose your travel inclination', 'Something familiar', 
                 'Seek something familiar.', 'Something new', 'Seeking something new.', DEFAULT);

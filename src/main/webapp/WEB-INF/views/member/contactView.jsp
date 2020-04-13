@@ -26,10 +26,10 @@
     color: #ffffff;
   }
   tbody tr:nth-child(2n) {
-    background-color: #D8E6E7;
+    background-color: #FFB6C1;
   }
   tbody tr:nth-child(2n+1) {
-    background-color: #EDECF0;
+    background-color: #FAFAFA;
   }
 
 	ul[id~=pagenation]>li{
@@ -81,7 +81,7 @@
             <th>처리 여부</th>
         </tr>
     </thead>
-	<c:forEach var="q" items="${ list }">
+<%-- 	<c:forEach var="q" items="${ list }">
     <tbody>
         <tr>
             <td>${ q.qId }</td>
@@ -98,11 +98,11 @@
             <td>${ q.qCreateDate }</td>
             <td>${ q.qStatus }</td>
         </tr>
-	</c:forEach>
+	</c:forEach> --%>
     </tbody>
     
     <!-- 페이징 처리 -->
-    <tr id="pagingDiv" align="center" height="20">
+   <%--  <tr id="pagingDiv" align="center" height="20">
     	<td colspan="6">
     	
     	<!-- [이전] -->
@@ -142,7 +142,7 @@
     	</c:if>
   
   
-	</td>
+	</tr> --%>
     </table>
 </div>
 </div>
@@ -219,22 +219,20 @@
    <!--::footer_part end::-->
 
 <script>
-	function getReplyList(){
-		var prev = ${ prev };
-		var pageSelect = ${ p };
-		var next = ${ next };
-		
-		$.ajax({
-			url:"contactView.do",
-			data:{currentPage:currentPage},
-			dataType:"json",
-			success:function(data){
-				location.href="contactView.do";
-			},error:function(){
-				console.log("전송실패");
-			}
-		});
-	}
+		function getList(){
+			var currentPage = ${ currentPage };
+			
+			$.ajax({
+				url:"contactView1.do",
+				data:{currentPage:currentPage},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+				},error:function(){
+					console.log("전송실패");
+				}
+			});
+		}
 </script>
 </body>
 </html>
