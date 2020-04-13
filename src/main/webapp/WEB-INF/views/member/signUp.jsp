@@ -10,6 +10,7 @@ font-family: 'Dosis' !important;
 } -->
 
 <head>
+<link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 <style>
 input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus
 	{
@@ -117,8 +118,20 @@ input:checked+label:after {
 }
 
 /* ---//여기까지가 녹색 */
+
+/* 비밀번호 보이기 */
+.input .eyes {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto 2px;
+	height: 30px;
+	font-size: 22px;
+	cursor: pointer;
+}
 </style>
-<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script> 
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -172,21 +185,27 @@ input:checked+label:after {
 					<div class="login_part_form">
 						<div class="login_part_form_iner">
 							<h3>CREATE YOUR ACCOUNT</h3>
-							<form class="row contact_form" method="post"
+							<form class="row contact_form" action="signUp.do" method="post"
 								novalidate="novalidate">
 								<div class="col-md-12 form-group p_star">
 									<input type="email" class="form-control" id="email"
-										name="email" value="" placeholder="E-mail"> <span
-										class="guide ok">사용가능 합니다</span> <span class="guide error">중복 된 이메일이 있습니다</span>
-									<input type="hidden" name="idDuplicateCheck"
-										id="idDuplicateCheck" value="0">
-									<button type="button" class="btn_3">인증하기</button>
+										name="email" value="" placeholder="E-mail" required> 
+										
+										<span id="ok" style="display:none;" class="guide ok">Your Email is Available</span> 
+										<span id="error" style="display:none;" class="guide error">Your Email is Already Joined</span> 
+										<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0">
+									<button type="button" class="btn_3">send a mail</button>
 
 								</div>
+
 								<div class="col-md-12 form-group p_star">
 									<input type="password" class="form-control" id="password"
 										name="password" value="" placeholder="Password">
+									<div class="eye">
+										<i class="fas fa-eye"></i>
+									</div>
 								</div>
+
 								<div class="col-md-12 form-group p_star">
 									<input type="password" class="form-control" id="passwordchk"
 										name="passwordchk" value="" placeholder="Password check">
@@ -196,8 +215,8 @@ input:checked+label:after {
 										name="nickname" placeholder="Nickname">
 								</div>
 								<div class="col-md-12 form-group p_star">
-									<input type="number" max="99" min="10" class="form-control" id="age" name="age"
-										placeholder="age">
+									<input type="number" max="99" min="10" class="form-control"
+										id="age" name="age" placeholder="age">
 								</div>
 
 
@@ -211,7 +230,7 @@ input:checked+label:after {
 
 
 								<div class="col-md-12 form-group p_star">
-									<input type="button" class="btn_3" value="취향선택하러가기"><a
+									<input type="button" class="btn_3" value="go to recommend"><a
 										href="recommend.do"></a>
 								</div>
 
@@ -226,8 +245,9 @@ input:checked+label:after {
 										<li><a href="#"><i class="fab fa-twitter"></i></a></li>
 										<li><a href="#"><i class="fas fa-globe"></i></a></li>
 									</ul> -->
-									<button type="submit" value="submit" class="btn_3">
-										SIGN UP</button>
+
+									<button onclick='return validate();' value="submit"
+										class="btn_3">SIGN UP</button>
 									<a class="lost_pass" href="#">forget password?</a>
 								</div>
 							</form>
@@ -248,43 +268,40 @@ input:checked+label:after {
 
 
 
-	<!-- ■■■■■■■■■■■■ Script part ■■■■■■■■■■■■-->
+	<!-- ■■■■■■■■■■■■ Script part ■■■■■■■■■■■■ -->
 
 	<script>
 		function validate(){
 			
-			// 아이디 중복 체크 여부
+
 			if($("idDuplicateCheck").val()==0){
-				// $ : 제이쿼리가 필요하다.
-				// 상단에 제이쿼리 적용하지 않았다. 근데 왜 사용가능한가?
-				// 상단에 인클루드 된 메뉴바.jsp에 제이쿼리가 적용되어 있기 때문에
 				
-				alert("사용 가능한 아이디를 입력해주세요");
+				alert("사용 가능한 이메일을 입력해주세요");
 				$("#email").focus();
 				return false;
 			} else{
-				return true;	 // 왜그런지 녹음강의 확인
+				return true;	 
 			}
 		}
 		
 		$(function(){
 			
 			$('#email').on("keyup",function(){
-							// 키가 눌렸다 떼어졌을 때 이벤트 발생
-				var userId = $(this).val();
 							
-				if(userId.length <5){
+				var email = $(this).val();
+							
+				if(email.length <5){
 					$(".guide").hide();
 					$("#idDuplicateCheck").val(0);
 					
-					return; // 길이제한 관련
+					return;
 				}
 				
 				$.ajax({
 					url:"idCheck.do",
-					data:{email:email}, // 넘겨주는데이터? .. 다시 음성강의 확인해보기
+					data:{email:email},
 					type:"post",
-					success:function(data){ // 성공했을때의 데이터
+					success:function(data){
 						console.log(data);
 					if(data == "ok"){
 						$(".error").hide();
@@ -302,10 +319,40 @@ input:checked+label:after {
 				});
 			});
 		});
-	
+		
 	</script>
 
-		</body>
+	<script>
+		
+		$(function(){
 
-		</html>
-	
+			//비밀번호 확인
+				$('#passwordchk').blur(function(){
+				   if($('#password').val() != $('#passwordchk').val()){
+				    	if($('#passwordchk').val()!=''){
+					    alert("비밀번호가 일치하지 않습니다.");
+				    	    $('#passwordchk').val('');
+				          $('#passwordchk').focus();
+				       }
+				    }
+				})  	   
+			});
+	</script>
+
+	<script>
+
+	$(function(){ // 눈표시 클릭 시 패스워드 보이기 
+		$('.eye').on('click',function(){ 
+			$('.col-md-12 form-group p_star.password').toggleClass('active'); 
+			if( $('.col-md-12 form-group p_star.password').hasClass('active') == true ){ 
+				$(this).find('.fa-eye').attr('class',"fa fa-eye-slash fa-lg").parents('.col-md-12 form-group p_star').find('#password').attr('type',"text"); 
+			} else{ 
+				$(this).find('.fa-eye-slash').attr('class',"fa fa-eye fa-lg").parents('.col-md-12 form-group p_star').find('#password').attr('type','password'); 
+			} 
+		}); 
+	});		
+	</script>
+
+</body>
+
+</html>
