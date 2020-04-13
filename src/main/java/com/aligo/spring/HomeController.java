@@ -84,7 +84,8 @@ public class HomeController {
 	
 	@RequestMapping("statistics.do")
 	public String statistics() {
-		return "admin/statistics";
+		// admin/statistics 
+		return "admin/redirectStatistics";
 	}
 	
 	@RequestMapping("themeInsertView.do")
