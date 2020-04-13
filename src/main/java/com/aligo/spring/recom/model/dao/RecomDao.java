@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.aligo.spring.member.model.vo.Member;
 import com.aligo.spring.recom.model.vo.Recommend;
 
 @Repository("rDao")
@@ -46,6 +47,11 @@ public class RecomDao {
 	public int insertRecomQA(Recommend r) {
 
 		return sqlSession.insert("recomMapper.insertRQ", r);
+	}
+
+	public int rUserUpdate(Object m) {
+
+		return sqlSession.update("recomMapper.updateUserRecom", (Member)m);
 	}
 	
 	

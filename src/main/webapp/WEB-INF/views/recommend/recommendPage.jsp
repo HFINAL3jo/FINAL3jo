@@ -200,11 +200,13 @@
 
 
     <!--::header part start::-->
-    
                                 
     <%@ include file="../common/menubar.jsp" %>
     <!-- Header part end-->
 
+	
+
+	<c:if test="${ !empty sessionScope.loginUser }">
 	<div class="showcase">
 		<div class="showcase_content">
 		    <div class="row justify-content-center margin-center" style="margin-top: 20%;">
@@ -215,10 +217,11 @@
 	        </div>
     	</div>
 	</div>
+	
 
     <!-- survey part start -->
     <div class="feature_part">
-        <form action="rResultList.do" onsubmit="return check()">
+        <form action="rResultList.do" onsubmit="return check();">
             <!-- 질문 1번 -->
             <div>
                 <div class="area">
@@ -369,11 +372,18 @@
                     </div>
                 </div>
             </div>
-            
-
         </form>
     </div>
     
+    
+    </c:if>
+    <c:if test="${ empty sessionScope.loginUser }">
+    	<br><br><br><br>    	<br><br><br><br>
+    	<div style="margin: auto; align-content: center; text-align: center;">
+	    	<h1 style="margin: auto; align-content: center; font-weight: bolder;">After login, you can use.</h1>
+    	</div>
+    	<br><br><br><br>    	<br><br><br><br>
+    </c:if>
     <!--::footer_part start::-->
    	<%@ include file="../common/footer.jsp" %>
     <!--::footer_part end::-->
@@ -482,11 +492,11 @@
         					keyword5 : $('input[name="keyword5"]:checked').val()
         				},
         				success : function(data){
-        					return false;
+        					return data;
         				},
         				error : function(){
         					alert("Recommend keyword update error");
-        					return true;
+        					return false;
         				}
         			});
         		}
