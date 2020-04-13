@@ -41,13 +41,14 @@ public class ThemeController extends TFile{
 	
 	@RequestMapping("theme.do")
 	public ModelAndView themeList(ModelAndView mv,
-			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
+			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
+			@RequestParam(value="searchValue",defaultValue="1")int searchValue) {
 		
 		int listCount = tService.getListCount();
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		SearchCondition sc = new SearchCondition();
-		sc.setSearchValue(1);
+		sc.setSearchValue(searchValue);
 		
 		ArrayList<Theme> list = tService.selectList(pi,sc);
 		
@@ -61,38 +62,32 @@ public class ThemeController extends TFile{
 	@RequestMapping("pagination.do")
 	public void pagination(HttpServletResponse response,
 		@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
-		SearchCondition sc)throws IOException {
-		System.out.println(sc);	
+		@RequestParam(value="searchValue") int searchValue)throws IOException {
+		
 		response.setContentType("application/json; charset=UTF-8");
-	  
 		int listCount = tService.getListCount();
 		
+		SearchCondition sc = new SearchCondition();
+		sc.setSearchValue(searchValue);
+		
 		PageInfo pi = Pagination.getPageInfo(currentPage,listCount);
-	
+		
 		ArrayList<Theme> list = tService.selectList(pi,sc);
 		
 		JSONArray jArr = new JSONArray();
 		
 		for(Theme t: list) {
 			JSONObject jobj = new JSONObject();
+			jobj.put("tId",t.gettId());
 			jobj.put("tModifyFile","resources/tuploadFiles/"+t.gettModifyFile());
 			jobj.put("tTitle", t.gettTitle());
 			jobj.put("tName","#"+t.gettName());
 			
 			jArr.add(jobj);
 		}
-			jArr.add(new JSONObject().put("sc",sc));
-		
-		
 		PrintWriter out = response.getWriter();
 		
 		out.print(jArr);
-
-		if(sc.getSearchValue() > 1) {
-			out.print("<script>");
-			out.print("$('#aList').html('')");
-			out.print("</script>");
-		}
 		out.flush();
 		out.close();
 	}

@@ -1,6 +1,12 @@
 package com.aligo.spring.theme.model.vo;
 
-public class SearchCondition {
+import java.io.Serializable;
+
+public class SearchCondition implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4846078499008925175L;
 	private String keyword;
 	private int searchValue;
 	
