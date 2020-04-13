@@ -24,6 +24,11 @@
 	background-color: transparent;
 	margin: 0;
 }
+
+/*조아요*/
+
+
+
 </style>
 
 </head>
@@ -89,8 +94,16 @@
 					</div>
 				</div>
 			</div>
+			<script type="text/javascript">
+			//좋아요
+			
+
+
+
+			</script>
 			    
 			<div id="aList" class="row align-items-center latest_product_inner">
+			
 			    <c:forEach var="t" items="${list }" begin="0" end="${pi.themeLimit}">
 			    <c:url var="post" value="postdetail.do">
 				 <c:param name="tId" value="${t.tId }"/>
@@ -98,12 +111,13 @@
 				<a href="${post }">
 				<div class="col-lg-4 col-sm-6">
 					<div class="single_product_item">
+						<!-- 조아유 -->
 						<img src="resources/tuploadFiles/${t.tModifyFile }"	style="width: 100%; height: 170px">
 						<div class="single_product_text">
 							<h4>${t.tTitle }</h4>
 							<h3><b style="color:rgba(121,125,237,0.9)">#${t.tName}</b></h3>
 							<!-- h5자리 -->
-							<a href="#" class="add_cart">+ add to cart</a>
+							<a href="#" class="add_cart" style="font-size: 12px;">+ add to List</a>
 						</div>
 					</div>
 				</div>
