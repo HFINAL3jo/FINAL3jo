@@ -32,8 +32,8 @@
 		font-family: monospace;
 	}
 	.like-content .btn-secondary {
-		display: block;
-		margin: 40px auto 0px;
+		  display: block;
+		  margin: 40px auto 0px;
 	    text-align: center;
 	    background: #ed2553;
 	    border-radius: 3px;
@@ -57,7 +57,7 @@
 	.animate-like {
 		animation-name: likeAnimation;
 		animation-iteration-count: 1;
-		animation-fill-mode: forwards;
+		animation-fill-mode: backwards;
 		animation-duration: 0.65s;
 	}
 	@keyframes likeAnimation {
@@ -129,11 +129,6 @@
             background-color: #ddd;
         }
 
-    </style>
-    <style>
-    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
-      
-    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
     </style>
     <style>
           .sub-contents-inner p {
@@ -338,6 +333,8 @@
           	margin-top:7%;
           }
      </style>
+     
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body class="sub">
@@ -494,7 +491,7 @@
     					Did you like this review? Press like to make it easier for others to see
   						</span>
   
-  						<button class="btn-secondary like-review">
+  						<button class="btn-secondary like-review" id="likeBtn" name="likeBtn" value="0">
     					<i class="fa fa-heart" aria-hidden="true"></i> Like
   						</button>
 					</div>
@@ -502,13 +499,23 @@
 				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
 				    $(function(){
 						$(document).on('click', '.like-review', function(e) {
-							$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this');
-							$(this).children('.fa-heart').addClass('animate-like');
+							if( $('#likeBtn').val() == 0 ){
+								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this');
+								$(this).children('.fa-heart').addClass('animate-like');
+								$(this).val(1);
+								
+							}else{
+								console.log();
+								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> Like');
+								$(this).children('.fa-heart').addClass('animate-like');
+								$(this).val(0);
+							}
 						});
 						/*
 							자바스크립트로 조아요 버튼 값을 받아서 밸류 체크후 클릭
 							해보쟈~~~~
 						*/
+						
 					});
 				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
 					</script>

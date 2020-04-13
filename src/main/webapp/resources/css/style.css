@@ -2110,9 +2110,8 @@ ul {
   top: 0;
   width: 100%;
   z-index: 999;
-  background-color: #F1F1F4;
-  border-bottom: 1px solid lightgray;
-  oc
+  background-color: white;
+  border-bottom: 1px dotted lightgray;  
 }
 
 /* line 9, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
@@ -2134,7 +2133,7 @@ ul {
   font-family: "Poppins", sans-serif;
   text-transform: capitalize;
   line-height: 12px;
-  font-weight: 400;
+  font-weight: bold;
 }
 
 /* line 29, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
