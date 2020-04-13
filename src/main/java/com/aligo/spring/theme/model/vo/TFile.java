@@ -1,27 +1,24 @@
 package com.aligo.spring.theme.model.vo;
 
-import java.io.Serializable;
-
-public class TFile implements Serializable {
+public class TFile{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3955303811075266232L;
 
 	public TFile() {
 	}
 
-	private String tCodeNumber;
-	private String tOriginalFile;
-	private String tModifyFile;
+	protected static int tCodeNumber;
+	protected static String tOriginalFile;
+	protected static String tModifyFile;
 
-	public String gettCodeNumber() {
+	public int gettCodeNumber() {
 		return tCodeNumber;
 	}
 
-	public void settCodeNumber(String tCodeNumber) {
-		this.tCodeNumber = tCodeNumber;
+	public void settCodeNumber(int tCodeNumber) {
+		TFile.tCodeNumber = tCodeNumber;
 	}
 
 	public String gettOriginalFile() {
@@ -29,7 +26,7 @@ public class TFile implements Serializable {
 	}
 
 	public void settOriginalFile(String tOriginalFile) {
-		this.tOriginalFile = tOriginalFile;
+		TFile.tOriginalFile = tOriginalFile;
 	}
 
 	public String gettModifyFile() {
@@ -37,7 +34,7 @@ public class TFile implements Serializable {
 	}
 
 	public void settModifyFile(String tModifyFile) {
-		this.tModifyFile = tModifyFile;
+		TFile.tModifyFile = tModifyFile;
 	}
 
 	@Override
@@ -46,11 +43,11 @@ public class TFile implements Serializable {
 				+ "]";
 	}
 
-	public TFile(String tCodeNumber, String tOriginalFile, String tModifyFile) {
+	public TFile(int tCodeNumber, String tOriginalFile, String tModifyFile) {
 		super();
-		this.tCodeNumber = tCodeNumber;
-		this.tOriginalFile = tOriginalFile;
-		this.tModifyFile = tModifyFile;
+		TFile.tCodeNumber = tCodeNumber;
+		TFile.tOriginalFile = tOriginalFile;
+		TFile.tModifyFile = tModifyFile;
 	}
 
 }

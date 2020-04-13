@@ -127,6 +127,7 @@ public class StatisticController {
 			if(td.equals("address")) {
 				
 				temp.setColumnAddressName("TADDRESS");
+				list = serviceStatics.StatisticAjax(temp);
 				
 			}else if(td.equals("themaName")) {
 				
@@ -140,6 +141,22 @@ public class StatisticController {
 			
 		}else if(choose.equals("T_VIEWS")) {
 			
+			temp.setColumnTlikeName("T_VIEWS");
+			temp.setColumnTlikeValue(choose);
+			
+			if(td.equals("address")) {
+				
+				temp.setColumnAddressName("TADDRESS");
+				list = serviceStatics.StatisticAjax(temp);
+				
+			}else if(td.equals("themaName")) {
+				
+				temp.setColumnTnameName("TNAME");
+				list = serviceStatics.StatisticAjax(temp);
+				
+			}else {
+				
+			}
 		}
 		
 		list = serviceStatics.StatisticAjax(temp);

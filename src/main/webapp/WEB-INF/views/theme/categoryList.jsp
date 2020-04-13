@@ -24,6 +24,11 @@
 	background-color: transparent;
 	margin: 0;
 }
+
+/*조아요*/
+
+
+
 </style>
 
 </head>
@@ -76,21 +81,29 @@
 						<div class="single_product_menu d-flex">
 							<div class="input-group">
 
-								<button class="genric-btn success-border medium"
+								<button id="lastPost" class="genric-btn success-border medium"
 									style="width: 100%; height: 90%;">Latest Posting</button>
 
 							</div>
 							&nbsp;&nbsp;
 							<div class="input-group">
-								<button class="genric-btn success-border medium"
+								<button class="genric-btn success-border medium" id="mostLiked"
 									style="width: 100%; height: 90%;">Most Liked</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<script type="text/javascript">
+			//좋아요
+			
+
+
+
+			</script>
 			    
 			<div id="aList" class="row align-items-center latest_product_inner">
+			
 			    <c:forEach var="t" items="${list }" begin="0" end="${pi.themeLimit}">
 			    <c:url var="post" value="postdetail.do">
 				 <c:param name="tId" value="${t.tId }"/>
@@ -98,12 +111,13 @@
 				<a href="${post }">
 				<div class="col-lg-4 col-sm-6">
 					<div class="single_product_item">
+						<!-- 조아유 -->
 						<img src="resources/tuploadFiles/${t.tModifyFile }"	style="width: 100%; height: 170px">
 						<div class="single_product_text">
 							<h4>${t.tTitle }</h4>
 							<h3><b style="color:rgba(121,125,237,0.9)">#${t.tName}</b></h3>
 							<!-- h5자리 -->
-							<a href="#" class="add_cart">+ add to cart</a>
+							<a href="#" class="add_cart" style="font-size: 12px;">+ add to List</a>
 						</div>
 					</div>
 				</div>
@@ -112,8 +126,9 @@
 			</div>
 			<input id="tc" type="hidden" value="${pi.currentPage }">
 			<input id="tm" type="hidden" value="${pi.maxPage }">
+			<input id="sv" type="hidden" value="${sc.searchValue}">
 			<div align="center">
-				<a href="javascript:void(0)" onclick="ex();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:#ebc5e4;">Lord More..</button></a>
+				<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:#ebc5e4;">Lord More..</button></a>
 			</div>
 			
 		</div>
@@ -141,17 +156,25 @@
 	<script>
 		var currentPage = $('#tc').val();
 		var maxPage = $('#tm').val();
+		var searchValue = $('#sv').val();
 		
-	function ex(){
+	function pagination(){
 		if(maxPage == currentPage){
 			$('#alb').text("End");
 		}else{ 
 		currentPage = (parseInt(currentPage) + 1);
+		ajaxPage();
+		}
+	}
+		function ajaxPage(){
+		searchValue = parseInt(searchValue);
+		currentPage = parseInt(currentPage);
 		$.ajax({
 			url:"pagination.do",
-			data:{currentPage:currentPage},
+			data:{currentPage:currentPage,searchValue:searchValue},
 			dataType:"json",
 			success:function(data){
+							   			   
 			   $div = $('#aList');
 			   $div.addClass('row align-items-center latest_product_inner');
 			   for(var i in data){
@@ -181,7 +204,7 @@
 				
 			}
 	});
-	}
+		
 	}
 		//스크롤 70% 스크립트 및 div 추가 
 		window.onmousewheel = function(e) {
@@ -192,11 +215,17 @@
 			
 			if (Math.floor((aa / (bb - cc)) * 100 > 75 && e.deltaY === 100)) {
 				
-				ex();
+				pagination();
 				}
 			}
-	 $('.col-lg-4 col-sm-6').click(function(){
-		 
+	 
+	 $('#lastPost').click(function(){
+		 searchValue = 2;
+		 ajaxPage();
+	 });
+	 $('#mostLiked').click(function(){
+		 searchValue = 3;
+		 ajaxPage();
 	 });
 	</script>
 </body>

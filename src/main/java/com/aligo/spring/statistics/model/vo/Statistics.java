@@ -51,8 +51,6 @@ public class Statistics implements Serializable{
 		this.columnAddressNumber = columnAddressNumber;
 	}
 
-	
-	
 	public int getNumber() {
 		return number;
 	}

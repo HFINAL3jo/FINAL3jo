@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.aligo.spring.theme.model.dao.ThemeDao;
 import com.aligo.spring.theme.model.vo.PageInfo;
+import com.aligo.spring.theme.model.vo.SearchCondition;
 import com.aligo.spring.theme.model.vo.TFile;
 import com.aligo.spring.theme.model.vo.Theme;
 
@@ -22,12 +23,12 @@ public class ThemeServiceImpl implements ThemeService {
 	}
 
 	@Override
-	public ArrayList<Theme> selectList(PageInfo pi) {
-		return tDao.selectList(pi);
+	public ArrayList<Theme> selectList(PageInfo pi,SearchCondition sc) {
+		return tDao.selectList(pi,sc);
 	}
 
 	@Override
-	public int insertTheme(Theme t,TFile tf) {
+	public int insertTheme(Theme t) {
 		
 		switch(t.gettCode()) {
 		case "History":t.settCode("T1"); break;
@@ -38,11 +39,23 @@ public class ThemeServiceImpl implements ThemeService {
 		case "Museum":t.settCode("T6"); break;
 		case "Exotic":t.settCode("T7"); break;
 		}
-		return tDao.insertTheme(t,tf);
+		return tDao.insertTheme(t);
 	}
 
 	@Override
 	public Theme selectTheme(int bId) {
 		return tDao.selectTheme(bId);
 	}
+
+	@Override
+	public int insertImg(TFile tf) {
+		int cl = tDao.getTCount(tf);
+		if(cl >= 1) return tDao.updateImg(tf); else return tDao.insertImg(tf);
+	}
+
+	@Override
+	public int getTNum() {
+		return tDao.getTNum();
+	}
+
 }
