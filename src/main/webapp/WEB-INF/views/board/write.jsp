@@ -25,32 +25,16 @@
     	<option value="History">History</option>
     	<option value="Food">Food</option>
     	<option value="Shopping">Shopping</option>
-    	<option value="Fastival">Fastival</option>
+    	<option value="Festival">Festival</option>
     	<option value="Night View">Night View</option>
     	<option value="Museum">Museum</option>
     	<option value="Exotic">Exotic</option>
     </datalist>&nbsp;&nbsp;&nbsp;
     Keyword &nbsp;&nbsp;<input type="text" name="tKeyword" style="margin-right:-10px;">
     <br><br>  
-	<!-- <div id="contents" style="resize:none; width:100%; height:100%" contentEditable="true"><br><br>내용입력<br><br></div> -->
 	<textarea name="tContent" id="smarteditor" rows="30" cols="104"></textarea>
-	<!-- <input type="hidden" id="tval" name="tContent" value=""> -->
     <br><br>
-    <input type="file" id="file_select" name="uploadFile" style="float:left; width:190px;">
     
-    <div style="width:300px; height:100%; display:inline-block; border:1px solid black; margin-left:-30px;">
-      	<table id="flist" style="align-content:center; width:100%;">
-      		<thead>File List</thead>
-      		<tbody align="center">
-      			
-      		</tbody>
-        </table>
-    </div>
-    <div style="display:inline-block; margin-left:50px; font-size:1em;">
-    <input id="fa" type="button" value="+" class="btn btn-default" style="background:rgb(206, 219, 240);">
-    <input id="fd" type="button" value="-" class="btn btn-default" style="background:rgb(206, 219, 240);">
-    </div>
-    <br><br>
     <table align="center">
     <tr>
 		<td>우편번호</td>
@@ -80,10 +64,27 @@
     <button class="btn btn-light" id="sbtn">Write</button>
 	</div>
     </form>
+    <button id="testbtn">테스트</button>
     
 <script type="text/javascript" src="resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false&autoMapping=false"></script>
 <script>
+    $('#testbtn').click(function(){
+    	
+	   var fileList = new Array();
+	   var temp = document.getElementsByClassName('se2_inputarea')[0].children[0].getElementsByTagName('img');
+	   if(temp.length > 0){
+		   for(var i=0;i<temp.length;i++){
+			   var tOriginalFile = temp[i].src.substring(temp[i].src.lastIndexOf("/")+1,70);			   
+			   var tModifyFile = temp[i].title;
+			   
+			   fileList.append(tOriginalFile);
+			   fileList.append(tModifyFile);
+			   
+			   console.log(fileList);
+		   }
+	   }
+    });
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
  oAppRef: oEditors,
@@ -95,11 +96,11 @@ nhn.husky.EZCreator.createInIFrame({
    $('#sbtn').click(function(){
 	   
     
-   oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD",[]);
+   oEditors.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD",[]);
    
    if(validation()) {
+	   }
 	   $('#sbtn').submit();
-   }
    });
    
    function validation(){ 
@@ -183,50 +184,8 @@ nhn.husky.EZCreator.createInIFrame({
     });
 	});
    
- 	  var fl = 0;
-	  $('#fa').click(function(){
-		 	 		
-			 var file = $('#file_select');
-			 var fname = file.get(0).files[0].name;
-			 var $tbody = $('#flist tbody');
-			 var $tr = $('<tr>');
-			 var $td = $('<td>');
-			 $td.text(fname);
-			 $tr.append($td);
-			 $tbody.append($tr);
-			 var $img = $('<img>');
-			 
-	  });
-	  
-	  $('#fd').click(function(){
-		 $('#flist tr').last().remove();
-	  });
-	  $('#cancel').click(function(){
-		  $('#flist tbody').html("");
-	  });
 
-	 /*  var upload = document.querySelector('#file_select');
-      var reader = new FileReader();
-	 
-      reader.onload = (function () {
-	 
-	  this.image = document.createElement('img');
-	    var vm = this;
-	        
-	    return function (e) {
-           vm.image.src = e.target.result
-	       }
-	    })()
-	 
-	    upload.addEventListener('change',function (e) {
-	        var get_file = e.target.files;
-	 
-	        if(get_file){
-	            reader.readAsDataURL(get_file[0]);
-	        }
-	 		
-	        $('#contents').append(image);
-	    }) */
+
 </script>
 </body>
 </html>

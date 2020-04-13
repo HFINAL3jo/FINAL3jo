@@ -1,7 +1,10 @@
 package com.aligo.spring.theme.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -76,15 +79,15 @@ public class ThemeController {
 	}
 	
 	@RequestMapping("themeInsert.do")
-	public String insertTheme(Theme t,HttpServletRequest request,
+	public String insertTheme(Theme t,HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(name="uploadFile",required=false) MultipartFile file) {
 		TFile tf = new TFile();
-		
-		System.out.println(t.gettContent());
+		System.out.println(t);
+		System.out.println(tf);
 		
 		if(!file.getOriginalFilename().equals("")) {
 			
-			String renameFilename = saveFile(request, file);
+			String renameFilename = saveFile(request, file,response);
 			
 			if(renameFilename != null) {
 				t.settOriginalFile(file.getOriginalFilename());
@@ -93,37 +96,57 @@ public class ThemeController {
 				tf.settModifyFile(renameFilename);
 			}
 		}
+		
 		int result = tService.insertTheme(t,tf);
 		
 		if(result >0) return "redirect:theme.do"; else return "";
 	}
 	
-	public String saveFile(HttpServletRequest request, MultipartFile file) {
+	@RequestMapping("multiplePhotoUpload.do")
+	public String saveFile(HttpServletRequest request, MultipartFile file,HttpServletResponse response) {
 		
-		String root = request.getSession().getServletContext().getRealPath("resources");
+		String sFileInfo = "";
+        String originFilename = request.getHeader("file-name");
+        String root = request.getSession().getServletContext().getRealPath("resources");
+        String savePath = root + "\\tuploadFiles";
+        File folder = new File(savePath);
+        if(!folder.exists()) {
+           folder.mkdirs();
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String renameFilename= sdf.format(new java.util.Date(System.currentTimeMillis())) + "." 
+        + originFilename.substring(originFilename.lastIndexOf(".")+1);
+        
+        String renamePath = folder + "\\" + renameFilename;
 		
-		String savePath = root + "\\tuploadFiles";
-		
-		File folder = new File(savePath);
-		
-		if(!folder.exists()) {
-			folder.mkdir();
-		}
-		
-		String originFilename = file.getOriginalFilename();
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		
-		String renameFilename = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
-		+ originFilename.substring(originFilename.lastIndexOf(".")+1);
-
-		String renamePath = folder + "\\" + renameFilename;
-		
-		try {
-			file.transferTo(new File(renamePath));
-		} catch (Exception e) {
-			System.out.println("파일 전송 에러 : " + e.getMessage());
-		}
+        try {
+	         //파일정보
+	         
+	         ///////////////// 서버에 파일쓰기 /////////////////
+	         InputStream is = request.getInputStream();
+	         OutputStream os=new FileOutputStream(renamePath);
+	         int numRead;
+	         byte b[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
+	         while((numRead = is.read(b,0,b.length)) != -1){
+	            os.write(b,0,numRead);
+	         }
+	         if(is != null) {
+	            is.close();
+	         }
+	         os.flush();
+	         os.close();
+	         // 정보 출력
+	         sFileInfo += "&bNewLine=true";
+	         // img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
+	         sFileInfo += "&sFileName="+ originFilename;
+	         sFileInfo += "&sFileURL="+"/spring/resources/tuploadFiles/"+ renameFilename;
+	         PrintWriter print = response.getWriter();
+	         print.print(sFileInfo);
+	         print.flush();
+	         print.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 		
 		return renameFilename;
 	}	

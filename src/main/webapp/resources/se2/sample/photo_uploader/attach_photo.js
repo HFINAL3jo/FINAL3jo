@@ -10,7 +10,7 @@
 	var nMaxTotalImageSize = 50*1024*1024;
 	var nMaxImageCount = 10;
 	var nImageFileCount = 0;
-	var bSupportDragAndDropAPI = false;
+	var bSupportDragAndDropAPI = true;
 	var oFileUploader;
 	var bAttachEvent = false;
 
