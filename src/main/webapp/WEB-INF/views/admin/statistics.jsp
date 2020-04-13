@@ -172,7 +172,9 @@ tbody tr:nth-child(2n+1) {
 						&nbsp;&nbsp;&nbsp;
 						<button id="ChangeChart" onclick="drawShowChart()">변 경</button>
 						<!-- c3.js 적용 차트 그리는 공간-->
-						<div id="chart"></div>
+						<div style="align-content: left;">
+							<div id="chart"></div>
+						</div>
 					</div>
 
 					<div class="div_right">
@@ -194,6 +196,7 @@ tbody tr:nth-child(2n+1) {
 								<tr>
 									<th style="width: 30%">순 위</th>
 									<th>HELLO</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody id="chartDataTable">
