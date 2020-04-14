@@ -52,6 +52,12 @@ public class ThemeController extends TFile{
 		
 		ArrayList<Theme> list = tService.selectList(pi,sc);
 		
+		for(Theme t: list) {
+			if(t.gettModifyFile().length() <= 18) {
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
+			}
+		}
+		
 		mv.addObject("list",list);
 		mv.addObject("pi",pi);
 		mv.addObject("sc",sc);
@@ -77,11 +83,14 @@ public class ThemeController extends TFile{
 		JSONArray jArr = new JSONArray();
 		
 		for(Theme t: list) {
+			if(t.gettModifyFile().length() <= 18) {
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
+			}else {
+				t.settModifyFile(t.gettModifyFile().replace("amp;",""));
+			}
 			JSONObject jobj = new JSONObject();
 			jobj.put("tId",t.gettId());
-			if(t.gettModifyFile() != "" || t.gettModifyFile() != null) {
-				jobj.put("tModifyFile","resources/tuploadFiles/"+t.gettModifyFile());
-			}
+			jobj.put("tModifyFile",t.gettModifyFile());
 			jobj.put("tTitle", t.gettTitle());
 			jobj.put("tName","#"+t.gettName());
 			

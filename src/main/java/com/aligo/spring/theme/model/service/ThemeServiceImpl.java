@@ -44,10 +44,7 @@ public class ThemeServiceImpl implements ThemeService {
 		
 		if(chk != 1) {
 			String str = t.gettContent();
-			System.out.println(str.length());
 			str = str.substring(str.indexOf("src")+5,str.indexOf("alt")-2);
-			System.out.println(str);
-			System.out.println(str.length());
 			t.settOriginalFile(str);
 			t.settModifyFile(str);
 			TFile tf = new TFile();

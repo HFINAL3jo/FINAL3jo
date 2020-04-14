@@ -33,9 +33,9 @@
 }
 
 .card > img {
-    position: relative;
+    position:absolute;
     width: 108%;
-    height: 108%;
+    height: 108% !important;
     /* top: -4%; */
     /* left: -4%; */
     z-index: -10;
