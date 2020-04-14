@@ -1,6 +1,9 @@
 package com.aligo.spring.qna.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +17,8 @@ import com.aligo.spring.common.QnAPagination;
 import com.aligo.spring.qna.model.service.QnAService;
 import com.aligo.spring.qna.model.vo.QnA;
 import com.aligo.spring.qna.model.vo.QnAPageInfo;
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 
 @Controller
 public class QnAController {
@@ -22,8 +27,15 @@ public class QnAController {
 	private QnAService qService;
 	
 	@RequestMapping("contactView.do")
-	public ModelAndView boardList(HttpServletResponse response, ModelAndView mv,
-			@RequestParam(value="currentPage",required=false,defaultValue="1")int currentPage) {
+	public String boardList(){
+		return "member/contactView";
+	}
+	
+	@RequestMapping("contactListView.do")
+	public void boardList1(
+			HttpServletResponse response,
+			@RequestParam(value="currentPage",required=false,defaultValue="1")int currentPage) throws JsonIOException, IOException {
+		//System.out.println(currentPage);
 		
 		response.setContentType("application/json; charset=utf-8");
 		
@@ -33,12 +45,12 @@ public class QnAController {
 		
 		ArrayList<QnA> list = qService.selectList(pi);
 		
-		mv.addObject("list",list);
-		mv.addObject("pi",pi);
-		mv.setViewName("member/contactView");
+		Map hmap = new HashMap();
+		hmap.put("list",list);
+		hmap.put("pi",pi);
 		
-		return mv;
+		Gson gson = new Gson().newBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(hmap,response.getWriter());
 	}
-	
 	
 }

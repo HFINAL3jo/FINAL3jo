@@ -1,6 +1,9 @@
 package com.aligo.spring.member.model.service;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.aligo.spring.member.model.dao.MemberDao;
@@ -11,6 +14,11 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	private MemberDao memDao;
+    
+	
+	@Inject
+	private JavaMailSender mailSender;
+
 
 	@Override
 	public int insertMember(Member m) {
@@ -20,6 +28,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int idCheck(String email) {
 		return memDao.idCheck(email);
+	}
+
+	@Override
+	public void authentication(Member m) {
+        memDao.authentication(m);
+
 	}
 	
 }
