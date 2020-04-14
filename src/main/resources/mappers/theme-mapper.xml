@@ -91,4 +91,8 @@
 		T_MODIFY_FILE = T_MODIFY_FILE ||','|| #{tModifyFile}
 		WHERE T_CODE_NUMBER = #{tCodeNumber}
 	</update>
+	
+	<select id="checkFile">
+		SELECT COUNT(*) FROM THEME_FILES WHERE T_CODE_NUMBER = #{tNum}
+	</select>
 </mapper>

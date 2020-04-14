@@ -54,4 +54,8 @@ public class ThemeDao {
 	public int updateImg(TFile tf) {
 		return sqlSession.update("themeMapper.updateImg",tf);
 	}
+
+	public int checkFile(int tNum) {
+		return sqlSession.selectOne("themeMapper.checkFile",tNum);
+	}
 }

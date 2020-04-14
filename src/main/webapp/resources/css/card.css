@@ -1,4 +1,4 @@
- .card-section {
+.card-section {
 	        width: 100%;
 	        margin: 15px 0 20px 0;
 	        padding: 25px;
@@ -33,7 +33,7 @@
 }
 
 .card > img {
-    position: absolute;
+    position: relative;
     width: 108%;
     height: 108%;
     /* top: -4%; */

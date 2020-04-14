@@ -79,7 +79,9 @@ public class ThemeController extends TFile{
 		for(Theme t: list) {
 			JSONObject jobj = new JSONObject();
 			jobj.put("tId",t.gettId());
-			jobj.put("tModifyFile","resources/tuploadFiles/"+t.gettModifyFile());
+			if(t.gettModifyFile() != "" || t.gettModifyFile() != null) {
+				jobj.put("tModifyFile","resources/tuploadFiles/"+t.gettModifyFile());
+			}
 			jobj.put("tTitle", t.gettTitle());
 			jobj.put("tName","#"+t.gettName());
 			
@@ -94,8 +96,9 @@ public class ThemeController extends TFile{
 	
 	@RequestMapping("themeInsert.do")
 	public String insertTheme(Theme t) {
+		int tNum = tService.getTNum();
 		
-		int result = tService.insertTheme(t);
+		int result = tService.insertTheme(t,tNum);
 		
 		if(result >0) return "redirect:theme.do"; else return "";
 	}

@@ -13,7 +13,6 @@
 <!-- nice select CSS -->
 <link rel="stylesheet" href="resources/css/nice-select.css">
 <link rel="stylesheet" href="resources/css/price_rangs.css">
-<link rel="stylesheet" href="resources/css/card.css">
 
 <style type="text/css">
 .floatdiv {
@@ -105,26 +104,27 @@ h4{
 
 
 			</script>
+			    
 			<div id="aList" class="row align-items-center latest_product_inner">
 			
 			    <c:forEach var="t" items="${list }" begin="0" end="${pi.themeLimit}">
-				<div class="col-lg-4 col-sm-6" style="max-width:50% !important;">
+			    <c:url var="post" value="postdetail.do">
+				 <c:param name="tId" value="${t.tId }"/>
+				</c:url>
 				<a href="${post }">
-        				<div class="card-list">
-          					<div class="card">
-          						<c:if test="${t.tModifyFile != null}">
-            					<img src="resources/tuploadFiles/${t.tModifyFile }"/></c:if>
-            						<span>${t.tTitle }</span>
-         								 </div>
-										    <c:url var="post" value="postdetail.do">
-											 <c:param name="tId" value="${t.tId }"/>
-											</c:url>
+				<div class="col-lg-4 col-sm-6">
 					<div class="single_product_item">
+						<!-- 조아유 -->
+						<img src="resources/tuploadFiles/${t.tModifyFile }"	style="width: 100%; height: 170px">
+							<h4>${t.tTitle }</h4>
 							<h3><b style="color:rgba(121,125,237,0.9)">#${t.tName}</b></h3>
+						<div class="single_product_text">
+							<!-- h5자리 -->
+							<a href="#" class="add_cart" style="font-size: 12px;">+ add to List</a>
+						</div>
 					</div>
-					</div>
-				</a>
 				</div>
+				</a>
 				</c:forEach>
 			</div>
 			<input id="tc" type="hidden" value="${pi.currentPage }">

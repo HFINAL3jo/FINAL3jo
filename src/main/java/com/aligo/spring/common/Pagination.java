@@ -11,7 +11,7 @@ public class Pagination {
 		int maxPage;
 		int startPage;
 		int pageLimit = 1;
-		int themeLimit = 6;
+		int themeLimit = 4;
 		
 		maxPage = (int)Math.ceil((double)listCount / themeLimit);
 		
