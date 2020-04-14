@@ -74,16 +74,19 @@ nhn.husky.EZCreator.createInIFrame({
  elPlaceHolder: "smarteditor",
  sSkinURI: "resources/se2/SmartEditor2Skin.html",
  fCreator: "createSEditor2"
+ 
 });
-
+  	
    $('#sbtn').click(function(){
-	   
     
    oEditors.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD",[]);
    
    if(validation()) {
-	   }
+	   
+	   
 	   $('#sbtn').submit();
+	   
+	   }
    });
    
    function validation(){ 
@@ -166,14 +169,7 @@ nhn.husky.EZCreator.createInIFrame({
         });
     });
 	});
-   
-	var niframe = $('iframe[src="resources/se2/SmartEditor2Skin.html"]').contents().find("iframe[name=se2_iframe]").contents().find('.se2_inputarea');
-	$('.se2_inputarea').onkeyup(function(e){
-		console.log(e);
-	});
-	$(niframe).on('keyup',function(e){
-		console.log(e);
-	});
+	
 </script>
 </body>
 </html>

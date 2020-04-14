@@ -92,7 +92,7 @@
 		WHERE T_CODE_NUMBER = #{tCodeNumber}
 	</update>
 	
-	<select id="checkFile">
+	<select id="checkFile" resultType="_int">
 		SELECT COUNT(*) FROM THEME_FILES WHERE T_CODE_NUMBER = #{tNum}
 	</select>
 </mapper>

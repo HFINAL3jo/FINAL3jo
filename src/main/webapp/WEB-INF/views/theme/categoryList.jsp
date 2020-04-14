@@ -112,8 +112,11 @@ h4{
 				<a href="${post }">
         				<div class="card-list">
           					<div class="card">
-          						<c:if test="${t.tModifyFile != null}">
+          						<c:if test="${t.tModifyFile.length == 18}">
             					<img src="resources/tuploadFiles/${t.tModifyFile }"/></c:if>
+            					<c:if test="${t.tModifyFile.length > 18 }">
+            					<img src="${t.tModifyFile }"/>
+            					</c:if>
             						<span>${t.tTitle }</span>
          								 </div>
 										    <c:url var="post" value="postdetail.do">

@@ -40,12 +40,22 @@ public class ThemeServiceImpl implements ThemeService {
 		case "Exotic":t.settCode("T7"); break;
 		}
 		
-		int check = tDao.checkFile(tNum);
-		if(check == 1) {
-			
+		int chk = tDao.checkFile(tNum);
+		
+		if(chk != 1) {
+			String str = t.gettContent();
+			System.out.println(str.length());
+			str = str.substring(str.indexOf("src")+5,str.indexOf("alt")-2);
+			System.out.println(str);
+			System.out.println(str.length());
+			t.settOriginalFile(str);
+			t.settModifyFile(str);
+			TFile tf = new TFile();
+			tf.settCodeNumber(tNum);
+			tf.settOriginalFile(str);
+			tf.settModifyFile(str);
+			int insertLink = tDao.insertImg(tf);
 		}
-		
-		
 		return tDao.insertTheme(t);
 	}
 
