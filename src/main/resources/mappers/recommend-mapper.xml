@@ -60,6 +60,12 @@
 		INSERT INTO RECOMMEND_Q
 		VALUES ( #{recomCode}, #{recomContent}, #{keyword1}, #{keyword1Content}, #{keyword2}, #{keyword2Content}, DEFAULT )
 	</insert>
+	
+	<update id="updateUserRecom">
+		UPDATE MEMBER
+		SET RECOMMEND = #{ recommend }
+		WHERE MID = #{ mid }
+	</update>
 
 
 

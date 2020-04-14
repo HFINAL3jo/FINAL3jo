@@ -88,8 +88,7 @@ tbody tr:nth-child(2n+1) {
 	CDN을 이용해서 간편하게 사용하겠다면 다음과 같이 추가하면 될 것이다.
  -->
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" />
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 
@@ -111,6 +110,7 @@ tbody tr:nth-child(2n+1) {
 	<input type="hidden" id="jObjArray" value=${jObjArray} >
 	<input type="hidden" id="JsonReverseArray" value=${JsonReverseArray}>
 	
+	<input type="hidden" id="charDataShow" value=${charDataShow}>
 	<input type="hidden" id="choose" value=${choose} ><!-- StatisticController의 조아요/조회수.키워트 중 하나에 대한 데이터를 값을 가져왔는 확인. -->
 	<input type="hidden" id="chartValue" value=${chartValue} ><!-- StatisticController에서 어떤 차트를 섰는지 표시 가져온다. -->
 	
@@ -170,9 +170,11 @@ tbody tr:nth-child(2n+1) {
 							<option value="themaName">테 마</option>
 						</datalist>
 						&nbsp;&nbsp;&nbsp;
-						<button id="ChangeChart">변 경</button>
+						<button id="ChangeChart" onclick="drawShowChart()">변 경</button>
 						<!-- c3.js 적용 차트 그리는 공간-->
-						<div id="chart"></div>
+						<div style="align-content: left;">
+							<div id="chart"></div>
+						</div>
 					</div>
 
 					<div class="div_right">
@@ -194,6 +196,7 @@ tbody tr:nth-child(2n+1) {
 								<tr>
 									<th style="width: 30%">순 위</th>
 									<th>HELLO</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody id="chartDataTable">
@@ -217,68 +220,26 @@ tbody tr:nth-child(2n+1) {
 	</section>
 	<%@ include file="../common/footer.jsp"%>
 
-	<!-- 이벤트 처리를 위한 스크립트 -->
-	<script>
+<!-- 버튼 상단 -->
+<script src="resources/js/statisticsButtonRegist.js"></script>
+<script>
 //var str = "<c:out value='${jObj}' />";
-window.onload = function(){
+/* window.onload = function(){
 	
 	// 왼쪽 바를 선택헤서 들어오면 무조건 여기서 부터 값을 가져 오게 한다.
 	if(!document.referrer.includes("goodStatistic.do")){
-		location.href="goodStatistic.do?first=good";
+		location.href="goodStatistic.do?first=T_LIKES";
 	}
 	// 콘솔 출력시에  "<c:out value='${jObj}' />" 로 나온다 즉 jstl이 파싱이 되지 않는다.
 	// var str = "<c:out value='${jObj}'/>";	
-}
+} */
 
-// {} 등에서 jstl이 파싱이 되지 않는 것 같다.
-var str = "<c:out value='${jObj}' />";
-showChart(str);
+showChart();
 
-document.getElementById('ChangeChart').onclick = function(){
-	console.log("ChangeChart");	
-	var check1 = document.getElementById('whatChart').value;
-	var check2 = document.getElementById('whatData').value;
-	
-	if(!(check1 == "" || check1 == null) ){
-		console.log("check1");	
-		var chart= document.getElementById('chartValue').value = check1;
-		showChart(chart, str);
-		
-	}else if((check1 == "" || check1 == null) || (check2 == "" || check2 == null)){
-		alert("데이터 입력이 되지 않았습니다. 다시 입력 해주세요.");
-		return;
-	}else{
-		
-		var str1
-		var str2
-		var chartValue = document.getElementById('chartValue').value;
-		
-		// ajax 구현
-		$.ajax({
-    		url: "",
-   			type: "",
-    		cache: "",
-    		dataType: "",
-    		data: "",
-    		success: function(data){
+// 차트를 뷰에서 띄우기 위한 차트 모형 || 데이터 검색 메소드
+drawShowChart();
 
-    		},
-
-		    error: function (request, status, error){        
-
-    		}
-
-  		});
-
-	} // end if
-	
-	
-	
-	
-}	
 </script>
-	<!-- 버튼 상단 -->
-	<script src="resources/js/statisticsButtonRegist.js"></script>
 </body>
 </html>
 

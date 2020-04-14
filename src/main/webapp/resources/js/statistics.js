@@ -5,17 +5,12 @@
 function showChart(){	
 	
 	var length = arguments.length;
-	var chartValue = "";
-	var str = "";
-		
-	if(length == 1){
-		chartValue = document.getElementById('chartValue').value;
-		str = arguments[0];
-	}else if(length == 2){
-		chartValue = arguments[0];
-		chartValue = arguments[1];
-	}
+	var chartValue = document.getElementById('chartValue').value;
+	var str = document.getElementById('jObj').value;
 	
+	chartValue = document.getElementById('chartValue').value;
+//	str = arguments[0];
+		
 	str=str.replace(/&#034;/g, '\"');
 	Data = JSON.parse(str);
 //

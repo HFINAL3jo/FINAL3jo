@@ -56,13 +56,13 @@
                                         Theme
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                        <a class="dropdown-item" href="theme.do">Nature Theme</a>
+                                        <a class="dropdown-item" href="theme.do">Restaurant Theme</a>
                                         <a class="dropdown-item" href="theme.do">History Theme</a>
-                                        <a class="dropdown-item" href="theme.do">Food Theme</a>
                                         <a class="dropdown-item" href="theme.do">Shopping Theme</a>
-                                        <a class="dropdown-item" href="theme.do">Fastival Theme</a>
-                                        <a class="dropdown-item" href="theme.do">Night View Theme</a>
-                                        <a class="dropdown-item" href="theme.do">Museum Theme</a>
-                                        <a class="dropdown-item" href="theme.do">Exotic Theme</a>
+                                        <a class="dropdown-item" href="theme.do">Bar Theme</a>
+                                        <a class="dropdown-item" href="theme.do">Activity Theme</a>
+                                        <a class="dropdown-item" href="theme.do">Exhibition Theme</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">

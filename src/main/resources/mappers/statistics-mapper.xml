@@ -13,18 +13,96 @@
 		 <result property="columnTnameNumber" column="ColumnTnameNumber" />
 		 <result property="columnTKeywordName" column="TKEYWORD" />
 		 <result property="columnTKeywordNumber" column="ColumnTKeywordNumber" />
-		 <result property="registDate" column="T_MODIFY_DATE" />
+		 
+		 <result property="columnTlikeName" column="T_LIKES" />
+		 <!-- <result property="columnTlikeValue" column="value" /> -->
+		 
+		  <result property="columnTviewsName" column="T_VIEWS" />
+		 <!-- <result property="columnTviewsValue" column="value" /> -->
 		 
 	</resultMap>
 
 	<!-- 조아요. 장소에 대한 데이터를 가져온다. -->
-	<select id="AllGoodStatistic" resultMap="themeStatisticsResult">
+	<select id="AllStatistic" resultMap="themeStatisticsResult">
+<!-- 		
 		SELECT TADDRESS, SUM(T_LIKES) as ColumnAddressNumber
 		FROM THEME_LIST
 		JOIN THEME_CODE USING(TCODE)
 		GROUP BY  TADDRESS
-		ORDER BY ColumnAddressNumber DESC
+		ORDER BY ColumnAddressNumber DESC 
+-->
+		<if test="columnTlikeName == 'T_LIKES'">
+			SELECT TADDRESS, SUM(T_LIKES) as ColumnAddressNumber
+			FROM THEME_LIST
+			JOIN THEME_CODE USING(TCODE)
+			GROUP BY  TADDRESS
+			ORDER BY ColumnAddressNumber DESC
+		</if>
+		<if test="columnTlikeName == 'T_VIEWS'">
+			SELECT TADDRESS, SUM(T_VIEWS) as ColumnAddressNumber
+			FROM THEME_LIST
+			JOIN THEME_CODE USING(TCODE)
+			GROUP BY  TADDRESS
+			ORDER BY ColumnAddressNumber DESC 
+		</if>
+		
 	</select>
+
+	<!-- StatisticAjax -->
+	<!--  java.sql.SQLSyntaxErrorException: ORA-01722: invalid number :  -->
+	<select id="StatisticAjax" resultMap="themeStatisticsResult">
+<!-- 		
+		SELECT #{columnTnameName} as TNAME,  SUM(TO_NUMBER(#{columnTlikeName})) as value
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		GROUP BY  #{columnTnameName}
+		ORDER BY value DESC 
+-->
+
+<!--	
+		ArrayList 가 null이 된다. 
+		SELECT #{columnTnameName}
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		GROUP BY #{columnTnameName}
+-->
+<!-- 
+		java.sql.SQLSyntaxErrorException: ORA-00979: not a GROUP BY expression
+		bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: ORA-00979: not a GROUP BY expression
+		
+		SELECT TNAME
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		GROUP BY #{columnTnameName}
+-->
+		<if test="columnTlikeName == 'T_LIKES'">
+			<if test="columnAddressName != null"><!-- TADDRESS -->
+				SELECT TADDRESS, SUM(T_LIKES) as ColumnAddressNumber
+			</if>
+			<if test="columnTnameName != null"><!-- TNAME -->
+				SELECT TNAME, SUM(T_LIKES) as ColumnTnameNumber
+			</if>
+		</if>
+		<if test="columnTlikeName == 'T_VIEWS'">
+			<if test="columnAddressName != null">
+				SELECT TADDRESS, SUM(T_VIEWS) as ColumnAddressNumber
+			</if>
+			<if test="columnTnameName != null">
+				SELECT TNAME, SUM(T_VIEWS) as ColumnTnameNumber
+			</if>
+		</if>
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		<if test="columnAddressName == 'TADDRESS'">
+				GROUP BY TADDRESS
+				ORDER BY ColumnAddressNumber DESC
+		</if>
+		<if test="columnTnameName == 'TNAME'">
+				GROUP BY TNAME
+				ORDER BY ColumnTnameNumber DESC
+		</if>
+	</select>
+
 
 </mapper>
 

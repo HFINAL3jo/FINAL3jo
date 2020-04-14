@@ -64,7 +64,6 @@
     <button class="btn btn-light" id="sbtn">Write</button>
 	</div>
     </form>
-    <button id="testbtn">테스트</button>
     
 <script type="text/javascript" src="resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false&autoMapping=false"></script>

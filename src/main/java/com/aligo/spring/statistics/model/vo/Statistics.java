@@ -12,13 +12,22 @@ public class Statistics implements Serializable{
 	
 	private int number; 					// TCODE
 	//private String tableName = "파이";		 실제 테이블명이 아니라 어느 차트에 쓰는 것지 표시	
-	private Date registDate;				// 날짜			
-	private String columnAddressName; 		// 장소(TADDRESS) DB에서 가져오는 이름 컬럼
-	private int columnAddressNumber;		// 장소(TADDRESS) DB에서 가져오는 이름에 해당하는 값
-	private String columnTnameName; 		// 1차분류(TNAME) DB에서 가져오는 이름 컬럼
-	private int columnTnameNumber;			// 1차분류(TNAME) DB에서 가져오는 이름에 해당하는 값
-	private String columnTKeywordName; 		// 1차분류의 세부 사항(TKEYWORD) DB에서 가져오는 이름 컬럼
-	private int columnTKeywordNumber;		// 1차분류의 세부 사항(TKEYWORD) DB에서 가져오는 이름에 해당하는 값
+	private Date registDate;				// 날짜
+	
+	private String columnAddressName; 		// 2차분류(TADDRESS) DB에서 가져오는 이름 컬럼
+	private int columnAddressNumber;		// 2차분류(TADDRESS) DB에서 가져오는 이름에 해당하는 값
+	
+	private String columnTnameName; 		// 2차분류(TNAME) DB에서 가져오는 이름 컬럼
+	private int columnTnameNumber;			// 2차분류(TNAME) DB에서 가져오는 이름에 해당하는 값
+	
+	private String columnTKeywordName; 		// 2차분류의 세부 사항(TKEYWORD) DB에서 가져오는 이름 컬럼
+	private int columnTKeywordNumber;		// 2차분류의 세부 사항(TKEYWORD) DB에서 가져오는 이름에 해당하는 값
+	
+	private String columnTlikeName; 		// 1차분류의 세부 사항(T_LIKES) DB에서 가져오는 이름 컬럼
+	private String columnTlikeValue;		// 1차분류의 세부 사항(T_LIKES) DB에서 가져오는 이름에 해당하는 값
+	
+	private String columnTviewsName; 		// 1차분류의 세부 사항(T_VIEWS) DB에서 가져오는 이름 컬럼
+	private String columnTviewsValue;		// 1차분류의 세부 사항(T_VIEWS) DB에서 가져오는 이름에 해당하는 값
 	
 	public Statistics() {}
 
@@ -106,12 +115,46 @@ public class Statistics implements Serializable{
 		this.columnTKeywordNumber = columnTKeywordNumber;
 	}
 
+	public String getColumnTlikeName() {
+		return columnTlikeName;
+	}
+
+	public void setColumnTlikeName(String columnTlikeName) {
+		this.columnTlikeName = columnTlikeName;
+	}
+
+	public String getColumnTlikeValue() {
+		return columnTlikeValue;
+	}
+
+	public void setColumnTlikeValue(String columnTlikeValue) {
+		this.columnTlikeValue = columnTlikeValue;
+	}
+
+	public String getColumnTviewsName() {
+		return columnTviewsName;
+	}
+
+	public void setColumnTviewsName(String columnTviewsName) {
+		this.columnTviewsName = columnTviewsName;
+	}
+
+	public String getColumnTviewsValue() {
+		return columnTviewsValue;
+	}
+
+	public void setColumnTviewsValue(String columnTviewsValue) {
+		this.columnTviewsValue = columnTviewsValue;
+	}
+
 	@Override
 	public String toString() {
 		return "Statistics [number=" + number + ", registDate=" + registDate + ", columnAddressName="
 				+ columnAddressName + ", columnAddressNumber=" + columnAddressNumber + ", columnTnameName="
 				+ columnTnameName + ", columnTnameNumber=" + columnTnameNumber + ", columnTKeywordName="
-				+ columnTKeywordName + ", columnTKeywordNumber=" + columnTKeywordNumber + "]";
+				+ columnTKeywordName + ", columnTKeywordNumber=" + columnTKeywordNumber + ", columnTlikeName="
+				+ columnTlikeName + ", columnTlikeValue=" + columnTlikeValue + ", columnTviewsName=" + columnTviewsName
+				+ ", columnTviewsValue=" + columnTviewsValue + "]";
 	}
 
 	

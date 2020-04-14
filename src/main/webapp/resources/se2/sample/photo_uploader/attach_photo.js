@@ -388,7 +388,7 @@
  	    		return ;
  	    	}
  			aTemp = sResString.split("&");
-	    	for (var i = 0; i < aTemp.length ; i++){
+	    	for (var i = 0; i < aTemp.length; i++){
 	    		if( !!aTemp[i] && aTemp[i] != "" && aTemp[i].indexOf("=") > 0){
 	    			aSubTemp = aTemp[i].split("=");
 	    			htTemp[aSubTemp[0]] = aSubTemp[1];
