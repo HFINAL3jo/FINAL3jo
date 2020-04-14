@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>aranoz</title>
+<title>aligo</title>
 
 <!-- nice select CSS -->
 <link rel="stylesheet" href="resources/css/nice-select.css">
@@ -23,6 +23,10 @@
 	top: 80%; /* 창에서 위에서 부터의 높이 */
 	background-color: transparent;
 	margin: 0;
+}
+
+h4{
+	text-align:center;
 }
 
 /*조아요*/
@@ -63,8 +67,7 @@
 	<section class="cat_product_area section_padding"
 		style="padding-top: 3%; padding-bottom: 0%;">
 		<!-- 인클루드 asside -->
-		<%@ include file="../common/assidetheme.jsp"%>
-
+		<jsp:include page="../common/assidetheme.jsp"/>
 		<div id="tList" class="col-lg-9">
 			<div class="row">
 				<div class="col-lg-12">
@@ -113,9 +116,9 @@
 					<div class="single_product_item">
 						<!-- 조아유 -->
 						<img src="resources/tuploadFiles/${t.tModifyFile }"	style="width: 100%; height: 170px">
-						<div class="single_product_text">
 							<h4>${t.tTitle }</h4>
 							<h3><b style="color:rgba(121,125,237,0.9)">#${t.tName}</b></h3>
+						<div class="single_product_text">
 							<!-- h5자리 -->
 							<a href="#" class="add_cart" style="font-size: 12px;">+ add to List</a>
 						</div>
@@ -126,7 +129,7 @@
 			</div>
 			<input id="tc" type="hidden" value="${pi.currentPage }">
 			<input id="tm" type="hidden" value="${pi.maxPage }">
-			<input id="sv" type="hidden" value="${sc.searchValue}">
+			<input id="sv" type="hidden" name="searchValue" value="${sc.searchValue}">
 			<div align="center">
 				<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:#ebc5e4;">Lord More..</button></a>
 			</div>
@@ -166,46 +169,45 @@
 		ajaxPage();
 		}
 	}
-		function ajaxPage(){
-		searchValue = parseInt(searchValue);
-		currentPage = parseInt(currentPage);
-		$.ajax({
-			url:"pagination.do",
-			data:{currentPage:currentPage,searchValue:searchValue},
-			dataType:"json",
-			success:function(data){
-							   			   
-			   $div = $('#aList');
-			   $div.addClass('row align-items-center latest_product_inner');
-			   for(var i in data){
-								
-				  var $diva = $('<div>').addClass('col-lg-4 col-sm-6'); 
-				  var $divb = $('<div>').addClass('single_product_item');
-				  var $img = $('<img>').attr('src',data[i].tModifyFile).css({"width":"100%","height":"170px"});
-				  var $divc = $('<div>').addClass("single_product_text");
-				  var $h4 = $('<h4>').text(data[i].tTitle);
-				  var $h3 = $('<h3>');
-				  var $b  = $('<b>').css({"color":"rgba(121,125,237,0.9)"}).text(data[i].tName);
-				  //var $h5 = $('<h5></h5>');
-				  var $a = $('<a>').attr('href','#').addClass('add_cart').text('+ add to cart');
-
-				  $div.append($diva);
-				  $diva.append($divb);
-				  $divb.append($divc);
-				  $divb.append($img);
-				  $divb.append($divc);
-				  $divc.append($h4);
-				  $h3.append($b);
-				  $divc.append($h3);
-				  //$divc.append($h5);
-				  $divc.append($a);
-			   }
-			},error:function(){
+	function ajaxPage(){
+	searchValue = parseInt(searchValue);
+	currentPage = parseInt(currentPage);
+	$.ajax({
+		url:"pagination.do",
+		data:{currentPage:currentPage,searchValue:searchValue},
+		dataType:"json",
+		success:function(data){
+		   $div = $('#aList');
+		   $div.addClass('row align-items-center latest_product_inner');
+		   for(var i in data){
+			  var $a = $('<a>').attr('href',"postdetail.do?tId="+data[i].tId);				
+			  var $diva = $('<div>').addClass('col-lg-4 col-sm-6'); 
+			  var $divb = $('<div>').addClass('single_product_item');
+			  var $img = $('<img loding="lazy">').attr('src',data[i].tModifyFile).css({"width":"100%","height":"170px"});
+			  var $h4 = $('<h4>').text(data[i].tTitle);
+			  var $h3 = $('<h3>');
+			  var $b  = $('<b>').css({"color":"rgba(121,125,237,0.9)"}).text(data[i].tName);
+			  var $divc = $('<div>').addClass("single_product_text");
+			  //var $h5 = $('<h5></h5>');
+			  var $a1 = $('<a>').attr('href','#').addClass('add_cart').text('+ add to cart');
 				
-			}
+			  $div.append($diva);
+			  $a.append($divb);
+			  $diva.append($a);
+			  $divb.append($divc);
+			  $divb.append($img);
+			  $divb.append($h4);
+			  $h3.append($b);
+			  $divb.append($h3);
+			  $divb.append($divc)
+			  $divc.append($a1);
+			  //$divc.append($h5);
+		   }
+		},error:function(){
+		   console.log("에러발생");
+		}
 	});
-		
-	}
+}
 		//스크롤 70% 스크립트 및 div 추가 
 		window.onmousewheel = function(e) {
 			e.preventDefault;
@@ -221,10 +223,16 @@
 	 
 	 $('#lastPost').click(function(){
 		 searchValue = 2;
+		 currentPage = 1;
+		 $('#titlebar').text('Last Posting');
+		 $('#aList').html("");
 		 ajaxPage();
 	 });
 	 $('#mostLiked').click(function(){
 		 searchValue = 3;
+		 currentPage = 1;
+		 $('#titlebar').text('Most Liked');
+		 $('#aList').html("");
 		 ajaxPage();
 	 });
 	</script>
