@@ -186,23 +186,16 @@ input:checked+label:after {
 					<div class="login_part_form">
 						<div class="login_part_form_iner">
 							<h3>CREATE YOUR ACCOUNT</h3>
-							<form class="row contact_form" action="auth.do" method="post"
-								novalidate="novalidate">
+							<form class="row contact_form" action="join_injeung.do${dice}" method="post">
 								<div class="col-md-12 form-group p_star">
-									<input type="email" class="form-control" id="email"
-										name="e_mail" value="" placeholder="E-mail" required> <span
-										id="ok" style="display: none;" class="guide ok">Your
-										Email is Available</span> <span id="error" style="display: none;"
-										class="guide error">Your Email is Already Joined</span> <input
-										type="hidden" name="idDuplicateCheck" id="idDuplicateCheck"
-										value="0">
-									<button type="submit" name="submit" class="btn_3" >send
-										a mail</button>
+									<input type="number" class="form-control" id="email_injeung"
+										name="email_injeung" value="" placeholder="Enter your Authentication number" required>
+									<button type="submit" name="submit" class="btn_3">go to signUp</button>
 
-								</div>
+					<!-- 			</div>
 							</form>
 
-							<!-- <form class="row contact_form" action="signUp.do" method="post"
+							<form class="row contact_form" action="signUp.do" method="post"
 								novalidate="novalidate">
 
 								<div class="col-md-12 form-group p_star">
@@ -253,7 +246,9 @@ input:checked+label:after {
 										<li><a href="#"><i class="fas fa-globe"></i></a></li>
 									</ul> -->
 
-
+									<button onclick='return validate();' value="submit"
+										class="btn_3">SIGN UP</button>
+									<a class="lost_pass" href="#">forget password?</a>
 								</div>
 							</form>
 						</div>
@@ -403,10 +398,10 @@ input:checked+label:after {
 
 			return true;
 
-		} 
+		}
 
 		 닉네임 미입력시 알림	            
-		    if ((nickname.value) == ""){
+		     if ((nickname.value) == ""){
 		 alert("Enter your nickname");
 		 nickname.focus();
 		 return false;
@@ -416,7 +411,7 @@ input:checked+label:after {
 		 if(!chk({4,10},nickname,"Enter your nickname between 4~10 characters")){
 		 return false;
 		 } 
-	</script>-->
+	</script> -->
 
 </body>
 

@@ -37,5 +37,10 @@
 		FROM MEMBER
 		WHERE email=#{email}
 	</select>
+	
+	<insert id="authentication" parameterType="Member">
+    INSERT INTO MEMBER
+    VALUES({EMAIL)}
+	</insert>
 
 </mapper>
