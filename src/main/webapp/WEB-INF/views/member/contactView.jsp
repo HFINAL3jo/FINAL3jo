@@ -71,7 +71,7 @@
       <hr>
         <div class="qnaPageTable">
 
-    <table align="center" class="table table-striped">
+    <table align="center" class="table table-striped" id="qtb">
         <thead align="center">
         <tr>
             <th>글번호</th>
@@ -81,8 +81,8 @@
             <th>처리 여부</th>
         </tr>
     </thead>
-<%-- 	<c:forEach var="q" items="${ list }">
-    <tbody>
+    <tbody id="tbody">
+	<%-- <c:forEach var="q" items="${ list }">
         <tr>
             <td>${ q.qId }</td>
             <td>
@@ -102,7 +102,7 @@
     </tbody>
     
     <!-- 페이징 처리 -->
-   <%--  <tr id="pagingDiv" align="center" height="20">
+    <tr id="pagingDiv" align="center" height="20">
     	<td colspan="6">
     	
     	<!-- [이전] -->
@@ -113,7 +113,7 @@
     		<c:url var="prev" value="contactView.do">
     			<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
     		</c:url>
-    		<a href="${ prev }">[이전]</a> &nbsp;
+    		<a href="${ prev }" onclick="getList(${ pi.currentPage -1 })">[이전]</a> &nbsp;
     	</c:if>
     	
     	<!-- 페이지 -->
@@ -126,7 +126,7 @@
     			<c:url var="pagination" value="contactView.do">
     				<c:param name="currentPage" value="${ p }"/>
     			</c:url>
-    			<a href="${ pagination }">${ p }</a> &nbsp;
+    			<a href="${ pagination }" onclick="getList(${p})">${ p }</a> &nbsp;
     		</c:if>
     	</c:forEach>
     	
@@ -138,15 +138,12 @@
     		<c:url var="next" value="contactView.do">
     			<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
     		</c:url>
-    		<a href="${ next }">[다음]</a>
+    		<a href="${ next }" onclick="getList(${pi.currentPage + 1})">[다음]</a>
     	</c:if>
-  
-  
-	</tr> --%>
+	</tr>
     </table>
 </div>
 </div>
-
       <div class="row">
         <div class="col-12">
           <h2 class="contact-title">문의하기(QnA)</h2>
@@ -204,8 +201,8 @@
           <div class="media contact-info">
             <span class="contact-info__icon"><i class="ti-email"></i></span>
             <div class="media-body">
-              <h3>H_Class_FINAL@KH.com</h3>
-              <p>Send us your query anytime!</p>
+              <h3>noticealigo@gmail.com</h3>
+  				<p>우리 존재 화이팅,,,</p>
             </div>
           </div>
         </div>
@@ -219,20 +216,45 @@
    <!--::footer_part end::-->
 
 <script>
-		function getList(){
-			var currentPage = ${ currentPage };
-			
-			$.ajax({
-				url:"contactView1.do",
-				data:{currentPage:currentPage},
-				dataType:"json",
-				success:function(data){
-					console.log(data);
-				},error:function(){
-					console.log("전송실패");
+	$(function(){
+		getList();	
+	});
+	
+	function getList(){
+		$.ajax({
+			url:"contactListView.do",
+			dataType:"json",
+			success:function(data){
+				$tableBody = $("qtb tbody");
+				$tableBody.html("");
+				
+				var $tr;
+				var $qId;
+				var $qTitle;
+				var $qContent;
+				var $qCreateDate;
+				var $qStatus;
+				console.log(data.list.length);
+				console.log(data.list);
+				if(data.list.length > 0){
+					for(var i in data.list){
+						$tr = $("<tr>");
+						$qId = $("<td>").text(data[i].list.qId);
+						$qTitle = $("<td>").text(data[i].list.);
+						$qWriter = $("<td>").text(data[i]);
+						$tr.append($qId);
+						$tableBody.append($tr);
+					}
+				}else{
+					$tr = $("<tr>");
+					/* $tr.append($qContent);
+					$tableBody.append($tr); */
 				}
-			});
-		}
+			},error:function(){
+				console.log("전송실패");
+			}
+		});
+	}	
 </script>
 </body>
 </html>
