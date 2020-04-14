@@ -185,7 +185,7 @@ input:checked+label:after {
 				<div class="col-lg-6 col-md-6">
 					<div class="login_part_form">
 						<div class="login_part_form_iner">
-							<h3>CREATE YOUR ACCOUNT</h3>
+							<h3>Enter your Email!</h3>
 							<form class="row contact_form" action="auth.do" method="post"
 								novalidate="novalidate">
 								<div class="col-md-12 form-group p_star">
@@ -275,26 +275,8 @@ input:checked+label:after {
 
 	<!-- ■■■■■■■■■■■■ Script part ■■■■■■■■■■■■ -->
 
-<!-- 	<script>
-		/*이메일 인증 팝업*/
-		var openChk;
-		function sendMail() {
-
-			var emailVal = $("#email").val();
-
-			var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-			// 검증에 사용할 정규식 변수 regExp에 저장
-
-			if (emailVal.match(regExp) != null) {
-				window.name = "signUp.jsp";
-				openChk = window
-						.open("emailPopup.jsp", "Email Check",
-								"width=500, height=50, resizable = no, scrollbars = no status= no");
-			} else {
-				alert('Error');
-			}
-		}
-
+ 	<script>
+		
 		/*이메일 중복체크*/
 		function validate() {
 
@@ -346,10 +328,23 @@ input:checked+label:after {
 				});
 			});
 		});
+		
+		function CheckEmail(str)
+		{                                                 
+		     var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+		     if(!reg_email.test(str)) {                            
+		          return false;         
+		     }                            
+		     else {                       
+		          return true;         
+		     }                            
+		}                                
 
-		$(function() {
+		</script>
 
-			//비밀번호 확인
+<!--  	$(function() {
+
+			
 			$('#passwordchk').blur(function() {
 				if ($('#password').val() != $('#passwordchk').val()) {
 					if ($('#passwordchk').val() != '') {
@@ -361,7 +356,7 @@ input:checked+label:after {
 			})
 		});
 
-		$(function() { // 눈표시 클릭 시 패스워드 보이기 
+		$(function() { 
 			$('.eye').on(
 					'click',
 					function() {
@@ -382,7 +377,7 @@ input:checked+label:after {
 					});
 		});
 
-		/*비밀번호 정규식*/
+		
 
 		function checkPassword(password) {
 			if (!/^[a-zA-Z0-9]{10,15}$/.test(password)) {
@@ -405,7 +400,7 @@ input:checked+label:after {
 
 		} 
 
-		 닉네임 미입력시 알림	            
+		            
 		    if ((nickname.value) == ""){
 		 alert("Enter your nickname");
 		 nickname.focus();
@@ -415,8 +410,9 @@ input:checked+label:after {
 		  닉네임 유효성 검사	    
 		 if(!chk({4,10},nickname,"Enter your nickname between 4~10 characters")){
 		 return false;
-		 } 
-	</script>-->
+		 }  -->
+
+
 
 </body>
 
