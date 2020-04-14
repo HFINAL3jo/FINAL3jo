@@ -188,7 +188,7 @@ input:checked+label:after {
 							<h3>CREATE YOUR ACCOUNT</h3>
 
 
-							 <form class="row contact_form" action="signUp.do" method="post"
+							 <form class="row contact_form" action="auth.do" method="post"
 								novalidate="novalidate">
 
 								<div class="col-md-12 form-group p_star">

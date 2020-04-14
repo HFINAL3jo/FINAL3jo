@@ -213,7 +213,7 @@ public class MemberController {
 
 			ModelAndView mv2 = new ModelAndView(); 
 
-			mv2.setViewName("emailPopup");
+			mv2.setViewName("member/email_injeung");
 
 			response_equals.setContentType("text/html; charset=UTF-8"); PrintWriter out_equals = response_equals.getWriter();
 			out_equals.println("<script>alert('인증번호가 일치하지않습니다. 인증번호를 다시 입력해주세요.'); history.go(-1);</script>");
