@@ -254,8 +254,8 @@ input:checked+label:after {
 									</ul> -->
 
 
-								</div>
-							</form>
+								<!-- </div>
+							</form> -->
 						</div>
 					</div>
 				</div>

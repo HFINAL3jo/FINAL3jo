@@ -186,14 +186,13 @@ input:checked+label:after {
 					<div class="login_part_form">
 						<div class="login_part_form_iner">
 							<h3>Enter your Authentication number</h3>
-							<c:url var="emailCheck" value="ec.do">
-								<c:param name="dice" value="${ dice }" />
-							</c:url>
+							<c:url var="emailCheck" value="ec.do"/>
 							<form class="row contact_form" action="${ emailCheck }">
 								<div class="col-md-12 form-group p_star">
 									<input type="number" class="form-control" id="email_injeung"
 										name="email_injeung" value="" placeholder="Enter your Authentication number" required>
-									<button type="submit" name="submit" class="btn_3">go to signUp</button>
+									<input type="text" value="${dice }" name="diceCheck" style="display: none;">
+									<button type="submit" class="btn_3">go to signUp</button>
 
 					 			</div>
 							</form>
@@ -418,7 +417,7 @@ input:checked+label:after {
 	
 	<script>
 		$(function(){
-			console.log(123123);
+			console.log(${dice});
 		});
 	</script>
 

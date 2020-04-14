@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -141,9 +142,11 @@ public class MemberController {
 			System.out.println(e);
 		}
 
+		String diceStr = "" + dice;
+
 		ModelAndView mv = new ModelAndView();    //ModelAndView로 보낼 페이지를 지정하고, 보낼 값을 지정한다.
 		mv.setViewName("/member/email_injeung");     //뷰의이름
-		mv.addObject("dice", dice);
+		mv.addObject("dice", diceStr);
 
 		System.out.println("mv : "+mv);
 
@@ -168,14 +171,12 @@ public class MemberController {
 	//내가 입력한 인증번호와 메일로 입력한 인증번호가 맞는지 확인해서 맞으면 회원가입 페이지로 넘어가고,
 	//틀리면 다시 원래 페이지로 돌아오는 메소드
 	@RequestMapping(value = "ec.do")
-	public ModelAndView join_injeung(String email_injeung, String dice, HttpServletResponse response_equals) throws IOException {
-
-
+	public ModelAndView join_injeung(String email_injeung, String diceCheck, HttpServletResponse response_equals) throws IOException {
 
 
 		System.out.println("마지막 : email_injeung : "+ email_injeung);
 
-		System.out.println("마지막 : dice : "+dice);
+		System.out.println("마지막 : dice : "+diceCheck);
 
 
 		//페이지이동과 자료를 동시에 하기위해 ModelAndView를 사용해서 이동할 페이지와 자료를 담음
@@ -186,7 +187,7 @@ public class MemberController {
 
 		mv.addObject("e_mail",email_injeung);
 
-		if (email_injeung.equals(dice)) {
+		if (email_injeung.equals(diceCheck)) {
 
 			//인증번호가 일치할 경우 인증번호가 맞다는 창을 출력하고 회원가입창으로 이동함
 
@@ -207,7 +208,7 @@ public class MemberController {
 			return mv;
 
 
-		}else if (email_injeung != dice) {
+		}else if (email_injeung != diceCheck) {
 
 
 			ModelAndView mv2 = new ModelAndView(); 
