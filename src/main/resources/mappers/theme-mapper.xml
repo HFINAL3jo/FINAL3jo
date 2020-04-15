@@ -48,11 +48,18 @@
 	</select>
 	
 	<select id="selectList" resultMap="themeResultSet">
+		
 		SELECT *
 		FROM THEME_LIST 
 		JOIN THEME_CODE USING(TCODE)
 		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
-		WHERE T_STATUS='Y' 
+		<if test="keyword == null">
+		WHERE T_STATUS='Y'
+		</if>
+		<if test="keyword != null">
+		WHERE (TNAME||TTITLE||TADDRESS||TADDRESSH||TKEYWORD||TCONTENT) 
+		LIKE UPPER('%'||#{keyword}||'%')
+		</if>
 		<choose>
 			<when test="searchValue == 2">ORDER BY TO_NUMBER(TO_CHAR(T_MODIFY_DATE,'YYMMDD')) DESC</when>
 			<when test="searchValue == 3">ORDER BY T_LIKES DESC</when>

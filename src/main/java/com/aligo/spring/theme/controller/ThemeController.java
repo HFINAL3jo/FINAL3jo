@@ -42,14 +42,11 @@ public class ThemeController extends TFile{
 	@RequestMapping("theme.do")
 	public ModelAndView themeList(ModelAndView mv,
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
-			@RequestParam(value="searchValue",defaultValue="1")int searchValue) {
+			SearchCondition sc) {
 		
 		int listCount = tService.getListCount();
-		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		SearchCondition sc = new SearchCondition();
-		sc.setSearchValue(searchValue);
-		
+		if(sc.getKeyword() == "") sc.setKeyword(null);
 		ArrayList<Theme> list = tService.selectList(pi,sc);
 		
 		for(Theme t: list) {
@@ -68,16 +65,12 @@ public class ThemeController extends TFile{
 	@RequestMapping("pagination.do")
 	public void pagination(HttpServletResponse response,
 		@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
-		@RequestParam(value="searchValue") int searchValue)throws IOException {
+		SearchCondition sc)throws IOException {
 		
 		response.setContentType("application/json; charset=UTF-8");
 		int listCount = tService.getListCount();
 		
-		SearchCondition sc = new SearchCondition();
-		sc.setSearchValue(searchValue);
-		
 		PageInfo pi = Pagination.getPageInfo(currentPage,listCount);
-		
 		ArrayList<Theme> list = tService.selectList(pi,sc);
 		
 		JSONArray jArr = new JSONArray();

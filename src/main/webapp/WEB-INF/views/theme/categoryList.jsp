@@ -129,6 +129,7 @@ h4{
 			<input id="tc" type="hidden" value="${pi.currentPage }">
 			<input id="tm" type="hidden" value="${pi.maxPage }">
 			<input id="sv" type="hidden" name="searchValue" value="${sc.searchValue}">
+			<input id="kw" type="hidden" name="keyword" value="${sc.keyword}">
 			<div align="center">
 				<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:#ebc5e4;">Lord More..</button></a>
 			</div>
@@ -159,6 +160,7 @@ h4{
 		var currentPage = $('#tc').val();
 		var maxPage = $('#tm').val();
 		var searchValue = $('#sv').val();
+		var keyword = $('#kw').val();
 		
 	function pagination(){
 		if(maxPage == currentPage){
@@ -173,7 +175,7 @@ h4{
 	currentPage = parseInt(currentPage);
 	$.ajax({
 		url:"pagination.do",
-		data:{currentPage:currentPage,searchValue:searchValue},
+		data:{currentPage:currentPage,searchValue:searchValue,keyword:keyword},
 		dataType:"json",
 		success:function(data){
 		
@@ -217,7 +219,7 @@ h4{
 				pagination();
 				}
 			}
-	 
+		
 	 $('#lastPost').click(function(){
 		 searchValue = 2;
 		 currentPage = 1;
@@ -232,6 +234,9 @@ h4{
 		 $('#aList').html("");
 		 ajaxPage();
 	 });
+	$('#svf').click(function(){
+		location.href='theme.do';
+	});
 	</script>
 </body>
 </html>
