@@ -37,7 +37,7 @@
 
     <!--================Category Product Area =================-->
     <%@ include file="../common/assideMyPage.jsp"%>
-                
+               
                 <div class="col-lg-9">
                     <div class="row">
                         <div class="col-lg-12">
@@ -45,194 +45,104 @@
                                 <div class="single_product_menu">
                                     <p><span>31 </span> Posting Found</p>
                                 </div>
-                                <div class="single_product_menu d-flex">
-                                    <h5>short by : </h5>
-                                    <select>
-                                        <option data-display="Select">Latest Posting</option>
-                                        <option value="latest">Latest Posting</option>
-                                        <option value="most">Most Liked</option>
-                                    </select>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
 
-                    <div class="row align-items-center latest_product_inner">
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/korea/Food/BbimBab.png" alt="">
-                                <div class="single_product_text">
-                                    <h4>Bibimbap</h4>
-                                    <h3>$16.06</h3>
-                                    <a href="#" class="add_cart">+ add to list<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/korea/Place/gbg.PNG" alt="">
-                                <div class="single_product_text">
-                                    <h4>Gyeongbokgung Palace</h4>
-                                    <h3>$2.41</h3>
-                                    <a href="#" class="add_cart">+ add to list<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/korea/Show/brMud.PNG" alt="">
-                                <div class="single_product_text">
-                                    <h4>BORYEONG MUD FESTIVAL</h4>
-                                    <h3>$5.00</h3>
-                                    <a href="#" class="add_cart">+ add to list<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/korea/Place/strFood.jpg" alt="">
-                                <div class="single_product_text">
-                                    <h4>Korean street food</h4>
-                                    <h3>$3.00</h3>
-                                    <a href="#" class="add_cart">+ add to list<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/korea/Show/mrshow.jpg" alt="">
-                                <div class="single_product_text">
-                                    <h4>Korean shows: Mr. SHOW</h4>
-                                    <h3>$64.26</h3>
-                                    <a href="#" class="add_cart">+ add to list<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/korea/Exprerience/hanbok.jpg" alt="">
-                                <div class="single_product_text">
-                                    <h4>Hanbok Korea rental review</h4>
-                                    <h3>$8.03</h3>
-                                    <a href="#" class="add_cart">+ add to list<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/product/product_7.png" alt="">
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/product/product_8.png" alt="">
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/product/product_2.png" alt="">
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="pageination">
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Previous">
-                                                <i class="ti-angle-double-left"></i>
-                                            </a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Next">
-                                                <i class="ti-angle-double-right"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="cart_inner">
+		        <div class="table-responsive">
+		          <table class="table">
+		            <thead>
+		              <tr>
+		                <th scope="col">Title</th>
+		                <th scope="col">Nickname</th>
+		                <th scope="col">Hit</th>
+		                <th scope="col">Liked</th>
+		              </tr>
+		            </thead>
+		            <tbody>
+		              <tr>
+		                <td>
+		                  <div class="media">
+		                    <div class="d-flex">
+		                      <img src="" alt="썸네일" />
+		                    </div>
+		                    <div class="media-body">
+		                      <p>침대 올라갈땐 신발 좀 벗으세요~~~!!</p>
+		                    </div>
+		                  </div>
+		                </td>
+		                <td>
+		                  <p>kimpro</p>
+		                </td>
+		                <td>
+		                  <div class="product_count">
+		                    <p>135</p>
+		                  </div>
+		                </td>
+		                <td>
+		                  <p>12</p>
+		                </td>
+		              </tr>
+		              <tr>
+		                <td>
+		                  <div class="media">
+		                    <div class="d-flex">
+		                      <img src="img/product/single-product/cart-1.jpg" alt="썸네일" />
+		                    </div>
+		                    <div class="media-body">
+		                      <p>데오드란트 바르고 여행하세요~~ 썩은 양파내</p>
+		                    </div>
+		                  </div>
+		                </td>
+		                <td>
+		                  <p>mulba</p>
+		                </td>
+		                <td>
+		                  <div class="product_count">		                    
+		                    <p>135</p>
+		                  </div>
+		                </td>
+		                <td>
+		                  <p>24</p>
+		                </td>
+		              </tr>
+		              <tr>
+		                <td>
+		                  <div class="media">
+		                    <div class="d-flex">
+		                      <img src="img/product/single-product/cart-1.jpg" alt="썸네일" />
+		                    </div>
+		                    <div class="media-body">
+		                      <p>다들 명동에서 티라미수 아몬드 많이 사가세여</p>
+		                    </div>
+		                  </div>
+		                </td>
+		                <td>
+		                  <p>hayonezz</p>
+		                </td>
+		                <td>
+		                  <div class="product_count">
+		                    <p>135</p>
+		                  </div>
+		                </td>
+		                <td>
+		                  <p>36</p>
+		                </td>
+		              </tr>
+		            </tbody>
+		          </table>		          
+		        </div>
+		      </div>
+                    
+                    
+                    
                 </div>
             </div>
         </div>
     </section>
-    <!--================End Category Product Area =================-->
-
-    <!-- product_list part start-->
-    <section class="product_list best_seller">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-12">
-                    <div class="section_tittle text-center">
-                        <h2>Best Sellers <span>shop</span></h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-center justify-content-between">
-                <div class="col-lg-12">
-                    <div class="best_product_slider owl-carousel">
-                        <div class="single_product_item">
-                            <img src="img/product/product_1.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="img/product/product_2.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="img/product/product_3.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="img/product/product_4.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="img/product/product_5.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- product_list part end-->
+    
 
     <!--::footer_part start::-->
     <%@ include file="../common/footer.jsp"%>

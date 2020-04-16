@@ -10,7 +10,8 @@
     <title>aranoz</title>
     <link rel="stylesheet" href="resources/css/animate.css">
     <!-- owl carousel CSS -->
-    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="resources/css/nice-select.css">
+    <link rel="stylesheet" href="resources/css/card.css">
 </head>
 
 <body>
@@ -26,8 +27,8 @@
                 <div class="col-lg-8">
                     <div class="breadcrumb_iner">
                         <div class="breadcrumb_iner_item">
-                            <h2>Shop Category</h2>
-                            <p>Home <span>-</span> Shop Category</p>
+                            <h2>Liked List</h2>
+                            <p>Home <span>-</span> My List</p>
                         </div>
                     </div>
                 </div>
@@ -37,196 +38,66 @@
     <!-- breadcrumb start-->
 
     <!--================Category Product Area =================-->
-    <%@ include file="../common/assideMyPage.jsp"%>
+    <%@ include file="../common/assideMyPage.jsp"%>                
                 
-                <div class="col-lg-9">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="product_top_bar d-flex justify-content-between align-items-center">                                
-                                <div class="single_product_menu">
-                                    <p><span>31 </span> Posting Found</p>
-                                </div>                                
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row align-items-center latest_product_inner">
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/korea/Food/BbimBab.png" alt="">
-                                <div class="single_product_text">
-                                    <h4>Bibimbap</h4>
-                                    <h3>$16.06</h3>
-                                    <a href="#" class="add_cart">+ add to list<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/korea/Place/gbg.PNG" alt="">
-                                <div class="single_product_text">
-                                    <h4>Gyeongbokgung Palace</h4>
-                                    <h3>$2.41</h3>
-                                    <a href="#" class="add_cart">+ add to list<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/korea/Show/brMud.PNG" alt="">
-                                <div class="single_product_text">
-                                    <h4>BORYEONG MUD FESTIVAL</h4>
-                                    <h3>$5.00</h3>
-                                    <a href="#" class="add_cart">+ add to list<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/korea/Place/strFood.jpg" alt="">
-                                <div class="single_product_text">
-                                    <h4>Korean street food</h4>
-                                    <h3>$3.00</h3>
-                                    <a href="#" class="add_cart">+ add to list<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/korea/Show/mrshow.jpg" alt="">
-                                <div class="single_product_text">
-                                    <h4>Korean shows: Mr. SHOW</h4>
-                                    <h3>$64.26</h3>
-                                    <a href="#" class="add_cart">+ add to list<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/korea/Exprerience/hanbok.jpg" alt="">
-                                <div class="single_product_text">
-                                    <h4>Hanbok Korea rental review</h4>
-                                    <h3>$8.03</h3>
-                                    <a href="#" class="add_cart">+ add to list<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/product/product_7.png" alt="">
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/product/product_8.png" alt="">
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/product/product_2.png" alt="">
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="pageination">
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Previous">
-                                                <i class="ti-angle-double-left"></i>
-                                            </a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Next">
-                                                <i class="ti-angle-double-right"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
+					<!-- 내가 좋아요한 리스트 -->
+					<div id="tList" class="col-lg-9">
+					<div class="row">
+						<div class="col-lg-12">
+							<div
+								class="product_top_bar d-flex justify-content-between align-items-center">
+		
+								<div class="single_product_menu">
+									<p>								
+										Number of posts <span>${pi.listCount}</span>
+									</p>									
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					<script type="text/javascript">
+					//좋아요
+					
+		
+		
+		
+					//좋아요
+					</script>
+					<div id="aList" class="row align-items-center latest_product_inner">
+					
+					    <c:forEach var="t" items="${list }" begin="0" end="${pi.themeLimit}">
+						<div class="col-lg-4 col-sm-6" style="max-width:50% !important;">
+						    <c:url var="post" value="postdetail.do">
+							 <c:param name="tId" value="${t.tId }"/>
+							</c:url>
+						<a href="${post }">
+		        				<div class="card-list">
+		          					<div class="card">
+		            					<img src="${t.tModifyFile }"/>
+		            						<span>${t.tTitle }</span>
+		         								 </div>
+							<div class="single_product_item">
+									<h3><b style="color:rgba(121,125,237,0.9)">#${t.tName}</b></h3>
+							</div>
+							</div>
+						</a>
+						</div>
+						</c:forEach>
+					</div>
+					<input id="tc" type="hidden" value="${pi.currentPage }">
+					<input id="tm" type="hidden" value="${pi.maxPage }">
+					<div align="center">
+						<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:#ebc5e4;">Lord More..</button></a>
+					</div>			
+					</div>					
+					<!-- 내가 좋아요한 리스트 -->
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!--================End Category Product Area =================-->
-
-    <!-- product_list part start-->
-    <section class="product_list best_seller">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-12">
-                    <div class="section_tittle text-center">
-                        <h2>Best Sellers <span>shop</span></h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-center justify-content-between">
-                <div class="col-lg-12">
-                    <div class="best_product_slider owl-carousel">
-                        <div class="single_product_item">
-                            <img src="img/product/product_1.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="img/product/product_2.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="img/product/product_3.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="img/product/product_4.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="img/product/product_5.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- product_list part end-->
-
+    
     <!--::footer_part start::-->
     <%@ include file="../common/footer.jsp"%>
     <!--::footer_part end::-->
@@ -235,6 +106,72 @@
     <script src="resources/js/stellar.js"></script>
     <script src="resources/js/price_rangs.js"></script>
     <!-- custom js -->
+    <script type="text/javascript">
+    
+		var currentPage = $('#tc').val();
+		var maxPage = $('#tm').val();
+		
+		function pagination(){
+			if(maxPage == currentPage){
+				$('#alb').text("End");
+			}else{ 
+			currentPage = (parseInt(currentPage) + 1);
+			ajaxPage();
+			}
+		}
+		function ajaxPage(){
+		currentPage = parseInt(currentPage);
+		$.ajax({
+			url:"pagination2.do",
+			data:{currentPage:currentPage},
+			dataType:"json",
+			success:function(data){
+			
+			   $div = $('#aList');
+			   $div.addClass('row align-items-center latest_product_inner');
+			   for(var i in data){
+				  var $diva = $('<div>').addClass('col-lg-4 col-sm-6').css('max-width','50%'); 
+				  var $a = $('<a>').attr('href',"postdetail.do?tId="+data[i].tId);
+				  var $divb = $('<div>').addClass('card-list');
+				  var $divc = $('<div>').addClass('card');			  
+				  var $img = $('<img>').attr('src',data[i].tModifyFile);
+				  var $span = $('<span>').text(data[i].tTitle);
+				  var $divd = $('<div>').addClass('single_product_item');
+				  var $h3 = $('<h3>');
+				  var $b  = $('<b>').css({"color":"rgba(121,125,237,0.9)"}).text(data[i].tName);
+					
+				  $div.append($diva);
+				  $diva.append($a);
+				  $a.append($divb);
+				  $divb.append($divc);
+				  $divc.append($img);
+				  $divc.append($span);
+				  $divb.append($divd);
+				  $divd.append($h3);
+				  $h3.append($b);
+			   }
+			},error:function(){
+			   console.log("에러발생");
+			}
+		});
+		}
+			//스크롤 70% 스크립트 및 div 추가 
+			window.onmousewheel = function(e) {
+				e.preventDefault;
+				var aa = $(window).height();
+				var bb = $(document).height();
+				var cc = $(window).scrollTop();
+				
+				if (Math.floor((aa / (bb - cc)) * 100 > 75 && e.deltaY === 100)) {
+					
+					pagination();
+					}
+				}
+			
+		$('#svf').click(function(){
+			location.href='likedList.do';
+		});
+	</script>
 </body>
 
 </html>

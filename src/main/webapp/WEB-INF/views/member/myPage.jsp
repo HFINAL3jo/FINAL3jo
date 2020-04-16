@@ -8,6 +8,22 @@
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
+	<!-- breadcrumb start-->
+	<section class="breadcrumb breadcrumb_bg">
+	  <div class="container">
+	    <div class="row justify-content-center">
+	      <div class="col-lg-8">
+	        <div class="breadcrumb_iner">
+	          <div class="breadcrumb_iner_item">
+	            <h2>My Page</h2>
+	            <p>Home <span>-</span> My Page</p>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</section>
+  <!-- breadcrumb start-->
 	<%@ include file="../common/assideMyPage.jsp" %>
 	 <div class="col-lg-9" >
                     <h3 style="align-self: center;">Edit Profile</h3>
@@ -24,61 +40,30 @@
                                     <label style="margin-bottom: 0; margin-top: 5%;">password</label>
                                     <div class="mt-10">
                                         <input type="password" id="password" name="password" placeholder="password" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'password'" required class="single-input">
+                                        onblur="this.placeholder = 'password'" required class="single-input" style="background-color: rgb(232, 240, 254);">
                                     </div>                                    
                                     <label style="margin-bottom: 0; margin-top: 5%;">nickname</label>
                                     <div class="mt-10">
                                         <input type="text" name="nickname" placeholder="Nickname" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Last Name'" required class="single-input">
+                                        onblur="this.placeholder = 'Last Name'" required class="single-input" style="background-color: rgb(232, 240, 254);">
                                     </div>                                    
                                     <br><br>
                                     <input class="genric-btn success-border small" type="submit" value="finish" style="margin : 10%">
             <!--                         <input class="genric-btn primary-border small" type="button" value="Delete Account" style="margin: 10px;" onclick="return deletemember()">   -->                                  
                               	 	<button type="button" class="genric-btn primary-border small" style="margin: 10px;" onclick="location.href='${ memDelete }';">Delete Account</button>
+                                    <input class="genric-btn success-border small" type="submit" value="finish">
+                                    <!-- <input class="genric-btn primary-border small" type="button" value="Delete Account" style="margin: 10px;" onclick="return deletemember()"> -->                                    
                                 </form> 
                             </div>
                         </div>
-                    </div>
-
-                    <!-- <div class="row align-items-center latest_product_inner">                  
-                        <div class="col-lg-4 col-sm-6">
-                            
-                        </div>                        
-                        <div class="col-lg-4 col-sm-6">
-                            
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            
-                        </div>
-                        <div class="col-lg-12">
-                            
-                        </div>
-                    </div> -->
+                    </div>                    
                 </div>
             </div>
         </div>
     </section>
     <%@ include file="../common/footer.jsp" %>
     
-     <script>		
+     <!-- <script>		
         function deletemember(){
             if($('#password').val() == ""){
             alert("비밀번호를 입력해주세요!");
@@ -86,7 +71,7 @@
             }     
             location.href ='#' //true때는 서블릿으로 넘겨줍시당~~
         }
-    </script>
+    </script> -->
     
     <script src="resources/js/stellar.js"></script>
     <script src="resources/js/price_rangs.js"></script>

@@ -24,4 +24,9 @@ public class MainDao {
 		return (ArrayList)sqlSession.selectList("mainMapper.selectThemeList");
 	}
 
+	public Theme selectTheme(String tId) {
+
+		return (Theme)sqlSession.selectOne("mainMapper.selectTheme", tId);
+	}
+
 }
