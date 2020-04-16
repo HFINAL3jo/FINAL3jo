@@ -13,7 +13,7 @@ public interface ThemeService {
 	 * 게시판 갯수 조회
 	 * @return
 	 */
-	int getListCount();
+	int getListCount(SearchCondition sc);
 	
 	/**
 	 * 게시판 조회

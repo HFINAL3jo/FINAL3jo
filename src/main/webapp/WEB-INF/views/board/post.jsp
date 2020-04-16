@@ -99,19 +99,20 @@
   <section class="img_board_view">
     
      <div class="img_view" align="center" style="width:500px; height:300px; position:relative; margin:auto;">
-          
-      <div><h3><img src="resources/tuploadFiles/${t.tModifyFile }" style="width:500px; height:300px;" alt=""></h3></div>
-      <div><h3><img src="resources/img/product/example/example2.jpg" style="width:500px; height:300px;" alt=""></h3></div>
-      <div><h3><img src="resources/img/product/example/example3.jpg" style="width:500px; height:300px;" alt=""></h3></div>
-      <div><h3><img src="resources/img/product/example/example4.jpg" style="width:500px; height:300px;" alt=""></h3></div>
-   
+      <c:if test="${!empty t.tFileList }">
+       <c:forEach var="pd" items="${t.tFileList }" begin="0" end="4">
+      <div><h3><img src="resources/tuploadFiles/${pd.tModifyFile }" style="width:500px; height:300px;" alt=""></h3></div>
+      </c:forEach>     
+   	   </c:if>
   </div>
   <br><br>
+ 
   <div class="img_slide" align="center" style="width:1200px; height:300px; position:relative; margin:auto;">
-      <div><h3><img src="resources/tuploadFiles/${t.tModifyFile }" style="width:200px; height:200px;" alt=""></h3></div>
-    <div><h3><img src="resources/img/product/example/example2.jpg"style="width:200px; height:200px;" alt=""></h3></div>
-    <div><h3><img src="resources/img/product/example/example3.jpg"style="width:200px; height:200px;" alt=""></h3></div>
-    <div><h3><img src="resources/img/product/example/example4.jpg"style="width:200px; height:200px;" alt=""></h3></div>
+  	   <c:if test="${!empty t.tFileList }">
+      <c:forEach var="pd" items="${t.tFileList }" begin="0" end="4">
+      <div><h3><img src="resources/tuploadFiles/${pd.tModifyFile }" style="width:200px; height:200px;" alt=""></h3></div>
+      </c:forEach>    
+   	   </c:if>
   </div>
   <br>
   <!--모달 팝업 및 좋아요 아이콘-->
