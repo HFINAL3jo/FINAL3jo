@@ -53,7 +53,7 @@ public class WebSocketController {
         try {
             for(Session session : WebSocketController.sessionList) {
                 if(!self.getId().equals(session.getId())) {
-                    session.getBasicRemote().sendText(message.split(",")[1]+" : "+message);
+					session.getBasicRemote().sendText(/* message.split("(SPLPOINT!!)")[1]+" : "+ */message);
                 }
             }
         }catch (Exception e) {
@@ -66,9 +66,8 @@ public class WebSocketController {
         //logger.info("Message From "+message.split(",")[1] + ": "+message.split(",")[0]);
         try {
             final Basic basic=session.getBasicRemote();
-            basic.sendText("to : "+message);
+            basic.sendText(message);
         }catch (Exception e) {
-            // TODO: handle exception
             System.out.println(e.getMessage());
         }
         sendAllSessionToMessage(session, message);
