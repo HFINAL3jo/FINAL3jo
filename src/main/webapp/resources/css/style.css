@@ -7501,8 +7501,9 @@ h6 {
 /* line 2, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
 .footer_part {
   padding: 45px 0px 25px;
-  background-color: #F1F1F4;
+  background-color: #2c323a;
   border-top: 1px solid lightgray;
+  margin-top: 13%;
 }
 
 @media (max-width: 576px) {
@@ -7589,12 +7590,13 @@ h6 {
 
 /* line 59, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
 .footer_part .single_footer_part p {
+	color: white;
   margin-bottom: 10px;
 }
 
 /* line 65, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
 .footer_part .single_footer_part .list-unstyled li a {
-  color: #7f7f7f;
+  color: white;
   margin-bottom: 10px;
   display: inline-block;
 }
@@ -7722,7 +7724,7 @@ h6 {
 
 /* line 187, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
 .footer_part .copyright_text p {
-  color: #888;
+  color: white;
 }
 
 /* line 191, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */

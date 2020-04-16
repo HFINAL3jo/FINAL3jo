@@ -42,15 +42,18 @@ public class ThemeController extends TFile{
 	@RequestMapping("theme.do")
 	public ModelAndView themeList(ModelAndView mv,
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
-			@RequestParam(value="searchValue",defaultValue="1")int searchValue) {
+			SearchCondition sc) {
 		
 		int listCount = tService.getListCount();
-		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		SearchCondition sc = new SearchCondition();
-		sc.setSearchValue(searchValue);
-		
+		if(sc.getKeyword() == "") sc.setKeyword(null);
 		ArrayList<Theme> list = tService.selectList(pi,sc);
+		
+		for(Theme t: list) {
+			if(t.gettModifyFile().length() <= 18) {
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
+			}
+		}
 		
 		mv.addObject("list",list);
 		mv.addObject("pi",pi);
@@ -62,24 +65,25 @@ public class ThemeController extends TFile{
 	@RequestMapping("pagination.do")
 	public void pagination(HttpServletResponse response,
 		@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
-		@RequestParam(value="searchValue") int searchValue)throws IOException {
+		SearchCondition sc)throws IOException {
 		
 		response.setContentType("application/json; charset=UTF-8");
 		int listCount = tService.getListCount();
 		
-		SearchCondition sc = new SearchCondition();
-		sc.setSearchValue(searchValue);
-		
 		PageInfo pi = Pagination.getPageInfo(currentPage,listCount);
-		
 		ArrayList<Theme> list = tService.selectList(pi,sc);
 		
 		JSONArray jArr = new JSONArray();
 		
 		for(Theme t: list) {
+			if(t.gettModifyFile().length() <= 18) {
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
+			}else {
+				t.settModifyFile(t.gettModifyFile().replace("amp;",""));
+			}
 			JSONObject jobj = new JSONObject();
 			jobj.put("tId",t.gettId());
-			jobj.put("tModifyFile","resources/tuploadFiles/"+t.gettModifyFile());
+			jobj.put("tModifyFile",t.gettModifyFile());
 			jobj.put("tTitle", t.gettTitle());
 			jobj.put("tName","#"+t.gettName());
 			
@@ -94,8 +98,9 @@ public class ThemeController extends TFile{
 	
 	@RequestMapping("themeInsert.do")
 	public String insertTheme(Theme t) {
+		int tNum = tService.getTNum();
 		
-		int result = tService.insertTheme(t);
+		int result = tService.insertTheme(t,tNum);
 		
 		if(result >0) return "redirect:theme.do"; else return "";
 	}

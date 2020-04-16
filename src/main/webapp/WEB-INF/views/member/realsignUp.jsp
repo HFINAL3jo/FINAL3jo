@@ -185,24 +185,10 @@ input:checked+label:after {
 				<div class="col-lg-6 col-md-6">
 					<div class="login_part_form">
 						<div class="login_part_form_iner">
-							<h3>Enter your Email!</h3>
-							<form class="row contact_form" action="auth.do" method="post"
-								novalidate="novalidate">
-								<div class="col-md-12 form-group p_star">
-									<input type="email" class="form-control" id="email"
-										name="e_mail" value="" placeholder="E-mail" required> <span
-										id="ok" style="display: none;" class="guide ok">Your
-										Email is Available</span> <span id="error" style="display: none;"
-										class="guide error">Your Email is Already Joined</span> <input
-										type="hidden" name="idDuplicateCheck" id="idDuplicateCheck"
-										value="0">
-									<button type="submit" name="submit" class="btn_3" >send
-										a mail</button>
+							<h3>CREATE YOUR ACCOUNT</h3>
 
-								</div>
-							</form>
 
-							<!-- <form class="row contact_form" action="signUp.do" method="post"
+							 <form class="row contact_form" action="auth.do" method="post"
 								novalidate="novalidate">
 
 								<div class="col-md-12 form-group p_star">
@@ -251,11 +237,11 @@ input:checked+label:after {
 										<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
 										<li><a href="#"><i class="fab fa-twitter"></i></a></li>
 										<li><a href="#"><i class="fas fa-globe"></i></a></li>
-									</ul> -->
+									</ul>
 
 
-								<!-- </div>
-							</form> -->
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -275,8 +261,26 @@ input:checked+label:after {
 
 	<!-- ■■■■■■■■■■■■ Script part ■■■■■■■■■■■■ -->
 
- 	<script>
-		
+<!-- 
+		/*이메일 인증 팝업*/
+		var openChk;
+		function sendMail() {
+
+			var emailVal = $("#email").val();
+
+			var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			// 검증에 사용할 정규식 변수 regExp에 저장
+
+			if (emailVal.match(regExp) != null) {
+				window.name = "signUp.jsp";
+				openChk = window
+						.open("emailPopup.jsp", "Email Check",
+								"width=500, height=50, resizable = no, scrollbars = no status= no");
+			} else {
+				alert('Error');
+			}
+		}
+
 		/*이메일 중복체크*/
 		function validate() {
 
@@ -327,24 +331,13 @@ input:checked+label:after {
 					}
 				});
 			});
-		});
-		
-		function CheckEmail(str)
-		{                                                 
-		     var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-		     if(!reg_email.test(str)) {                            
-		          return false;         
-		     }                            
-		     else {                       
-		          return true;         
-		     }                            
-		}                                
+		}); -->
 
-		</script>
+ 	<script>
+ 	
+		$(function() {
 
-<!--  	$(function() {
-
-			
+			//비밀번호 확인
 			$('#passwordchk').blur(function() {
 				if ($('#password').val() != $('#passwordchk').val()) {
 					if ($('#passwordchk').val() != '') {
@@ -356,7 +349,7 @@ input:checked+label:after {
 			})
 		});
 
-		$(function() { 
+		$(function() { // 눈표시 클릭 시 패스워드 보이기 
 			$('.eye').on(
 					'click',
 					function() {
@@ -377,7 +370,7 @@ input:checked+label:after {
 					});
 		});
 
-		
+		/*비밀번호 정규식*/
 
 		function checkPassword(password) {
 			if (!/^[a-zA-Z0-9]{10,15}$/.test(password)) {
@@ -400,7 +393,6 @@ input:checked+label:after {
 
 		} 
 
-		            
 		    if ((nickname.value) == ""){
 		 alert("Enter your nickname");
 		 nickname.focus();
@@ -410,9 +402,8 @@ input:checked+label:after {
 		  닉네임 유효성 검사	    
 		 if(!chk({4,10},nickname,"Enter your nickname between 4~10 characters")){
 		 return false;
-		 }  -->
-
-
+		 } 
+	</script>-->
 
 </body>
 

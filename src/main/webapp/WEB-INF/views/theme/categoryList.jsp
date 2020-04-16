@@ -13,6 +13,7 @@
 <!-- nice select CSS -->
 <link rel="stylesheet" href="resources/css/nice-select.css">
 <link rel="stylesheet" href="resources/css/price_rangs.css">
+<link rel="stylesheet" href="resources/css/card.css">
 
 <style type="text/css">
 .floatdiv {
@@ -104,32 +105,31 @@ h4{
 
 
 			</script>
-			    
 			<div id="aList" class="row align-items-center latest_product_inner">
 			
 			    <c:forEach var="t" items="${list }" begin="0" end="${pi.themeLimit}">
-			    <c:url var="post" value="postdetail.do">
-				 <c:param name="tId" value="${t.tId }"/>
-				</c:url>
+				<div class="col-lg-4 col-sm-6" style="max-width:50% !important;">
+				    <c:url var="post" value="postdetail.do">
+					 <c:param name="tId" value="${t.tId }"/>
+					</c:url>
 				<a href="${post }">
-				<div class="col-lg-4 col-sm-6">
+        				<div class="card-list">
+          					<div class="card">
+            					<img src="${t.tModifyFile }"/>
+            						<span>${t.tTitle }</span>
+         								 </div>
 					<div class="single_product_item">
-						<!-- 조아유 -->
-						<img src="resources/tuploadFiles/${t.tModifyFile }"	style="width: 100%; height: 170px">
-							<h4>${t.tTitle }</h4>
 							<h3><b style="color:rgba(121,125,237,0.9)">#${t.tName}</b></h3>
-						<div class="single_product_text">
-							<!-- h5자리 -->
-							<a href="#" class="add_cart" style="font-size: 12px;">+ add to List</a>
-						</div>
 					</div>
-				</div>
+					</div>
 				</a>
+				</div>
 				</c:forEach>
 			</div>
 			<input id="tc" type="hidden" value="${pi.currentPage }">
 			<input id="tm" type="hidden" value="${pi.maxPage }">
 			<input id="sv" type="hidden" name="searchValue" value="${sc.searchValue}">
+			<input id="kw" type="hidden" name="keyword" value="${sc.keyword}">
 			<div align="center">
 				<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:#ebc5e4;">Lord More..</button></a>
 			</div>
@@ -160,6 +160,7 @@ h4{
 		var currentPage = $('#tc').val();
 		var maxPage = $('#tm').val();
 		var searchValue = $('#sv').val();
+		var keyword = $('#kw').val();
 		
 	function pagination(){
 		if(maxPage == currentPage){
@@ -174,34 +175,32 @@ h4{
 	currentPage = parseInt(currentPage);
 	$.ajax({
 		url:"pagination.do",
-		data:{currentPage:currentPage,searchValue:searchValue},
+		data:{currentPage:currentPage,searchValue:searchValue,keyword:keyword},
 		dataType:"json",
 		success:function(data){
+		
 		   $div = $('#aList');
 		   $div.addClass('row align-items-center latest_product_inner');
 		   for(var i in data){
-			  var $a = $('<a>').attr('href',"postdetail.do?tId="+data[i].tId);				
-			  var $diva = $('<div>').addClass('col-lg-4 col-sm-6'); 
-			  var $divb = $('<div>').addClass('single_product_item');
-			  var $img = $('<img loding="lazy">').attr('src',data[i].tModifyFile).css({"width":"100%","height":"170px"});
-			  var $h4 = $('<h4>').text(data[i].tTitle);
+			  var $diva = $('<div>').addClass('col-lg-4 col-sm-6').css('max-width','50%'); 
+			  var $a = $('<a>').attr('href',"postdetail.do?tId="+data[i].tId);
+			  var $divb = $('<div>').addClass('card-list');
+			  var $divc = $('<div>').addClass('card');			  
+			  var $img = $('<img>').attr('src',data[i].tModifyFile);
+			  var $span = $('<span>').text(data[i].tTitle);
+			  var $divd = $('<div>').addClass('single_product_item');
 			  var $h3 = $('<h3>');
 			  var $b  = $('<b>').css({"color":"rgba(121,125,237,0.9)"}).text(data[i].tName);
-			  var $divc = $('<div>').addClass("single_product_text");
-			  //var $h5 = $('<h5></h5>');
-			  var $a1 = $('<a>').attr('href','#').addClass('add_cart').text('+ add to cart');
 				
 			  $div.append($diva);
-			  $a.append($divb);
 			  $diva.append($a);
+			  $a.append($divb);
 			  $divb.append($divc);
-			  $divb.append($img);
-			  $divb.append($h4);
+			  $divc.append($img);
+			  $divc.append($span);
+			  $divb.append($divd);
+			  $divd.append($h3);
 			  $h3.append($b);
-			  $divb.append($h3);
-			  $divb.append($divc)
-			  $divc.append($a1);
-			  //$divc.append($h5);
 		   }
 		},error:function(){
 		   console.log("에러발생");
@@ -220,11 +219,11 @@ h4{
 				pagination();
 				}
 			}
-	 
+		
 	 $('#lastPost').click(function(){
 		 searchValue = 2;
 		 currentPage = 1;
-		 $('#titlebar').text('Last Posting');
+		 $('#titlebar').text('Newest');
 		 $('#aList').html("");
 		 ajaxPage();
 	 });
@@ -235,6 +234,9 @@ h4{
 		 $('#aList').html("");
 		 ajaxPage();
 	 });
+	$('#svf').click(function(){
+		location.href='theme.do';
+	});
 	</script>
 </body>
 </html>

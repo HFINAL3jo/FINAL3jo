@@ -5,6 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    
+    <style>
+    	.footer_part>.container>.row>div>div>h4{
+    		color: white;
+    		margin-bottom: 20px;
+    		text-align: left;
+    	}
+    </style>
 </head>
 <body>
     

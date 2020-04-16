@@ -28,16 +28,30 @@ public class ThemeServiceImpl implements ThemeService {
 	}
 
 	@Override
-	public int insertTheme(Theme t) {
+	public int insertTheme(Theme t,int tNum) {
 		
 		switch(t.gettCode()) {
 		case "History":t.settCode("T1"); break;
 		case "Food":t.settCode("T2"); break;
 		case "Shopping":t.settCode("T3"); break;
-		case "Fastival":t.settCode("T4"); break;
+		case "Festival":t.settCode("T4"); break;
 		case "Night View":t.settCode("T5"); break;
 		case "Museum":t.settCode("T6"); break;
 		case "Exotic":t.settCode("T7"); break;
+		}
+		
+		int chk = tDao.checkFile(tNum);
+		
+		if(chk != 1) {
+			String str = t.gettContent();
+			str = str.substring(str.indexOf("src")+5,str.indexOf("alt")-2);
+			t.settOriginalFile(str);
+			t.settModifyFile(str);
+			TFile tf = new TFile();
+			tf.settCodeNumber(tNum);
+			tf.settOriginalFile(str);
+			tf.settModifyFile(str);
+			int insertLink = tDao.insertImg(tf);
 		}
 		return tDao.insertTheme(t);
 	}

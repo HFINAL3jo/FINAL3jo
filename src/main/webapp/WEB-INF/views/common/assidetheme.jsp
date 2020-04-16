@@ -33,7 +33,7 @@
                                         <label for="confirm-switch"></label>
                                     </div>
                                 </div>
-                               <%--  <c:if test="${loginUser.userId eq 'ADMIN'}"><button>Write</button></c:if> --%>
+                             <button type="button" id="svf" class="btn btn-outline-primary" style="width:100%;">Reset Findings</button>
                             </div>
                         </aside>
 

@@ -36,7 +36,11 @@
 		SELECT COUNT(*)
 		FROM MEMBER
 		WHERE email=#{email}
-		<!-- 카운트가 있으면 아이디가 있다는 것 -->
 	</select>
+	
+	<insert id="authentication" parameterType="Member">
+    INSERT INTO MEMBER
+    VALUES({EMAIL)}
+	</insert>
 
 </mapper>

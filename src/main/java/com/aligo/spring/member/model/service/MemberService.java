@@ -17,5 +17,12 @@ public interface MemberService {
 	 * @return
 	 */
 	int idCheck(String email);
+	
+	
+	/**
+	 * ▶ 이메일 인증관련
+	 * @param m
+	 */
+	public void authentication(Member m);
 
 }

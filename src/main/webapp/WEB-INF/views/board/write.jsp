@@ -68,38 +68,25 @@
 <script type="text/javascript" src="resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false&autoMapping=false"></script>
 <script>
-    $('#testbtn').click(function(){
-    	
-	   var fileList = new Array();
-	   var temp = document.getElementsByClassName('se2_inputarea')[0].children[0].getElementsByTagName('img');
-	   if(temp.length > 0){
-		   for(var i=0;i<temp.length;i++){
-			   var tOriginalFile = temp[i].src.substring(temp[i].src.lastIndexOf("/")+1,70);			   
-			   var tModifyFile = temp[i].title;
-			   
-			   fileList.append(tOriginalFile);
-			   fileList.append(tModifyFile);
-			   
-			   console.log(fileList);
-		   }
-	   }
-    });
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
  oAppRef: oEditors,
  elPlaceHolder: "smarteditor",
  sSkinURI: "resources/se2/SmartEditor2Skin.html",
  fCreator: "createSEditor2"
+ 
 });
-
+  	
    $('#sbtn').click(function(){
-	   
     
    oEditors.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD",[]);
    
    if(validation()) {
-	   }
+	   
+	   
 	   $('#sbtn').submit();
+	   
+	   }
    });
    
    function validation(){ 
@@ -182,9 +169,7 @@ nhn.husky.EZCreator.createInIFrame({
         });
     });
 	});
-   
-
-
+	
 </script>
 </body>
 </html>

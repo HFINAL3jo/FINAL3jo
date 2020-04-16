@@ -25,9 +25,10 @@ public interface ThemeService {
 	/**
 	 * 테마글 작성
 	 * @param t
+	 * @param tNum 
 	 * @return
 	 */
-	int insertTheme(Theme t);
+	int insertTheme(Theme t, int tNum);
 
 	/**
 	 * 테마글 상세보기

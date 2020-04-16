@@ -76,6 +76,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="contactView.do">Q & A</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="chat.do">Free Talk</a>
+                                </li>
                                  <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="" id="navbarDropdown_1"
                                         role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -129,10 +132,16 @@
         </div>
         <div class="search_input" id="search_input_box">
             <div class="container ">
-                <form class="d-flex justify-content-between search-inner">
-                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                <form action="theme.do" class="d-flex justify-content-between search-inner">
+                    <input type="text" name="keyword" class="form-control" id="search_input" list="sl" placeholder="Search Here and Press Enter Key">
+                    <datalist id="sl">
+                   <%--  <c:forEach var="" begin="" end="" items="">
+                    	
+                    	</c:forEach> --%>
+                    </datalist>
                     <button type="submit" class="btn"></button>
                     <span class="ti-close" id="close_search" title="Close Search"></span>
+                    <input type="hidden" name="searchValue" value="1">
                 </form>
             </div>
         </div>
@@ -166,6 +175,12 @@
     <!-- custom js -->
     <script src="resources/js/custom.js"></script>
 
-
+	<script>
+		$('#search_input').on('click keyup',function(){
+			ajax({
+				
+			});
+		});
+	</script>
 </body>
 </html>
