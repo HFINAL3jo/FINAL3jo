@@ -28,5 +28,9 @@ public class QnADao {
 		return (ArrayList)sqlSession.selectList("qnaMapper.selectList",null,rowBounds);
 	}
 
+	public QnA selectBoard(int qId) {
+		return sqlSession.selectOne("qnaMapper.selectBoard",qId);
+	}
+
 	
 }

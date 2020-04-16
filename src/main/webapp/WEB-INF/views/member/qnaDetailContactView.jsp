@@ -67,7 +67,7 @@
     <div class="container">
  	<div class="qnaPage">
      
-      <h2>문의게시판</h2>
+      <h2>상세보기</h2>
       <hr>
         
         <!-- 글 내용-->
@@ -93,28 +93,22 @@
             <tbody>
             <tr>
             <th scope="row">제목</th>
-                                    <td>디자인 문의 관련은 '문의상담' 게시판으로만 접수받습니다.</td>
-                                </tr>
+                   <td>${ q.qTitle }</td>
+               </tr>
             <tr>
             <th scope="row">작성자</th>
-                                    <td>  <span class="displaynone">(ip:)</span> </td>
-                                </tr>
-            <tr class="">
-            <th scope="row">작성일</th>
-                                    <td>2016-11-11</td>
-                                </tr>
+	                <td>${ q.qWriter }</td>
+	            </tr>
             <tr>
-            <td colspan="2">
-                                        <div class="detail"><p><br></p><p>디자인 상담이나 문의할 내용이 있으신 경우 디자인퍼블릭 홈페이지의 '문의/상담' 게시판에 글 남겨주세요.</p><p><br></p><p><span>내용은 되도록 상세하게 남겨주시고 캡쳐화면을 첨부하여 주시면 내용 파악에 도움이 됩니다.</span></p><p><br></p><p>파일용량이 클 경우에는 <a href="http://mailto:design_pb@naver.com/" target="_blank">design_pb@naver.com</a>으로 보내주세요.</p><p><br></p><p><br></p><p><br></p><p><span">필요한 정보를 기재하지 않으시거나 커스터마이징 방법문의, 전문지식을 요하는 문의, 그리고 저희 디자인과 전혀 무관한 질문을 남길 경우 </span"></p><p><span style="font-size: 9pt;"><br></span></p><p><span style="font-size: 9pt;">통보없이 글이 삭제되거나 답변이 되지 않을 수 있습니다.</span></p><p><span style="font-size: 9pt;"><br></span></p><p>디자인 사용방법이나 궁금한 점에 대해서만 답변이 가능하며 <span>쇼핑몰솔루션 기능에 관련된 문의는 카페24 고객센터로 해주세요.</span></p><p></p><p></p><p><br></p></div>
-                                    </td>
-                                </tr>
-            <tr class="attach displaynone">
-            <th scope="row">첨부파일</th>
-                                    <td></td>
-                                </tr>
+            <th scope="row">작성일</th>
+                   <td>${q.qCreateDate }</td>
+               </tr>
+            <tr>
+            <td colspan="2">${q.qContent }</td>
+             	</tr>
             <tr class="displaynone ">
             <th scope="row">비밀번호</th>
-                                    <td><input id="password" name="password" fw-filter="" fw-label="비밀번호" fw-msg="" onkeydown="if (event.keyCode == 13 || event.which == 13) { return false; }" value="" type="password"> <span class="ec-base-help txtInfo">수정 및 삭제하려면 비밀번호를 입력하세요.</span>
+                                    <td><input id="password" name="password"  onkeydown="if (event.keyCode == 13 || event.which == 13) { return false; }" value="" type="password"> <span class="ec-base-help txtInfo">수정 및 삭제하려면 비밀번호를 입력하세요.</span>
             </td>
                                 </tr>
             </tbody>
@@ -131,7 +125,7 @@
                                 <a href="http://webpublic.co.kr/board/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/" class="btn">목록</a>
                             </span>
                             <span class="gRight">
-                                <a href="http://webpublic.co.kr/article/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/4060/#none" onclick="BOARD_READ.article_delete(&#39;BoardDelForm&#39;,&#39;1&#39;);" class="displaynone btn">삭제</a>
+                                <a href="http://webpublic.co.kr/article/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/4060/#none"  class="displaynone btn">삭제</a>
                                 <a href="http://webpublic.co.kr/board/free/modify.html?board_act=edit&amp;no=4060&amp;board_no=1" class="displaynone btn btn-black">수정</a>
                                 <a href="http://webpublic.co.kr/board/free/reply.html" class="displaynone btn">답변</a>
                             </span>
@@ -148,11 +142,11 @@
             <input id="comment_no" name="comment_no" value="" type="hidden">
             <input id="member_id" name="member_id" value="" type="hidden"><div class="xans-element- xans-board xans-board-commentform-1002 xans-board-commentform xans-board-1002 "><fieldset>
             <legend>댓글 수정</legend>
-                                <p>비밀번호 : <input id="comment_password" name="comment_password" fw-filter="isFill" fw-label="댓글비밀번호" fw-msg="" value="" type="password"> <span class="secret displaynone"><label>비밀댓글</label></span></p>
+                                <p>비밀번호 : <input id="comment_password" name="comment_password"  value="" type="password"> <span class="secret displaynone"><label>비밀댓글</label></span></p>
                                 <div class="view">
-                                    <textarea id="comment_modify" name="comment_modify" fw-filter="isFill" fw-label="댓글내용" fw-msg=""></textarea>                        <span class="submit">
-                                        <a href="http://webpublic.co.kr/article/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/4060/#none" onclick="BOARD_COMMENT.comment_update_ok(&#39;commentForm&#39;);"><img src="./제일 예쁜 웹퍼블릭 심플 문의사항_files/btn_comment_modify.gif" alt="수정"></a>
-                                        <a href="http://webpublic.co.kr/article/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/4060/#none" onclick="BOARD_COMMENT.comment_cancel_ok(&#39;commentForm&#39;);"><img src="./제일 예쁜 웹퍼블릭 심플 문의사항_files/btn_comment_cancel.gif" alt="취소"></a>
+                                    <textarea id="comment_modify" name="comment_modify" ></textarea>                        <span class="submit">
+                                        <a href="http://webpublic.co.kr/article/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/4060/#none" ><img src="./제일 예쁜 웹퍼블릭 심플 문의사항_files/btn_comment_modify.gif" alt="수정"></a>
+                                        <a href="http://webpublic.co.kr/article/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/4060/#none" ><img src="./제일 예쁜 웹퍼블릭 심플 문의사항_files/btn_comment_cancel.gif" alt="취소"></a>
                                     </span>
                                 </div>
                                 <p class="displaynone"> /  byte</p>
@@ -233,7 +227,7 @@
   <%@ include file="../common/footer.jsp"%>
    <!--::footer_part end::-->
 
-<script>
+<!-- <script>
 	function getReplyList(){
 		var prev = ${ prev };
 		var pageSelect = ${ p };
@@ -250,6 +244,6 @@
 			}
 		});
 	}
-</script>
+</script> -->
 </body>
 </html>

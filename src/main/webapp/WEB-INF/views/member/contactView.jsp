@@ -26,7 +26,7 @@
     color: #ffffff;
   }
   tbody tr:nth-child(2n) {
-    background-color: #FFB6C1;
+    background-color: #ffffff;
   }
   tbody tr:nth-child(2n+1) {
     background-color: #FAFAFA;
@@ -52,7 +52,7 @@
         <div class="col-lg-8">
           <div class="breadcrumb_iner">
             <div class="breadcrumb_iner_item">
-              <h2>contact us</h2>
+              <h2>Q & A</h2>
               <p>Home <span>-</span> contact us</p>
             </div>
           </div>
@@ -82,66 +82,35 @@
         </tr>
     </thead>
     <tbody id="tbody">
-	<%-- <c:forEach var="q" items="${ list }">
-        <tr>
-            <td>${ q.qId }</td>
-            <td>
-            	<c:url var="qdetail" value="qdetail.do">
-            		<c:param name="qId" value="${ q.qId }"/>
-            		<c:param name="currentPage" value="${ pi.currentPage }"/> 
-            	</c:url>
-            	<c:if test="${ empty loginUser }">
-            		${ q.qTitle }
-            	</c:if>
-            </td>
-            <td>${ q.qWriter }</td>
-            <td>${ q.qCreateDate }</td>
-            <td>${ q.qStatus }</td>
-        </tr>
-	</c:forEach> --%>
+	
     </tbody>
     
-    <!-- 페이징 처리 -->
-    <tr id="pagingDiv" align="center" height="20">
-    	<td colspan="6">
-    	
-    	<!-- [이전] -->
-    	<c:if test="${ pi.currentPage eq 1 }">
-    		[이전] &nbsp;
-    	</c:if>
-    	<c:if test="${ pi.currentPage ne 1 }">
-    		<c:url var="prev" value="contactView.do">
-    			<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
-    		</c:url>
-    		<a href="${ prev }" onclick="getList(${ pi.currentPage -1 })">[이전]</a> &nbsp;
-    	</c:if>
-    	
-    	<!-- 페이지 -->
-    	<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-    		<c:if test="${ p eq pi.currentPage }">
-    			<font color="pink" size="4"><b>[${ p }]</b></font>
-    		</c:if>
-    		
-    		<c:if test="${ p ne pi.currentPage }">
-    			<c:url var="pagination" value="contactView.do">
-    				<c:param name="currentPage" value="${ p }"/>
-    			</c:url>
-    			<a href="${ pagination }" onclick="getList(${p})">${ p }</a> &nbsp;
-    		</c:if>
-    	</c:forEach>
-    	
-    	<!-- [다음] -->
-    	<c:if test="${ pi.currentPage eq pi.maxPage }">
-    		[다음]
-    	</c:if>
-    	<c:if test="${ pi.currentPage ne pi.maxPage }">
-    		<c:url var="next" value="contactView.do">
-    			<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
-    		</c:url>
-    		<a href="${ next }" onclick="getList(${pi.currentPage + 1})">[다음]</a>
-    	</c:if>
-	</tr>
+
     </table>
+<!--     <div class="col-lg-12">
+    <div class="pageination">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <i class="ti-angle-double-left"></i>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item"><a class="page-link" href="#">6</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <i class="ti-angle-double-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div> -->
 </div>
 </div>
       <div class="row">
@@ -217,47 +186,71 @@
 
 <script>
 	$(function(){
-		getList();	
+		var pageNo = ${currentPage};
+		getList(pageNo);	
 	});
 	
-	function getList(){
+	function getList(pageNo){
 		$.ajax({
 			url:"contactListView.do",
+			data:{currentPage:pageNo},
 			dataType:"json",
+			type:"post",
 			success:function(data){
-				$tableBody = $("qtb tbody");
-				$tableBody.html("");
+				console.log(data);
 				
-				var $tr;
-				var $qId;
-				var $qTitle;
-				var $qContent;
-				var $qCreateDate;
-				var $qStatus;
-				console.log(data.list.length);
-				console.log(data.list);
-				if(data.list.length > 0){
+				var listText = "";
+				<%-- var loginUser = "<%= ((Member)session.getAttribute("loginUser")).getId()%>"; --%>
+				
 					for(var i in data.list){
-						$tr = $("<tr>");
-						$qId = $("<td>").text(data[i].list.qId);
-						$qTitle = $("<td>").text(data[i].list.qTitle);
-						$qWriter = $("<td>").text(data[i].list.qWriter);
+						listText += "<tr>";
+						listText += "<td>"+data.list[i].qId+"</td>";
+						listText += "<td>";
+						listText += "<a href='qdetail.bo?qId="+data.list[i].qTitle+"$currentPage="+data.pi.currentPage+"'>"+data.list[i].qTitle+"</a>";
+						listText += "</td>";
 						
-						$tr.append($qId);
-						$tr.append($qTitle);
-						$tr.append($qWriter);
-						$tableBody.append($tr);
+						listText += "<td>"+data.list[i].qWriter+"</td>";
+						listText += "<td>"+data.list[i].qCreateDate+"</td>";
+						listText += "<td>"+data.list[i].qStatus+"</td>";
+
+						listText +="</tr>";
 					}
-				}else{
-					//$tr = $("<tr>");
-					/* $tr.append($qContent);
-					$tableBody.append($tr); */
-				}
-			},error:function(){
-				console.log("전송실패");
+				
+					   // 페이징 처리
+					   listText += "<tr align='center' height='20'>";
+					   listText += "<td colspan='6'>";
+					   // [이전]
+					   if(pageNo == 1){
+						   listText +=	"[이전] &nbsp;";
+					   }else{
+						   listText += "<a href='javascript:void(0);' onclick='getList("+ (pageNo - 1) +")'>[이전]</a> &nbsp;&nbsp;";
+					   }
+						// 페이지 
+						for(var p= data.pi.startPage; p<= data.pi.endPage; p++){
+							if(p == data.pi.currentPage){
+								listText += "<font color='red' size='4'><b>"+ [ p ] + "</b></font>&nbsp;&nbsp;";
+							}else{
+								listText +=  "<a href='javascript:void(0);' onclick='getList("+ p + ")'>" + p + "</a> &nbsp;&nbsp;";
+							}						
+						}
+						// [다음]
+						if(pageNo == data.pi.maxPage){
+							listText += "[다음]";
+						}else{
+							listText += "<a href='javascript:void(0);' onclick='getList("+ (pageNo+1) +")'>[다음]</a>&nbsp;&nbsp;";
+						}
+						listText +="</td>";
+						listText +="</tr>";
+					   
+					   $("#qtb tbody").html(listText);
+					   
+					},error:function(){
+						console.log("전송실패");
+					}
+				});
 			}
-		});
-	}	
-</script>
+
+		</script>
+	
 </body>
 </html>

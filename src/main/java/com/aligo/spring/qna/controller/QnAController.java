@@ -27,8 +27,11 @@ public class QnAController {
 	private QnAService qService;
 	
 	@RequestMapping("contactView.do")
-	public String boardList(){
-		return "member/contactView";
+	public ModelAndView boardList(ModelAndView mv,
+			@RequestParam(value="currentPAge",required=false,defaultValue="1")int currentPage){
+			mv.addObject("currentPage",currentPage);
+			mv.setViewName("member/contactView");
+		return mv;
 	}
 	
 	@RequestMapping("contactListView.do")
@@ -37,7 +40,6 @@ public class QnAController {
 			@RequestParam(value="currentPage",required=false,defaultValue="1")int currentPage) throws JsonIOException, IOException {
 		//System.out.println(currentPage);
 		
-		response.setContentType("application/json; charset=utf-8");
 		
 		int listCount = qService.getListCount();
 		
@@ -49,8 +51,26 @@ public class QnAController {
 		hmap.put("list",list);
 		hmap.put("pi",pi);
 		
-		Gson gson = new Gson().newBuilder().setDateFormat("yyyy-MM-dd").create();
+		response.setContentType("application/json; charset=utf-8");
+		
+		Gson gson = new Gson().newBuilder().setDateFormat("yyyy-MM-dd hh:mm a").create();
 		gson.toJson(hmap,response.getWriter());
 	}
 	
+	@RequestMapping("qdetail.bo")
+	public ModelAndView boardDetail(ModelAndView mv, int qId, 
+			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
+		
+		QnA q = qService.selectBoard(qId);
+		
+		if(q != null) {
+			mv.addObject("q",q)
+			  .addObject("currentPage",currentPage)
+			  .setViewName("member/qnaDetailContactView");
+		}else {
+			mv.addObject("msg","상세조회 실패!")
+			.setViewName("common/errorPage");
+		}
+		return mv;
+	}
 }
