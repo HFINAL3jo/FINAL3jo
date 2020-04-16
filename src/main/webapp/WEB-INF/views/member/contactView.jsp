@@ -240,13 +240,16 @@
 					for(var i in data.list){
 						$tr = $("<tr>");
 						$qId = $("<td>").text(data[i].list.qId);
-						$qTitle = $("<td>").text(data[i].list.);
-						$qWriter = $("<td>").text(data[i]);
+						$qTitle = $("<td>").text(data[i].list.qTitle);
+						$qWriter = $("<td>").text(data[i].list.qWriter);
+						
 						$tr.append($qId);
+						$tr.append($qTitle);
+						$tr.append($qWriter);
 						$tableBody.append($tr);
 					}
 				}else{
-					$tr = $("<tr>");
+					//$tr = $("<tr>");
 					/* $tr.append($qContent);
 					$tableBody.append($tr); */
 				}
