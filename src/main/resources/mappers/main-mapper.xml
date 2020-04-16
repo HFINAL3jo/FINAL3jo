@@ -47,4 +47,11 @@
 		FROM THEME_LIST) B on (A.xx = B.yy)
 		JOIN THEME_FILES F ON(B.TID = F.T_CODE_NUMBER)
 	</select>
+	
+	<select id="selectTheme" resultMap="themeResultSet">
+		SELECT *
+		FROM THEME_LIST
+		WHERE TID=#{tId}
+		AND T_STATUS='Y'
+	</select>
 </mapper>

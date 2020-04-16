@@ -211,11 +211,6 @@
       <script>
       	 $(function(){
       		topList();
-      		
-      		$('.card').on("click",function(){
-      			location.href="/spring/categoryList.jsp";
-      		});
-      		
       	});
       	
       	function topList(){
@@ -224,13 +219,13 @@
       			dataType:"json",
       			success:function(data){
       				$.each(data, function(index, value){
-      					
+      					console.log(value);
       					var card = "#card" + (index + 1);	
       					
       					$(card).children('img').attr('src',"/spring/resources/tuploadFiles/"+value.tModifyFile);
       					$(card).children('span').html(value.tTitle);
       					$(card).on("click",function(){
-      						location.href="topListDetail.do";
+      						location.href="topListDetail.do?tId="+value.tId;
       					});
       				});
       			},error:function(){

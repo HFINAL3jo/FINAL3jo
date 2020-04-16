@@ -26,4 +26,10 @@ public class MainServiceImpl implements MainService {
 		return mDao.selectThemeList();
 	}
 
+	@Override
+	public Theme selectTheme(String tId) {
+		
+		return mDao.selectTheme(tId);
+	}
+
 }

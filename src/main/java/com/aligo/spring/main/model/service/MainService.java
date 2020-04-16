@@ -18,4 +18,11 @@ public interface MainService {
 	 */
 	ArrayList<Theme> selectThemeList();
 
+	/**
+	 * 3. 테마 포스팅 상세 페이지
+	 * @param tId
+	 * @return
+	 */
+	Theme selectTheme(String tId);
+
 }
