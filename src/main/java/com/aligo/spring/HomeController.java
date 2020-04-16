@@ -57,10 +57,11 @@ public class HomeController {
 		return "member/myReview";
 	}
 	
-	@RequestMapping("likedList.do")
+	/*@RequestMapping("likedList.do")
 	public String likedList() {
 		return "member/likedList";
 	}
+	*/
 	
 	@RequestMapping("deleteMember.do")
 	public String deleteMember() {
