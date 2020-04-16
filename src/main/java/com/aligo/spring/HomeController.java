@@ -106,6 +106,6 @@ public class HomeController {
 	
 	@RequestMapping("themeDetailView.do")
 	public String themeDetailView() {
-		return "theme/themeDetailView";
+		return "theme/themeDetailView2";
 	}
 }

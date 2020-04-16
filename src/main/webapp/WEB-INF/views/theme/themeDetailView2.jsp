@@ -16,7 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=645218c0e569303936c79803cc2aa695&libraries=services"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=645218c0e569303936c79803cc2aa695&libraries=LIBRARY"></script>      
- 	<script type="text/javascript" src="humanframe/theme/visitseoul/assets/script/livere8_lib.js" charset="utf-8"></script>
+ 
     <style>
     .like-content {
 	    display: inline-block;
@@ -128,6 +128,9 @@
             height: 1px;
             background-color: #ddd;
         }
+
+    </style>
+    <style>
           .sub-contents-inner p {
               font-size: 16px;
               font-weight: 300;
@@ -293,7 +296,7 @@
               font-size: 15px;
               color: #0085e9;
               padding-right: 15px;
-               background: url(//humanframe/theme/visitseoul/assets/images/2019/web_content/0128/ico-arrow.png) no-repeat right center
+              background: url(/humanframe/theme/visitseoul/assets/images/2019/web_content/0128/ico-arrow.png) no-repeat right center
           }
           
           @media screen and (max-width: 768px) {
@@ -339,28 +342,57 @@
             <!-- sub-detail-visual -->
             <div class="sub-contents-inner" id="container">
                 <!-- wide-inner-->
-				
+
                 <div class="loction">
-                    &gt;&nbsp;<span id="th" class="ar">Theme</span> 
-                    &gt;&nbsp;<span id="tn" class="ar">${t.tName }</span> 
+                    <span class="ar">&gt;</span> 테마
+                    <span class="ar">&gt;</span>
+                    <span>자연과 공원</span>
                 </div>
                 <!-- location  -->
 
                 <section class="infor-element">
                     <div class="text-type">
                        		공원&amp;정원</div>
-                    <h3 class="h3 textcenter">${t.tTitle }</h3>
-                    <br>                    
-					<span style="float:right;">Views : ${t.tViews }<br></span>
+                    <h3 class="h3 textcenter">낮과 밤 모두 완벽한 이곳, 석촌호수!</h3>                    
+
                     <div class="post-element">
-                        <span>Posted : ${t.tCreateDate } / Modified : ${t.tModifyDate }</span>
+                        <span>제작일 : 2020.02.18 / 수정일 : 2020.02.18</span>
                     </div>
-                    <div class="text-area" style="text-align:center;">
-                        ${t.tContent }
-                        <br><br>
+                    <div class="text-area">
+                        <p>도심 속에서 즐기는 여유는 특별한 감성을 가져다준다.
+                            <br>그곳이 고요한 호수의 산책이라면 더 훌륭하다.
+                            <br>
+                            <br><strong>바쁜 여행 일정 속에 몸과 마음에도 가끔은 휴식이 필요하다.<br>지친 일상을 달래줄 석촌호수의 산책로에서 여유를 즐겨 보는 건 어떨까.</strong></p>
+                        <p>&nbsp;</p>
+                        <p style="text-align:center;padding-bottom:15px"><img class="main-img" src="/spring/resources/images/gyungbok_palace.jpg" alt="낮과 밤 모두 완벽한 이곳, 석촌호수!"></p>
+                        <p>&nbsp;</p>
+                        <h3>석촌호수</h3>
+                        <p>&nbsp;</p>
+                        <p>석촌호수는 송파대로가 호수를 가로질러 가게 되면서 기다란 8자 모양을 하고 있다.
+                            <br>잠실역과 롯데월드타워가 바로 연결되어 있어 접근성도 용이하다.
+                            <br>호수를 따라 걷다 보면 알록달록한 벽화들, 전시공간, 조각품 등 다양하게 꾸며져 있어 산책로가 지루하지 않다.</p>
+                        <p>&nbsp;</p>
+                        <h4># 석촌호수 즐기기</h4>
+                        <p><strong>1. 산책로 걷기</strong>
+                            <br>
+                            <br>잘 가꿔진 도심 속 쉼터라는 타이틀이 아깝지 않을 매력을 가지고 있는 석촌호수다.
+                            <br>낮에는 낮의 매력을 밤에는 밤의 아름다움을 뽐내고 시즌 별로 열리는 축제도 기다리게 된다.
+                            <br>그중에서도 석촌호수의 야경은 아름다운 서울을 눈에 담을 수 있는 매력적인 코스로 통한다.
+                            <br>
+                            <br>서호와 동호가 합쳐진 석촌호수는 약 2.5km 되며, 천천히 걸으면 한 시간이 조금 넘게 걸린다.
+                            <br>동호 방향에는 롯데월드타워, 롯데월드몰이 있으며, 서호 방향에는 롯데월드가 위치해 있다.
+                            <br>걷다 보면 롯데월드의 동화 같은 성을 만나기도 하고, 액티브한 놀이기구를 타는 사람들의 즐거운 비명소리를 듣기도 한다.</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p><img class="main-img" src="/spring/resources/images/gyungbok_palace.jpg" alt="석촌호수">
+                        <p>&nbsp;</p>
+                        <p>누구에게나 열려있는 ‘공유 피아노’를 만나게 되면 그냥 지나칠 수가 없다.
+                            <br>운이 좋으면 근사한 음악 연주를 들을 수 있고, 직접 연주해 볼 수도 있어 한 번씩 머물다 가는 곳이다.</p>
+                        <p>&nbsp;</p><img class="main-img" src="/spring/resources/images/gyungbok_palace.jpg" alt="석촌호수">
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
                         <div class="cnt-blockquote">
-                            <dl><dt>Address</dt>
-                                <dd>${t.tAddress }</dd>
+                            <dl><dt>주소</dt>
+                                <dd>서울특별시 송파구 잠실동 47</dd>
                             </dl>
                             <dl><dt>지하철</dt>
                                 <dd>2호선 잠실역 3번 출구</dd>
@@ -377,121 +409,7 @@
                         </div>
                         <p>&nbsp;</p>
                         <div id="map" style="width:100%;height:400px;"></div>
-               					<br>
-					<div class="like-content" align="center">
-						<span>
-    					Did you like this review? Press like to make it easier for others to see
-  						</span>
-  
-  						<button class="btn-secondary like-review" id="likeBtn" name="likeBtn" value="0">
-    					<i class="fa fa-heart" aria-hidden="true"></i> Like ${t.tLikes}
-  						</button>
-					</div>
-                        <p>&nbsp;</p>
-                        <p>&nbsp;</p>
-                        <p>&nbsp;</p>
-                        <h3 class="black"># ${t.tKeyword}</h3>
-                        <p>&nbsp;</p>
-                        <ul class="cols4-element">
-                            <li>
-                                <a href="http://me2.do/xDAyqdMi" title="서울야경 스릴 있게 즐기기!"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27505&amp;fileTy=MEDIA&amp;fileNo=1" alt="서울야경 스릴 있게 즐기기!"><span class="cont"><span class="title">서울야경 스릴 있게 즐기기!</span><span class="content">                    국내 최고 높이의 롯데타워 전망대에서                    아찔한 인증샷을 남겨보자.</span></span><span class="link"><span>랜드마크 서울스카이</span></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://me2.do/5e04rj8z" title="비가와도 걱정 없는 이곳!"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27506&amp;fileTy=MEDIA&amp;fileNo=1" alt="비가와도 걱정 없는 이곳!"><span class="cont"><span class="title">비가와도 걱정 없는 이곳!</span><span class="content">아이들과의 여행에서 비가 온다면?걱정 없이 즐길 수 있는 잠실 여행코스.</span></span><span class="link"><span>하루 종일 놀 수 있는 실내코스 </span></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://me2.do/GcbukJyo" title="  낮과밤 모두 완벽한 석촌호수"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27507&amp;fileTy=MEDIA&amp;fileNo=1" alt="  낮과밤 모두 완벽한 석촌호수"><span class="cont"><span class="title">                    낮과밤 모두 완벽한 석촌호수</span><span class="content">                    도심 속에서 즐기는 특별한 여유!                    고요한 호수 산책과                    여유를 즐겨보는 코스.</span></span><span class="link"><span>                    석촌호수 힐링여행</span></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://me2.do/GXmjSWe1" title="자동차 극장은 처음이지?"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27508&amp;fileTy=MEDIA&amp;fileNo=1" alt="자동차 극장은 처음이지?"><span class="cont"><span class="title">자동차 극장은 처음이지?</span><span class="content">                    색다른 경험과 즐거움이 가득한                    자동차 극장 백배 즐기는 방법.</span></span><span class="link"><span>잠실 자동차 극장</span></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </section>
-                <section class="tag-element detail">
-                    <span class="title">태그</span>
-                    <p>
-                        <a href="/search?search_radio=T&amp;lang=ko&amp;searchTerm=낮과-밤-모두-완벽한-이곳-석촌호수">#${t.tKeyword }</a>
-                    </p>
-                </section>
-                <!-- livere -->
-                <div class="livere-wrap">
-                    <!-- livere8 -->
-                    
-                    <div id="livereContainer" style="padding-top:30px;" class="livereReply_useMouseOver">
-                    
-                        <div id="liverePlugIn">
-                            <h3 class="livereNone">소셜댓글 라이브리 영역. SNS 계정으로 로그인해 댓글을 작성하고 SNS로 전송할 수 있습니다</h3>
-                            <div id="livereWriteForm">
-                                <div id="livereWriteFormTop"> <span id="livereSNSLoginTitle">소셜로그인</span>
-                                    <div id="livereSNSLoginIconContainer">
-                                        <ul id="livereLogged" class="livereNone"></ul>
-                                        <ul id="livereNotLogged">
-                                            <li id="livere_facebook">
-                                                <button type="button" class="livereSNSLoginIcon livereClick livereBtn1" clicktype="snsLoginBtn" rel="tooltip"> <span class="livereSNSImage_B livere_t_indent">Facebook 로그인 페이지 새창이 열립니다</span> </button>
-                                            </li>
-                                            <li id="livere_twitter">
-                                                <button type="button" class="livereSNSLoginIcon livereClick livereBtn1" clicktype="snsLoginBtn" rel="tooltip"> <span class="livereSNSImage_B livere_t_indent">Twitter 로그인 페이지 새창이 열립니다</span> </button>
-                                            </li>
-                                            <li id="livere_google_plus">
-                                                <button type="button" class="livereSNSLoginIcon livereClick livereBtn1" clicktype="snsLoginBtn" rel="tooltip"> <span class="livereSNSImage_B livere_t_indent">GooglePlus 로그인 페이지 새창이 열립니다</span> </button>
-                                            </li>
-                                            <li id="livere_linkedIn">
-                                                <button type="button" class="livereSNSLoginIcon livereClick livereBtn1" clicktype="snsLoginBtn" rel="tooltip"> <span class="livereSNSImage_B livere_t_indent">LinkedIn 로그인 페이지 새창이 열립니다</span> </button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div id="livereWriteFormMiddle">
-                                    <div id="livereWriteFromMiddleLeft">
-                                        <ul id="liverePrimaryStatus">
-                                            <li> <span id="liverePrimaryThumb" class="notLoggedThumb">							<img src="https://101.livere.co.kr/images/_.gif" alt="로그인 전 프로필 이미지">						</span> </li>
-                                        </ul>
-                                    </div>
-                                    <div id="livereWriteFormMiddleRightContainer">
-                                        <label for="livere_contentText" class="livereNone">댓글입력하는영역</label>
-                                        <ul id="livereWriteFormMiddleRight" class="livereWriteFormWrapper">
-                                            <li class="livereAccInfoWrapper">
-                                                <p id="livereAccInfo" class="livereAccInfo">소셜계정으로 작성하세요</p>
-                                            </li>
-                                            <li id="livereWriteParamsForm" class="livereContentTextForm">
-                                                <input id="livere_short_url" name="livere_short_url" type="hidden">
-                                                <input id="livere_name" name="livere_name" type="hidden">
-                                                <input id="livere_parent_seq" name="livere_parent_seq" type="hidden">
-                                                <textarea tabindex="0" id="livere_contentText" class="livere_contentText" name="livere_content" targetname="livereParentStrCount" title="댓글입력하는영역" aria-label="댓글입력하는영역" disabled="disabled">로그인 후 작성 가능합니다</textarea>
-                                            </li>
-                                            <li id="livereWriteFormFunction" class="livereFunctionContainer">
-                                                <ul id="livereFunctionWrapper" class="livereFunctionWrapper">
-                                                    <li id="livereAttachOpenBtnsWrapper">
-                                                        <button type="button" id="livereImageAttachOpenBtn" class="livereAttachOpenBtns livereBtn3 livere_t_indent" rel="tooltip"><span>사진첨부창 열기</span></button>
-                                                        <button type="button" id="livereVideoAttachOpenBtn" class="livereAttachOpenBtns livereBtn3 livere_t_indent" rel="tooltip"><span>비디오첨부창 열기</span></button>
-                                                    </li>
-                                                    <li class="livereTextCountWrapper"> <strong id="livereParentStrCount">0</strong>/<span id="livereStrMaxCount">250</span> </li>
-                                                </ul>
-                                            </li>
-                                            <li id="livereWriteFormMiddleBottom">
-                                                <button type="button" id="livereWriteBtn" class="livereWriteBtn livereBtn2"><span class="livereFont5">보내기</span></button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div id="livereHome"><span id="livereHomeBtn"><a href="http://www.livere.com" title="라이브리 홈페이지 - 새 창이 열립니다" aria-label="라이브리 홈페이지 - 새 창이 열립니다" target="_blank">Powered by <strong class="livereColor1">Live</strong><strong class="livereColor2">Re</strong></a></span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- //livere8-->
-                </div>
-                <!--// livere -->
-            </div>
-            <div class="heart heart-unliked"></div>
-            <%@ include file="../common/footer.jsp" %>
-            
-            <script>
+               <script>
 				var mapContainer = document.getElementById('map');
 				var mapOption = {
 				    center: new daum.maps.LatLng(37.566826, 126.9786567),
@@ -566,8 +484,79 @@
 				        });
 				    });
 				}); */
-				
-				//--------------------------------
+				</script>
+					<br>
+					<div class="like-content" align="center">
+						<span>
+    					Did you like this review? Press like to make it easier for others to see
+  						</span>
+  
+  						<button class="btn-secondary like-review" id="likeBtn" name="likeBtn" value="0">
+    					<i class="fa fa-heart" aria-hidden="true"></i> Like
+  						</button>
+					</div>
+					<script type="text/javascript">
+				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
+				    $(function(){
+						$(document).on('click', '.like-review', function(e) {
+							if( $('#likeBtn').val() == 0 ){
+								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this');
+								$(this).children('.fa-heart').addClass('animate-like');
+								$(this).val(1);
+								
+							}else{
+								console.log();
+								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> Like');
+								$(this).children('.fa-heart').addClass('animate-like');
+								$(this).val(0);
+							}
+						});
+						/*
+							자바스크립트로 조아요 버튼 값을 받아서 밸류 체크후 클릭
+							해보쟈~~~~
+						*/
+						
+					});
+				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
+					</script>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <h3 class="black"># 엔도르핀이 팍팍, 잠실</h3>
+                        <p>&nbsp;</p>
+                        <ul class="cols4-element">
+                            <li>
+                                <a href="http://me2.do/xDAyqdMi" title="서울야경 스릴 있게 즐기기!"><img src="/comm/getImage?srvcId=MEDIA&amp;parentSn=27505&amp;fileTy=MEDIA&amp;fileNo=1" alt="서울야경 스릴 있게 즐기기!"><span class="cont"><span class="title">서울야경 스릴 있게 즐기기!</span><span class="content">                    국내 최고 높이의 롯데타워 전망대에서                    아찔한 인증샷을 남겨보자.</span></span><span class="link"><span>랜드마크 서울스카이</span></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://me2.do/5e04rj8z" title="비가와도 걱정 없는 이곳!"><img src="/comm/getImage?srvcId=MEDIA&amp;parentSn=27506&amp;fileTy=MEDIA&amp;fileNo=1" alt="비가와도 걱정 없는 이곳!"><span class="cont"><span class="title">비가와도 걱정 없는 이곳!</span><span class="content">아이들과의 여행에서 비가 온다면?걱정 없이 즐길 수 있는 잠실 여행코스.</span></span><span class="link"><span>하루 종일 놀 수 있는 실내코스 </span></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://me2.do/GcbukJyo" title="  낮과밤 모두 완벽한 석촌호수"><img src="/comm/getImage?srvcId=MEDIA&amp;parentSn=27507&amp;fileTy=MEDIA&amp;fileNo=1" alt="  낮과밤 모두 완벽한 석촌호수"><span class="cont"><span class="title">                    낮과밤 모두 완벽한 석촌호수</span><span class="content">                    도심 속에서 즐기는 특별한 여유!                    고요한 호수 산책과                    여유를 즐겨보는 코스.</span></span><span class="link"><span>                    석촌호수 힐링여행</span></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://me2.do/GXmjSWe1" title="자동차 극장은 처음이지?"><img src="/comm/getImage?srvcId=MEDIA&amp;parentSn=27508&amp;fileTy=MEDIA&amp;fileNo=1" alt="자동차 극장은 처음이지?"><span class="cont"><span class="title">자동차 극장은 처음이지?</span><span class="content">                    색다른 경험과 즐거움이 가득한                    자동차 극장 백배 즐기는 방법.</span></span><span class="link"><span>잠실 자동차 극장</span></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </section>
+                <section class="tag-element detail">
+                    <span class="title">태그</span>
+                    <p>
+                        <a href="/search?search_radio=T&amp;lang=ko&amp;searchTerm=낮과-밤-모두-완벽한-이곳-석촌호수">#낮과-밤-모두-완벽한-이곳-석촌호수</a>
+                    </p>
+                </section>
+                <!-- livere -->
+                <div class="livere-wrap">
+                    <!-- livere8 -->
+                    <script type="text/javascript" src="/humanframe/theme/visitseoul/assets/script/livere8_lib.js" charset="utf-8"></script>
+                    <div id="livereContainer" style="padding-top:30px;" class="livereReply_useMouseOver">
+                        <script type="text/javascript">
                             //		jQuery.noConflict();
                             var locale = 'ko';
                             var current_url_ = 'http://korean.visitseoul.net/nature/낮과-밤-모두-완벽한-이곳-석촌호수_/33228';
@@ -611,40 +600,79 @@
                             livereReply.description = current_url;
                             livereLib.start();
                    
+                        </script>
+                        <script>
                         $(function() {
                         	  $(".heart").on("click", function() {
                         	    $(this).toggleClass("is-active");
                         	  });
                         	});
-				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
-				    $(function(){
-						$(document).on('click', '.like-review', function(e) {
-							if( $('#likeBtn').val() == 0 ){
-								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this');
-								$(this).children('.fa-heart').addClass('animate-like');
-								$(this).val(1);
-								
-							}else{
-								console.log();
-								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> Like');
-								$(this).children('.fa-heart').addClass('animate-like');
-								$(this).val(0);
-							}
-						});
-						/*
-							자바스크립트로 조아요 버튼 값을 받아서 밸류 체크후 클릭
-							해보쟈~~~~
-						*/
-						
-					});
-				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
-				    //theme > themename 링크
-				    $('.loction').mouseenter(function(){
-				    	$(this).css('cursor','pointer');
-				    }).click(function(e){
-				    	console.log(e);
-				    });
-					</script>
+                        </script>
+                        <div id="liverePlugIn">
+                            <h3 class="livereNone">소셜댓글 라이브리 영역. SNS 계정으로 로그인해 댓글을 작성하고 SNS로 전송할 수 있습니다</h3>
+                            <div id="livereWriteForm">
+                                <div id="livereWriteFormTop"> <span id="livereSNSLoginTitle">소셜로그인</span>
+                                    <div id="livereSNSLoginIconContainer">
+                                        <ul id="livereLogged" class="livereNone"></ul>
+                                        <ul id="livereNotLogged">
+                                            <li id="livere_facebook">
+                                                <button type="button" class="livereSNSLoginIcon livereClick livereBtn1" clicktype="snsLoginBtn" rel="tooltip"> <span class="livereSNSImage_B livere_t_indent">Facebook 로그인 페이지 새창이 열립니다</span> </button>
+                                            </li>
+                                            <li id="livere_twitter">
+                                                <button type="button" class="livereSNSLoginIcon livereClick livereBtn1" clicktype="snsLoginBtn" rel="tooltip"> <span class="livereSNSImage_B livere_t_indent">Twitter 로그인 페이지 새창이 열립니다</span> </button>
+                                            </li>
+                                            <li id="livere_google_plus">
+                                                <button type="button" class="livereSNSLoginIcon livereClick livereBtn1" clicktype="snsLoginBtn" rel="tooltip"> <span class="livereSNSImage_B livere_t_indent">GooglePlus 로그인 페이지 새창이 열립니다</span> </button>
+                                            </li>
+                                            <li id="livere_linkedIn">
+                                                <button type="button" class="livereSNSLoginIcon livereClick livereBtn1" clicktype="snsLoginBtn" rel="tooltip"> <span class="livereSNSImage_B livere_t_indent">LinkedIn 로그인 페이지 새창이 열립니다</span> </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div id="livereWriteFormMiddle">
+                                    <div id="livereWriteFromMiddleLeft">
+                                        <ul id="liverePrimaryStatus">
+                                            <li> <span id="liverePrimaryThumb" class="notLoggedThumb">							<img src="https://101.livere.co.kr/images/_.gif" alt="로그인 전 프로필 이미지">						</span> </li>
+                                        </ul>
+                                    </div>
+                                    <div id="livereWriteFormMiddleRightContainer">
+                                        <label for="livere_contentText" class="livereNone">댓글입력하는영역</label>
+                                        <ul id="livereWriteFormMiddleRight" class="livereWriteFormWrapper">
+                                            <li class="livereAccInfoWrapper">
+                                                <p id="livereAccInfo" class="livereAccInfo">소셜계정으로 작성하세요</p>
+                                            </li>
+                                            <li id="livereWriteParamsForm" class="livereContentTextForm">
+                                                <input id="livere_short_url" name="livere_short_url" type="hidden">
+                                                <input id="livere_name" name="livere_name" type="hidden">
+                                                <input id="livere_parent_seq" name="livere_parent_seq" type="hidden">
+                                                <textarea tabindex="0" id="livere_contentText" class="livere_contentText" name="livere_content" targetname="livereParentStrCount" title="댓글입력하는영역" aria-label="댓글입력하는영역" disabled="disabled">로그인 후 작성 가능합니다</textarea>
+                                            </li>
+                                            <li id="livereWriteFormFunction" class="livereFunctionContainer">
+                                                <ul id="livereFunctionWrapper" class="livereFunctionWrapper">
+                                                    <li id="livereAttachOpenBtnsWrapper">
+                                                        <button type="button" id="livereImageAttachOpenBtn" class="livereAttachOpenBtns livereBtn3 livere_t_indent" rel="tooltip"><span>사진첨부창 열기</span></button>
+                                                        <button type="button" id="livereVideoAttachOpenBtn" class="livereAttachOpenBtns livereBtn3 livere_t_indent" rel="tooltip"><span>비디오첨부창 열기</span></button>
+                                                    </li>
+                                                    <li class="livereTextCountWrapper"> <strong id="livereParentStrCount">0</strong>/<span id="livereStrMaxCount">250</span> </li>
+                                                </ul>
+                                            </li>
+                                            <li id="livereWriteFormMiddleBottom">
+                                                <button type="button" id="livereWriteBtn" class="livereWriteBtn livereBtn2"><span class="livereFont5">보내기</span></button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div id="livereHome"><span id="livereHomeBtn"><a href="http://www.livere.com" title="라이브리 홈페이지 - 새 창이 열립니다" aria-label="라이브리 홈페이지 - 새 창이 열립니다" target="_blank">Powered by <strong class="livereColor1">Live</strong><strong class="livereColor2">Re</strong></a></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- //livere8-->
+                </div>
+                <!--// livere -->
+            </div>
+            <div class="heart heart-unliked"></div>
+            <%@ include file="../common/footer.jsp" %>
 </body>
 
 </html>

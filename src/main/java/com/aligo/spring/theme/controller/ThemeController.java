@@ -141,7 +141,8 @@ public class ThemeController extends TFile{
 			t.settFileList(list);
 		}
 		mv.addObject("t",t);
-		mv.setViewName("board/post");		
+		//mv.setViewName("board/post");		
+		mv.setViewName("theme/themeDetailView");		
 		return mv;
 	}
 	
