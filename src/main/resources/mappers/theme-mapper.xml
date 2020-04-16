@@ -53,8 +53,7 @@
 		</if>
 	</select>
 	
-	<select id="selectList" resultMap="themeResultSet">
-		
+	<select id="selectList" resultMap="themeResultSet">		
 		SELECT *
 		FROM THEME_LIST 
 		JOIN THEME_CODE USING(TCODE)

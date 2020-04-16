@@ -86,7 +86,7 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
                                         <a class="dropdown-item" href="themeInsertView.do">Test1</a>
-                                        <a class="dropdown-item" href="blogdetail.do">Test2</a>
+                                        <a class="dropdown-item" href="likedList.do">Test2</a>
                                     </div>
                                 </li>
                             </ul>
