@@ -161,9 +161,9 @@ public class MemberController {
 	}
 
 	//이메일 인증 페이지 맵핑 메소드
-	@RequestMapping("/member/email.do")
+	@RequestMapping("/member/signUp.do")
 	public String email() {
-		return "member/email";
+		return "member/signUp";
 	}
 
 
@@ -193,7 +193,7 @@ public class MemberController {
 
 
 
-			mv.setViewName("signUp.jsp");
+			mv.setViewName("member/join");
 
 			mv.addObject("e_mail",email_injeung);
 

@@ -1,4 +1,4 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -188,7 +188,7 @@ input:checked+label:after {
 							<h3>CREATE YOUR ACCOUNT</h3>
 
 
-							 <form class="row contact_form" action="auth.do" method="post"
+							<form class="row contact_form" action="auth.do" method="post"
 								novalidate="novalidate">
 
 								<div class="col-md-12 form-group p_star">
@@ -227,13 +227,18 @@ input:checked+label:after {
 										href="recommend.do"></a>
 								</div>
 
-								<div class="col-md-12 form-group"> -->
-									<!-- 									<div class="creat_account d-flex align-items-center">
+								<div class="col-md-12 form-group">
+
+									<button type="submit" value="submit" class="btn_3" href="index.jsp">
+										SIGN UP</button>
+								</div>
+
+								<!-- 									<div class="creat_account d-flex align-items-center">
 										<input type="checkbox" id="f-option" name="selector">
 										<label for="f-option">Remember me</label>
 									</div> -->
-									<br>
-									<!-- 									<ul class="social-icons text-right">
+								<br>
+								<!-- 									<ul class="social-icons text-right">
 										<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
 										<li><a href="#"><i class="fab fa-twitter"></i></a></li>
 										<li><a href="#"><i class="fas fa-globe"></i></a></li>
@@ -250,18 +255,18 @@ input:checked+label:after {
 	</section>
 	<!--================sign_up part end =================-->
 
-	<!--::footer_part start::-->
-	<%@ include file="../common/footer.jsp"%>
-	<!--::footer_part end::-->
+								<!--::footer_part start::-->
+								<%@ include file="../common/footer.jsp"%>
+								<!--::footer_part end::-->
 
-	<script src="resources/js/stellar.js"></script>
-	<script src="resources/js/price_rangs.js"></script>
+								<script src="resources/js/stellar.js"></script>
+								<script src="resources/js/price_rangs.js"></script>
 
 
 
-	<!-- ■■■■■■■■■■■■ Script part ■■■■■■■■■■■■ -->
+								<!-- ■■■■■■■■■■■■ Script part ■■■■■■■■■■■■ -->
 
-<!-- 
+								<!-- 
 		/*이메일 인증 팝업*/
 		var openChk;
 		function sendMail() {
@@ -333,7 +338,7 @@ input:checked+label:after {
 			});
 		}); -->
 
- 	<script>
+								<script>
  	
 		$(function() {
 
@@ -403,9 +408,8 @@ input:checked+label:after {
 		 if(!chk({4,10},nickname,"Enter your nickname between 4~10 characters")){
 		 return false;
 		 } 
-	</script>-->
-
+	</script>
+								-->
 </body>
 
 </html>
- --%>
