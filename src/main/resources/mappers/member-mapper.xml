@@ -38,9 +38,12 @@
 		WHERE email=#{email}
 	</select>
 	
-<!-- 	<insert id="authentication" parameterType="Member">
-    INSERT INTO MEMBER
-    VALUES({EMAIL)}
-	</insert> -->
+	<update id="deleteMember" parameterType="String">
+		UPDATE MEMBER
+		SET M_STATUS='N'
+		WHERE email=#{email}
+	
+	
+	</update>
 
 </mapper>

@@ -25,4 +25,10 @@ public interface MemberService {
 	 */
 	public void authentication(Member m);
 
+	/**
+	 * ▶ 회원탈퇴
+	 * @param email
+	 * @return
+	 */
+	int deleteMember(String email); 
 }

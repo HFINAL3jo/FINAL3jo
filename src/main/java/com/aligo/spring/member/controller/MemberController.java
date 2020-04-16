@@ -16,11 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aligo.spring.member.model.service.MemberService;
@@ -225,8 +227,18 @@ public class MemberController {
 
 	}
 
-
-
-
+	@RequestMapping("memDelete.do")
+	public String memberDelete(SessionStatus status, String email, Model model) {
+		
+		
+		int result = memService.deleteMember(email);
+		if(result>0) {
+			status.setComplete();
+			return "redirect:index.jsp";
+		}else {
+			model.addAttribute("msg","회원탈퇴실패!");
+			return "common/errorPage";
+		}		
+	}
 
 }

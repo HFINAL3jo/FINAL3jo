@@ -195,7 +195,7 @@ input:checked+label:after {
 
 
 								<div class="col-md-12 form-group p_star">
-									<input type=text name="email" value="${ email }" readonly>
+									<input type=text class="form-control" name="email" value="${ email }" readonly>
 								</div>
 
 								<div class="col-md-12 form-group p_star">
@@ -222,10 +222,10 @@ input:checked+label:after {
 										value="F" id="F" /> <label for="F">Female</label>
 								</div>
 
-								<div class="col-md-12 form-group p_star">
+<!-- 								<div class="col-md-12 form-group">
 									<input type="button" class="btn_3" value="go to recommend"><a
 										href="recommend.do"></a>
-								</div>
+								</div> -->
 
 								<div class="col-md-12 form-group">
 									<button type="submit" value="submit" class="btn_3"
@@ -267,8 +267,7 @@ input:checked+label:after {
 				}
 			})
 		});
-
-
+		
 	</script>
 </body>
 

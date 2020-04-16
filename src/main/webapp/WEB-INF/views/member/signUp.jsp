@@ -200,61 +200,6 @@ input:checked+label:after {
 										
 								</div>
 							</form>
-
-							<!-- <form class="row contact_form" action="signUp.do" method="post"
-								novalidate="novalidate">
-
-								<div class="col-md-12 form-group p_star">
-									<input type="password" class="form-control" id="password"
-										name="password" value="" placeholder="Password">
-									<div class="eye">
-										<i class="fas fa-eye"></i>
-									</div>
-								</div>
-
-								<div class="col-md-12 form-group p_star">
-									<input type="password" class="form-control" id="passwordchk"
-										name="passwordchk" value="" placeholder="Password check">
-								</div>
-								<div class="col-md-12 form-group p_star">
-									<input type="text" class="form-control" id="nickname"
-										name="nickname" placeholder="Nickname">
-								</div>
-								<div class="col-md-12 form-group p_star">
-									<input type="number" max="99" min="10" class="form-control"
-										id="age" name="age" placeholder="age">
-								</div>
-
-
-
-								<div class="col-md-12 form-group p_star" id="input-group">
-									<input type="radio" name="gender" value="M" id="M" /> <label
-										for="M">Male</label> <input type="radio" name="gender"
-										value="F" id="F" /> <label for="F">Female</label>
-								</div>
-
-
-
-								<div class="col-md-12 form-group p_star">
-									<input type="button" class="btn_3" value="go to recommend"><a
-										href="recommend.do"></a>
-								</div>
-
-								<div class="col-md-12 form-group"> -->
-									<!-- 									<div class="creat_account d-flex align-items-center">
-										<input type="checkbox" id="f-option" name="selector">
-										<label for="f-option">Remember me</label>
-									</div> -->
-									<br>
-									<!-- 									<ul class="social-icons text-right">
-										<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-										<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-										<li><a href="#"><i class="fas fa-globe"></i></a></li>
-									</ul> -->
-
-
-								<!-- </div>
-							</form> -->
 						</div>
 					</div>
 				</div>
@@ -275,27 +220,6 @@ input:checked+label:after {
 	<!-- ■■■■■■■■■■■■ Script part ■■■■■■■■■■■■ -->
 
  	<script>
-		
-
-	/*이메일 인증 팝업*/
-	var openChk;
-	function sendMail() {
-
-		var emailVal = $("#email").val();
-
-		var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-		// 검증에 사용할 정규식 변수 regExp에 저장
-
-		if (emailVal.match(regExp) != null) {
-			window.name = "signUp.jsp";
-			openChk = window
-					.open("emailPopup.jsp", "Email Check",
-							"width=500, height=50, resizable = no, scrollbars = no status= no");
-		} else {
-			alert('Error');
-		}
-	}
-
 	/*이메일 중복체크*/
 	function validate() {
 
@@ -315,7 +239,7 @@ input:checked+label:after {
 
 			var email = $(this).val();
 
-			if (email.length < 5) {
+			if (email.length < 10) {
 				$(".guide").hide();
 				$("#idDuplicateCheck").val(0);
 
@@ -347,79 +271,8 @@ input:checked+label:after {
 			});
 		});
 	}); 
-
-  	$(function() {
-
-			
-			$('#passwordchk').blur(function() {
-				if ($('#password').val() != $('#passwordchk').val()) {
-					if ($('#passwordchk').val() != '') {
-						alert("비밀번호가 일치하지 않습니다.");
-						$('#passwordchk').val('');
-						$('#passwordchk').focus();
-					}
-				}
-			})
-		});
-
-		$(function() { 
-			$('.eye').on(
-					'click',
-					function() {
-						$('.col-md-12 form-group p_star.password').toggleClass(
-								'active');
-						if ($('.col-md-12 form-group p_star.password')
-								.hasClass('active') == true) {
-							$(this).find('.fa-eye').attr('class',
-									"fa fa-eye-slash fa-lg").parents(
-									'.col-md-12 form-group p_star').find(
-									'#password').attr('type', "text");
-						} else {
-							$(this).find('.fa-eye-slash').attr('class',
-									"fa fa-eye fa-lg").parents(
-									'.col-md-12 form-group p_star').find(
-									'#password').attr('type', 'password');
-						}
-					});
-		});
-
-		
-
-		function checkPassword(password) {
-			if (!/^[a-zA-Z0-9]{10,15}$/.test(password)) {
-
-				alert('숫자와 영문자 조합으로 10~15자리를 사용해야 합니다.');
-				return false;
-			}
-			var checkNumber = password.search(/[0-9]/g);
-			var checkEnglish = password.search(/[a-z]/ig);
-
-			if (checkNumber < 0 || checkEnglish < 0) {
-
-				alert("숫자와 영문자를 혼용하여야 합니다.");
-
-				return false;
-
-			}
-
-			return true;
-
-		} 
-
-		            
-		    if ((nickname.value) == ""){
-		 alert("Enter your nickname");
-		 nickname.focus();
-		 return false;
-		 }            
-
-		  닉네임 유효성 검사	    
-		 if(!chk({4,10},nickname,"Enter your nickname between 4~10 characters")){
-		 return false;
-		 } 
-
-
-
+	</script>
+	
 </body>
 
 </html>
