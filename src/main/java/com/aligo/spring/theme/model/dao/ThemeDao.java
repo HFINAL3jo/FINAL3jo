@@ -30,7 +30,7 @@ public class ThemeDao {
 		
 		return (ArrayList)sqlSession.selectList("themeMapper.selectList",sc,rowBounds);
 	}
-
+	
 	public int insertTheme(Theme t) {	
 		return sqlSession.insert("themeMapper.insertTheme",t);
 	}
