@@ -18,8 +18,8 @@ public class ThemeDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public int getListCount() {
-		return sqlSession.selectOne("themeMapper.getListCount");
+	public int getListCount(SearchCondition sc) {
+		return sqlSession.selectOne("themeMapper.getListCount",sc);
 	}
 
 	public ArrayList<Theme> selectList(PageInfo pi,SearchCondition sc) {

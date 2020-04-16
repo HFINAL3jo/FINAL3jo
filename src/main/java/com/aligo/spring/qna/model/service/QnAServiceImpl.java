@@ -24,6 +24,12 @@ public class QnAServiceImpl implements QnAService{
 	public ArrayList<QnA> selectList(QnAPageInfo pi) {
 		return qDao.selectList(pi);
 	}
+
+	@Override
+	public QnA selectBoard(int qId) {
+		
+		return qDao.selectBoard(qId);
+	}
 	
 	
 }

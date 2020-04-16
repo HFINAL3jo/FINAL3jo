@@ -22,13 +22,13 @@
     <br><br>
     <span style="float:left;">Theme &nbsp;<input type="search" list="tcl" name="tCode"></span>
     <datalist id="tcl">
-    	<option value="History">History</option>
-    	<option value="Food">Food</option>
-    	<option value="Shopping">Shopping</option>
-    	<option value="Festival">Festival</option>
-    	<option value="Night View">Night View</option>
-    	<option value="Museum">Museum</option>
-    	<option value="Exotic">Exotic</option>
+    	<option value="NATURE">NATURE</option>
+    	<option value="RESTAURANT">RESTAURANT</option>
+    	<option value="HISTORY">HISTORY</option>
+    	<option value="SHOPPING">SHOPPING</option>
+    	<option value="BAR">BAR</option>
+    	<option value="ACTIVITY">ACTIVITY</option>
+    	<option value="EXHIBITION">EXHIBITION</option>
     </datalist>&nbsp;&nbsp;&nbsp;
     Keyword &nbsp;&nbsp;<input type="text" name="tKeyword" style="margin-right:-10px;">
     <br><br>  

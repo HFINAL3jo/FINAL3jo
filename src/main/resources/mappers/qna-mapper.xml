@@ -25,4 +25,10 @@
 		FROM QNA 
 		ORDER BY QID DESC
 	</select>
+	
+	<select id="selectBoard" resultMap="qnaResultSet">
+		SELECT *
+		FROM QNA
+		WHERE QID=#{qId}
+	</select>
 </mapper>

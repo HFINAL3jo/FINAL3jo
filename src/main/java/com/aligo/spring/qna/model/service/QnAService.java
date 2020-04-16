@@ -21,4 +21,12 @@ public interface QnAService {
 	ArrayList<QnA> selectList(QnAPageInfo pi);
 
 
+	/**
+	 * 게시판 상세조회
+	 * @param qId
+	 * @return
+	 */
+	QnA selectBoard(int qId);
+
+
 }

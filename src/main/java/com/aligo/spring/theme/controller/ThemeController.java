@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
 import org.apache.ibatis.javassist.expr.Instanceof;
 import org.json.simple.JSONArray;
@@ -44,14 +45,21 @@ public class ThemeController extends TFile{
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
 			SearchCondition sc) {
 		
-		int listCount = tService.getListCount();
+		int listCount = tService.getListCount(sc);
+		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		if(sc.getKeyword() == "") sc.setKeyword(null);
 		ArrayList<Theme> list = tService.selectList(pi,sc);
 		
 		for(Theme t: list) {
+			if(t.gettTitle().length() > 16) {
+				t.settTitle(t.gettTitle().substring(0,15));
+			}
+			
 			if(t.gettModifyFile().length() <= 18) {
 				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
+			}else if(t.gettModifyFile().contains(",")){
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile().substring(0,t.gettModifyFile().indexOf(",")));
 			}
 		}
 		
@@ -68,7 +76,7 @@ public class ThemeController extends TFile{
 		SearchCondition sc)throws IOException {
 		
 		response.setContentType("application/json; charset=UTF-8");
-		int listCount = tService.getListCount();
+		int listCount = tService.getListCount(sc);
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage,listCount);
 		ArrayList<Theme> list = tService.selectList(pi,sc);
@@ -76,8 +84,14 @@ public class ThemeController extends TFile{
 		JSONArray jArr = new JSONArray();
 		
 		for(Theme t: list) {
+			if(t.gettTitle().length() > 16) {
+				t.settTitle(t.gettTitle().substring(0,15));
+			}
+			
 			if(t.gettModifyFile().length() <= 18) {
 				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
+			}else if(t.gettModifyFile().contains(",")){
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile().substring(0,t.gettModifyFile().indexOf(",")));
 			}else {
 				t.settModifyFile(t.gettModifyFile().replace("amp;",""));
 			}
@@ -110,6 +124,22 @@ public class ThemeController extends TFile{
 			@RequestParam(value="tId") int bId) {
 		
 		Theme t = tService.selectTheme(bId);
+		ArrayList list = new ArrayList();
+		if(t.gettModifyFile().length() > 18 && t.gettModifyFile().contains(",")) {
+			String str = t.gettModifyFile();
+			String strArr[] = str.split(",");
+			
+			for(int i=0;i<strArr.length;i++) {
+				String result = strArr[i];
+				TFile ti = new TFile();
+				ti.settModifyFile(result);
+				list.add(ti);
+			}
+		}
+		
+		if(!list.isEmpty()) {
+			t.settFileList(list);
+		}
 		mv.addObject("t",t);
 		mv.setViewName("board/post");		
 		return mv;

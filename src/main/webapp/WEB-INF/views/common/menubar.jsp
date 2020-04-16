@@ -55,14 +55,14 @@
                                         role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Theme
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="theme.do">Nature Theme</a>
-                                        <a class="dropdown-item" href="theme.do">Restaurant Theme</a>
-                                        <a class="dropdown-item" href="theme.do">History Theme</a>
-                                        <a class="dropdown-item" href="theme.do">Shopping Theme</a>
-                                        <a class="dropdown-item" href="theme.do">Bar Theme</a>
-                                        <a class="dropdown-item" href="theme.do">Activity Theme</a>
-                                        <a class="dropdown-item" href="theme.do">Exhibition Theme</a>
+                                    <div class="dropdown-menu" id="theme" aria-labelledby="navbarDropdown_1">
+                                        <a class="dropdown-item" href="theme.do?keyword=Nature">Nature Theme</a>
+                                        <a class="dropdown-item" href="theme.do?keyword=Restaurant">Restaurant Theme</a>
+                                        <a class="dropdown-item" href="theme.do?keyword=History">History Theme</a>
+                                        <a class="dropdown-item" href="theme.do?keyword=Shopping">Shopping Theme</a>
+                                        <a class="dropdown-item" href="theme.do?keyword=Bar">Bar Theme</a>
+                                        <a class="dropdown-item" href="theme.do?keyword=Activity">Activity Theme</a>
+                                        <a class="dropdown-item" href="theme.do?keyword=Exhibition">Exhibition Theme</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
@@ -181,6 +181,7 @@
 				
 			});
 		});
+		
 	</script>
 </body>
 </html>
