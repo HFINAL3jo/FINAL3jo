@@ -38,9 +38,9 @@
 		WHERE email=#{email}
 	</select>
 	
-	<insert id="authentication" parameterType="Member">
+<!-- 	<insert id="authentication" parameterType="Member">
     INSERT INTO MEMBER
     VALUES({EMAIL)}
-	</insert>
+	</insert> -->
 
 </mapper>

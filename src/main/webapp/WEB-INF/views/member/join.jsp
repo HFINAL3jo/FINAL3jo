@@ -186,17 +186,21 @@ input:checked+label:after {
 					<div class="login_part_form">
 						<div class="login_part_form_iner">
 							<h3>CREATE YOUR ACCOUNT</h3>
+							<form class="row contact_form" action="signUp.do" method="post">
+
+								<%
+										request.setCharacterEncoding("UTF-8");
+										String email = request.getParameter("e_mail");
+									%>
 
 
-							<form class="row contact_form" action="auth.do" method="post"
-								novalidate="novalidate">
+								<div class="col-md-12 form-group p_star">
+									<input type=text name="email" value="${ email }" readonly>
+								</div>
 
 								<div class="col-md-12 form-group p_star">
 									<input type="password" class="form-control" id="password"
 										name="password" value="" placeholder="Password">
-									<div class="eye">
-										<i class="fas fa-eye"></i>
-									</div>
 								</div>
 
 								<div class="col-md-12 form-group p_star">
@@ -212,15 +216,11 @@ input:checked+label:after {
 										id="age" name="age" placeholder="age">
 								</div>
 
-
-
 								<div class="col-md-12 form-group p_star" id="input-group">
 									<input type="radio" name="gender" value="M" id="M" /> <label
 										for="M">Male</label> <input type="radio" name="gender"
 										value="F" id="F" /> <label for="F">Female</label>
 								</div>
-
-
 
 								<div class="col-md-12 form-group p_star">
 									<input type="button" class="btn_3" value="go to recommend"><a
@@ -228,24 +228,10 @@ input:checked+label:after {
 								</div>
 
 								<div class="col-md-12 form-group">
-
-									<button type="submit" value="submit" class="btn_3" href="index.jsp">
-										SIGN UP</button>
+									<button type="submit" value="submit" class="btn_3"
+										href="index.jsp">SIGN UP</button>
 								</div>
-
-								<!-- 									<div class="creat_account d-flex align-items-center">
-										<input type="checkbox" id="f-option" name="selector">
-										<label for="f-option">Remember me</label>
-									</div> -->
 								<br>
-								<!-- 									<ul class="social-icons text-right">
-										<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-										<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-										<li><a href="#"><i class="fas fa-globe"></i></a></li>
-									</ul>
-
-
-								</div>
 							</form>
 						</div>
 					</div>
@@ -253,92 +239,20 @@ input:checked+label:after {
 			</div>
 		</div>
 	</section>
-	<!--================sign_up part end =================-->
 
-								<!--::footer_part start::-->
-								<%@ include file="../common/footer.jsp"%>
-								<!--::footer_part end::-->
+	<!--::footer_part start::-->
+	<%@ include file="../common/footer.jsp"%>
+	<!--::footer_part end::-->
 
-								<script src="resources/js/stellar.js"></script>
-								<script src="resources/js/price_rangs.js"></script>
-
+	<script src="resources/js/stellar.js"></script>
+	<script src="resources/js/price_rangs.js"></script>
 
 
-								<!-- ■■■■■■■■■■■■ Script part ■■■■■■■■■■■■ -->
 
-								<!-- 
-		/*이메일 인증 팝업*/
-		var openChk;
-		function sendMail() {
+	<!-- ■■■■■■■■■■■■ Script part ■■■■■■■■■■■■ -->
 
-			var emailVal = $("#email").val();
 
-			var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-			// 검증에 사용할 정규식 변수 regExp에 저장
-
-			if (emailVal.match(regExp) != null) {
-				window.name = "signUp.jsp";
-				openChk = window
-						.open("emailPopup.jsp", "Email Check",
-								"width=500, height=50, resizable = no, scrollbars = no status= no");
-			} else {
-				alert('Error');
-			}
-		}
-
-		/*이메일 중복체크*/
-		function validate() {
-
-			if ($("idDuplicateCheck").val() == 0) {
-
-				alert("사용 가능한 이메일을 입력해주세요");
-				$("#email").focus();
-				return false;
-			} else {
-				return true;
-			}
-		}
-
-		$(function() {
-
-			$('#email').on("keyup", function() {
-
-				var email = $(this).val();
-
-				if (email.length < 5) {
-					$(".guide").hide();
-					$("#idDuplicateCheck").val(0);
-
-					return;
-				}
-
-				$.ajax({
-					url : "idCheck.do",
-					data : {
-						email : email
-					},
-					type : "post",
-					success : function(data) {
-						console.log(data);
-						if (data == "ok") {
-							$(".error").hide();
-							$(".ok").show();
-							$("#idDuplicateCheck").val(1);
-						} else {
-							$(".ok").hide();
-							$(".error").show();
-							$("#idDuplicateCheck").val(0);
-						}
-
-					},
-					error : function() {
-						console.log("ajax 처리 실패")
-					}
-				});
-			});
-		}); -->
-
-								<script>
+	<script>
  	
 		$(function() {
 
@@ -354,62 +268,8 @@ input:checked+label:after {
 			})
 		});
 
-		$(function() { // 눈표시 클릭 시 패스워드 보이기 
-			$('.eye').on(
-					'click',
-					function() {
-						$('.col-md-12 form-group p_star.password').toggleClass(
-								'active');
-						if ($('.col-md-12 form-group p_star.password')
-								.hasClass('active') == true) {
-							$(this).find('.fa-eye').attr('class',
-									"fa fa-eye-slash fa-lg").parents(
-									'.col-md-12 form-group p_star').find(
-									'#password').attr('type', "text");
-						} else {
-							$(this).find('.fa-eye-slash').attr('class',
-									"fa fa-eye fa-lg").parents(
-									'.col-md-12 form-group p_star').find(
-									'#password').attr('type', 'password');
-						}
-					});
-		});
 
-		/*비밀번호 정규식*/
-
-		function checkPassword(password) {
-			if (!/^[a-zA-Z0-9]{10,15}$/.test(password)) {
-
-				alert('숫자와 영문자 조합으로 10~15자리를 사용해야 합니다.');
-				return false;
-			}
-			var checkNumber = password.search(/[0-9]/g);
-			var checkEnglish = password.search(/[a-z]/ig);
-
-			if (checkNumber < 0 || checkEnglish < 0) {
-
-				alert("숫자와 영문자를 혼용하여야 합니다.");
-
-				return false;
-
-			}
-
-			return true;
-
-		} 
-
-		    if ((nickname.value) == ""){
-		 alert("Enter your nickname");
-		 nickname.focus();
-		 return false;
-		 }            
-
-		  닉네임 유효성 검사	    
-		 if(!chk({4,10},nickname,"Enter your nickname between 4~10 characters")){
-		 return false;
-		 } 
 	</script>
-								-->
 </body>
 
 </html>

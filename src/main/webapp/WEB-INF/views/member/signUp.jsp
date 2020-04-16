@@ -186,8 +186,7 @@ input:checked+label:after {
 					<div class="login_part_form">
 						<div class="login_part_form_iner">
 							<h3>Enter your Email!</h3>
-							<form class="row contact_form" action="auth.do" method="post"
-								novalidate="novalidate">
+							<form class="row contact_form" action="auth.do" method="post">
 								<div class="col-md-12 form-group p_star">
 									<input type="email" class="form-control" id="email"
 										name="e_mail" value="" placeholder="E-mail" required> <span
@@ -196,9 +195,9 @@ input:checked+label:after {
 										class="guide error">Your Email is Already Joined</span> <input
 										type="hidden" name="idDuplicateCheck" id="idDuplicateCheck"
 										value="0">
-									<button type="submit" name="submit" class="btn_3" >send
+									<button type="submit" name="submit" class="btn_3" onclick="sendMail()">send
 										a mail</button>
-
+										
 								</div>
 							</form>
 
@@ -277,72 +276,79 @@ input:checked+label:after {
 
  	<script>
 		
-		/*이메일 중복체크*/
-		function validate() {
 
-			if ($("idDuplicateCheck").val() == 0) {
+	/*이메일 인증 팝업*/
+	var openChk;
+	function sendMail() {
 
-				alert("사용 가능한 이메일을 입력해주세요");
-				$("#email").focus();
-				return false;
-			} else {
-				return true;
-			}
+		var emailVal = $("#email").val();
+
+		var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		// 검증에 사용할 정규식 변수 regExp에 저장
+
+		if (emailVal.match(regExp) != null) {
+			window.name = "signUp.jsp";
+			openChk = window
+					.open("emailPopup.jsp", "Email Check",
+							"width=500, height=50, resizable = no, scrollbars = no status= no");
+		} else {
+			alert('Error');
 		}
+	}
 
-		$(function() {
+	/*이메일 중복체크*/
+	function validate() {
 
-			$('#email').on("keyup", function() {
+		if ($("idDuplicateCheck").val() == 0) {
 
-				var email = $(this).val();
+			alert("사용 가능한 이메일을 입력해주세요");
+			$("#email").focus();
+			return false;
+		} else {
+			return true;
+		}
+	}
 
-				if (email.length < 5) {
-					$(".guide").hide();
-					$("#idDuplicateCheck").val(0);
+	$(function() {
 
-					return;
-				}
+		$('#email').on("keyup", function() {
 
-				$.ajax({
-					url : "idCheck.do",
-					data : {
-						email : email
-					},
-					type : "post",
-					success : function(data) {
-						console.log(data);
-						if (data == "ok") {
-							$(".error").hide();
-							$(".ok").show();
-							$("#idDuplicateCheck").val(1);
-						} else {
-							$(".ok").hide();
-							$(".error").show();
-							$("#idDuplicateCheck").val(0);
-						}
+			var email = $(this).val();
 
-					},
-					error : function() {
-						console.log("ajax 처리 실패")
+			if (email.length < 5) {
+				$(".guide").hide();
+				$("#idDuplicateCheck").val(0);
+
+				return;
+			}
+
+			$.ajax({
+				url : "idCheck.do",
+				data : {
+					email : email
+				},
+				type : "post",
+				success : function(data) {
+					console.log(data);
+					if (data == "ok") {
+						$(".error").hide();
+						$(".ok").show();
+						$("#idDuplicateCheck").val(1);
+					} else {
+						$(".ok").hide();
+						$(".error").show();
+						$("#idDuplicateCheck").val(0);
 					}
-				});
+
+				},
+				error : function() {
+					console.log("ajax 처리 실패")
+				}
 			});
 		});
-		
-		function CheckEmail(str)
-		{                                                 
-		     var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-		     if(!reg_email.test(str)) {                            
-		          return false;         
-		     }                            
-		     else {                       
-		          return true;         
-		     }                            
-		}                                
+	}); 
 
-		</script>
-
-<!--  	$(function() {
+  	$(function() {
 
 			
 			$('#passwordchk').blur(function() {
@@ -410,7 +416,7 @@ input:checked+label:after {
 		  닉네임 유효성 검사	    
 		 if(!chk({4,10},nickname,"Enter your nickname between 4~10 characters")){
 		 return false;
-		 }  -->
+		 } 
 
 
 
