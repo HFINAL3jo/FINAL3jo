@@ -71,21 +71,31 @@ var showChart = function(){
     		 title: 'My Daily Activities',
     		 is3D: true,
     		 width: '100%', 
-    		 height: 460
+    		 height: 460,
+    		 animation:{
+    		     duration: 1000,
+    		     easing: 'out',
+    		 }
     	  };
        }
        
        if(chartValue == 'donut'){
-    	   console.log('donut 실행')
-    	   //var chart = new google.visualization.PieChart(document.getElementById('chart'));
-    	   //chart.draw(google.visualization.arrayToDataTable(Dd), options);
-    	   console.log('json 실행');
+//    	   console.log('donut 실행')
+//    	   console.log(Dd);
     	   var chart = new google.visualization.PieChart(document.getElementById('chart'));
-    	   chart.draw(new google.visualization.DataTable(ss), options);
+    	   chart.draw(google.visualization.arrayToDataTable(Dd), options);
+    	   
+//    	   console.log('json 실행');
+//    	   var chart = new google.visualization.PieChart(document.getElementById('chart'));
+//    	   chart.draw(new google.visualization.DataTable(ss), options);
        }else if(chartValue == 'bar'){    	   
-    	   console.log('bar 실행')
+//    	   console.log('bar 실행')
     	   var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
     	   chart.draw(google.visualization.arrayToDataTable(Dd), options);
+    	   
+//    	   console.log('json 실행');
+//    	   var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+//    	   chart.draw(new google.visualization.DataTable(ss), options);
        }
      }
 }
