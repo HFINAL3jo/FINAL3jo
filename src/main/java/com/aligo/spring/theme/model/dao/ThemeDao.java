@@ -58,4 +58,13 @@ public class ThemeDao {
 	public int checkFile(int tNum) {
 		return sqlSession.selectOne("themeMapper.checkFile",tNum);
 	}
+
+	public int updateCount(int bId) {
+		return sqlSession.update("themeMapper.updateViewCount",bId) +
+			   sqlSession.update("themeMapper.updateTagCount",bId);
+	}
+
+	public int updateSearchKeyword(SearchCondition sc) {
+		return 0;
+	}
 }

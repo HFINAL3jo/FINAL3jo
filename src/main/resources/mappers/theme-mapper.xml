@@ -107,4 +107,14 @@
 	<select id="checkFile" resultType="_int">
 		SELECT COUNT(*) FROM THEME_FILES WHERE T_CODE_NUMBER = #{tNum}
 	</select>
+	
+	<update id="updateViewCount">
+		UPDATE THEME_LIST SET T_VIEWS = T_VIEWS + 1	WHERE TID = #{tId}
+	</update>
+	
+	<update id="updateTagCount">
+		UPDATE THEME_CODE 
+		SET TCOUNT = TCOUNT + 1
+		WHERE TCODE = (SELECT TCODE FROM THEME_LIST WHERE TID = #{tID})
+	</update>
 </mapper>
