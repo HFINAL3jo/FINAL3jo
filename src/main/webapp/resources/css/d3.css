@@ -1,0 +1,39 @@
+@charset "UTF-8";
+	svg{
+		width: 757.5px;
+		height:420px;
+		border: 1px solid black;
+	}
+	.bar{
+		fill : orange;
+	}
+	
+	.barNum{
+		font-size: 10pt;
+		text-anchor :end;
+		writing-mode: tb;
+		glyph-orientation-vertical : 0
+	}
+	
+	.barName{
+		font-size : 9pt;
+		text-anchor : middle;
+	}
+	
+	.axis text{
+		font-family : scans-serif;
+		font-size : 11px;
+	}
+	
+	.axis path,
+	
+	.axis line{
+		fill : none;
+		stroke : black;
+	}
+	
+	.axis_x line{
+		fill : none;
+		stroke : black;
+	}
+	

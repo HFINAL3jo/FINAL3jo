@@ -16,6 +16,12 @@
 		location.href="statistic.do?choose=T_VIEWS";
 	}	
 	
+	// 기타 정보
+	document.getElementById('uPbtn4').onclick = function(){
+		//console.log("실행");
+//		location.href="statistic.do?choose=T_VIEWS";
+	}
+	
 	// 오름 차순으로 테이블 형성
 	document.getElementById('btn1').onclick = function(){
 		console.log("btn1 실행");
@@ -70,11 +76,10 @@
 	}
 	
 // showChart()
-function drawShowChart(){
+var drawShowChart = function(){
 	//var str = document.getElementById('jObj').value;
 	
-	document.getElementById('ChangeChart').onclick = function(){
-//		
+		
 		var check1 = document.getElementById('whatChart').value;
 		var check2 = document.getElementById('whatData').value;
 		
@@ -83,22 +88,17 @@ function drawShowChart(){
 		// 데이터 검색을 하지 않았을 시에  true
 		var ifCheck2 = (check2 == "" || check2 == null);
 		
+
 		if(ifCheck1 || ifCheck2){
 			
-			// 차트 검색을 선택한후에  데이터 검색을 ""로 놓았을시에 실행
+			// 차트 검색을 선택한후에  데이터 검색을 ""로 놓았을시에 아무것도 실행 하지 않는다.
 			if(ifCheck1 && ifCheck2){
 				
-				alert("데이터 입력이 되지 않았습니다. 다시 입력 해주세요.");
+				//alert("데이터 입력이 되지 않았습니다. 다시 입력 해주세요.");
 				return;	
 			}else if( (!ifCheck1) && ifCheck2){
-				
 				document.getElementById('chartValue').value = check1;
 				showChart();
-			}else{				
-				
-				// 일단 보류 ajax를 함수로 만들어 처리
-				alert("데이터 입력이 되지 않았습니다. 다시 입력 해주세요.");
-				return;	
 			}
 
 		}else{
@@ -139,9 +139,9 @@ function drawShowChart(){
 		    		document.getElementById('JsonReverseArray').value = JSON.stringify(Source.JsonReverseArray);
 //		    		document.getElementById('JsonReverseList').value = JSON.stringify(Source.JsonReverseList);
 		    		
-		    		console.log(document.getElementById('jObj').value);								
-		    		console.log(document.getElementById('jObjArray').value);						
-		    		console.log(document.getElementById('JsonReverseArray').value);	
+//		    		console.log(document.getElementById('jObj').value);								
+//		    		console.log(document.getElementById('jObjArray').value);						
+//		    		console.log(document.getElementById('JsonReverseArray').value);	
 //		    		console.log(document.getElementById('JsonReverseList').value);	
 		    		document.getElementById('chartValue').value = check1
 		    		
@@ -154,9 +154,7 @@ function drawShowChart(){
 
 		  	}); // end $.ajax
  		
-		} // end if
-		
-	}// document.getElementById('ChangeChart').onclick			
+		} // end if	
 
 }	// end function
 	

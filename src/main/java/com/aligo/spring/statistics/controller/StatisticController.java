@@ -45,6 +45,7 @@ public class StatisticController {
 		
 		JSONObject jObj = null;
 		JSONObject JsonReverseList = null;
+		JSONObject googleChart = null;				// 구글 차트에서 쓰기 위한 것
 		
 		JSONArray jObjArray = null;
 		JSONArray JsonReverseArray = null;
@@ -82,11 +83,15 @@ public class StatisticController {
 		reverseSort((reverTableData = cut(limit, list)), charDataShow);
 		JsonReverseArray =   ConvertJsonArray(reverTableData, charDataShow);
 
+//{"rows":[{"c":[{"v":"강남"},{"v":50}]},{"c":[{"v":"광장시장"},{"v":45}]},{"c":[{"v":"북한산"},{"v":45}]},{"c":[{"v":"부산"},{"v":40}]},{"c":[{"v":"명동"},{"v":40}]},{"c":[{"v":"불꽃놀이"},{"v":35}]},{"c":[{"v":"경희루"},{"v":35}]},{"c":[{"v":"동대문"},{"v":35}]},{"c":[{"v":"제주천지연폭포"},{"v":30}]},{"c":[{"v":"삼청동"},{"v":30}]},{"c":[{"v":"삼계탕"},{"v":25}]},{"c":[{"v":"이촌"},{"v":25}]},{"c":[{"v":"남산"},{"v":20}]}],"cols":[{"label":"장소","type":"string"},{"label":"조아요","type":"number"}]}		
+		googleChart = GoogletJson(list, charDataShow);
+
 		mav.addObject("list", list);
 //		mav.addObject("reverTableData", reverTableData);
 		
 		mav.addObject("jObj", jObj);
 		mav.addObject("JsonReverseList", JsonReverseList);
+		mav.addObject("googleChart", googleChart);
 		
 		mav.addObject("jObjArray", jObjArray);
 		mav.addObject("JsonReverseArray", JsonReverseArray);//
@@ -157,6 +162,15 @@ public class StatisticController {
 			}else {
 				
 			}
+		}else if(choose.equals("")) { // 검색 키워드
+			
+		}else if(choose.equals("")) { // 기타 정보
+			// 가로 바 조아요/조회수 을 가지고 TKEYWORD 표시
+			// 신고내역 처리수 비중등
+			// TCODE 하위의 별 조아요/조회수의 TKEYWORD 'Stacked bar charts
+			// 전체 가입자 중 남자/여자 비율
+		}else {
+			
 		}
 		
 		list = serviceStatics.StatisticAjax(temp);
@@ -279,12 +293,51 @@ public class StatisticController {
 	public JSONArray ConvertJsonArray(ArrayList<Statistics> list, String property) {
 
 		JSONArray jArr = new JSONArray();
+		
+//		 //json의 칼럼 객체
+//        JSONObject col1 = new JSONObject();
+//        JSONObject col2 = new JSONObject();
+//		
+//        //리턴할 json 객체
+//        JSONObject data = new JSONObject(); //{}
+//        
+//        //("필드이름","자료형") 
+//        JSONArray title = new JSONArray();
+//        col1.put("label","장소"); 
+//        col1.put("type", "string");
+//        col2.put("label", "조아요");
+//        col2.put("type", "number");
+//        
+//        //테이블행에 컬럼 추가
+//        title.add(col1);
+//        title.add(col2);
+//        
+//        //json 객체에 타이틀행 추가
+//        data.put("cols", title);//제이슨을 넘김 => {"cols" : [{"label" : "장소","type":"string"},{"label" : "조아요", "type" : "number"}]}
+//        
+//        JSONArray body = new JSONArray(); //json 배열을 사용하기 위해 객체를 생성
 		if (property.equals("address")) {
 			for (Statistics out : list) {
 				JSONObject JsonData = new JSONObject();
 				JsonData.put(out.getColumnAddressName().replaceAll(" ", ""), out.getColumnAddressNumber());
 				jArr.add(JsonData);
+				
+				// 구글에서 쓰는 json형태로 변환
+//				JSONObject JsonLabel = new JSONObject();	//json오브젝트 객체를 생성
+//				JsonLabel.put("v", out.getColumnAddressName().replaceAll(" ", "")); // JsonData변수에 out에 저장된 상품의 이름을 v라고 저장한다.
+//			
+//				JSONObject JsonValue = new JSONObject();	//json오브젝트 객체를 생성
+//				JsonValue.put("v", out.getColumnAddressNumber());
+//				
+//				JSONArray row = new JSONArray(); //json 배열 객체 생성
+//				row.add(JsonLabel);
+//				row.add(JsonValue);
+//				
+//				 JSONObject cell = new JSONObject();
+//				 cell.put("c", row);
+//				 body.add(cell);
 			}
+//			data.put("rows", body);
 			return jArr;
 
 		} else if (property.equals("themaName")) {
@@ -299,5 +352,51 @@ public class StatisticController {
 			// 조건에 없을 시에 null 반환
 			return null;
 		}
+	}
+	
+	public JSONObject GoogletJson(ArrayList<Statistics> list, String property) {
+		//json의 칼럼 객체
+        JSONObject col1 = new JSONObject();
+        JSONObject col2 = new JSONObject();
+		
+        //리턴할 json 객체
+        JSONObject data = new JSONObject(); //{}
+        
+        //("필드이름","자료형") 
+        JSONArray title = new JSONArray();
+        col1.put("label","장소"); 
+        col1.put("type", "string");
+        col2.put("label", "조아요");
+        col2.put("type", "number");
+        
+        //테이블행에 컬럼 추가
+        title.add(col1);
+        title.add(col2);
+        
+        //json 객체에 타이틀행 추가
+        data.put("cols", title);//제이슨을 넘김 => {"cols" : [{"label" : "장소","type":"string"},{"label" : "조아요", "type" : "number"}]}
+        
+        JSONArray body = new JSONArray(); //json 배열을 사용하기 위해 객체를 생성
+		if (property.equals("address")) {
+			for (Statistics out : list) {
+				
+				// 구글에서 쓰는 json형태로 변환
+				JSONObject JsonLabel = new JSONObject();	//json오브젝트 객체를 생성
+				JsonLabel.put("v", out.getColumnAddressName().replaceAll(" ", "")); // JsonData변수에 out에 저장된 상품의 이름을 v라고 저장한다.
+			
+				JSONObject JsonValue = new JSONObject();	//json오브젝트 객체를 생성
+				JsonValue.put("v", out.getColumnAddressNumber());
+				
+				JSONArray row = new JSONArray(); //json 배열 객체 생성
+				row.add(JsonLabel);
+				row.add(JsonValue);
+				
+				 JSONObject cell = new JSONObject();
+				 cell.put("c", row);
+				 body.add(cell);
+			}
+			data.put("rows", body);
+		}
+		return data;
 	}
 }
