@@ -41,7 +41,7 @@
 	<update id="deleteMember" parameterType="String">
 		UPDATE MEMBER
 		SET M_STATUS='N'
-		WHERE email=#{email}
+		WHERE email=#{email}, password=#{password}
 	
 	
 	</update>

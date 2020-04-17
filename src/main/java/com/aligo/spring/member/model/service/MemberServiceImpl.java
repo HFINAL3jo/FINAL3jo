@@ -36,9 +36,6 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
-	@Override
-	public int deleteMember(String email) {
-		return memDao.deleteMember(email);
-	}
+	
 	
 }

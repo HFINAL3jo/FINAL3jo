@@ -34,8 +34,8 @@
                                 <form action="main.do" style="margin-left: 5%; width: 45%;">
                                     <label style="margin-bottom: 0; margin-top: 5%;">email</label>
                                     <div class="mt-10">
-                                        <input type="email" name="EMAIL" placeholder="Email address *수정불가*" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Email address'" required class="single-input" >
+                                        <input type="text" name="EMAIL" value="${ loginUser.email }" onfocus="this.placeholder = ''"
+                                        onblur="this.placeholder = 'Email address'" required class="single-input" readonly>
                                     </div>
                                     <label style="margin-bottom: 0; margin-top: 5%;">password</label>
                                     <div class="mt-10">
@@ -48,11 +48,7 @@
                                         onblur="this.placeholder = 'Last Name'" required class="single-input" style="background-color: rgb(232, 240, 254);">
                                     </div>                                    
                                     <br><br>
-                                    <input class="genric-btn success-border small" type="submit" value="finish" style="margin : 10%">
-            <!--                         <input class="genric-btn primary-border small" type="button" value="Delete Account" style="margin: 10px;" onclick="return deletemember()">   -->                                  
-                              	 	<button type="button" class="genric-btn primary-border small" style="margin: 10px;" onclick="location.href='${ memDelete }';">Delete Account</button>
-                                    <input class="genric-btn success-border small" type="submit" value="finish">
-                                    <!-- <input class="genric-btn primary-border small" type="button" value="Delete Account" style="margin: 10px;" onclick="return deletemember()"> -->                                    
+                                    <input class="genric-btn success-border small" type="submit" value="submit" style="margin-left: 40%;">                                             
                                 </form> 
                             </div>
                         </div>
@@ -63,7 +59,7 @@
     </section>
     <%@ include file="../common/footer.jsp" %>
     
-     <!-- <script>		
+     <script>		
         function deletemember(){
             if($('#password').val() == ""){
             alert("비밀번호를 입력해주세요!");
@@ -71,7 +67,7 @@
             }     
             location.href ='#' //true때는 서블릿으로 넘겨줍시당~~
         }
-    </script> -->
+    </script>
     
     <script src="resources/js/stellar.js"></script>
     <script src="resources/js/price_rangs.js"></script>

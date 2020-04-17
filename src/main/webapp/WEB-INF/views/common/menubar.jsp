@@ -119,7 +119,7 @@
 								data-balloon="Likes" data-balloon-pos="down-right"> <i
 									class="far fa-heart" style="margin-left: 0px;"></i>
 							</span>
-							</a> <a href=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+							</a> <a href="logout.do"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
 								data-balloon="Sign Out" data-balloon-pos="down-right"> <i
 									class="fas fa-sign-out-alt" style="margin-left: 0px;"></i>
 							</span>

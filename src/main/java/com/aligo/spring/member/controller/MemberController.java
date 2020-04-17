@@ -227,18 +227,29 @@ public class MemberController {
 
 	}
 
-	@RequestMapping("memDelete.do")
-	public String memberDelete(SessionStatus status, String email, Model model) {
-		
-		
-		int result = memService.deleteMember(email);
-		if(result>0) {
-			status.setComplete();
-			return "redirect:index.jsp";
-		}else {
-			model.addAttribute("msg","회원탈퇴실패!");
-			return "common/errorPage";
-		}		
-	}
+	/**
+	 * 	▶ 회원탈퇴
+	 * @param status
+	 * @param email
+	 * @param model
+	 * @return
+	 * 
+	 */
+	/*
+	 * @RequestMapping("memDelete.do") public String memberDelete(@RequestParam
+	 * String email, @RequestParam String password, Model model) {
+	 * 
+	 * }
+	 */
 
+	
+	@RequestMapping("logout.do")
+	public String logout(SessionStatus status) {
+		// SessionStatus : 커맨드 객체로 세선의 상태를 관리할 수 있는 객체이다.
+		
+		// 세션의 상태를 확정지어주는 메소드 호출
+		status.setComplete();
+		
+		return "redirect:index.jsp";
+	}
 }
