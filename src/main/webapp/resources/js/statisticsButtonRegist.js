@@ -19,7 +19,7 @@
 	// 기타 정보
 	document.getElementById('uPbtn4').onclick = function(){
 		//console.log("실행");
-//		location.href="statistic.do?choose=T_VIEWS";
+		location.href="statisticSurplus.do?choose=Surplus";
 	}
 	
 	// 오름 차순으로 테이블 형성
@@ -136,6 +136,8 @@ var drawShowChart = function(){
 		    	
 		    		document.getElementById('jObj').value = JSON.stringify(Source.jObj)
 		    		document.getElementById('jObjArray').value = JSON.stringify(Source.jObjArray);
+		    		//googleChart
+		    		document.getElementById('googleChart').value = JSON.stringify(Source.googleChart);
 		    		document.getElementById('JsonReverseArray').value = JSON.stringify(Source.JsonReverseArray);
 //		    		document.getElementById('JsonReverseList').value = JSON.stringify(Source.JsonReverseList);
 		    		

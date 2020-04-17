@@ -82,20 +82,20 @@ var showChart = function(){
        if(chartValue == 'donut'){
 //    	   console.log('donut 실행')
 //    	   console.log(Dd);
-    	   var chart = new google.visualization.PieChart(document.getElementById('chart'));
-    	   chart.draw(google.visualization.arrayToDataTable(Dd), options);
+//    	   var chart = new google.visualization.PieChart(document.getElementById('chart'));
+//    	   chart.draw(google.visualization.arrayToDataTable(Dd), options);
     	   
 //    	   console.log('json 실행');
-//    	   var chart = new google.visualization.PieChart(document.getElementById('chart'));
-//    	   chart.draw(new google.visualization.DataTable(ss), options);
+    	   var chart = new google.visualization.PieChart(document.getElementById('chart'));
+    	   chart.draw(new google.visualization.DataTable(ss), options);
        }else if(chartValue == 'bar'){    	   
 //    	   console.log('bar 실행')
-    	   var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
-    	   chart.draw(google.visualization.arrayToDataTable(Dd), options);
+//    	   var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+//    	   chart.draw(google.visualization.arrayToDataTable(Dd), options);
     	   
 //    	   console.log('json 실행');
-//    	   var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
-//    	   chart.draw(new google.visualization.DataTable(ss), options);
+    	   var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+    	   chart.draw(new google.visualization.DataTable(ss), options);
        }
      }
 }

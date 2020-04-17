@@ -50,9 +50,12 @@ public class StatisticController {
 		JSONArray jObjArray = null;
 		JSONArray JsonReverseArray = null;
 		
-		String chartValue = "donut";							// 어떤 모양의 차트의 도표 그릴것지 선택 
-		String choose = "";							 			// StatisticController의 조아요/조회수.키워트 중 하나에 대한 데이터를 값을 뷰에 보여주는지 확인.
-		String charDataShow  = "";						// 주소(address) / 테마(themaName) 등 어디에 해당하는 데이터인지 표시 , 기본값으로  address 표시
+		String chartValue = "donut";					// 어떤 모양의 차트의 도표 그릴것지 선택 
+		String choose = "";							 	// StatisticController의 조아요(T_LIKES)/조회수(T_VIEWS)/기타(Surplus)
+														//키워트 중 하나에 대한 데이터를 값을 뷰에 보여주는지 확인.
+		
+		String charDataShow  = "address";				// 주소(address) / 테마(themaName) 등 어디에 해당하는 데이터인지 표시 , 
+														//  검색 키워드는 ""(일단), 기본값으로  address 표시
 		
 		String checkingParameter = request.getParameter("choose");
 		Statistics temp = new Statistics();
@@ -60,17 +63,20 @@ public class StatisticController {
 		if (checkingParameter.equals("T_LIKES")) {
 			
 			choose="T_LIKES";
-			charDataShow = "address";
 			
 			temp.setColumnTlikeName("T_LIKES");
 			temp.setColumnTlikeValue(choose);
 
 		}else if(checkingParameter.equals("T_VIEWS")) {
+			
 			choose="T_VIEWS";
-			charDataShow = "address";
 			
 			temp.setColumnTlikeName("T_VIEWS");
 			temp.setColumnTlikeValue(choose);
+			
+		}else if(checkingParameter.equals("")) {//기타 정보
+			
+			
 		}
 		
 		list = serviceStatics.AllStatistic(temp);
@@ -104,6 +110,21 @@ public class StatisticController {
 		return mav;
 	}
 
+	// 기타 정보클릭시에 이동
+	@RequestMapping(value="statisticSurplus.do", method=RequestMethod.GET)
+	public ModelAndView statisticSurplus(ModelAndView mav) {
+		
+		// 가로 바 조아요/조회수 을 가지고 TKEYWORD 표시
+		// 신고내역 처리수 비중등
+		// TCODE 하위의 별 조아요/조회수의 TKEYWORD 'Stacked bar charts
+		// 전체 가입자 중 남자/여자 비율
+		
+		ArrayList<Statistics> list = null;
+		
+		mav.setViewName("admin/statisticsSurplus");
+		return mav;
+	}
+	
 	// ajax 	
 	@RequestMapping(value="StatisticAjax.do", method=RequestMethod.POST)
 	@ResponseBody
@@ -114,6 +135,7 @@ public class StatisticController {
 		
 		JSONObject jObj = null;
 		JSONObject JsonReverseList = null;
+		JSONObject googleChart = null;				// 구글 차트에서 쓰기 위한 것
 		
 		JSONArray jObjArray = null;
 		JSONArray JsonReverseArray = null;
@@ -164,12 +186,7 @@ public class StatisticController {
 			}
 		}else if(choose.equals("")) { // 검색 키워드
 			
-		}else if(choose.equals("")) { // 기타 정보
-			// 가로 바 조아요/조회수 을 가지고 TKEYWORD 표시
-			// 신고내역 처리수 비중등
-			// TCODE 하위의 별 조아요/조회수의 TKEYWORD 'Stacked bar charts
-			// 전체 가입자 중 남자/여자 비율
-		}else {
+		}else if(choose.equals("")) { // 기타 정보 x
 			
 		}
 		
@@ -181,6 +198,7 @@ public class StatisticController {
 		reverseSort(reverTableData = cut(limit, list),  td); //(오름 차순)역순 정렬	
 		JsonReverseList = ConvertJson(reverTableData, td);
 		jObj = ConvertJson(cut(limit, list),  td);
+		googleChart = GoogletJson(list, td);
 		
 		jObjArray = ConvertJsonArray(cut(limit, list),  td);
 		reverseSort((reverTableData = cut(limit, list)),  td);
@@ -189,6 +207,7 @@ public class StatisticController {
 		Map<String, Object> map = new HashMap<String, Object>();
 //		mav.addObject("list", list);
 //		mav.addObject("reverTableData", reverTableData);
+		map.put("googleChart", googleChart);
 		
 		map.put("jObj", jObj);
 //		map.put("JsonReverseList", JsonReverseList);
@@ -364,9 +383,9 @@ public class StatisticController {
         
         //("필드이름","자료형") 
         JSONArray title = new JSONArray();
-        col1.put("label","장소"); 
+        col1.put("label","key"); 
         col1.put("type", "string");
-        col2.put("label", "조아요");
+        col2.put("label", "KeyValue");
         col2.put("type", "number");
         
         //테이블행에 컬럼 추가
@@ -395,8 +414,28 @@ public class StatisticController {
 				 cell.put("c", row);
 				 body.add(cell);
 			}
-			data.put("rows", body);
+			
+		}else if(property.equals("themaName")) {
+			for (Statistics out : list) {
+				
+				// 구글에서 쓰는 json형태로 변환
+				JSONObject JsonLabel = new JSONObject();	//json오브젝트 객체를 생성
+				JsonLabel.put("v", out.getColumnTnameName().replaceAll(" ", "")); // JsonData변수에 out에 저장된 상품의 이름을 v라고 저장한다.
+			
+				JSONObject JsonValue = new JSONObject();	//json오브젝트 객체를 생성
+				JsonValue.put("v", out.getColumnTnameNumber());
+				
+				JSONArray row = new JSONArray(); //json 배열 객체 생성
+				row.add(JsonLabel);
+				row.add(JsonValue);
+				
+				 JSONObject cell = new JSONObject();
+				 cell.put("c", row);
+				 body.add(cell);
+			}
 		}
+		data.put("rows", body);
+		
 		return data;
 	}
 }
