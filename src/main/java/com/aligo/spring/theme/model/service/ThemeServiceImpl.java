@@ -80,8 +80,17 @@ public class ThemeServiceImpl implements ThemeService {
 	}
 
 	@Override
-	public int updateSearchKeyword(SearchCondition sc) {
-		return tDao.updateSearchKeyword(sc);
+	public int updateSearchKeywordCount(SearchCondition sc) {
+		String findKeyword = tDao.findKeywordArea(sc);
+		if(findKeyword == null) {
+			findKeyword = tDao.findKeywordTheme(sc);
+			if(findKeyword != null) {
+				return tDao.updateCountKwT(findKeyword);
+			}else {
+				return 0;
+			}
+		}else {
+			return tDao.updateCountKwA(findKeyword);
+		}
 	}
-
 }

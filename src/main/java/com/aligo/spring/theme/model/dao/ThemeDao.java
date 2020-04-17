@@ -64,7 +64,19 @@ public class ThemeDao {
 			   sqlSession.update("themeMapper.updateTagCount",bId);
 	}
 
-	public int updateSearchKeyword(SearchCondition sc) {
-		return 0;
+	public String findKeywordArea(SearchCondition sc) {
+		return sqlSession.selectOne("themeMapper.findKeywordArea",sc);
+	}
+
+	public String findKeywordTheme(SearchCondition sc) {
+		return sqlSession.selectOne("themeMapper.findKeywordTheme",sc);
+	}
+
+	public int updateCountKwA(String key) {
+		return sqlSession.update("themeMapper.updateCountKwA",key);
+	}
+	
+	public int updateCountKwT(String key) {
+		return sqlSession.update("themeMapper.updateCountKwT",key);
 	}
 }

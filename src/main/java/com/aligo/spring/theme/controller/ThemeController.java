@@ -50,10 +50,10 @@ public class ThemeController extends TFile{
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
 		//키워드 관련 검색 횟수 증가
-		if(sc.getKeyword() == "") {
+		if(sc.getKeyword() == "" || sc.getKeyword() == null) {
 			sc.setKeyword(null);
 		}else {
-			//int usk = tService.updateSearchKeyword(sc);
+			int usk = tService.updateSearchKeywordCount(sc);
 		}
 		
 		ArrayList<Theme> list = tService.selectList(pi,sc);

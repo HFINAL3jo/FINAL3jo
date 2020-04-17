@@ -61,6 +61,6 @@ public interface ThemeService {
 	 * @param sc
 	 * @return
 	 */
-	int updateSearchKeyword(SearchCondition sc);
+	int updateSearchKeywordCount(SearchCondition sc);
 	
 }

@@ -117,4 +117,25 @@
 		SET TCOUNT = TCOUNT + 1
 		WHERE TCODE = (SELECT TCODE FROM THEME_LIST WHERE TID = #{tID})
 	</update>
+	
+	<select id="findKeywordArea" resultType="string">
+		SELECT AREA
+		FROM SEARCH_AREA
+		WHERE AREA LIKE UPPER('%'||#{keyword}||'%')
+	</select>
+	
+	<select id="findKeywordTheme" resultType="string">
+		SELECT TCODE 
+		FROM SEARCH_THEME
+		JOIN THEME_CODE USING(TCODE)
+		WHERE TNAME LIKE UPPER('%'||#{keyword}||'%') 
+	</select>
+	
+	<update id="updateCountKwT">
+		UPDATE SEARCH_THEME SET ST_COUNT = ST_COUNT + 1 WHERE TCODE = #{key}
+	</update>
+	
+	<update id="updateCountKwA">
+		UPDATE SEARCH_AREA SET SA_COUNT = SA_COUNT + 1 WHERE AREA = #{key}
+	</update>
 </mapper>
