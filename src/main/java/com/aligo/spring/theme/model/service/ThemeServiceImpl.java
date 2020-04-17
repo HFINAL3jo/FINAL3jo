@@ -74,4 +74,14 @@ public class ThemeServiceImpl implements ThemeService {
 		return tDao.getTNum();
 	}
 
+	@Override
+	public int updateCount(int bId) {
+		return tDao.updateCount(bId);
+	}
+
+	@Override
+	public int updateSearchKeyword(SearchCondition sc) {
+		return tDao.updateSearchKeyword(sc);
+	}
+
 }

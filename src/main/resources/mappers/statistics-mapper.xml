@@ -22,7 +22,6 @@
 		 
 	</resultMap>
 
-	<!-- 조아요. 장소에 대한 데이터를 가져온다. -->
 	<select id="AllStatistic" resultMap="themeStatisticsResult">
 <!-- 		
 		SELECT TADDRESS, SUM(T_LIKES) as ColumnAddressNumber

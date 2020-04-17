@@ -48,7 +48,14 @@ public class ThemeController extends TFile{
 		int listCount = tService.getListCount(sc);
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		if(sc.getKeyword() == "") sc.setKeyword(null);
+		
+		//키워드 관련 검색 횟수 증가
+		if(sc.getKeyword() == "") {
+			sc.setKeyword(null);
+		}else {
+			//int usk = tService.updateSearchKeyword(sc);
+		}
+		
 		ArrayList<Theme> list = tService.selectList(pi,sc);
 		
 		for(Theme t: list) {
@@ -122,6 +129,9 @@ public class ThemeController extends TFile{
 	@RequestMapping("postdetail.do")
 	public ModelAndView themeDetailView(ModelAndView mv, 
 			@RequestParam(value="tId") int bId) {
+		
+		int uc = tService.updateCount(bId);
+		if(uc == 2) System.out.println("updateCount성공"); else System.out.println("실패"); 
 		
 		Theme t = tService.selectTheme(bId);
 		ArrayList list = new ArrayList();

@@ -48,5 +48,19 @@ public interface ThemeService {
 	 * @return
 	 */
 	int getTNum();
+
+	/**
+	 * 게시물 조회 수 증가
+	 * @param bId
+	 * @return
+	 */
+	int updateCount(int bId);
+
+	/**
+	 * 키워드 검색 횟수 데이터 적재
+	 * @param sc
+	 * @return
+	 */
+	int updateSearchKeyword(SearchCondition sc);
 	
 }
