@@ -177,6 +177,7 @@
         </div>
       </div>
     </div>
+    <input type="hidden" name="currentPage" value="${currentPage }" id="cp">
   </section>
   <!-- ================ contact section end ================= -->
 
@@ -187,6 +188,7 @@
 <script>
 	$(function(){
 		var pageNo = ${currentPage};
+		
 		getList(pageNo);	
 	});
 	
@@ -206,7 +208,7 @@
 						listText += "<tr>";
 						listText += "<td>"+data.list[i].qId+"</td>";
 						listText += "<td>";
-						listText += "<a href='qdetail.bo?qId="+data.list[i].qTitle+"$currentPage="+data.pi.currentPage+"'>"+data.list[i].qTitle+"</a>";
+						listText += "<a href='qdetail.do?qId="+data.list[i].qId+"&currentPage="+data.pi.currentPage+"'>"+data.list[i].qTitle+"</a>";
 						listText += "</td>";
 						
 						listText += "<td>"+data.list[i].qWriter+"</td>";
@@ -250,6 +252,7 @@
 				});
 			}
 
+		
 		</script>
 	
 </body>

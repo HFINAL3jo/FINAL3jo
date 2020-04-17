@@ -57,10 +57,9 @@ public class QnAController {
 		gson.toJson(hmap,response.getWriter());
 	}
 	
-	@RequestMapping("qdetail.bo")
+	@RequestMapping("qdetail.do")
 	public ModelAndView boardDetail(ModelAndView mv, int qId, 
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
-		
 		QnA q = qService.selectBoard(qId);
 		
 		if(q != null) {
