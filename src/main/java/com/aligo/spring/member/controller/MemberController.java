@@ -16,11 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aligo.spring.member.model.service.MemberService;
@@ -98,7 +100,7 @@ public class MemberController {
 	 * 이메일 인증 관련
 	 */
 	@RequestMapping( value = "auth.do" , method=RequestMethod.POST )
-	public ModelAndView mailSending(HttpServletRequest request, String email, HttpServletResponse response_email) throws IOException {
+	public ModelAndView mailSending(HttpServletRequest request, String e_mail, HttpServletResponse response_email) throws IOException {
 
 		Random r = new Random();
 		int dice = r.nextInt(4589362) + 49311; //이메일로 받는 인증코드 부분 (난수)
@@ -154,16 +156,16 @@ public class MemberController {
 		PrintWriter out_email = response_email.getWriter();
 		out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>");
 		out_email.flush();
-
+		mv.addObject(e_mail);
 		return mv;
 
 
 	}
 
 	//이메일 인증 페이지 맵핑 메소드
-	@RequestMapping("/member/email.do")
+	@RequestMapping("/member/signUp.do")
 	public String email() {
-		return "member/email";
+		return "member/signUp";
 	}
 
 
@@ -171,12 +173,14 @@ public class MemberController {
 	//내가 입력한 인증번호와 메일로 입력한 인증번호가 맞는지 확인해서 맞으면 회원가입 페이지로 넘어가고,
 	//틀리면 다시 원래 페이지로 돌아오는 메소드
 	@RequestMapping(value = "ec.do")
-	public ModelAndView join_injeung(String email_injeung, String diceCheck, HttpServletResponse response_equals) throws IOException {
+	public ModelAndView join_injeung(String email_injeung, String diceCheck, String email, HttpServletResponse response_equals) throws IOException {
 
 
 		System.out.println("마지막 : email_injeung : "+ email_injeung);
 
 		System.out.println("마지막 : dice : "+diceCheck);
+		
+		System.out.println("email : " + email);
 
 
 		//페이지이동과 자료를 동시에 하기위해 ModelAndView를 사용해서 이동할 페이지와 자료를 담음
@@ -185,18 +189,13 @@ public class MemberController {
 
 		mv.setViewName("/member/join.do");
 
-		mv.addObject("e_mail",email_injeung);
 
 		if (email_injeung.equals(diceCheck)) {
 
 			//인증번호가 일치할 경우 인증번호가 맞다는 창을 출력하고 회원가입창으로 이동함
 
-
-
-			mv.setViewName("signUp.jsp");
-
-			mv.addObject("e_mail",email_injeung);
-
+			mv.setViewName("member/join");
+			mv.addObject("email",email);
 			//만약 인증번호가 같다면 이메일을 회원가입 페이지로 같이 넘겨서 이메일을
 			//한번더 입력할 필요가 없게 한다.
 
@@ -228,8 +227,18 @@ public class MemberController {
 
 	}
 
-
-
-
+	@RequestMapping("memDelete.do")
+	public String memberDelete(SessionStatus status, String email, Model model) {
+		
+		
+		int result = memService.deleteMember(email);
+		if(result>0) {
+			status.setComplete();
+			return "redirect:index.jsp";
+		}else {
+			model.addAttribute("msg","회원탈퇴실패!");
+			return "common/errorPage";
+		}		
+	}
 
 }

@@ -35,5 +35,10 @@ public class MemberServiceImpl implements MemberService {
         memDao.authentication(m);
 
 	}
+
+	@Override
+	public int deleteMember(String email) {
+		return memDao.deleteMember(email);
+	}
 	
 }

@@ -29,6 +29,10 @@ public class MemberDao {
 		return  sqlSession.insert("memberMapper.authentication", m);
 
 	}
+
+	public int deleteMember(String email) {
+		return sqlSession.update("memberMapper.deleteMember",email);
+	}
 	
 	
 

@@ -18,8 +18,8 @@ public class ThemeServiceImpl implements ThemeService {
 	private ThemeDao tDao = new ThemeDao();
 	
 	@Override
-	public int getListCount() {
-		return tDao.getListCount();
+	public int getListCount(SearchCondition sc) {
+		return tDao.getListCount(sc);
 	}
 
 	@Override
@@ -31,20 +31,22 @@ public class ThemeServiceImpl implements ThemeService {
 	public int insertTheme(Theme t,int tNum) {
 		
 		switch(t.gettCode()) {
-		case "History":t.settCode("T1"); break;
-		case "Food":t.settCode("T2"); break;
-		case "Shopping":t.settCode("T3"); break;
-		case "Festival":t.settCode("T4"); break;
-		case "Night View":t.settCode("T5"); break;
-		case "Museum":t.settCode("T6"); break;
-		case "Exotic":t.settCode("T7"); break;
+		case "NATURE":t.settCode("T1"); break;
+		case "RESTAURANT":t.settCode("T2"); break;
+		case "HISTORY":t.settCode("T3"); break;
+		case "SHOPPIN":t.settCode("T4"); break;
+		case "BAR":t.settCode("T5"); break;
+		case "ACTIVITY":t.settCode("T6"); break;
+		case "EXHIBITION":t.settCode("T7"); break;
 		}
 		
 		int chk = tDao.checkFile(tNum);
 		
 		if(chk != 1) {
 			String str = t.gettContent();
-			str = str.substring(str.indexOf("src")+5,str.indexOf("alt")-2);
+			str = str.substring(str.indexOf("src")+5,str.length()-str.indexOf("src")+5);
+			str = str.substring(0,str.indexOf("\""));
+			
 			t.settOriginalFile(str);
 			t.settModifyFile(str);
 			TFile tf = new TFile();
@@ -64,7 +66,7 @@ public class ThemeServiceImpl implements ThemeService {
 	@Override
 	public int insertImg(TFile tf) {
 		int cl = tDao.getTCount(tf);
-		if(cl >= 1) return tDao.updateImg(tf); else return tDao.insertImg(tf);
+		if(cl == 1) return tDao.updateImg(tf); else return tDao.insertImg(tf);
 	}
 
 	@Override

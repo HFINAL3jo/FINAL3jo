@@ -132,7 +132,7 @@ input:checked+label:after {
 	cursor: pointer;
 }
 </style>
-<script src="http://code.jquery.com/jque	ry-3.4.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -185,38 +185,22 @@ input:checked+label:after {
 				<div class="col-lg-6 col-md-6">
 					<div class="login_part_form">
 						<div class="login_part_form_iner">
-							<h3>Enter your Authentication number</h3>
-							<c:url var="emailCheck" value="ec.do"/>
-							<form class="row contact_form" action="${ emailCheck }">
-								<div class="col-md-12 form-group p_star">
-									<input type="number" class="form-control" id="email_injeung"
-										name="email_injeung" value="" placeholder="Enter your Authentication number" required>
-									<input type="text" value="${dice }" name="diceCheck" style="display: none;">
-									<button type="submit" class="btn_3">go to signUp</button>
-									
-											<%
+							<h3>CREATE YOUR ACCOUNT</h3>
+							<form class="row contact_form" action="signUp.do" method="post">
+
+								<%
 										request.setCharacterEncoding("UTF-8");
 										String email = request.getParameter("e_mail");
-										
 									%>
-					
-								<div class="col-md-12 form-group p_star">
-									<input type=hidden name="email" value="<%=email%>" readonly>
-									
-								</div>
 
-					 			</div>
-							</form>
-						
-						<!-- 	<form class="row contact_form" action="signUp.do" method="post"
-								novalidate="novalidate">
+
+								<div class="col-md-12 form-group p_star">
+									<input type=text class="form-control" name="email" value="${ email }" readonly>
+								</div>
 
 								<div class="col-md-12 form-group p_star">
 									<input type="password" class="form-control" id="password"
 										name="password" value="" placeholder="Password">
-									<div class="eye">
-										<i class="fas fa-eye"></i>
-									</div>
 								</div>
 
 								<div class="col-md-12 form-group p_star">
@@ -232,45 +216,29 @@ input:checked+label:after {
 										id="age" name="age" placeholder="age">
 								</div>
 
-
-
 								<div class="col-md-12 form-group p_star" id="input-group">
 									<input type="radio" name="gender" value="M" id="M" /> <label
 										for="M">Male</label> <input type="radio" name="gender"
 										value="F" id="F" /> <label for="F">Female</label>
 								</div>
 
-
-
-								<div class="col-md-12 form-group p_star">
+<!-- 								<div class="col-md-12 form-group">
 									<input type="button" class="btn_3" value="go to recommend"><a
 										href="recommend.do"></a>
+								</div> -->
+
+								<div class="col-md-12 form-group">
+									<button type="submit" value="submit" class="btn_3"
+										href="index.jsp">SIGN UP</button>
 								</div>
-
-								<div class="col-md-12 form-group">  -->
-									<!-- 									<div class="creat_account d-flex align-items-center">
-										<input type="checkbox" id="f-option" name="selector">
-										<label for="f-option">Remember me</label>
-									</div> -->
-									<br>
-									<!-- 									<ul class="social-icons text-right">
-										<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-										<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-										<li><a href="#"><i class="fas fa-globe"></i></a></li>
-									</ul> -->
-
-<!-- 									<button onclick='return validate();' value="submit"
-										class="btn_3">SIGN UP</button>
-									<a class="lost_pass" href="#">forget password?</a> -->
-							<!-- 	</div>
-							</form> -->
+								<br>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<!--================sign_up part end =================-->
 
 	<!--::footer_part start::-->
 	<%@ include file="../common/footer.jsp"%>
@@ -283,78 +251,9 @@ input:checked+label:after {
 
 	<!-- ■■■■■■■■■■■■ Script part ■■■■■■■■■■■■ -->
 
-<!-- 	<script>
-		/*이메일 인증 팝업*/
-		var openChk;
-		function sendMail() {
 
-			var emailVal = $("#email").val();
-
-			var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-			// 검증에 사용할 정규식 변수 regExp에 저장
-
-			if (emailVal.match(regExp) != null) {
-				window.name = "signUp.jsp";
-				openChk = window
-						.open("emailPopup.jsp", "Email Check",
-								"width=500, height=50, resizable = no, scrollbars = no status= no");
-			} else {
-				alert('Error');
-			}
-		}
-
-		/*이메일 중복체크*/
-		function validate() {
-
-			if ($("idDuplicateCheck").val() == 0) {
-
-				alert("사용 가능한 이메일을 입력해주세요");
-				$("#email").focus();
-				return false;
-			} else {
-				return true;
-			}
-		}
-
-		$(function() {
-
-			$('#email').on("keyup", function() {
-
-				var email = $(this).val();
-
-				if (email.length < 5) {
-					$(".guide").hide();
-					$("#idDuplicateCheck").val(0);
-
-					return;
-				}
-
-				$.ajax({
-					url : "idCheck.do",
-					data : {
-						email : email
-					},
-					type : "post",
-					success : function(data) {
-						console.log(data);
-						if (data == "ok") {
-							$(".error").hide();
-							$(".ok").show();
-							$("#idDuplicateCheck").val(1);
-						} else {
-							$(".ok").hide();
-							$(".error").show();
-							$("#idDuplicateCheck").val(0);
-						}
-
-					},
-					error : function() {
-						console.log("ajax 처리 실패")
-					}
-				});
-			});
-		});
-
+	<script>
+ 	
 		$(function() {
 
 			//비밀번호 확인
@@ -368,70 +267,8 @@ input:checked+label:after {
 				}
 			})
 		});
-
-		$(function() { // 눈표시 클릭 시 패스워드 보이기 
-			$('.eye').on(
-					'click',
-					function() {
-						$('.col-md-12 form-group p_star.password').toggleClass(
-								'active');
-						if ($('.col-md-12 form-group p_star.password')
-								.hasClass('active') == true) {
-							$(this).find('.fa-eye').attr('class',
-									"fa fa-eye-slash fa-lg").parents(
-									'.col-md-12 form-group p_star').find(
-									'#password').attr('type', "text");
-						} else {
-							$(this).find('.fa-eye-slash').attr('class',
-									"fa fa-eye fa-lg").parents(
-									'.col-md-12 form-group p_star').find(
-									'#password').attr('type', 'password');
-						}
-					});
-		});
-
-		/*비밀번호 정규식*/
-
-		function checkPassword(password) {
-			if (!/^[a-zA-Z0-9]{10,15}$/.test(password)) {
-
-				alert('숫자와 영문자 조합으로 10~15자리를 사용해야 합니다.');
-				return false;
-			}
-			var checkNumber = password.search(/[0-9]/g);
-			var checkEnglish = password.search(/[a-z]/ig);
-
-			if (checkNumber < 0 || checkEnglish < 0) {
-
-				alert("숫자와 영문자를 혼용하여야 합니다.");
-
-				return false;
-
-			}
-
-			return true;
-
-		}
-
-		 닉네임 미입력시 알림	            
-		     if ((nickname.value) == ""){
-		 alert("Enter your nickname");
-		 nickname.focus();
-		 return false;
-		 }            
-
-		  닉네임 유효성 검사	    
-		 if(!chk({4,10},nickname,"Enter your nickname between 4~10 characters")){
-		 return false;
-		 } 
-	</script> -->
-	
-	<script>
-		$(function(){
-			console.log(${dice});
-		});
+		
 	</script>
-
 </body>
 
 </html>

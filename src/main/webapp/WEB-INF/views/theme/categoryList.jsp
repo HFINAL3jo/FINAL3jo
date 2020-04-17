@@ -76,7 +76,6 @@ h4{
 						class="product_top_bar d-flex justify-content-between align-items-center">
 
 						<div class="single_product_menu">
-							<p>								
 								Number of posts <span>${pi.listCount}</span>
 							</p>
 							<!-- <p>여행 테마 -> 전통 -> 고궁</p> -->
@@ -130,6 +129,7 @@ h4{
 			<input id="tm" type="hidden" value="${pi.maxPage }">
 			<input id="sv" type="hidden" name="searchValue" value="${sc.searchValue}">
 			<input id="kw" type="hidden" name="keyword" value="${sc.keyword}">
+			<input id="lc" type="hidden" value="${pi.listCount }">
 			<div align="center">
 				<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:#ebc5e4;">Lord More..</button></a>
 			</div>
@@ -161,7 +161,8 @@ h4{
 		var maxPage = $('#tm').val();
 		var searchValue = $('#sv').val();
 		var keyword = $('#kw').val();
-		
+		var endb = $('#lc').val();
+	
 	function pagination(){
 		if(maxPage == currentPage){
 			$('#alb').text("End");

@@ -186,8 +186,7 @@ input:checked+label:after {
 					<div class="login_part_form">
 						<div class="login_part_form_iner">
 							<h3>Enter your Email!</h3>
-							<form class="row contact_form" action="auth.do" method="post"
-								novalidate="novalidate">
+							<form class="row contact_form" action="auth.do" method="post">
 								<div class="col-md-12 form-group p_star">
 									<input type="email" class="form-control" id="email"
 										name="e_mail" value="" placeholder="E-mail" required> <span
@@ -196,66 +195,11 @@ input:checked+label:after {
 										class="guide error">Your Email is Already Joined</span> <input
 										type="hidden" name="idDuplicateCheck" id="idDuplicateCheck"
 										value="0">
-									<button type="submit" name="submit" class="btn_3" >send
+									<button type="submit" name="submit" class="btn_3" onclick="sendMail()">send
 										a mail</button>
-
+										
 								</div>
 							</form>
-
-							<!-- <form class="row contact_form" action="signUp.do" method="post"
-								novalidate="novalidate">
-
-								<div class="col-md-12 form-group p_star">
-									<input type="password" class="form-control" id="password"
-										name="password" value="" placeholder="Password">
-									<div class="eye">
-										<i class="fas fa-eye"></i>
-									</div>
-								</div>
-
-								<div class="col-md-12 form-group p_star">
-									<input type="password" class="form-control" id="passwordchk"
-										name="passwordchk" value="" placeholder="Password check">
-								</div>
-								<div class="col-md-12 form-group p_star">
-									<input type="text" class="form-control" id="nickname"
-										name="nickname" placeholder="Nickname">
-								</div>
-								<div class="col-md-12 form-group p_star">
-									<input type="number" max="99" min="10" class="form-control"
-										id="age" name="age" placeholder="age">
-								</div>
-
-
-
-								<div class="col-md-12 form-group p_star" id="input-group">
-									<input type="radio" name="gender" value="M" id="M" /> <label
-										for="M">Male</label> <input type="radio" name="gender"
-										value="F" id="F" /> <label for="F">Female</label>
-								</div>
-
-
-
-								<div class="col-md-12 form-group p_star">
-									<input type="button" class="btn_3" value="go to recommend"><a
-										href="recommend.do"></a>
-								</div>
-
-								<div class="col-md-12 form-group"> -->
-									<!-- 									<div class="creat_account d-flex align-items-center">
-										<input type="checkbox" id="f-option" name="selector">
-										<label for="f-option">Remember me</label>
-									</div> -->
-									<br>
-									<!-- 									<ul class="social-icons text-right">
-										<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-										<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-										<li><a href="#"><i class="fas fa-globe"></i></a></li>
-									</ul> -->
-
-
-								<!-- </div>
-							</form> -->
 						</div>
 					</div>
 				</div>
@@ -276,144 +220,59 @@ input:checked+label:after {
 	<!-- ■■■■■■■■■■■■ Script part ■■■■■■■■■■■■ -->
 
  	<script>
-		
-		/*이메일 중복체크*/
-		function validate() {
+	/*이메일 중복체크*/
+	function validate() {
 
-			if ($("idDuplicateCheck").val() == 0) {
+		if ($("idDuplicateCheck").val() == 0) {
 
-				alert("사용 가능한 이메일을 입력해주세요");
-				$("#email").focus();
-				return false;
-			} else {
-				return true;
-			}
+			alert("사용 가능한 이메일을 입력해주세요");
+			$("#email").focus();
+			return false;
+		} else {
+			return true;
 		}
+	}
 
-		$(function() {
+	$(function() {
 
-			$('#email').on("keyup", function() {
+		$('#email').on("keyup", function() {
 
-				var email = $(this).val();
+			var email = $(this).val();
 
-				if (email.length < 5) {
-					$(".guide").hide();
-					$("#idDuplicateCheck").val(0);
+			if (email.length < 10) {
+				$(".guide").hide();
+				$("#idDuplicateCheck").val(0);
 
-					return;
-				}
+				return;
+			}
 
-				$.ajax({
-					url : "idCheck.do",
-					data : {
-						email : email
-					},
-					type : "post",
-					success : function(data) {
-						console.log(data);
-						if (data == "ok") {
-							$(".error").hide();
-							$(".ok").show();
-							$("#idDuplicateCheck").val(1);
-						} else {
-							$(".ok").hide();
-							$(".error").show();
-							$("#idDuplicateCheck").val(0);
-						}
-
-					},
-					error : function() {
-						console.log("ajax 처리 실패")
+			$.ajax({
+				url : "idCheck.do",
+				data : {
+					email : email
+				},
+				type : "post",
+				success : function(data) {
+					console.log(data);
+					if (data == "ok") {
+						$(".error").hide();
+						$(".ok").show();
+						$("#idDuplicateCheck").val(1);
+					} else {
+						$(".ok").hide();
+						$(".error").show();
+						$("#idDuplicateCheck").val(0);
 					}
-				});
+
+				},
+				error : function() {
+					console.log("ajax 처리 실패")
+				}
 			});
 		});
-		
-		function CheckEmail(str)
-		{                                                 
-		     var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-		     if(!reg_email.test(str)) {                            
-		          return false;         
-		     }                            
-		     else {                       
-		          return true;         
-		     }                            
-		}                                
-
-		</script>
-
-<!--  	$(function() {
-
-			
-			$('#passwordchk').blur(function() {
-				if ($('#password').val() != $('#passwordchk').val()) {
-					if ($('#passwordchk').val() != '') {
-						alert("비밀번호가 일치하지 않습니다.");
-						$('#passwordchk').val('');
-						$('#passwordchk').focus();
-					}
-				}
-			})
-		});
-
-		$(function() { 
-			$('.eye').on(
-					'click',
-					function() {
-						$('.col-md-12 form-group p_star.password').toggleClass(
-								'active');
-						if ($('.col-md-12 form-group p_star.password')
-								.hasClass('active') == true) {
-							$(this).find('.fa-eye').attr('class',
-									"fa fa-eye-slash fa-lg").parents(
-									'.col-md-12 form-group p_star').find(
-									'#password').attr('type', "text");
-						} else {
-							$(this).find('.fa-eye-slash').attr('class',
-									"fa fa-eye fa-lg").parents(
-									'.col-md-12 form-group p_star').find(
-									'#password').attr('type', 'password');
-						}
-					});
-		});
-
-		
-
-		function checkPassword(password) {
-			if (!/^[a-zA-Z0-9]{10,15}$/.test(password)) {
-
-				alert('숫자와 영문자 조합으로 10~15자리를 사용해야 합니다.');
-				return false;
-			}
-			var checkNumber = password.search(/[0-9]/g);
-			var checkEnglish = password.search(/[a-z]/ig);
-
-			if (checkNumber < 0 || checkEnglish < 0) {
-
-				alert("숫자와 영문자를 혼용하여야 합니다.");
-
-				return false;
-
-			}
-
-			return true;
-
-		} 
-
-		            
-		    if ((nickname.value) == ""){
-		 alert("Enter your nickname");
-		 nickname.focus();
-		 return false;
-		 }            
-
-		  닉네임 유효성 검사	    
-		 if(!chk({4,10},nickname,"Enter your nickname between 4~10 characters")){
-		 return false;
-		 }  -->
-
-
-
+	}); 
+	</script>
+	
 </body>
 
 </html>

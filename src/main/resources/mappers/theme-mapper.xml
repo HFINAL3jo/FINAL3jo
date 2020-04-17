@@ -44,7 +44,13 @@
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*) 
 		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		<if test="keyword == null">
 		WHERE T_STATUS='Y'
+		</if>
+		<if test="keyword != null">
+		WHERE TNAME LIKE UPPER('%'||#{keyword}||'%')
+		</if>
 	</select>
 	
 	<select id="selectList" resultMap="themeResultSet">		
