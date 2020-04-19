@@ -9,14 +9,9 @@
     <!-- Google Analytics -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-16476520-26"></script>
-    <link type="text/css" rel="stylesheet" href="https://101.livere.co.kr/extension_8/attachFile/attachFile.css">
-    <link type="text/css" rel="stylesheet" href="https://101.livere.co.kr/css/default_livere8_gzip.css">
-    <link type="text/css" rel="stylesheet" href="https://101.livere.co.kr/consumers/visitseoul/visitseoul.css">
-    <link type="text/css" rel="stylesheet" href="https://101.livere.co.kr/css/default_actionwidzet8_gzip.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=645218c0e569303936c79803cc2aa695&libraries=services"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=645218c0e569303936c79803cc2aa695&libraries=LIBRARY"></script>      
- 	<script type="text/javascript" src="humanframe/theme/visitseoul/assets/script/livere8_lib.js" charset="utf-8"></script>
     <style>
     .like-content {
 	    display: inline-block;
@@ -71,7 +66,7 @@
             padding: 10px 0px 20px 15px;
             font-size: 16px;
             color: #666;
-            background: url(../../../assets/images/2019/common/ico-home@2x.png) no-repeat 0px 15px;
+            /* background: url(../../../assets/images/2019/common/ico-home@2x.png) no-repeat 0px 15px; */
             background-size: 10px 12px;
             box-sizing: border-box;
         }
@@ -329,7 +324,26 @@
           .sub-contents-inner{
           	margin-top:7%;
           }
-     </style>
+          /*댓글 */
+          .reply{
+          	  width:80%;
+          	  border-collapse:collapse;
+          	  font-size:1em;
+          }
+          
+          .trd{
+			 display:inline-block; 
+			 border-radius:10px; 
+			 height:100px; 
+			 width:91%; 
+			 border:1px #a9b2c2 solid;          
+          }
+         
+          .replyList{
+          		colspan:2;
+          		width:70%;
+          }
+         </style>
      
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -387,11 +401,34 @@
     					<i class="fa fa-heart" aria-hidden="true"></i> Like ${t.tLikes}
   						</button>
 					</div>
-                        <p>&nbsp;</p>
-                        <p>&nbsp;</p>
-                        <p>&nbsp;</p>
+					<br><br><br>
+					<div>
+						<table class="reply" id="trt" align="center">
+								<tr>
+									<td>Reply</td>
+									<c:if test="${empty loginUser }">
+									<td colspan="2" width="95%"><a href="loginView.do" id="lof"><textarea name="trContent" id="tr" align="center" rows="5" cols="95" style="resize: none;" placeholder="If you want leave a message..Please login First" readonly="readonly"></textarea></a></td>
+									</c:if>
+									<c:if test="${!empty loginUser }">
+									<td colspan="2" width="95%"><textarea name="trContent" id="trc" align="center" rows="5" cols="95" style="resize: none;" placeholder=""></textarea></td>
+									</c:if>
+								</tr>
+						</table>
+						<c:if test="${!empty loginUser}">
+						<button id="rSubmit" style="float:right; margin-right:136px; border-radius:10px;">Add a Comment</button>
+						</c:if>
+						<br><br>
+						<table class="reply" id="trtl" align="center">
+							<tbody>
+								<tr>
+								 	
+								</tr>							
+							</tbody>
+						</table>
+					</div>
+                        <br><br><br>
                         <h3 class="black"># ${t.tKeyword}</h3>
-                        <p>&nbsp;</p>
+                        <br><br>
                         <ul class="cols4-element">
                             <li>
                                 <a href="http://me2.do/xDAyqdMi" title="서울야경 스릴 있게 즐기기!"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27505&amp;fileTy=MEDIA&amp;fileNo=1" alt="서울야경 스릴 있게 즐기기!"><span class="cont"><span class="title">서울야경 스릴 있게 즐기기!</span><span class="content">                    국내 최고 높이의 롯데타워 전망대에서                    아찔한 인증샷을 남겨보자.</span></span><span class="link"><span>랜드마크 서울스카이</span></span>
@@ -411,7 +448,7 @@
                             </li>
                         </ul>
                     </div>
-
+					
                 </section>
                 <section class="tag-element detail">
                     <span class="title">태그</span>
@@ -419,74 +456,7 @@
                         <a href="/search?search_radio=T&amp;lang=ko&amp;searchTerm=낮과-밤-모두-완벽한-이곳-석촌호수">#${t.tKeyword }</a>
                     </p>
                 </section>
-                <!-- livere -->
-                <div class="livere-wrap">
-                    <!-- livere8 -->
-                    
-                    <div id="livereContainer" style="padding-top:30px;" class="livereReply_useMouseOver">
-                    
-                        <div id="liverePlugIn">
-                            <h3 class="livereNone">소셜댓글 라이브리 영역. SNS 계정으로 로그인해 댓글을 작성하고 SNS로 전송할 수 있습니다</h3>
-                            <div id="livereWriteForm">
-                                <div id="livereWriteFormTop"> <span id="livereSNSLoginTitle">소셜로그인</span>
-                                    <div id="livereSNSLoginIconContainer">
-                                        <ul id="livereLogged" class="livereNone"></ul>
-                                        <ul id="livereNotLogged">
-                                            <li id="livere_facebook">
-                                                <button type="button" class="livereSNSLoginIcon livereClick livereBtn1" clicktype="snsLoginBtn" rel="tooltip"> <span class="livereSNSImage_B livere_t_indent">Facebook 로그인 페이지 새창이 열립니다</span> </button>
-                                            </li>
-                                            <li id="livere_twitter">
-                                                <button type="button" class="livereSNSLoginIcon livereClick livereBtn1" clicktype="snsLoginBtn" rel="tooltip"> <span class="livereSNSImage_B livere_t_indent">Twitter 로그인 페이지 새창이 열립니다</span> </button>
-                                            </li>
-                                            <li id="livere_google_plus">
-                                                <button type="button" class="livereSNSLoginIcon livereClick livereBtn1" clicktype="snsLoginBtn" rel="tooltip"> <span class="livereSNSImage_B livere_t_indent">GooglePlus 로그인 페이지 새창이 열립니다</span> </button>
-                                            </li>
-                                            <li id="livere_linkedIn">
-                                                <button type="button" class="livereSNSLoginIcon livereClick livereBtn1" clicktype="snsLoginBtn" rel="tooltip"> <span class="livereSNSImage_B livere_t_indent">LinkedIn 로그인 페이지 새창이 열립니다</span> </button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div id="livereWriteFormMiddle">
-                                    <div id="livereWriteFromMiddleLeft">
-                                        <ul id="liverePrimaryStatus">
-                                            <li> <span id="liverePrimaryThumb" class="notLoggedThumb">							<img src="https://101.livere.co.kr/images/_.gif" alt="로그인 전 프로필 이미지">						</span> </li>
-                                        </ul>
-                                    </div>
-                                    <div id="livereWriteFormMiddleRightContainer">
-                                        <label for="livere_contentText" class="livereNone">댓글입력하는영역</label>
-                                        <ul id="livereWriteFormMiddleRight" class="livereWriteFormWrapper">
-                                            <li class="livereAccInfoWrapper">
-                                                <p id="livereAccInfo" class="livereAccInfo">소셜계정으로 작성하세요</p>
-                                            </li>
-                                            <li id="livereWriteParamsForm" class="livereContentTextForm">
-                                                <input id="livere_short_url" name="livere_short_url" type="hidden">
-                                                <input id="livere_name" name="livere_name" type="hidden">
-                                                <input id="livere_parent_seq" name="livere_parent_seq" type="hidden">
-                                                <textarea tabindex="0" id="livere_contentText" class="livere_contentText" name="livere_content" targetname="livereParentStrCount" title="댓글입력하는영역" aria-label="댓글입력하는영역" disabled="disabled">로그인 후 작성 가능합니다</textarea>
-                                            </li>
-                                            <li id="livereWriteFormFunction" class="livereFunctionContainer">
-                                                <ul id="livereFunctionWrapper" class="livereFunctionWrapper">
-                                                    <li id="livereAttachOpenBtnsWrapper">
-                                                        <button type="button" id="livereImageAttachOpenBtn" class="livereAttachOpenBtns livereBtn3 livere_t_indent" rel="tooltip"><span>사진첨부창 열기</span></button>
-                                                        <button type="button" id="livereVideoAttachOpenBtn" class="livereAttachOpenBtns livereBtn3 livere_t_indent" rel="tooltip"><span>비디오첨부창 열기</span></button>
-                                                    </li>
-                                                    <li class="livereTextCountWrapper"> <strong id="livereParentStrCount">0</strong>/<span id="livereStrMaxCount">250</span> </li>
-                                                </ul>
-                                            </li>
-                                            <li id="livereWriteFormMiddleBottom">
-                                                <button type="button" id="livereWriteBtn" class="livereWriteBtn livereBtn2"><span class="livereFont5">보내기</span></button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div id="livereHome"><span id="livereHomeBtn"><a href="http://www.livere.com" title="라이브리 홈페이지 - 새 창이 열립니다" aria-label="라이브리 홈페이지 - 새 창이 열립니다" target="_blank">Powered by <strong class="livereColor1">Live</strong><strong class="livereColor2">Re</strong></a></span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- //livere8-->
-                </div>
-                <!--// livere -->
+               
             </div>
             <div class="heart heart-unliked"></div>
             <%@ include file="../common/footer.jsp" %>
@@ -579,24 +549,18 @@
                             			current_url_=current_url_+"&WT.ac=MainBanner1-1";
                             		} */
 
-                            var livere_seq = "";
                             var consumer_seq = "744";
                             var smartlogin_seq = "";
 
                             if (locale == 'ko') {
-                                livere_seq = "18866";
                                 smartlogin_seq = "879";
                             } else if (locale == 'en') {
-                                livere_seq = "18867";
                                 smartlogin_seq = "879";
                             } else if (locale == 'ja') {
-                                livere_seq = "18869";
                                 smartlogin_seq = "880";
                             } else if (locale == 'zh-CN') {
-                                livere_seq = "18868";
                                 smartlogin_seq = "881";
                             } else {
-                                livere_seq = "24906";
                                 smartlogin_seq = "881";
                             }
 
@@ -606,11 +570,6 @@
 
                             refer = refer.replace("http://", "");
 
-                            livereReply = new Livere(livere_seq, refer, title);
-                            livereReply.site = current_url;
-                            livereReply.description = current_url;
-                            livereLib.start();
-                   
                         $(function() {
                         	  $(".heart").on("click", function() {
                         	    $(this).toggleClass("is-active");
@@ -639,10 +598,115 @@
 					});
 				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
 				    //theme > themename 링크
-				    $('.loction').mouseenter(function(){
+				    $('.loction span').mouseenter(function(){
 				    	$(this).css('cursor','pointer');
 				    }).click(function(e){
-				    	console.log(e);
+				    	if(e.target.innerText == "Theme"){
+				    		location.href="theme.do";
+				    	}else{
+				    		location.href="theme.do?keyword="+e.target.innerText;
+				    	}
+				    });
+				    
+				    //댓글 submit
+				    $('#rSubmit').click(function(){
+				    	var trWriter = '${loginUser.nickname}';
+				    	var trContent = $('#trc').val();
+				    	var refTid = ${t.tId};
+				    	
+				    	$.ajax({
+				    		url:"addTReply.do",
+				    		data:{trWriter:trWriter,trContent:trContent,refTid:refTid},
+				    		type:"post",
+				    		success:function(data){	
+				    			if(data=="success"){
+				    				getTReplyList();
+				    			}
+				    		},error:function(){
+				    			console.log("댓글전송실패");
+				    		}
+				    	});
+				    });
+				    
+				    $(function(){
+				    	
+				    	getTReplyList();
+				    	
+				    	setInterval(function(){
+				    		getTReplyList();
+						}, 30000);
+				    	
+				    	function getTReplyList(){
+				    		$tableBody = $('#trtl tbody');
+				    		$tableBody.html("");
+				    		
+				    		var $tr; 
+				    		var $trWriter; 
+				    		var $td;
+				    		var $trContent;
+				    		var $trCreatedate;
+				    		var $input;
+				    		
+				    		var tId = ${t.tId};
+				    		$.ajax({
+				    			url:"trList.do",
+				    			data:{tId:tId},
+				    			dataType:"json",
+				    			success:function(data){
+				    				
+				    				if(data.length > 0){
+				    				
+				    				for(var i in data){
+				    				
+					    				if(data[i].trWriter == '${loginUser.nickname}'){
+					    					
+					    				$tr = $('<tr>');
+					    				$trWriter = $('<td>').text(data[i].trWriter);
+					    				$td = $('<td>').addClass('replyList');
+					    				$trContent = $('<div align="center">').addClass('trd').text(data[i].trContent);
+					    				$trCreateDate = $('<td>').text(data[i].trCreateDate);
+					    				var $br = $('<br>');
+					    				$input = $('<input type="button" value="Delete">').css('font-size','0.8em')
+					    				.attr('onclick','window.confirm("Are you sure?");');
+					    				
+					    				$tr.append($trWriter);
+					    				$tr.append($td);
+					    				$td.append($trContent);
+					    				$tr.append($trCreateDate);
+					    				$trCreateDate.append($br);
+					    				$trCreateDate.append($input);
+					    				
+					    				$tableBody.append($tr);
+				    					}else{
+				    						$tr = $('<tr>');
+						    				$trWriter = $('<td>').text(data[i].trWriter);
+						    				$td = $('<td>').addClass('replyList');
+						    				$trContent = $('<div align="center">').addClass('trd').text(data[i].trContent);
+						    				$trCreateDate = $('<td colspan="10">').text(data[i].trCreateDate);
+						    				
+						    				$tr.append($trWriter);
+						    				$tr.append($td);
+						    				$td.append($trContent);
+						    				$tr.append($trCreateDate);
+						    				
+						    				$tableBody.append($tr);
+				    					}	
+				    				}
+				    				
+				    				}else{
+				    					$tr = $('<tr>');
+				    					$td = $('<td>').addClass('replayList');
+				    					$trContent = $('<div align="center">').addClass('trd').text('Leave First Reply Our Journey');
+				    					
+				    					$tr.append($td);
+				    					$td.append($trContent);
+				    					$tableBody.append($tr);
+				    				}
+				    			},error:function(){
+				    				console.log("전송실패");
+				    			}
+				    		});
+				    	}
 				    });
 					</script>
 </body>

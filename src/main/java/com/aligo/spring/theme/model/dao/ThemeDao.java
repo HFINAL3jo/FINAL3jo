@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.aligo.spring.theme.model.vo.PageInfo;
 import com.aligo.spring.theme.model.vo.SearchCondition;
 import com.aligo.spring.theme.model.vo.TFile;
+import com.aligo.spring.theme.model.vo.TReply;
 import com.aligo.spring.theme.model.vo.Theme;
 
 @Repository("tDao")
@@ -78,5 +79,13 @@ public class ThemeDao {
 	
 	public int updateCountKwT(String key) {
 		return sqlSession.update("themeMapper.updateCountKwT",key);
+	}
+
+	public int insertTReply(TReply r) {
+		return sqlSession.insert("themeMapper.insertTReply",r);
+	}
+
+	public ArrayList<TReply> selectTReplyList(int tId) {
+		return (ArrayList)sqlSession.selectList("themeMapper.selectTReplyList",tId);
 	}
 }

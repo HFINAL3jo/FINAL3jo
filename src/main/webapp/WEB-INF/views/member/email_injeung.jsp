@@ -429,6 +429,8 @@ input:checked+label:after {
 	<script>
 		$(function(){
 			console.log(${dice});
+			
+			//scroll 내려가기
 		});
 	</script>
 

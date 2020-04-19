@@ -271,6 +271,12 @@ input:checked+label:after {
 			});
 		});
 	}); 
+	
+	window.setTimeout(function(){
+		var offset=window.innerHeight;
+		$('html,body').stop().animate({scrollTop:'300'},600);
+		$('#email').focus();	
+		}, 200);
 	</script>
 	
 </body>

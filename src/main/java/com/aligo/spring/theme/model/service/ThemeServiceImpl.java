@@ -9,6 +9,7 @@ import com.aligo.spring.theme.model.dao.ThemeDao;
 import com.aligo.spring.theme.model.vo.PageInfo;
 import com.aligo.spring.theme.model.vo.SearchCondition;
 import com.aligo.spring.theme.model.vo.TFile;
+import com.aligo.spring.theme.model.vo.TReply;
 import com.aligo.spring.theme.model.vo.Theme;
 
 @Service("tService")
@@ -92,5 +93,15 @@ public class ThemeServiceImpl implements ThemeService {
 		}else {
 			return tDao.updateCountKwA(findKeyword);
 		}
+	}
+
+	@Override
+	public int addTReply(TReply r) {
+		return tDao.insertTReply(r);
+	}
+
+	@Override
+	public ArrayList<TReply> slelctTReplyList(int tId){ 
+		return tDao.selectTReplyList(tId);
 	}
 }

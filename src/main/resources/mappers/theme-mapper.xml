@@ -23,8 +23,19 @@
 	 <result property="tModifyFile" column="T_MODIFY_FILE"/>
 	 <result property="tName" column="TNAME"/>
 	 
-	 <collection property="tFileList" javaType="java.util.ArrayList" resultMap="themeFileResultSet"/>
-	 <collection property="tNameList" javaType="java.util.ArrayList" resultMap="themeNameResultSet"/>
+	</resultMap>
+	
+	<resultMap type="TReply" id="themeReplyResultSet">
+		<id property="trId" column="TRID"/>
+		
+		<result property="trId" column="TRID"/>
+		<result property="trContent" column="TRCONTENT"/>
+		<result property="refTid" column="REF_TID"/>
+		<result property="trWriter" column="TRWIRTER"/>
+		<result property="trCreateDate" column="TR_CREATE_DATE"/>
+		<result property="trModifyDate" column="TR_MODIFY_DATE"/>
+		<result property="trStatus" column="TR_STATUS"/>
+	
 	</resultMap>
 	
 	<resultMap type="TFile" id="themeFileResultSet">
@@ -138,4 +149,16 @@
 	<update id="updateCountKwA">
 		UPDATE SEARCH_AREA SET SA_COUNT = SA_COUNT + 1 WHERE AREA = #{key}
 	</update>
+	
+	<insert id="insertTReply">
+		INSERT INTO THEME_REPLY VALUES
+		(SEQ_TRNO.NEXTVAL,#{trContent},#{refTid},#{trWriter},DEFAULT,DEFAULT,DEFAULT)
+	</insert>
+	
+	<select id="selectTReplyList" resultMap="themeReplyResultSet" parameterType="TReply">
+		SELECT * 
+		FROM THEME_REPLY 
+		WHERE REF_TID = #{tId} AND TR_STATUS = 'Y'
+		ORDER BY TRID DESC
+	</select>
 </mapper>

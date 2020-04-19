@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,7 +30,11 @@ import com.aligo.spring.theme.model.vo.PageInfo;
 import com.aligo.spring.theme.model.vo.PhotoVo;
 import com.aligo.spring.theme.model.vo.SearchCondition;
 import com.aligo.spring.theme.model.vo.TFile;
+import com.aligo.spring.theme.model.vo.TReply;
 import com.aligo.spring.theme.model.vo.Theme;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 
 @Controller
 public class ThemeController extends TFile{
@@ -251,4 +256,28 @@ public class ThemeController extends TFile{
 		    }
 		}
 		
+	@RequestMapping("addTReply.do")
+	@ResponseBody
+	public String addTReply(TReply r) {
+		String str = "";
+		System.out.println(r);
+		int result = tService.addTReply(r);
+		
+		if(result > 0) str="success"; else str="fail";
+		
+		return str;
+	}
+	
+	@RequestMapping("trList.do")
+	public void getTReplyList(HttpServletResponse response,int tId) throws JsonIOException, IOException {
+		
+	ArrayList<TReply> list = tService.slelctTReplyList(tId);
+	
+	response.setContentType("application/json; charset=UTF-8");
+	
+	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+	
+	gson.toJson(list,response.getWriter());
+}
+
 }

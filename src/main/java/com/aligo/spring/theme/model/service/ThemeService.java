@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.aligo.spring.theme.model.vo.PageInfo;
 import com.aligo.spring.theme.model.vo.SearchCondition;
 import com.aligo.spring.theme.model.vo.TFile;
+import com.aligo.spring.theme.model.vo.TReply;
 import com.aligo.spring.theme.model.vo.Theme;
 
 public interface ThemeService {
@@ -62,5 +63,18 @@ public interface ThemeService {
 	 * @return
 	 */
 	int updateSearchKeywordCount(SearchCondition sc);
-	
+
+	/**
+	 * 댓글 작성
+	 * @param r
+	 * @return
+	 */
+	int addTReply(TReply r);
+
+	/**
+	 * 댓글리스트 조회
+	 * @param tId
+	 * @return
+	 */
+	ArrayList<TReply> slelctTReplyList(int tId);
 }

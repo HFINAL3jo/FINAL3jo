@@ -176,6 +176,7 @@
     <script src="resources/js/custom.js"></script>
 
 	<script>
+	//datalist 추가 예정
 		$('#search_input').on('click keyup',function(){
 			ajax({
 				

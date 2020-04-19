@@ -108,6 +108,11 @@ ul[class~=social-icons]>li {
 			 location.href="findPwd.do"
 		 });
 		 
+		 window.setTimeout(function(){
+				var offset=window.innerHeight;
+				$('html,body').stop().animate({scrollTop:'300'},600);
+				$('#email').focus();	
+				}, 200);
 	</script>
 </body>
 
