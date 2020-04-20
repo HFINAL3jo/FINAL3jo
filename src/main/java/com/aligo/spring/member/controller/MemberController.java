@@ -15,13 +15,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,8 +43,12 @@ import com.aligo.spring.member.model.vo.Member;
  * → 회원가입나이제한(0~100)
  * → 취향선택 연결하기
  */
+@SessionAttributes("loginUser")
 @Controller
 public class MemberController {
+	
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
 	@Inject
 	JavaMailSender mailSender;     //메일 서비스를 사용하기 위해 의존성을 주입함.
@@ -58,9 +65,13 @@ public class MemberController {
 
 	@RequestMapping(value="signUp.do", method = RequestMethod.POST)
 	public String insertMember(Member m) {
-
-		int result = memService.insertMember(m);
+		
 		System.out.println(m);
+		String encPwd = bcryptPasswordEncoder.encode(m.getpassword());
+		m.setpassword(encPwd);
+		System.out.println(m);
+		
+		int result = memService.insertMember(m);
 
 		if(result >0) {
 			return "redirect:index.jsp";
@@ -227,7 +238,21 @@ public class MemberController {
 
 	}
 
-	
+	@RequestMapping(value="login.do")
+	public String memberLogin(@ModelAttribute Member m, Model model) {
+
+		Member loginUser = memService.loginMember(m);
+
+		if(loginUser != null && bcryptPasswordEncoder.matches(m.getpassword(), loginUser.getpassword())) {			
+			//	로그인 성공 시 세션에 정보를 담아야 되기 때문에 세션이 필요하다.
+			model.addAttribute("loginUser", loginUser);
+			return "redirect:index.jsp";
+		}else {			
+			//	로그인 실패
+			model.addAttribute("msg", "로그인 실패!!");
+			return "common/errorPage";
+		}
+	}
 	
 	
 

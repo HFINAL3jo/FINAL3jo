@@ -23,12 +23,15 @@
 		(SEQ_MNO.NEXTVAL,#{email},#{password},#{nickname},#{gender},#{age},DEFAULT,#{recommend})
 	</insert>
 
-	<select id="loginMember" parameterType="Member"
-		resultMap="memberResultSet">
+	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
+		<!-- 암호화 전
 		SELECT *
 		FROM MEMBER
 		WHERE EMAIL = #{ email }
 		AND PASSWORD = #{ password }
+		AND M_STATUS = 'Y' -->
+		SELECT * FROM MEMBER
+		WHERE EMAIL = #{ email }
 		AND M_STATUS = 'Y'
 	</select>
 
@@ -38,12 +41,11 @@
 		WHERE email=#{email}
 	</select>
 	
-	<update id="deleteMember" parameterType="String">
+	<update id="deleteMember" parameterType="Member">
 		UPDATE MEMBER
 		SET M_STATUS='N'
-		WHERE email=#{email}, password=#{password}
-	
-	
+		WHERE EMAIL=#{email}
+		AND PASSWORD=#{password}
 	</update>
 
 </mapper>

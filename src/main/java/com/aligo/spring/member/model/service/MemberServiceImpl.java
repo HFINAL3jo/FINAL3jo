@@ -36,6 +36,14 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
+	@Override
+	public Member loginMember(Member m) {
+		/* return memDao.loginMember(m); */
+		Member loginUser = memDao.loginMember(m);
+		
+		return loginUser;
+	}
+
 	
 	
 }
