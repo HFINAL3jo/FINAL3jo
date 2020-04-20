@@ -30,9 +30,10 @@ public class MemberDao {
 
 	}
 
-	public int deleteMember(String email) {
-		return sqlSession.update("memberMapper.deleteMember",email);
+	public Member loginMember(Member m) {
+		return (Member)sqlSession.selectOne("memberMapper.loginMember", m);
 	}
+
 	
 	
 

@@ -25,6 +25,12 @@ public interface MemberService {
 	 */
 	public void authentication(Member m);
 
+	/**암호화 후 로그인
+	 * @param m
+	 * @return
+	 */
+	Member loginMember(Member m);
+
 
 
 	

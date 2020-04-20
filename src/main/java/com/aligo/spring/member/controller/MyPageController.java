@@ -10,12 +10,15 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aligo.spring.common.Pagination;
 import com.aligo.spring.member.model.service.MyPageService;
+import com.aligo.spring.member.model.vo.Member;
 import com.aligo.spring.theme.model.vo.PageInfo;
 import com.aligo.spring.theme.model.vo.Theme;
 
@@ -81,13 +84,24 @@ public class MyPageController {
 	}
 	  
 	  
+	/**
+	 * 회원 탈퇴
+	 * @param status
+	 * @param m
+	 * @param model
+	 * @param email
+	 * @param password
+	 * @return
+	 */
 	@RequestMapping("memDelete.do") 
-	public String memberDelete(String email, String password) {
-		int result = mpService.memberDelete(email,password);
+	public String memberDelete(SessionStatus status, Member m, Model model, String email, String password) {
+		int result = mpService.memberDelete(m);
 		
 		if(result > 0) {
-			return "redirext:logout.do";
+			status.setComplete();			
+			return "redirect:index.jsp";
 		}else {
+			model.addAttribute("msg","회원 탈퇴 오류");
 			return "common/errorPage";
 		}
 
