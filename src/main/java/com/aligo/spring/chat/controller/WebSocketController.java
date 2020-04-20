@@ -13,6 +13,7 @@ import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -20,10 +21,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class WebSocketController {
 
 	private static final List<Session> sessionList=new ArrayList<Session>();
+	private static final List<Session> sessionList2=new ArrayList<Session>();
+	private static final List<Session> sessionList3=new ArrayList<Session>();
+	private static final List<Session> sessionList4=new ArrayList<Session>();
+	private static final List<Session> sessionList5=new ArrayList<Session>();
 	
-	public WebSocketController() {
-        System.out.println("웹소켓(서버) 객체생성");
-	}
+	public WebSocketController() {}
 	
 	@RequestMapping(value="/chat.do")
 	public ModelAndView getChatViewPage(ModelAndView mav) {
@@ -37,11 +40,12 @@ public class WebSocketController {
 	    //logger.info("Open session id:"+session.getId());
 		try {
 		    final Basic basic = session.getBasicRemote();
-		    basic.sendText("Connection Established");
+//		    basic.sendText("Connection Established");
 		}catch (Exception e) {
 	        System.out.println(e.getMessage());
 	    }
 	    sessionList.add(session);
+	    
 	}
 
 	/*
@@ -53,7 +57,7 @@ public class WebSocketController {
         try {
             for(Session session : WebSocketController.sessionList) {
                 if(!self.getId().equals(session.getId())) {
-					session.getBasicRemote().sendText(/* message.split("(SPLPOINT!!)")[1]+" : "+ */message);
+					session.getBasicRemote().sendText(message);
                 }
             }
         }catch (Exception e) {
@@ -82,6 +86,14 @@ public class WebSocketController {
         //logger.info("Session "+session.getId()+" has ended");
         sessionList.remove(session);
     }
+    
+    @ResponseBody
+    @RequestMapping("chatCount.do")
+    public String chatCount() {
+    	
+    	return sessionList.size()+"";
+    }
+    
     
     
 }

@@ -139,42 +139,18 @@
 	<%@ include file="../common/menubar.jsp"%>
 	<!-- Header part end-->
 
-	
+	<c:if test="${ !empty sessionScope.loginUser }">
 	<div class="chat" style="text-align: center;">
 		<div class="chatList" style="position: relative; margin: 1% auto; height: auto;">
-			<input type="button" value="Free Chat 1" class="mybtn e-large" onclick="openSocket(this.value);">
-			<input type="button" value="Free Chat 2" class="mybtn e-large">
-			<input type="button" value="Free Chat 3" class="mybtn e-large">
-			<input type="button" value="Free Chat 4" class="mybtn e-large">
-			<input type="button" value="Free Chat 5" class="mybtn e-large">
+			<input type="button" value="Free Chat 1" class="mybtn e-large" id="chat1" onclick="openSocket();">
+			<input type="button" value="Free Chat 2" class="mybtn e-large" onclick="openSocket();">
+			<input type="button" value="Free Chat 3" class="mybtn e-large" onclick="openSocket();">
+			<input type="button" value="Free Chat 4" class="mybtn e-large" onclick="openSocket();">
+			<input type="button" value="Free Chat 5" class="mybtn e-large" onclick="openSocket();">
 		</div>
 		<!-- Server responses get written here -->
 		<div class="msgArea" style="height: 90%; position: relative; display: none;">
 			<div id="messages" style="position: relative; margin: auto; width: 90%; height: 87%; border: 1px solid black; overflow: auto;">
-				<div style="margin-bottom: 10%; margin-top: 10%;">
-					<h3>Hello, ${sessionScope.loginUser.nickname }!!</h3>
-					<h3>Free Chat Start!!</h3>
-				</div>
-				<div class="message-wrapper">
-					<div class="chat-bubble left">
-						<div class="message">Gee wiz, this is something special.</div>
-						<div class="message-detail">
-						    <span class="bold">Venkman</span>
-						</div>
-					</div>
-				</div>
-				<div class="cf"></div>
-				<div class="message-wrapper">
-					<div class="chat-bubble right">
-						<div class="message">Gee wiz, this is something special.</div>
-					</div>
-				</div>
-				<div class="cf"></div>
-				<div class="message-wrapper">
-					<span class="visit">----------------------- <span class="bold">Venkman</span> 님이 입장하셨습니다. -----------------------</span>
-				</div>
-				<div class="cf"></div>
-				
 				
 			</div>
 			<div>
@@ -189,7 +165,14 @@
 			</div>
 		</div>
 	</div>
-	
+	</c:if>
+	<c:if test="${ empty sessionScope.loginUser }">
+    	<br><br><br><br>    	<br><br><br><br>
+    	<div style="margin: auto; align-content: center; text-align: center;">
+	    	<h1 style="margin: auto; align-content: center; font-weight: bolder;">After login, you can use.</h1>
+    	</div>
+    	<br><br><br><br>    	<br><br><br><br>
+    </c:if>
 	
 	<!--::footer_part start::-->
 	<%@ include file="../common/footer.jsp"%>
@@ -203,29 +186,45 @@
                 	send();
                 }
             });
+			
+			setInterval(function() {
+				$.ajax({
+					url : 'chatCount.do',
+					success : function(data){
+						console.log(data);
+						
+						$('#chat1').val('Free Chat 1 [ ' + data + ' ]');
+					}
+				});
+			}, 1000);
+
 		});
 	
 	
 		var ws;
 		var messages = document.getElementById("messages");
 		
-		function openSocket(num) {
+		function openSocket() {
 			$('.msgArea').slideDown(200);
 			
 			if (ws !== undefined && ws.readyState !== WebSocket.CLOSED) {
-				
 				writeResponse("WebSocket is already opened.");
 				return;
 			}
 			
 			//웹소켓 객체 만드는 코드
-			ws = new WebSocket("ws://192.168.120.48:8888/spring/ac.do"); // 각자 서버주소기준 
+			ws = new WebSocket("ws://183.109.107.171:8888/spring/ac.do"); // 각자 서버주소기준 
 
 			ws.onopen = function(event) {
-				if (event.data === undefined)
+				if (event.data === undefined){
+					
+					var msg = 'CODE_onopen';
+					var sender = "${ sessionScope.loginUser.nickname }";
+					
+					ws.send(msg + "(SPLPOINT!!)" + sender);
+					
 					return;
-
-				writeResponse(event.data);
+				}
 			};
 			ws.onmessage = function(event) {
 				writeResponse(event.data);
@@ -246,7 +245,7 @@
 				ws.send(text);
 				
 				$("#messages").scrollTop($("#messages")[0].scrollHeight);
-				$('#messageinput').val('');
+				$('#messageinput').val('').focus();
 			}
 		}
 
@@ -257,7 +256,7 @@
 			var msg = text.split("(SPLPOINT!!)")[0];
 			var sender = text.split("(SPLPOINT!!)")[1];
 			
-			if( sender != "${ sessionScope.loginUser.nickname }" ){
+			if( sender != "${ sessionScope.loginUser.nickname }" && msg != 'CODE_onopen' ){
 				
 				var addtag = '<div class="message-wrapper">' + 
 					'<div class="chat-bubble left">' +
@@ -270,7 +269,7 @@
 					'<div class="cf"></div>';
 				
 				$('#messages').append(addtag);
-			}else{
+			}else if ( sender == "${ sessionScope.loginUser.nickname }" && msg != 'CODE_onopen' ){
 				var addtag = '<div class="message-wrapper">' + 
 							'<div class="chat-bubble right">' +
 							'<div class="message">' + msg + '</div>' +
@@ -279,6 +278,15 @@
 							'<div class="cf"></div>';
 				
 				$('#messages').append(addtag);
+			}else if ( msg == 'CODE_onopen' ){
+				
+				var addtag = '<div class="message-wrapper">'
+							+ '<span class="visit">----------------------- <span class="bold">'
+							+ sender + '</span> 님이 입장하셨습니다. -----------------------</span>'
+							+ '</div>'
+							+ '<div class="cf"></div>';
+				$('#messages').append(addtag);
+				
 			}
 			
 			$("#messages").scrollTop($("#messages")[0].scrollHeight);
