@@ -7,7 +7,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>aranoz</title>
+    <title>Aligo</title>
     <link rel="stylesheet" href="resources/css/nice-select.css">
    
     <link rel="stylesheet" href="resources/css/price_rangs.css">
@@ -45,10 +45,10 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="product_top_bar d-flex justify-content-between align-items-center" style="align-self: center;">
-                                <form action="memDelete.do" style="margin-left: 5%; width: 45%;">
+                                <form action="memDelete.do" onsubmit="return deleteMember();" style="margin-left: 5%; width: 45%;">
                                     <label style="margin-bottom: 0; margin-top: 5%;">email</label>
                                                                        <div class="mt-10">
-                                        <input type="text" name="EMAIL" value="${ loginUser.email }" onfocus="this.placeholder = ''"
+                                        <input type="text" name="email" value="${ loginUser.email }" onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = 'Email address'" required class="single-input" readonly>
                                     </div>
                                     <label style="margin-bottom: 0; margin-top: 5%;">password</label>
@@ -58,7 +58,7 @@
                                     </div>                                    
                                     
                                     <br><br>
-                                    <input class="genric-btn primary-border small" type="button" value="Delete Account" style="margin-left: 30%;"onclick="deleteMember()">
+                                    <input class="genric-btn primary-border small" type="submit" value="Delete Account" style="margin-left: 30%;">
                                 </form> 
                             </div>
                         </div>
@@ -76,10 +76,13 @@
     <script>		
         function deleteMember(){
             if($('#password').val() == ""){
-            alert("비밀번호를 입력해주세요!");
-            return false;
-            }     
-            location.href ='#' //true때는 서블릿으로 넘겨줍시당~~
+            	alert("비밀번호를 입력해주세요!");
+            	return false;
+            }else if( $('#password').val() == "${ sessionScope.loginUser.password }" ){
+            	console.log("확인");
+            	/* location.href ='memDelete.do' //true때는 서블릿으로 넘겨줍시당~~ */
+            	return true;
+            }
         }
     </script>
 

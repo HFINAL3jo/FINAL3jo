@@ -227,20 +227,9 @@ public class MemberController {
 
 	}
 
-	/**
-	 * 	▶ 회원탈퇴
-	 * @param status
-	 * @param email
-	 * @param model
-	 * @return
-	 * 
-	 */
-	/*
-	 * @RequestMapping("memDelete.do") public String memberDelete(@RequestParam
-	 * String email, @RequestParam String password, Model model) {
-	 * 
-	 * }
-	 */
+	
+	
+	
 
 	
 	@RequestMapping("logout.do")
