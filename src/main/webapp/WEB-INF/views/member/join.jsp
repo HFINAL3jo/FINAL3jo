@@ -34,6 +34,7 @@ input, input[type="radio"]+label, input[type="checkbox"]+label:before,
 	-o-transition: 0.35s ease-in-out;
 	transition: 0.35s ease-in-out;
 	transition: all 0.35s ease-in-out;
+	cursor: pointer;
 }
 /* 지워도 되나 */
 input:focus {

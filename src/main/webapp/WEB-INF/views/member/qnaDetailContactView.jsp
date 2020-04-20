@@ -71,7 +71,7 @@
       <hr>
         
         <!-- 글 내용-->
-        <form id="BoardDelForm" name="" action="http://webpublic.co.kr/exec/front/Board/del/1" method="post" target="_self" enctype="multipart/form-data">
+        <form id="BoardDelForm" name="" action="" method="post" target="_self" enctype="multipart/form-data">
             <input id="no" name="no" value="4060" type="hidden">
             <input id="bulletin_no" name="bulletin_no" value="2247" type="hidden">
             <input id="board_no" name="board_no" value="1" type="hidden">
@@ -117,17 +117,13 @@
             <div class="ec-base-button ">
                             <span class="gLeft">
                                 <span class="displaynone">
-                                    <a href="http://webpublic.co.kr/article/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/4060/#none" onclick="" class="admin displaynone btn">관리자게시</a>
-                                    <a href="http://webpublic.co.kr/article/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/4060/#none" onclick="" class="admin displaynone btn">게시안함</a>
-                                    <a href="http://webpublic.co.kr/article/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/4060/#none" onclick="" class="btn">스팸신고</a>
-                                    <a href="http://webpublic.co.kr/article/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/4060/#none" onclick="" class="btn">스팸해제</a>
                                 </span>
-                                <a href="http://webpublic.co.kr/board/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/" class="btn">목록</a>
+                                <a href="#" class="btn">목록</a>
                             </span>
                             <span class="gRight">
-                                <a href="http://webpublic.co.kr/article/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/4060/#none"  class="displaynone btn">삭제</a>
-                                <a href="http://webpublic.co.kr/board/free/modify.html?board_act=edit&amp;no=4060&amp;board_no=1" class="displaynone btn btn-black">수정</a>
-                                <a href="http://webpublic.co.kr/board/free/reply.html" class="displaynone btn">답변</a>
+                                <a href="#"  class="displaynone btn">삭제</a>
+                                <a href="#" class="displaynone btn btn-black">수정</a>
+                                <a href="#" class="displaynone btn">답변</a>
                             </span>
                         </div>
             </div>
@@ -136,7 +132,7 @@
                     <div class="xans-element- xans-board xans-board-commentpackage-1002 xans-board-commentpackage xans-board-1002 "><!-- 코멘트 리스트 -->
             <!-- 코멘트 페이징 -->
             <!-- 댓글 수정 -->
-            <form id="commentForm" name="" action="http://webpublic.co.kr/exec/front/Board/CommentUpdate/1" method="post" target="_self" enctype="multipart/form-data" style="display: none;">
+            <form id="commentForm" name="" action="" method="post" target="_self" enctype="multipart/form-data" style="display: none;">
             <input id="board_no" name="board_no" value="1" type="hidden">
             <input id="no" name="no" value="4060" type="hidden">
             <input id="comment_no" name="comment_no" value="" type="hidden">
@@ -145,8 +141,8 @@
                                 <p>비밀번호 : <input id="comment_password" name="comment_password"  value="" type="password"> <span class="secret displaynone"><label>비밀댓글</label></span></p>
                                 <div class="view">
                                     <textarea id="comment_modify" name="comment_modify" ></textarea>                        <span class="submit">
-                                        <a href="http://webpublic.co.kr/article/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/4060/#none" ><img src="./제일 예쁜 웹퍼블릭 심플 문의사항_files/btn_comment_modify.gif" alt="수정"></a>
-                                        <a href="http://webpublic.co.kr/article/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/4060/#none" ><img src="./제일 예쁜 웹퍼블릭 심플 문의사항_files/btn_comment_cancel.gif" alt="취소"></a>
+                                        <a href=#" alt="수정"></a>
+                                        <a href="#" ><img src="./제일 예쁜 웹퍼블릭 심플 문의사항_files/btn_comment_cancel.gif" alt="취소"></a>
                                     </span>
                                 </div>
                                 <p class="displaynone"> /  byte</p>
