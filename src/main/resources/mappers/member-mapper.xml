@@ -45,7 +45,12 @@
 		UPDATE MEMBER
 		SET M_STATUS='N'
 		WHERE EMAIL=#{email}
-		AND PASSWORD=#{password}
+	</update>
+	
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER
+		SET PASSWORD=#{password},NICKNAME=#{nickname}
+		WHERE EMAIL=${email}
 	</update>
 
 </mapper>

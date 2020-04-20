@@ -30,9 +30,6 @@ h4{
 	text-align:center;
 }
 
-/*조아요*/
-
-
 
 </style>
 
@@ -97,13 +94,6 @@ h4{
 					</div>
 				</div>
 			</div>
-			<script type="text/javascript">
-			//좋아요
-			
-
-
-
-			</script>
 			<div id="aList" class="row align-items-center latest_product_inner">
 			
 			    <c:forEach var="t" items="${list }" begin="0" end="${pi.themeLimit}">
@@ -112,11 +102,11 @@ h4{
 					 <c:param name="tId" value="${t.tId }"/>
 					</c:url>
 				<a href="${post }">
-        				<div class="card-list">
-          					<div class="card">
+        				<div class="card-list">        				
+          					<div class="card">          					
             					<img src="${t.tModifyFile }"/>
-            						<span>${t.tTitle }</span>
-         								 </div>
+            					<span>${t.tTitle }</span>
+         					</div>
 					<div class="single_product_item">
 							<h3><b style="color:rgba(121,125,237,0.9)">#${t.tName}</b></h3>
 					</div>
