@@ -47,40 +47,54 @@ public class MyPageController {
 	}
 	
 	
-	  @RequestMapping("pagination2.do") 
-	  public void pagination(HttpServletResponse response,	  
-			  				 @RequestParam(value="currentPage",required=false,defaultValue="1")
-	  						 int currentPage)throws IOException {
+	@RequestMapping("pagination2.do") 
+	public void pagination(HttpServletResponse response,	  
+		  				 @RequestParam(value="currentPage",required=false,defaultValue="1")
+							 int currentPage)throws IOException {
+		
+	  response.setContentType("application/json; charset=UTF-8");
+	  int listCount = mpService.getListCount();
 	  
-		  response.setContentType("application/json; charset=UTF-8");
-		  int listCount = mpService.getListCount();
+	  PageInfo pi = Pagination.getPageInfo(currentPage,listCount); ArrayList<Theme>
+	  list = mpService.selectList(pi);
+	  
+	  JSONArray jArr = new JSONArray();
+	  
+	  for(Theme t: list) { 
+		  if(t.gettModifyFile().length() <= 18) {
+			  t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile()); 
+		  }else {
+			  t.settModifyFile(t.gettModifyFile().replace("amp;","")); 
+		  }
+		  JSONObject jobj = new JSONObject(); jobj.put("tId",t.gettId());
+		  jobj.put("tModifyFile",t.gettModifyFile());
+		  jobj.put("tTitle",t.gettTitle());
+		  jobj.put("tName","#"+t.gettName());
 		  
-		  PageInfo pi = Pagination.getPageInfo(currentPage,listCount); ArrayList<Theme>
-		  list = mpService.selectList(pi);
-		  
-		  JSONArray jArr = new JSONArray();
-		  
-		  for(Theme t: list) { 
-			  if(t.gettModifyFile().length() <= 18) {
-				  t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile()); 
-			  }else {
-				  t.settModifyFile(t.gettModifyFile().replace("amp;","")); 
-			  }
-			  JSONObject jobj = new JSONObject(); jobj.put("tId",t.gettId());
-			  jobj.put("tModifyFile",t.gettModifyFile());
-			  jobj.put("tTitle",t.gettTitle());
-			  jobj.put("tName","#"+t.gettName());
-			  
-			  jArr.add(jobj); 
-		  } 
-		  	PrintWriter out = response.getWriter();
-		  	
-		  	out.print(jArr);
-		  	out.flush();
-		  	out.close(); 
-	  }
-	 
-	
-	
+		  jArr.add(jobj); 
+	  } 
+	  	PrintWriter out = response.getWriter();
+	  	
+	  	out.print(jArr);
+	  	out.flush();
+	  	out.close(); 
+	}
+	  
+	  
+	@RequestMapping("memDelete.do") 
+	public String memberDelete(String email, String password) {
+		int result = mpService.memberDelete(email,password);
+		
+		if(result > 0) {
+			return "redirext:logout.do";
+		}else {
+			return "common/errorPage";
+		}
 
+		
+		
+	}
+	
+	  
+	  
 }
