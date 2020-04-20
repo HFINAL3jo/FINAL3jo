@@ -65,8 +65,8 @@
 		              <tr>
 		                <td>
 		                  <div class="media">
-		                    <div class="d-flex">
-		                      <img src="" alt="썸네일" />
+		                    <div class="d-flex" >
+		                      <img src="" style="border-radius: 100%" alt="썸네일" />
 		                    </div>
 		                    <div class="media-body">
 		                      <p>침대 올라갈땐 신발 좀 벗으세요~~~!!</p>

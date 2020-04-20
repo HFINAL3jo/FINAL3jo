@@ -94,7 +94,8 @@ public class MyPageController {
 	 * @return
 	 */
 	@RequestMapping("memDelete.do") 
-	public String memberDelete(SessionStatus status, Member m, Model model, String email, String password) {
+	public String memberDelete(SessionStatus status, Member m, Model model,
+								String email, String password) {
 		int result = mpService.memberDelete(m);
 		
 		if(result > 0) {
@@ -104,9 +105,20 @@ public class MyPageController {
 			model.addAttribute("msg","회원 탈퇴 오류");
 			return "common/errorPage";
 		}
-
+	}
+	
+	@RequestMapping("memUpdate.do")
+	public String memberUpdate(Member m, Model model) {
 		
+		int result = mpService.memberUpdate(m);
 		
+		if(result > 0) {
+			model.addAttribute("loginUser",m);
+			return "redirect:index.jsp";
+		}else {
+			model.addAttribute("msg","회원 수정 실패");
+			return "common/errorPage";			
+		}		
 	}
 	
 	  
