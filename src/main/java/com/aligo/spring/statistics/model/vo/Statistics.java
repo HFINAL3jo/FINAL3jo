@@ -10,7 +10,7 @@ public class Statistics implements Serializable{
 
 	// 일단 방법 1을 따른다. 이후에 고치는것 알아서 판단
 	
-	private int number; 					// TCODE
+	private String number; 					// TCODE
 	//private String tableName = "파이";		 실제 테이블명이 아니라 어느 차트에 쓰는 것지 표시	
 	private Date registDate;				// 날짜
 	
@@ -20,14 +20,16 @@ public class Statistics implements Serializable{
 	private String columnTnameName; 		// 2차분류(TNAME) DB에서 가져오는 이름 컬럼
 	private int columnTnameNumber;			// 2차분류(TNAME) DB에서 가져오는 이름에 해당하는 값
 	
-	private String columnTKeywordName; 		// 2차분류의 세부 사항(TKEYWORD) DB에서 가져오는 이름 컬럼
-	private int columnTKeywordNumber;		// 2차분류의 세부 사항(TKEYWORD) DB에서 가져오는 이름에 해당하는 값
+	private String columnTKeywordName; 		// 1차분류의 세부 사항(TKEYWORD) DB에서 가져오는 이름 컬럼
+	private int columnTKeywordNumber;		// 1차분류의 세부 사항(TKEYWORD) DB에서 가져오는 이름에 해당하는 값
 	
 	private String columnTlikeName; 		// 1차분류의 세부 사항(T_LIKES) DB에서 가져오는 이름 컬럼
 	private String columnTlikeValue;		// 1차분류의 세부 사항(T_LIKES) DB에서 가져오는 이름에 해당하는 값
 	
 	private String columnTviewsName; 		// 1차분류의 세부 사항(T_VIEWS) DB에서 가져오는 이름 컬럼
 	private String columnTviewsValue;		// 1차분류의 세부 사항(T_VIEWS) DB에서 가져오는 이름에 해당하는 값
+	
+	//
 	
 	public Statistics() {}
 
@@ -44,18 +46,18 @@ public class Statistics implements Serializable{
 		this.columnAddressNumber = columnAddressNumber;
 	}
 	
-	public Statistics(int number, String columnAddressName, int columnAddressNumber) {
+	public Statistics(String number, String columnAddressName, int columnAddressNumber) {
 		super();
 		this.number = number;
 		this.columnAddressName = columnAddressName;
 		this.columnAddressNumber = columnAddressNumber;
 	}
 
-	public int getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(int number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 

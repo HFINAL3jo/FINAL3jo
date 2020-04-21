@@ -48,8 +48,8 @@ tbody tr:nth-child(2n+1) {
 .div_left {
 	/* 	width: 500px;
 	float: left; */
-	height: 500px;
-	margin-bottom: 4%;
+	height: 430px;
+	margin-bottom: 1%;
 	background-color: snow;
 	box-sizing: border-box;
 }
@@ -99,20 +99,21 @@ tbody tr:nth-child(2n+1) {
 	margin-left: 10px;
 }
 
+.left-box {
+  background: red;
+  float: left;
+}
+
 </style>
 
 <!-- 
-	c3가 기본으로 제공하는 디자인 형식인 c3.min.css 파일을 <head> 부분에 추가한다. 
-	그리고 c3.js는 d3.js 기반에서 돌아가므로 d3.min.js를 먼저 자바스크립트 파트에 추가해 준 뒤에 c3.min.js를 추가하면 될 것이다. 
-	CDN을 이용해서 간편하게 사용하겠다면 다음과 같이 추가하면 될 것이다.
- -->
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" />
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
-
+ -->
+ 
 <!-- d3.js -->
-<!-- <link rel="stylesheet" href="css/d3.css"> -->
+<link rel="stylesheet" href="css/d3.css">
 <script src="http://d3js.org/d3.v3.min.js" charset="UTF-8"></script>
 
 <!-- google chart -->
@@ -121,19 +122,9 @@ tbody tr:nth-child(2n+1) {
 <body>
 	<%@ include file="../common/menubar.jsp"%>
 	
-	<input type="hidden" id="list" value=${list} ><!-- StatisticController의 list 값을 가져온다. -->
-	<!--<input type="hidden" id="reverTableData" value=${reverTableData} > --><!-- StatisticController의 역순 차트 값을 가져온다. -->
-
-	<input type="hidden" id="jObj" value=${jObj} ><!-- StatisticController의 차트에 쓰일 JSON 값을 가져온다. -->
-	<!-- 	<input type="hidden" id="JsonReverseList" value=${JsonReverseList} > --><!-- StatisticController의 차트에 쓰일  내림 차순 JSON 값을 가져온다. -->
-	<input type="hidden" id="googleChart" value=${googleChart} >
-
-	<input type="hidden" id="jObjArray" value=${jObjArray} >
-	<input type="hidden" id="JsonReverseArray" value=${JsonReverseArray}>
-	
-	<input type="hidden" id="charDataShow" value=${charDataShow}>
-	<input type="hidden" id="choose" value=${choose} ><!-- StatisticController의 조아요/조회수.키워트 중 하나에 대한 데이터를 값을 가져왔는 확인. -->
-	<input type="hidden" id="chartValue" value=${chartValue} ><!-- StatisticController에서 어떤 차트를 섰는지 표시 가져온다. -->
+	<input type="hidden" id="list_1" value=${list_1}>
+	<input type="hidden" id="list_2" value=${list_2}>
+	<input type="hidden" id="list_3" value=${list_3}>
 
 	<section class="cat_product_area section_padding" style="">
 		<div class="container" style="margin-bottom: 15px;">
@@ -151,49 +142,56 @@ tbody tr:nth-child(2n+1) {
 					</div>
 
 					<div class="div_left">
-						<div style="align-content: left;">
-							<div id="chart1"></div>
-						</div>
+						<div id="chart1" class='left-box'></div>
+						<div id="chart2" class='left-box'></div>
 					</div>
-
+					<div style="height: 28px;">
+						<span style="float: left; margin-left: 3%;">테마 &nbsp;<input type="search" list="chartTcl" id="Data1"></span>&nbsp;
+						: <span id="value">NATURE</span> <button id="changeChart" onclick="DataChange()" style="float:right">값 을 변경 합니다.</button>
+						<datalist id="chartTcl">
+							<option value="T1">NATURE</option>
+							<option value="T2">RESTAURANT</option>
+							<option value="T3">HISTORY</option>
+							<option value="T4">SHOPPING</option>
+							<option value="T5">BAR</option>
+							<option value="T6">ACTIVITY</option>
+							<option value="T7">EXHIBITION</option>
+						</datalist>
+					</div>
+					<div style="width: 800px;">
+						<div id="chart3" style="width:60%; height:100%; float:left;"></div>
+						<div id="chart8" style="width:40%; height:100%; float:left;"></div>
 					</div>
 				</div>
 			</div>
+		</div>
 	</section>
-	
+
 	<%@ include file="../common/footer.jsp"%>
 
 <!-- 버튼 상단 -->
 <script src="resources/js/statisticsUpButton.js"></script>
 <script>
-//google 차트
-google.charts.load("current", {packages:["corechart"]});
-google.charts.setOnLoadCallback(drawChart);
-
-// 데이터 처리
-function drawChart() {
-	var data = [
-		['성별', '값'],
-		['남', 65],
-		['여', 45]
-	];					      
-  
-  var options;
-  if(chartValue == 'donut' || chartValue == 'bar'){
-	  options = {
-		 title: 'My Daily Activities',
-		 is3D: true,
-		 width: '100%', 
-		 height: 460,
-		 animation:{
-		     duration: 1000,
-		     easing: 'out',
-		 }
-	  };
-  }
-  var chart = new google.visualization.PieChart(document.getElementById('chart1'));
-  chart.draw(new google.visualization.arrayToDataTable(data), options);				
-}
+	graphSircle();
+	//graphSircle2();
+	graphSircle3();
+	
+	graphSircle8();
+	
+	document.getElementById('Data1').onchange = function(){
+		var value = document.getElementById('Data1').value;
+		
+		var change = (value == 'T1')? "NATURE":
+					(value == 'T2')? "RESTAURANT":
+					(value == 'T3')? "HISTORY":
+					(value == 'T4')? "SHOPPING":
+					(value == 'T5')? "BAR":
+					(value == 'T6')? "ACTIVITY":
+					(value == 'T7')? "EXHIBITION":"XXXX";
+		document.getElementById('value').innerHTML = change;
+	}
+	
+	//DataChange();
 </script>
 </body>
 </html>

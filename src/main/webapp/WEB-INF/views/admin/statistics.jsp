@@ -196,9 +196,8 @@ tbody tr:nth-child(2n+1) {
 						<!--  <div id="linechart"></div> -->
 						<div style="height: 50px; padding-bottom: 5px;">
 						<!-- genric-btn success large button_body_chart -->
-							<button class="mybtn2" style="" id="btn1">Low list 10</button> &nbsp;&nbsp;
+							<button class="mybtn2" id="btn1">Low list</button> &nbsp;&nbsp;
 							<button class="mybtn2" id="btn2">TOP list 10</button> &nbsp;&nbsp;
-							<button class="mybtn2" id="btn3">Average</button> &nbsp;&nbsp;
 						</div>
 						<table style="border: 1px solid;">
 							<thead>
@@ -209,7 +208,7 @@ tbody tr:nth-child(2n+1) {
 								</tr>
 							</thead>
 							<tbody id="chartDataTable">
-								<c:set var="count" value="1" />
+								<%-- <c:set var="count" value="1" />
 								<c:forEach var="s" items="${list}">
 									<tr>
 										<td>${count}</td>
@@ -217,8 +216,7 @@ tbody tr:nth-child(2n+1) {
 										<td>${s.columnAddressNumber}</td>
 										<c:set var="count" value="${count+1}" />
 									</tr>
-								</c:forEach>
-
+								</c:forEach> --%>
 							</tbody>
 						</table>
 					</div>
@@ -250,6 +248,7 @@ showChart();
 
 // 차트를 뷰에서 띄우기 위한 차트 모형 || 데이터 검색 메소드
 drawShowChart();
+showTopList(1);
 
 
 </script>
