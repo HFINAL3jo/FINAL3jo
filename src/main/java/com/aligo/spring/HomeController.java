@@ -1,11 +1,7 @@
 package com.aligo.spring;
 
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Locale;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -87,11 +83,6 @@ public class HomeController {
 	public String statistics() {
 		// admin/statistics 
 		return "admin/redirectStatistics";
-	}
-	
-	@RequestMapping("themeInsertView.do")
-	public String themeInsertView() {
-		return "board/boardInsertView";
 	}
 	
 	@RequestMapping("signUp.do")

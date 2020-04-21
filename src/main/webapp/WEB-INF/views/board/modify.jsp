@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,14 +30,7 @@
     	<option value="ACTIVITY">ACTIVITY</option>
     	<option value="EXHIBITION">EXHIBITION</option>
     </datalist>&nbsp;&nbsp;&nbsp;
-    Keyword &nbsp;&nbsp;<input type="search" list="tkl" name="tKeyword" style="margin-right:-10px;">
-    	<c:if test="${!empty list}">	
-    <datalist id="tkl">
-    	 <c:forEach var="kv" begin="0" end="${tKlength}" items="${list}">
-    	 	  <option value="${kv }">${kv }</option>
-    	 </c:forEach>
-    </datalist>
-    	</c:if>
+    Keyword &nbsp;&nbsp;<input type="text" name="tKeyword" style="margin-right:-10px;">
     <br><br>  
 	<textarea name="tContent" id="smarteditor" rows="30" cols="104"></textarea>
     <br><br>

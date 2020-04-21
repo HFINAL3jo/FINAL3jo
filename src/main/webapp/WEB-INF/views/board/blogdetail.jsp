@@ -15,7 +15,6 @@
    <!--::header part start::-->
    			<%@ include file="../common/menubar.jsp" %>
    			<br><br><br><br>
-   			<%@ include file="../common/assidebp.jsp" %>
             <!--blog-->
             
             <div align="center" style="display:block; width:70%; height:auto; margin-top:50px; padding:20px; border:1px solid black;">
