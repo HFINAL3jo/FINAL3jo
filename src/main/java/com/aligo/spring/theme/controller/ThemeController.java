@@ -271,13 +271,14 @@ public class ThemeController extends TFile{
 	@RequestMapping("trList.do")
 	public void getTReplyList(HttpServletResponse response,int tId) throws JsonIOException, IOException {
 		
-	ArrayList<TReply> list = tService.slelctTReplyList(tId);
+		ArrayList<TReply> list = tService.slelctTReplyList(tId);
 	
-	response.setContentType("application/json; charset=UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
 	
-	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 	
-	gson.toJson(list,response.getWriter());
-}
+		gson.toJson(list,response.getWriter());
+	}
+	
 
 }
