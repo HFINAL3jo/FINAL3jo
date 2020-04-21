@@ -222,27 +222,8 @@
 		var serverport;
 		
 		$(function(){
-			/* 
-			$.ajax({
-				url : "spring/serverIdSetting.properties",
-				dataType : "text",
-				success : function(data){
-					var temp = data.split("=");
-					serverport = temp[temp.length-1];
-				}
-			});
-			 */
-			/* 
-			$("#id").change(function(){
-	    		var roomVal=$("#room").val().trim();
-	    		var idVal=$('#id').val().trim();
-	    		if(idVal.length<1){
-	    			alert('id를 입력해 주세요');
-	    			$('#id').focus();
-	    			return;
-    		}
-	    	 */
-	    	$("#messageinput").keydown(function(key) {
+			
+	    	$("#message").keydown(function(key) {
                 if (key.keyCode == 13) {
                 	clientSend();
                 }
@@ -275,6 +256,8 @@
         	 */
             console.log(message);
             socket.send(JSON.stringify(new MessageFlag("${ sessionScope.loginUser.nickname }", $("#room").val(), $('#message').val(), "msg", $("#receiveNn").val() )));
+            
+            $('#message').val('').focus();
             
 			
             
@@ -326,7 +309,7 @@
         				} */
         			}
         			else{
-        				/* $('#result>#message-container').append($("<p>").html(data["id"]+" : "+data["msg"])); */ 
+        				/* $('#result>#message-container').append($("<p>").html(data["id"]+" : "+data["msg"])); */
         				if( data['nickname'] == "${ sessionScope.loginUser.nickname }" ){
         					
         					console.log("내가 보낸 메시지");
@@ -345,13 +328,13 @@
         					'<div class="chat-bubble left">' +
         					'<div class="message">' + data['msg'] + '</div>' +
         					'<div class="message-detail">' +
-        					    '<span class="bold">' + data['receiveNn'] + '</span>' +
+        					    '<span class="bold">' + data['nickname'] + '</span>' +
         					'</div>' +
         					'</div>' +
         					'</div>' +
         					'<div class="cf"></div>';
         				
-        					$('#messages').append(addtag);
+        					$('#messageArea').append(addtag);
         				}
         				
         			}
