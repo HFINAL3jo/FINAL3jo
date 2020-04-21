@@ -30,6 +30,11 @@ public class QnAServiceImpl implements QnAService{
 		
 		return qDao.selectBoard(qId);
 	}
+
+	@Override
+	public int writeBoard(QnA q) {
+		return qDao.writeBoard(q);
+	}
 	
 	
 }

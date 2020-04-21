@@ -76,9 +76,9 @@
           <h2 class="contact-title">문의하기(Q&A)</h2>
       <hr>
         </div>
+        
         <div class="col-lg-8">
-          <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm"
-            novalidate="novalidate">
+          <form class="form-contact contact_form" action="qinsert.do" method="post" id="contactForm">
             <div class="row">
 
 
@@ -89,18 +89,18 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6">
+                    <div class="col-12">
                         <div class="form-group">
                           <input class="form-control" name="name" id="name" type="text" onfocus="this.placeholder = ''"
-                            onblur="this.placeholder = '이름(name)'" placeholder='이름(name)'>
+                            onblur="this.placeholder = '작성자(writer)'" placeholder='작성자(writer)'>
                         </div>
                       </div>
-                      <div class="col-sm-6">
+                      <!-- <div class="col-sm-6">
                         <div class="form-group">
                           <input class="form-control" name="email" id="email" type="email" onfocus="this.placeholder = ''"
                             onblur="this.placeholder = '이메일(email)'" placeholder='이메일(email)'>
                         </div>
-                      </div>
+                      </div> -->
 
                       <div class="col-12">
                         <div class="form-group">
@@ -113,7 +113,7 @@
 
             </div>
             <div class="form-group mt-3">
-              <a href="#" class="btn_3 button-contactForm">보내기(send)</a>
+              <input type="submit" class="btn_3 button-contactForm" value="보내기(send)">
             </div>
           </form>
         </div>

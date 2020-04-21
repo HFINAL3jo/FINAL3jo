@@ -1,12 +1,11 @@
 package com.aligo.spring.qna.controller;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,4 +78,15 @@ public class QnAController {
 	public String qnaWriteView() {
 		return "member/qnaWriteForm";
 	}	
+	
+	@RequestMapping("qinsert.do")
+	public String writeBoard(QnA q, HttpServletRequest request) {
+		int result = qService.writeBoard(q);
+		System.out.println(q);
+		if(result > 0) {
+			return "redirect:contactView.do";
+		}else {
+			return "common/errorPage";
+		}
+	}
 }
