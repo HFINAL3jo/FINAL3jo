@@ -27,5 +27,30 @@ public class StatisticsDao {
 		return (ArrayList)sqlSession.selectList("themeStatisticsMapper.StatisticAjax", temp);
 	}
 
+	public ArrayList<Statistics> SearchAreaSaCount(Statistics temp) {
+		
+		return (ArrayList)sqlSession.selectList("themeStatisticsMapper.SearchAreaSaCount", temp);
+	}
+
+	public ArrayList<Statistics> StatisticAjaxSaCount(Statistics temp) {
+		
+		return (ArrayList)sqlSession.selectList("themeStatisticsMapper.StatisticAjaxSaCount", temp);
+	}
+
+	public ArrayList<Statistics> list_1() {
+		
+		return (ArrayList)sqlSession.selectList("themeStatisticsMapper.list_1");
+	}
+
+	public ArrayList<Statistics> list_2(Statistics temp) {
+		
+		return (ArrayList)sqlSession.selectList("themeStatisticsMapper.list_2", temp);
+	}
+
+	public ArrayList<Statistics> list_3(Statistics temp) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("themeStatisticsMapper.list_3", temp);
+	}
+
 
 }

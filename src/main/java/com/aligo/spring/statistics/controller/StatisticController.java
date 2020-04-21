@@ -30,7 +30,7 @@ import com.google.gson.JsonObject;
 @Controller
 public class StatisticController {
 
-	public static int limit = 9; // 차트에 쓰일 자료의 갯수를 10개이하로 끝는다.
+	public static int limit = 7; // 차트에 쓰일 자료의 갯수를 10개이하로 끝는다.
 	//
 	@Autowired
 	private StatisticsService serviceStatics;
@@ -65,18 +65,47 @@ public class StatisticController {
 			choose="T_LIKES";
 			
 			temp.setColumnTlikeName("T_LIKES");
-			temp.setColumnTlikeValue(choose);
+			//temp.setColumnTlikeValue(choose);
 
 		}else if(checkingParameter.equals("T_VIEWS")) {
 			
 			choose="T_VIEWS";
 			
 			temp.setColumnTlikeName("T_VIEWS");
-			temp.setColumnTlikeValue(choose);
+			//temp.setColumnTlikeValue(choose);
 			
-		}else if(checkingParameter.equals("")) {//기타 정보
+		}else if(checkingParameter.equals("SA_COUNT")) {//검색 키워드
+			// SEARCH_AREA 테이블의 컬럼명 SA_COUNT
+			// 조아요 / 조회수와는 다른 테이블을 사용 하므로 위의 코드와는 다르게 짠다.
+			choose="SA_COUNT";
+			temp.setColumnTlikeName("T_VIEWS");
+			//temp.setColumnTlikeValue(choose);
 			
+			list = serviceStatics.SearchAreaSaCount(temp);
 			
+			jObj = ConvertJson(cut(limit, list), charDataShow);
+			
+			jObjArray = ConvertJsonArray(cut(limit, list), charDataShow);
+			reverseSort((reverTableData = cut(limit, list)), charDataShow);
+			JsonReverseArray =   ConvertJsonArray(reverTableData, charDataShow);
+			
+			googleChart = GoogletJson(cut(limit, list), charDataShow);
+			
+			mav.addObject("list", list);
+			
+			mav.addObject("jObj", jObj);
+			mav.addObject("JsonReverseList", JsonReverseList);
+			mav.addObject("googleChart", googleChart);
+			
+			mav.addObject("jObjArray", jObjArray);
+			mav.addObject("JsonReverseArray", JsonReverseArray);//
+			
+			mav.addObject("chartValue", chartValue); 			// 어떤 차트(인포그램/통계)를 사용 할 것지 표시
+			mav.addObject("choose", choose); 					// StatisticController의 조아요/조회수.키워트 중 하나에 대한 데이터를 값을 뷰에 보여주는지 확인.
+			mav.addObject("charDataShow", charDataShow);
+			
+			mav.setViewName("admin/statistics");
+			return mav;
 		}
 		
 		list = serviceStatics.AllStatistic(temp);
@@ -90,7 +119,7 @@ public class StatisticController {
 		JsonReverseArray =   ConvertJsonArray(reverTableData, charDataShow);
 
 //{"rows":[{"c":[{"v":"강남"},{"v":50}]},{"c":[{"v":"광장시장"},{"v":45}]},{"c":[{"v":"북한산"},{"v":45}]},{"c":[{"v":"부산"},{"v":40}]},{"c":[{"v":"명동"},{"v":40}]},{"c":[{"v":"불꽃놀이"},{"v":35}]},{"c":[{"v":"경희루"},{"v":35}]},{"c":[{"v":"동대문"},{"v":35}]},{"c":[{"v":"제주천지연폭포"},{"v":30}]},{"c":[{"v":"삼청동"},{"v":30}]},{"c":[{"v":"삼계탕"},{"v":25}]},{"c":[{"v":"이촌"},{"v":25}]},{"c":[{"v":"남산"},{"v":20}]}],"cols":[{"label":"장소","type":"string"},{"label":"조아요","type":"number"}]}		
-		googleChart = GoogletJson(list, charDataShow);
+		googleChart = GoogletJson(cut(limit, list), charDataShow);
 
 		mav.addObject("list", list);
 //		mav.addObject("reverTableData", reverTableData);
@@ -114,13 +143,30 @@ public class StatisticController {
 	@RequestMapping(value="statisticSurplus.do", method=RequestMethod.GET)
 	public ModelAndView statisticSurplus(ModelAndView mav) {
 		
-		// 가로 바 조아요/조회수 을 가지고 TKEYWORD 표시
-		// 신고내역 처리수 비중등
-		// TCODE 하위의 별 조아요/조회수의 TKEYWORD 'Stacked bar charts
-		// 전체 가입자 중 남자/여자 비율
+		Statistics temp = new Statistics();
 		
-		ArrayList<Statistics> list = null;
+		JSONObject JsonObject1 = new JSONObject();
+		JSONObject JsonObject2 = new JSONObject();
+		JSONObject JsonObject3 = new JSONObject();
 		
+		// 남/여 회원 비율
+		// 객체를 변경 하지 않고 그냥  TKeyworTNAME/ColumnTKeywordNumber으로 값을 받아오는 것으로 대체한다.
+		ArrayList<Statistics> list_1 = serviceStatics.list_1();
+		JsonObject1 = ConvertJson(list_1, "gender");
+		
+		// 테마별 바
+		// 처음은 WHERE TCODE = 'T1' 이 되도록 한다.
+		temp.setNumber("T1");
+		ArrayList<Statistics> list_2 = serviceStatics.list_2(temp);
+		JsonObject2 = ConvertJson(list_2, "2");
+		
+		// 테마별 산도표
+		ArrayList<Statistics> list_3 = serviceStatics.list_3(temp);;
+		JsonObject3 = ConvertJson(list_3, "3");
+		
+		mav.addObject("list_1", JsonObject1);
+		mav.addObject("list_2", JsonObject2);
+		mav.addObject("list_3", JsonObject3);
 		mav.setViewName("admin/statisticsSurplus");
 		return mav;
 	}
@@ -141,7 +187,7 @@ public class StatisticController {
 		JSONArray JsonReverseArray = null;
 		
 		String chartValue = request.getParameter("whatChart");	// 어떤 모양의 차트의 도표 그릴것지 선택 
-		String choose = request.getParameter("choose");			// StatisticController의 조아요/조회수.키워트 중 하나에 대한 데이터를 값을 뷰에 보여주는지 확인.
+		String choose = request.getParameter("choose");			// StatisticController의 조아요/조회수/검색 .키워트 중 하나에 대한 데이터를 값을 뷰에 보여주는지 확인.
 		String td  = request.getParameter("whatData");			// 주소(address) / 테마(themaName) 등 어디에 해당하는 데이터인지 표시 , 기본값으로  address 표시
 		
 		Statistics temp = new Statistics();
@@ -161,15 +207,12 @@ public class StatisticController {
 				temp.setColumnTnameName("TNAME");
 				list = serviceStatics.StatisticAjax(temp);
 				
-			}else {
-				
 			}
-			
 			
 		}else if(choose.equals("T_VIEWS")) {
 			
-			temp.setColumnTlikeName("T_VIEWS");
-			temp.setColumnTlikeValue(choose);
+			temp.setColumnTviewsName("T_VIEWS");
+			temp.setColumnTviewsValue(choose);
 			
 			if(td.equals("address")) {
 				
@@ -181,13 +224,43 @@ public class StatisticController {
 				temp.setColumnTnameName("TNAME");
 				list = serviceStatics.StatisticAjax(temp);
 				
-			}else {
+			}
+		}else if(choose.equals("SA_COUNT")) { // 검색 키워드
+			
+			temp.setColumnTlikeName("SA_COUNT");
+			temp.setColumnTlikeValue(choose);
+			
+			if(td.equals("address")) {
+				
+				temp.setColumnAddressName("TADDRESS");
+				//list = serviceStatics.StatisticAjax(temp);
+				list = serviceStatics.StatisticAjaxSaCount(temp);
+				
+			}else if(td.equals("themaName")) {
+				
+				temp.setColumnTnameName("TNAME");
+				list = serviceStatics.StatisticAjaxSaCount(temp);
 				
 			}
-		}else if(choose.equals("")) { // 검색 키워드
 			
-		}else if(choose.equals("")) { // 기타 정보 x
+			reverseSort(reverTableData = cut(limit, list),  td); //(오름 차순)역순 정렬	
+			JsonReverseList = ConvertJson(reverTableData, td);
+			jObj = ConvertJson(cut(limit, list),  td);
+			googleChart = GoogletJson(cut(limit, list), td);
 			
+			jObjArray = ConvertJsonArray(cut(limit, list),  td);
+			reverseSort((reverTableData = cut(limit, list)),  td);
+			JsonReverseArray =   ConvertJsonArray(reverTableData, td);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("googleChart", googleChart);
+			map.put("jObj", jObj);
+			
+			map.put("jObjArray", jObjArray);
+			map.put("JsonReverseArray", JsonReverseArray);//
+			
+			return map;
 		}
 		
 		list = serviceStatics.StatisticAjax(temp);
@@ -198,7 +271,7 @@ public class StatisticController {
 		reverseSort(reverTableData = cut(limit, list),  td); //(오름 차순)역순 정렬	
 		JsonReverseList = ConvertJson(reverTableData, td);
 		jObj = ConvertJson(cut(limit, list),  td);
-		googleChart = GoogletJson(list, td);
+		googleChart = GoogletJson(cut(limit, list), td);
 		
 		jObjArray = ConvertJsonArray(cut(limit, list),  td);
 		reverseSort((reverTableData = cut(limit, list)),  td);
@@ -225,6 +298,48 @@ public class StatisticController {
 	}
 	
 	/**
+	 * . 기타 정보 ajax 처리
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="SurplusAjax.do", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> SurplusAjax(HttpServletRequest request){
+		
+		String param = request.getParameter("value");
+		System.out.println("param : "+param);
+		Map<String, Object> map = new HashMap<String, Object>();
+	// ===================================================
+		Statistics temp = new Statistics();
+		
+//		JSONObject JsonObject1 = new JSONObject();
+		JSONObject JsonObject2 = new JSONObject();
+		JSONObject JsonObject3 = new JSONObject();
+		
+		// 남/여 회원 비율
+		// 객체를 변경 하지 않고 그냥  TKeyworTNAME/ColumnTKeywordNumber으로 값을 받아오는 것으로 대체한다.
+//		ArrayList<Statistics> list_1 = serviceStatics.list_1();
+//		JsonObject1 = ConvertJson(list_1, "gender");
+		
+		// 테마별 바
+		temp.setNumber(param);
+		ArrayList<Statistics> list_2 = serviceStatics.list_2(temp);
+		JsonObject2 = ConvertJson(list_2, "2");
+		
+		// 테마별 산도표
+		ArrayList<Statistics> list_3 = serviceStatics.list_3(temp);;
+		JsonObject3 = ConvertJson(list_3, "3");
+		
+	//=========================================================
+		
+//		map.put("JsonObject1", JsonObject1);
+		map.put("JsonObject2", JsonObject2);
+		map.put("JsonObject3", JsonObject3);
+		
+		return map;
+	}
+	
+	/**
 	 * 2. list를 json으로 형태의 문자열로 변환
 	 * 
 	 * @param list, property : address/themaName 으로 구분하여 변환하는 json 데이터를 다르게 처리
@@ -233,6 +348,7 @@ public class StatisticController {
 	public JSONObject ConvertJson(ArrayList<Statistics> list, String property) {
 
 		JSONObject JsonData = new JSONObject();
+		
 		if (property.equals("address")) {
 
 			for (Statistics out : list) {
@@ -247,8 +363,28 @@ public class StatisticController {
 			}
 			return JsonData;
 		}else {
-			// 조건에 없을 시에 null 반환
-			return null;
+			// 기타 조건
+			if(property.equals("gender")) {
+//				JsonData.put("성별", "값");
+				for (Statistics out : list) {
+					JsonData.put(out.getColumnTKeywordName().replaceAll(" ", ""), out.getColumnTKeywordNumber());
+				}
+			}else if(property.equals("2")) {
+//				JsonData.put("테마", "값");
+				
+				for (Statistics out : list) {
+					JsonData.put(out.getColumnTKeywordName().replaceAll(" ", ""), out.getColumnTKeywordNumber());
+				}
+				
+			}else if(property.equals("3")){
+//				JsonData.put("조아요", "조회수");
+				for (Statistics out : list) {
+					JsonData.put(out.getColumnTlikeValue().replaceAll(" ", ""), out.getColumnTviewsValue());
+				}
+
+			}
+			
+			return JsonData;
 		}
 	}
 
@@ -438,4 +574,6 @@ public class StatisticController {
 		
 		return data;
 	}
+	
+	
 }

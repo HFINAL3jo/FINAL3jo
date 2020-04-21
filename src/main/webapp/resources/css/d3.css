@@ -1,7 +1,6 @@
 @charset "UTF-8";
 	svg{
-		width: 757.5px;
-		height:420px;
+		width:'50%';
 		border: 1px solid black;
 	}
 	.bar{
