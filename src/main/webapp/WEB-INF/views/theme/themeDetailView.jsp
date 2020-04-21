@@ -401,10 +401,10 @@
                					<br>
 					<div class="like-content" align="center">
 						<span>
-    					Did you like this review? Press like to make it easier for others to see
+    					Did you like this review? Press like to make it easier for others to see!
   						</span>
   
-  						<button class="btn-secondary like-review" id="likeBtn" name="likeBtn" value="0">
+  						<button class="btn-secondary like-review" id="likeBtn" name="likeBtn" value="0" onclick="return like()">
     					<i class="fa fa-heart" aria-hidden="true"></i> Like ${t.tLikes}
   						</button>
 					</div>
@@ -510,39 +510,7 @@
 				    } 
 				});
 				
-				/* var listData = [
-					{	content :'디뮤지엄',
-						address :'서울특별시 용산구 한남동 독서당로29길 5-6'},
-					{	content :'로우앤슬로우',
-						address :'서울특별시 용산구 이태원1동 보광로 126'},
-					{	content :'국립중앙박물관',
-						address :'서울특별시 용산구 서빙고동 서빙고로 137'},
-					{	content :'Fountain',
-						address :'서울특별시 용산구 이태원동 116-6'}    
-				];
 				
-				listData.forEach(function(addr, index) {
-				    geocoder.addressSearch(addr, function(result, status) {
-				        if (status === daum.maps.services.Status.OK) {
-				            var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-				
-				            var marker = new daum.maps.Marker({
-				                map: map,
-				                position: coords
-				            });
-				            var infowindow = new daum.maps.InfoWindow({
-				                content: '<div style="width:150px;text-align:center;padding:6px 0;">' + listData[index] + '</div>',
-				                disableAutoPan: true
-				            });
-				            //infowindow.open(map, marker);
-				        }
-				        kakao.maps.event.addListener(marker, 'click', function() {
-				            // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-				            infowindow.setContent('<div style="width:150px;text-align:center;padding:6px 0;">' + listData[index] + '</div>');
-				            infowindow.open(map, marker);
-				        });
-				    });
-				}); */
 				
 				//--------------------------------
                             //		jQuery.noConflict();
@@ -586,24 +554,33 @@
 				    $(function(){
 						$(document).on('click', '.like-review', function(e) {
 							if( $('#likeBtn').val() == 0 ){
-								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this');
+								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this '+${t.tLikes});
 								$(this).children('.fa-heart').addClass('animate-like');
 								$(this).val(1);
 								
 							}else{
 								console.log();
-								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> Like');
+								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> Like '+${t.tLikes});
 								$(this).children('.fa-heart').addClass('animate-like');
 								$(this).val(0);
 							}
 						});
-						/*
-							자바스크립트로 조아요 버튼 값을 받아서 밸류 체크후 클릭
-							해보쟈~~~~
-						*/
+						
 						
 					});
 				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
+				    function like() {
+						/* $.ajax({
+							url:  ,
+							type:  ,
+							dataType:"json"
+							data:
+						}); */
+					}
+				    
+				    
+				    
+				    
 				    //theme > themename 링크
 				    $('.loction span').mouseenter(function(){
 				    	$(this).css('cursor','pointer');
@@ -614,6 +591,10 @@
 				    		location.href="theme.do?keyword="+e.target.innerText;
 				    	}
 				    });
+				   
+				    
+				    
+				    
 				    
 				    //댓글 submit
 				    $('#rSubmit').click(function(){

@@ -39,6 +39,10 @@
     	 </c:forEach>
     </datalist>
     	</c:if>
+    <br>
+    <select>
+    <option>1</option>
+    </select>
     <br><br>  
 	<textarea name="tContent" id="smarteditor" rows="30" cols="104"></textarea>
     <br><br>
