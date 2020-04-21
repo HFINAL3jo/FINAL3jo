@@ -31,6 +31,12 @@ public interface MemberService {
 	 */
 	Member loginMember(Member m);
 
+	/** 비번찾기
+	 * @param m
+	 * @return
+	 */
+	int findPwdFin(Member m);
+
 
 
 	

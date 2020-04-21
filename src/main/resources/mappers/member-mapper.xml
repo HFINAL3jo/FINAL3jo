@@ -50,7 +50,13 @@
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER
 		SET PASSWORD=#{password},NICKNAME=#{nickname}
-		WHERE EMAIL=${email}
+		WHERE EMAIL=#{email}
+	</update>
+	
+	<update id="findPwdFin">
+		UPDATE MEMBER SET
+		PASSWORD=#{password}
+		WHERE EMAIL=#{email}
 	</update>
 
 </mapper>

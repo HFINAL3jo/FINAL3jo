@@ -44,6 +44,11 @@ public class MemberServiceImpl implements MemberService {
 		return loginUser;
 	}
 
+	@Override
+	public int findPwdFin(Member m) {
+		return memDao.findPwdFin(m);
+	}
+
 	
 	
 }

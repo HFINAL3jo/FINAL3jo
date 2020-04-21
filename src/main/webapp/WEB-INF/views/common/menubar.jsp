@@ -182,7 +182,9 @@
 				
 			});
 		});
-		
+		$('#navbarDropdown_1').click(function(){
+			location.href="theme.do?keyword=";
+		});
 	</script>
 </body>
 </html>

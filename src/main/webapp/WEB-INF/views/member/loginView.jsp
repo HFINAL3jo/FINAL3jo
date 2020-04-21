@@ -80,7 +80,7 @@ ul[class~=social-icons]>li {
 										
 									<input type="button" class="btn_3" id="bs" value="Sign up">
 									  
-									<a class="lost_pass" id="find">forgot your password?</a>
+									<a class="lost_pass" id="find" style="cursor: pointer;">forgot your password?</a>
 								</div>
 							</form>
 						</div>
