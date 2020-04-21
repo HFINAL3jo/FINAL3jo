@@ -33,12 +33,10 @@
                             <div class="product_top_bar d-flex justify-content-between align-items-center" style="align-self: center;">
                                 <h3>${loginUser.nickname }'s Information</h3>
                                 <form action="memUpdate.do" onsubmit="return pwdcheck()" style="margin-left: 5%; width: 45%;">
-                                    <!-- <label style="margin-bottom: 0; margin-top: 5%;">email</label> -->
                                     <div class="mt-10">
-                                        <input type="text" name="EMAIL" value="${ loginUser.email }" onfocus="this.placeholder = ''"
+                                        <input type="text" name="email" value="${ loginUser.email }" onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = 'Email address'" required class="single-input" readonly>
                                     </div>
-                                    <!-- <label style="margin-bottom: 0; margin-top: 5%;">password</label> -->
                                     <div class="mt-10">
                                         <input type="password" id="password" name="password" placeholder="password" onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = 'password'" required class="single-input" style="background-color: rgb(232, 240, 254);">
@@ -46,8 +44,7 @@
                                     <div class="mt-10">
                                         <input type="password" id="password2" name="password2" placeholder="password check" onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = 'password check'" required class="single-input" style="background-color: rgb(232, 240, 254);">
-                                    </div>                                    
-                                    <!-- <label style="margin-bottom: 0; margin-top: 5%;">nickname</label> -->
+                                    </div>
                                     <div class="mt-10">
                                         <input type="text" name="nickname" value="${loginUser.nickname }" <%-- placeholder="${ loginUser.nickname }" --%> onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = '${ loginUser.nickname }'" required class="single-input" style="background-color: rgb(232, 240, 254);">
