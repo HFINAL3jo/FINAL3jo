@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<span style="text-align: center;"><h2 id="titlebar" style="margin-left:15%;">
+	<span style="text-align: center;"><h2 id="titlebar" style="margin-left:8%;">
 		Your Interest</h2></span>
         <div class="container">
             <div class="row">
