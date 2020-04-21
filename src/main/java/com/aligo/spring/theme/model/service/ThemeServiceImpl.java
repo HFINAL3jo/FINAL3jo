@@ -67,7 +67,7 @@ public class ThemeServiceImpl implements ThemeService {
 	@Override
 	public int insertImg(TFile tf) {
 		int cl = tDao.getTCount(tf);
-		if(cl == 1) return tDao.updateImg(tf); else return tDao.insertImg(tf);
+		if(cl == 0) return tDao.insertImg(tf); else return tDao.updateImg(tf);
 	}
 
 	@Override
@@ -103,5 +103,10 @@ public class ThemeServiceImpl implements ThemeService {
 	@Override
 	public ArrayList<TReply> slelctTReplyList(int tId){ 
 		return tDao.selectTReplyList(tId);
+	}
+
+	@Override
+	public String getKeyword() {
+		return tDao.getKeyword();
 	}
 }

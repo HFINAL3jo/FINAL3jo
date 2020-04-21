@@ -27,7 +27,10 @@ public class Theme implements Serializable {
 	private String tName;
 	private int tCodeNumber;
 	private String tAddressH;
-
+	private String tTel;
+	private String tFee;
+	private String tHours;
+	private String tTrans;
 	private ArrayList<TFile> tFileList;
 	private ArrayList<TName> tNameList;
 
@@ -170,6 +173,38 @@ public class Theme implements Serializable {
 		this.tAddressH = tAddressH;
 	}
 
+	public String gettTel() {
+		return tTel;
+	}
+
+	public void settTel(String tTel) {
+		this.tTel = tTel;
+	}
+
+	public String gettFee() {
+		return tFee;
+	}
+
+	public void settFee(String tFee) {
+		this.tFee = tFee;
+	}
+
+	public String gettHours() {
+		return tHours;
+	}
+
+	public void settHours(String tHours) {
+		this.tHours = tHours;
+	}
+
+	public String gettTrans() {
+		return tTrans;
+	}
+
+	public void settTrans(String tTrans) {
+		this.tTrans = tTrans;
+	}
+
 	public ArrayList<TFile> gettFileList() {
 		return tFileList;
 	}
@@ -188,8 +223,8 @@ public class Theme implements Serializable {
 
 	public Theme(int tId, String tWriter, String tTitle, String tContent, String tAddress, Date tCreateDate,
 			Date tModifyDate, int tViews, int tLikes, String tKeyword, String tStatus, String tCode,
-			String tOriginalFile, String tModifyFile, String tName, int tCodeNumber, String tAddressH,
-			ArrayList<TFile> tFileList, ArrayList<TName> tNameList) {
+			String tOriginalFile, String tModifyFile, String tName, int tCodeNumber, String tAddressH, String tTel,
+			String tFee, String tHours, String tTrans, ArrayList<TFile> tFileList, ArrayList<TName> tNameList) {
 		super();
 		this.tId = tId;
 		this.tWriter = tWriter;
@@ -208,6 +243,10 @@ public class Theme implements Serializable {
 		this.tName = tName;
 		this.tCodeNumber = tCodeNumber;
 		this.tAddressH = tAddressH;
+		this.tTel = tTel;
+		this.tFee = tFee;
+		this.tHours = tHours;
+		this.tTrans = tTrans;
 		this.tFileList = tFileList;
 		this.tNameList = tNameList;
 	}
@@ -218,8 +257,9 @@ public class Theme implements Serializable {
 				+ ", tAddress=" + tAddress + ", tCreateDate=" + tCreateDate + ", tModifyDate=" + tModifyDate
 				+ ", tViews=" + tViews + ", tLikes=" + tLikes + ", tKeyword=" + tKeyword + ", tStatus=" + tStatus
 				+ ", tCode=" + tCode + ", tOriginalFile=" + tOriginalFile + ", tModifyFile=" + tModifyFile + ", tName="
-				+ tName + ", tCodeNumber=" + tCodeNumber + ", tAddressH=" + tAddressH + ", tFileList=" + tFileList
-				+ ", tNameList=" + tNameList + "]";
+				+ tName + ", tCodeNumber=" + tCodeNumber + ", tAddressH=" + tAddressH + ", tTel=" + tTel + ", tFee="
+				+ tFee + ", tHours=" + tHours + ", tTrans=" + tTrans + ", tFileList=" + tFileList + ", tNameList="
+				+ tNameList + "]";
 	}
 
 }

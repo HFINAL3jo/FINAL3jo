@@ -22,6 +22,11 @@
 	 <result property="tOriginalFile" column="T_ORIGINAL_FILE"/>
 	 <result property="tModifyFile" column="T_MODIFY_FILE"/>
 	 <result property="tName" column="TNAME"/>
+	 <result property="tTel" column="TTEL"/>
+	 <result property="tFee" column="TFEE"/>
+	 <result property="tHours" column="THOURS"/>
+	 <result property="tTrans" column="TTRANS"/>
+	 
 	 
 	</resultMap>
 	
@@ -51,7 +56,7 @@
 		
 		<result property="tName" column="TNAME"/>	
 	</resultMap>
-	
+		
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*) 
 		FROM THEME_LIST
@@ -85,7 +90,8 @@
 	
 	<insert id="insertTheme" parameterType="Theme">
 		INSERT INTO THEME_LIST VALUES(SEQ_TNO.NEXTVAL,#{tWriter},#{tTitle},
-		#{tContent},#{tAddress},#{tAddressH},DEFAULT,DEFAULT,DEFAULT,DEFAULT,#{tKeyword},DEFAULT,#{tCode})
+		#{tContent},#{tAddress},#{tAddressH},DEFAULT,DEFAULT,DEFAULT,DEFAULT,
+		#{tKeyword},DEFAULT,#{tCode},#{tTel},#{tFee},#{tHours},#{tTrans})
 	</insert>
 	
 	<insert id="insertImg" parameterType="TFile">
@@ -160,5 +166,12 @@
 		FROM THEME_REPLY 
 		WHERE REF_TID = #{tId} AND TR_STATUS = 'Y'
 		ORDER BY TRID DESC
+	</select>
+	
+	<select id="getKeyword" resultType="string">
+		WITH TEMP_TABLE AS(
+		SELECT RQKEYWORD1 FROM RECOMMEND_Q WHERE R_STATUS='Y' UNION ALL
+		SELECT RQKEYWORD2 FROM RECOMMEND_Q WHERE R_STATUS='Y')
+		SELECT LISTAGG(RQKEYWORD1,',') WITHIN GROUP (ORDER BY ROWNUM) TKEYWORD FROM TEMP_TABLE
 	</select>
 </mapper>

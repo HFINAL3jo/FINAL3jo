@@ -77,4 +77,10 @@ public interface ThemeService {
 	 * @return
 	 */
 	ArrayList<TReply> slelctTReplyList(int tId);
+
+	/**
+	 * DB에서 recommend keyword 값 가져오기
+	 * @return
+	 */
+	String getKeyword();
 }

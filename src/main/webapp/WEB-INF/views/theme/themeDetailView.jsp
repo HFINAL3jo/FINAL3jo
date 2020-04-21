@@ -366,6 +366,12 @@
                     <h3 class="h3 textcenter">${t.tTitle }</h3>
                     <br>                    
 					<span style="float:right;">Views : ${t.tViews }<br></span>
+					<c:if test="${loginUser eq t.tWriter || loginUser.nickname eq 'ADMIN'}">
+					<c:url var="mo" value="themeModify.do">
+						<c:param name="${t }"/>
+					</c:url>
+					<br><button id="mp" value="${mo }" style="float:right;">Modify</button>					
+					</c:if>
                     <div class="post-element">
                         <span>Posted : ${t.tCreateDate } / Modified : ${t.tModifyDate }</span>
                     </div>
@@ -376,17 +382,18 @@
                             <dl><dt>Address</dt>
                                 <dd>${t.tAddress }</dd>
                             </dl>
-                            <dl><dt>지하철</dt>
-                                <dd>2호선 잠실역 3번 출구</dd>
+                            <dl><dt>Transportation</dt>
+                                <dd>${t.tTrans }</dd>
                             </dl>
-                            <dl><dt>입장료</dt>
-                                <dd>무료</dd>
+                            <dl><dt>Fee</dt>
+                                <c:if test="${!empty t.tFee  }">${t.tFee }<dd></dd></c:if>
+                                <c:if test="${empty t.tFee  }">Free<dd></dd></c:if>
                             </dl>
-                            <dl><dt>전화번호</dt>
-                                <dd>02-412-0190</dd>
+                            <dl><dt>Tel</dt>
+                                <dd>${t.tTel }</dd>
                             </dl>
-                            <dl><dt>이용시간</dt>
-                                <dd>매일 00:00 ~ 24:00</dd>
+                            <dl><dt>Opening Hours</dt>
+                                <dd>${t.tHours }</dd>
                             </dl>
                         </div>
                         <p>&nbsp;</p>
@@ -476,7 +483,7 @@
 				
 				// 주소-좌표 변환 객체 생성
 				var geocoder = new daum.maps.services.Geocoder();
-				var adrs = '서울특별시 송파구 잠실동 47'
+				var adrs = '${t.tAddress}';
 				
 				// 주소로 좌표를 검색합니다
 				geocoder.addressSearch(adrs , function(result, status) {
@@ -689,6 +696,7 @@
 				    		});
 				    	}
 				    });
+				    
 					</script>
 </body>
 

@@ -45,6 +45,19 @@ public class ThemeController extends TFile{
 	@Autowired
 	private ThemeService tService;
 	
+	@RequestMapping("themeInsertView.do")
+	public ModelAndView themeInsertView(ModelAndView mv) {
+		String str = tService.getKeyword();
+		String strArr[] = str.split(",");
+		ArrayList<String> list = new ArrayList<>(); 
+		for(int i=0;i<strArr.length;i++) {
+			list.add(strArr[i]);
+		}
+		mv.addObject("list",list).addObject("tKlength",strArr.length).setViewName("board/boardInsertView");
+		
+		return mv;
+	}
+	
 	@RequestMapping("theme.do")
 	public ModelAndView themeList(ModelAndView mv,
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
@@ -125,7 +138,6 @@ public class ThemeController extends TFile{
 	@RequestMapping("themeInsert.do")
 	public String insertTheme(Theme t) {
 		int tNum = tService.getTNum();
-		
 		int result = tService.insertTheme(t,tNum);
 		
 		if(result >0) return "redirect:theme.do"; else return "";
@@ -280,5 +292,11 @@ public class ThemeController extends TFile{
 		gson.toJson(list,response.getWriter());
 	}
 	
+	@RequestMapping("themeModify.do")
+	public ModelAndView themeModifyView(Theme t,ModelAndView mv) {
+		mv.addObject("t",t).setViewName("board/boardModifyView");
+		
+		return mv;
+	}
 
 }
