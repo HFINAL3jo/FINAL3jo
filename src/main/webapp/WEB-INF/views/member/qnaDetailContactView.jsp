@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="zxx">
 
@@ -204,6 +205,10 @@ textarea{
   text-justify: inter-word;
 }
 
+.breadcrumb{
+	background-image:url('${contextPath}/resources/images/qnaflowers.jpg');
+  background-size: 100% 100%;
+}
 </style>
 </head>
 
@@ -220,8 +225,8 @@ textarea{
         <div class="col-lg-8">
           <div class="breadcrumb_iner">
             <div class="breadcrumb_iner_item">
-              <h2>contact us</h2>
-              <p>Home <span>-</span> contact us</p>
+              <h2 style="color:white;">Q&A</h2>
+              <p style="color:white;"><strong>Ask Anything! </strong></p>
             </div>
           </div>
         </div>
@@ -235,7 +240,7 @@ textarea{
     <div class="container">
  	<div class="qnaPage">
      
-      <h2>상세보기</h2>
+      <h2>Q&A</h2>
       <hr>
         
         <!-- 글 내용-->
@@ -252,7 +257,7 @@ textarea{
                </tr>
             <tr id="qwriter">
                <td>작성자&nbsp;&nbsp;&nbsp;<strong>${ q.qWriter }</strong></td>
-               <td>${q.qCreateDate }</td>
+               <td><fmt:formatDate pattern="yyyy.MM.dd HH:mm " value="${q.qCreateDate }"/></td>
             </tr>
             <tr>
             <td colspan="2">${q.qContent }</td>
@@ -262,13 +267,13 @@ textarea{
             </div>
             <div class="ec-base-button" align="right">
                             <span class="gRight">
-                                <button class="btn pull-right">수정</button>
-                                <button class="btn pull-right">삭제</button>
+                                <a href="">Edit</a>&nbsp;&nbsp;&nbsp;
+                                <a href="">Delete</a>&nbsp;&nbsp;&nbsp;
                             </span>
                             <span class="gLeft">
                                 <span class="displaynone">
                                 </span>
-                                <button class="btn pull-right">목록</button>
+                                <a href="contactView.do">List</a>
                             </span>
                         </div>
             </div>
@@ -301,7 +306,7 @@ textarea{
     <div class="comment-box">
       <textarea class="form-control comment-input" placeholder="Write a comment" id="comment-box" rows=""></textarea>
       <div align="right">
-      <button class="btn pull-right">등록</button>
+      <button class="btn pull-right">submit</button>
       </div>
     </div>
   </div>

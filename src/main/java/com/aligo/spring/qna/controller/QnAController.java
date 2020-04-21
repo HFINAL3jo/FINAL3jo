@@ -1,6 +1,8 @@
 package com.aligo.spring.qna.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,7 +55,7 @@ public class QnAController {
 		
 		response.setContentType("application/json; charset=utf-8");
 		
-		Gson gson = new Gson().newBuilder().setDateFormat("yyyy-MM-dd hh:mm a").create();
+		Gson gson = new Gson().newBuilder().setDateFormat("yyyy.MM.dd hh:mm a").create();
 		gson.toJson(hmap,response.getWriter());
 	}
 	
@@ -61,7 +63,6 @@ public class QnAController {
 	public ModelAndView boardDetail(ModelAndView mv, int qId, 
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
 		QnA q = qService.selectBoard(qId);
-		
 		if(q != null) {
 			mv.addObject("q",q)
 			  .addObject("currentPage",currentPage)
@@ -70,6 +71,12 @@ public class QnAController {
 			mv.addObject("msg","상세조회 실패!")
 			.setViewName("common/errorPage");
 		}
+		
 		return mv;
 	}
+
+	@RequestMapping("qWrite.do")
+	public String qnaWriteView() {
+		return "member/qnaWriteForm";
+	}	
 }
