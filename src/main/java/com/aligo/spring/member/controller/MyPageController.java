@@ -111,15 +111,17 @@ public class MyPageController {
 		}
 	}
 	
+	/**
+	 * 회원 수정
+	 * @param m
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("memUpdate.do")
 	public String memberUpdate(Member m, Model model) {
 		
-		System.out.println(m);
-		
 		String encPwd = bcryptPasswordEncoder.encode(m.getpassword());
 		m.setpassword(encPwd);
-		
-		System.out.println(m);
 		
 		int result = mpService.memberUpdate(m);
 		
