@@ -49,7 +49,7 @@
 	
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER
-		SET PASSWORD=#{password},NICKNAME=#{nickname}
+		SET PASSWORD=#{password}
 		WHERE EMAIL=${email}
 	</update>
 
