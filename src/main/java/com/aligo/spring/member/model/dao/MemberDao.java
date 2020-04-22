@@ -38,6 +38,11 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.findPwdFin", m);
 	}
 
+	public int deleteMember(String email) {
+		return sqlSession.update("memberMapper.deleteMember",email);
+
+	}
+
 	
 	
 
