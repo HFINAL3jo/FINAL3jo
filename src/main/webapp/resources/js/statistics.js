@@ -14,7 +14,14 @@ var showChart = function(){
 	ss = JSON.parse(strA);
 	//---------------------------------
 	
-	var chartValue = document.getElementById('chartValue').value;
+	var chartValue = document.getElementById('chartValue').value;	// 차트 모형
+	var chartValue2 = document.getElementById('charDataShow').value; // 데이터 검색에서 값을 가져오는 값
+	
+	var charStr1 = (document.getElementById('choose').value == 'T_LIKES')? 
+						'좋아요':(document.getElementById('choose').value == 'T_VIEWS')? '조회수':'검색 키워드'; 
+	var charStr2 = (chartValue2 == 'address')? '주 소':(chartValue2 == 'themaName')? '테 마':'';
+		//themaName
+	
 //	str = arguments[0];
 		
 	str=str.replace(/&#034;/g, '\"');
@@ -65,11 +72,8 @@ var showChart = function(){
     	   Dd.push(value);
        }
        
-       var options;
-       if(chartValue == 'donut' || chartValue == 'bar'){
-    	  options = {
-    		 title: 'My Daily Activities',
-    		 is3D: true,
+       var options = {
+    		 title: charStr1 + ' : '+charStr2,
     		 width: '100%', 
     		 height: 460,
     		 animation:{
@@ -77,9 +81,18 @@ var showChart = function(){
     		     easing: 'out',
     		 }
     	  };
+//       if(chartValue == 'donut' || chartValue == 'bar'){
+//    	 
+//       }
+       if(chartValue == 'donut'){
+    	   options.is3D = true;
+    	   
+       }else if(chartValue == 'pie'){
+    	   
+    	   options.pieHole = 0.4;
        }
        
-       if(chartValue == 'donut'){
+       if(chartValue == 'donut' || chartValue == 'pie'){
 //    	   console.log('donut 실행')
 //    	   console.log(Dd);
 //    	   var chart = new google.visualization.PieChart(document.getElementById('chart'));

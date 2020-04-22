@@ -147,7 +147,10 @@ public class StatisticController {
 		
 		JSONObject JsonObject1 = new JSONObject();
 		JSONObject JsonObject2 = new JSONObject();
+		
+		// 분산 차트를 위해 따로 나누어 처리(조아요/ 조회수)
 		JSONObject JsonObject3 = new JSONObject();
+		JSONObject JsonObject4 = new JSONObject();
 		
 		// 남/여 회원 비율
 		// 객체를 변경 하지 않고 그냥  TKeyworTNAME/ColumnTKeywordNumber으로 값을 받아오는 것으로 대체한다.
@@ -161,12 +164,17 @@ public class StatisticController {
 		JsonObject2 = ConvertJson(list_2, "2");
 		
 		// 테마별 산도표
-		ArrayList<Statistics> list_3 = serviceStatics.list_3(temp);;
+		ArrayList<Statistics> list_3 = serviceStatics.list_3(temp);
+		// 조아요
 		JsonObject3 = ConvertJson(list_3, "3");
+		// 조회수
+		JsonObject4 = ConvertJson(list_3, "4");
 		
 		mav.addObject("list_1", JsonObject1);
 		mav.addObject("list_2", JsonObject2);
 		mav.addObject("list_3", JsonObject3);
+		mav.addObject("list_4", JsonObject4);
+		
 		mav.setViewName("admin/statisticsSurplus");
 		return mav;
 	}
@@ -290,7 +298,7 @@ public class StatisticController {
 		
 //		mav.addObject("chartValue", chartValue); 			// 어떤 차트(인포그램/통계)를 사용 할 것지 표시
 //		mav.addObject("choose", choose); 					// StatisticController의 조아요/조회수.키워트 중 하나에 대한 데이터를 값을 뷰에 보여주는지 확인.
-//		mav.addObject("charDataShow", td);				// 주소(address) / 테마(themaName) 등 어디에 해당하는 데이터인지 표시 , 기본값으로  address 표시
+		mav.addObject("charDataShow", td);				// 주소(address) / 테마(themaName) 등 어디에 해당하는 데이터인지 표시 , 기본값으로  address 표시
 		
 //		mav.put("admin/statistics");
 		
@@ -315,6 +323,7 @@ public class StatisticController {
 //		JSONObject JsonObject1 = new JSONObject();
 		JSONObject JsonObject2 = new JSONObject();
 		JSONObject JsonObject3 = new JSONObject();
+		JSONObject JsonObject4 = new JSONObject();
 		
 		// 남/여 회원 비율
 		// 객체를 변경 하지 않고 그냥  TKeyworTNAME/ColumnTKeywordNumber으로 값을 받아오는 것으로 대체한다.
@@ -329,12 +338,13 @@ public class StatisticController {
 		// 테마별 산도표
 		ArrayList<Statistics> list_3 = serviceStatics.list_3(temp);;
 		JsonObject3 = ConvertJson(list_3, "3");
-		
+		JsonObject4 = ConvertJson(list_3, "4");
 	//=========================================================
 		
 //		map.put("JsonObject1", JsonObject1);
 		map.put("JsonObject2", JsonObject2);
 		map.put("JsonObject3", JsonObject3);
+		map.put("JsonObject4", JsonObject4);
 		
 		return map;
 	}
@@ -379,7 +389,13 @@ public class StatisticController {
 			}else if(property.equals("3")){
 //				JsonData.put("조아요", "조회수");
 				for (Statistics out : list) {
-					JsonData.put(out.getColumnTlikeValue().replaceAll(" ", ""), out.getColumnTviewsValue());
+					JsonData.put(out.getColumnTKeywordName().replaceAll(" ", ""), out.getColumnTlikeValue());
+				}
+
+			}else if(property.equals("4")){
+//				JsonData.put("조아요", "조회수");
+				for (Statistics out : list) {
+					JsonData.put(out.getColumnTKeywordName().replaceAll(" ", ""), out.getColumnTviewsValue());
 				}
 
 			}
@@ -400,6 +416,10 @@ public class StatisticController {
 		ArrayList<Statistics> c = new ArrayList<Statistics>();
 
 		for (int i = 0; i <= list1.size() - 1; i++) {
+			
+			// ===== 여기서 주소를 서울시 '~~구' 로나누어 저장한다. 
+			//String[] str = list1.get(i).getColumnAddressName().split(" ");
+			
 			if (i <= limit) {
 				c.add(list1.get(i));
 			} else {
@@ -503,7 +523,7 @@ public class StatisticController {
 			}
 			return jArr;
 			
-		}else {
+		}else{	
 			// 조건에 없을 시에 null 반환
 			return null;
 		}
