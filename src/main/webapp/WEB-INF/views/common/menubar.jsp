@@ -87,6 +87,7 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
                                         <a class="dropdown-item" href="themeInsertView.do">Test1</a>
                                         <a class="dropdown-item" href="likedList.do">Test2</a>
+                                        <a class="dropdown-item" href="rResultList.do">레코멘드결과뷰</a>
                                     </div>
                                 </li>
                             </ul>

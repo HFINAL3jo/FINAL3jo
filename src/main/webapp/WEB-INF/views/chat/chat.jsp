@@ -242,18 +242,7 @@
 		}
 		
 		function clientSend(){
-        	/* 
-			if($("#id").val().trim().length<2){
-        		alert('2자이상의 아이디를 입력하세요');
-        		$("#id").focus();
-        		return;
-        	}
-        	if($("#room").val().trim().length<2){
-        		alert('2자이상의 아이디를 입력하세요');
-        		$("#room").focus();
-        		return;
-        	}
-        	 */
+        	
             console.log(message);
             socket.send(JSON.stringify(new MessageFlag("${ sessionScope.loginUser.nickname }", $("#room").val(), $('#message').val(), "msg", $("#receiveNn").val() )));
             
@@ -288,6 +277,7 @@
 			            		<a>asdfasfd</a>
 			            	</li>
         				 */
+        				 $("#chatRoom-area").html('');
         				for(var i=0;i<rooms.length;i++){
         					$("#chatRoom-area").append( $("<li>").html("<a>" + rooms[i] + "</a>").click(function(){
         						
@@ -420,7 +410,7 @@
         $('#createBtn').on('click',function(){
         	
         	$("#room").val(prompt("Enter the name of the chat room."));
-        	socket.send(JSON.stringify(new MessageFlag($("#id").val(),$("#room").val(),"","createroom",$("#receiveId").val())));
+        	socket.send(JSON.stringify(new MessageFlag("${ sessionScope.loginUser.nickname }",$("#room").val(),"","createroom",$("#receiveNn").val())));
         });
         
 	</script>
