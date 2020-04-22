@@ -78,20 +78,20 @@
         </div>
         
         <div class="col-lg-8">
-          <form class="form-contact contact_form" action="qinsert.do" method="post" id="contactForm">
+          <form action="qinsert.do" method="post">
             <div class="row">
 
 
                 <div class="col-12">
                         <div class="form-group">
-                          <input class="form-control" name="subject" id="subject" type="text" onfocus="this.placeholder = ''"
+                          <input class="form-control" name="qTitle" id="subject" type="text" onfocus="this.placeholder = ''"
                             onblur="this.placeholder = '제목(title)'" placeholder='제목(title)'>
                         </div>
                     </div>
 
                     <div class="col-12">
                         <div class="form-group">
-                          <input class="form-control" name="name" id="name" type="text" onfocus="this.placeholder = ''"
+                          <input class="form-control" name="qWriter" id="name" type="text" onfocus="this.placeholder = ''"
                             onblur="this.placeholder = '작성자(writer)'" placeholder='작성자(writer)'>
                         </div>
                       </div>
@@ -104,7 +104,7 @@
 
                       <div class="col-12">
                         <div class="form-group">
-                  <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9"
+                  <textarea class="form-control w-100" name="qContent" id="message" cols="30" rows="9"
                     onfocus="this.placeholder = ''" onblur="this.placeholder = '문의내용(message)'"
                     placeholder='문의내용(message)'></textarea>
                 </div>

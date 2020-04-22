@@ -29,7 +29,8 @@ public class QnAController {
 	
 	@RequestMapping("contactView.do")
 	public ModelAndView boardList(ModelAndView mv,
-			@RequestParam(value="currentPAge",required=false,defaultValue="1")int currentPage){
+			@RequestParam(value="currentPage",required=false,defaultValue="1")int currentPage){
+			
 			mv.addObject("currentPage",currentPage);
 			mv.setViewName("member/contactView");
 		return mv;
@@ -81,8 +82,10 @@ public class QnAController {
 	
 	@RequestMapping("qinsert.do")
 	public String writeBoard(QnA q, HttpServletRequest request) {
-		int result = qService.writeBoard(q);
+		
+		
 		System.out.println(q);
+		int result = qService.writeBoard(q);
 		if(result > 0) {
 			return "redirect:contactView.do";
 		}else {
