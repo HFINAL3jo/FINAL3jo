@@ -31,4 +31,10 @@
 		FROM QNA
 		WHERE QID=#{qId}
 	</select>
+	
+	<insert id="writeBoard" parameterType="QnA">
+		INSERT INTO QNA 
+		VALUES(SEQ_QID.NEXTVAL,#{qTitle},#{qContent},#{qWriter},
+		SYSDATE,DEFAULT,DEFAULT)
+	</insert>
 </mapper>

@@ -32,5 +32,9 @@ public class QnADao {
 		return sqlSession.selectOne("qnaMapper.selectBoard",qId);
 	}
 
+	public int writeBoard(QnA q) {
+		return sqlSession.insert("qnaMapper.writeBoard",q);
+	}
+
 	
 }

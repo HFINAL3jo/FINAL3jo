@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,9 @@ import com.aligo.spring.theme.model.vo.Theme;
 
 @Controller
 public class MyPageController {
+	
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	@Autowired
 	private MyPageService mpService;
@@ -109,6 +113,13 @@ public class MyPageController {
 	
 	@RequestMapping("memUpdate.do")
 	public String memberUpdate(Member m, Model model) {
+		
+		System.out.println(m);
+		
+		String encPwd = bcryptPasswordEncoder.encode(m.getpassword());
+		m.setpassword(encPwd);
+		
+		System.out.println(m);
 		
 		int result = mpService.memberUpdate(m);
 		

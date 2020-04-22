@@ -88,4 +88,8 @@ public class ThemeDao {
 	public ArrayList<TReply> selectTReplyList(int tId) {
 		return (ArrayList)sqlSession.selectList("themeMapper.selectTReplyList",tId);
 	}
+
+	public String getKeyword() {
+		return sqlSession.selectOne("themeMapper.getKeyword");
+	}
 }

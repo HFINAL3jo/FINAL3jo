@@ -29,4 +29,12 @@ public interface QnAService {
 	QnA selectBoard(int qId);
 
 
+	/**
+	 * 문의글 작성
+	 * @param q
+	 * @return
+	 */
+	int writeBoard(QnA q);
+
+
 }

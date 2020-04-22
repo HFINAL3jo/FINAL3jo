@@ -66,10 +66,8 @@ public class MemberController {
 	@RequestMapping(value="signUp.do", method = RequestMethod.POST)
 	public String insertMember(Member m) {
 		
-		System.out.println(m);
 		String encPwd = bcryptPasswordEncoder.encode(m.getpassword());
 		m.setpassword(encPwd);
-		System.out.println(m);
 		
 		int result = memService.insertMember(m);
 
@@ -238,6 +236,11 @@ public class MemberController {
 
 	}
 
+	/** 암호화 로그인
+	 * @param m
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="login.do")
 	public String memberLogin(@ModelAttribute Member m, Model model) {
 
@@ -254,9 +257,10 @@ public class MemberController {
 		}
 	}
 	
-	
-
-	
+	/** 로그아웃
+	 * @param status
+	 * @return
+	 */
 	@RequestMapping("logout.do")
 	public String logout(SessionStatus status) {
 		// SessionStatus : 커맨드 객체로 세선의 상태를 관리할 수 있는 객체이다.
@@ -266,4 +270,30 @@ public class MemberController {
 		
 		return "redirect:index.jsp";
 	}
+	
+	
+	@RequestMapping("findPwd.do")
+	public String findPwd() {
+		return "member/findPwd";
+	}
+	
+	@RequestMapping("findPwdFin.do")
+	public String findPwdFin(Member m, Model model) {		
+		System.out.println(m);
+		String encPwd = bcryptPasswordEncoder.encode(m.getpassword());
+		m.setpassword(encPwd);
+		System.out.println(m);
+		
+		int result = memService.findPwdFin(m);
+		
+		if(result > 0) {
+			return "member/loginView";
+		}else {
+			return "common/errorPage";
+		}
+		
+		
+	}
+	
+	
 }

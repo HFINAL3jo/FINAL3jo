@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,7 @@ public class QnAController {
 		
 		response.setContentType("application/json; charset=utf-8");
 		
-		Gson gson = new Gson().newBuilder().setDateFormat("yyyy-MM-dd hh:mm a").create();
+		Gson gson = new Gson().newBuilder().setDateFormat("yyyy.MM.dd hh:mm a").create();
 		gson.toJson(hmap,response.getWriter());
 	}
 	
@@ -61,7 +62,6 @@ public class QnAController {
 	public ModelAndView boardDetail(ModelAndView mv, int qId, 
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
 		QnA q = qService.selectBoard(qId);
-		
 		if(q != null) {
 			mv.addObject("q",q)
 			  .addObject("currentPage",currentPage)
@@ -70,6 +70,23 @@ public class QnAController {
 			mv.addObject("msg","상세조회 실패!")
 			.setViewName("common/errorPage");
 		}
+		
 		return mv;
+	}
+
+	@RequestMapping("qWrite.do")
+	public String qnaWriteView() {
+		return "member/qnaWriteForm";
+	}	
+	
+	@RequestMapping("qinsert.do")
+	public String writeBoard(QnA q, HttpServletRequest request) {
+		int result = qService.writeBoard(q);
+		System.out.println(q);
+		if(result > 0) {
+			return "redirect:contactView.do";
+		}else {
+			return "common/errorPage";
+		}
 	}
 }

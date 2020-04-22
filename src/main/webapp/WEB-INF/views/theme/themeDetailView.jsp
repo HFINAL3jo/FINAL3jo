@@ -366,6 +366,12 @@
                     <h3 class="h3 textcenter">${t.tTitle }</h3>
                     <br>                    
 					<span style="float:right;">Views : ${t.tViews }<br></span>
+					<c:if test="${loginUser eq t.tWriter || loginUser.nickname eq 'ADMIN'}">
+					<c:url var="mo" value="themeModify.do">
+						<c:param name="${t }"/>
+					</c:url>
+					<br><button id="mp" value="${mo }" style="float:right;">Modify</button>					
+					</c:if>
                     <div class="post-element">
                         <span>Posted : ${t.tCreateDate } / Modified : ${t.tModifyDate }</span>
                     </div>
@@ -376,17 +382,18 @@
                             <dl><dt>Address</dt>
                                 <dd>${t.tAddress }</dd>
                             </dl>
-                            <dl><dt>지하철</dt>
-                                <dd>2호선 잠실역 3번 출구</dd>
+                            <dl><dt>Transportation</dt>
+                                <dd>${t.tTrans }</dd>
                             </dl>
-                            <dl><dt>입장료</dt>
-                                <dd>무료</dd>
+                            <dl><dt>Fee</dt>
+                                <c:if test="${!empty t.tFee  }">${t.tFee }<dd></dd></c:if>
+                                <c:if test="${empty t.tFee  }">Free<dd></dd></c:if>
                             </dl>
-                            <dl><dt>전화번호</dt>
-                                <dd>02-412-0190</dd>
+                            <dl><dt>Tel</dt>
+                                <dd>${t.tTel }</dd>
                             </dl>
-                            <dl><dt>이용시간</dt>
-                                <dd>매일 00:00 ~ 24:00</dd>
+                            <dl><dt>Opening Hours</dt>
+                                <dd>${t.tHours }</dd>
                             </dl>
                         </div>
                         <p>&nbsp;</p>
@@ -394,10 +401,10 @@
                					<br>
 					<div class="like-content" align="center">
 						<span>
-    					Did you like this review? Press like to make it easier for others to see
+    					Did you like this review? Press like to make it easier for others to see!
   						</span>
   
-  						<button class="btn-secondary like-review" id="likeBtn" name="likeBtn" value="0">
+  						<button class="btn-secondary like-review" id="likeBtn" name="likeBtn" value="0" onclick="return like()">
     					<i class="fa fa-heart" aria-hidden="true"></i> Like ${t.tLikes}
   						</button>
 					</div>
@@ -476,7 +483,7 @@
 				
 				// 주소-좌표 변환 객체 생성
 				var geocoder = new daum.maps.services.Geocoder();
-				var adrs = '서울특별시 송파구 잠실동 47'
+				var adrs = '${t.tAddress}';
 				
 				// 주소로 좌표를 검색합니다
 				geocoder.addressSearch(adrs , function(result, status) {
@@ -503,39 +510,7 @@
 				    } 
 				});
 				
-				/* var listData = [
-					{	content :'디뮤지엄',
-						address :'서울특별시 용산구 한남동 독서당로29길 5-6'},
-					{	content :'로우앤슬로우',
-						address :'서울특별시 용산구 이태원1동 보광로 126'},
-					{	content :'국립중앙박물관',
-						address :'서울특별시 용산구 서빙고동 서빙고로 137'},
-					{	content :'Fountain',
-						address :'서울특별시 용산구 이태원동 116-6'}    
-				];
 				
-				listData.forEach(function(addr, index) {
-				    geocoder.addressSearch(addr, function(result, status) {
-				        if (status === daum.maps.services.Status.OK) {
-				            var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-				
-				            var marker = new daum.maps.Marker({
-				                map: map,
-				                position: coords
-				            });
-				            var infowindow = new daum.maps.InfoWindow({
-				                content: '<div style="width:150px;text-align:center;padding:6px 0;">' + listData[index] + '</div>',
-				                disableAutoPan: true
-				            });
-				            //infowindow.open(map, marker);
-				        }
-				        kakao.maps.event.addListener(marker, 'click', function() {
-				            // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-				            infowindow.setContent('<div style="width:150px;text-align:center;padding:6px 0;">' + listData[index] + '</div>');
-				            infowindow.open(map, marker);
-				        });
-				    });
-				}); */
 				
 				//--------------------------------
                             //		jQuery.noConflict();
@@ -579,24 +554,33 @@
 				    $(function(){
 						$(document).on('click', '.like-review', function(e) {
 							if( $('#likeBtn').val() == 0 ){
-								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this');
+								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this '+${t.tLikes});
 								$(this).children('.fa-heart').addClass('animate-like');
 								$(this).val(1);
 								
 							}else{
 								console.log();
-								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> Like');
+								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> Like '+${t.tLikes});
 								$(this).children('.fa-heart').addClass('animate-like');
 								$(this).val(0);
 							}
 						});
-						/*
-							자바스크립트로 조아요 버튼 값을 받아서 밸류 체크후 클릭
-							해보쟈~~~~
-						*/
+						
 						
 					});
 				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
+				    function like() {
+						/* $.ajax({
+							url:  ,
+							type:  ,
+							dataType:"json"
+							data:
+						}); */
+					}
+				    
+				    
+				    
+				    
 				    //theme > themename 링크
 				    $('.loction span').mouseenter(function(){
 				    	$(this).css('cursor','pointer');
@@ -607,6 +591,10 @@
 				    		location.href="theme.do?keyword="+e.target.innerText;
 				    	}
 				    });
+				   
+				    
+				    
+				    
 				    
 				    //댓글 submit
 				    $('#rSubmit').click(function(){
@@ -708,6 +696,7 @@
 				    		});
 				    	}
 				    });
+				    
 					</script>
 </body>
 

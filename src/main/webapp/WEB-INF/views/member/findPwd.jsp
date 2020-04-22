@@ -154,7 +154,7 @@ input:checked+label:after {
 				<div class="col-lg-8">
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item">
-							<h2>Forgot your Password?</h2>
+							<h2>Forgot your ACCOUNT?</h2>
 							<p>
 								Home <span>-</span> Sign Up
 							</p>
@@ -179,24 +179,21 @@ input:checked+label:after {
 				<div class="col-lg-6 col-md-6">
 					<div class="login_part_form">
 						<div class="login_part_form_iner">
-							<h3>CREATE YOUR ACCOUNT</h3>
-							<form class="row contact_form" action="findPwd.do" method="post">
+							<h3>CREATE YOUR NEW PASSWORD</h3>
+							<form class="row contact_form" id="fm1" method="post" >
 
+								<div class="col-md-12 form-group p_star">
+									<input type="text" class="form-control" id="email"
+										name="email" placeholder="Your email">
+								</div>
+								
 								<div class="col-md-12 form-group p_star">
 									<input type="password" class="form-control" id="password"
-										name="password" value="" placeholder="Password">
+										name="password" placeholder="Password">
 								</div>
-
-								<div class="col-md-12 form-group p_star">
-									<input type="password" class="form-control" id="passwordchk"
-										name="passwordchk" value="" placeholder="Password check">
-								</div>
-
-
 
 								<div class="col-md-12 form-group">
-									<button type="submit" value="submit" class="btn_3"
-										href="index.jsp">SIGN UP</button>
+									<button type="submit" value="submit" class="btn_3" id="findPwd" onclick="resetPwd()">RESET PASSWORD</button>
 								</div>
 								<br>
 							</form>
@@ -206,6 +203,13 @@ input:checked+label:after {
 			</div>
 		</div>
 	</section>
+	<script type="text/javascript">
+		function resetPwd() {			
+			alert("Change completed. Please Log in.😉");
+			$("#fm1").attr("action","findPwdFin.do").submit();
+		}
+
+	</script>
 
 	<!--::footer_part start::-->
 	<%@ include file="../common/footer.jsp"%>

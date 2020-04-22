@@ -13,7 +13,7 @@
 	<%@ include file="../common/assidetheme.jsp" %>
 	
 	<div align="center">
-	<%@ include file="write.jsp" %>
+	<%@ include file="modify.jsp" %>
 	</div>
 	</div>
 	</div>
@@ -22,7 +22,8 @@
 	
 	<%@ include file="../common/footer.jsp" %>
 	<script>
-		$('#titlebar').text('Write');
+		console.log(${t});
+		$('#titlebar').text('Modify');
 	</script>
 </body>
 </html>

@@ -39,7 +39,7 @@ $(document).ready(function(){
                     minlength: "your name must consist of at least 2 characters"
                 },
                 subject: {
-                    required: "come on, you have a subject, don't you?",
+                    required: "come on, you have a title, don't you?",
                     minlength: "your subject must consist of at least 4 characters"
                 },
                 number: {

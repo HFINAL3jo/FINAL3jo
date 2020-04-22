@@ -162,7 +162,7 @@
     <script src="resources/js/masonry.pkgd.js"></script>
     <!-- particles js -->
     <script src="resources/js/owl.carousel.min.js"></script>
-    <script src="resources/js/jquery.nice-select.min.js"></script>
+    <!-- <script src="resources/js/jquery.nice-select.min.js"></script> -->
     <!-- slick js -->
     <script src="resources/js/slick.min.js"></script>
     <script src="resources/js/jquery.counterup.min.js"></script>
@@ -182,7 +182,9 @@
 				
 			});
 		});
-		
+		$('#navbarDropdown_1').click(function(){
+			location.href="theme.do?keyword=";
+		});
 	</script>
 </body>
 </html>

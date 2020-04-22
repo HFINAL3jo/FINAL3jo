@@ -5,52 +5,58 @@
 
 <mapper namespace="memberMapper">
 
-	<resultMap type="Member" id="memberResultSet">
-		<id property="mid" column="MID" />
-		<result property="email" column="EMAIL" />
-		<result property="password" column="PASSWORD" />
-		<result property="nickname" column="NICKNAME" />
-		<result property="gender" column="GENDER" />
-		<result property="age" column="AGE" />
-		<result property="mStatus" column="M_STATUS" />
-		<result property="recommend" column="RECOMMEND" />
-	</resultMap>
+   <resultMap type="Member" id="memberResultSet">
+      <id property="mid" column="MID" />
+      <result property="email" column="EMAIL" />
+      <result property="password" column="PASSWORD" />
+      <result property="nickname" column="NICKNAME" />
+      <result property="gender" column="GENDER" />
+      <result property="age" column="AGE" />
+      <result property="mStatus" column="M_STATUS" />
+      <result property="recommend" column="RECOMMEND" />
+   </resultMap>
 
 
-	<insert id="insertMember" parameterType="Member">
-		INSERT INTO MEMBER
-		VALUES
-		(SEQ_MNO.NEXTVAL,#{email},#{password},#{nickname},#{gender},#{age},DEFAULT,#{recommend})
-	</insert>
+   <insert id="insertMember" parameterType="Member">
+      INSERT INTO MEMBER
+      VALUES
+      (SEQ_MNO.NEXTVAL,#{email},#{password},#{nickname},#{gender},#{age},DEFAULT,#{recommend})
+   </insert>
 
-	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
-		<!-- 암호화 전
-		SELECT *
-		FROM MEMBER
-		WHERE EMAIL = #{ email }
-		AND PASSWORD = #{ password }
-		AND M_STATUS = 'Y' -->
-		SELECT * FROM MEMBER
-		WHERE EMAIL = #{ email }
-		AND M_STATUS = 'Y'
-	</select>
+   <select id="loginMember" parameterType="Member" resultMap="memberResultSet">
+      <!-- 암호화 전
+      SELECT *
+      FROM MEMBER
+      WHERE EMAIL = #{ email }
+      AND PASSWORD = #{ password }
+      AND M_STATUS = 'Y' -->
+      SELECT * FROM MEMBER
+      WHERE EMAIL = #{ email }
+      AND M_STATUS = 'Y'
+   </select>
 
-	<select id="idCheck" parameterType="String" resultType="_int">
-		SELECT COUNT(*)
-		FROM MEMBER
-		WHERE email=#{email}
-	</select>
-	
-	<update id="deleteMember" parameterType="Member">
-		UPDATE MEMBER
-		SET M_STATUS='N'
-		WHERE EMAIL=#{email}
-	</update>
-	
-	<update id="updateMember" parameterType="Member">
-		UPDATE MEMBER
-		SET PASSWORD=#{password}
-		WHERE EMAIL=${email}
-	</update>
+   <select id="idCheck" parameterType="String" resultType="_int">
+      SELECT COUNT(*)
+      FROM MEMBER
+      WHERE email=#{email}
+   </select>
+   
+   <update id="deleteMember" parameterType="Member">
+      UPDATE MEMBER
+      SET M_STATUS='N'
+      WHERE EMAIL=#{email}
+   </update>
+   
+   <update id="updateMember" parameterType="Member">
+      UPDATE MEMBER
+      SET PASSWORD=#{password},NICKNAME=#{nickname}
+      WHERE EMAIL=#{email}
+   </update>
+   
+   <update id="findPwdFin">
+      UPDATE MEMBER SET
+      PASSWORD=#{password}
+      WHERE EMAIL=#{email}
+   </update>
 
 </mapper>

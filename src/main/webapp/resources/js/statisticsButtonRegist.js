@@ -16,6 +16,13 @@
 		location.href="statistic.do?choose=T_VIEWS";
 	}	
 	
+	// 검색 키워드
+	document.getElementById('uPbtn3').onclick = function(){
+		//console.log("실행");
+		// 위의 조건 들과는 다르게 SEARCH_AREA 테이블등 에서 검색
+		location.href="statistic.do?choose=SA_COUNT";
+	}	
+	
 	// 기타 정보
 	document.getElementById('uPbtn4').onclick = function(){
 		//console.log("실행");
@@ -33,10 +40,10 @@
 		showTopList("2");
 	}	
 	
-	document.getElementById('btn3').onclick = function(){
-		console.log("btn3 실행");
-		showTopList("3");
-	}	
+//	document.getElementById('btn3').onclick = function(){
+//		console.log("btn3 실행");
+//		showTopList("3");
+//	}	
 	
 	//
 	function showTopList(data){
@@ -67,10 +74,6 @@
 			}
 			
 			document.getElementById('chartDataTable').innerHTML=str;
-			
-		}else if(data == "3"){
-			
-		}else{
 			
 		}
 	}

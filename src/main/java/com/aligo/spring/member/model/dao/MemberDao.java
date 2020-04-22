@@ -34,6 +34,10 @@ public class MemberDao {
 		return (Member)sqlSession.selectOne("memberMapper.loginMember", m);
 	}
 
+	public int findPwdFin(Member m) {
+		return sqlSession.update("memberMapper.findPwdFin", m);
+	}
+
 	
 	
 
