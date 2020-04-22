@@ -295,5 +295,21 @@ public class MemberController {
 		
 	}
 	
+	@RequestMapping("deleteAccount.do")
+	public String deleteMember(SessionStatus status, String email, Model model) {
+		
+		
+		int result = memService.deleteMember(email);
+		
+		if(result>0) {
+			status.setComplete();
+			return "redirect:index.jsp";
+		}else {
+			model.addAttribute("msg","회원탈퇴실패!");
+			return "common/errorPage";
+		}		
+	}
+		
+	}
 	
-}
+	

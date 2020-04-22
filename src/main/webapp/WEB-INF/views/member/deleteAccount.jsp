@@ -59,7 +59,8 @@
                                     </div>                                    
                                     
                                     <br><br>
-                                    <input class="genric-btn primary-border small" type="submit" value="Delete Account" style="margin-left: 30%;">
+<!--                                     <input class="genric-btn primary-border small" type="submit" value="Delete Account" style="margin-left: 30%;">
+ -->                                <button type="button" class="genric-btn primary-border small" onclick="location.href='${ memDelete }';">탈퇴하기</button>
                                 </form> 
                             </div>
                         </div>
@@ -86,8 +87,6 @@
             }
         }
     </script>
-
-
 </body>
 
 </html>

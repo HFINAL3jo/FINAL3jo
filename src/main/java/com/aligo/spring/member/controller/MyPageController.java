@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -13,9 +14,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aligo.spring.common.Pagination;
 import com.aligo.spring.member.model.service.MyPageService;
@@ -98,18 +101,55 @@ public class MyPageController {
 	 * @return
 	 */
 	@RequestMapping("memDelete.do") 
-	public String memberDelete(SessionStatus status, Member m, Model model,
-								String email, String password) {
-		int result = mpService.memberDelete(m);
+	public String memberDelete(HttpSession session, SessionStatus status, Member m, RedirectAttributes rttr) {
 		
-		if(result > 0) {
-			status.setComplete();			
-			return "redirect:index.jsp";
-		}else {
-			model.addAttribute("msg","회원 탈퇴 오류");
-			return "common/errorPage";
-		}
-	}
+		
+		// 세션에 있는 member를 가져와 member변수에 넣어줍니다.
+				Member mem = (Member) session.getAttribute("mem");
+				// 세션에있는 비밀번호
+				String sessionPass = mem.getpassword();
+				// vo로 들어오는 비밀번호
+				String voPass = m.getpassword();
+				
+				if(!(sessionPass.equals(voPass))) {
+					rttr.addFlashAttribute("msg", false);
+					return "redirect:/member/deleteAccount";
+				}
+				mpService.memberDelete(m);
+				session.invalidate();
+				return "redirect:/";
+			}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	/*
+	 * int result = mpService.memberDelete(m);
+	 * 
+	 * if(result > 0) { status.setComplete(); return "redirect:index.jsp"; }else {
+	 * model.addAttribute("msg","회원 탈퇴 오류"); return "common/errorPage"; } }
+	 */
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping("memUpdate.do")
 	public String memberUpdate(Member m, Model model) {

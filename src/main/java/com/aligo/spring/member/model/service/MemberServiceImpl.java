@@ -49,6 +49,12 @@ public class MemberServiceImpl implements MemberService {
 		return memDao.findPwdFin(m);
 	}
 
+	@Override
+	public int deleteMember(String email) {
+		// TODO Auto-generated method stub
+		return memDao.deleteMember(email);
+	}
+
 	
 	
 }

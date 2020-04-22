@@ -37,6 +37,8 @@ public interface MemberService {
 	 */
 	int findPwdFin(Member m);
 
+	int deleteMember(String email);
+
 
 
 	
