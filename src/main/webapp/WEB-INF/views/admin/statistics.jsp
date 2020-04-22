@@ -197,13 +197,13 @@ tbody tr:nth-child(2n+1) {
 						<div style="height: 50px; padding-bottom: 5px;">
 						<!-- genric-btn success large button_body_chart -->
 							<button class="mybtn2" id="btn1">Low list</button> &nbsp;&nbsp;
-							<button class="mybtn2" id="btn2">TOP list 10</button> &nbsp;&nbsp;
+							<button class="mybtn2" id="btn2">TOP list</button> &nbsp;&nbsp;
 						</div>
 						<table style="border: 1px solid;">
 							<thead>
 								<tr>
 									<th style="width: 30%">순 위</th>
-									<th>HELLO</th>
+									<th></th>
 									<th></th>
 								</tr>
 							</thead>

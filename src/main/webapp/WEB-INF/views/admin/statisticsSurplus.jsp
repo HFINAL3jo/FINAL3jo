@@ -125,6 +125,7 @@ tbody tr:nth-child(2n+1) {
 	<input type="hidden" id="list_1" value=${list_1}>
 	<input type="hidden" id="list_2" value=${list_2}>
 	<input type="hidden" id="list_3" value=${list_3}>
+	<input type="hidden" id="list_4" value=${list_4}>
 
 	<section class="cat_product_area section_padding" style="">
 		<div class="container" style="margin-bottom: 15px;">

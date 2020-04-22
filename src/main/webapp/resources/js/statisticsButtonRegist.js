@@ -148,7 +148,11 @@ var drawShowChart = function(){
 //		    		console.log(document.getElementById('jObjArray').value);						
 //		    		console.log(document.getElementById('JsonReverseArray').value);	
 //		    		console.log(document.getElementById('JsonReverseList').value);	
+		    		
 		    		document.getElementById('chartValue').value = check1
+		    		
+		    		console.log("whatData : "+ whatData);
+		    		document.getElementById('charDataShow').value = whatData;
 		    		
 		    		showChart();
 		    		showTopList("1");

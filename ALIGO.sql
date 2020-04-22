@@ -348,4 +348,18 @@ INSERT INTO SEARCH_THEME VALUES ('T5',11);
 INSERT INTO SEARCH_THEME VALUES ('T6',45);
 INSERT INTO SEARCH_THEME VALUES ('T7',60);
 
+Insert into ALIGO.THEME_FILES (T_CODE_NUMBER,T_ORIGINAL_FILE,T_MODIFY_FILE) values (1,'http://www.visitseoul.net/file_save/art_img/2015/08/11/81665_M.jpg','http://www.visitseoul.net/file_save/art_img/2015/08/11/81665_M.jpg');
+Insert into ALIGO.THEME_FILES (T_CODE_NUMBER,T_ORIGINAL_FILE,T_MODIFY_FILE) values (2,'https://support.visitkorea.or.kr/img/call?cmd=VIEW&amp;id=67b21214-e619-4169-87c4-5cf27fe6108d','https://support.visitkorea.or.kr/img/call?cmd=VIEW&amp;id=67b21214-e619-4169-87c4-5cf27fe6108d');
+Insert into ALIGO.THEME_FILES (T_CODE_NUMBER,T_ORIGINAL_FILE,T_MODIFY_FILE) values (3,'https://support.visitkorea.or.kr/img/call?cmd=VIEW&amp;id=bfc978e8-7dd0-45bf-b0ef-365af2e7d3f9','https://support.visitkorea.or.kr/img/call?cmd=VIEW&amp;id=bfc978e8-7dd0-45bf-b0ef-365af2e7d3f9');
+Insert into ALIGO.THEME_FILES (T_CODE_NUMBER,T_ORIGINAL_FILE,T_MODIFY_FILE) values (4,'https://t1.daumcdn.net/cfile/tistory/262D923D517882BE04','https://t1.daumcdn.net/cfile/tistory/262D923D517882BE04');
+Insert into ALIGO.THEME_FILES (T_CODE_NUMBER,T_ORIGINAL_FILE,T_MODIFY_FILE) values (5,'https://support.visitkorea.or.kr/img/call?cmd=VIEW&amp;id=6f0c88c9-f43e-4fc9-b729-c35d1a4c0228','https://support.visitkorea.or.kr/img/call?cmd=VIEW&amp;id=6f0c88c9-f43e-4fc9-b729-c35d1a4c0228');
+
+Insert into ALIGO.THEME_LIST (TID,TWRITER,TTITLE,TADDRESS,TADDRESSH,T_CREATE_DATE,T_MODIFY_DATE,T_VIEWS,T_LIKES,TKEYWORD,T_STATUS,TCODE,TTEL,TFEE,THOURS,TTRANS) values (SEQ_TNO.NEXTVAL,'ADMIN','북촌한옥마을','37, Gyedong-gil, Jongno-gu, Seoul, Korea','서울 종로구 계동길 37',to_date('20/04/22','RR/MM/DD'),to_date('20/04/22','RR/MM/DD'),1,0,'TEST','Y','T3','02-2133-1372','FREE','10:00 ~ 16:00','Subway 3th line 3 Gateway');
+Insert into ALIGO.THEME_LIST (TID,TWRITER,TTITLE,TADDRESS,TADDRESSH,T_CREATE_DATE,T_MODIFY_DATE,T_VIEWS,T_LIKES,TKEYWORD,T_STATUS,TCODE,TTEL,TFEE,THOURS,TTRANS) values (SEQ_TNO.NEXTVAL,'ADMIN','DDP','281, Eulji-ro, Jung-gu, Seoul, Korea','서울 중구 을지로 281',to_date('20/04/22','RR/MM/DD'),to_date('20/04/22','RR/MM/DD'),1,0,'TEST2','Y','T7','02-2153-0000','ON DEPENDS EXHIBITION','10:00~21:00','지하철 2,4,5호선 동대문역사문화공원역 1,2번 출구');
+Insert into ALIGO.THEME_LIST (TID,TWRITER,TTITLE,TADDRESS,TADDRESSH,T_CREATE_DATE,T_MODIFY_DATE,T_VIEWS,T_LIKES,TKEYWORD,T_STATUS,TCODE,TTEL,TFEE,THOURS,TTRANS) values (SEQ_TNO.NEXTVAL,'ADMIN','낮에도 좋아! 밤에는 더 좋아! 어느 초여름날의 꿈, 궁궐 나들이','B 130, Sajik-ro, Jongno-gu, Seoul, Korea','서울 종로구 사직로 지하 130',to_date('20/04/22','RR/MM/DD'),to_date('20/04/22','RR/MM/DD'),2,0,'TEST3','Y','T3','02-3700-3900','1000','--','지하철 3호선 경복궁역');
+Insert into ALIGO.THEME_LIST (TID,TWRITER,TTITLE,TADDRESS,TADDRESSH,T_CREATE_DATE,T_MODIFY_DATE,T_VIEWS,T_LIKES,TKEYWORD,T_STATUS,TCODE,TTEL,TFEE,THOURS,TTRANS) values (SEQ_TNO.NEXTVAL,'ADMIN','반포대교 야경','40, Sinbanpo-ro 11-gil, Seocho-gu, Seoul, Korea','서울 서초구 신반포로11길 40',to_date('20/04/22','RR/MM/DD'),to_date('20/04/22','RR/MM/DD'),3,0,'TEST3','Y','T6','--','FREE','20:00~23:00','서빙고역 도보 15분');
+Insert into ALIGO.THEME_LIST (TID,TWRITER,TTITLE,TADDRESS,TADDRESSH,T_CREATE_DATE,T_MODIFY_DATE,T_VIEWS,T_LIKES,TKEYWORD,T_STATUS,TCODE,TTEL,TFEE,THOURS,TTRANS) values (SEQ_TNO.NEXTVAL,'ADMIN','유유자적한 서핑? 느릿한 카약? 뚝섬한강공원의 SUP 즐기기','264, Gangbyeonbuk-ro, Gwangjin-gu, Seoul, Korea','서울 광진구 강변북로 264',to_date('20/04/22','RR/MM/DD'),to_date('20/04/22','RR/MM/DD'),1,0,'TEST4','Y','T6','010-2126-8900','문의','08:00 ~ 20:00','--');
+
+INSERT INTO MEMBER VALUES(SEQ_MNO.NEXTVAL,'ADMIN','$2a$10$k9pLcB34MEqPsCYYSWSlbur7I7aeTZgH19.jPaB4gYCFm5jVl0TZy','ADMIN','M',34,'Y',NULL);
+
 COMMIT;	

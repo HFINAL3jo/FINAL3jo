@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +18,12 @@
     <br>
     <label for="tt" style="margin:10px;">Title&nbsp;&nbsp;
     <input type="text" size="40" name="tTitle" id="tt"></label>&nbsp;&nbsp;
-    <label>Writer</label>&nbsp;
-    <input type="text" name="tWriter" size="40" value="${loginUser.nickname }" style="border:none;">
+    <label>Writer&nbsp;
+    <input type="text" name="tWriter" size="40" value="${loginUser.nickname }" style="border:none;" readonly></label>
     <br><br>
-    <span style="float:left;">Theme &nbsp;<input type="search" list="tcl" name="tCode"></span>
-    <datalist id="tcl">
+    <span style="float:left;">Theme &nbsp;
+    <select id="tcl" name="tCode">
+    	<option>--</option>
     	<option value="NATURE">NATURE</option>
     	<option value="RESTAURANT">RESTAURANT</option>
     	<option value="HISTORY">HISTORY</option>
@@ -29,8 +31,23 @@
     	<option value="BAR">BAR</option>
     	<option value="ACTIVITY">ACTIVITY</option>
     	<option value="EXHIBITION">EXHIBITION</option>
-    </datalist>&nbsp;&nbsp;&nbsp;
-    Keyword &nbsp;&nbsp;<input type="text" name="tKeyword" style="margin-right:-10px;">
+    </select>&nbsp;&nbsp;&nbsp;
+    Keyword &nbsp;&nbsp;<input type="text" id="tkv" name="tKeyword" style="margin-right:-10px;" readonly></span>
+    	<c:if test="${!empty list}">	
+    		<select id="tk1">
+    			<option>--</option>
+    	  <c:forEach var="kv" begin="0" end="4" items="${list }">
+    		 	<option value="${kv }">${kv}</option>
+    	  </c:forEach>
+    		</select>
+    		<select id="tk2">
+    			<option>--</option>
+    	  <c:forEach var="kv" begin="5" end="9" items="${list }">
+    		 	<option value="${kv }">${kv}</option>
+    	  </c:forEach>
+    	  </select>
+    	</c:if>
+   	
     <br><br>  
 	<textarea name="tContent" id="smarteditor" rows="30" cols="104"></textarea>
     <br><br>
@@ -185,7 +202,10 @@ nhn.husky.EZCreator.createInIFrame({
         });
     });
 	});
-	
+	$('#tk1').change(function(){
+		alert("으앙");
+		console.log($('#tk1').val());
+	});
 </script>
 </body>
 </html>
