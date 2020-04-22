@@ -92,4 +92,14 @@ public class QnAController {
 			return "common/errorPage";
 		}
 	}
+	
+	@RequestMapping("qupView.do")
+	public ModelAndView boardUpdateView(ModelAndView mv, int qId) {
+		//mv.addObject("q",qService.selectUpdateBoard(qId)).setViewName("member/~~~~");
+		return mv;
+	
+	/*@RequestMapping("qDelete.do")
+	public String boardDelete(int qId,HttpServletRequest request) {
+		QnA q = qService.select*/
+	}
 }
