@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.aligo.spring.recom.model.dao.RecomDao;
 import com.aligo.spring.recom.model.vo.Recommend;
+import com.aligo.spring.theme.model.vo.Theme;
 
 @Service("rService")
 public class RecomServiceImple implements RecomService{
@@ -54,6 +55,12 @@ public class RecomServiceImple implements RecomService{
 	public int rUserUpdate(Object m) {
 
 		return rDao.rUserUpdate(m);
+	}
+
+	@Override
+	public ArrayList<Theme> selectList(String tCode) {
+
+		return rDao.selectList(tCode);
 	}
 	
 	
