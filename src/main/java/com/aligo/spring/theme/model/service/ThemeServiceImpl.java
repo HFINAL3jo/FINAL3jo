@@ -43,7 +43,7 @@ public class ThemeServiceImpl implements ThemeService {
 		
 		int chk = tDao.checkFile(tNum);
 		
-		if(chk != 1) {
+		if(chk == 0) {
 			String str = t.gettContent();
 			str = str.substring(str.indexOf("src")+5,str.length()-str.indexOf("src")+5);
 			str = str.substring(0,str.indexOf("\""));
