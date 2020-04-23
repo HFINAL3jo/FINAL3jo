@@ -17,6 +17,7 @@
 		<typeAlias type="com.aligo.spring.qna.model.vo.QnA" alias="QnA"/>
 		<typeAlias type="com.aligo.spring.statistics.model.vo.Statistics" alias="Statistics"/>
 		<typeAlias type="com.aligo.spring.theme.model.vo.TReply" alias="TReply"/>
+		<typeAlias type="com.aligo.spring.recom.model.vo.ThemeVo" alias="ThemeVo"/>
 	</typeAliases>
 	
 	<mappers>
