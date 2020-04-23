@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.aligo.spring.qna.model.vo.QnA;
 import com.aligo.spring.qna.model.vo.QnAPageInfo;
+import com.aligo.spring.qna.model.vo.QnaReply;
 
 @Repository("qDao")
 public class QnADao {
@@ -42,6 +43,10 @@ public class QnADao {
 
 	public int deleteBoard(int qId) {
 		return sqlSession.update("qnaMapper.deleteBoard",qId);
+	}
+
+	public ArrayList<QnaReply> selectReplyList(int qId) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectReplyList",qId);
 	}
 
 	

@@ -18,7 +18,9 @@ import com.aligo.spring.common.QnAPagination;
 import com.aligo.spring.qna.model.service.QnAService;
 import com.aligo.spring.qna.model.vo.QnA;
 import com.aligo.spring.qna.model.vo.QnAPageInfo;
+import com.aligo.spring.qna.model.vo.QnaReply;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 
 @Controller
@@ -126,5 +128,15 @@ public class QnAController {
 		}else {
 			return "common/errorPage";
 		}
+	}
+	
+	@RequestMapping("rList.do")
+	public void getReplyList(HttpServletResponse response,int qId) throws JsonIOException, IOException {
+		ArrayList<QnaReply> rList = qService.selectReplyList(qId);
+		
+		response.setContentType("application/json; charset=utf-8");
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd hh:mm a").create();
+		gson.toJson(rList,response.getWriter());
 	}
 }

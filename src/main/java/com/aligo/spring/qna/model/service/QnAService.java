@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.aligo.spring.qna.model.vo.QnA;
 import com.aligo.spring.qna.model.vo.QnAPageInfo;
+import com.aligo.spring.qna.model.vo.QnaReply;
 
 public interface QnAService {
 
@@ -52,6 +53,14 @@ public interface QnAService {
 	 * @return
 	 */
 	int deleteBoard(int qId);
+
+
+	/**
+	 * 문의글에 댓글
+	 * @param qId
+	 * @return
+	 */
+	ArrayList<QnaReply> selectReplyList(int qId);
 
 
 }
