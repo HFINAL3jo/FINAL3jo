@@ -30,6 +30,10 @@ h4{
 	text-align:center;
 }
 
+.breadcrumb{
+  	background-image:url('${contextPath}/resources/images/nightview.jpg');
+    background-size: 100% 100%;
+  }
 
 </style>
 
