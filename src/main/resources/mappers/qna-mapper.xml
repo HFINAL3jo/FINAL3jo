@@ -15,7 +15,7 @@
 	 <result property="qStatus" column="Q_STATUS" />
 	</resultMap>
 	
-	<resultMap id="replyResultSet" type="Reply">
+	<resultMap id="replyResultSet" type="QnaReply">
 		<id property="rId" column="RID"/>
 		<result property="rContent" column="RCONTENT"/>
 		<result property="refQid" column="REF_BID"/>
