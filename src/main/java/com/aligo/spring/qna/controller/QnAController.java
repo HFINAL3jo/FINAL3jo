@@ -83,8 +83,6 @@ public class QnAController {
 	@RequestMapping("qinsert.do")
 	public String writeBoard(QnA q, HttpServletRequest request) {
 		
-		
-		System.out.println(q);
 		int result = qService.writeBoard(q);
 		if(result > 0) {
 			return "redirect:contactView.do";
@@ -94,12 +92,39 @@ public class QnAController {
 	}
 	
 	@RequestMapping("qupView.do")
-	public ModelAndView boardUpdateView(ModelAndView mv, int qId) {
-		//mv.addObject("q",qService.selectUpdateBoard(qId)).setViewName("member/~~~~");
-		return mv;
+	public ModelAndView boardUpdateView(ModelAndView mv, String qId) {
+		int qId1= Integer.parseInt(qId);
+		mv.addObject("q",qService.selectUpdateBoard(qId1)).setViewName("member/qnaUpdateForm");
+		return mv;	
+	}
 	
-	/*@RequestMapping("qDelete.do")
+	/**
+	 * 나중에 다시 
+	 * @param q
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("qupdate.do")
+	public String boardUpdate(QnA q, HttpServletRequest request) {
+		int result = qService.updateBoard(q);
+		
+		if(result > 0) {
+			return "redirect:contactView.do";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	@RequestMapping("qDelete.do")
 	public String boardDelete(int qId,HttpServletRequest request) {
-		QnA q = qService.select*/
+		QnA q = qService.selectUpdateBoard(qId);
+		
+		int result = qService.deleteBoard(qId);
+		
+		if(result > 0) {
+			return "redirect:contactView.do";
+		}else {
+			return "common/errorPage";
+		}
 	}
 }

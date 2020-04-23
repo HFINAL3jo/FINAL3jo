@@ -37,4 +37,21 @@ public interface QnAService {
 	int writeBoard(QnA q);
 
 
+	/**
+	 * 문의글 수정
+	 * @param qId
+	 * @return
+	 */
+	QnA selectUpdateBoard(int qId);
+	int updateBoard(QnA q);
+
+
+	/**
+	 * 문의글 삭제
+	 * @param qId
+	 * @return
+	 */
+	int deleteBoard(int qId);
+
+
 }

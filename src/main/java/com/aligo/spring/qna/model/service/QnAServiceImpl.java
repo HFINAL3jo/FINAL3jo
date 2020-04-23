@@ -35,6 +35,21 @@ public class QnAServiceImpl implements QnAService{
 	public int writeBoard(QnA q) {
 		return qDao.writeBoard(q);
 	}
+
+	@Override
+	public QnA selectUpdateBoard(int qId) {
+		return qDao.selectBoard(qId);
+	}
+
+	@Override
+	public int updateBoard(QnA q) {
+		return qDao.updateBoard(q);
+	}
+
+	@Override
+	public int deleteBoard(int qId) {
+		return qDao.deleteBoard(qId);
+	}
 	
 	
 }

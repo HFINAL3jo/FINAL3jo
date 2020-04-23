@@ -36,5 +36,13 @@ public class QnADao {
 		return sqlSession.insert("qnaMapper.writeBoard",q);
 	}
 
+	public int updateBoard(QnA q) {
+		return sqlSession.update("qnaMapper.updateBoard",q);
+	}
+
+	public int deleteBoard(int qId) {
+		return sqlSession.update("qnaMapper.deleteBoard",qId);
+	}
+
 	
 }

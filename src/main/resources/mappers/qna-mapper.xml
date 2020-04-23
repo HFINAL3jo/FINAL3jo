@@ -37,4 +37,14 @@
 		VALUES(SEQ_QID.NEXTVAL,#{qTitle},#{qContent},#{qWriter},
 		SYSDATE,DEFAULT,DEFAULT)
 	</insert>
+	
+	<update id="updateBoard" parameterType="QnA">
+		UPDATE QNA
+		SET QTITLE=#{qTitle},QCONTENT=#{qContent}			
+		WHERE QID=#{qId}
+	</update>
+	
+	<delete id="deleteBoard">
+		DELETE FROM QNA WHERE QID=#{qId}
+	</delete>
 </mapper>
