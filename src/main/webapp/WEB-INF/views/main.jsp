@@ -24,9 +24,17 @@
 	        background-size: 100% 100%;
         }
 
-        .showcase h2, .showcase p {
+        .showcase h1, .showcase p {
 	        margin-bottom: 10px;
 	        color: white;
+        }
+        
+        .showcase h1{
+        	font-size:4em;
+        }
+        
+        #welcome_p{
+        	font-size:1.6em;
         }
 
         .showcase .btn {
@@ -156,6 +164,132 @@
             text-align: center;
         }
         /* card section css end */
+        
+        @import url('https://fonts.googleapis.com/css?family=Roboto:400,300,100');
+		@import url('https://cdnjs.cloudflare.com/ajax/libs/weather-icons/1.3.2/css/weather-icons.min.css');
+		
+		.weather_wrapper h1,
+		h2,
+		h3,
+		h4 {
+			color: white;
+			font-family: 'Roboto';
+			font-weight: 100;
+			line-height: 1.1;
+			letter-spacing: 0.025em;
+			margin: 0; padding: 0;
+		}
+		a {
+			color: white;
+			opacity: 0.54;
+			text-decoration: none;
+		}
+		a:hover,
+		.active {opacity: 1;}
+		
+		.weather_wrapper {
+			width: 480px;
+			margin: 0 auto;
+		}
+		.searchbar,
+		.button {
+			height: 45px;
+			margin: 1em 0 4em;
+			padding: 0;
+			font: 400 1rem 'Roboto';
+			letter-spacing: 0.025em;
+			text-transform: uppercase;
+			color: white;
+			border: none;
+		}
+		.searchbar {
+			float: left;
+			width: 380px;
+			border-bottom: solid thin white;
+			color: #E8E8E8;
+			color: rgba(255, 255, 255, 0.7);
+		}
+		
+		.searchbar::-webkit-input-placeholder {color: white; opacity: 0.35;}
+		.searchbar::-moz-placeholder {color: white; opacity: 0.35;}
+		.searchbar:-ms-input-placeholder {color: white; opacity: 0.35;}
+		.searchbar:-moz-placeholder {color: white; opacity: 0.35;}
+		
+		.button:focus,
+		.searchbar:focus {outline: none; color: white;}
+		.searchbar:focus::-webkit-input-placeholder {color: white; opacity: 0.7;}
+		.searchbar:focus::-moz-placeholder {color: white; opacity: 0.7;}
+		.searchbar:focus:-ms-input-placeholder {color: white; opacity: 0.7;}
+		.searchbar:focus:-moz-placeholder {color: white; opacity: 0.7;}
+		
+		.button {
+			float: right;
+			width: 100px;
+		}
+		.panel {
+			width: 100%;
+			display: inline-block;
+		}
+		.weather {
+			width: 100%;
+			margin-top: 20px;
+			display: inline-block;
+		}
+		.city {
+			text-align: left;
+			border-bottom: solid thin white;
+			text-transform: uppercase;
+			color: #E8E8E8;
+			color: rgba(255, 255, 255, 0.7);
+		}
+		.group {
+			width: 165px;
+			margin-bottom: 20px;
+			text-align: right;
+			float: right;
+			clear: both;
+		}
+		.temp {
+			font-size: 4.5em;
+			font-weight: 300;
+			line-height: 0.75;
+		}
+		.celsius,
+		.fahrenheit,
+		.divider {
+			font-size: 1.75rem;
+			vertical-align: super;
+		}
+		.divider {
+			margin: 0 0.05em;
+		}
+		.forecast {
+			display: table;
+			text-transform: uppercase;
+			width: 100%;
+		}
+		.block {
+			display: table-cell;
+			padding: 1.5em 0 0 0;
+			text-align: center;
+		}
+		.high {
+			font-weight: 300;
+			margin: 0.25em 0;
+		}
+		
+		.secondary {opacity: 0.7;}
+		.transparent {background: transparent;}
+		.hot {background: #FF5722;}
+		.warm {background: #FF6F00;}
+		.cool {background: #2196F3;}
+		.cold {background: #3F51B5;}
+		.color404 {background: #161616;}
+		.button-hot {background: #BF360C;}
+		.button-warm {background: #B34E00;}
+		.button-cool {background: #0D47A1;}
+		.button-cold {background: #1A237E;}
+		.button404 {background: black;}
   </style>
 </head>
 <body>
@@ -168,8 +302,8 @@
       <!-- Showcase -->
       <div class="showcase">
           <div id="showcas-div">
-        <h2>Welcome to SEOUL!</h2>
-        <p>
+        <h1>Welcome to SEOUL!</h1>
+        <p id="welcome_p">
 			Get inspired for your journey!
         </p>
         <!-- <a href="#" class="btn">
@@ -317,8 +451,6 @@
       <script>
       	$(function(){
       		themeList();
-      		
-      		
       	});
       	
       	function themeList(){
