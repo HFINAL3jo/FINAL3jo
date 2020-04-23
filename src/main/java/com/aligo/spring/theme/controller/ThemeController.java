@@ -258,7 +258,7 @@ public class ThemeController extends TFile{
 		         TFile.tOriginalFile = originFilename;
 		         TFile.tModifyFile = renameFilename;
 		         TFile.tCodeNumber = tService.getTNum();
-		         
+		         System.out.println(tf);
 		         int result = tService.insertImg(tf);
 		         
 		    } catch (Exception e) {

@@ -67,7 +67,12 @@ public class ThemeServiceImpl implements ThemeService {
 	@Override
 	public int insertImg(TFile tf) {
 		int cl = tDao.getTCount(tf);
-		if(cl == 0) return tDao.insertImg(tf); else return tDao.updateImg(tf);
+		if(cl == 0) {
+			return  cl = tDao.insertImg(tf);
+		}else if(cl >= 1) {
+			return cl = tDao.updateImg(tf);
+		}
+		return cl;
 	}
 
 	@Override

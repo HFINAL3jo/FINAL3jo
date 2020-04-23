@@ -51,7 +51,7 @@ h4{
 						<div class="breadcrumb_iner_item">
 							<h2>THEME</h2>
 							<p>
-								Home <span>-</span> Theme
+								Theme <span>-</span> keyword
 							</p>
 						</div>
 					</div>
