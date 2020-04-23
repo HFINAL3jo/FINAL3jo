@@ -1,14 +1,7 @@
-//var check = document.getElementById('jObj').value;
-
-// 콘솔 출력시에  "<c:out value='${jObj}' />" 로 나온다 즉 jstl이 파싱이 되지 않는다.
-//var str = "<c:out value='${jObj}' />";
 
 var showChart = function(){	
 	
-	//var chartValue = document.getElementById('chartValue').value;
-	var str = document.getElementById('jObj').value;
-	
-	//----------구글 json 자동 x---------
+	//----------구글 json---------
 	var strObject = document.getElementById('googleChart').value;
 	var strA = strObject.replace(/&#034;/g, '\"');
 	ss = JSON.parse(strA);
@@ -20,34 +13,10 @@ var showChart = function(){
 	var charStr1 = (document.getElementById('choose').value == 'T_LIKES')? 
 						'좋아요':(document.getElementById('choose').value == 'T_VIEWS')? '조회수':'검색 키워드'; 
 	var charStr2 = (chartValue2 == 'address')? '주 소':(chartValue2 == 'themaName')? '테 마':'';
-		//themaName
-	
-//	str = arguments[0];
-		
+
+	var str = document.getElementById('jObj').value;	
 	str=str.replace(/&#034;/g, '\"');
 	Data = JSON.parse(str);
-// 	// c3.js
-//	var chartDonut = c3.generate({
-//		bindto: "#chart",
-//		
-//		size: {
-//			  width: 600,
-//			  height: 480
-//		},	
-//		data: {
-//			json: [Data],
-//			keys: {
-//				value: Object.keys(Data),
-//			},
-//			type: chartValue
-//		},
-//		donut: {
-//			title: "파이의 종류",
-//		},
-//	});
-//	
-// 	// 차트 그리기 실행
-//	var chartDonutColors = chartDonut.data.colors();
 	
 	// google 차트
 	 google.charts.load("current", {packages:["corechart"]});
@@ -81,9 +50,7 @@ var showChart = function(){
     		     easing: 'out',
     		 }
     	  };
-//       if(chartValue == 'donut' || chartValue == 'bar'){
-//    	 
-//       }
+
        if(chartValue == 'donut'){
     	   options.is3D = true;
     	   
@@ -91,24 +58,23 @@ var showChart = function(){
     	   
     	   options.pieHole = 0.4;
        }
-       
+
+//	   console.log(Dd);
        if(chartValue == 'donut' || chartValue == 'pie'){
-//    	   console.log('donut 실행')
-//    	   console.log(Dd);
-//    	   var chart = new google.visualization.PieChart(document.getElementById('chart'));
-//    	   chart.draw(google.visualization.arrayToDataTable(Dd), options);
-    	   
-//    	   console.log('json 실행');
+
     	   var chart = new google.visualization.PieChart(document.getElementById('chart'));
-    	   chart.draw(new google.visualization.DataTable(ss), options);
-       }else if(chartValue == 'bar'){    	   
-//    	   console.log('bar 실행')
-//    	   var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
-//    	   chart.draw(google.visualization.arrayToDataTable(Dd), options);
+    	   chart.draw(google.visualization.arrayToDataTable(Dd), options);
     	   
-//    	   console.log('json 실행');
+//    	   console.log('Google json');
+//    	   var chart = new google.visualization.PieChart(document.getElementById('chart'));
+//    	   chart.draw(new google.visualization.DataTable(ss), options);
+       }else if(chartValue == 'bar'){    	   
     	   var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
-    	   chart.draw(new google.visualization.DataTable(ss), options);
+    	   chart.draw(google.visualization.arrayToDataTable(Dd), options);
+    	   
+//    	   console.log('Google json');
+//    	   var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+//    	   chart.draw(new google.visualization.DataTable(ss), options);
        }
      }
 }
@@ -249,59 +215,3 @@ var showChart = function(){
 //	str=str.replace(/&#034;/g, '\"');
 //	Data = JSON.parse(str);
 //	
-////	// d3.js
-//	
-//	// json 값 처리 (키/값 분류)=======================
-//	var dataSet = new Array();
-//	var labelName = new Array();
-//	for (var key in Data) {
-//		labelName.push(key)
-//		dataSet.push(Data[key]);
-//	}
-//	var max = dataSet.reduce(function(a, b) {
-//	    return Math.max(a, b);
-//	});
-//	console.log(labelName);
-//	console.log(dataSet);
-//	// ===========================================
-//	var dataMax = max;// 데이터의 최댓값
-//	
-//	 //구글차트 
-//    google.charts.load('current', {'packages':['corechart']}); 
-//    google.charts.setOnLoadCallback(drawChart);
-//    function drawChart() {
-//        var data = new google.visualization.DataTable();
-//        data.addColumn('string','지역');
-//        data.addColumn('number','수');
-//
-//        data.addRows([ 
-//        	
-//            ['피자',5],
-//            ['치킨',2],
-//            ['햄버거',3]
-//        ]);
-//        var opt = {
-//                'title':'좋아하는 음식',
-//                'width':400,
-//                'height':400,
-//                pieSliceText:'label',
-//                legend:'none' 
-//        };
-//        var chart = new google.visualization.PieChart(document.getElementById('chart'));
-//        chart.draw(data,opt);
-//    }
-
-	
-//}
-
-
-
-
-
-
-
-
-
-
-
-	
