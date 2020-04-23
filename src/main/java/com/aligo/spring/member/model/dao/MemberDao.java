@@ -29,6 +29,20 @@ public class MemberDao {
 		return  sqlSession.insert("memberMapper.authentication", m);
 
 	}
+
+	public Member loginMember(Member m) {
+		return (Member)sqlSession.selectOne("memberMapper.loginMember", m);
+	}
+
+	public int findPwdFin(Member m) {
+		return sqlSession.update("memberMapper.findPwdFin", m);
+	}
+
+	public int deleteMember(String email) {
+		return sqlSession.update("memberMapper.deleteMember",email);
+
+	}
+
 	
 	
 

@@ -12,13 +12,13 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.ibatis.javassist.expr.Instanceof;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,7 +28,11 @@ import com.aligo.spring.theme.model.vo.PageInfo;
 import com.aligo.spring.theme.model.vo.PhotoVo;
 import com.aligo.spring.theme.model.vo.SearchCondition;
 import com.aligo.spring.theme.model.vo.TFile;
+import com.aligo.spring.theme.model.vo.TReply;
 import com.aligo.spring.theme.model.vo.Theme;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 
 @Controller
 public class ThemeController extends TFile{
@@ -39,19 +43,46 @@ public class ThemeController extends TFile{
 	@Autowired
 	private ThemeService tService;
 	
+	@RequestMapping("themeInsertView.do")
+	public ModelAndView themeInsertView(ModelAndView mv) {
+		String str = tService.getKeyword();
+		String strArr[] = str.split(",");
+		ArrayList<String> list = new ArrayList<>(); 
+		for(int i=0;i<strArr.length;i++) {
+			list.add(strArr[i]);
+		}
+		mv.addObject("list",list).addObject("tKlength",strArr.length).setViewName("board/boardInsertView");
+		
+		return mv;
+	}
+	
 	@RequestMapping("theme.do")
 	public ModelAndView themeList(ModelAndView mv,
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
 			SearchCondition sc) {
 		
-		int listCount = tService.getListCount();
+		int listCount = tService.getListCount(sc);
+		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		if(sc.getKeyword() == "") sc.setKeyword(null);
+		
+		//키워드 관련 검색 횟수 증가
+		if(sc.getKeyword() == "" || sc.getKeyword() == null) {
+			sc.setKeyword(null);
+		}else {
+			int usk = tService.updateSearchKeywordCount(sc);
+		}
+		
 		ArrayList<Theme> list = tService.selectList(pi,sc);
 		
 		for(Theme t: list) {
+			if(t.gettTitle().length() > 16) {
+				t.settTitle(t.gettTitle().substring(0,15));
+			}
+			
 			if(t.gettModifyFile().length() <= 18) {
 				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
+			}else if(t.gettModifyFile().contains(",")){
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile().substring(0,t.gettModifyFile().indexOf(",")));
 			}
 		}
 		
@@ -68,7 +99,7 @@ public class ThemeController extends TFile{
 		SearchCondition sc)throws IOException {
 		
 		response.setContentType("application/json; charset=UTF-8");
-		int listCount = tService.getListCount();
+		int listCount = tService.getListCount(sc);
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage,listCount);
 		ArrayList<Theme> list = tService.selectList(pi,sc);
@@ -76,8 +107,14 @@ public class ThemeController extends TFile{
 		JSONArray jArr = new JSONArray();
 		
 		for(Theme t: list) {
+			if(t.gettTitle().length() > 16) {
+				t.settTitle(t.gettTitle().substring(0,15));
+			}
+			
 			if(t.gettModifyFile().length() <= 18) {
 				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
+			}else if(t.gettModifyFile().contains(",")){
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile().substring(0,t.gettModifyFile().indexOf(",")));
 			}else {
 				t.settModifyFile(t.gettModifyFile().replace("amp;",""));
 			}
@@ -99,7 +136,6 @@ public class ThemeController extends TFile{
 	@RequestMapping("themeInsert.do")
 	public String insertTheme(Theme t) {
 		int tNum = tService.getTNum();
-		
 		int result = tService.insertTheme(t,tNum);
 		
 		if(result >0) return "redirect:theme.do"; else return "";
@@ -109,9 +145,29 @@ public class ThemeController extends TFile{
 	public ModelAndView themeDetailView(ModelAndView mv, 
 			@RequestParam(value="tId") int bId) {
 		
+		int uc = tService.updateCount(bId);
+		if(uc == 2) System.out.println("updateCount성공"); else System.out.println("실패"); 
+		
 		Theme t = tService.selectTheme(bId);
+		ArrayList list = new ArrayList();
+		if(t.gettModifyFile().length() > 18 && t.gettModifyFile().contains(",")) {
+			String str = t.gettModifyFile();
+			String strArr[] = str.split(",");
+			
+			for(int i=0;i<strArr.length;i++) {
+				String result = strArr[i];
+				TFile ti = new TFile();
+				ti.settModifyFile(result);
+				list.add(ti);
+			}
+		}
+		
+		if(!list.isEmpty()) {
+			t.settFileList(list);
+		}
 		mv.addObject("t",t);
-		mv.setViewName("board/post");		
+		//mv.setViewName("board/post");		
+		mv.setViewName("theme/themeDetailView");		
 		return mv;
 	}
 	
@@ -210,4 +266,35 @@ public class ThemeController extends TFile{
 		    }
 		}
 		
+	@RequestMapping("addTReply.do")
+	@ResponseBody
+	public String addTReply(TReply r) {
+		String str = "";
+		System.out.println(r);
+		int result = tService.addTReply(r);
+		
+		if(result > 0) str="success"; else str="fail";
+		
+		return str;
+	}
+	
+	@RequestMapping("trList.do")
+	public void getTReplyList(HttpServletResponse response,int tId) throws JsonIOException, IOException {
+		
+		ArrayList<TReply> list = tService.slelctTReplyList(tId);
+	
+		response.setContentType("application/json; charset=UTF-8");
+	
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+	
+		gson.toJson(list,response.getWriter());
+	}
+	
+	@RequestMapping("themeModify.do")
+	public ModelAndView themeModifyView(Theme t,ModelAndView mv) {
+		mv.addObject("t",t).setViewName("board/boardModifyView");
+		
+		return mv;
+	}
+
 }

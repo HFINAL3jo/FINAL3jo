@@ -29,13 +29,16 @@ th, td {
 	text-align: center;
 }
 
-thead tr {
-	background-color: #77AAAD;
+/* thead tr {
+	background-color: #c9dff0;
 	color: #ffffff;
 }
 
 tbody tr:nth-child(2n) {
 	background-color: #D8E6E7;
+} */
+tr{
+	color : #555;
 }
 
 tbody tr:nth-child(2n+1) {
@@ -62,12 +65,15 @@ tbody tr:nth-child(2n+1) {
 	margin-left: 10px
 }
 
-.button_header {
-	width: 20%;
-	height: 110px;
-	padding: 0px;
-	margin: 5px;
-	margin-left: 5px;
+.mybtn {
+	color: #0067b8; 
+	border:1px solid #0067b8; 
+	background: white; 
+    margin-right: 10px;
+    margin-bottom: 0;
+    width: 200px;
+    height: 80px;
+    font-size: 25px; 
 }
 
 .button_body_chart_div {
@@ -76,10 +82,23 @@ tbody tr:nth-child(2n+1) {
 	height: 12%;
 }
 
+.mybtn2 {
+	color: #0067b8; 
+	border:1px solid #0067b8; 
+	background: white; 
+    margin-right: 10px;
+    margin-bottom: 1%;
+	width: 23%;
+    height: 100%;
+    font-size: 25px; 
+    float: right;
+}
+
 .button_body_chart {
 	float: right;
 	margin-left: 10px;
 }
+
 </style>
 
 <!-- 
@@ -92,9 +111,12 @@ tbody tr:nth-child(2n+1) {
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 
-<!-- 버튼 상단 이벤트 처리 -->
-<script src="resources/js/statistics.js"></script>
+<!-- d3.js -->
+<!-- <link rel="stylesheet" href="css/d3.css"> -->
+<script src="http://d3js.org/d3.v3.min.js" charset="UTF-8"></script>
 
+<!-- google chart -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp"%>
@@ -106,6 +128,7 @@ tbody tr:nth-child(2n+1) {
 
 	<input type="hidden" id="jObj" value=${jObj} ><!-- StatisticController의 차트에 쓰일 JSON 값을 가져온다. -->
 	<!-- 	<input type="hidden" id="JsonReverseList" value=${JsonReverseList} > --><!-- StatisticController의 차트에 쓰일  내림 차순 JSON 값을 가져온다. -->
+	<input type="hidden" id="googleChart" value=${googleChart} >
 
 	<input type="hidden" id="jObjArray" value=${jObjArray} >
 	<input type="hidden" id="JsonReverseArray" value=${JsonReverseArray}>
@@ -132,24 +155,13 @@ tbody tr:nth-child(2n+1) {
 
 				<div class="col-lg-10">
 					<!--  조아요 / 조회수 / 검색 키워드 별 버튼으로 구현 -->
-					<p style='font-size: 20px; padding-top: 20px;'>간단한 통계 자료</P>
+					<p style='font-size: 20px; padding-top: 20px;'>통계 자료</P>
 					<br>
-					<div class='row align-items-center latest_product_inner'
-						style='padding-top: 10px; width: 100%; margin-left: 8%; margin-bottom: 4%;'>
-						<button class='genric-btn success-border e-large button_header'
-							id='uPbtn1'>
-							<p class='showLetter'>조아요</p>
-						</button>
-						<button class='genric-btn success-border e-large button_header'
-							id='uPbtn2'>
-							<p class='showLetter'>조회수</p>
-						</button>
-						<button class='genric-btn success-border e-large button_header'
-							id='uPbtn3'>
-							<p class='showLetter'>검색 키워드</p>
-						</button>
-						<button class='genric-btn success-border e-large button_header'
-							id='uPbtn4'>Large</button>
+					<div class='row align-items-center latest_product_inner' style='padding-top: 10px; width: 100%; margin-left: 0; margin-bottom: 4%;'>
+						<button class="mybtn" id="uPbtn1">좋아요</button>	
+						<button class='mybtn' id='uPbtn2'>조회수</button>
+						<button class='mybtn' id='uPbtn3'>검색 키워드</button>
+						<button class='mybtn' id='uPbtn4'>기타 정보</button>
 					</div>
 
 					<div class="div_left">
@@ -170,7 +182,9 @@ tbody tr:nth-child(2n+1) {
 							<option value="themaName">테 마</option>
 						</datalist>
 						&nbsp;&nbsp;&nbsp;
-						<button id="ChangeChart" onclick="drawShowChart()">변 경</button>
+						<!--  onclick="drawShowChart()" -->
+						<button onclick="drawShowChart()">변 경</button>
+						<!-- <button onclick="showChart">바 차트</button> -->
 						<!-- c3.js 적용 차트 그리는 공간-->
 						<div style="align-content: left;">
 							<div id="chart"></div>
@@ -181,26 +195,20 @@ tbody tr:nth-child(2n+1) {
 						<!-- c3.js 예제 1 -->
 						<!--  <div id="linechart"></div> -->
 						<div style="height: 50px; padding-bottom: 5px;">
-							<button class="genric-btn success large button_body_chart"
-								id="btn1">Low list 10</button>
-							&nbsp;&nbsp;
-							<button class="genric-btn success large button_body_chart"
-								id="btn2">TOP list 10</button>
-							&nbsp;&nbsp;
-							<button class="genric-btn success large button_body_chart"
-								id="btn3">Average</button>
-							&nbsp;&nbsp;
+						<!-- genric-btn success large button_body_chart -->
+							<button class="mybtn2" id="btn1">Low list</button> &nbsp;&nbsp;
+							<button class="mybtn2" id="btn2">TOP list</button> &nbsp;&nbsp;
 						</div>
 						<table style="border: 1px solid;">
 							<thead>
 								<tr>
 									<th style="width: 30%">순 위</th>
-									<th>HELLO</th>
+									<th></th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody id="chartDataTable">
-								<c:set var="count" value="1" />
+								<%-- <c:set var="count" value="1" />
 								<c:forEach var="s" items="${list}">
 									<tr>
 										<td>${count}</td>
@@ -208,8 +216,7 @@ tbody tr:nth-child(2n+1) {
 										<td>${s.columnAddressNumber}</td>
 										<c:set var="count" value="${count+1}" />
 									</tr>
-								</c:forEach>
-
+								</c:forEach> --%>
 							</tbody>
 						</table>
 					</div>
@@ -222,6 +229,9 @@ tbody tr:nth-child(2n+1) {
 
 <!-- 버튼 상단 -->
 <script src="resources/js/statisticsButtonRegist.js"></script>
+<!-- 버튼 상단 이벤트 처리 -->
+<script src="resources/js/statistics.js"></script>
+
 <script>
 //var str = "<c:out value='${jObj}' />";
 /* window.onload = function(){
@@ -238,6 +248,8 @@ showChart();
 
 // 차트를 뷰에서 띄우기 위한 차트 모형 || 데이터 검색 메소드
 drawShowChart();
+showTopList(1);
+
 
 </script>
 </body>

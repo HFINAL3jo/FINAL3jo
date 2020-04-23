@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,30 +18,48 @@
     <br>
     <label for="tt" style="margin:10px;">Title&nbsp;&nbsp;
     <input type="text" size="40" name="tTitle" id="tt"></label>&nbsp;&nbsp;
-    <label>Writer</label>&nbsp;
-    <input type="text" name="tWriter" size="40" value="${loginUser.email }" style="border:none;">
+    <label>Writer&nbsp;
+    <input type="text" name="tWriter" size="40" value="${loginUser.nickname }" style="border:none;" readonly></label>
     <br><br>
-    <span style="float:left;">Theme &nbsp;<input type="search" list="tcl" name="tCode"></span>
-    <datalist id="tcl">
-    	<option value="History">History</option>
-    	<option value="Food">Food</option>
-    	<option value="Shopping">Shopping</option>
-    	<option value="Festival">Festival</option>
-    	<option value="Night View">Night View</option>
-    	<option value="Museum">Museum</option>
-    	<option value="Exotic">Exotic</option>
-    </datalist>&nbsp;&nbsp;&nbsp;
-    Keyword &nbsp;&nbsp;<input type="text" name="tKeyword" style="margin-right:-10px;">
-    <br><br>  
+    <span style="float:left;">Theme &nbsp;
+    <select id="tcl" name="tCode">
+    	<option>--</option>
+    	<option value="NATURE">NATURE</option>
+    	<option value="RESTAURANT">RESTAURANT</option>
+    	<option value="HISTORY">HISTORY</option>
+    	<option value="SHOPPING">SHOPPING</option>
+    	<option value="BAR">BAR</option>
+    	<option value="ACTIVITY">ACTIVITY</option>
+    	<option value="EXHIBITION">EXHIBITION</option>
+    </select>&nbsp;&nbsp;&nbsp;
+    Keyword &nbsp;&nbsp;<input type="text" id="tkv" name="tKeyword" style="margin-right:-10px;"></span><br><br>
+    	<c:if test="${!empty list}">
+    	<div id="selectVal" style="border:1px lightblue solid; display:inline-block; float:left; margin:10px; padding:10px; text-align:left;">
+    		<label><input type="radio" name="f1" value="${list[0]}">&nbsp;${list[0] }</label>
+    		&nbsp;&nbsp;<label><input type="radio" name="f1" value="${list[5]}">&nbsp;${list[5] }</label><br>
+    		<label><input type="radio" name="f2" value="${list[1]}">&nbsp;${list[1] }</label>
+    		&nbsp;&nbsp;<label><input type="radio" name="f2" value="${list[6]}">&nbsp;${list[6] }</label><br> 
+    		<label><input type="radio" name="f3" value="${list[2]}">&nbsp;${list[2] }</label>
+    		&nbsp;&nbsp;<label><input type="radio" name="f3" value="${list[7]}">&nbsp;${list[7] }</label><br>
+    		<label><input type="radio" name="f4" value="${list[3]}">&nbsp;${list[3] }</label>
+    		&nbsp;&nbsp;<label><input type="radio" name="f4" value="${list[8]}">&nbsp;${list[8] }</label><br>
+    		<label><input type="radio" name="f5" value="${list[4]}">&nbsp;${list[4] }</label>
+    		&nbsp;&nbsp;<label><input type="radio" name="f5" value="${list[9]}">&nbsp;${list[9] }</label><br>
+    		<input type="button" id="tkvreset" value="Reset">
+    	</div>
+    	<br>
+    	</c:if>
+   	
+    <br><br>
 	<textarea name="tContent" id="smarteditor" rows="30" cols="104"></textarea>
     <br><br>
     
     <table align="center">
     <tr>
-		<td>우편번호</td>
+		<td>ZIP CODE</td>
 		<td>
 			<input type="text" id="postcode" placeholder="우편번호" size="6">
-			<button type="button" id="ars">검색</button>
+			<button type="button" id="ars">search</button>
 		</td>
 	</tr>
 	<tr>
@@ -48,7 +67,7 @@
 		<td><input type="text" id="da" name="tAddressH" placeholder="도로명주소" class="adi"></td>
 	</tr>
 	<tr>
-		<td>영문 도로명 주소</td>
+		<td>ADDRESS</td>
 		<td><input type="text" id="ja" name="tAddress" placeholder="영문 도로명 주소" class="adi"></td>
 	</tr>
 	<tr>
@@ -56,8 +75,24 @@
 		<td><input type="text" id="ad" placeholder="영문 지번 주소" class="adi"></td>
 	</tr>
 	<tr>
-		<td>상세 주소 </td>
+		<td>상세 주소</td>
 		<td><input type="text" id="sample4_extraAddress" placeholder="참고항목"></td>
+	</tr>
+	<tr>
+		<td>Tel</td>
+		<td><input type="text" id="tel" name="tTel"></td>
+	</tr>
+	<tr>
+		<td>Fee</td>
+		<td><input type="text" id="fee" name="tFee"></td>
+	</tr>
+	<tr>
+		<td>transportation</td>
+		<td><input type="text" id="trans" name="tTrans"></td>
+	</tr>
+	<tr>
+		<td>Opening hours</td>
+		<td><input type="text" id="oh" name="tHours">
 	</tr>
 	</table>
     <button id="cancel" class="btn btn-light" type="reset">Cancle</button>
@@ -169,7 +204,35 @@ nhn.husky.EZCreator.createInIFrame({
         });
     });
 	});
-	
+	var tkv = $('#tkv');
+	var chkn = 0;
+	$('#selectVal').mouseleave(function(e){
+		tkv.val("");
+		for(var i=0;i<10;i++){
+		 var chk = $('#selectVal').children('label').children('input').eq(i);
+		 if(chkn < 5){
+			 
+		 if(chk.is(":checked") == true && chkn == 4){
+			 tkv.val(tkv.val() + chk.val());
+			 chkn++;
+		 }else if(chk.is(":checked") == true){
+			 tkv.val(tkv.val() + chk.val() + ",");
+			 chkn++;
+		 }
+		 }else{
+			 break;
+		 }
+		}
+	});
+	$('#tkvreset').click(function(){
+		chkn = 0;
+		tkv.val("");
+		for(var i=0;i<10;i++){
+		$('#selectVal').children('label').children('input').eq(i).removeAttr("checked");
+			
+		}
+		
+	});
 </script>
 </body>
 </html>

@@ -193,6 +193,17 @@ input:checked+label:after {
 										name="email_injeung" value="" placeholder="Enter your Authentication number" required>
 									<input type="text" value="${dice }" name="diceCheck" style="display: none;">
 									<button type="submit" class="btn_3">go to signUp</button>
+									
+											<%
+										request.setCharacterEncoding("UTF-8");
+										String email = request.getParameter("e_mail");
+										
+									%>
+					
+								<div class="col-md-12 form-group p_star">
+									<input type=hidden name="email" value="<%=email%>" readonly>
+									
+								</div>
 
 					 			</div>
 							</form>
@@ -418,6 +429,8 @@ input:checked+label:after {
 	<script>
 		$(function(){
 			console.log(${dice});
+			
+			//scroll 내려가기
 		});
 	</script>
 

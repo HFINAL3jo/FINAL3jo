@@ -35,5 +35,26 @@ public class MemberServiceImpl implements MemberService {
         memDao.authentication(m);
 
 	}
+
+	@Override
+	public Member loginMember(Member m) {
+		/* return memDao.loginMember(m); */
+		Member loginUser = memDao.loginMember(m);
+		
+		return loginUser;
+	}
+
+	@Override
+	public int findPwdFin(Member m) {
+		return memDao.findPwdFin(m);
+	}
+
+	@Override
+	public int deleteMember(String email) {
+		// TODO Auto-generated method stub
+		return memDao.deleteMember(email);
+	}
+
+	
 	
 }

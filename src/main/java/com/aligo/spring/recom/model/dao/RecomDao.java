@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.aligo.spring.member.model.vo.Member;
 import com.aligo.spring.recom.model.vo.Recommend;
+import com.aligo.spring.theme.model.vo.Theme;
 
 @Repository("rDao")
 public class RecomDao {
@@ -52,6 +53,11 @@ public class RecomDao {
 	public int rUserUpdate(Object m) {
 
 		return sqlSession.update("recomMapper.updateUserRecom", (Member)m);
+	}
+
+	public ArrayList<Theme> selectList(String tCode) {
+
+		return (ArrayList)sqlSession.selectList("recomMapper.selectListTheme", tCode);
 	}
 	
 	

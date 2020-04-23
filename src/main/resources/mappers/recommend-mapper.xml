@@ -14,6 +14,27 @@
 		<result property="rStatus" column="R_STATUS"/>
 	</resultMap>
 	
+	<resultMap type="Theme" id="themeResultSet">
+		<id property="tId" column="TID"/>
+		<result property="tWriter" column="TWRITER" />
+		<result property="tTitle" column="TTITLE" />
+		<result property="tContent" column="TCONTENT" />
+		<result property="tAddress" column="TADDRESS" />
+		<result property="tAddressH" column="TADDRESSH" />
+		<result property="tCreateDate" column="T_CREATE_DATE" />
+		<result property="tModifyDate" column="T_MODIFY_DATE" />
+		<result property="tViews" column="T_VIEWS" />
+		<result property="tLikes" column="T_LIKES" />
+		<result property="tKeyword" column="TKEYWORD" />
+		<result property="tStatus" column="T_STATUS" />
+		<result property="tCode" column="TCODE" />
+		<result property="tName" column="TNAME"/>
+		<result property="tTel" column="TTEL"/>
+		<result property="tFee" column="TFEE"/>
+		<result property="tHours" column="THOURS"/>
+		<result property="tTrans" column="TTRANS"/>
+	</resultMap>
+	
 	<select id="selectQA" resultMap="recomResultSet">
 		SELECT *
 		FROM RECOMMEND_Q
@@ -66,7 +87,12 @@
 		SET RECOMMEND = #{ recommend }
 		WHERE MID = #{ mid }
 	</update>
-
+	
+	<select id="selectListTheme" parameterType="string" resultMap="themeResultSet">
+		SELECT TID, TTITLE
+		FROM THEME_LIST
+		WHERE TCODE = #{ tCode } AND T_STATUS = 'Y'
+	</select>
 
 
 </mapper>

@@ -16,6 +16,19 @@
 		location.href="statistic.do?choose=T_VIEWS";
 	}	
 	
+	// 검색 키워드
+	document.getElementById('uPbtn3').onclick = function(){
+		//console.log("실행");
+		// 위의 조건 들과는 다르게 SEARCH_AREA 테이블등 에서 검색
+		location.href="statistic.do?choose=SA_COUNT";
+	}	
+	
+	// 기타 정보
+	document.getElementById('uPbtn4').onclick = function(){
+		//console.log("실행");
+		location.href="statisticSurplus.do?choose=Surplus";
+	}
+	
 	// 오름 차순으로 테이블 형성
 	document.getElementById('btn1').onclick = function(){
 		console.log("btn1 실행");
@@ -27,10 +40,10 @@
 		showTopList("2");
 	}	
 	
-	document.getElementById('btn3').onclick = function(){
-		console.log("btn3 실행");
-		showTopList("3");
-	}	
+//	document.getElementById('btn3').onclick = function(){
+//		console.log("btn3 실행");
+//		showTopList("3");
+//	}	
 	
 	//
 	function showTopList(data){
@@ -62,19 +75,14 @@
 			
 			document.getElementById('chartDataTable').innerHTML=str;
 			
-		}else if(data == "3"){
-			
-		}else{
-			
 		}
 	}
 	
 // showChart()
-function drawShowChart(){
+var drawShowChart = function(){
 	//var str = document.getElementById('jObj').value;
 	
-	document.getElementById('ChangeChart').onclick = function(){
-//		
+		
 		var check1 = document.getElementById('whatChart').value;
 		var check2 = document.getElementById('whatData').value;
 		
@@ -83,22 +91,17 @@ function drawShowChart(){
 		// 데이터 검색을 하지 않았을 시에  true
 		var ifCheck2 = (check2 == "" || check2 == null);
 		
+
 		if(ifCheck1 || ifCheck2){
 			
-			// 차트 검색을 선택한후에  데이터 검색을 ""로 놓았을시에 실행
+			// 차트 검색을 선택한후에  데이터 검색을 ""로 놓았을시에 아무것도 실행 하지 않는다.
 			if(ifCheck1 && ifCheck2){
 				
-				alert("데이터 입력이 되지 않았습니다. 다시 입력 해주세요.");
+				//alert("데이터 입력이 되지 않았습니다. 다시 입력 해주세요.");
 				return;	
 			}else if( (!ifCheck1) && ifCheck2){
-				
 				document.getElementById('chartValue').value = check1;
 				showChart();
-			}else{				
-				
-				// 일단 보류 ajax를 함수로 만들어 처리
-				alert("데이터 입력이 되지 않았습니다. 다시 입력 해주세요.");
-				return;	
 			}
 
 		}else{
@@ -136,14 +139,20 @@ function drawShowChart(){
 		    	
 		    		document.getElementById('jObj').value = JSON.stringify(Source.jObj)
 		    		document.getElementById('jObjArray').value = JSON.stringify(Source.jObjArray);
+		    		//googleChart
+		    		document.getElementById('googleChart').value = JSON.stringify(Source.googleChart);
 		    		document.getElementById('JsonReverseArray').value = JSON.stringify(Source.JsonReverseArray);
 //		    		document.getElementById('JsonReverseList').value = JSON.stringify(Source.JsonReverseList);
 		    		
-		    		console.log(document.getElementById('jObj').value);								
-		    		console.log(document.getElementById('jObjArray').value);						
-		    		console.log(document.getElementById('JsonReverseArray').value);	
+//		    		console.log(document.getElementById('jObj').value);								
+//		    		console.log(document.getElementById('jObjArray').value);						
+//		    		console.log(document.getElementById('JsonReverseArray').value);	
 //		    		console.log(document.getElementById('JsonReverseList').value);	
+		    		
 		    		document.getElementById('chartValue').value = check1
+		    		
+		    		console.log("whatData : "+ whatData);
+		    		document.getElementById('charDataShow').value = whatData;
 		    		
 		    		showChart();
 		    		showTopList("1");
@@ -154,9 +163,7 @@ function drawShowChart(){
 
 		  	}); // end $.ajax
  		
-		} // end if
-		
-	}// document.getElementById('ChangeChart').onclick			
+		} // end if	
 
 }	// end function
 	

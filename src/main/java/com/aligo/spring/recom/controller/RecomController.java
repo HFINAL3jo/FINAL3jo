@@ -3,6 +3,8 @@ package com.aligo.spring.recom.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -51,10 +53,27 @@ public class RecomController {
 		
 		System.out.println("rk2 : " + rk);
 		
+		Map<String, ArrayList<Theme>> map = new HashMap<String, ArrayList<Theme>>();
+		
+		for(int i = 1; i < 8; i++) {
+			
+			String code = "T" + i;
+			
+			Theme t = new Theme();
+			t.settCode(code);
+			// t.settKeyword(rk);
+			
+			ArrayList<Theme> list = rService.selectList(code);
+			
+			map.put(code,list);
+		}
 		
 		
-		return null;
+		
+		mv.setViewName("recommend/recomResultList");
+		return mv;
 	}
+	
 	
 	/**
 	 * 	session 로그인 유저로 keyword 저장

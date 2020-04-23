@@ -73,23 +73,14 @@ ul[class~=social-icons]>li {
 										name="password" placeholder="Password">
 								</div>
 								<div class="col-md-12 form-group">
-									<div class="creat_account d-flex align-items-center">
-										<input type="checkbox" id="f-option" name="selector">
-										<label for="f-option">Remember me</label>
-									</div>
 									<br>
-									<ul class="social-icons text-right">
-										<li><a href="#"><i class="fab fa-facebook-f">&nbsp;&nbsp;</i></a></li>
-										<li><a href="#"><i class="fab fa-twitter">&nbsp;&nbsp;</i></a></li>
-										<li><a href="#"><i class="fas fa-globe">&nbsp;&nbsp;</i></a></li>
-									</ul>
 									<button type="submit" value="submit" class="btn_3">
 										log in</button>
 										
 										
 									<input type="button" class="btn_3" id="bs" value="Sign up">
 									  
-									<a class="lost_pass" href="#">forget password?</a>
+									<a class="lost_pass" id="find" style="cursor: pointer;">forgot your password?</a>
 								</div>
 							</form>
 						</div>
@@ -113,6 +104,15 @@ ul[class~=social-icons]>li {
 		 });
 		 
 		 
+		 $('#find').click(function(){
+			 location.href="findPwd.do"
+		 });
+		 
+		 window.setTimeout(function(){
+				var offset=window.innerHeight;
+				$('html,body').stop().animate({scrollTop:'300'},600);
+				$('#email').focus();	
+				}, 200);
 	</script>
 </body>
 

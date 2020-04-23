@@ -1,11 +1,7 @@
 package com.aligo.spring;
 
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Locale;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,10 +53,11 @@ public class HomeController {
 		return "member/myReview";
 	}
 	
-	@RequestMapping("likedList.do")
+	/*@RequestMapping("likedList.do")
 	public String likedList() {
 		return "member/likedList";
 	}
+	*/
 	
 	@RequestMapping("deleteMember.do")
 	public String deleteMember() {
@@ -88,11 +85,6 @@ public class HomeController {
 		return "admin/redirectStatistics";
 	}
 	
-	@RequestMapping("themeInsertView.do")
-	public String themeInsertView() {
-		return "board/boardInsertView";
-	}
-	
 	@RequestMapping("signUp.do")
 	public String signupView() {
 		return "member/signUp";
@@ -105,6 +97,6 @@ public class HomeController {
 	
 	@RequestMapping("themeDetailView.do")
 	public String themeDetailView() {
-		return "theme/themeDetailView";
+		return "theme/themeDetailView2";
 	}
 }

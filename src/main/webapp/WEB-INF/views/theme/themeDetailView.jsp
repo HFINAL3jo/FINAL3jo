@@ -9,14 +9,9 @@
     <!-- Google Analytics -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-16476520-26"></script>
-    <link type="text/css" rel="stylesheet" href="https://101.livere.co.kr/extension_8/attachFile/attachFile.css">
-    <link type="text/css" rel="stylesheet" href="https://101.livere.co.kr/css/default_livere8_gzip.css">
-    <link type="text/css" rel="stylesheet" href="https://101.livere.co.kr/consumers/visitseoul/visitseoul.css">
-    <link type="text/css" rel="stylesheet" href="https://101.livere.co.kr/css/default_actionwidzet8_gzip.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=645218c0e569303936c79803cc2aa695&libraries=services"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=645218c0e569303936c79803cc2aa695&libraries=LIBRARY"></script>      
- 
     <style>
     .like-content {
 	    display: inline-block;
@@ -71,7 +66,7 @@
             padding: 10px 0px 20px 15px;
             font-size: 16px;
             color: #666;
-            background: url(../../../assets/images/2019/common/ico-home@2x.png) no-repeat 0px 15px;
+            /* background: url(../../../assets/images/2019/common/ico-home@2x.png) no-repeat 0px 15px; */
             background-size: 10px 12px;
             box-sizing: border-box;
         }
@@ -128,9 +123,6 @@
             height: 1px;
             background-color: #ddd;
         }
-
-    </style>
-    <style>
           .sub-contents-inner p {
               font-size: 16px;
               font-weight: 300;
@@ -296,7 +288,7 @@
               font-size: 15px;
               color: #0085e9;
               padding-right: 15px;
-              background: url(/humanframe/theme/visitseoul/assets/images/2019/web_content/0128/ico-arrow.png) no-repeat right center
+               background: url(//humanframe/theme/visitseoul/assets/images/2019/web_content/0128/ico-arrow.png) no-repeat right center
           }
           
           @media screen and (max-width: 768px) {
@@ -332,7 +324,26 @@
           .sub-contents-inner{
           	margin-top:7%;
           }
-     </style>
+          /*댓글 */
+          .reply{
+          	  width:80%;
+          	  border-collapse:collapse;
+          	  font-size:1em;
+          }
+          
+          .trd{
+			 display:inline-block; 
+			 border-radius:10px; 
+			 height:100px; 
+			 width:91%; 
+			 border:1px #a9b2c2 solid;          
+          }
+         
+          .replyList{
+          		colspan:2;
+          		width:70%;
+          }
+         </style>
      
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -342,74 +353,122 @@
             <!-- sub-detail-visual -->
             <div class="sub-contents-inner" id="container">
                 <!-- wide-inner-->
-
+				
                 <div class="loction">
-                    <span class="ar">&gt;</span> 테마
-                    <span class="ar">&gt;</span>
-                    <span>자연과 공원</span>
+                    &gt;&nbsp;<span id="th" class="ar">Theme</span> 
+                    &gt;&nbsp;<span id="tn" class="ar">${t.tName }</span> 
                 </div>
                 <!-- location  -->
 
                 <section class="infor-element">
                     <div class="text-type">
                        		공원&amp;정원</div>
-                    <h3 class="h3 textcenter">낮과 밤 모두 완벽한 이곳, 석촌호수!</h3>                    
-
+                    <h3 class="h3 textcenter">${t.tTitle }</h3>
+                    <br>                    
+					<span style="float:right;">Views : ${t.tViews }<br></span>
+					<c:if test="${loginUser eq t.tWriter || loginUser.nickname eq 'ADMIN'}">
+					<c:url var="mo" value="themeModify.do">
+						<c:param name="${t }"/>
+					</c:url>
+					<br><button id="mp" value="${mo }" style="float:right;">Modify</button>					
+					</c:if>
                     <div class="post-element">
-                        <span>제작일 : 2020.02.18 / 수정일 : 2020.02.18</span>
+                        <span>Posted : ${t.tCreateDate } / Modified : ${t.tModifyDate }</span>
                     </div>
-                    <div class="text-area">
-                        <p>도심 속에서 즐기는 여유는 특별한 감성을 가져다준다.
-                            <br>그곳이 고요한 호수의 산책이라면 더 훌륭하다.
-                            <br>
-                            <br><strong>바쁜 여행 일정 속에 몸과 마음에도 가끔은 휴식이 필요하다.<br>지친 일상을 달래줄 석촌호수의 산책로에서 여유를 즐겨 보는 건 어떨까.</strong></p>
-                        <p>&nbsp;</p>
-                        <p style="text-align:center;padding-bottom:15px"><img class="main-img" src="/spring/resources/images/gyungbok_palace.jpg" alt="낮과 밤 모두 완벽한 이곳, 석촌호수!"></p>
-                        <p>&nbsp;</p>
-                        <h3>석촌호수</h3>
-                        <p>&nbsp;</p>
-                        <p>석촌호수는 송파대로가 호수를 가로질러 가게 되면서 기다란 8자 모양을 하고 있다.
-                            <br>잠실역과 롯데월드타워가 바로 연결되어 있어 접근성도 용이하다.
-                            <br>호수를 따라 걷다 보면 알록달록한 벽화들, 전시공간, 조각품 등 다양하게 꾸며져 있어 산책로가 지루하지 않다.</p>
-                        <p>&nbsp;</p>
-                        <h4># 석촌호수 즐기기</h4>
-                        <p><strong>1. 산책로 걷기</strong>
-                            <br>
-                            <br>잘 가꿔진 도심 속 쉼터라는 타이틀이 아깝지 않을 매력을 가지고 있는 석촌호수다.
-                            <br>낮에는 낮의 매력을 밤에는 밤의 아름다움을 뽐내고 시즌 별로 열리는 축제도 기다리게 된다.
-                            <br>그중에서도 석촌호수의 야경은 아름다운 서울을 눈에 담을 수 있는 매력적인 코스로 통한다.
-                            <br>
-                            <br>서호와 동호가 합쳐진 석촌호수는 약 2.5km 되며, 천천히 걸으면 한 시간이 조금 넘게 걸린다.
-                            <br>동호 방향에는 롯데월드타워, 롯데월드몰이 있으며, 서호 방향에는 롯데월드가 위치해 있다.
-                            <br>걷다 보면 롯데월드의 동화 같은 성을 만나기도 하고, 액티브한 놀이기구를 타는 사람들의 즐거운 비명소리를 듣기도 한다.</p>
-                        <p>&nbsp;</p>
-                        <p>&nbsp;</p><img class="main-img" src="/spring/resources/images/gyungbok_palace.jpg" alt="석촌호수">
-                        <p>&nbsp;</p>
-                        <p>누구에게나 열려있는 ‘공유 피아노’를 만나게 되면 그냥 지나칠 수가 없다.
-                            <br>운이 좋으면 근사한 음악 연주를 들을 수 있고, 직접 연주해 볼 수도 있어 한 번씩 머물다 가는 곳이다.</p>
-                        <p>&nbsp;</p><img class="main-img" src="/spring/resources/images/gyungbok_palace.jpg" alt="석촌호수">
-                        <p>&nbsp;</p>
-                        <p>&nbsp;</p>
+                    <div class="text-area" style="text-align:center;">
+                        ${t.tContent }
+                        <br><br>
                         <div class="cnt-blockquote">
-                            <dl><dt>주소</dt>
-                                <dd>서울특별시 송파구 잠실동 47</dd>
+                            <dl><dt>Address</dt>
+                                <dd>${t.tAddress }</dd>
                             </dl>
-                            <dl><dt>지하철</dt>
-                                <dd>2호선 잠실역 3번 출구</dd>
+                            <dl><dt>Transportation</dt>
+                                <dd>${t.tTrans }</dd>
                             </dl>
-                            <dl><dt>입장료</dt>
-                                <dd>무료</dd>
+                            <dl><dt>Fee</dt>
+                                <c:if test="${!empty t.tFee  }">${t.tFee }<dd></dd></c:if>
+                                <c:if test="${empty t.tFee  }">Free<dd></dd></c:if>
                             </dl>
-                            <dl><dt>전화번호</dt>
-                                <dd>02-412-0190</dd>
+                            <dl><dt>Tel</dt>
+                                <dd>${t.tTel }</dd>
                             </dl>
-                            <dl><dt>이용시간</dt>
-                                <dd>매일 00:00 ~ 24:00</dd>
+                            <dl><dt>Opening Hours</dt>
+                                <dd>${t.tHours }</dd>
                             </dl>
                         </div>
                         <p>&nbsp;</p>
                         <div id="map" style="width:100%;height:400px;"></div>
-               <script>
+               					<br>
+					<div class="like-content" align="center">
+						<span>
+    					Did you like this review? Press like to make it easier for others to see!
+  						</span>
+  
+  						<button class="btn-secondary like-review" id="likeBtn" name="likeBtn" value="0" onclick="return like()">
+    					<i class="fa fa-heart" aria-hidden="true"></i> Like ${t.tLikes}
+  						</button>
+					</div>
+					<br><br><br>
+					<div>
+						<table class="reply" id="trt" align="center">
+								<tr>
+									<td>Reply</td>
+									<c:if test="${empty loginUser }">
+									<td colspan="2" width="95%"><a href="loginView.do" id="lof"><textarea name="trContent" id="tr" align="center" rows="5" cols="95" style="resize: none;" placeholder="If you want leave a message..Please login First" readonly="readonly"></textarea></a></td>
+									</c:if>
+									<c:if test="${!empty loginUser }">
+									<td colspan="2" width="95%"><textarea name="trContent" id="trc" align="center" rows="5" cols="95" style="resize: none;" placeholder=""></textarea></td>
+									</c:if>
+								</tr>
+						</table>
+						<c:if test="${!empty loginUser}">
+						<button id="rSubmit" style="float:right; margin-right:136px; border-radius:10px;">Add a Comment</button>
+						</c:if>
+						<br><br>
+						<table class="reply" id="trtl" align="center">
+							<tbody>
+								<tr>
+								 	
+								</tr>							
+							</tbody>
+						</table>
+					</div>
+                        <br><br><br>
+                        <h3 class="black"># ${t.tKeyword}</h3>
+                        <br><br>
+                        <ul class="cols4-element">
+                            <li>
+                                <a href="http://me2.do/xDAyqdMi" title="서울야경 스릴 있게 즐기기!"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27505&amp;fileTy=MEDIA&amp;fileNo=1" alt="서울야경 스릴 있게 즐기기!"><span class="cont"><span class="title">서울야경 스릴 있게 즐기기!</span><span class="content">                    국내 최고 높이의 롯데타워 전망대에서                    아찔한 인증샷을 남겨보자.</span></span><span class="link"><span>랜드마크 서울스카이</span></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://me2.do/5e04rj8z" title="비가와도 걱정 없는 이곳!"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27506&amp;fileTy=MEDIA&amp;fileNo=1" alt="비가와도 걱정 없는 이곳!"><span class="cont"><span class="title">비가와도 걱정 없는 이곳!</span><span class="content">아이들과의 여행에서 비가 온다면?걱정 없이 즐길 수 있는 잠실 여행코스.</span></span><span class="link"><span>하루 종일 놀 수 있는 실내코스 </span></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://me2.do/GcbukJyo" title="  낮과밤 모두 완벽한 석촌호수"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27507&amp;fileTy=MEDIA&amp;fileNo=1" alt="  낮과밤 모두 완벽한 석촌호수"><span class="cont"><span class="title">                    낮과밤 모두 완벽한 석촌호수</span><span class="content">                    도심 속에서 즐기는 특별한 여유!                    고요한 호수 산책과                    여유를 즐겨보는 코스.</span></span><span class="link"><span>                    석촌호수 힐링여행</span></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://me2.do/GXmjSWe1" title="자동차 극장은 처음이지?"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27508&amp;fileTy=MEDIA&amp;fileNo=1" alt="자동차 극장은 처음이지?"><span class="cont"><span class="title">자동차 극장은 처음이지?</span><span class="content">                    색다른 경험과 즐거움이 가득한                    자동차 극장 백배 즐기는 방법.</span></span><span class="link"><span>잠실 자동차 극장</span></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+					
+                </section>
+                <section class="tag-element detail">
+                    <span class="title">태그</span>
+                    <p>
+                        <a href="/search?search_radio=T&amp;lang=ko&amp;searchTerm=낮과-밤-모두-완벽한-이곳-석촌호수">#${t.tKeyword }</a>
+                    </p>
+                </section>
+               
+            </div>
+            <div class="heart heart-unliked"></div>
+            <%@ include file="../common/footer.jsp" %>
+            
+            <script>
 				var mapContainer = document.getElementById('map');
 				var mapOption = {
 				    center: new daum.maps.LatLng(37.566826, 126.9786567),
@@ -424,7 +483,7 @@
 				
 				// 주소-좌표 변환 객체 생성
 				var geocoder = new daum.maps.services.Geocoder();
-				var adrs = '서울특별시 송파구 잠실동 47'
+				var adrs = '${t.tAddress}';
 				
 				// 주소로 좌표를 검색합니다
 				geocoder.addressSearch(adrs , function(result, status) {
@@ -451,112 +510,9 @@
 				    } 
 				});
 				
-				/* var listData = [
-					{	content :'디뮤지엄',
-						address :'서울특별시 용산구 한남동 독서당로29길 5-6'},
-					{	content :'로우앤슬로우',
-						address :'서울특별시 용산구 이태원1동 보광로 126'},
-					{	content :'국립중앙박물관',
-						address :'서울특별시 용산구 서빙고동 서빙고로 137'},
-					{	content :'Fountain',
-						address :'서울특별시 용산구 이태원동 116-6'}    
-				];
 				
-				listData.forEach(function(addr, index) {
-				    geocoder.addressSearch(addr, function(result, status) {
-				        if (status === daum.maps.services.Status.OK) {
-				            var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 				
-				            var marker = new daum.maps.Marker({
-				                map: map,
-				                position: coords
-				            });
-				            var infowindow = new daum.maps.InfoWindow({
-				                content: '<div style="width:150px;text-align:center;padding:6px 0;">' + listData[index] + '</div>',
-				                disableAutoPan: true
-				            });
-				            //infowindow.open(map, marker);
-				        }
-				        kakao.maps.event.addListener(marker, 'click', function() {
-				            // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-				            infowindow.setContent('<div style="width:150px;text-align:center;padding:6px 0;">' + listData[index] + '</div>');
-				            infowindow.open(map, marker);
-				        });
-				    });
-				}); */
-				</script>
-					<br>
-					<div class="like-content" align="center">
-						<span>
-    					Did you like this review? Press like to make it easier for others to see
-  						</span>
-  
-  						<button class="btn-secondary like-review" id="likeBtn" name="likeBtn" value="0">
-    					<i class="fa fa-heart" aria-hidden="true"></i> Like
-  						</button>
-					</div>
-					<script type="text/javascript">
-				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
-				    $(function(){
-						$(document).on('click', '.like-review', function(e) {
-							if( $('#likeBtn').val() == 0 ){
-								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this');
-								$(this).children('.fa-heart').addClass('animate-like');
-								$(this).val(1);
-								
-							}else{
-								console.log();
-								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> Like');
-								$(this).children('.fa-heart').addClass('animate-like');
-								$(this).val(0);
-							}
-						});
-						/*
-							자바스크립트로 조아요 버튼 값을 받아서 밸류 체크후 클릭
-							해보쟈~~~~
-						*/
-						
-					});
-				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
-					</script>
-                        <p>&nbsp;</p>
-                        <p>&nbsp;</p>
-                        <p>&nbsp;</p>
-                        <h3 class="black"># 엔도르핀이 팍팍, 잠실</h3>
-                        <p>&nbsp;</p>
-                        <ul class="cols4-element">
-                            <li>
-                                <a href="http://me2.do/xDAyqdMi" title="서울야경 스릴 있게 즐기기!"><img src="/comm/getImage?srvcId=MEDIA&amp;parentSn=27505&amp;fileTy=MEDIA&amp;fileNo=1" alt="서울야경 스릴 있게 즐기기!"><span class="cont"><span class="title">서울야경 스릴 있게 즐기기!</span><span class="content">                    국내 최고 높이의 롯데타워 전망대에서                    아찔한 인증샷을 남겨보자.</span></span><span class="link"><span>랜드마크 서울스카이</span></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://me2.do/5e04rj8z" title="비가와도 걱정 없는 이곳!"><img src="/comm/getImage?srvcId=MEDIA&amp;parentSn=27506&amp;fileTy=MEDIA&amp;fileNo=1" alt="비가와도 걱정 없는 이곳!"><span class="cont"><span class="title">비가와도 걱정 없는 이곳!</span><span class="content">아이들과의 여행에서 비가 온다면?걱정 없이 즐길 수 있는 잠실 여행코스.</span></span><span class="link"><span>하루 종일 놀 수 있는 실내코스 </span></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://me2.do/GcbukJyo" title="  낮과밤 모두 완벽한 석촌호수"><img src="/comm/getImage?srvcId=MEDIA&amp;parentSn=27507&amp;fileTy=MEDIA&amp;fileNo=1" alt="  낮과밤 모두 완벽한 석촌호수"><span class="cont"><span class="title">                    낮과밤 모두 완벽한 석촌호수</span><span class="content">                    도심 속에서 즐기는 특별한 여유!                    고요한 호수 산책과                    여유를 즐겨보는 코스.</span></span><span class="link"><span>                    석촌호수 힐링여행</span></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://me2.do/GXmjSWe1" title="자동차 극장은 처음이지?"><img src="/comm/getImage?srvcId=MEDIA&amp;parentSn=27508&amp;fileTy=MEDIA&amp;fileNo=1" alt="자동차 극장은 처음이지?"><span class="cont"><span class="title">자동차 극장은 처음이지?</span><span class="content">                    색다른 경험과 즐거움이 가득한                    자동차 극장 백배 즐기는 방법.</span></span><span class="link"><span>잠실 자동차 극장</span></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </section>
-                <section class="tag-element detail">
-                    <span class="title">태그</span>
-                    <p>
-                        <a href="/search?search_radio=T&amp;lang=ko&amp;searchTerm=낮과-밤-모두-완벽한-이곳-석촌호수">#낮과-밤-모두-완벽한-이곳-석촌호수</a>
-                    </p>
-                </section>
-                <!-- livere -->
-                <div class="livere-wrap">
-                    <!-- livere8 -->
-                    <script type="text/javascript" src="/humanframe/theme/visitseoul/assets/script/livere8_lib.js" charset="utf-8"></script>
-                    <div id="livereContainer" style="padding-top:30px;" class="livereReply_useMouseOver">
-                        <script type="text/javascript">
+				//--------------------------------
                             //		jQuery.noConflict();
                             var locale = 'ko';
                             var current_url_ = 'http://korean.visitseoul.net/nature/낮과-밤-모두-완벽한-이곳-석촌호수_/33228';
@@ -568,24 +524,18 @@
                             			current_url_=current_url_+"&WT.ac=MainBanner1-1";
                             		} */
 
-                            var livere_seq = "";
                             var consumer_seq = "744";
                             var smartlogin_seq = "";
 
                             if (locale == 'ko') {
-                                livere_seq = "18866";
                                 smartlogin_seq = "879";
                             } else if (locale == 'en') {
-                                livere_seq = "18867";
                                 smartlogin_seq = "879";
                             } else if (locale == 'ja') {
-                                livere_seq = "18869";
                                 smartlogin_seq = "880";
                             } else if (locale == 'zh-CN') {
-                                livere_seq = "18868";
                                 smartlogin_seq = "881";
                             } else {
-                                livere_seq = "24906";
                                 smartlogin_seq = "881";
                             }
 
@@ -595,84 +545,159 @@
 
                             refer = refer.replace("http://", "");
 
-                            livereReply = new Livere(livere_seq, refer, title);
-                            livereReply.site = current_url;
-                            livereReply.description = current_url;
-                            livereLib.start();
-                   
-                        </script>
-                        <script>
                         $(function() {
                         	  $(".heart").on("click", function() {
                         	    $(this).toggleClass("is-active");
                         	  });
                         	});
-                        </script>
-                        <div id="liverePlugIn">
-                            <h3 class="livereNone">소셜댓글 라이브리 영역. SNS 계정으로 로그인해 댓글을 작성하고 SNS로 전송할 수 있습니다</h3>
-                            <div id="livereWriteForm">
-                                <div id="livereWriteFormTop"> <span id="livereSNSLoginTitle">소셜로그인</span>
-                                    <div id="livereSNSLoginIconContainer">
-                                        <ul id="livereLogged" class="livereNone"></ul>
-                                        <ul id="livereNotLogged">
-                                            <li id="livere_facebook">
-                                                <button type="button" class="livereSNSLoginIcon livereClick livereBtn1" clicktype="snsLoginBtn" rel="tooltip"> <span class="livereSNSImage_B livere_t_indent">Facebook 로그인 페이지 새창이 열립니다</span> </button>
-                                            </li>
-                                            <li id="livere_twitter">
-                                                <button type="button" class="livereSNSLoginIcon livereClick livereBtn1" clicktype="snsLoginBtn" rel="tooltip"> <span class="livereSNSImage_B livere_t_indent">Twitter 로그인 페이지 새창이 열립니다</span> </button>
-                                            </li>
-                                            <li id="livere_google_plus">
-                                                <button type="button" class="livereSNSLoginIcon livereClick livereBtn1" clicktype="snsLoginBtn" rel="tooltip"> <span class="livereSNSImage_B livere_t_indent">GooglePlus 로그인 페이지 새창이 열립니다</span> </button>
-                                            </li>
-                                            <li id="livere_linkedIn">
-                                                <button type="button" class="livereSNSLoginIcon livereClick livereBtn1" clicktype="snsLoginBtn" rel="tooltip"> <span class="livereSNSImage_B livere_t_indent">LinkedIn 로그인 페이지 새창이 열립니다</span> </button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div id="livereWriteFormMiddle">
-                                    <div id="livereWriteFromMiddleLeft">
-                                        <ul id="liverePrimaryStatus">
-                                            <li> <span id="liverePrimaryThumb" class="notLoggedThumb">							<img src="https://101.livere.co.kr/images/_.gif" alt="로그인 전 프로필 이미지">						</span> </li>
-                                        </ul>
-                                    </div>
-                                    <div id="livereWriteFormMiddleRightContainer">
-                                        <label for="livere_contentText" class="livereNone">댓글입력하는영역</label>
-                                        <ul id="livereWriteFormMiddleRight" class="livereWriteFormWrapper">
-                                            <li class="livereAccInfoWrapper">
-                                                <p id="livereAccInfo" class="livereAccInfo">소셜계정으로 작성하세요</p>
-                                            </li>
-                                            <li id="livereWriteParamsForm" class="livereContentTextForm">
-                                                <input id="livere_short_url" name="livere_short_url" type="hidden">
-                                                <input id="livere_name" name="livere_name" type="hidden">
-                                                <input id="livere_parent_seq" name="livere_parent_seq" type="hidden">
-                                                <textarea tabindex="0" id="livere_contentText" class="livere_contentText" name="livere_content" targetname="livereParentStrCount" title="댓글입력하는영역" aria-label="댓글입력하는영역" disabled="disabled">로그인 후 작성 가능합니다</textarea>
-                                            </li>
-                                            <li id="livereWriteFormFunction" class="livereFunctionContainer">
-                                                <ul id="livereFunctionWrapper" class="livereFunctionWrapper">
-                                                    <li id="livereAttachOpenBtnsWrapper">
-                                                        <button type="button" id="livereImageAttachOpenBtn" class="livereAttachOpenBtns livereBtn3 livere_t_indent" rel="tooltip"><span>사진첨부창 열기</span></button>
-                                                        <button type="button" id="livereVideoAttachOpenBtn" class="livereAttachOpenBtns livereBtn3 livere_t_indent" rel="tooltip"><span>비디오첨부창 열기</span></button>
-                                                    </li>
-                                                    <li class="livereTextCountWrapper"> <strong id="livereParentStrCount">0</strong>/<span id="livereStrMaxCount">250</span> </li>
-                                                </ul>
-                                            </li>
-                                            <li id="livereWriteFormMiddleBottom">
-                                                <button type="button" id="livereWriteBtn" class="livereWriteBtn livereBtn2"><span class="livereFont5">보내기</span></button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div id="livereHome"><span id="livereHomeBtn"><a href="http://www.livere.com" title="라이브리 홈페이지 - 새 창이 열립니다" aria-label="라이브리 홈페이지 - 새 창이 열립니다" target="_blank">Powered by <strong class="livereColor1">Live</strong><strong class="livereColor2">Re</strong></a></span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- //livere8-->
-                </div>
-                <!--// livere -->
-            </div>
-            <div class="heart heart-unliked"></div>
-            <%@ include file="../common/footer.jsp" %>
+				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
+				    $(function(){
+						$(document).on('click', '.like-review', function(e) {
+							if( $('#likeBtn').val() == 0 ){
+								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this '+${t.tLikes});
+								$(this).children('.fa-heart').addClass('animate-like');
+								$(this).val(1);
+								
+							}else{
+								console.log();
+								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> Like '+${t.tLikes});
+								$(this).children('.fa-heart').addClass('animate-like');
+								$(this).val(0);
+							}
+						});
+						
+						
+					});
+				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
+				    function like() {
+						/* $.ajax({
+							url:  ,
+							type:  ,
+							dataType:"json"
+							data:
+						}); */
+					}
+				    
+				    
+				    
+				    
+				    //theme > themename 링크
+				    $('.loction span').mouseenter(function(){
+				    	$(this).css('cursor','pointer');
+				    }).click(function(e){
+				    	if(e.target.innerText == "Theme"){
+				    		location.href="theme.do";
+				    	}else{
+				    		location.href="theme.do?keyword="+e.target.innerText;
+				    	}
+				    });
+				   
+				    
+				    
+				    
+				    
+				    //댓글 submit
+				    $('#rSubmit').click(function(){
+				    	var trWriter = '${loginUser.nickname}';
+				    	var trContent = $('#trc').val();
+				    	var refTid = ${t.tId};
+				    	
+				    	$.ajax({
+				    		url:"addTReply.do",
+				    		data:{trWriter:trWriter,trContent:trContent,refTid:refTid},
+				    		type:"post",
+				    		success:function(data){	
+				    			if(data=="success"){
+				    				getTReplyList();
+				    			}
+				    		},error:function(){
+				    			console.log("댓글전송실패");
+				    		}
+				    	});
+				    });
+				    
+				    $(function(){
+				    	
+				    	getTReplyList();
+				    	
+				    	setInterval(function(){
+				    		getTReplyList();
+						}, 30000);
+				    	
+				    	function getTReplyList(){
+				    		$tableBody = $('#trtl tbody');
+				    		$tableBody.html("");
+				    		
+				    		var $tr; 
+				    		var $trWriter; 
+				    		var $td;
+				    		var $trContent;
+				    		var $trCreatedate;
+				    		var $input;
+				    		
+				    		var tId = ${t.tId};
+				    		$.ajax({
+				    			url:"trList.do",
+				    			data:{tId:tId},
+				    			dataType:"json",
+				    			success:function(data){
+				    				
+				    				if(data.length > 0){
+				    				
+				    				for(var i in data){
+				    				
+					    				if(data[i].trWriter == '${loginUser.nickname}'){
+					    					
+					    				$tr = $('<tr>');
+					    				$trWriter = $('<td>').text(data[i].trWriter);
+					    				$td = $('<td>').addClass('replyList');
+					    				$trContent = $('<div align="center">').addClass('trd').text(data[i].trContent);
+					    				$trCreateDate = $('<td>').text(data[i].trCreateDate);
+					    				var $br = $('<br>');
+					    				$input = $('<input type="button" value="Delete">').css('font-size','0.8em')
+					    				.attr('onclick','window.confirm("Are you sure?");');
+					    				
+					    				$tr.append($trWriter);
+					    				$tr.append($td);
+					    				$td.append($trContent);
+					    				$tr.append($trCreateDate);
+					    				$trCreateDate.append($br);
+					    				$trCreateDate.append($input);
+					    				
+					    				$tableBody.append($tr);
+				    					}else{
+				    						$tr = $('<tr>');
+						    				$trWriter = $('<td>').text(data[i].trWriter);
+						    				$td = $('<td>').addClass('replyList');
+						    				$trContent = $('<div align="center">').addClass('trd').text(data[i].trContent);
+						    				$trCreateDate = $('<td colspan="10">').text(data[i].trCreateDate);
+						    				
+						    				$tr.append($trWriter);
+						    				$tr.append($td);
+						    				$td.append($trContent);
+						    				$tr.append($trCreateDate);
+						    				
+						    				$tableBody.append($tr);
+				    					}	
+				    				}
+				    				
+				    				}else{
+				    					$tr = $('<tr>');
+				    					$td = $('<td>').addClass('replayList');
+				    					$trContent = $('<div align="center">').addClass('trd').text('Leave First Reply Our Journey');
+				    					
+				    					$tr.append($td);
+				    					$td.append($trContent);
+				    					$tableBody.append($tr);
+				    				}
+				    			},error:function(){
+				    				console.log("전송실패");
+				    			}
+				    		});
+				    	}
+				    });
+				    
+					</script>
 </body>
 
 </html>

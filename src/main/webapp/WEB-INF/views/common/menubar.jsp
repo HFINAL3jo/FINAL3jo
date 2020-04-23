@@ -229,14 +229,14 @@
                                         role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Theme
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="theme.do">Nature Theme</a>
-                                        <a class="dropdown-item" href="theme.do">Restaurant Theme</a>
-                                        <a class="dropdown-item" href="theme.do">History Theme</a>
-                                        <a class="dropdown-item" href="theme.do">Shopping Theme</a>
-                                        <a class="dropdown-item" href="theme.do">Bar Theme</a>
-                                        <a class="dropdown-item" href="theme.do">Activity Theme</a>
-                                        <a class="dropdown-item" href="theme.do">Exhibition Theme</a>
+                                    <div class="dropdown-menu" id="theme" aria-labelledby="navbarDropdown_1">
+                                        <a class="dropdown-item" href="theme.do?keyword=Nature">Nature Theme</a>
+                                        <a class="dropdown-item" href="theme.do?keyword=Restaurant">Restaurant Theme</a>
+                                        <a class="dropdown-item" href="theme.do?keyword=History">History Theme</a>
+                                        <a class="dropdown-item" href="theme.do?keyword=Shopping">Shopping Theme</a>
+                                        <a class="dropdown-item" href="theme.do?keyword=Bar">Bar Theme</a>
+                                        <a class="dropdown-item" href="theme.do?keyword=Activity">Activity Theme</a>
+                                        <a class="dropdown-item" href="theme.do?keyword=Exhibition">Exhibition Theme</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
@@ -260,7 +260,8 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
                                         <a class="dropdown-item" href="themeInsertView.do">Test1</a>
-                                        <a class="dropdown-item" href="blogdetail.do">Test2</a>
+                                        <a class="dropdown-item" href="likedList.do">Test2</a>
+                                        <a class="dropdown-item" href="rResultList.do">레코멘드결과뷰</a>
                                     </div>
                                 </li>
                             </ul>
@@ -296,7 +297,7 @@
 								data-balloon="Likes" data-balloon-pos="down-right"> <i
 									class="far fa-heart" style="margin-left: 0px;"></i>
 							</span>
-							</a> <a href=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+							</a> <a href="logout.do"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
 								data-balloon="Sign Out" data-balloon-pos="down-right"> <i
 									class="fas fa-sign-out-alt" style="margin-left: 0px;"></i>
 							</span>
@@ -543,7 +544,7 @@
     <script src="resources/js/masonry.pkgd.js"></script>
     <!-- particles js -->
     <script src="resources/js/owl.carousel.min.js"></script>
-    <script src="resources/js/jquery.nice-select.min.js"></script>
+    <!-- <script src="resources/js/jquery.nice-select.min.js"></script> -->
     <!-- slick js -->
     <script src="resources/js/slick.min.js"></script>
     <script src="resources/js/jquery.counterup.min.js"></script>
@@ -557,10 +558,14 @@
     <script src="resources/js/custom.js"></script>
 
 	<script>
+	//datalist 추가 예정
 		$('#search_input').on('click keyup',function(){
 			ajax({
 				
 			});
+		});
+		$('#navbarDropdown_1').click(function(){
+			location.href="theme.do?keyword=";
 		});
 	</script>
 </body>

@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<span style="text-align: center;"><h2 id="titlebar" style="margin-left:15%;">
+	<span style="text-align: center;"><h2 id="titlebar" style="margin-left:8%;">
 		Your Interest</h2></span>
         <div class="container">
             <div class="row">
@@ -34,6 +34,9 @@
                                     </div>
                                 </div>
                              <button type="button" id="svf" class="btn btn-outline-primary" style="width:100%;">Reset Findings</button>
+                             <br><br>
+                             <c:if test="${!empty loginUser }">
+                             <button id="wb" type="button" class="btn btn-outline-danger" style="width:200px; height:50px;">Write Post</button></c:if>
                             </div>
                         </aside>
 
@@ -52,51 +55,51 @@
                                 <ul class="list">
                                     <h5>By Place</h5><br>
                                     <li>
-                                        <label>History</label>
+                                        <label>Restaurant</label>
                                         <div class="confirm-radio">
-                                            <input type="checkbox" id="ha">
-                                            <label for="ha"></label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <h6>Food</h6>
-                                        <div class="confirm-radio">
-                                            <input type="checkbox" id="ha2">
+                                            <input type="checkbox" id="ha2" checked="checked">
                                             <label for="ha2"></label>
                                         </div>
                                     </li>
                                     <li>
-                                        <h6>Shopping</h6>
+                                        <label>Bar</label>
                                         <div class="confirm-radio">
-                                            <input type="checkbox" id="ha3">
+                                            <input type="checkbox" id="ha4" checked="checked">
+                                            <label for="ha4"></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <label>Nature</label>
+                                        <div class="confirm-radio">
+                                            <input type="checkbox" id="ha" checked="checked">
+                                            <label for="ha"></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <label>History</label>
+                                        <div class="confirm-radio">
+                                            <input type="checkbox" id="ha3" checked="checked">
                                             <label for="ha3"></label>
                                         </div>
                                     </li>
                                     <li>
-                                        <h6>Festival</h6>
+                                        <label>Shopping</label>
                                         <div class="confirm-radio">
-                                            <input type="checkbox" id="ha4">
+                                            <input type="checkbox" id="ha4" checked="checked">
                                             <label for="ha4"></label>
                                         </div>
                                     </li>
                                     <li>
-                                        <h6>Night View</h6>
+                                        <label>Activity</label>
                                         <div class="confirm-radio">
-                                            <input type="checkbox" id="ha4">
+                                            <input type="checkbox" id="ha4" checked="checked">
                                             <label for="ha4"></label>
                                         </div>
                                     </li>
                                     <li>
-                                        <h6>Museum</h6>
+                                        <label>Exhibition</label>
                                         <div class="confirm-radio">
-                                            <input type="checkbox" id="ha4">
-                                            <label for="ha4"></label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <h6>Exotic</h6>
-                                        <div class="confirm-radio">
-                                            <input type="checkbox" id="ha4">
+                                            <input type="checkbox" id="ha4" checked="checked">
                                             <label for="ha4"></label>
                                         </div>
                                     </li>
@@ -151,5 +154,10 @@
                         </aside> -->
                     </div>
                 </div>
+  <script>
+  	$('#wb').click(function(){
+  		location.href="themeInsertView.do";
+  	});
+  </script>
 </body>
 </html>

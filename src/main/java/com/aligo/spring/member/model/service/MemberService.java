@@ -25,4 +25,21 @@ public interface MemberService {
 	 */
 	public void authentication(Member m);
 
+	/**암호화 후 로그인
+	 * @param m
+	 * @return
+	 */
+	Member loginMember(Member m);
+
+	/** 비번찾기
+	 * @param m
+	 * @return
+	 */
+	int findPwdFin(Member m);
+
+	int deleteMember(String email);
+
+
+
+	
 }

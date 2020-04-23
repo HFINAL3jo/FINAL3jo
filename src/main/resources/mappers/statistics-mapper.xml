@@ -7,22 +7,21 @@
 	<resultMap type="Statistics" id="themeStatisticsResult">
 		 
 		 <result property="number" column="TCODE" />
-		 <result property="columnAddressName" column="TADDRESS" />
+		 <result property="columnAddressName" column="TADDRESSH" />
 		 <result property="columnAddressNumber" column="ColumnAddressNumber" />
 		 <result property="columnTnameName" column="TNAME" />
 		 <result property="columnTnameNumber" column="ColumnTnameNumber" />
-		 <result property="columnTKeywordName" column="TKEYWORD" />
+		 <result property="columnTKeywordName" column="TKeyworTNAME" />
 		 <result property="columnTKeywordNumber" column="ColumnTKeywordNumber" />
 		 
 		 <result property="columnTlikeName" column="T_LIKES" />
-		 <!-- <result property="columnTlikeValue" column="value" /> -->
+		 <result property="columnTlikeValue" column="value1" />
 		 
 		  <result property="columnTviewsName" column="T_VIEWS" />
-		 <!-- <result property="columnTviewsValue" column="value" /> -->
+		  <result property="columnTviewsValue" column="value2" />
 		 
 	</resultMap>
 
-	<!-- 조아요. 장소에 대한 데이터를 가져온다. -->
 	<select id="AllStatistic" resultMap="themeStatisticsResult">
 <!-- 		
 		SELECT TADDRESS, SUM(T_LIKES) as ColumnAddressNumber
@@ -30,19 +29,19 @@
 		JOIN THEME_CODE USING(TCODE)
 		GROUP BY  TADDRESS
 		ORDER BY ColumnAddressNumber DESC 
--->
+--><!-- SUBSTR(TADDRESSH, 4, INSTR(TADDRESSH, '구')-2) AS  -->
 		<if test="columnTlikeName == 'T_LIKES'">
-			SELECT TADDRESS, SUM(T_LIKES) as ColumnAddressNumber
+			SELECT SUBSTR(TADDRESSH, 4, INSTR(TADDRESSH, '구')-2) AS TADDRESSH, SUM(T_LIKES) as ColumnAddressNumber
 			FROM THEME_LIST
 			JOIN THEME_CODE USING(TCODE)
-			GROUP BY  TADDRESS
+			GROUP BY  TADDRESSH
 			ORDER BY ColumnAddressNumber DESC
 		</if>
 		<if test="columnTlikeName == 'T_VIEWS'">
-			SELECT TADDRESS, SUM(T_VIEWS) as ColumnAddressNumber
+			SELECT SUBSTR(TADDRESSH, 4, INSTR(TADDRESSH, '구')-2) AS TADDRESSH, SUM(T_VIEWS) as ColumnAddressNumber
 			FROM THEME_LIST
 			JOIN THEME_CODE USING(TCODE)
-			GROUP BY  TADDRESS
+			GROUP BY  TADDRESSH
 			ORDER BY ColumnAddressNumber DESC 
 		</if>
 		
@@ -77,15 +76,16 @@
 -->
 		<if test="columnTlikeName == 'T_LIKES'">
 			<if test="columnAddressName != null"><!-- TADDRESS -->
-				SELECT TADDRESS, SUM(T_LIKES) as ColumnAddressNumber
+				SELECT SUBSTR(TADDRESSH, 4, INSTR(TADDRESSH, '구')-2) AS TADDRESSH, SUM(T_LIKES) as ColumnAddressNumber
 			</if>
 			<if test="columnTnameName != null"><!-- TNAME -->
 				SELECT TNAME, SUM(T_LIKES) as ColumnTnameNumber
 			</if>
 		</if>
-		<if test="columnTlikeName == 'T_VIEWS'">
+		<if test="columnTviewsName == 'T_VIEWS'">
+		
 			<if test="columnAddressName != null">
-				SELECT TADDRESS, SUM(T_VIEWS) as ColumnAddressNumber
+				SELECT SUBSTR(TADDRESSH, 4, INSTR(TADDRESSH, '구')-2) AS TADDRESSH, SUM(T_VIEWS) as ColumnAddressNumber
 			</if>
 			<if test="columnTnameName != null">
 				SELECT TNAME, SUM(T_VIEWS) as ColumnTnameNumber
@@ -94,7 +94,7 @@
 		FROM THEME_LIST
 		JOIN THEME_CODE USING(TCODE)
 		<if test="columnAddressName == 'TADDRESS'">
-				GROUP BY TADDRESS
+				GROUP BY TADDRESSH
 				ORDER BY ColumnAddressNumber DESC
 		</if>
 		<if test="columnTnameName == 'TNAME'">
@@ -103,7 +103,55 @@
 		</if>
 	</select>
 
+<!-- 검색 키워드 밴 상단 버튼 클릭시에 데이터를 가져오는 쿼리 -->
+	<select id="SearchAreaSaCount" resultMap="themeStatisticsResult">
+		SELECT AREA as TADDRESSH, SUM(SA_COUNT) as ColumnAddressNumber
+    	FROM SEARCH_AREA
+    	GROUP BY AREA
+    	ORDER BY ColumnAddressNumber DESC
+	</select>
 
+<!-- AJAX를 이용하여 검색 키워드의 주소/테마를 가져오는 쿼리 -->
+	<select id="StatisticAjaxSaCount" resultMap="themeStatisticsResult">
+		<if test="columnAddressName != null"><!-- TADDRESS -->
+			SELECT AREA as TADDRESSH, SUM(SA_COUNT) as ColumnAddressNumber
+		    FROM SEARCH_AREA
+		    GROUP BY AREA
+		    ORDER BY ColumnAddressNumber DESC
+		</if>
+		<if test="columnTnameName != null"><!-- TNAME -->
+			SELECT TNAME, SUM(ST_COUNT) as ColumnTnameNumber
+			FROM SEARCH_THEME
+			JOIN THEME_CODE USING(TCODE)
+			GROUP BY TNAME
+			ORDER BY ColumnTnameNumber DESC
+		</if>
+	</select>
+	
+	<!-- 1. 전체 회원 가입 남/여 비율  -->
+	<!-- 객체를 변경 하지 않고 그냥  TKeyworTNAME/ColumnTKeywordNumber으로 값을 받아오는 것으로 대체한다.-->
+	<select id="list_1" resultMap="themeStatisticsResult">
+		SELECT GENDER AS TKeyworTNAME, COUNT(*) AS ColumnTKeywordNumber
+		FROM MEMBER
+		GROUP BY GENDER
+	</select>
+	
+	<select id="list_2" resultMap="themeStatisticsResult">
+		SELECT TKEYWORD as TKeyworTNAME, COUNT(TKEYWORD) AS ColumnTKeywordNumber
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		WHERE TCODE = #{number}
+		GROUP BY TKEYWORD
+	</select>
+	
+	<select id="list_3" resultMap="themeStatisticsResult">
+		SELECT TKEYWORD as TKeyworTNAME, SUM(T_VIEWS) AS value2, SUM(T_LIKES) AS value1
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		WHERE TCODE = #{number}
+		GROUP BY TKEYWORD
+	</select>
+	
 </mapper>
 
     

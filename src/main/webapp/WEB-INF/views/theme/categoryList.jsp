@@ -30,9 +30,6 @@ h4{
 	text-align:center;
 }
 
-/*조아요*/
-
-
 
 </style>
 
@@ -76,7 +73,6 @@ h4{
 						class="product_top_bar d-flex justify-content-between align-items-center">
 
 						<div class="single_product_menu">
-							<p>								
 								Number of posts <span>${pi.listCount}</span>
 							</p>
 							<!-- <p>여행 테마 -> 전통 -> 고궁</p> -->
@@ -98,13 +94,6 @@ h4{
 					</div>
 				</div>
 			</div>
-			<script type="text/javascript">
-			//좋아요
-			
-
-
-
-			</script>
 			<div id="aList" class="row align-items-center latest_product_inner">
 			
 			    <c:forEach var="t" items="${list }" begin="0" end="${pi.themeLimit}">
@@ -113,11 +102,11 @@ h4{
 					 <c:param name="tId" value="${t.tId }"/>
 					</c:url>
 				<a href="${post }">
-        				<div class="card-list">
-          					<div class="card">
+        				<div class="card-list">        				
+          					<div class="card">          					
             					<img src="${t.tModifyFile }"/>
-            						<span>${t.tTitle }</span>
-         								 </div>
+            					<span>${t.tTitle }</span>
+         					</div>
 					<div class="single_product_item">
 							<h3><b style="color:rgba(121,125,237,0.9)">#${t.tName}</b></h3>
 					</div>
@@ -130,6 +119,7 @@ h4{
 			<input id="tm" type="hidden" value="${pi.maxPage }">
 			<input id="sv" type="hidden" name="searchValue" value="${sc.searchValue}">
 			<input id="kw" type="hidden" name="keyword" value="${sc.keyword}">
+			<input id="lc" type="hidden" value="${pi.listCount }">
 			<div align="center">
 				<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:#ebc5e4;">Lord More..</button></a>
 			</div>
@@ -161,7 +151,8 @@ h4{
 		var maxPage = $('#tm').val();
 		var searchValue = $('#sv').val();
 		var keyword = $('#kw').val();
-		
+		var endb = $('#lc').val();
+	
 	function pagination(){
 		if(maxPage == currentPage){
 			$('#alb').text("End");

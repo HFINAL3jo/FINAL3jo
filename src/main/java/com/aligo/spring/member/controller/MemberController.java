@@ -15,12 +15,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aligo.spring.member.model.service.MemberService;
@@ -38,8 +43,12 @@ import com.aligo.spring.member.model.vo.Member;
  * → 회원가입나이제한(0~100)
  * → 취향선택 연결하기
  */
+@SessionAttributes("loginUser")
 @Controller
 public class MemberController {
+	
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
 	@Inject
 	JavaMailSender mailSender;     //메일 서비스를 사용하기 위해 의존성을 주입함.
@@ -56,9 +65,11 @@ public class MemberController {
 
 	@RequestMapping(value="signUp.do", method = RequestMethod.POST)
 	public String insertMember(Member m) {
-
+		
+		String encPwd = bcryptPasswordEncoder.encode(m.getpassword());
+		m.setpassword(encPwd);
+		
 		int result = memService.insertMember(m);
-		System.out.println(m);
 
 		if(result >0) {
 			return "redirect:index.jsp";
@@ -98,7 +109,7 @@ public class MemberController {
 	 * 이메일 인증 관련
 	 */
 	@RequestMapping( value = "auth.do" , method=RequestMethod.POST )
-	public ModelAndView mailSending(HttpServletRequest request, String email, HttpServletResponse response_email) throws IOException {
+	public ModelAndView mailSending(HttpServletRequest request, String e_mail, HttpServletResponse response_email) throws IOException {
 
 		Random r = new Random();
 		int dice = r.nextInt(4589362) + 49311; //이메일로 받는 인증코드 부분 (난수)
@@ -154,16 +165,16 @@ public class MemberController {
 		PrintWriter out_email = response_email.getWriter();
 		out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>");
 		out_email.flush();
-
+		mv.addObject(e_mail);
 		return mv;
 
 
 	}
 
 	//이메일 인증 페이지 맵핑 메소드
-	@RequestMapping("/member/email.do")
+	@RequestMapping("/member/signUp.do")
 	public String email() {
-		return "member/email";
+		return "member/signUp";
 	}
 
 
@@ -171,12 +182,14 @@ public class MemberController {
 	//내가 입력한 인증번호와 메일로 입력한 인증번호가 맞는지 확인해서 맞으면 회원가입 페이지로 넘어가고,
 	//틀리면 다시 원래 페이지로 돌아오는 메소드
 	@RequestMapping(value = "ec.do")
-	public ModelAndView join_injeung(String email_injeung, String diceCheck, HttpServletResponse response_equals) throws IOException {
+	public ModelAndView join_injeung(String email_injeung, String diceCheck, String email, HttpServletResponse response_equals) throws IOException {
 
 
 		System.out.println("마지막 : email_injeung : "+ email_injeung);
 
 		System.out.println("마지막 : dice : "+diceCheck);
+		
+		System.out.println("email : " + email);
 
 
 		//페이지이동과 자료를 동시에 하기위해 ModelAndView를 사용해서 이동할 페이지와 자료를 담음
@@ -185,18 +198,13 @@ public class MemberController {
 
 		mv.setViewName("/member/join.do");
 
-		mv.addObject("e_mail",email_injeung);
 
 		if (email_injeung.equals(diceCheck)) {
 
 			//인증번호가 일치할 경우 인증번호가 맞다는 창을 출력하고 회원가입창으로 이동함
 
-
-
-			mv.setViewName("signUp.jsp");
-
-			mv.addObject("e_mail",email_injeung);
-
+			mv.setViewName("member/join");
+			mv.addObject("email",email);
 			//만약 인증번호가 같다면 이메일을 회원가입 페이지로 같이 넘겨서 이메일을
 			//한번더 입력할 필요가 없게 한다.
 
@@ -228,8 +236,80 @@ public class MemberController {
 
 	}
 
+	/** 암호화 로그인
+	 * @param m
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="login.do")
+	public String memberLogin(@ModelAttribute Member m, Model model) {
 
+		Member loginUser = memService.loginMember(m);
 
-
-
-}
+		if(loginUser != null && bcryptPasswordEncoder.matches(m.getpassword(), loginUser.getpassword())) {			
+			//	로그인 성공 시 세션에 정보를 담아야 되기 때문에 세션이 필요하다.
+			model.addAttribute("loginUser", loginUser);
+			return "redirect:index.jsp";
+		}else {			
+			//	로그인 실패
+			model.addAttribute("msg", "로그인 실패!!");
+			return "common/errorPage";
+		}
+	}
+	
+	/** 로그아웃
+	 * @param status
+	 * @return
+	 */
+	@RequestMapping("logout.do")
+	public String logout(SessionStatus status) {
+		// SessionStatus : 커맨드 객체로 세선의 상태를 관리할 수 있는 객체이다.
+		
+		// 세션의 상태를 확정지어주는 메소드 호출
+		status.setComplete();
+		
+		return "redirect:index.jsp";
+	}
+	
+	
+	@RequestMapping("findPwd.do")
+	public String findPwd() {
+		return "member/findPwd";
+	}
+	
+	@RequestMapping("findPwdFin.do")
+	public String findPwdFin(Member m, Model model) {		
+		System.out.println(m);
+		String encPwd = bcryptPasswordEncoder.encode(m.getpassword());
+		m.setpassword(encPwd);
+		System.out.println(m);
+		
+		int result = memService.findPwdFin(m);
+		
+		if(result > 0) {
+			return "member/loginView";
+		}else {
+			return "common/errorPage";
+		}
+		
+		
+	}
+	
+	@RequestMapping("deleteAccount.do")
+	public String deleteMember(SessionStatus status, String email, Model model) {
+		
+		
+		int result = memService.deleteMember(email);
+		
+		if(result>0) {
+			status.setComplete();
+			return "redirect:index.jsp";
+		}else {
+			model.addAttribute("msg","회원탈퇴실패!");
+			return "common/errorPage";
+		}		
+	}
+		
+	}
+	
+	

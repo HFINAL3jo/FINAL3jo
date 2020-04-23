@@ -10,7 +10,7 @@
 <body>
 	<%@ include file="../common/menubar.jsp" %>
 	<br><br><br><br><br>
-	<%@ include file="../common/assidebp.jsp" %>
+	<%@ include file="../common/assidetheme.jsp" %>
 	
 	<div align="center">
 	<%@ include file="write.jsp" %>
@@ -21,5 +21,8 @@
 	
 	
 	<%@ include file="../common/footer.jsp" %>
+	<script>
+		$('#titlebar').text('Write');
+	</script>
 </body>
 </html>
