@@ -41,6 +41,15 @@
       WHERE email=#{email}
    </select>
    
+   
+     <select id="nickCheck" parameterType="String" resultType="_int">
+      SELECT COUNT(*)
+      FROM MEMBER
+      WHERE nickname=#{nickname}
+   </select>
+   
+   
+   
    <update id="deleteMember" parameterType="Member">
       UPDATE MEMBER
       SET M_STATUS='N'

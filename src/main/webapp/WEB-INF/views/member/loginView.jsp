@@ -8,12 +8,16 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>aranoz</title>
+<title>aligo</title>
 <style>
 ul[class~=social-icons]>li {
 	font-size: 2em;
 	display: inline;
 }
+.breadcrumb{
+  	background-image:url('${contextPath}/resources/images/hanbok.jpg');
+    background-size: 100% 100%;
+  }
 </style>
 </head>
 
@@ -47,7 +51,7 @@ ul[class~=social-icons]>li {
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-lg-6 col-md-6">
-					<img src="img/korea/mainpic/wctk.jpg">
+					<!-- <img src="img/korea/mainpic/wctk.jpg"> -->
 					<div class="login_part_text text-center"
 						style="padding: 5%; display: none;">
 						<!-- <div class="login_part_text_iner">

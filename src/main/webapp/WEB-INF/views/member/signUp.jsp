@@ -138,7 +138,7 @@ input:checked+label:after {
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>aranoz</title>
+<title>aligo</title>
 </head>
 
 <body>
@@ -171,7 +171,7 @@ input:checked+label:after {
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-lg-6 col-md-6">
-					<img src="img/korea/mainpic/wctk.jpg">
+<!-- 					<img src="img/korea/mainpic/wctk.jpg">  -->
 					<div class="login_part_text text-center"
 						style="padding: 5%; display: none;">
 						<!-- <div class="login_part_text_iner">
@@ -186,16 +186,20 @@ input:checked+label:after {
 					<div class="login_part_form">
 						<div class="login_part_form_iner">
 							<h3>Enter your Email!</h3>
-							<form class="row contact_form" action="auth.do" method="post">
+							<form class="row contact_form" id="oknext" action="auth.do" method="post">
 								<div class="col-md-12 form-group p_star">
 									<input type="email" class="form-control" id="email"
-										name="e_mail" value="" placeholder="E-mail" required> <span
-										id="ok" style="display: none;" class="guide ok">Your
-										Email is Available</span> <span id="error" style="display: none;"
-										class="guide error">Your Email is Already Joined</span> <input
-										type="hidden" name="idDuplicateCheck" id="idDuplicateCheck"
+										name="e_mail" value="" placeholder="E-mail" required>
+
+										<span id="ok" style="display: none;" class="guide ok">
+										Your Email is Available</span> 
+										<span id="error" style="display: none;"
+										class="guide error">Your Email is Already Joined</span> 
+										
+										
+										<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck"
 										value="0">
-									<button type="submit" name="submit" class="btn_3" onclick="sendMail()">send
+									<button type="submit" name="submit" class="btn_3" id="emailCheck">send
 										a mail</button>
 										
 								</div>
@@ -220,8 +224,11 @@ input:checked+label:after {
 	<!-- ■■■■■■■■■■■■ Script part ■■■■■■■■■■■■ -->
 
  	<script>
+ 	
+ 	
+    var idCheck = 0;
 	/*이메일 중복체크*/
-	function validate() {
+ 	function validate() {
 
 		if ($("idDuplicateCheck").val() == 0) {
 
@@ -258,6 +265,8 @@ input:checked+label:after {
 						$(".error").hide();
 						$(".ok").show();
 						$("#idDuplicateCheck").val(1);
+						
+						
 					} else {
 						$(".ok").hide();
 						$(".error").show();
@@ -270,13 +279,33 @@ input:checked+label:after {
 				}
 			});
 		});
-	}); 
+	});
+	
+	
+	
 	
 	window.setTimeout(function(){
 		var offset=window.innerHeight;
 		$('html,body').stop().animate({scrollTop:'300'},600);
 		$('#email').focus();	
 		}, 200);
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	</script>
 	
 </body>

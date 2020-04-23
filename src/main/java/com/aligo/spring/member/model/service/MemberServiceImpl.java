@@ -55,6 +55,11 @@ public class MemberServiceImpl implements MemberService {
 		return memDao.deleteMember(email);
 	}
 
+	@Override
+	public int nickCheck(String nickname) {
+		return memDao.nickCheck(nickname);
+	}
+
 	
 	
 }

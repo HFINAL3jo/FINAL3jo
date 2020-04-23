@@ -32,7 +32,7 @@
     	<option value="ACTIVITY">ACTIVITY</option>
     	<option value="EXHIBITION">EXHIBITION</option>
     </select>&nbsp;&nbsp;&nbsp;
-    Keyword &nbsp;&nbsp;<input type="text" id="tkv" name="tKeyword" style="margin-right:-10px;"></span><br><br>
+    Keyword &nbsp;&nbsp;<input type="text" id="tkv" name="tKeyword" readonly style="margin-right:-10px;"></span><br><br>
     	<c:if test="${!empty list}">
     	<div id="selectVal" style="border:1px lightblue solid; display:inline-block; float:left; margin:10px; padding:10px; text-align:left;">
     		<label><input type="radio" name="f1" value="${list[0]}">&nbsp;${list[0] }</label>

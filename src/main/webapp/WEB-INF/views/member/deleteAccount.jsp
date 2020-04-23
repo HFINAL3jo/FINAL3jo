@@ -11,7 +11,12 @@
     <link rel="stylesheet" href="resources/css/nice-select.css">
    
     <link rel="stylesheet" href="resources/css/price_rangs.css">
- 
+<style type="text/css">
+	.breadcrumb{
+		background-image:url('${contextPath}/resources/images/knocker.jpg');
+		background-size: 100% 100%;
+	 }
+</style>
 </head>
 
 <body>
@@ -27,8 +32,8 @@
                 <div class="col-lg-8">
                     <div class="breadcrumb_iner">
                         <div class="breadcrumb_iner_item">
-                            <h2>Shop Category</h2>
-                            <p>Home <span>-</span> Shop Category</p>
+                            <h2>Delete Account</h2>
+                            <p>Home <span>-</span> My Profile</p>
                         </div>
                     </div>
                 </div>

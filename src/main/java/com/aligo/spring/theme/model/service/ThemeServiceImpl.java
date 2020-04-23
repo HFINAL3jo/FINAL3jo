@@ -43,7 +43,7 @@ public class ThemeServiceImpl implements ThemeService {
 		
 		int chk = tDao.checkFile(tNum);
 		
-		if(chk != 1) {
+		if(chk == 0) {
 			String str = t.gettContent();
 			str = str.substring(str.indexOf("src")+5,str.length()-str.indexOf("src")+5);
 			str = str.substring(0,str.indexOf("\""));
@@ -67,7 +67,12 @@ public class ThemeServiceImpl implements ThemeService {
 	@Override
 	public int insertImg(TFile tf) {
 		int cl = tDao.getTCount(tf);
-		if(cl == 0) return tDao.insertImg(tf); else return tDao.updateImg(tf);
+		if(cl == 0) {
+			return  cl = tDao.insertImg(tf);
+		}else if(cl >= 1) {
+			return cl = tDao.updateImg(tf);
+		}
+		return cl;
 	}
 
 	@Override
