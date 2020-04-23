@@ -31,7 +31,7 @@ import com.google.gson.JsonObject;
 public class StatisticController {
 
 	public static int limit = 7; // 차트에 쓰일 자료의 갯수를 10개이하로 끝는다.
-	//
+
 	@Autowired
 	private StatisticsService serviceStatics;
 
@@ -65,7 +65,6 @@ public class StatisticController {
 			choose="T_LIKES";
 			
 			temp.setColumnTlikeName("T_LIKES");
-			//temp.setColumnTlikeValue(choose);
 
 		}else if(checkingParameter.equals("T_VIEWS")) {
 			
@@ -91,7 +90,7 @@ public class StatisticController {
 			
 			googleChart = GoogletJson(cut(limit, list), charDataShow);
 			
-			mav.addObject("list", list);
+//			mav.addObject("list", list);
 			
 			mav.addObject("jObj", jObj);
 			mav.addObject("JsonReverseList", JsonReverseList);
@@ -125,7 +124,7 @@ public class StatisticController {
 //		mav.addObject("reverTableData", reverTableData);
 		
 		mav.addObject("jObj", jObj);
-		mav.addObject("JsonReverseList", JsonReverseList);
+//		mav.addObject("JsonReverseList", JsonReverseList);
 		mav.addObject("googleChart", googleChart);
 		
 		mav.addObject("jObjArray", jObjArray);
@@ -295,13 +294,7 @@ public class StatisticController {
 		
 		map.put("jObjArray", jObjArray);
 		map.put("JsonReverseArray", JsonReverseArray);//
-		
-//		mav.addObject("chartValue", chartValue); 			// 어떤 차트(인포그램/통계)를 사용 할 것지 표시
-//		mav.addObject("choose", choose); 					// StatisticController의 조아요/조회수.키워트 중 하나에 대한 데이터를 값을 뷰에 보여주는지 확인.
-		mav.addObject("charDataShow", td);				// 주소(address) / 테마(themaName) 등 어디에 해당하는 데이터인지 표시 , 기본값으로  address 표시
-		
-//		mav.put("admin/statistics");
-		
+				
 		return map;
 	}
 	
@@ -320,15 +313,9 @@ public class StatisticController {
 	// ===================================================
 		Statistics temp = new Statistics();
 		
-//		JSONObject JsonObject1 = new JSONObject();
 		JSONObject JsonObject2 = new JSONObject();
 		JSONObject JsonObject3 = new JSONObject();
 		JSONObject JsonObject4 = new JSONObject();
-		
-		// 남/여 회원 비율
-		// 객체를 변경 하지 않고 그냥  TKeyworTNAME/ColumnTKeywordNumber으로 값을 받아오는 것으로 대체한다.
-//		ArrayList<Statistics> list_1 = serviceStatics.list_1();
-//		JsonObject1 = ConvertJson(list_1, "gender");
 		
 		// 테마별 바
 		temp.setNumber(param);
@@ -341,7 +328,6 @@ public class StatisticController {
 		JsonObject4 = ConvertJson(list_3, "4");
 	//=========================================================
 		
-//		map.put("JsonObject1", JsonObject1);
 		map.put("JsonObject2", JsonObject2);
 		map.put("JsonObject3", JsonObject3);
 		map.put("JsonObject4", JsonObject4);
@@ -469,50 +455,13 @@ public class StatisticController {
 
 		JSONArray jArr = new JSONArray();
 		
-//		 //json의 칼럼 객체
-//        JSONObject col1 = new JSONObject();
-//        JSONObject col2 = new JSONObject();
-//		
-//        //리턴할 json 객체
-//        JSONObject data = new JSONObject(); //{}
-//        
-//        //("필드이름","자료형") 
-//        JSONArray title = new JSONArray();
-//        col1.put("label","장소"); 
-//        col1.put("type", "string");
-//        col2.put("label", "조아요");
-//        col2.put("type", "number");
-//        
-//        //테이블행에 컬럼 추가
-//        title.add(col1);
-//        title.add(col2);
-//        
-//        //json 객체에 타이틀행 추가
-//        data.put("cols", title);//제이슨을 넘김 => {"cols" : [{"label" : "장소","type":"string"},{"label" : "조아요", "type" : "number"}]}
-//        
-//        JSONArray body = new JSONArray(); //json 배열을 사용하기 위해 객체를 생성
 		if (property.equals("address")) {
 			for (Statistics out : list) {
 				JSONObject JsonData = new JSONObject();
 				JsonData.put(out.getColumnAddressName().replaceAll(" ", ""), out.getColumnAddressNumber());
 				jArr.add(JsonData);
-				
-				// 구글에서 쓰는 json형태로 변환
-//				JSONObject JsonLabel = new JSONObject();	//json오브젝트 객체를 생성
-//				JsonLabel.put("v", out.getColumnAddressName().replaceAll(" ", "")); // JsonData변수에 out에 저장된 상품의 이름을 v라고 저장한다.
-//			
-//				JSONObject JsonValue = new JSONObject();	//json오브젝트 객체를 생성
-//				JsonValue.put("v", out.getColumnAddressNumber());
-//				
-//				JSONArray row = new JSONArray(); //json 배열 객체 생성
-//				row.add(JsonLabel);
-//				row.add(JsonValue);
-//				
-//				 JSONObject cell = new JSONObject();
-//				 cell.put("c", row);
-//				 body.add(cell);
 			}
-//			data.put("rows", body);
+
 			return jArr;
 
 		} else if (property.equals("themaName")) {

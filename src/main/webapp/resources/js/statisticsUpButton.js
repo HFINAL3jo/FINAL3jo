@@ -1,5 +1,3 @@
-// 기타 정보 데이터 (d3js)처리
-
 // 조아요
 	document.getElementById('uPbtn1').onclick = function(){
 		//console.log("실행");
@@ -52,8 +50,7 @@
 			
 			data.push(value);
 		}
-		
-									  
+						  
 		var options = {
 				title: '전체 회원 남여 비율',
 				is3D: true,
@@ -71,7 +68,7 @@
 }
  // =====================
  var charOption = {
-	    	title: 'ssss',
+	    	title: '',
 	        width: 550,
 	        height: 500,
 	        padding: 50,
@@ -86,11 +83,9 @@
 										
 		// 데이터 처리
 	function drawChart() {
-//		var data = google.visualization.arrayToDataTable([
-//		        ['Genre', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
-//		         'Western', 'Literature', { role: 'annotation' } ],
-//		        ['테바별(1차)', 10, 24, 20, 32, 18, 5, ''],
-//		      ]);
+//[
+//	['Genre', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General','Western', 'Literature', { role: 'annotation' } ],
+//	['테바별(1차)', 10, 				24, 		20, 			32, 		18, 		5, 			''],];
 			
 			var jsonObject = JSON.parse(document.getElementById('list_2').value);
 			
@@ -126,17 +121,17 @@
 		// 데이터 처리
 	function drawChart() {
 		// 1. 첫번째 열 : 수직 축, 2. 두번째 열 : 수평 축
-//		var data = google.visualization.arrayToDataTable([
-//		        ['조아요', '조회수'],
-//		        [1, 2],
-//		        [7, 6],
-//		        [6, 6],
-//		        [7, 8],
-//		        [1, 3],
-//		        [5, 5],
-//		        [6, 9],
-//		        [4, 2],
-//		      ]);
+//		[
+//		     ['조아요', '조회수'],
+//		     [1, 2],
+//		     [7, 6],
+//		     [6, 6],
+//		     [7, 8],
+//		     [1, 3],
+//		     [5, 5],
+//		     [6, 9],
+//		     [4, 2],
+//		];
 		
 		// 조아요
 		var jsonObject1 = JSON.parse(document.getElementById('list_3').value);
@@ -160,6 +155,9 @@
 			value.push((jsonObject1[key]*1));
 			value.push((jsonObject2[key]*1));
 			
+			console.log("조아요" + (jsonObject1[key]*1));
+			console.log("조회수" + (jsonObject2[key]*1));
+			
 			likeMax = (likeMax >= jsonObject1[key]*1)? likeMax : (jsonObject1[key]*1);
 			likeMin = (likeMin < jsonObject1[key]*1)? (jsonObject1[key]*1):likeMin;
 			
@@ -175,8 +173,8 @@
 		        hAxis : {title : '조아요', minValue : likeMin, maxValue : likeMax},
 		        vAxis : {title : '조회수', minValue : T_viewsMin, maxValue : T_viewsMax}
 		     };
-		 console.log("likeMin : "+likeMin + ", likeMax : "+likeMax);     
-		 console.log("T_viewsMin : "+T_viewsMin+", T_viewsMax : "+T_viewsMax);    
+//		 console.log("likeMin : "+likeMin + ", likeMax : "+likeMax);     
+//		 console.log("T_viewsMin : "+T_viewsMin+", T_viewsMax : "+T_viewsMax); 
 		   var chart = new google.visualization.ScatterChart(document.getElementById('chart8'));
 			chart.draw(new google.visualization.arrayToDataTable(data), options);
 			//chart.draw(data, options);
@@ -208,9 +206,7 @@
 	 	
 	 xhr.onreadystatechange = function() {
 	       if (xhr.readyState === 4 && xhr.status === 200) {
-//	        	console.log('ok 전송 성공');
-//	            console.log(xhr.responseText);
-//	            console.log(typeof xhr.responseText);
+	        	console.log('ok 전송 성공');
 	            s = xhr.responseText;
 	            
 	            var obj = JSON.parse(s);

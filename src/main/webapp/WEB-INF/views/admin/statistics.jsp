@@ -28,15 +28,6 @@ th, td {
 	border-bottom: 1px solid #444444;
 	text-align: center;
 }
-
-/* thead tr {
-	background-color: #c9dff0;
-	color: #ffffff;
-}
-
-tbody tr:nth-child(2n) {
-	background-color: #D8E6E7;
-} */
 tr{
 	color : #555;
 }
@@ -121,9 +112,8 @@ tbody tr:nth-child(2n+1) {
 <body>
 	<%@ include file="../common/menubar.jsp"%>
 	<!-- 내용 저장 위의 버튼(맨위의 조아요등 ) 클릭시 저장하는 값-->
-	<!-- 리스트 형태로 html태그에 저장시 공백을 처리하지 않으면 값이 공백에서 끝어져 .vlaue; 시에 데이터가 끝어서 나온다. -->
 	
-	<input type="hidden" id="list" value=${list} ><!-- StatisticController의 list 값을 가져온다. -->
+	<!-- <input type="hidden" id="list" value=${list}> --><!-- StatisticController의 list 값을 가져온다. -->
 	<!--<input type="hidden" id="reverTableData" value=${reverTableData} > --><!-- StatisticController의 역순 차트 값을 가져온다. -->
 
 	<input type="hidden" id="jObj" value=${jObj} ><!-- StatisticController의 차트에 쓰일 JSON 값을 가져온다. -->
@@ -184,8 +174,7 @@ tbody tr:nth-child(2n+1) {
 						&nbsp;&nbsp;&nbsp;
 						<!--  onclick="drawShowChart()" -->
 						<button onclick="drawShowChart()">변 경</button>
-						<!-- <button onclick="showChart">바 차트</button> -->
-						<!-- c3.js 적용 차트 그리는 공간-->
+						<!-- 적용 차트 그리는 공간-->
 						<div style="align-content: left;">
 							<div id="chart"></div>
 						</div>
@@ -208,15 +197,7 @@ tbody tr:nth-child(2n+1) {
 								</tr>
 							</thead>
 							<tbody id="chartDataTable">
-								<%-- <c:set var="count" value="1" />
-								<c:forEach var="s" items="${list}">
-									<tr>
-										<td>${count}</td>
-										<td>${s.columnAddressName}</td>
-										<td>${s.columnAddressNumber}</td>
-										<c:set var="count" value="${count+1}" />
-									</tr>
-								</c:forEach> --%>
+
 							</tbody>
 						</table>
 					</div>
@@ -233,16 +214,6 @@ tbody tr:nth-child(2n+1) {
 <script src="resources/js/statistics.js"></script>
 
 <script>
-//var str = "<c:out value='${jObj}' />";
-/* window.onload = function(){
-	
-	// 왼쪽 바를 선택헤서 들어오면 무조건 여기서 부터 값을 가져 오게 한다.
-	if(!document.referrer.includes("goodStatistic.do")){
-		location.href="goodStatistic.do?first=T_LIKES";
-	}
-	// 콘솔 출력시에  "<c:out value='${jObj}' />" 로 나온다 즉 jstl이 파싱이 되지 않는다.
-	// var str = "<c:out value='${jObj}'/>";	
-} */
 
 showChart();
 

@@ -30,6 +30,10 @@ h4{
 	text-align:center;
 }
 
+.breadcrumb{
+  	background-image:url('${contextPath}/resources/images/nightview.jpg');
+    background-size: 100% 100%;
+  }
 
 </style>
 
@@ -51,7 +55,7 @@ h4{
 						<div class="breadcrumb_iner_item">
 							<h2>THEME</h2>
 							<p>
-								Home <span>-</span> Theme
+								Theme <span>-</span> keyword
 							</p>
 						</div>
 					</div>

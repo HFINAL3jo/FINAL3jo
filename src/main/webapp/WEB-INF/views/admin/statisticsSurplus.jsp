@@ -29,14 +29,6 @@ th, td {
 	text-align: center;
 }
 
-/* thead tr {
-	background-color: #c9dff0;
-	color: #ffffff;
-}
-
-tbody tr:nth-child(2n) {
-	background-color: #D8E6E7;
-} */
 tr{
 	color : #555;
 }
@@ -46,8 +38,6 @@ tbody tr:nth-child(2n+1) {
 }
 
 .div_left {
-	/* 	width: 500px;
-	float: left; */
 	height: 430px;
 	margin-bottom: 1%;
 	background-color: snow;
@@ -55,9 +45,7 @@ tbody tr:nth-child(2n+1) {
 }
 
 .div_right {
-	/* 	width: 400px; */
 	height: 700px;
-	/* 	float: right;  */
 	margin-bottom: 10px;
 	background-color: snow;
 	box-sizing: border-box;
@@ -106,12 +94,6 @@ tbody tr:nth-child(2n+1) {
 
 </style>
 
-<!-- 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" />
-<script src="https://d3js.org/d3.v3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
- -->
- 
 <!-- d3.js -->
 <link rel="stylesheet" href="css/d3.css">
 <script src="http://d3js.org/d3.v3.min.js" charset="UTF-8"></script>

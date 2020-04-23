@@ -7445,11 +7445,12 @@ h6 {
 
 /* line 19, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_breadcrumb.scss */
 .breadcrumb .breadcrumb_iner .breadcrumb_iner_item h2 {
-  color: #222222;
+  color: white;
   font-size: 36px;
   font-weight: 700;
   margin-bottom: 10px;
   text-transform: capitalize;
+  text-shadow:3px 3px 3px rgb(0,0,0);
 }
 
 @media (max-width: 576px) {
@@ -7483,7 +7484,8 @@ h6 {
 /* line 42, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_breadcrumb.scss */
 .breadcrumb .breadcrumb_iner .breadcrumb_iner_item p {
   font-size: 15px;
-  color: #777777;
+  color: white;
+  text-shadow:3px 3px 3px rgb(0,0,0);
 }
 
 /* line 47, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_breadcrumb.scss */
@@ -7603,7 +7605,7 @@ h6 {
 
 /* line 69, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
 .footer_part .single_footer_part .list-unstyled li a:hover {
-  color: #ff3368 !important;
+  color: #007bff !important;
 }
 
 /* line 76, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
@@ -7683,7 +7685,7 @@ h6 {
 
 /* line 141, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
 .footer_part .footer_icon li a:hover {
-  background-color: #ff3368;
+  background-color: #007bff;
   box-shadow: -1.717px 8.835px 29.76px 2.24px rgba(255, 51, 104, 0.18);
   color: #fff !important;
 }
@@ -7749,7 +7751,7 @@ h6 {
 
 /* line 207, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */
 .footer_part .copyright_text p a:hover {
-  color: #ff3368;
+  color: #007bff;
 }
 
 /* line 212, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_footer.scss */

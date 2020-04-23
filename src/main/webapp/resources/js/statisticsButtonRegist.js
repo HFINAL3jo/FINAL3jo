@@ -40,11 +40,6 @@
 		showTopList("2");
 	}	
 	
-//	document.getElementById('btn3').onclick = function(){
-//		console.log("btn3 실행");
-//		showTopList("3");
-//	}	
-	
 	//
 	function showTopList(data){
 		
@@ -54,7 +49,7 @@
 		var str = "";
 		var i = 1;
 		
-		// Low list 10
+		// Low list
 		if(data == "1"){
 			
 			for(var i = 0; i<JsonReverseArray.length; i++){
@@ -65,6 +60,7 @@
 			
 			document.getElementById('chartDataTable').innerHTML=str;
 			
+		// Top list
 		}else if(data == "2"){
 			
 			for(var i = 0; i<jObjArray.length; i++){
@@ -80,8 +76,7 @@
 	
 // showChart()
 var drawShowChart = function(){
-	//var str = document.getElementById('jObj').value;
-	
+	//var str = document.getElementById('jObj').value;	
 		
 		var check1 = document.getElementById('whatChart').value;
 		var check2 = document.getElementById('whatData').value;
@@ -97,7 +92,6 @@ var drawShowChart = function(){
 			// 차트 검색을 선택한후에  데이터 검색을 ""로 놓았을시에 아무것도 실행 하지 않는다.
 			if(ifCheck1 && ifCheck2){
 				
-				//alert("데이터 입력이 되지 않았습니다. 다시 입력 해주세요.");
 				return;	
 			}else if( (!ifCheck1) && ifCheck2){
 				document.getElementById('chartValue').value = check1;
@@ -122,12 +116,7 @@ var drawShowChart = function(){
 		    	dataType: "json",
 		    	data: {"whatChart":whatChart, "whatData":whatData, "choose":choose},
 		    	success: function(Source){
-		    		console.log("전송 성공");
-//		    		console.log(Source);
-//		    		console.log(Source.jObj);
-//		    		console.log(Source.jObjArray);
-//		    		console.log(Source.JsonReverseArray);
-//		    		console.log(Source.JsonReverseList);
+//		    		console.log("전송 성공");
 		    		
 // 객체로 바로 넘어 온것을 그대로 document.getElementById('jObj').value = Source.jObj; 쓰면  [object Object]식이 된다.
 //		    		document.getElementById('jObj').value = Source.jObj;
@@ -144,10 +133,6 @@ var drawShowChart = function(){
 		    		document.getElementById('JsonReverseArray').value = JSON.stringify(Source.JsonReverseArray);
 //		    		document.getElementById('JsonReverseList').value = JSON.stringify(Source.JsonReverseList);
 		    		
-//		    		console.log(document.getElementById('jObj').value);								
-//		    		console.log(document.getElementById('jObjArray').value);						
-//		    		console.log(document.getElementById('JsonReverseArray').value);	
-//		    		console.log(document.getElementById('JsonReverseList').value);	
 		    		
 		    		document.getElementById('chartValue').value = check1
 		    		

@@ -5,6 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	.breadcrumb{
+		background-image:url('${contextPath}/resources/images/knocker.jpg');
+		background-size: 100% 100%;
+	 }
+</style>
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>

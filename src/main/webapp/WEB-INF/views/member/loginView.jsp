@@ -14,6 +14,10 @@ ul[class~=social-icons]>li {
 	font-size: 2em;
 	display: inline;
 }
+.breadcrumb{
+  	background-image:url('${contextPath}/resources/images/hanbok.jpg');
+    background-size: 100% 100%;
+  }
 </style>
 </head>
 
