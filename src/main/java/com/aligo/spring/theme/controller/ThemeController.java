@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aligo.spring.common.AligoException;
 import com.aligo.spring.common.Pagination;
 import com.aligo.spring.theme.model.service.ThemeService;
 import com.aligo.spring.theme.model.vo.PageInfo;
@@ -134,11 +136,21 @@ public class ThemeController extends TFile{
 	}
 	
 	@RequestMapping("themeInsert.do")
-	public String insertTheme(Theme t) {
+	public String insertTheme(Theme t,HttpServletRequest request) throws ServletException, IOException {
 		int tNum = tService.getTNum();
-		int result = tService.insertTheme(t,tNum);
-		
-		if(result >0) return "redirect:theme.do"; else return "";
+		int result = 0;
+		try {
+			result = tService.insertTheme(t,tNum);
+		} catch (AligoException e) {
+			e.getMessage();
+		}
+		if(result >0) {
+			return "redirect:theme.do"; 
+		}else { 
+			request.setAttribute("msg",AligoException.getMsg());
+			request.getRequestDispatcher("views/common/errorPage.jsp");
+			return "common/errorPage";
+		}
 	}
 	
 	@RequestMapping("postdetail.do")
@@ -166,7 +178,6 @@ public class ThemeController extends TFile{
 			t.settFileList(list);
 		}
 		mv.addObject("t",t);
-		//mv.setViewName("board/post");		
 		mv.setViewName("theme/themeDetailView");		
 		return mv;
 	}
@@ -290,11 +301,17 @@ public class ThemeController extends TFile{
 		gson.toJson(list,response.getWriter());
 	}
 	
-	@RequestMapping("themeModify.do")
+	@RequestMapping("themeModifyView.do")
 	public ModelAndView themeModifyView(Theme t,ModelAndView mv) {
 		mv.addObject("t",t).setViewName("board/boardModifyView");
-		
 		return mv;
+	}
+	
+	@RequestMapping("updateTheme.do")
+	public String updateTheme(Theme t) {
+		int result = tService.updateTheme(t);
+		
+		return "redirect:postdetail.do";
 	}
 
 }
