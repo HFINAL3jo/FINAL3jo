@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+<script src="resources/js/jquery-3.4.1.min.js"></script>
     <link rel="icon" href="resources/img/favicon.png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -42,14 +43,14 @@
 
         .weather-card {
         margin: 60px auto;
-        height: 740px;
-        width: 450px;
+        height: 550px;
+        width: 350px;
         background: #fff;
         box-shadow: 0 1px 38px rgba(0, 0, 0, 0.15), 0 5px 12px rgba(0, 0, 0, 0.25);
         }
         .weather-card .top {
         position: relative;
-        height: 570px;
+        height: 400px;
         width: 100%;
         background: url("https://s-media-cache-ak0.pinimg.com/564x/cf/1e/c4/cf1ec4b0c96e59657a46867a91bb0d1e.jpg") no-repeat;
         background-size: cover;
@@ -131,7 +132,7 @@
         margin: 0;
         font-size: 0;
         padding: 0;
-        padding-top: 20px;
+        padding-top: 30px;
         max-height: 155px;
         }
         .weather-card .bottom .wrapper .forecast a {
@@ -169,13 +170,7 @@
         font-weight: 400;
         padding-top: 2px;
         }
-        .weather-card .bottom .wrapper .forecast li .condition .temp .deg {
-        display: inline-block;
-        font-size: 10px;
-        font-weight: 600;
-        margin-left: 3px;
-        vertical-align: top;
-        }
+       
         .weather-card .bottom .wrapper .forecast li .condition .temp .temp-type {
         font-size: 20px;
         }
@@ -270,6 +265,45 @@
                         <div class="hearer_icon d-flex">
 							<div>
 								<img id="weather_1" src="${ contextPath }/resources/images/weather_icon.png" style="width:24px; height:24px; opacity:0.7;">
+								<div class="weather_container">
+					        <div class="row">
+					            <div class="col">
+					                <div class="weather-card">
+					                    <div class="top">
+					                        <div class="wrapper">
+					                            <div class="mynav">
+					                                <a href="javascript:;"><span class="lnr lnr-chevron-left"></span></a>
+					                                <a href="javascript:;"><span class="lnr lnr-cog"></span></a>
+					                            </div>
+					                            <h1 class="heading" id="weather_name">Rainy day</h1>
+					                            <h3 class="location">Seoul, Korea</h3>
+					                            <p class="temp">
+					                                <span class="temp-value" id="temp_value">16</span>
+					                            </p>
+					                        </div>
+					                    </div>
+					                    <div class="bottom">
+					                        <div class="wrapper">
+					                            <ul class="forecast">
+					                                <a href="javascript:;"><span class="lnr lnr-chevron-up go-up"></span></a>
+					                                <li class="active">
+					                                    <span class="date">Yesterday</span>
+					                                    <span class="lnr lnr-cloud condition">
+					                                        <span class="temp" id="yesterday_temp">22</span>
+					                                    </span>
+					                                </li>
+					                                <li>
+					                                    <span class="date">Tomorrow</span>
+					                                    <span class="lnr lnr-cloud condition">
+					                                        <span class="temp" id="tomorrow_temp">18</span>
+					                                    </span>
+					                                </li>
+					                            </ul>
+					                        </div>
+					                    </div>
+					                </div>
+					            </div>
+					    	</div>
 							</div>
 							<a id="search_1" href="javascript:void(0)"><i
 								class="ti-search"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -324,213 +358,72 @@
             </div>
         </div>
         
-        <div class="weather_container">
-        <div class="row">
-            
-        <!-- Clear night -->
-            <div class="col">
-                <div class="weather-card one">
-                    <div class="top">
-                        <div class="wrapper">
-                            <div class="mynav">
-                                <a href="javascript:;"><span class="lnr lnr-chevron-left"></span></a>
-                                <a href="javascript:;"><span class="lnr lnr-cog"></span></a>
-                            </div>
-                            <h1 class="heading">Clear night</h1>
-                            <h3 class="location">Dhaka, Bangladesh</h3>
-                            <p class="temp">
-                                <span class="temp-value">20</span>
-                                <span class="deg">0</span>
-                                <a href="javascript:;"><span class="temp-type">C</span></a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="bottom">
-                        <div class="wrapper">
-                            <ul class="forecast">
-                                <a href="javascript:;"><span class="lnr lnr-chevron-up go-up"></span></a>
-                                <li class="active">
-                                    <span class="date">Yesterday</span>
-                                    <span class="lnr lnr-moon condition">
-                                        <span class="temp">23<span class="deg">0</span><span class="temp-type">C</span></span>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="date">Tomorrow</span>
-                                    <span class="lnr lnr-moon condition">
-                                        <span class="temp">21<span class="deg">0</span><span class="temp-type">C</span></span>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="col">
-                <div class="weather-card rain">
-                    <div class="top">
-                        <div class="wrapper">
-                            <div class="mynav">
-                                <a href="javascript:;"><span class="lnr lnr-chevron-left"></span></a>
-                                <a href="javascript:;"><span class="lnr lnr-cog"></span></a>
-                            </div>
-                            <h1 class="heading">Rainy day</h1>
-                            <h3 class="location">Sylhet, Bangladesh</h3>
-                            <p class="temp">
-                                <span class="temp-value">16</span>
-                                <span class="deg">0</span>
-                                <a href="javascript:;"><span class="temp-type">C</span></a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="bottom">
-                        <div class="wrapper">
-                            <ul class="forecast">
-                                <a href="javascript:;"><span class="lnr lnr-chevron-up go-up"></span></a>
-                                <li class="active">
-                                    <span class="date">Yesterday</span>
-                                    <span class="lnr lnr-cloud condition">
-                                        <span class="temp">22<span class="deg">0</span><span class="temp-type">C</span></span>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="date">Tomorrow</span>
-                                    <span class="lnr lnr-cloud condition">
-                                        <span class="temp">18<span class="deg">0</span><span class="temp-type">C</span></span>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-        <!-- Cloudy -->
-            <div class="col">
-                <div class="weather-card cloudy">
-                    <div class="top">
-                        <div class="wrapper">
-                            <div class="mynav">
-                                <a href="javascript:;"><span class="lnr lnr-chevron-left"></span></a>
-                                <a href="javascript:;"><span class="lnr lnr-cog"></span></a>
-                            </div>
-                            <h1 class="heading">Cloudy day</h1>
-                            <h3 class="location">Rangpur, Bangladesh</h3>
-                            <p class="temp">
-                                <span class="temp-value">19</span>
-                                <span class="deg">0</span>
-                                <a href="javascript:;"><span class="temp-type">C</span></a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="bottom">
-                        <div class="wrapper">
-                            <ul class="forecast">
-                                <a href="javascript:;"><span class="lnr lnr-chevron-up go-up"></span></a>
-                                <li class="active">
-                                    <span class="date">Yesterday</span>
-                                    <span class="lnr lnr-sun condition">
-                                        <span class="temp">22<span class="deg">0</span><span class="temp-type">C</span></span>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="date">Tomorrow</span>
-                                    <span class="lnr lnr-cloud condition">
-                                        <span class="temp">18<span class="deg">0</span><span class="temp-type">C</span></span>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-            <!-- Snow -->
-            <div class="col">
-                <div class="weather-card snow">
-                    <div class="top">
-                        <div class="wrapper">
-                            <div class="mynav">
-                                <a href="javascript:;"><span class="lnr lnr-chevron-left"></span></a>
-                                <a href="javascript:;"><span class="lnr lnr-cog"></span></a>
-                            </div>
-                            <h1 class="heading">Snow</h1>
-                            <h3 class="location">NewYork, USA</h3>
-                            <p class="temp">
-                                <span class="temp-value">-5</span>
-                                <span class="deg">0</span>
-                                <a href="javascript:;"><span class="temp-type">C</span></a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="bottom">
-                        <div class="wrapper">
-                            <ul class="forecast">
-                                <a href="javascript:;"><span class="lnr lnr-chevron-up go-up"></span></a>
-                                <li class="active">
-                                    <span class="date">Yesterday</span>
-                                    <span class="lnr lnr-cloud condition">
-                                        <span class="temp">22<span class="deg">0</span><span class="temp-type">C</span></span>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="date">Tomorrow</span>
-                                    <span class="lnr lnr-cloud condition">
-                                        <span class="temp">18<span class="deg">0</span><span class="temp-type">C</span></span>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Sunny -->
-            <div class="col">
-                <div class="weather-card sunny">
-                    <div class="top">
-                        <div class="wrapper">
-                            <div class="mynav">
-                                <a href="javascript:;"><span class="lnr lnr-chevron-left"></span></a>
-                                <a href="javascript:;"><span class="lnr lnr-cog"></span></a>
-                            </div>
-                            <h1 class="heading">Sunny day</h1>
-                            <h3 class="location">NewYork, USA</h3>
-                            <p class="temp">
-                                <span class="temp-value">35</span>
-                                <span class="deg">0</span>
-                                <a href="javascript:;"><span class="temp-type">C</span></a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="bottom">
-                        <div class="wrapper">
-                            <ul class="forecast">
-                                <a href="javascript:;"><span class="lnr lnr-chevron-up go-up"></span></a>
-                                <li class="active">
-                                    <span class="date">Yesterday</span>
-                                    <span class="lnr lnr-sun condition">
-                                        <span class="temp">32<span class="deg">0</span><span class="temp-type">C</span></span>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="date">Tomorrow</span>
-                                    <span class="lnr lnr-sun condition">
-                                        <span class="temp">38<span class="deg">0</span><span class="temp-type">C</span></span>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <script>
+        $(function(){
+        	$('.weather_container').hide();
+        	$('.weather_container').css('position','fixed');
+        	$('#weather_1').on("click",function(){
+        		$('.weather_container').slideToggle();
+        	});
+        	
+        });
+        	var apiURI = "https://api.openweathermap.org/data/2.5/onecall?lat=37.57&lon=126.98&appid="+"cbb2ea4f1ab7a72a57e98ecd56c439a3";
+	        $.ajax({
+	            url: apiURI,
+	            dataType: "json",
+	            type: "GET",
+	            async: "false",
+	            success: function(data) {
+	                console.log(data);
+	                console.log("현재온도 : "+ (data.current.temp- 273.15) );
+	                
+	                var weatherId = data.current.weather[0].id.toString();
+	                var weatherName = data.current.weather[0].main;
+	                var temp = (data.current.temp - 273.15).toFixed(1);
+	                var tomorrowTemp = (data.daily[0].temp.day - 273.15).toFixed(1);
+	                
+	                if(weatherId.charAt(0) == '2' || weatherId.charAt(0) == '3' || weatherId.charAt(0) == '5'){
+	                	$('.weather-card').attr('class','weather-card rain');
+	                	$('#weather_name').text(weatherName);
+	                	$('#temp_value').text(temp+" ℃");
+	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
+	                	
+	                }else if(weatherId.charAt(0) == '6' || weatherId.charAt(0) == '7' ){
+	                	$('.weather-card').attr('class','weather-card snow');
+	                	$('#weather_name').text(weatherName);
+	                	$('#temp_value').text(temp+" ℃");
+	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
+	                	
+	                }else if(weatherId == '800'){
+	                	$('.weather-card').attr('class','weather-card sunny');
+	                	$('#weather_name').text(weatherName);
+	                	$('#temp_value').text(temp+" ℃");
+	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
+	                	
+	                }else if(weatherId.charAt(0) == '8' && weatherName.includes("cloud")){
+	                	$('.weather-card').attr('class','weather-card cloudy');
+	                	$('#weather_name').text(weatherName);
+	                	$('#temp_value').text(temp+" ℃");
+	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
+	                	
+	                }else{
+	                	$('.weather-card').attr('class','weather-card sunny');
+	                	$('#weather_name').text(weatherName);
+	                	$('#temp_value').text(temp+" ℃");
+	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
+	                	
+	                }
+	            }
+	        });
+        </script>
+        
+        
     </header>
+        
     <!-- Header part end-->
 
     <!-- jquery plugins here-->
+    
     <script src="resources/js/jquery-1.12.1.min.js"></script>
     <!-- popper js -->
     <script src="resources/js/popper.min.js"></script>

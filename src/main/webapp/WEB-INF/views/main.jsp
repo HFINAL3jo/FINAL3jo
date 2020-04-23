@@ -24,9 +24,17 @@
 	        background-size: 100% 100%;
         }
 
-        .showcase h2, .showcase p {
+        .showcase h1, .showcase p {
 	        margin-bottom: 10px;
 	        color: white;
+        }
+        
+        .showcase h1{
+        	font-size:4em;
+        }
+        
+        #welcome_p{
+        	font-size:1.6em;
         }
 
         .showcase .btn {
@@ -294,8 +302,8 @@
       <!-- Showcase -->
       <div class="showcase">
           <div id="showcas-div">
-        <h2>Welcome to SEOUL!</h2>
-        <p>
+        <h1>Welcome to SEOUL!</h1>
+        <p id="welcome_p">
 			Get inspired for your journey!
         </p>
         <!-- <a href="#" class="btn">
@@ -443,8 +451,6 @@
       <script>
       	$(function(){
       		themeList();
-      		
-      		
       	});
       	
       	function themeList(){
@@ -470,33 +476,6 @@
       	};
       </script>
     </div>
-    	
-    <script>
-    	var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=cbb2ea4f1ab7a72a57e98ecd56c439a3";
-    	
-    	$.ajax({
-    		url:apiURI,
-    		dataType:"json",
-    		type:"GET",
-    		async:"false",
-    		success:function(data){
-    			console.log(data);
-    			console.log("현재온도 : " + (data.main.temp - 273.15));
-    			console.log("도시이름 : " + data.name);
-    			console.log("날씨 : " + data.weather[0].main);
-    			console.log("상세 이미지 : " + data.weather[0].icon);
-    			
-		    	var imgURL = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png"
-		    	$('#weather').attr('src', imgURL);
-		    	$('#weather_icon').attr('src',data.weather[0].icon);
-		    	$('#weather_city').html(data.name);
-		    	$('#weather_wind').html(data.wind.speed);
-		    	$('#weather_description').html(data.weather[0].description);
-		    	$('#weather_wind').html(data.country);
-    		}
-    	});
-    	
-    </script>
 
     <!--::footer_part start::-->
     <%@ include file="common/footer.jsp" %>
