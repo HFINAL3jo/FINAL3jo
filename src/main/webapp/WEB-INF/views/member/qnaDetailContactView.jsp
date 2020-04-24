@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.aligo.spring.member.model.vo.Member"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="zxx">
@@ -58,54 +58,7 @@ textarea{
 	border: 0.5px solid #F8F8F8 !important; 
 }
 
-@font-face {
-  font-family: 'Open Sans';
-  font-style: italic;
-  font-weight: 300;
-  src: local('Open Sans Light Italic'), local('OpenSans-LightItalic'), url(https://fonts.gstatic.com/s/opensans/v17/memnYaGs126MiZpBA-UFUKWyV9hrIqY.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: italic;
-  font-weight: 400;
-  src: local('Open Sans Italic'), local('OpenSans-Italic'), url(https://fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0Zdcg.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: italic;
-  font-weight: 600;
-  src: local('Open Sans SemiBold Italic'), local('OpenSans-SemiBoldItalic'), url(https://fonts.gstatic.com/s/opensans/v17/memnYaGs126MiZpBA-UFUKXGUdhrIqY.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: italic;
-  font-weight: 700;
-  src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url(https://fonts.gstatic.com/s/opensans/v17/memnYaGs126MiZpBA-UFUKWiUNhrIqY.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Open Sans Light'), local('OpenSans-Light'), url(https://fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN_r8OUuhs.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVZ0e.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Open Sans SemiBold'), local('OpenSans-SemiBold'), url(https://fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UNirkOUuhs.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(https://fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN7rgOUuhs.ttf) format('truetype');
-}
+
 .no-padding {
   padding-right: 0;
   padding-left: 0;
@@ -127,9 +80,7 @@ textarea{
   color: #fff;
   background-color: #3B3E44;
 }
-.comment-wrapper .comment-border .comment-box .btn:hover {
-  text-decoration: none;
-}
+
 .comment-wrapper .comment-post-box {
   padding: 5px;
   border-bottom: 2px solid #F4F4F1;
@@ -161,17 +112,11 @@ textarea{
 .comment-wrapper .comment-post-box .comment-post .comment-post-header .fa {
   color: #8A8B8F;
 }
-@media screen and (max-width: 768px) {
-  .comment-wrapper .comment-post-box .comment-post .comment-post-box {
-    margin-top: 70px;
-  }
-}
+
 .comment-wrapper .show {
   border-radius: 5px;
 }
-.comment-wrapper .comment-post-box {
-  display: none;
-}
+
 .recent-wrapper .center {
   text-align: center;
 }
@@ -301,7 +246,6 @@ textarea{
                 <strong>Kendall</strong>
                 <small>Posted 12 hr ago</small>
               </h5>
-          <i class="fa fa-pencil-square-o pull-right"></i>
         </div>
         <div class="panel-body comment-post-body">
           <div class="comment-post-content">
@@ -310,6 +254,7 @@ textarea{
         </div>
       </div>
     </div>
+    
     <div class="comment-post-box">
       <div class="comment-post">
         <div class="comment-post-header">
@@ -317,7 +262,6 @@ textarea{
                 <strong>Kendall</strong>
                 <small>Posted 12 hr ago</small>
               </h5>
-          <i class="fa fa-pencil-square-o pull-right"></i>
         </div>
         <div class="panel-body comment-post-body">
           <div class="comment-post-content">
@@ -326,86 +270,7 @@ textarea{
         </div>
       </div>
     </div>
-    <div class="comment-post-box">
-      <div class="comment-post">
-        <div class="comment-post-header">
-          <h5>
-                <strong>Kendall</strong>
-                <small>Posted 12 hr ago</small>
-              </h5>
-          <i class="fa fa-pencil-square-o pull-right"></i>
-        </div>
-        <div class="panel-body comment-post-body">
-          <div class="comment-post-content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="comment-post-box">
-      <div class="comment-post">
-        <div class="comment-post-header">
-          <h5>
-                <a href="">Kendall</a>
-                <small>Posted 12 hr ago</small>
-              </h5>
-          <i class="fa fa-pencil-square-o pull-right"></i>
-        </div>
-        <div class="panel-body comment-post-body">
-          <div class="comment-post-content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="comment-post-box">
-      <div class="comment-post">
-        <div class="comment-post-header">
-          <h5>
-                <strong>Kendall</strong>
-                <small>Posted 12 hr ago</small>
-              </h5>
-          <i class="fa fa-pencil-square-o pull-right"></i>
-        </div>
-        <div class="panel-body comment-post-body">
-          <div class="comment-post-content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="comment-post-box">
-      <div class="comment-post">
-        <div class="comment-post-header">
-          <h5>
-                <strong>Kendall</strong>
-                <small>Posted 12 hr ago</small>
-              </h5>
-          <i class="fa fa-pencil-square-o pull-right"></i>
-        </div>
-        <div class="panel-body comment-post-body">
-          <div class="comment-post-content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="comment-post-box">
-      <div class="comment-post">
-        <div class="comment-post-header">
-          <h5>
-                <strong>Kendall</strong>
-                <small>Posted 12 hr ago</small>
-              </h5>
-          <i class="fa fa-pencil-square-o pull-right"></i>
-        </div>
-        <div class="panel-body comment-post-body">
-          <div class="comment-post-content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    
     <!-- <button class="btn btn-default btn-link btn-block more show hidden" id="see-more">
       <small>Show more comments</small>
       <i class="fa fa-caret-down"></i>
@@ -425,30 +290,16 @@ textarea{
   </section>
   <!--// 본문 -->
   <script>
-  $(".comment-body-box").each(function (index) {
-	  $(this).children(".comment-post-box").slice(-3).show();
-	});
+  /* edit, delete 버튼 */
+	var edit = function(){
+		location.href = "qupView.do?qId="+document.getElementsByName('qId')[0].value;
+	}
 
-	/* $("#see-more").removeClass("hidden");
+	var deleteQNA = function(){
+		location.href = "qDelete.do?qId="+document.getElementsByName('qId')[0].value;
+	}
 
-	$("#see-more").click(function (e) {
-	  // click event for load more
-	  e.preventDefault();
-	  $(this).siblings(".comment-post-box:hidden").slice(-3).show(); // select next 5 hidden divs and show them
-	  if ($(this).siblings(".comment-post-box:hidden").length == 0) {
-	    // check if any hidden divs
-	    $("#see-less").removeClass("hidden");
-	    $("#see-more").addClass("hidden");
-	  }
-	});
-
-	$("#see-less").click(function (e) {
-	  e.preventDefault();
-	  $(this).siblings(".comment-post-box").slice(3).hide();
-	  $("#see-less").addClass("hidden");
-	  $("#see-more").removeClass("hidden");
-	}); */
-
+	
   </script>
   
   <!-- ================ contact section end ================= -->
@@ -475,14 +326,6 @@ textarea{
 		});
 	}
 </script> -->
-<script>
-	var edit = function(){
-		location.href = "qupView.do?qId="+document.getElementsByName('qId')[0].value;
-	}
 
-	var deleteQNA = function(){
-		location.href = "qDelete.do?qId="+document.getElementsByName('qId')[0].value;
-	}
-</script>
 </body>
 </html>
