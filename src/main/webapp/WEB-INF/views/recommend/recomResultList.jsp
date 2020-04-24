@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% 
 	Map<Integer, ArrayList<ThemeVo>> map = (Map)request.getAttribute("map");
-
+	System.out.println(map.get(1).get(0).getTid());
 %>
 <!DOCTYPE html>
 <html>
@@ -198,11 +198,9 @@
 				<div class="card-list">
 			<% for(int j = 0; j < map.get(count).size(); j++){ %>
 				<% if( map.get(count).get(j) != null ){ %>
-					<%-- <c:url var="detail" value="topListDetail.do">
-						<c:param name="tId" value="<%= map.get(count).get(j).getTid() %>" />
-					</c:url> --%>
 					<div class="card">
-						<img src="<%= map.get(count).get(j).getTfile() %>">
+						<img src="<%= map.get(count).get(j).getTfile() %>" 
+							onclick="location.href='postdetail.do?tId='+<%= map.get(count).get(j).getTid() %>;">
 						<span><%= map.get(count).get(j).getTtitle() %></span>
 					</div>
 				<%} %>
