@@ -404,7 +404,7 @@
     					Did you like this review? Press like to make it easier for others to see!
   						</span>
   
-  						<button class="btn-secondary like-review" id="likeBtn" name="likeBtn" value="0" onclick="return like()">
+  						<button class="btn-secondary like-review" id="likeBtn" name="likeBtn" value="0" onclick="like(this);">
     					<i class="fa fa-heart" aria-hidden="true"></i> Like ${t.tLikes}
   						</button>
 					</div>
@@ -559,25 +559,21 @@
 								$(this).val(1);
 								
 							}else{
-								console.log();
-								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> Like '+${t.tLikes});
+								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> Like '+ ${t.tLikes});
 								$(this).children('.fa-heart').addClass('animate-like');
 								$(this).val(0);
 							}
 						});
 					});
 				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
-				    function like() {
+				    function like(value) {
+				   		console.log(value);
 						/* $.ajax({
-							url:  ,
-							type:  ,
-							dataType:"json"
+							url: "updateLike.do",
+							type: ,
 							data:
 						}); */
 					}
-				    
-				    
-				    
 				    
 				    //theme > themename 링크
 				    $('.loction span').mouseenter(function(){
@@ -590,10 +586,6 @@
 				    	}
 				    });
 				   
-				    
-				    
-				    
-				    
 				    //댓글 submit
 				    $('#rSubmit').click(function(){
 				    	var trWriter = '${loginUser.nickname}';
