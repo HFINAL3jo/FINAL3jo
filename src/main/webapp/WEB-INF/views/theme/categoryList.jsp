@@ -34,6 +34,17 @@ h4{
   	background-image:url('${contextPath}/resources/images/nightview.jpg');
     background-size: 100% 100%;
   }
+  
+ .genric-btn.primary:hover {
+  background:#0067b8 !important;
+  color: white !important;
+  border: 1px solid #0067b8 !important;
+}
+ .genric-btn.primary{
+  color: black !important;
+  border: 1px solid #0067b8 !important;
+  background:white;
+}
 
 </style>
 
@@ -125,7 +136,7 @@ h4{
 			<input id="kw" type="hidden" name="keyword" value="${sc.keyword}">
 			<input id="lc" type="hidden" value="${pi.listCount }">
 			<div align="center">
-				<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:#ebc5e4;">Lord More..</button></a>
+				<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:white;">Lord More..</button></a>
 			</div>
 			
 		</div>
@@ -229,9 +240,6 @@ h4{
 		 $('#aList').html("");
 		 ajaxPage();
 	 });
-	$('#svf').click(function(){
-		location.href='theme.do';
-	});
 	</script>
 </body>
 </html>
