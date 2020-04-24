@@ -154,7 +154,7 @@
 						listText += "<tr>";
 						listText += "<td>"+data.list[i].qId+"</td>";
 						listText += "<td>";
-						listText += "<a href='qdetail.do?qId="+data.list[i].qId+"&currentPage="+data.pi.currentPage+"'>"+data.list[i].qTitle+"</a>";
+						listText += "<a style='color:black' href='qdetail.do?qId="+data.list[i].qId+"&currentPage="+data.pi.currentPage+"'>"+data.list[i].qTitle+"</a>";
 						listText += "</td>";
 						
 						listText += "<td>"+data.list[i].qWriter+"</td>";
