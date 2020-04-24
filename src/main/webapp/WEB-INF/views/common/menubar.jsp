@@ -265,7 +265,7 @@
                         <div class="hearer_icon d-flex">
 							<div>
 								<img id="weather_1" src="${ contextPath }/resources/images/weather_icon.png" style="width:24px; height:24px; opacity:0.7;">
-								<div class="weather_container">
+								<div class="weather_container" style="left:65%;">
 					        <div class="row">
 					            <div class="col">
 					                <div class="weather-card">
@@ -366,55 +366,69 @@
         		$('.weather_container').slideToggle();
         	});
         	
+        	var apiURI1 = "https://api.openweathermap.org/data/2.5/onecall?lat=37.57&lon=126.98&appid="+"cbb2ea4f1ab7a72a57e98ecd56c439a3";
+        	var apiURI2 = "http://api.openweathermap.org/data/2.5/onecall/timemachine?lat=37.57&lon=126.98&dt=1587610800&appid=cbb2ea4f1ab7a72a57e98ecd56c439a3";
+        	getWeather(apiURI1);
+        	getWeather(apiURI2);
         });
-        	var apiURI = "https://api.openweathermap.org/data/2.5/onecall?lat=37.57&lon=126.98&appid="+"cbb2ea4f1ab7a72a57e98ecd56c439a3";
-	        $.ajax({
-	            url: apiURI,
-	            dataType: "json",
-	            type: "GET",
-	            async: "false",
-	            success: function(data) {
-	                console.log(data);
-	                console.log("현재온도 : "+ (data.current.temp- 273.15) );
-	                
-	                var weatherId = data.current.weather[0].id.toString();
-	                var weatherName = data.current.weather[0].main;
-	                var temp = (data.current.temp - 273.15).toFixed(1);
-	                var tomorrowTemp = (data.daily[0].temp.day - 273.15).toFixed(1);
-	                
-	                if(weatherId.charAt(0) == '2' || weatherId.charAt(0) == '3' || weatherId.charAt(0) == '5'){
-	                	$('.weather-card').attr('class','weather-card rain');
-	                	$('#weather_name').text(weatherName);
-	                	$('#temp_value').text(temp+" ℃");
-	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
-	                	
-	                }else if(weatherId.charAt(0) == '6' || weatherId.charAt(0) == '7' ){
-	                	$('.weather-card').attr('class','weather-card snow');
-	                	$('#weather_name').text(weatherName);
-	                	$('#temp_value').text(temp+" ℃");
-	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
-	                	
-	                }else if(weatherId == '800'){
-	                	$('.weather-card').attr('class','weather-card sunny');
-	                	$('#weather_name').text(weatherName);
-	                	$('#temp_value').text(temp+" ℃");
-	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
-	                	
-	                }else if(weatherId.charAt(0) == '8' && weatherName.includes("cloud")){
-	                	$('.weather-card').attr('class','weather-card cloudy');
-	                	$('#weather_name').text(weatherName);
-	                	$('#temp_value').text(temp+" ℃");
-	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
-	                	
-	                }else{
-	                	$('.weather-card').attr('class','weather-card sunny');
-	                	$('#weather_name').text(weatherName);
-	                	$('#temp_value').text(temp+" ℃");
-	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
-	                	
-	                }
-	            }
-	        });
+	        
+        	function getWeather(apiURI){
+        		$.ajax({
+    	            url: apiURI,
+    	            dataType: "json",
+    	            type: "GET",
+    	            async: "false",
+    	            success: function(data) {
+    	                console.log(data);
+    	                console.log("현재온도 : "+ (data.current.temp- 273.15) );
+    	                
+    	                var weatherId = data.current.weather[0].id.toString();
+    	                var weatherName = data.current.weather[0].main;
+    	                var temp = (data.current.temp - 273.15).toFixed(1);
+    	                var tomorrowTemp = (data.daily[0].temp.day - 273.15).toFixed(1);
+    	                var yesterdayTemp = (data.hourly[5].temp - 273.15).toFixed(1);
+    	                
+    	                if(weatherId.charAt(0) == '2' || weatherId.charAt(0) == '3' || weatherId.charAt(0) == '5'){
+    	                	$('.weather-card').attr('class','weather-card rain');
+    	                	$('#weather_name').text(weatherName);
+    	                	$('#temp_value').text(temp+" ℃");
+    	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
+    	                	$('#yesterday_temp').text(yesterdayTemp+" ℃");
+    	                	
+    	                }else if(weatherId.charAt(0) == '6' || weatherId.charAt(0) == '7' ){
+    	                	$('.weather-card').attr('class','weather-card snow');
+    	                	$('#weather_name').text(weatherName);
+    	                	$('#temp_value').text(temp+" ℃");
+    	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
+    	                	$('#yesterday_temp').text(yesterdayTemp+" ℃");
+    	                	
+    	                }else if(weatherId == '800'){
+    	                	$('.weather-card').attr('class','weather-card sunny');
+    	                	$('#weather_name').text(weatherName);
+    	                	$('#temp_value').text(temp+" ℃");
+    	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
+    	                	$('#yesterday_temp').text(yesterdayTemp+" ℃");
+    	                	
+    	                }else if(weatherId.charAt(0) == '8' && weatherName.includes("cloud")){
+    	                	$('.weather-card').attr('class','weather-card cloudy');
+    	                	$('#weather_name').text(weatherName);
+    	                	$('#temp_value').text(temp+" ℃");
+    	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
+    	                	$('#yesterday_temp').text(yesterdayTemp+" ℃");
+    	                	
+    	                }else{
+    	                	$('.weather-card').attr('class','weather-card sunny');
+    	                	$('#weather_name').text(weatherName);
+    	                	$('#temp_value').text(temp+" ℃");
+    	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
+    	                	$('#yesterday_temp').text(yesterdayTemp+" ℃");
+    	                	
+    	                }
+    	            }
+    	        });
+        	}
+        	
+        	
         </script>
         
         

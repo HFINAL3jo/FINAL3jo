@@ -369,32 +369,10 @@
       		});
       	}
       </script>
-      
-      <!-- <div class="card-section">
-        <h1>aligo theme</h1>
-        <h4>Hover over the picture to get an awesome 3d parallax effect</h4>
-        <div class="card-list">
-          <div class="card">
-            <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=320"/>
-          </div>
-          <div class="card">
-            <img src="https://images.unsplash.com/photo-1518365428912-757c887d86c0?w=320"/>
-          </div>
-          <div class="card">
-            <img src="https://images.unsplash.com/photo-1489573280374-2e193c63726c?w=320"/>
-          </div>
-          <div class="card">
-            <img src="https://images.unsplash.com/photo-1535190878546-79d24dae2530?w=320"/>
-          </div>
-          <div class="card">
-            <img src="https://images.unsplash.com/photo-1494675006433-9e9428eba6c7?w=320"/>
-          </div>
-        </div>
-      </div> -->
       <!-- card section end -->
 
       <!-- Home cards 1 -->
-      <div id="home-cards-title">
+      <%-- <div id="home-cards-title">
         <h1>aligo theme</h1>
         <h4 style="color:#999">Please check out a variety of information about culture, local food, shopping, activity and take a rest</h4>
         </div>
@@ -475,7 +453,65 @@
       		});
       	};
       </script>
-    </div>
+    </div> --%>
+    
+    <!-- card section start -->
+      <div class="card-section">
+        <h1 style="margin:10px 0px">aligo theme</h1>
+        <h4>Please check out a variety of information about culture, local food, shopping, activity and take a rest</h4>
+        <div class="card-list">
+          <div class="card" id="theme1">
+            <img src="${ contextPath }/resources/images/recommend_place_bibimbab.jpg"/>
+            <span>테스트 일번</span>
+          </div>
+          <div class="card" id="theme2">
+            <img src="${ contextPath }/resources/images/recommend_place_lottetower.jpg"/>
+            <span>테스트 일번</span>
+          </div>
+          <div class="card" id="theme3">
+            <img src="${ contextPath }/resources/images/recommend_place_chunggyechun.jpg"/>
+            <span>테스트 일번</span>
+          </div>
+          <div class="card" id="theme4">
+            <img src="${ contextPath }/resources/images/recommend_place_gyungbokgung.jpg"/>
+            <span>테스트 일번</span>
+          </div>
+          <div class="card" id="theme5">
+            <img src="${ contextPath }/resources/images/recommend_place_hanriverpark.jpg"/>
+            <span>테스트 일번</span>
+          </div>
+          <div class="card" id="theme6">
+            <img src="${ contextPath }/resources/images/recommend_place_hanriverpark.jpg"/>
+            <span>테스트 일번</span>
+          </div>
+        </div>
+      </div>
+      <script>
+      	 $(function(){
+      		themeList();
+      	});
+      	
+      	function themeList(){
+      		$.ajax({
+      			url:"themeList.do",
+      			dataType:"json",
+      			success:function(data){
+      				$.each(data, function(index, value){
+						var theme = "#theme" + (index + 1);
+      					
+      					$(theme).children('img').attr('src','/spring/resources/tuploadFiles/'+value.tModifyFile);
+      					$(theme).children('span').html(value.tTitle);
+      					$(theme).on("click",function(){
+      						location.href="themeDetail.do?tId="+value.tId;;
+      					});
+      				});
+      			},error:function(){
+      				/* alert("page load failed"); */
+      				console.log("error");
+      			}
+      		});
+      	};
+      </script>
 
     <!--::footer_part start::-->
     <%@ include file="common/footer.jsp" %>
