@@ -361,8 +361,6 @@
                 <!-- location  -->
 
                 <section class="infor-element">
-                    <div class="text-type">
-                       		공원&amp;정원</div>
                     <h3 class="h3 textcenter">${t.tTitle }</h3>
                     <br>                    
 					<span style="float:right;">Views : ${t.tViews }<br></span>
@@ -382,7 +380,7 @@
                             <dl><dt>Address</dt>
                                 <dd>${t.tAddress }</dd>
                             </dl>
-                            <dl><dt>Transportation</dt>
+                            <dl><dt>Traffic</dt>
                                 <dd>${t.tTrans }</dd>
                             </dl>
                             <dl><dt>Fee</dt>
@@ -392,7 +390,7 @@
                             <dl><dt>Tel</dt>
                                 <dd>${t.tTel }</dd>
                             </dl>
-                            <dl><dt>Opening Hours</dt>
+                            <dl><dt>Opening</dt>
                                 <dd>${t.tHours }</dd>
                             </dl>
                         </div>
