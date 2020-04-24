@@ -66,7 +66,7 @@ h4{
 						<div class="breadcrumb_iner_item">
 							<h2>THEME</h2>
 							<p>
-								Theme <span>-</span> keyword
+								Theme <span id="kk">-</span> 
 							</p>
 						</div>
 					</div>
@@ -239,6 +239,12 @@ h4{
 		 $('#titlebar').text('Most Liked');
 		 $('#aList').html("");
 		 ajaxPage();
+	 });
+	 
+	 $(function(){
+		var str = document.URL.substr(document.URL.indexOf('keyword=')+8,document.URL.length);
+		str = decodeURI(str.substr(0,str.indexOf('&')));
+		$('#kk').text(' - ' + str);
 	 });
 	</script>
 </body>
