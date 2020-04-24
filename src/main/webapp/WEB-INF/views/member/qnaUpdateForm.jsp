@@ -52,6 +52,10 @@
    border: 1px solid #0067b8 !important;
    background: #0067b8 !important;
  }
+ 
+ .mt-3 input:last-child{
+ float:right;
+}
 </style>
 </head>
 
@@ -131,8 +135,7 @@
             </div>
             <div class="form-group mt-3">
               <input type="submit" class="btn" value="send">
-              <!-- <input type="button" class="btn" value="back" align="right" > -->
-              <a href="javascript:history.back()">Back</a>
+              <input type="button" class="btn" value="back" onClick="location.href='javascript:history.back()'" >
             </div>
           </form>
         </div>

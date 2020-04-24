@@ -258,7 +258,62 @@ textarea{
         </div>
       </div>
     </div>
- 
+   <%--  <script>
+    	$(function(){
+    		getReplyList();
+    		
+    		setInterval(function(){
+    			getReplyList();
+    		},3000);
+    		
+    		$("#rSubmit").on("click",function(){
+    			var rContent = $("#comment-box").val();
+    			var refQid = ${ q.qId };
+    			var rWriter = "<%= ((Member)session.getAttribute("loginUser")).getnickname()%>"; /* id말고 닉네임으로 함 */
+    			
+    			$.ajax({
+    				url:"addReply.do",
+    				data:{rContent:rContent,refQid:refQid,rWriter:rWriter},
+    				type:"post",
+    				success:function(data){
+    					if(data == "success"){
+    						getReplyList();
+    						$("rContent").val("");
+    					}
+    				},error:function(){
+    					console.log("전송실패");
+    				}
+    			});
+    		});
+    	});
+    	
+    	function getReplyList(){
+    		var qId = ${ q.qId};
+    		
+    		$.ajax({
+    			url:"rList.do",
+    			data:{qId:qId},
+    			dataType:"json",
+    			success:function(data){
+    				$divHeadWriter = $("#rDivWriter div");
+    				$divHeadWriter.html("");//????이거 뭔가요?
+    						
+    				var $divOfWriter;
+    				var $divOfContent;
+    				var $rWriter;
+    				var $rContent;
+    				var $rCreateDate;
+    				
+    				for(var i in data){
+    					$divOfWriter = $("<div>");
+    					$rWriter = $("<div>").text(data[i].rWriter);
+    				}
+    			},error:function(){
+    				console.log("전송실패");
+    			}
+    		});
+    	}
+    </script> --%>
     <!-- <div class="comment-post-box">
       <div class="comment-post">
         <div class="comment-post-header">
