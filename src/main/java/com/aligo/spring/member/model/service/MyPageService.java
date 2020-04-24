@@ -8,9 +8,9 @@ import com.aligo.spring.theme.model.vo.Theme;
 
 public interface MyPageService {
 
-	int getListCount();
+	int getListCount(String mId);
 
-	ArrayList<Theme> selectList(PageInfo pi);
+	ArrayList<Theme> selectList(PageInfo pi, String mId);
 
 	int memberDelete(Member m);
 

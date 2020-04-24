@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -158,7 +159,6 @@ public class ThemeController extends TFile{
 			@RequestParam(value="tId") int bId) {
 		
 		int uc = tService.updateCount(bId);
-		if(uc == 2) System.out.println("updateCount성공"); else System.out.println("실패"); 
 		
 		Theme t = tService.selectTheme(bId);
 		ArrayList list = new ArrayList();
@@ -314,4 +314,32 @@ public class ThemeController extends TFile{
 		return "redirect:postdetail.do";
 	}
 
+	@RequestMapping("updateLike.do")
+	public String updateLike(int tId,String lv,String loginUser,String tCode,HttpServletResponse response) throws IOException {
+		HashMap<String,String> map = new HashMap<>();
+		map.put("loginUser",loginUser);
+		map.put("tCode",tCode);
+		map.put("tId",Integer.toString(tId));
+		map.put("lv",lv);
+		int result = tService.updateLike(map);
+		String str = "";
+		switch(result) {
+		case 3: str = "Saved mylike list!"; break;
+		case 2: str = "deleted!"; break;
+		case 0: str = "error!"; break;
+		default: str = "Contact the admin"; break;
+		}
+		return str;
+	}
+	
+	@RequestMapping("likeStatus.do")
+	@ResponseBody
+	public String likeStatus(String loginUser,int tId) {
+		HashMap<String,String> map = new HashMap<>();
+		map.put("loginUser",loginUser);
+		map.put("tId",Integer.toString(tId));
+		
+		int result = tService.likeStatus(map);
+		if(result > 0) return "true"; else return "false";
+	}
 }

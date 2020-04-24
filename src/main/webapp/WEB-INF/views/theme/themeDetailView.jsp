@@ -363,7 +363,8 @@
                 <section class="infor-element">
                     <h3 class="h3 textcenter">${t.tTitle }</h3>
                     <br>                    
-					<span style="float:right;">Views : ${t.tViews }<br></span>
+					<span style="float:right;">Views : ${t.tViews }</span><br>
+					<span style="float:right;">Likes : ${t.tLikes }</span><br>
 					<c:if test="${loginUser.nickname eq t.tWriter || loginUser.nickname eq 'ADMIN'}">
 					<c:url var="mo" value="themeModifyView.do">
 						<c:param name="t" value="${t }"/>
@@ -401,10 +402,9 @@
 						<span>
     					Did you like this review? Press like to make it easier for others to see!
   						</span>
-  
-  						<button class="btn-secondary like-review" id="likeBtn" name="likeBtn" value="0" onclick="like(this);">
-    					<i class="fa fa-heart" aria-hidden="true"></i> Like ${t.tLikes}
-  						</button>
+  						<c:if test="${!empty loginUser }">
+  						<button class="btn-secondary like-review" id="likeBtn" name="likeBtn" value="0">
+    					<i class="fa fa-heart" aria-hidden="true"></i> Like </button></c:if>
 					</div>
 					<br><br><br>
 					<div>
@@ -434,7 +434,7 @@
                         <br><br><br>
                         <h3 class="black"># ${t.tKeyword}</h3>
                         <br><br>
-                        <ul class="cols4-element">
+                       <!--  <ul class="cols4-element">
                             <li>
                                 <a href="http://me2.do/xDAyqdMi" title="서울야경 스릴 있게 즐기기!"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27505&amp;fileTy=MEDIA&amp;fileNo=1" alt="서울야경 스릴 있게 즐기기!"><span class="cont"><span class="title">서울야경 스릴 있게 즐기기!</span><span class="content">                    국내 최고 높이의 롯데타워 전망대에서                    아찔한 인증샷을 남겨보자.</span></span><span class="link"><span>랜드마크 서울스카이</span></span>
                                 </a>
@@ -451,7 +451,7 @@
                                 <a href="http://me2.do/GXmjSWe1" title="자동차 극장은 처음이지?"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27508&amp;fileTy=MEDIA&amp;fileNo=1" alt="자동차 극장은 처음이지?"><span class="cont"><span class="title">자동차 극장은 처음이지?</span><span class="content">                    색다른 경험과 즐거움이 가득한                    자동차 극장 백배 즐기는 방법.</span></span><span class="link"><span>잠실 자동차 극장</span></span>
                                 </a>
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
 					
                 </section>
@@ -512,15 +512,15 @@
 				
 				//--------------------------------
                             //		jQuery.noConflict();
-                            var locale = 'ko';
+                     /*        var locale = 'ko';
                             var current_url_ = 'http://korean.visitseoul.net/nature/낮과-밤-모두-완벽한-이곳-석촌호수_/33228';
                             var current_url = location.href;
-                            /* 		if(current_url.indexOf("&WT.ac") != -1){
+                             		if(current_url.indexOf("&WT.ac") != -1){
                             			//current_url=current_url.replace(current_url.slice(current_url.indexOf("&WT"), current_url.length),"");
                             		}else{
                             			current_url=current_url+"&WT.ac=MainBanner1-1";
                             			current_url_=current_url_+"&WT.ac=MainBanner1-1";
-                            		} */
+                            		} 
 
                             var consumer_seq = "744";
                             var smartlogin_seq = "";
@@ -541,36 +541,59 @@
 
                             var refer = "evt_event_id=N_" + 33228;
 
-                            refer = refer.replace("http://", "");
+                            refer = refer.replace("http://", ""); */
 
-                        $(function() {
-                        	  $(".heart").on("click", function() {
-                        	    $(this).toggleClass("is-active");
-                        	  });
-                        	});
 				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
+				    <%if(request.getSession().getAttribute("loginUser") != null){%>
 				    $(function(){
+				    	var loginUser = '${loginUser.nickname}';
+				    	var tId = '${t.tId}';
+				    	$.ajax({
+				    		url:"likeStatus.do",
+				    		type:"post",
+				    		data:{loginUser:loginUser,tId:tId},
+				    		success:function(data){
+				    			if(data =='true'){
+				    			 var btn = $('#likeBtn');
+				    			 btn.val(1);
+				    			 btn.html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this ');
+								 btn.children('.fa-heart').addClass('animate-like');
+				    			}
+				    		},error:function(){
+				    			
+				    		}
+				    	});
+				    	
 						$(document).on('click', '.like-review', function(e) {
 							if( $('#likeBtn').val() == 0 ){
-								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this '+${t.tLikes});
+								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this ');
 								$(this).children('.fa-heart').addClass('animate-like');
 								$(this).val(1);
-								
+								like(this);
 							}else{
-								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> Like '+ ${t.tLikes});
+								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> Like ');
 								$(this).children('.fa-heart').addClass('animate-like');
 								$(this).val(0);
+								like(this);
 							}
 						});
 					});
-				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
-				    function like(value) {
-				   		console.log(value);
-						/* $.ajax({
+				   <%}%>
+				    function like(data) {
+				   		var lv = data.value;
+				   		var tId = '${t.tId}';
+				   		var loginUser = '${loginUser.nickname}';
+				   		var tCode = '${t.tCode}';
+				    		
+						 $.ajax({
 							url: "updateLike.do",
-							type: ,
-							data:
-						}); */
+							type:"post",
+							data:{tId:tId,lv:lv,loginUser:loginUser,tCode:tCode},
+							success:function(data){
+								console.log(data);
+							},error:function(){
+							}
+						});
 					}
 				    
 				    //theme > themename 링크
@@ -588,7 +611,7 @@
 				    $('#rSubmit').click(function(){
 				    	var trWriter = '${loginUser.nickname}';
 				    	var trContent = $('#trc').val();
-				    	var refTid = ${t.tId};
+				    	var refTid = '${t.tId}';
 				    	
 				    	$.ajax({
 				    		url:"addTReply.do",
@@ -604,13 +627,13 @@
 				    	});
 				    });
 				    
-				    $(function(){
+				     $(function(){
 				    	
 				    	getTReplyList();
 				    	
-				    	setInterval(function(){
+				    	 /* setInterval(function(){
 				    		getTReplyList();
-						}, 30000);
+						}, 30000); */ 
 				    	
 				    	function getTReplyList(){
 				    		$tableBody = $('#trtl tbody');
@@ -683,7 +706,7 @@
 				    			}
 				    		});
 				    	}
-				    });
+				    }); 
 				    
 					</script>
 </body>

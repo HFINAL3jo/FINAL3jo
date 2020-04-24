@@ -20,16 +20,16 @@ public class MyPageServiceImpl implements MyPageService {
 	 * 좋아요 리스트 갯수 가져오기
 	 */
 	@Override
-	public int getListCount() {
-		return mpDao.getListCount();
+	public int getListCount(String mId) {
+		return mpDao.getListCount(mId);
 	}
 
 	/**
 	 *좋아요 리스트 가져오기
 	 */
 	@Override
-	public ArrayList<Theme> selectList(PageInfo pi) {
-		return mpDao.selectMyList(pi);
+	public ArrayList<Theme> selectList(PageInfo pi,String mId) {
+		return mpDao.selectMyList(pi,mId);
 	}
 
 	/**
