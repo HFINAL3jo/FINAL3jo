@@ -38,7 +38,7 @@ public class ThemeServiceImpl implements ThemeService {
 		case "NATURE":t.settCode("T1"); break;
 		case "RESTAURANT":t.settCode("T2"); break;
 		case "HISTORY":t.settCode("T3"); break;
-		case "SHOPPIN":t.settCode("T4"); break;
+		case "SHOPPING":t.settCode("T4"); break;
 		case "BAR":t.settCode("T5"); break;
 		case "ACTIVITY":t.settCode("T6"); break;
 		case "EXHIBITION":t.settCode("T7"); break;
