@@ -139,4 +139,6 @@ public class QnAController {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd hh:mm a").create();
 		gson.toJson(rList,response.getWriter());
 	}
+	
+
 }
