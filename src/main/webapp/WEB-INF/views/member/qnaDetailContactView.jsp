@@ -74,11 +74,23 @@ textarea{
   border: none;
   border-radius: 0;
 }
-.comment-wrapper .comment-border .comment-box .btn {
+.comment-wrapper .comment-border .comment-box .btn{
   padding: 5px;
   font-size: 1.1em;
   color: #fff;
   background-color: #3B3E44;
+}
+
+.btn {
+  color: #0067b8 !important;
+  border:1px solid #0067b8 !important;
+  background: white !important;
+}
+
+.btn:hover {
+  color: snow !important;
+  border: 1px solid #0067b8 !important;
+  background: #0067b8 !important;
 }
 
 .comment-wrapper .comment-post-box {
@@ -136,18 +148,6 @@ textarea{
   margin: 0 36px 0 36px;
   padding: 13px;
   font-size: 0.9em;
-}
-.recent-wrapper .recent-act .per-notif img {
-  max-width: 30px;
-  max-heigth: 30px;
-}
-.recent-wrapper .recent-act .per-notif .glyphicon {
-  font-size: 30px;
-  color: #3B3E44;
-}
-.recent-wrapper .recent-act .per-notif .per-notif-body {
-  text-align: justify;
-  text-justify: inter-word;
 }
 
 .breadcrumb{
@@ -234,28 +234,32 @@ textarea{
     <div class="comment-box">
       <textarea class="form-control comment-input" placeholder="Write a comment" id="comment-box" rows=""></textarea>
       <div align="right">
-      <button class="btn pull-right">submit</button>
+      <button class="btn pull-right" id="rSubmit">submit</button>
       </div>
     </div>
   </div>
   <div class="comment-body-box">
     <div class="comment-post-box">
       <div class="comment-post">
-        <div class="comment-post-header">
+        <div class="comment-post-header" id="rDivWriter">
+          <div>
           <h5>
                 <strong>Kendall</strong>
                 <small>Posted 12 hr ago</small>
               </h5>
+          </div>
         </div>
         <div class="panel-body comment-post-body">
-          <div class="comment-post-content">
+          <div class="comment-post-content" id="rDivContent">
+            <div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    
-    <div class="comment-post-box">
+ 
+    <!-- <div class="comment-post-box">
       <div class="comment-post">
         <div class="comment-post-header">
           <h5>
@@ -269,7 +273,7 @@ textarea{
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     
     <!-- <button class="btn btn-default btn-link btn-block more show hidden" id="see-more">
       <small>Show more comments</small>
