@@ -31,12 +31,12 @@
 	
 	// 오름 차순으로 테이블 형성
 	document.getElementById('btn1').onclick = function(){
-		console.log("btn1 실행");
+//		console.log("btn1 실행");
 		showTopList("1");
 	}	
 	
 	document.getElementById('btn2').onclick = function(){
-		console.log("btn2 실행");
+//		console.log("btn2 실행");
 		showTopList("2");
 	}	
 	
@@ -136,7 +136,6 @@ var drawShowChart = function(){
 		    		
 		    		document.getElementById('chartValue').value = check1
 		    		
-		    		console.log("whatData : "+ whatData);
 		    		document.getElementById('charDataShow').value = whatData;
 		    		
 		    		showChart();

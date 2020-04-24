@@ -15,6 +15,16 @@
 	 <result property="qStatus" column="Q_STATUS" />
 	</resultMap>
 	
+	<resultMap id="replyResultSet" type="QnaReply">
+		<id property="rId" column="RID"/>
+		<result property="rContent" column="RCONTENT"/>
+		<result property="refQid" column="REF_BID"/>
+		<result property="rWriterNickname" column="RWRITER"/>
+		<result property="rCreateDate" column="R_CREATE_DATE"/>
+		<result property="rModifyDate" column="R_MODIFY_DATE"/>
+		<result property="rStatus" column="R_STATUS"/>
+	</resultMap>
+	
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM QNA
@@ -37,4 +47,22 @@
 		VALUES(SEQ_QID.NEXTVAL,#{qTitle},#{qContent},#{qWriter},
 		SYSDATE,DEFAULT,DEFAULT)
 	</insert>
+	
+	<update id="updateBoard" parameterType="QnA">
+		UPDATE QNA
+		SET QTITLE=#{qTitle},QCONTENT=#{qContent}			
+		WHERE QID=#{qId}
+	</update>
+	
+	<delete id="deleteBoard">
+		DELETE FROM QNA WHERE QID=#{qId}
+	</delete>
+	
+	<select id="selectReplyList" resultMap="replyResultSet">
+		SELECT *
+		FROM REPLY
+		WHERE REF_QID=#{qId}
+		AND R_STATUS='Y'
+		ORDER BY RID DESC
+	</select>
 </mapper>

@@ -14,25 +14,13 @@
 		<result property="rStatus" column="R_STATUS"/>
 	</resultMap>
 	
-	<resultMap type="Theme" id="themeResultSet">
-		<id property="tId" column="TID"/>
-		<result property="tWriter" column="TWRITER" />
-		<result property="tTitle" column="TTITLE" />
-		<result property="tContent" column="TCONTENT" />
-		<result property="tAddress" column="TADDRESS" />
-		<result property="tAddressH" column="TADDRESSH" />
-		<result property="tCreateDate" column="T_CREATE_DATE" />
-		<result property="tModifyDate" column="T_MODIFY_DATE" />
-		<result property="tViews" column="T_VIEWS" />
-		<result property="tLikes" column="T_LIKES" />
-		<result property="tKeyword" column="TKEYWORD" />
-		<result property="tStatus" column="T_STATUS" />
-		<result property="tCode" column="TCODE" />
-		<result property="tName" column="TNAME"/>
-		<result property="tTel" column="TTEL"/>
-		<result property="tFee" column="TFEE"/>
-		<result property="tHours" column="THOURS"/>
-		<result property="tTrans" column="TTRANS"/>
+	<resultMap type="ThemeVo" id="themeResultSet">
+		<id property="tid" column="TID"/>
+		<result property="ttitle" column="TTITLE"/>
+		<result property="tcode" column="TCODE"/>
+		<result property="tname" column="TNAME"/>
+		<result property="tstatus" column="T_STATUS"/>
+		<result property="tfile" column="T_MODIFY_FILE"/>
 	</resultMap>
 	
 	<select id="selectQA" resultMap="recomResultSet">
@@ -88,10 +76,23 @@
 		WHERE MID = #{ mid }
 	</update>
 	
-	<select id="selectListTheme" parameterType="string" resultMap="themeResultSet">
-		SELECT TID, TTITLE
-		FROM THEME_LIST
-		WHERE TCODE = #{ tCode } AND T_STATUS = 'Y'
+	<select id="selectListTheme" resultMap="themeResultSet">
+		<![CDATA[
+		SELECT *
+		FROM (SELECT L.TID, L.TTITLE, L.TCODE, C.TNAME, L.T_STATUS, F.T_MODIFY_FILE
+		FROM THEME_LIST L
+		LEFT JOIN THEME_CODE C ON(L.TCODE = C.TCODE)
+		JOIN THEME_FILES F ON(L.TID = F.T_CODE_NUMBER)
+		WHERE L.T_STATUS = 'Y'
+		    AND L.TCODE=#{ tcode }
+		    AND (L.TKEYWORD like '%' || #{ keywords.keyword1 } || '%')
+		    AND (L.TKEYWORD like '%' || #{ keywords.keyword2 } || '%')
+		    AND (L.TKEYWORD like '%' || #{ keywords.keyword3 } || '%')
+		    AND (L.TKEYWORD like '%' || #{ keywords.keyword4 } || '%')
+		    AND (L.TKEYWORD like '%' || #{ keywords.keyword5 } || '%')
+		ORDER BY L.T_CREATE_DATE DESC)
+		WHERE ROWNUM <= 3
+		]]>
 	</select>
 
 

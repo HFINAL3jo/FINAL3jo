@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.aligo.spring.common.AligoException;
+import com.aligo.spring.theme.controller.ThemeController;
 import com.aligo.spring.theme.model.dao.ThemeDao;
 import com.aligo.spring.theme.model.vo.PageInfo;
 import com.aligo.spring.theme.model.vo.SearchCondition;
@@ -29,13 +32,13 @@ public class ThemeServiceImpl implements ThemeService {
 	}
 
 	@Override
-	public int insertTheme(Theme t,int tNum) {
+	public int insertTheme(Theme t,int tNum) throws AligoException{
 		
 		switch(t.gettCode()) {
 		case "NATURE":t.settCode("T1"); break;
 		case "RESTAURANT":t.settCode("T2"); break;
 		case "HISTORY":t.settCode("T3"); break;
-		case "SHOPPIN":t.settCode("T4"); break;
+		case "SHOPPING":t.settCode("T4"); break;
 		case "BAR":t.settCode("T5"); break;
 		case "ACTIVITY":t.settCode("T6"); break;
 		case "EXHIBITION":t.settCode("T7"); break;
@@ -43,11 +46,15 @@ public class ThemeServiceImpl implements ThemeService {
 		
 		int chk = tDao.checkFile(tNum);
 		
-		if(chk != 1) {
+		if(chk == 0) {
+			
 			String str = t.gettContent();
+			try {
 			str = str.substring(str.indexOf("src")+5,str.length()-str.indexOf("src")+5);
 			str = str.substring(0,str.indexOf("\""));
-			
+			}catch(Exception e){
+				throw new AligoException("At least Need One Image");
+			}
 			t.settOriginalFile(str);
 			t.settModifyFile(str);
 			TFile tf = new TFile();
@@ -113,5 +120,10 @@ public class ThemeServiceImpl implements ThemeService {
 	@Override
 	public String getKeyword() {
 		return tDao.getKeyword();
+	}
+
+	@Override
+	public int updateTheme(Theme t) {
+		return tDao.updateTheme(t);
 	}
 }

@@ -244,13 +244,17 @@ textarea{
       <hr>
         
         <!-- 글 내용-->
-        <form id="BoardDelForm" name="" action="" method="post" target="_self" enctype="multipart/form-data">
+        <form id="BoardDelForm" name="" action="" method="post">
             <div class="ec-base-table typeWrite ">
                             <table border="1" summary="">
                             <colgroup>
             <col style="width:130px;">
             <col style="width:auto;">
             </colgroup>
+            <input type="hidden" name="qId" value="${ q.qId }">
+		<%-- <input type="hidden" name="qCreateDate;" value="${ q.qCreateDate }">
+		<input type="hidden" name="qAnswerDate;" value="${ q.qAnswerDate }">
+		<input type="hidden" name="qStatus;" value="${ q.qStatus }"> --%>
             <tbody>
             <tr id="qtitle">
             <th colspan="2" align="left"><h4><strong>${ q.qTitle }</strong></h4></th>
@@ -267,8 +271,9 @@ textarea{
             </div>
             <div class="ec-base-button" align="right">
                             <span class="gRight">
-                                <a href="">Edit</a>&nbsp;&nbsp;&nbsp;
-                                <a href="">Delete</a>&nbsp;&nbsp;&nbsp;
+                           <!--      <a href="qupView.do?qId=">Edit</a>&nbsp;&nbsp;&nbsp; -->
+                           <a href='javascript:void(0);' onclick="edit();">Edit</a>&nbsp;&nbsp;&nbsp;
+                                <a href='javascript:void(0);' onclick="deleteQNA();">Delete</a>&nbsp;&nbsp;&nbsp;
                             </span>
                             <span class="gLeft">
                                 <span class="displaynone">
@@ -278,28 +283,6 @@ textarea{
                         </div>
             </div>
             </form>    
-            
-                    <div class="xans-element- xans-board xans-board-commentpackage-1002 xans-board-commentpackage xans-board-1002 "><!-- 코멘트 리스트 -->
-            <!-- 코멘트 페이징 -->
-            <!-- 댓글 수정 -->
-            <form id="commentForm" name="" action="" method="post" target="_self" enctype="multipart/form-data" style="display: none;">
-            <input id="board_no" name="board_no" value="1" type="hidden">
-            <input id="no" name="no" value="4060" type="hidden">
-            <input id="comment_no" name="comment_no" value="" type="hidden">
-            <input id="member_id" name="member_id" value="" type="hidden"><div class="xans-element- xans-board xans-board-commentform-1002 xans-board-commentform xans-board-1002 "><fieldset>
-            <legend>댓글 수정</legend>
-                                <p>비밀번호 : <input id="comment_password" name="comment_password"  value="" type="password"> <span class="secret displaynone"><label>비밀댓글</label></span></p>
-                                <div class="view">
-                                    <textarea id="comment_modify" name="comment_modify" ></textarea>                        <span class="submit">
-                                        <a href="#" alt="수정"></a>
-                                        <a href="#" ><img src="./제일 예쁜 웹퍼블릭 심플 문의사항_files/btn_comment_cancel.gif" alt="취소"></a>
-                                    </span>
-                                </div>
-                                <p class="displaynone"> /  byte</p>
-                            </fieldset>
-            </div>
-            </form>
-</div>
   <!-- 여기부터 댓글 -->
   <div class="col-md-9 comment-wrapper">
   <div class="comment-border">
@@ -492,5 +475,14 @@ textarea{
 		});
 	}
 </script> -->
+<script>
+	var edit = function(){
+		location.href = "qupView.do?qId="+document.getElementsByName('qId')[0].value;
+	}
+
+	var deleteQNA = function(){
+		location.href = "qDelete.do?qId="+document.getElementsByName('qId')[0].value;
+	}
+</script>
 </body>
 </html>

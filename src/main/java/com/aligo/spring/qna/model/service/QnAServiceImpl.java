@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.aligo.spring.qna.model.dao.QnADao;
 import com.aligo.spring.qna.model.vo.QnA;
 import com.aligo.spring.qna.model.vo.QnAPageInfo;
+import com.aligo.spring.qna.model.vo.QnaReply;
 
 @Service("qService")
 public class QnAServiceImpl implements QnAService{
@@ -34,6 +35,26 @@ public class QnAServiceImpl implements QnAService{
 	@Override
 	public int writeBoard(QnA q) {
 		return qDao.writeBoard(q);
+	}
+
+	@Override
+	public QnA selectUpdateBoard(int qId) {
+		return qDao.selectBoard(qId);
+	}
+
+	@Override
+	public int updateBoard(QnA q) {
+		return qDao.updateBoard(q);
+	}
+
+	@Override
+	public int deleteBoard(int qId) {
+		return qDao.deleteBoard(qId);
+	}
+
+	@Override
+	public ArrayList<QnaReply> selectReplyList(int qId) {
+		return qDao.selectReplyList(qId);
 	}
 	
 	

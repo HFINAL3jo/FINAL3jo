@@ -97,6 +97,23 @@ tbody tr:nth-child(2n+1) {
 <!-- d3.js -->
 <link rel="stylesheet" href="css/d3.css">
 <script src="http://d3js.org/d3.v3.min.js" charset="UTF-8"></script>
+<!-- 
+	--간단한 공지--  SurplusAjax,  statisticSurplus.do
+	기타 정보 페이지 입니다. 이 페이지는 com.aligo.spring.statistics.controller.StatisticsController.java 에서 
+	'statisticSurplus.do' 로 이동하여 데이터 남/여, 테마별 분류(좋아요/조회수)등을 가져 온다. (구글 차트 사용) 
+	분산 차트는 차트 특성상  두개의 값(list_3, list_4)를 가져온다. 
+	dataList의 테마 에서 DataChange() 함수를 이용해서 자바스크립트의 XMLHttpRequest() 객체를 이용해서 비동기식 처리를 하여 
+	차트를 변경한다. (남/여 회원 비율은 변경 x)
+	
+	graphSircle() 	: 남/여 회원 비율 보여주는 차트
+	
+	graphSircle3()	: 테마별 (1차 분류)에 따른  TTitle(2차 분류)의 갯수를 보여주는 바 차트
+	
+	graphSircle8()	: 테마별 (1차 분류)에 따른 좋아요/조회수 의 상관 관계를 보여주는 분산 차트 
+	
+	statisticsUpButton.js	: 기존의 페이지(statistics.jsp)에서 차트와 화면 구성이 달라 지므로 따로 버튼이나 비동기 처리를 위해 코드를
+	따로 빼서 관리 [graphSircle(), graphSircle3(), graphSircle8() 의 코드 구현] 
+ -->
 
 <!-- google chart -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -129,6 +146,7 @@ tbody tr:nth-child(2n+1) {
 						<div id="chart2" class='left-box'></div>
 					</div>
 					<div style="height: 28px;">
+					<!-- 테마 별 선택에 따른 비동기식 처리를 위한 데이터 선택 -->
 						<span style="float: left; margin-left: 3%;">테마 &nbsp;<input type="search" list="chartTcl" id="Data1"></span>&nbsp;
 						: <span id="value">NATURE</span> <button id="changeChart" onclick="DataChange()" style="float:right">값 을 변경 합니다.</button>
 						<datalist id="chartTcl">
@@ -141,9 +159,10 @@ tbody tr:nth-child(2n+1) {
 							<option value="T7">EXHIBITION</option>
 						</datalist>
 					</div>
+					<!-- 테마 별 선택에 따른 비동기식 처리에 따른 결과를 차트로 보여주는 곳 -->
 					<div style="width: 800px;">
-						<div id="chart3" style="width:60%; height:100%; float:left;"></div>
-						<div id="chart8" style="width:40%; height:100%; float:left;"></div>
+						<div id="chart3" style="width:65%; height:100%; float:left;"></div>
+						<div id="chart8" style="width:35%; height:100%; float:left;"></div>
 					</div>
 				</div>
 			</div>
@@ -161,6 +180,7 @@ tbody tr:nth-child(2n+1) {
 	
 	graphSircle8();
 	
+	// datalist의 선택 값이 변경 될 경우 선택된 value값에 따라 span 태그에 보여주기 위한 것
 	document.getElementById('Data1').onchange = function(){
 		var value = document.getElementById('Data1').value;
 		

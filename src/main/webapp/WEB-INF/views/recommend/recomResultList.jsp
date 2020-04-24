@@ -1,6 +1,13 @@
+<%@page import="com.aligo.spring.recom.model.vo.ThemeVo"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% 
+	Map<Integer, ArrayList<ThemeVo>> map = (Map)request.getAttribute("map");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -182,61 +189,46 @@
     	</div>
 	</div>
 
-	<div class="card-section">
-		<h2>Nature Theme<span class="h2span">View more...</span></h2>
-		<div class="card-list">
-			<div class="card" id="card1">
-				<img src="/spring/resources/images/recommend_place_bibimbab.jpg">
-				<span>테스트 일번</span>
-			</div>
-			<div class="card" id="card2">
-				<img src="/spring/resources/images/recommend_place_lottetower.jpg">
-				<span>테스트 일번</span>
-			</div>
-			<div class="card" id="card3">
-				<img src="/spring/resources/images/recommend_place_chunggyechun.jpg">
-				<span>테스트 일번</span>
-			</div>
+	<%! int count = 0; %>
+	<% for(int i=1; i<8; i++){ %>
+		<% count=count+1; %>
+		<% if( !map.get(count).isEmpty() ){ %>
+			<div class="card-section">
+			<h2><%= map.get(count).get(0).getTname() %><span class="h2span">View more...</span></h2>
+				<div class="card-list">
+			<% for(int j = 0; j < map.get(count).size(); j++){ %>
+				<% if( map.get(count).get(j) != null ){ %>
+					<%-- <c:url var="detail" value="topListDetail.do">
+						<c:param name="tId" value="<%= map.get(count).get(j).getTid() %>" />
+					</c:url> --%>
+					<div class="card">
+						<img src="<%= map.get(count).get(j).getTfile() %>">
+						<span><%= map.get(count).get(j).getTtitle() %></span>
+					</div>
+				<%} %>
+			<%} %>
+				</div>
+		<%} %>
 		</div>
-	</div>
-	
-	<div class="card-section">
-		<h2>Restaurant Theme<span class="h2span">View more...</span></h2>
-		<div class="card-list">
-			<div class="card" id="card1">
-				<img src="/spring/resources/images/recommend_place_bibimbab.jpg">
-				<span>테스트 일번</span>
-			</div>
-			<div class="card" id="card2">
-				<img src="/spring/resources/images/recommend_place_lottetower.jpg">
-				<span>테스트 일번</span>
-			</div>
-			<div class="card" id="card3">
-				<img src="/spring/resources/images/recommend_place_chunggyechun.jpg">
-				<span>테스트 일번</span>
-			</div>
-		</div>
-	</div>
-	
-	
-	
-	
-
-
+	<%} %>
+		
 	<!--::footer_part start::-->
 	<%@ include file="../common/footer.jsp"%>
 	<!--::footer_part end::-->
 	
-	
-	
 	<script>
-	//	페이지 이동 animate script
-	    $('.down').on('click',function(){
-	        
-	        var offset = $(this).parent().parent().parent().next().children().offset();
-	        
-	        $('html').animate({scrollTop : offset.top - 110}, 1000);
-	    });
+		$(function(){
+			//	페이지 이동 animate script
+		    $('.down').on('click',function(){
+		        
+		        var offset = $(this).parent().parent().parent().next().children().offset();
+		        
+		        $('html').animate({scrollTop : offset.top - 110}, 1000);
+		    });
+			
+			
+			
+		});
 	</script>
 </body>
 </html>
