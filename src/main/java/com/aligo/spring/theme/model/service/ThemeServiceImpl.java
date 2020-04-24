@@ -50,7 +50,7 @@ public class ThemeServiceImpl implements ThemeService {
 			
 			String str = t.gettContent();
 			try {
-			str = str.substring(str.indexOf("src")+5,str.length()-str.indexOf("src")+5);
+			str = str.substring(str.indexOf("src")+5,str.length());
 			str = str.substring(0,str.indexOf("\""));
 			}catch(Exception e){
 				throw new AligoException("At least Need One Image");
