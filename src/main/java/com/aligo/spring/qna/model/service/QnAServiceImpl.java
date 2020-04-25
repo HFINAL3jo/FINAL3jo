@@ -1,6 +1,8 @@
 package com.aligo.spring.qna.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +57,20 @@ public class QnAServiceImpl implements QnAService{
 	@Override
 	public ArrayList<QnaReply> selectReplyList(int qId) {
 		return qDao.selectReplyList(qId);
+	}
+
+
+// =========================== ============================
+	@Override
+	public int getSearchQnaDataTotal(Map<String, String> map) {
+		
+		return qDao.getSearchQnaDataTotal(map);
+	}
+
+	@Override
+	public ArrayList<QnA> getSearchQnaData(Map<String, String> map, QnAPageInfo pi) {
+		
+		return qDao.getSearchQnaData(map, pi);
 	}
 	
 	

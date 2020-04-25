@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aligo.spring.common.QnAPagination;
@@ -140,5 +142,50 @@ public class QnAController {
 		gson.toJson(rList,response.getWriter());
 	}
 	
+	// =================ADMIN 문의 사항==========================
+	@RequestMapping(value="goSearchQnaData.do", method=RequestMethod.POST)
+	@ResponseBody
+	public void goSearchQnaData(HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println(request.getParameterValues("value[]"));
+		System.out.println(request.getParameterValues("checkSearch"));
+		System.out.println(request.getParameter("checkSearch"));
+		System.out.println(request.getParameter("currentPage"));
+		
+		Map<String, String> map = new HashMap();
+		//checkSearch.value
+		
+		// String[] arrayParam = request.getParameterValues("value[]");
 
+		for(int i = 1; i <= request.getParameterValues("value[]").length; i++) {
+			map.put("search"+i, request.getParameterValues("value[]")[i-1]);
+		}
+//		map.put("currentPage", request.getParameter("currentPage"));
+		
+//		int listCount = qService.getSearchQnaDataTotal(map);
+		
+//		int currentPage = 1;	// 검색시에 무조건 페이징 처리는 1부터 한다.
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+//		QnAPageInfo pi = QnAPagination.getQnAPageInfo(currentPage, listCount);
+		QnAPageInfo pi = QnAPagination.getQnAPageInfo(currentPage, qService.getSearchQnaDataTotal(map));
+		
+		ArrayList<QnA> list = qService.getSearchQnaData(map, pi);
+		
+		response.setContentType("application/json; charset=utf-8");
+		
+		Map qnaMap = new HashMap();
+		qnaMap.put("list", list);
+		qnaMap.put("pi", pi);
+		
+		Gson gson = new Gson().newBuilder().setDateFormat("yyyy.MM.dd hh:mm a").create();
+		
+		try {
+			gson.toJson(qnaMap, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
