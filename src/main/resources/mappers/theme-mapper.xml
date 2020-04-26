@@ -225,4 +225,12 @@
 		DELETE FROM THEME_LIKES WHERE MID = 
 		(SELECT MID FROM MEMBER WHERE NICKNAME=#{loginUser})
 	</delete>
+	
+	<update id="deleteTheme">
+		UPDATE THEME_LIST SET T_STATUS='N' WHERE TID=#{tId} 
+	</update>
+	
+	<update id="deleteTReply">
+		UPDATE THEME_REPLY SET TR_STATUS='N' WHERE TRID=#{trId}
+	</update>
 </mapper>

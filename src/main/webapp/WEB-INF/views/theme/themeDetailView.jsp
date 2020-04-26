@@ -366,7 +366,8 @@
 					<span style="float:right;">Views : ${t.tViews }</span><br>
 					<span style="float:right;">Likes : ${t.tLikes }</span><br>
 					<c:if test="${loginUser.nickname eq t.tWriter || loginUser.nickname eq 'ADMIN'}">
-					<br><button id="mp" style="float:right;">Modify</button>					
+					<br><button id="dp" style="float:right; margin-left:20px;">Delete</button>					
+					<button id="mp" style="float:right;">Modify</button>
 					</c:if>
                     <div class="post-element">
                         <span>Posted : ${t.tCreateDate } / Modified : ${t.tModifyDate }</span>
@@ -617,6 +618,7 @@
 				    		success:function(data){	
 				    			if(data=="success"){
 				    				getTReplyList();
+				    				$('#trc').val('');
 				    			}
 				    		},error:function(){
 				    			console.log("댓글전송실패");
@@ -631,7 +633,7 @@
 				    	 /* setInterval(function(){
 				    		getTReplyList();
 						}, 30000); */ 
-				    	
+				     });
 				    	function getTReplyList(){
 				    		$tableBody = $('#trtl tbody');
 				    		$tableBody.html("");
@@ -642,8 +644,9 @@
 				    		var $trContent;
 				    		var $trCreatedate;
 				    		var $input;
+				    		var $input2;
 				    		
-				    		var tId = ${t.tId};
+				    		var tId = '${t.tId}';
 				    		$.ajax({
 				    			url:"trList.do",
 				    			data:{tId:tId},
@@ -663,14 +666,16 @@
 					    				$trCreateDate = $('<td>').text(data[i].trCreateDate);
 					    				var $br = $('<br>');
 					    				$input = $('<input type="button" value="Delete">').css('font-size','0.8em')
-					    				.attr('onclick','window.confirm("Are you sure?");');
-					    				
+					    				.attr('onclick','delReply(this);').addClass('delThis');
+					    				$input2 = $('<input type="hidden">').val(data[i].trId).addClass('deltrId');
+
 					    				$tr.append($trWriter);
 					    				$tr.append($td);
 					    				$td.append($trContent);
 					    				$tr.append($trCreateDate);
 					    				$trCreateDate.append($br);
 					    				$trCreateDate.append($input);
+					    				$trCreateDate.append($input2);
 					    				
 					    				$tableBody.append($tr);
 				    					}else{
@@ -703,10 +708,38 @@
 				    			}
 				    		});
 				    	}
-				    }); 
+				    //포스트 수정
 				    $('#mp').click(function(){
 				    	location.href="themeModifyView.do?tId="+'${t.tId}';
 				    });
+				    
+				    //포스트 삭제
+				    $('#dp').click(function(){
+				    	var e = window.confirm("Are you delete your post?");
+				    	if(e){
+				    		location.href="deleteTheme.do?tId="+'${t.tId}';
+				    	}
+				    });
+				  	
+				    //댓글 삭제
+				    function delReply(value){
+				    	var trId = $(value).siblings('input').val();
+				    	var e = window.confirm("Are you delete your reply?");
+				    	if(e){
+				    		$.ajax({
+				    			 url:"deleteTReply.do",
+				    			type:"get",
+				    			data:{trId:trId},
+				    			success:function(data){
+				    				if(data == 'success') getTReplyList();
+				    				alert("Delete Success");
+				    			},error:function(){
+				    				
+				    			}
+				    		});
+				    	}
+				    } 
+				    
 					</script>
 </body>
 

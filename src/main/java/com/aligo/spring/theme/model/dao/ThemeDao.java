@@ -121,4 +121,12 @@ public class ThemeDao {
 	public int deleteMyLike(HashMap<String, String> map) {
 		return sqlSession.delete("themeMapper.deleteMyLike",map);
 	}
+
+	public int deleteTheme(int tId) {
+		return sqlSession.update("themeMapper.deleteTheme",tId);
+	}
+
+	public int deleteTReply(int trId) {
+		return sqlSession.update("themeMapper.deleteTReply",trId);
+	}
 }

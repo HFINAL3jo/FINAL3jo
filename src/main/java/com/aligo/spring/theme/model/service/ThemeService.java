@@ -80,7 +80,7 @@ public interface ThemeService {
 	 * @param tId
 	 * @return
 	 */
-	ArrayList<TReply> slelctTReplyList(int tId);
+	ArrayList<TReply> selectTReplyList(int tId);
 
 	/**
 	 * DB에서 recommend keyword 값 가져오기
@@ -108,4 +108,18 @@ public interface ThemeService {
 	 * @return
 	 */
 	int likeStatus(HashMap<String, String> map);
+
+	/**
+	 * 테마 포스트 삭제
+	 * @param tId
+	 * @return
+	 */
+	int deleteTheme(int tId);
+
+	/**
+	 * 댓글 삭제
+	 * @param trId
+	 * @return
+	 */
+	int deleteTReply(int trId);
 }

@@ -268,7 +268,6 @@ public class ThemeController extends TFile{
 		         TFile.tOriginalFile = originFilename;
 		         TFile.tModifyFile = renameFilename;
 		         TFile.tCodeNumber = tService.getTNum();
-		         System.out.println(tf);
 		         int result = tService.insertImg(tf);
 		         
 		    } catch (Exception e) {
@@ -280,7 +279,6 @@ public class ThemeController extends TFile{
 	@ResponseBody
 	public String addTReply(TReply r) {
 		String str = "";
-		System.out.println(r);
 		int result = tService.addTReply(r);
 		
 		if(result > 0) str="success"; else str="fail";
@@ -291,7 +289,7 @@ public class ThemeController extends TFile{
 	@RequestMapping("trList.do")
 	public void getTReplyList(HttpServletResponse response,int tId) throws JsonIOException, IOException {
 		
-		ArrayList<TReply> list = tService.slelctTReplyList(tId);
+		ArrayList<TReply> list = tService.selectTReplyList(tId);
 	
 		response.setContentType("application/json; charset=UTF-8");
 	
@@ -349,5 +347,17 @@ public class ThemeController extends TFile{
 		
 		int result = tService.likeStatus(map);
 		if(result > 0) return "true"; else return "false";
+	}
+	
+	@RequestMapping("deleteTheme.do")
+	public String deleteTheme(int tId) {
+		int result = tService.deleteTheme(tId);
+		return "redirect:theme.do";
+	}
+	
+	@RequestMapping("deleteTReply.do")
+	public String deleteTReply(int trId) {
+		int result = tService.deleteTReply(trId); 
+		if(result > 0) return "success"; else return "fail";
 	}
 }

@@ -118,7 +118,7 @@ public class ThemeServiceImpl implements ThemeService {
 	}
 
 	@Override
-	public ArrayList<TReply> slelctTReplyList(int tId){ 
+	public ArrayList<TReply> selectTReplyList(int tId){ 
 		return tDao.selectTReplyList(tId);
 	}
 
@@ -160,5 +160,15 @@ public class ThemeServiceImpl implements ThemeService {
 	@Override
 	public int likeStatus(HashMap<String, String> map) {
 		return tDao.likeStatus(map);
+	}
+
+	@Override
+	public int deleteTheme(int tId) {
+		return tDao.deleteTheme(tId);
+	}
+
+	@Override
+	public int deleteTReply(int trId) {
+		return tDao.deleteTReply(trId);
 	}
 	}

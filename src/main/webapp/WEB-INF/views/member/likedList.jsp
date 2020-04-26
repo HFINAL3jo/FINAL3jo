@@ -62,14 +62,6 @@
 							</div>
 						</div>
 					</div>
-					<script type="text/javascript">
-					//좋아요
-					
-		
-		
-		
-					//좋아요
-					</script>
 					<div id="aList" class="row align-items-center latest_product_inner">
 					
 					    <c:forEach var="t" items="${list }" begin="0" end="${pi.themeLimit}">
@@ -83,9 +75,6 @@
 		            					<img src="${t.tModifyFile }"/>
 		            						<span>${t.tTitle }</span>
 		         								 </div>
-							<div class="single_product_item">
-									<h3><b style="color:rgba(121,125,237,0.9)">#${t.tName}</b></h3>
-							</div>
 							</div>
 						</a>
 						</div>
@@ -143,8 +132,6 @@
 				  var $img = $('<img>').attr('src',data[i].tModifyFile);
 				  var $span = $('<span>').text(data[i].tTitle);
 				  var $divd = $('<div>').addClass('single_product_item');
-				  var $h3 = $('<h3>');
-				  var $b  = $('<b>').css({"color":"rgba(121,125,237,0.9)"}).text(data[i].tName);
 					
 				  $div.append($diva);
 				  $diva.append($a);
@@ -153,8 +140,6 @@
 				  $divc.append($img);
 				  $divc.append($span);
 				  $divb.append($divd);
-				  $divd.append($h3);
-				  $h3.append($b);
 			   }
 			},error:function(){
 			   console.log("에러발생");
