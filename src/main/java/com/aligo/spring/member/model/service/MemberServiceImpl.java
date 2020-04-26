@@ -44,20 +44,22 @@ public class MemberServiceImpl implements MemberService {
 		return loginUser;
 	}
 
-	@Override
-	public int findPwdFin(Member m) {
-		return memDao.findPwdFin(m);
-	}
+	
+	  @Override
+	  public int findPwdFin(Member m) { 
+		  return memDao.findPwdFin(m); 
+		  }
+	 
 
-	@Override
-	public int deleteMember(String email) {
-		// TODO Auto-generated method stub
-		return memDao.deleteMember(email);
-	}
 
 	@Override
 	public int nickCheck(String nickname) {
 		return memDao.nickCheck(nickname);
+	}
+
+	@Override
+	public int deleteAccount(Member m) {
+		return memDao.deteleAccount(m);
 	}
 
 	

@@ -51,7 +51,7 @@
                         <div class="col-lg-12">
                             <div class="product_top_bar d-flex justify-content-between align-items-center" style="align-self: center;">
                         		<h3>Are you sure you want to unsubscribe?😢</h3>                        		
-                                <form action="memDelete.do" onsubmit="return deleteMember();" style="margin-left: 5%; width: 45%;">
+                                <form role="form" method="post" autocomplete="off" style="margin-left: 5%; width: 45%;">
                                     <label style="margin-bottom: 0; margin-top: 5%;">email</label>
                                     <div class="mt-10">
                                         <input type="text" name="email" value="${ loginUser.email }" onfocus="this.placeholder = ''"
@@ -64,8 +64,10 @@
                                     </div>                                    
                                     
                                     <br><br>
-<!--                                     <input class="genric-btn primary-border small" type="submit" value="Delete Account" style="margin-left: 30%;">
- -->                                <button type="button" class="genric-btn primary-border small" onclick="location.href='${ memDelete }';">탈퇴하기</button>
+                                   <%--  <input class="genric-btn primary-border small" type="submit" value="Delete Account" style="margin-left: 30%;">
+                                 <button type="button" class="genric-btn primary-border small" onclick="location.href='${ memDelete }';">탈퇴하기</button> --%>
+                               <button type="submit">탈퇴하기</button>
+                               
                                 </form> 
                             </div>
                         </div>
@@ -81,16 +83,22 @@
     <script src="resources/js/price_rangs.js"></script>
 
     <script>		
-        function deleteMember(){
+      /*   function deleteMember(){
             if($('#password').val() == ""){
-            	alert("비밀번호를 입력해주세요!");
+            	alert("Enter your Password");
             	return false;
             }else if( $('#password').val() == "${ sessionScope.loginUser.password }" ){
             	console.log("확인");
-            	/* location.href ='memDelete.do' //true때는 서블릿으로 넘겨줍시당~~ */
+            	/* location.href ='memDelete.do' //true때는 서블릿으로 넘겨줍시당~~ 
             	return true;
             }
-        }
+        } 
+        */
+        <c:if test="${msg == false}">
+        <p>
+        	입력한 비밀번호가 일치하지 않습니다.
+        </p>
+        </c:if>
     </script>
 </body>
 

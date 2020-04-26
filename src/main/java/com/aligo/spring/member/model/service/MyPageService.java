@@ -12,8 +12,9 @@ public interface MyPageService {
 
 	ArrayList<Theme> selectList(PageInfo pi, String mId);
 
-	int memberDelete(Member m);
-
+	/*
+	 * int memberDelete(Member m);
+	 */
 	int memberUpdate(Member m);
 
 }

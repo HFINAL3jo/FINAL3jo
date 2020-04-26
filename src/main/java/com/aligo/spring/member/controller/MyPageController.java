@@ -29,13 +29,13 @@ import com.aligo.spring.theme.model.vo.Theme;
 
 @Controller
 public class MyPageController {
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
-	
+
 	@Autowired
 	private MyPageService mpService;
-	
+
 	@RequestMapping("likedList.do")
 	public ModelAndView themeList(ModelAndView mv,
 								  @RequestParam(value="currentPage",required=false,defaultValue="1")
@@ -62,7 +62,7 @@ public class MyPageController {
 		
 		return mv;
 	}
-	
+
 	
 	@RequestMapping("pagination2.do") 
 	public void pagination(HttpServletResponse response,	  
@@ -103,91 +103,60 @@ public class MyPageController {
 	  	out.flush();
 	  	out.close(); 
 	}
-	  
-	  
-	/**
-	 * 회원 탈퇴
-	 * @param status
-	 * @param m
-	 * @param model
-	 * @param email
-	 * @param password
-	 * @return
-	 */
-	@RequestMapping("memDelete.do") 
-	public String memberDelete(HttpSession session, SessionStatus status, Member m, RedirectAttributes rttr) {
-		
-		
-		// 세션에 있는 member를 가져와 member변수에 넣어줍니다.
-				Member mem = (Member) session.getAttribute("mem");
-				// 세션에있는 비밀번호
-				String sessionPass = mem.getpassword();
-				// vo로 들어오는 비밀번호
-				String voPass = m.getpassword();
-				
-				if(!(sessionPass.equals(voPass))) {
-					rttr.addFlashAttribute("msg", false);
-					return "redirect:/member/deleteAccount";
-				}
-				mpService.memberDelete(m);
-				session.invalidate();
-				return "redirect:/";
-			}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+	/*	  
+		*//**
+			 * 회원 탈퇴
+			 * 
+			 * @param status
+			 * @param m
+			 * @param model
+			 * @param email
+			 * @param password
+			 * @return
+			 *//*
+				 * @RequestMapping("memDelete.do") public String memberDelete(HttpSession
+				 * session, SessionStatus status, Member m, RedirectAttributes rttr) {
+				 * 
+				 * 
+				 * // 세션에 있는 member를 가져와 member변수에 넣어줍니다. Member mem = (Member)
+				 * session.getAttribute("mem"); // 세션에있는 비밀번호 String sessionPass =
+				 * mem.getpassword(); // vo로 들어오는 비밀번호 String voPass = m.getpassword();
+				 * 
+				 * if(!(sessionPass.equals(voPass))) { rttr.addFlashAttribute("msg", false);
+				 * return "redirect:/member/deleteAccount"; } mpService.memberDelete(m);
+				 * session.invalidate(); return "redirect:/"; }
+				 */
+
 	/*
 	 * int result = mpService.memberDelete(m);
 	 * 
 	 * if(result > 0) { status.setComplete(); return "redirect:index.jsp"; }else {
 	 * model.addAttribute("msg","회원 탈퇴 오류"); return "common/errorPage"; } }
 	 */
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	/**
 	 * 회원 수정
+	 * 
 	 * @param m
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping("memUpdate.do")
 	public String memberUpdate(Member m, Model model) {
-		
+
 		String encPwd = bcryptPasswordEncoder.encode(m.getpassword());
 		m.setpassword(encPwd);
-		
+
 		int result = mpService.memberUpdate(m);
-		
-		if(result > 0) {
-			model.addAttribute("loginUser",m);
+
+		if (result > 0) {
+			model.addAttribute("loginUser", m);
 			return "redirect:index.jsp";
-		}else {
-			model.addAttribute("msg","회원 수정 실패");
-			return "common/errorPage";			
-		}		
+		} else {
+			model.addAttribute("msg", "회원 수정 실패");
+			return "common/errorPage";
+		}
 	}
-	
-	  
-	  
+
 }

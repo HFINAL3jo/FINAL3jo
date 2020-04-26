@@ -34,17 +34,19 @@ public class MemberDao {
 		return (Member)sqlSession.selectOne("memberMapper.loginMember", m);
 	}
 
-	public int findPwdFin(Member m) {
-		return sqlSession.update("memberMapper.findPwdFin", m);
-	}
+	
+	  public int findPwdFin(Member m) { 
+		  return  sqlSession.update("memberMapper.findPwd", m); 
+		  }
+	 
 
-	public int deleteMember(String email) {
-		return sqlSession.update("memberMapper.deleteMember",email);
-
-	}
 
 	public int nickCheck(String nickname) {
 		return sqlSession.selectOne("memberMapper.nickCheck",nickname);
+	}
+
+	public int deteleAccount(Member m){
+		return sqlSession.update("memberMapper.deteleAccount",m);
 	}
 
 	
