@@ -35,11 +35,12 @@ public interface MemberService {
 	 * @param m
 	 * @return
 	 */
-	int findPwdFin(Member m);
-
-	int deleteMember(String email);
-
+	
+	 int findPwdFin(Member m);
+	 
 	int nickCheck(String nickname);
+
+	int deleteAccount(Member m);
 
 
 

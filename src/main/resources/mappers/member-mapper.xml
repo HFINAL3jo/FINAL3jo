@@ -50,10 +50,10 @@
    
    
    
-   <update id="deleteMember" parameterType="Member">
+   <update id="deteleAccount" parameterType="Member">
       UPDATE MEMBER
       SET M_STATUS='N'
-      WHERE EMAIL=#{email},PASSWORD={password}
+      WHERE EMAIL=#{email}
    </update>
    
    <update id="updateMember" parameterType="Member">
@@ -62,10 +62,15 @@
       WHERE EMAIL=#{email}
    </update>
    
-   <update id="findPwdFin">
-      UPDATE MEMBER SET
-      PASSWORD=#{password}
-      WHERE EMAIL=#{email}
-   </update>
+<!-- 비밀번호 찾기 후 새 비번으로 변경 -->
+	<update id="findPwd" parameterType="member">
+		update member
+		set password = #{password} 
+		where email = #{email}
+	</update>
+   
+   
+   
+   
 
 </mapper>

@@ -3,12 +3,16 @@ package com.aligo.spring.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +22,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aligo.spring.member.model.service.MemberService;
 import com.aligo.spring.member.model.vo.Member;
@@ -52,7 +58,8 @@ public class MemberController {
 
 	@Inject
 	JavaMailSender mailSender;     //메일 서비스를 사용하기 위해 의존성을 주입함.
-	MemberService memberservice; 
+	MemberService memberservice;
+	BCryptPasswordEncoder pwdEncoder;
 
 	private static final Logger logger=
 			LoggerFactory.getLogger(MemberController.class);
@@ -78,8 +85,7 @@ public class MemberController {
 		}
 
 	}
-
-
+	
 	/**
 	 * @param email
 	 * @return
@@ -140,26 +146,26 @@ public class MemberController {
 
 		String setfrom = "noticealigo@gmail.com";
 		String tomail = request.getParameter("e_mail"); // 받는 사람 이메일
-		String title = "회원가입 인증 이메일 입니다."; // 제목
+		String title = "Welcome to Aligo"; // 제목
 		String content =
 
 				System.getProperty("line.separator")+ //한줄씩 줄간격을 두기위해 작성
 
 				System.getProperty("line.separator")+
 
-				"안녕하세요 회원님 저희 홈페이지를 찾아주셔서 감사합니다"
+				"Hello~"
 
         +System.getProperty("line.separator")+
 
         System.getProperty("line.separator")+
 
-        " 인증번호는 " +dice+ " 입니다. "
+        " Your number is " + dice
 
         +System.getProperty("line.separator")+
 
         System.getProperty("line.separator")+
 
-        "받으신 인증번호를 홈페이지에 입력해 주시면 다음으로 넘어갑니다."; // 내용
+        "Thank You!"; // 내용
 
 
 		try {
@@ -296,44 +302,53 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping("findPwd.do")
-	public String findPwd() {
-		return "member/findPwd";
-	}
 	
-	@RequestMapping("findPwdFin.do")
-	public String findPwdFin(Member m, Model model) {		
-		System.out.println(m);
-		String encPwd = bcryptPasswordEncoder.encode(m.getpassword());
-		m.setpassword(encPwd);
-		System.out.println(m);
-		
-		int result = memService.findPwdFin(m);
-		
-		if(result > 0) {
-			return "member/loginView";
-		}else {
-			return "common/errorPage";
+	
+	
+	  /**
+	   * 비밀번호 찾기
+	 * @return
+	 */
+	@RequestMapping("findPwd.do") public String findPwd() { 
+		  return "member/findPwd"; 
+		  }
+	
+	  @RequestMapping("findPwdFin.do") 
+	  
+	  public String findPwdFin(Member m, Model model) { 
+		  System.out.println(m);
+		  String encPwd = bcryptPasswordEncoder.encode(m.getpassword()); m.setpassword(encPwd);
+	  System.out.println(m);
+	  
+	  int result = memService.findPwdFin(m);
+	  
+	  if(result > 0) { 
+		  return "member/loginView"; 
+	  }else { 
+		  return
+	  "common/errorPage"; 
+		  }
+	  
+	  
+	  }
+	 
+	
+	// 회원 탈퇴 get
+		@RequestMapping(value="deleteAccount", method = RequestMethod.GET)
+		public String deleteAccountView() throws Exception{
+			return "deleteAccount";
 		}
 		
-		
-	}
+		// 회원 탈퇴 post
+		@RequestMapping(value="/memberDelete", method = RequestMethod.POST)
+		public String memberDelete(Member m, HttpSession session, RedirectAttributes rttr) throws Exception{
+			
+			memService.deleteAccount(m);
+			session.invalidate();
+			
+			return "redirect:/";
+		}
 	
-	@RequestMapping("deleteAccount.do")
-	public String deleteMember(SessionStatus status, String email, Model model) {
-		
-		
-		int result = memService.deleteMember(email);
-		
-		if(result>0) {
-			status.setComplete();
-			return "redirect:index.jsp";
-		}else {
-			model.addAttribute("msg","회원탈퇴실패!");
-			return "common/errorPage";
-		}		
-	}
-		
-	}
 	
+}
 	

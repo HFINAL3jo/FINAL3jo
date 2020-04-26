@@ -26,10 +26,10 @@ public class MypageDao {
 		return (ArrayList)sqlSession.selectList("myPageMapper.selectMyList",null,rowBounds);
 	}
 
-	public int memberDelete(Member m) {
-		return sqlSession.delete("memberMapper.deleteMember",m);
-	}
-
+	/*
+	 * public int memberDelete(Member m) { return
+	 * sqlSession.delete("memberMapper.deleteMember",m); }
+	 */
 	public int memberUpdate(Member m) {
 		return sqlSession.update("memberMapper.updateMember",m);
 	}
