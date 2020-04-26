@@ -1,6 +1,8 @@
 package com.aligo.spring.qna.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -47,6 +49,17 @@ public class QnADao {
 
 	public ArrayList<QnaReply> selectReplyList(int qId) {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectReplyList",qId);
+	}
+// =============================================================
+	public int getSearchQnaDataTotal(Map<String, String> map) {
+		
+		return sqlSession.selectOne("qnaMapper.getSearchQnaDataTotal", map);
+	}
+
+	public ArrayList<QnA> getSearchQnaData(Map<String, String> map, QnAPageInfo pi) {
+		
+		RowBounds rowBounds = new RowBounds(((pi.getCurrentPage() -1) * pi.getBoardLimit()), pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("qnaMapper.getSearchQnaData", map, rowBounds);
 	}
 
 	

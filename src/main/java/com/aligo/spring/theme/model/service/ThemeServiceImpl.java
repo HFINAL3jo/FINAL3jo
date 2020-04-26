@@ -1,6 +1,7 @@
 package com.aligo.spring.theme.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,7 +51,7 @@ public class ThemeServiceImpl implements ThemeService {
 			
 			String str = t.gettContent();
 			try {
-			str = str.substring(str.indexOf("src")+5,str.length()-str.indexOf("src")+5);
+			str = str.substring(str.indexOf("src")+5,str.length());
 			str = str.substring(0,str.indexOf("\""));
 			}catch(Exception e){
 				throw new AligoException("At least Need One Image");
@@ -125,5 +126,35 @@ public class ThemeServiceImpl implements ThemeService {
 	@Override
 	public int updateTheme(Theme t) {
 		return tDao.updateTheme(t);
+	}
+
+	@Override
+	public int updateLike(HashMap<String, String> map) {
+		int result = 0;
+		int chk = 0;
+		int result2 = 0;
+		if(map.get("lv").equals("1")) {
+			result = tDao.updateLike(map);
+		    chk = tDao.checkLike(map);
+		    result2 = tDao.updateThemeLikeCount(map);
+			if(chk == 1) { 
+				return 0; 
+			}else {
+				int result3 = tDao.insertMyLike(map);
+				return result+chk+result2+result3;
+			}
+		}else if(map.get("lv").equals("0")) {
+			result = tDao.updateLike(map);
+			result2 = tDao.updateThemeLikeCount(map);
+			chk = tDao.deleteMyLike(map);
+			chk--;
+			return result+result2+chk;
+		}
+		return 0;
+	}
+
+	@Override
+	public int likeStatus(HashMap<String, String> map) {
+		return tDao.likeStatus(map);
 	}
 }

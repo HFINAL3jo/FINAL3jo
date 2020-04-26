@@ -1,6 +1,7 @@
 package com.aligo.spring.theme.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -95,5 +96,29 @@ public class ThemeDao {
 
 	public int updateTheme(Theme t) {
 		return sqlSession.update("themeMapper.updateTheme",t);
+	}
+
+	public int updateLike(HashMap<String, String> map) {
+		return sqlSession.update("themeMapper.updateLike",map);
+	}
+
+	public int insertMyLike(HashMap<String, String> map) {
+		return sqlSession.insert("themeMapper.insertMyLike",map);
+	}
+
+	public int updateThemeLikeCount(HashMap<String, String> map) {
+		return sqlSession.update("themeMapper.updateThemeLikeCount",map);
+	}
+
+	public int checkLike(HashMap<String, String> map) {
+		return sqlSession.selectOne("themeMapper.checkLike",map);
+	}
+
+	public int likeStatus(HashMap<String, String> map) {
+		return sqlSession.selectOne("themeMapper.selectStatus",map);
+	}
+
+	public int deleteMyLike(HashMap<String, String> map) {
+		return sqlSession.delete("themeMapper.deleteMyLike",map);
 	}
 }

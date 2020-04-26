@@ -1,6 +1,7 @@
 package com.aligo.spring.theme.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.aligo.spring.common.AligoException;
 import com.aligo.spring.theme.controller.ThemeController;
@@ -93,4 +94,18 @@ public interface ThemeService {
 	 * @return
 	 */
 	int updateTheme(Theme t);
+
+	/**
+	 * 게시물 좋아요 횟수 증가
+	 * @param tId
+	 * @return
+	 */
+	int updateLike(HashMap<String,String> map);
+
+	/**
+	 * 좋아요 체크
+	 * @param map
+	 * @return
+	 */
+	int likeStatus(HashMap<String, String> map);
 }

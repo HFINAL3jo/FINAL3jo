@@ -76,7 +76,6 @@
                             <div class="l_w_title">
                             </div>
                             <div class="widgets_inner">
-                             <button type="button" id="svf" class="btn btn-outline-primary" style="width:100%;">Reset Findings</button>
                              <br><br>
                              <c:if test="${!empty loginUser }">
                              <button id="wb" type="button" class="btn btn-outline-danger" style="width:200px; height:50px;">Write Post</button></c:if>

@@ -1,6 +1,8 @@
 package com.aligo.spring.qna.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.aligo.spring.qna.model.vo.QnA;
 import com.aligo.spring.qna.model.vo.QnAPageInfo;
@@ -63,4 +65,21 @@ public interface QnAService {
 	ArrayList<QnaReply> selectReplyList(int qId);
 
 
+	/**
+	 * 검색 조건에 따른 페이징 처리를 위한 갯수를 구한다.
+	 * @param map : 검색 조건를 저장
+	 * @return
+	 */
+	int getSearchQnaDataTotal(Map<String, String> map);
+
+
+	/**
+	 * 검색 조건에 따른 페이징 처리한 데이터를 ArrayList 에 담는다.
+	 * @param map : 검색 조건를 저장
+	 * @param pi : RowBounds 객체에서 처리 하기 위해 필요
+	 * @return
+	 */
+	ArrayList<QnA> getSearchQnaData(Map<String, String> map, QnAPageInfo pi);
+
+	
 }

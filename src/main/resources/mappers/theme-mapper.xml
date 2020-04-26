@@ -180,4 +180,49 @@
 		TADDRESSH=#{tAddressH},T_MODIFYDATE=SYSDATE,TKEYWORD=#{tKeyword},TCODE=#{tCode},TTEL=#{tTel},
 		TFEE=#{tFee},THOURS=#{tHours},TTRANS=#{tTrans} WHERE TID=#{tId} 
 	</update>
+	
+	<!-- Like -->
+	<update id="updateLike">
+		<if test="lv == 0">
+		UPDATE THEME_LIST SET T_LIKES = T_LIKES - 1 WHERE TID= TO_NUMBER(#{tId})
+		</if>
+		<if test="lv == 1">
+		UPDATE THEME_LIST SET T_LIKES = T_LIKES + 1 WHERE TID= TO_NUMBER(#{tId})
+		</if>
+	</update>
+	
+	<update id="updateThemeLikeCount">
+		<if test="lv == 0">
+		UPDATE THEME_CODE SET TLIKE= TLIKE - 1 WHERE TCODE=#{tCode}
+		</if>
+		<if test="lv == 1">
+		UPDATE THEME_CODE SET TLIKE= TLIKE + 1 WHERE TCODE=#{tCode}
+		</if>
+	</update>
+	
+	<insert id="insertMyLike" parameterType="map">
+		INSERT INTO THEME_LIKES VALUES((
+		SELECT MID FROM MEMBER WHERE NICKNAME=#{loginUser}),TO_NUMBER(#{tId}))
+	</insert>
+	
+	<select id="checkLike" resultType="_int">
+		SELECT COUNT(*) FROM THEME_LIKES 
+		WHERE MID = (SELECT MID 
+					FROM MEMBER 
+					WHERE NICKNAME=#{loginUser})
+        AND T_CODE_NUM = TO_NUMBER(#{tId})
+	</select>
+	
+	<select id="selectStatus" parameterType="map" resultType="_int">
+		SELECT COUNT(*) FROM THEME_LIKES 
+		WHERE T_CODE_NUM = TO_NUMBER(#{tId}) AND 
+		MID = (SELECT MID 
+			   FROM MEMBER 
+			   WHERE NICKNAME=#{loginUser}) 
+	</select>
+	
+	<delete id="deleteMyLike">
+		DELETE FROM THEME_LIKES WHERE MID = 
+		(SELECT MID FROM MEMBER WHERE NICKNAME=#{loginUser})
+	</delete>
 </mapper>

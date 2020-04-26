@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -37,56 +38,70 @@ public class MyPageController {
 
 	@RequestMapping("likedList.do")
 	public ModelAndView themeList(ModelAndView mv,
-			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
-		int listCount = mpService.getListCount();
+								  @RequestParam(value="currentPage",required=false,defaultValue="1")
+								  int currentPage,String mId) {
+		int listCount = mpService.getListCount(mId);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		ArrayList<Theme> list = mpService.selectList(pi);
-
-		for (Theme t : list) {
-			if (t.gettModifyFile().length() <= 18) {
+		ArrayList<Theme> list = mpService.selectList(pi,mId);
+		
+		for(Theme t: list) {
+			if(t.gettTitle().length() > 16) {
+				t.settTitle(t.gettTitle().substring(0,15));
+			}
+			
+			if(t.gettModifyFile().length() <= 18) {
 				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
+			}else if(t.gettModifyFile().contains(",")){
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile().substring(0,t.gettModifyFile().indexOf(",")));
 			}
 		}
-
-		mv.addObject("list", list);
-		mv.addObject("pi", pi);
+		
+		mv.addObject("list",list);
+		mv.addObject("pi",pi);
 		mv.setViewName("member/likedList");
-
+		
 		return mv;
 	}
 
-	@RequestMapping("pagination2.do")
-	public void pagination(HttpServletResponse response,
-			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage)
-			throws IOException {
-
-		response.setContentType("application/json; charset=UTF-8");
-		int listCount = mpService.getListCount();
-
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		ArrayList<Theme> list = mpService.selectList(pi);
-
-		JSONArray jArr = new JSONArray();
-
-		for (Theme t : list) {
-			if (t.gettModifyFile().length() <= 18) {
+	
+	@RequestMapping("pagination2.do") 
+	public void pagination(HttpServletResponse response,	  
+		  				 @RequestParam(value="currentPage",required=false,defaultValue="1")
+							 int currentPage,String mId)throws IOException {
+		
+	  response.setContentType("application/json; charset=UTF-8");
+	  int listCount = mpService.getListCount(mId);
+	  
+	  PageInfo pi = Pagination.getPageInfo(currentPage,listCount); 
+	  ArrayList<Theme> list = mpService.selectList(pi,mId);
+	  
+	  JSONArray jArr = new JSONArray();
+	  
+	  for(Theme t: list) {
+			if(t.gettTitle().length() > 16) {
+				t.settTitle(t.gettTitle().substring(0,15));
+			}
+			
+			if(t.gettModifyFile().length() <= 18) {
 				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
-			} else {
-				t.settModifyFile(t.gettModifyFile().replace("amp;", ""));
+			}else if(t.gettModifyFile().contains(",")){
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile().substring(0,t.gettModifyFile().indexOf(",")));
+			}else {
+				t.settModifyFile(t.gettModifyFile().replace("amp;",""));
 			}
 			JSONObject jobj = new JSONObject();
-			jobj.put("tId", t.gettId());
-			jobj.put("tModifyFile", t.gettModifyFile());
+			jobj.put("tId",t.gettId());
+			jobj.put("tModifyFile",t.gettModifyFile());
 			jobj.put("tTitle", t.gettTitle());
-			jobj.put("tName", "#" + t.gettName());
-
+			jobj.put("tName","#"+t.gettName());
+			
 			jArr.add(jobj);
-		}
-		PrintWriter out = response.getWriter();
-
-		out.print(jArr);
-		out.flush();
-		out.close();
+	  }
+	  	PrintWriter out = response.getWriter();
+	  	
+	  	out.print(jArr);
+	  	out.flush();
+	  	out.close(); 
 	}
 
 	/*	  

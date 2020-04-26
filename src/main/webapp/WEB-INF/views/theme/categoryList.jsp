@@ -34,6 +34,28 @@ h4{
   	background-image:url('${contextPath}/resources/images/nightview.jpg');
     background-size: 100% 100%;
   }
+  
+ .genric-btn.primary:hover {
+  background:#0067b8 !important;
+  color: white !important;
+  border: 1px solid #0067b8 !important;
+}
+ .genric-btn.primary{
+  color: black !important;
+  border: 1px solid #0067b8 !important;
+  background:white;
+}
+.genric-btn.success {
+  color: black !important;
+  background: rgba(227, 227, 227,1) !important;
+  border: 1px solid transparent;
+}
+
+.genric-btn.success:hover {
+  color: white !important;
+  border: 1px solid #c1e3f7 !important;
+  background: #c1e3f7 !important;
+}
 
 </style>
 
@@ -55,7 +77,7 @@ h4{
 						<div class="breadcrumb_iner_item">
 							<h2>THEME</h2>
 							<p>
-								Theme <span>-</span> keyword
+								Theme <span id="kk">-</span> 
 							</p>
 						</div>
 					</div>
@@ -85,13 +107,13 @@ h4{
 						<div class="single_product_menu d-flex">
 							<div class="input-group">
 
-								<button id="lastPost" class="genric-btn success-border medium"
+								<button id="lastPost" class="genric-btn success"
 									style="width: 100%; height: 90%;">Latest Posting</button>
 
 							</div>
 							&nbsp;&nbsp;
 							<div class="input-group">
-								<button class="genric-btn success-border medium" id="mostLiked"
+								<button class="genric-btn success" id="mostLiked"
 									style="width: 100%; height: 90%;">Most Liked</button>
 							</div>
 						</div>
@@ -125,7 +147,7 @@ h4{
 			<input id="kw" type="hidden" name="keyword" value="${sc.keyword}">
 			<input id="lc" type="hidden" value="${pi.listCount }">
 			<div align="center">
-				<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:#ebc5e4;">Lord More..</button></a>
+				<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:white;">Lord More..</button></a>
 			</div>
 			
 		</div>
@@ -229,9 +251,17 @@ h4{
 		 $('#aList').html("");
 		 ajaxPage();
 	 });
-	$('#svf').click(function(){
-		location.href='theme.do';
-	});
+	 
+	 $(function(){
+		var str = document.URL.substr(document.URL.indexOf('keyword=')+8,document.URL.length);
+
+		if(str.charAt(0) =='%'){
+			str = decodeURI(str.substr(0,str.indexOf('&')));
+			$('#kk').text(' - ' + str);			
+		}else{
+			$('#kk').text(' - ' + str);
+		}
+	 });
 	</script>
 </body>
 </html>

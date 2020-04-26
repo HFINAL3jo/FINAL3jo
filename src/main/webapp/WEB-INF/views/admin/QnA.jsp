@@ -7,7 +7,7 @@
 <title>QnA</title>
    
  <style>
- table {
+ /* table {
     width: 100%;
     border-top: 1px solid #444444;
     border-collapse: collapse;
@@ -30,68 +30,187 @@
   
   ul[id~=pagenation]>li{
   	display:inline;
+  } */
+  
+  table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+    text-align: center;
+  }
+  thead tr {
+    background-color: #3B4CF7;
+    color: #ffffff;
+  }
+  tbody tr:nth-child(2n) {
+    background-color: #ffffff;
+  }
+  tbody tr:nth-child(2n+1) {
+    background-color: #FAFAFA;
+  }
+
+  ul[id~=pagenation]>li{
+  	display:inline;
+  }
+
+  .breadcrumb{
+  	background-image:url('${contextPath}/resources/images/qnaflowers.jpg');
+    background-size: 100% 100%;
   }
  </style>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
+<input type="hidden" id="SearchValue1" value="">
+<input type="hidden" id="SearchValue2" value="">
+<input type="hidden" id="SearchValue3" value="">
+<input type="hidden" id="checkPaging" value="y">
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-	
-	<div class="col-lg-9" >
-                    <h3 style="align-self: center;">Delete Account</h3>
-                    <hr>
-                    <div class="row">
-	<%@ include file="assideAdmin.jsp" %>
-                        <div class="col-lg-12">
-    <div class="qnaPage" style="width:30%">
-     
-      <h2>문의하기</h2>
-      <hr>
-        <div class="qnaPageTable">
+	<section class="cat_product_area section_padding">
+		<div class="container" style="margin-bottom: 15px;">
+			<div class="row" style="margin-left: 0px; width:">
+				<%@ include file="assideAdmin.jsp"%>
+				
+				<div style="width:930px; height:850px;">
+					<div style="margin-top: 4%;">			
+					<h1>문의 내역 게시판</h1>
+				</div>
+			
+					<!-- 검색 처리 -->
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>글번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>날짜</th>
-        </tr>
-    </thead>
+						<div style="margin: 1%;">
+							처리 여부 : 
+							<select name="checkSearch" style="width:150px; margin-right:3%; margin-left: 1%;">
+								<option value="Y">완 료</option>
+								<option value="X">해당 없음</option>
+								<option value="N">처 리 중</option>
+								<option value="ALL">전부 다</option>
+							</select> 
+							검색 조건  : 
+							<select name="checkSearch" style="width:150px; margin-right:3%; margin-left: 1%;">
+								<option value="TITLE">제 목</option>
+								<option value="QWRITER">작 성 자</option>
+								<option value="NOT">검색 조건 없음</option>
+							</select>
+							<input type="text" name="checkSearch" value="" style="width:300px; margin-right:2% font-size:12pt; font-weight:bold;">
+							<input type="button" onclick="injectionHiddenValue()" value="검 색">
+						</div>
 
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>문의합니다</td>
-            <td>sj</td>
-            <td>sysdate</td>
-        </tr>
-
-        <tr>
-            <td>2</td>
-            <td>다시 문의합니다</td>
-            <td>sj</td>
-            <td>sysdate</td>
-        </tr>
-
-    </tbody>
-    </table>
-
-    <div class=Pagenation>
-
-        <ul id="pagenation" align="center" style="margin-left:-90px;">
-          <li><button class="listbtn" value="-1">&lt;</button></li>
-          <li><button class="listbtn" value="1">1</button></li>
-          <li><button class="listbtn" value="2">2</button></li>
-          <li><button class="listbtn" value="3">3</button></li>
-          <li><button class="listbtn" value="+1">&gt;</button></li>
-      </ul>
-  
+				   	<table align="center" class="table table-striped" id="qtb">
+				        <thead align="center">
+					        <tr>
+					            <th>글번호</th>
+					            <th>제목</th>
+					            <th>작성자</th>
+					            <th>날짜</th>
+					            <th>처리 여부</th>
+					        </tr>
+				    	</thead>
+				    	<tbody id="tbody">
+				    		
+				    	</tbody>
+				    </table>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
-</div>
+	</section>
+	
 	<%@ include file="../common/footer.jsp" %>
 </body>
+
+<script>
+	//
+	var injectionHiddenValue = function(){
+		for(var i = 1; i<=3; i++){
+			document.getElementById('SearchValue'+i).value = document.getElementsByName('checkSearch')[i-1].value;
+		}
+		document.getElementById('checkPaging').value = 'y';
+		Search();
+	}
+	
+	var bringData = function(){
+		var array = new Array();
+		for(var i = 1; i<=3; i++){
+			array.push(document.getElementById('SearchValue'+i).value);
+		}
+		return array;
+	}
+	
+	var Search = function(page){
+		var checkSearch = new Object();
+		checkSearch.value = bringData();
+		
+		// currentPage, checkPaging 
+		var currentPage = page;
+		
+		if(document.getElementById('checkPaging').value == 'y'){
+			currentPage = 1;
+			document.getElementById('checkPaging').value = 'n';
+		}
+		
+		checkSearch.currentPage = currentPage;
+		$.ajax({
+			url:"goSearchQnaData.do",
+			data: checkSearch,
+			dataType:"json",
+			type:"post",
+			success:function(data){
+				console.log(data);
+				
+				var listText = "";
+				
+					for(var i in data.list){
+						listText += "<tr>";
+						listText += "<td>"+data.list[i].qId+"</td>";
+						listText += "<td>";
+						listText += "<a style='color:black' href='qdetail.do?qId="+data.list[i].qId+"&currentPage="+data.pi.currentPage+"'>"+data.list[i].qTitle+"</a>";
+						listText += "</td>";
+						
+						listText += "<td>"+data.list[i].qWriter+"</td>";
+						listText += "<td>"+data.list[i].qCreateDate+"</td>";
+						listText += "<td>"+data.list[i].qStatus+"</td>";
+
+						listText +="</tr>";
+					}
+				
+					   // 페이징 처리
+					   listText += "<tr align='center' height='20'>";
+					   listText += "<td colspan='6'>";
+					   // [이전]
+					   if(currentPage == 1){
+						   listText +=	"[이전] &nbsp;";
+					   }else{
+						   listText += "<a href='javascript:void(0);' onclick='Search("+ (currentPage - 1) +")'>[이전]</a> &nbsp;&nbsp;";
+					   }
+						// 페이지 
+						for(var p= data.pi.startPage; p<= data.pi.endPage; p++){
+							if(p == data.pi.currentPage){
+								listText += "<font color='red' size='4'><b>"+ [ p ] + "</b></font>&nbsp;&nbsp;";
+							}else{
+								listText +=  "<a href='javascript:void(0);' onclick='Search("+ p + ")'>" + p + "</a> &nbsp;&nbsp;";
+							}						
+						}
+						// [다음]
+						if(currentPage == data.pi.maxPage){
+							listText += "[다음]";
+						}else{
+							listText += "<a href='javascript:void(0);' onclick='Search("+ (currentPage+1) +")'>[다음]</a>&nbsp;&nbsp;";
+						}
+						listText +="</td>";
+						listText +="</tr>";
+					   
+					   $("#qtb tbody").html(listText);
+					   
+					},error:function(){
+						console.log("전송실패");
+					}
+				});
+	}
+</script>
+
+
 </html>
