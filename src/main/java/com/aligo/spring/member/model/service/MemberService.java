@@ -36,7 +36,7 @@ public interface MemberService {
 	 * @return
 	 */
 	
-	 int findPwdFin(Member m);
+	int findPwdFin(Member m);
 	 
 	int nickCheck(String nickname);
 
