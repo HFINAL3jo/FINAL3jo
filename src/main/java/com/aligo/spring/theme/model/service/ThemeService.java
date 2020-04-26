@@ -37,10 +37,10 @@ public interface ThemeService {
 
 	/**
 	 * 테마글 상세보기
-	 * @param bId
+	 * @param tId
 	 * @return
 	 */
-	Theme selectTheme(int bId);
+	Theme selectTheme(int tId);
 
 	/**
 	 * theme img 삽입
@@ -56,10 +56,10 @@ public interface ThemeService {
 
 	/**
 	 * 게시물 조회 수 증가
-	 * @param bId
+	 * @param tId
 	 * @return
 	 */
-	int updateCount(int bId);
+	int updateCount(int tId);
 
 	/**
 	 * 키워드 검색 횟수 데이터 적재

@@ -366,10 +366,7 @@
 					<span style="float:right;">Views : ${t.tViews }</span><br>
 					<span style="float:right;">Likes : ${t.tLikes }</span><br>
 					<c:if test="${loginUser.nickname eq t.tWriter || loginUser.nickname eq 'ADMIN'}">
-					<c:url var="mo" value="themeModifyView.do">
-						<c:param name="t" value="${t }"/>
-					</c:url>
-					<br><button id="mp" value="${mo }" style="float:right;">Modify</button>					
+					<br><button id="mp" style="float:right;">Modify</button>					
 					</c:if>
                     <div class="post-element">
                         <span>Posted : ${t.tCreateDate } / Modified : ${t.tModifyDate }</span>
@@ -707,7 +704,9 @@
 				    		});
 				    	}
 				    }); 
-				    
+				    $('#mp').click(function(){
+				    	location.href="themeModifyView.do?tId="+'${t.tId}';
+				    });
 					</script>
 </body>
 

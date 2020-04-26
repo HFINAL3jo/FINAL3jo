@@ -156,11 +156,11 @@ public class ThemeController extends TFile{
 	
 	@RequestMapping("postdetail.do")
 	public ModelAndView themeDetailView(ModelAndView mv, 
-			@RequestParam(value="tId") int bId) {
+			@RequestParam(value="tId") int tId) {
 		
-		int uc = tService.updateCount(bId);
+		int uc = tService.updateCount(tId);
 		
-		Theme t = tService.selectTheme(bId);
+		Theme t = tService.selectTheme(tId);
 		ArrayList list = new ArrayList();
 		if(t.gettModifyFile().length() > 18 && t.gettModifyFile().contains(",")) {
 			String str = t.gettModifyFile();
@@ -223,7 +223,6 @@ public class ThemeController extends TFile{
 		
 		@RequestMapping("multiplePhotoUpload.do")
 		public void saveFile(HttpServletRequest request, MultipartFile file,HttpServletResponse response) {
-			
 			String sFileInfo = "";
 	        String originFilename = request.getHeader("file-name");
 	        String root = request.getSession().getServletContext().getRealPath("resources");
@@ -302,8 +301,17 @@ public class ThemeController extends TFile{
 	}
 	
 	@RequestMapping("themeModifyView.do")
-	public ModelAndView themeModifyView(Theme t,ModelAndView mv) {
-		mv.addObject("t",t).setViewName("board/boardModifyView");
+	public ModelAndView themeModifyView(int tId,ModelAndView mv) {
+		Theme t = tService.selectTheme(tId);
+		
+		String str = tService.getKeyword();
+		String strArr[] = str.split(",");
+		ArrayList<String> list = new ArrayList<>(); 
+		for(int i=0;i<strArr.length;i++) {
+			list.add(strArr[i]);
+		}
+		mv.addObject("list",list).addObject("tKlength",strArr.length).addObject("t",t)
+		.setViewName("board/boardModifyView");
 		return mv;
 	}
 	
