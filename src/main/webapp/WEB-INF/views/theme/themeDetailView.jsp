@@ -248,11 +248,13 @@
           }
           
           .cols4-element li a img {
-              width: 100%
+              width: 100%;
+              height:100%;
           }
           
           .cols4-element li a span {
               display: block;
+              height:100%;
           }
           
           .cols4-element li a .cont {
@@ -262,7 +264,7 @@
           .cols4-element li a .cont .title {
               font-size: 16px;
               color: #333;
-              font-weight: 900
+              font-weight: 900;
           }
           
           .cols4-element li a .cont .content {
@@ -277,7 +279,7 @@
               left: 0px;
               right: 0px;
               bottom: 0px;
-              height: 20px;
+              height: 50px;
               padding: 10px 0px;
               text-align: center;
               background-color: #ececec
@@ -430,35 +432,20 @@
 						</table>
 					</div>
                         <br><br><br>
-                        <h3 class="black"># ${t.tKeyword}</h3>
-                        <br><br>
-                       <!--  <ul class="cols4-element">
-                            <li>
-                                <a href="http://me2.do/xDAyqdMi" title="서울야경 스릴 있게 즐기기!"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27505&amp;fileTy=MEDIA&amp;fileNo=1" alt="서울야경 스릴 있게 즐기기!"><span class="cont"><span class="title">서울야경 스릴 있게 즐기기!</span><span class="content">                    국내 최고 높이의 롯데타워 전망대에서                    아찔한 인증샷을 남겨보자.</span></span><span class="link"><span>랜드마크 서울스카이</span></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://me2.do/5e04rj8z" title="비가와도 걱정 없는 이곳!"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27506&amp;fileTy=MEDIA&amp;fileNo=1" alt="비가와도 걱정 없는 이곳!"><span class="cont"><span class="title">비가와도 걱정 없는 이곳!</span><span class="content">아이들과의 여행에서 비가 온다면?걱정 없이 즐길 수 있는 잠실 여행코스.</span></span><span class="link"><span>하루 종일 놀 수 있는 실내코스 </span></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://me2.do/GcbukJyo" title="  낮과밤 모두 완벽한 석촌호수"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27507&amp;fileTy=MEDIA&amp;fileNo=1" alt="  낮과밤 모두 완벽한 석촌호수"><span class="cont"><span class="title">                    낮과밤 모두 완벽한 석촌호수</span><span class="content">                    도심 속에서 즐기는 특별한 여유!                    고요한 호수 산책과                    여유를 즐겨보는 코스.</span></span><span class="link"><span>                    석촌호수 힐링여행</span></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://me2.do/GXmjSWe1" title="자동차 극장은 처음이지?"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27508&amp;fileTy=MEDIA&amp;fileNo=1" alt="자동차 극장은 처음이지?"><span class="cont"><span class="title">자동차 극장은 처음이지?</span><span class="content">                    색다른 경험과 즐거움이 가득한                    자동차 극장 백배 즐기는 방법.</span></span><span class="link"><span>잠실 자동차 극장</span></span>
-                                </a>
-                            </li>
-                        </ul> -->
-                    </div>
-					
-                </section>
+                
                 <section class="tag-element detail">
-                    <span class="title">태그</span>
                     <p>
-                        <a href="/search?search_radio=T&amp;lang=ko&amp;searchTerm=낮과-밤-모두-완벽한-이곳-석촌호수">#${t.tKeyword }</a>
+                        <c:if test="${!empty t.tKeyword }"><h3 class="black"><a href="">#${t.tKeyword }</a></h3></c:if>
                     </p>
                 </section>
+                    </div>
+                        <br><br>
+                        <ul class="cols4-element">
+                            <li>
+                            </li>
+                        </ul>
+					
+                
                
             </div>
             <div class="heart heart-unliked"></div>
@@ -497,7 +484,7 @@
 
 				        // 인포윈도우로 장소에 대한 설명을 표시합니다
 				        var infowindow = new kakao.maps.InfoWindow({
-				            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+adrs+'</div>'
+				            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+'${t.tAddress}'+'</div>'
 				        });
 				        infowindow.open(map, marker);
 
@@ -507,40 +494,6 @@
 				});
 				
 				
-				
-				//--------------------------------
-                            //		jQuery.noConflict();
-                     /*        var locale = 'ko';
-                            var current_url_ = 'http://korean.visitseoul.net/nature/낮과-밤-모두-완벽한-이곳-석촌호수_/33228';
-                            var current_url = location.href;
-                             		if(current_url.indexOf("&WT.ac") != -1){
-                            			//current_url=current_url.replace(current_url.slice(current_url.indexOf("&WT"), current_url.length),"");
-                            		}else{
-                            			current_url=current_url+"&WT.ac=MainBanner1-1";
-                            			current_url_=current_url_+"&WT.ac=MainBanner1-1";
-                            		} 
-
-                            var consumer_seq = "744";
-                            var smartlogin_seq = "";
-
-                            if (locale == 'ko') {
-                                smartlogin_seq = "879";
-                            } else if (locale == 'en') {
-                                smartlogin_seq = "879";
-                            } else if (locale == 'ja') {
-                                smartlogin_seq = "880";
-                            } else if (locale == 'zh-CN') {
-                                smartlogin_seq = "881";
-                            } else {
-                                smartlogin_seq = "881";
-                            }
-
-                            var title = '낮과 밤 모두 완벽한 이곳, 석촌호수!';
-
-                            var refer = "evt_event_id=N_" + 33228;
-
-                            refer = refer.replace("http://", ""); */
-
 				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
 				    <%if(request.getSession().getAttribute("loginUser") != null){%>
 				    $(function(){
@@ -630,9 +583,9 @@
 				    	
 				    	getTReplyList();
 				    	
-				    	 /* setInterval(function(){
+				    	 setInterval(function(){
 				    		getTReplyList();
-						}, 30000); */ 
+						}, 30000); 
 				     });
 				    	function getTReplyList(){
 				    		$tableBody = $('#trtl tbody');
@@ -739,7 +692,49 @@
 				    		});
 				    	}
 				    } 
-				    
+				    //랜덤으로 keyword 게시물 보여주기
+				    	
+					var recommend = '${t.tKeyword}';
+					
+					$(function(){
+						
+						getRandomList();
+					});				    			    
+				    function getRandomList(){
+				    	
+				     $.ajax({
+				    	url:"getRandomlist.do",
+				    	data:{recommend:recommend},
+				    	type:"post",
+				    	success:function(data){
+				    		var $ul = $('ul[class=cols4-element]');
+				    		var $li; 
+				    		var $a;
+				    		var $img;
+				    		var $span; 
+				    		var $span2;
+				    		
+				    		$ul.html("");
+				    		$.each(data,function(index,item){
+					    		$li = $('<li>');
+					    		$a = $('<a>').attr("href","postdetail.do?tId="+data[index].tId)
+					    		.attr("title",data[index].tTitle);
+					    		$img = $('<img>').attr('src',data[index].tModifyFile);
+					    		$span = $('<span>').addClass('link');
+					    		$span2 = $('<span>').text(data[index].tTitle);
+				    			
+					    		$li.append($a);
+					    		$a.append($img);
+					    		$a.append($span);
+					    		$span.append($span2);
+					    		
+					    		$ul.append($li);
+				    		});
+				    	},error:function(){
+				    		
+				    	}
+				     });
+				    }
 					</script>
 </body>
 

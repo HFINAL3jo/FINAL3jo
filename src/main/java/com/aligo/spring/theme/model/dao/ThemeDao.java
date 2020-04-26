@@ -129,4 +129,15 @@ public class ThemeDao {
 	public int deleteTReply(int trId) {
 		return sqlSession.update("themeMapper.deleteTReply",trId);
 	}
+
+	public int getRandomListCount(String tKeyword) {
+		return sqlSession.selectOne("themeMapper.getRandomListCount",tKeyword);
+	}
+
+	public ArrayList<Theme> selectTkeywordList(PageInfo pi, String tKeyword) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getThemeLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getThemeLimit());
+		
+		return (ArrayList)sqlSession.selectList("themeMapper.selectTkeywordList", tKeyword, rowBounds);
+	}
 }

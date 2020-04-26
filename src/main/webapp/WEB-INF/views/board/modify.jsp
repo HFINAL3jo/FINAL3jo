@@ -51,7 +51,6 @@
     	</div>
     	<br>
     	</c:if>
-   	
     <br><br>
 	<textarea name="tContent" id="smarteditor" rows="30" cols="104">${t.tContent }</textarea>
     <br><br>
@@ -98,7 +97,8 @@
 	</tr>
 	</table>
     <button id="cancel" class="btn btn-light" type="reset">Cancle</button>
-    <input type="button" class="btn btn-light" id="sbtn" value="Write"> 
+    <input type="button" class="btn btn-light" id="sbtn" value="Write">
+    <input type="hidden" name="tId" value="${t.tId }"> 
 	</div>
     </form>
     </c:if>

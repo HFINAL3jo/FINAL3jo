@@ -177,7 +177,7 @@
 	
 	<update id="updateTheme" parameterType="Theme">
 		UPDATE THEME_LIST SET TTITLE=#{tTitle},TCONTENT=#{tContent},TADDRESS=#{tAddress},
-		TADDRESSH=#{tAddressH},T_MODIFYDATE=SYSDATE,TKEYWORD=#{tKeyword},TCODE=#{tCode},TTEL=#{tTel},
+		TADDRESSH=#{tAddressH},T_MODIFY_DATE=SYSDATE,TKEYWORD=#{tKeyword},TCODE=#{tCode},TTEL=#{tTel},
 		TFEE=#{tFee},THOURS=#{tHours},TTRANS=#{tTrans} WHERE TID=#{tId} 
 	</update>
 	
@@ -233,4 +233,23 @@
 	<update id="deleteTReply">
 		UPDATE THEME_REPLY SET TR_STATUS='N' WHERE TRID=#{trId}
 	</update>
+	
+	<select id="getRandomListCount" resultType="_int"> 
+		SELECT COUNT(*) 
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		WHERE T_STATUS='Y' AND
+		TKEYWORD LIKE '%'||#{recommend}||'%'
+		ORDER BY TID DESC
+	</select>
+	
+	<select id="selectTkeywordList" resultMap="themeResultSet">
+		SELECT * 
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
+		WHERE T_STATUS='Y' AND
+		TKEYWORD LIKE '%'||#{recommend}||'%'
+		ORDER BY TID DESC
+	</select>
 </mapper>

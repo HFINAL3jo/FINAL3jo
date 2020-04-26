@@ -129,6 +129,8 @@ public class ThemeServiceImpl implements ThemeService {
 
 	@Override
 	public int updateTheme(Theme t) {
+		t = themeCode(t);
+		
 		return tDao.updateTheme(t);
 	}
 
@@ -171,4 +173,14 @@ public class ThemeServiceImpl implements ThemeService {
 	public int deleteTReply(int trId) {
 		return tDao.deleteTReply(trId);
 	}
+
+	@Override
+	public int getRandomListCount(String recommend) {
+		return tDao.getRandomListCount(recommend);
 	}
+
+	@Override
+	public ArrayList<Theme> selectTkeywordList(PageInfo pi, String recommend) {
+		return tDao.selectTkeywordList(pi,recommend);
+	}
+}

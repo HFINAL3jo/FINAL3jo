@@ -122,4 +122,20 @@ public interface ThemeService {
 	 * @return
 	 */
 	int deleteTReply(int trId);
+
+	/**
+	 * recommand keyword 랜덤리스트 카운트
+	 * @param list
+	 * @return
+	 */
+	int getRandomListCount(String recommend);
+
+	/**
+	 * 리스트 출력
+	 * @param pi
+	 * @param tKeyword
+	 * @return
+	 */
+	ArrayList<Theme> selectTkeywordList(PageInfo pi, String recommend);
+	
 }

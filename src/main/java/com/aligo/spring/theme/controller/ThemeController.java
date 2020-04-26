@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -113,7 +114,6 @@ public class ThemeController extends TFile{
 			if(t.gettTitle().length() > 16) {
 				t.settTitle(t.gettTitle().substring(0,15));
 			}
-			
 			if(t.gettModifyFile().length() <= 18) {
 				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
 			}else if(t.gettModifyFile().contains(",")){
@@ -177,6 +177,7 @@ public class ThemeController extends TFile{
 		if(!list.isEmpty()) {
 			t.settFileList(list);
 		}
+		t.settAddress(t.gettAddress().substring(0,t.gettAddress().lastIndexOf(",")));
 		mv.addObject("t",t);
 		mv.setViewName("theme/themeDetailView");		
 		return mv;
@@ -317,7 +318,7 @@ public class ThemeController extends TFile{
 	public String updateTheme(Theme t) {
 		int result = tService.updateTheme(t);
 		
-		return "redirect:postdetail.do";
+		return "redirect:theme.do";
 	}
 
 	@RequestMapping("updateLike.do")
@@ -359,5 +360,36 @@ public class ThemeController extends TFile{
 	public String deleteTReply(int trId) {
 		int result = tService.deleteTReply(trId); 
 		if(result > 0) return "success"; else return "fail";
+	}
+	
+	@RequestMapping("getRandomlist.do")
+	public void getRandomList(String recommend,HttpServletResponse response) throws JsonIOException, IOException {
+		response.setContentType("application/json; charset=UTF-8");	
+		
+		int listCount = tService.getRandomListCount(recommend);
+		int currentPage = 1;
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		
+		ArrayList<Theme> randomList = tService.selectTkeywordList(pi,recommend);
+
+		for(Theme t: randomList) {
+			if(t.gettTitle().length() > 16) {
+				t.settTitle(t.gettTitle().substring(0,15));
+			}
+			
+			if(t.gettModifyFile().length() <= 18) {
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
+			}else if(t.gettModifyFile().contains(",")){
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile().substring(0,t.gettModifyFile().indexOf(",")));
+			}else {
+				t.settModifyFile(t.gettModifyFile().replace("amp;",""));
+			}
+			
+			Collections.shuffle(randomList);
+			
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			
+			gson.toJson(randomList,response.getWriter());
+		}
 	}
 }

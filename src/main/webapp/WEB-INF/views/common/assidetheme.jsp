@@ -57,7 +57,7 @@
                                         <label for="ha6">Activity</label>
                                         <div class="confirm-radio">
                                             <input type="checkbox" id="ha6" checked="checked">
-                                            <label for="ha5"></label>
+                                            <label for="ha6"></label>
                                         </div>
                                     </li>
                                     <li>
@@ -87,6 +87,8 @@
   	$('#wb').click(function(){
   		location.href="themeInsertView.do";
   	});
+  	
+  	
   </script>
 </body>
 </html>
