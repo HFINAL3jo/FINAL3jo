@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aligo.spring.common.Pagination;
 import com.aligo.spring.member.model.vo.Member;
 import com.aligo.spring.recom.model.service.RecomService;
 import com.aligo.spring.recom.model.vo.RecomKeyword;
 import com.aligo.spring.recom.model.vo.Recommend;
 import com.aligo.spring.recom.model.vo.ThemeVo;
+import com.aligo.spring.theme.model.vo.PageInfo;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 
@@ -51,16 +53,8 @@ public class RecomController {
 	public ModelAndView recomResultList(ModelAndView mv,
 									RecomKeyword rk) {
 		
-		System.out.println("rk2 : " + rk);
-		
 		ThemeVo tv = new ThemeVo();
 		tv.setKeywords(rk);
-		
-		System.out.println(tv.getKeywords().getKeyword1());
-		System.out.println(tv.getKeywords().getKeyword2());
-		System.out.println(tv.getKeywords().getKeyword3());
-		System.out.println(tv.getKeywords().getKeyword4());
-		System.out.println(tv.getKeywords().getKeyword5());
 		
 		Map<Integer, ArrayList<ThemeVo>> map = new HashMap<Integer, ArrayList<ThemeVo>>();
 		
@@ -71,6 +65,11 @@ public class RecomController {
 			tv.setTcode(code);
 			
 			ArrayList<ThemeVo> list = rService.selectList(tv);
+
+			for(int j = 0 ; j < list.size(); j++) {
+				
+				list.get(j).setKeywords(rk);
+			}
 			
 			map.put(i, list);
 		}
@@ -78,6 +77,110 @@ public class RecomController {
 		mv.addObject("map", map);
 		mv.setViewName("recommend/recomResultList");
 		return mv;
+	}
+	
+	@RequestMapping("rResultList2.do")
+	public ModelAndView recomResultList2(ModelAndView mv, String rkStr) {
+		
+		System.out.println("확인");
+		
+		ThemeVo tv = new ThemeVo();
+		
+		String[] keywords = new String[5];
+		
+		String[] strArr1 = rkStr.split("=");
+		for(int i = 1; i < strArr1.length; i++) {
+
+			if(i != strArr1.length-1) {
+				
+				String str = strArr1[i].split(", ")[0];
+				keywords[i-1] = str;
+			}else {
+				
+				String str = strArr1[i].substring(0, strArr1[i].length()-1);
+				keywords[i-1] = str;
+			}
+		}
+		
+		RecomKeyword rk = new RecomKeyword(keywords[0], keywords[1], keywords[2], keywords[3], keywords[4]);
+		tv.setKeywords(rk);
+		
+		Map<Integer, ArrayList<ThemeVo>> map = new HashMap<Integer, ArrayList<ThemeVo>>();
+		
+		for(int i = 1; i < 8; i++) {
+			
+			String code = "T" + i;
+			
+			tv.setTcode(code);
+			
+			ArrayList<ThemeVo> list = rService.selectList(tv);
+
+			for(int j = 0 ; j < list.size(); j++) {
+				
+				list.get(j).setKeywords(rk);
+			}
+			
+			map.put(i, list);
+		}
+		
+		mv.addObject("map", map);
+		mv.setViewName("recommend/recomResultList");
+		return mv;
+	}
+	
+	/**
+	 * 	tcode와 rk를 가지고 THEME 리스트를 전송함
+	 * @param session
+	 * @param response
+	 * @param tid
+	 * @param rk
+	 * @throws IOException 
+	 */
+	@ResponseBody
+	@RequestMapping("rResultMoreList.do")
+	public void rResultMoreList(HttpSession session, HttpServletResponse response, String tcode, String rkStr) throws IOException {
+		
+		response.setContentType("text/html; charset=UTF-8");
+		
+		ThemeVo tv = new ThemeVo();
+		tv.setTcode(tcode);
+		
+		String[] keywords = new String[5];
+		
+		String[] strArr1 = rkStr.split("=");
+		for(int i = 1; i < strArr1.length; i++) {
+
+			if(i != strArr1.length-1) {
+				
+				String str = strArr1[i].split(", ")[0];
+				keywords[i-1] = str;
+			}else {
+				
+				String str = strArr1[i].substring(0, strArr1[i].length()-1);
+				keywords[i-1] = str;
+			}
+		}
+		
+		RecomKeyword rk = new RecomKeyword(keywords[0], keywords[1], keywords[2], keywords[3], keywords[4]);
+		tv.setKeywords(rk);
+		
+		int listCount = rService.getListCount(tv);
+		
+		System.out.println(listCount);
+		
+		PageInfo pi = Pagination.getPageInfo2(1, listCount);
+		
+		ArrayList<ThemeVo> list = rService.rResultMoreList(pi, tv);
+		
+		if(list == null || list.size() == 0) {
+			
+			//	넘길 값이 없음
+			PrintWriter out = response.getWriter();
+			out.print(false);
+		}else {
+			
+			new Gson().toJson(list, response.getWriter());
+		}
 	}
 	
 	

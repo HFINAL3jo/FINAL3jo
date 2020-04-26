@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% 
 	Map<Integer, ArrayList<ThemeVo>> map = (Map)request.getAttribute("map");
-	System.out.println(map.get(1).get(0).getTid());
+	System.out.println(map.size());
 %>
 <!DOCTYPE html>
 <html>
@@ -77,14 +77,25 @@
 	    margin-bottom: 1%;
 	    left: 6%;
 	}
-	.h2span {
+	.moreView {
 	    color: #adadad;
 	    font-size: 16px;
 	    font-weight: 700;
 	    margin-left: 60px;
 	    cursor: pointer;
 	}
-	.h2span:hover {
+	.moreView:hover {
+	    color: orangered;
+	    
+	}
+	.alltheme {
+	    color: #adadad;
+	    font-size: 16px;
+	    font-weight: 700;
+	    margin-left: 60px;
+	    cursor: pointer;
+	}
+	.alltheme:hover {
 	    color: orangered;
 	    
 	}
@@ -189,12 +200,20 @@
     	</div>
 	</div>
 
-	<%! int count = 0; %>
+	<%! 
+		int count = 0;
+	%>
 	<% for(int i=1; i<8; i++){ %>
 		<% count=count+1; %>
+		<div class="card-section">
 		<% if( !map.get(count).isEmpty() ){ %>
-			<div class="card-section">
-			<h2><%= map.get(count).get(0).getTname() %><span class="h2span">View more...</span></h2>
+			<h2><%= map.get(count).get(0).getTname() %> LIST
+				<% if( map.get(count).size() == 3 ){ %>
+				<span class="moreView">View more...</span>
+				<%} %>
+			</h2>
+			<input type="hidden" value="<%= map.get(count).get(0).getTcode() %>" class="cardTcode"/>
+			<input type="hidden" value="<%= map.get(count).get(0).getKeywords() %>" class="keywords"/>
 				<div class="card-list">
 			<% for(int j = 0; j < map.get(count).size(); j++){ %>
 				<% if( map.get(count).get(j) != null ){ %>
@@ -206,6 +225,34 @@
 				<%} %>
 			<%} %>
 				</div>
+		<%}else{ %>
+			<% switch(i){
+			case 1 : %>
+				<h2>NATURE LIST</h2>
+				<%break;
+			case 2 : %>
+				<h2>RESTAURANT LIST</h2>
+				<%break;
+			case 3 : %>
+				<h2>HISTORY LIST</h2>
+				<%break;
+			case 4 : %>
+				<h2>SHOPPING LIST</h2>
+				<%break;
+			case 5 : %>
+				<h2>BAR LIST</h2>
+				<%break;
+			case 6 : %>
+				<h2>ACTIVITY LIST</h2>
+				<%break;
+			case 7 : %>
+				<h2>EXHIBITION LIST</h2>
+				<%break;
+			}%>
+			<div class="card-list" style="height: 150px;">
+				<h4>There is no list.</h4>
+			</div>
+			
 		<%} %>
 		</div>
 	<%} %>
@@ -225,8 +272,59 @@
 		    });
 			
 			
+			$('.moreView').on('click', function(){
+				
+				$vmspan = $(this);
+				$h2 = $(this).parent();
+				$div = $(this).parent().siblings('.card-list');
+				var rkStr = $(this).parent().siblings('.keywords').val();
+				
+				//	$(this).parent().parent().siblings('.card-section').remove();
+				$(this).parent().parent().siblings('.card-section').fadeOut(1500,function(){ $(this).remove(); });
+				
+				$.ajax({
+					url : "rResultMoreList.do",
+					data : {
+						tcode : $(this).parent().siblings('.cardTcode').val(),
+						rkStr : $(this).parent().siblings('.keywords').val()
+					},
+					dataType : 'json',
+					success : function(data){
+						
+						$.each(data, function(index, value){
+							
+							if(index > 3){
+								
+								$div1 = $('<div>').addClass('card');
+								$img1 = $('<img>').attr('src', data[index].tfile);
+								$img1.attr('onclick',"location.href='postdetail.do?tId='+"+data[index].tid+";")
+								$span1 = $('<span>').text(data[index].ttitle);
+								
+								$div1.append($img1);
+								$div1.append($span1);
+								
+								$div.append($div1);
+							}
+						});
+						
+						$vmspan.remove();
+						$addspan = $('<span>').addClass('moreView').text('All theme...');
+						$addspan.attr('onclick', "viewmore('"+rkStr+"');");
+						$h2.append($addspan);
+						
+					}
+				});
+			});
 			
 		});
+		
+		function viewmore(rkStr){
+			
+			console.log(rkStr);
+			//location.href="rResultList2.do?rkStr='"+rkStr+"';";
+		}
+		
+		
 	</script>
 </body>
 </html>
