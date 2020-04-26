@@ -109,7 +109,7 @@ ul[class~=social-icons]>li {
 		 
 		 
 		 $('#find').click(function(){
-			 location.href="findPwd.do"
+			 location.href="findPwd.do";
 		 });
 		 
 		 window.setTimeout(function(){

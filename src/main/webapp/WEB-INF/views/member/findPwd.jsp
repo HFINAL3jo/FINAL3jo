@@ -177,7 +177,7 @@ input:checked+label:after {
 					<div class="login_part_form">
 						<div class="login_part_form_iner">
 							<h3>Enter Your Email <br> Send New Password</h3>
-							<form class="row contact_form" id="fm1" action="findPwd.do" method="get" >
+							<form class="row contact_form" id="findPwd" action="findPwd">
 								<div class="col-md-12 form-group p_star">
 									<input type="email" class="form-control" id="findemail"
 										name="findemail" placeholder="Your email">

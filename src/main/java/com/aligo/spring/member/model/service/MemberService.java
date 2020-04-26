@@ -1,5 +1,9 @@
 package com.aligo.spring.member.model.service;
 
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
 import com.aligo.spring.member.model.vo.Member;
 
 public interface MemberService {
@@ -31,20 +35,16 @@ public interface MemberService {
 	 */
 	Member loginMember(Member m);
 
-	/** 비번찾기
-	 * @param m
-	 * @return
-	 */
-	
-	int findPwdFin(Member m);
-	 
+		 
 	int nickCheck(String nickname);
 
-	int deleteAccount(Member m);
 	
 	public int pwdUpdate(Member m) throws Exception;
 
+	int deleteMember(Member m);
 
 
+	
+	
 	
 }

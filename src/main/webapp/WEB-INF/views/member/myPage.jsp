@@ -79,7 +79,7 @@
 			$('#passwordchk').blur(function() {
 				if ($('#password').val() != $('#passwordchk').val()) {
 					if ($('#passwordchk').val() != '') {
-						alert("비밀번호가 일치하지 않습니다.");
+						alert("Password is not matched");
 						$('#passwordchk').val('');
 						$('#passwordchk').focus();
 					}
@@ -100,15 +100,6 @@
 		        return false;
 		    } 
 		    }
-		
-     
-     
-     
-     
-     
-     
-     
-     
     </script>
     
     <script src="resources/js/stellar.js"></script>

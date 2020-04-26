@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aligo.spring.member.model.vo.Member;
 
@@ -34,24 +35,27 @@ public class MemberDao {
 		return (Member)sqlSession.selectOne("memberMapper.loginMember", m);
 	}
 
-	
-	  public int findPwdFin(Member m) { 
-		  return  sqlSession.update("memberMapper.findPwd", m); 
-		  }
-	 
 
 
 	public int nickCheck(String nickname) {
 		return sqlSession.selectOne("memberMapper.nickCheck",nickname);
 	}
 
-	public int deteleAccount(Member m){
-		return sqlSession.update("memberMapper.deteleAccount",m);
-	}
 
 	public int pwdUpdate(Member m) {
 		return sqlSession.update("memberMapper.pwdUpdate",m);
 	}
+
+	public int deleteMember(Member m) {
+		return sqlSession.update("memberMapper.deteleMember",m);
+
+	}
+	
+	// 비밀번호 변경
+		@Transactional
+		public int findPwd(Member m) throws Exception{
+			return sqlSession.update("memberMapper.findPwd", m);
+		}
 
 	
 	

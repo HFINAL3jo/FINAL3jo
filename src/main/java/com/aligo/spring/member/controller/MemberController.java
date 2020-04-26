@@ -52,7 +52,7 @@ import com.aligo.spring.member.model.vo.Member;
 @SessionAttributes("loginUser")
 @Controller
 public class MemberController {
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
@@ -72,10 +72,10 @@ public class MemberController {
 
 	@RequestMapping(value="signUp.do", method = RequestMethod.POST)
 	public String insertMember(Member m) {
-		
+
 		String encPwd = bcryptPasswordEncoder.encode(m.getpassword());
 		m.setpassword(encPwd);
-		
+
 		int result = memService.insertMember(m);
 
 		if(result >0) {
@@ -85,7 +85,7 @@ public class MemberController {
 		}
 
 	}
-	
+
 	/**
 	 * @param email
 	 * @return
@@ -104,11 +104,11 @@ public class MemberController {
 		}
 
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("nickCheck.do")
 	public String nickCheck(String nickname) {
-		
+
 		int result = memService.nickCheck(nickname);
 
 		if(result >0) {
@@ -117,17 +117,7 @@ public class MemberController {
 			return "ok";
 		}
 	}
-	
-	/*
-	 * 
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping("findPwd.do") public String findPwd(String password) {
-	 * 
-	 * int result = memService.findPwd(password);
-	 * 
-	 * if(result >0) { return "fail"; }else { return "ok"; } }
-	 */
+
 
 
 	/**
@@ -193,8 +183,8 @@ public class MemberController {
 
 		response_email.setContentType("text/html; charset=UTF-8");
 		PrintWriter out_email = response_email.getWriter();
-		  out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>"); 	
-		  out_email.flush();
+		out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>"); 	
+		out_email.flush();
 		mv.addObject(e_mail);
 		return mv;
 
@@ -218,7 +208,7 @@ public class MemberController {
 		System.out.println("마지막 : email_injeung : "+ email_injeung);
 
 		System.out.println("마지막 : dice : "+diceCheck);
-		
+
 		System.out.println("email : " + email);
 
 
@@ -286,7 +276,7 @@ public class MemberController {
 			return "common/errorPage";
 		}
 	}
-	
+
 	/** 로그아웃
 	 * @param status
 	 * @return
@@ -294,87 +284,113 @@ public class MemberController {
 	@RequestMapping("logout.do")
 	public String logout(SessionStatus status) {
 		// SessionStatus : 커맨드 객체로 세선의 상태를 관리할 수 있는 객체이다.
-		
+
 		// 세션의 상태를 확정지어주는 메소드 호출
 		status.setComplete();
-		
+
 		return "redirect:index.jsp";
 	}
-	
-	
-	
-	
-	
-	  /**
-	   * 비밀번호 찾기
-	 * @return
-	 */
-	@RequestMapping("findPwd.do") public String findPwd() { 
-		  return "member/findPwd"; 
-		  }
-	
-	  @RequestMapping("findPwdFin.do") 
-	  
-	  public String findPwdFin(Member m, Model model) { 
-		  System.out.println(m);
-		  String encPwd = bcryptPasswordEncoder.encode(m.getpassword()); m.setpassword(encPwd);
-	  System.out.println(m);
-	  
-	  int result = memService.findPwdFin(m);
-	  
-	  if(result > 0) { 
-		  return "member/loginView"; 
-	  }else { 
-		  return
-	  "common/errorPage"; 
-		  }
-	  
-	  
-	  }
-	 
-	
-	// 회원 탈퇴 get
-		@RequestMapping(value="deleteAccount", method = RequestMethod.GET)
-		public String deleteAccountView() throws Exception{
-			return "deleteAccount";
-		}
-		
-		// 회원 탈퇴 post
-		@RequestMapping(value="/memberDelete", method = RequestMethod.POST)
-		public String memberDelete(Member m, HttpSession session, RedirectAttributes rttr) throws Exception{
-			
-			memService.deleteAccount(m);
-			session.invalidate();
-			
-			return "redirect:/";
-		}
-		
 
+
+
+	@RequestMapping("pwdUpdate.do")
+
+	public String pwdUpdate(Member m, Model model) throws Exception {
+
+		String encPwd = bcryptPasswordEncoder.encode(m.getpassword());
+		m.setpassword(encPwd);
+
+		int result = memService.pwdUpdate(m);
+
+		if (result > 0) { 
+			model.addAttribute("loginUser", m); 
+
+			return "redirect:index.jsp"; 
+
+		} else { 
+
+			model.addAttribute("msg", "회원 수정 실패"); 
+
+			return "common/errorPage"; 
+		} 
+	}
+
+
+	@RequestMapping("memdelete.do")
+	public String deleteMember(SessionStatus status, Member m, Model model) {
+
+
+		int result = memService.deleteMember(m);
+
+		if(result>0) {
+			status.setComplete();
+			return "redirect:index.jsp";
+		}else {
+			model.addAttribute("msg","회원탈퇴실패!");
+			return "common/errorPage";
+		}		
+	}
+
+	@RequestMapping("/findPwd.do")
+	public String findPwd() throws Exception{
+		return "findPwd";
+	} 
 		
-		
-		  @RequestMapping("pwdUpdate.do")
-		  
-		  public String pwdUpdate(Member m, Model model) throws Exception {
-		  
-		  String encPwd = bcryptPasswordEncoder.encode(m.getpassword());
-		  m.setpassword(encPwd);
-		  
-		  int result = memService.pwdUpdate(m);
-		  
-		  if (result > 0) { 
-			  model.addAttribute("loginUser", m); 
-			  
-			  return "redirect:index.jsp"; 
-			  
-		  } else { 
-				  
-			  model.addAttribute("msg", "회원 수정 실패"); 
-				  
-			  return "common/errorPage"; 
-				  } 
-		  }
-		 
-	
-	
+	/*
+	 * @RequestMapping("findPwdMail.do") public void
+	 * PwdMailSending(HttpServletRequest request, String e_mail, HttpServletResponse
+	 * response_email) throws IOException {
+	 * 
+	 * Random r = new Random(); int newPass = r.nextInt(4589362) + 49311; //이메일로 받는
+	 * 인증코드 부분 (난수)
+	 * 
+	 * String setfrom = "noticealigo@gmail.com"; String tomail =
+	 * request.getParameter("e_mail"); // 받는 사람 이메일 String title =
+	 * "Welcome to Aligo"; // 제목 String content =
+	 * 
+	 * System.getProperty("line.separator")+ //한줄씩 줄간격을 두기위해 작성
+	 * 
+	 * System.getProperty("line.separator")+
+	 * 
+	 * "Hello~"
+	 * 
+	 * +System.getProperty("line.separator")+
+	 * 
+	 * System.getProperty("line.separator")+
+	 * 
+	 * " Your number is " + newPass
+	 * 
+	 * +System.getProperty("line.separator")+
+	 * 
+	 * System.getProperty("line.separator")+
+	 * 
+	 * "Thank You!"; // 내용
+	 * 
+	 * 
+	 * try { MimeMessage message = mailSender.createMimeMessage(); MimeMessageHelper
+	 * messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+	 * 
+	 * messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
+	 * messageHelper.setTo(tomail); // 받는사람 이메일 messageHelper.setSubject(title); //
+	 * 메일제목은 생략이 가능하다 messageHelper.setText(content); // 메일 내용
+	 * 
+	 * mailSender.send(message); } catch (Exception e) { System.out.println(e); }
+	 * 
+	 * // String newPassStr = "" + newPass;
+	 * 
+	 * // ModelAndView mv = new ModelAndView(); //ModelAndView로 보낼 페이지를 지정하고, 보낼 값을
+	 * 지정한다. // mv.setViewName("/member/email_injeung"); //뷰의이름 //
+	 * mv.addObject("dice", newPassStr);
+	 * 
+	 * // System.out.println("mv : "+mv);
+	 * 
+	 * response_email.setContentType("text/html; charset=UTF-8"); PrintWriter
+	 * out_email = response_email.getWriter();
+	 * out_email.println("<script>alert('이메일이 발송되었습니다');</script>");
+	 * out_email.flush(); // mv.addObject(e_mail); // return mv;
+	 * 
+	 * 
+	 * }
+	 */
 }
-	
+
