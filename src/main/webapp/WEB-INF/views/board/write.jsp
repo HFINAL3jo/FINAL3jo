@@ -118,7 +118,6 @@ nhn.husky.EZCreator.createInIFrame({
    oEditors.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD",[]);
    
    if(validation()) {
-	   console.log("으앙");
 	   $('#gosubmit').attr('onsubmit','true');
 	   $('#gosubmit').submit();
 	   }

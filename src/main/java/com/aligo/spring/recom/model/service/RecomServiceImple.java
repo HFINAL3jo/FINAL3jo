@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.aligo.spring.recom.model.dao.RecomDao;
 import com.aligo.spring.recom.model.vo.Recommend;
 import com.aligo.spring.recom.model.vo.ThemeVo;
+import com.aligo.spring.theme.model.vo.PageInfo;
 import com.aligo.spring.theme.model.vo.Theme;
 
 @Service("rService")
@@ -62,6 +63,18 @@ public class RecomServiceImple implements RecomService{
 	public ArrayList<ThemeVo> selectList(ThemeVo tv) {
 
 		return rDao.selectList(tv);
+	}
+
+	@Override
+	public int getListCount(ThemeVo tv) {
+
+		return rDao.getListCount(tv);
+	}
+
+	@Override
+	public ArrayList<ThemeVo> rResultMoreList(PageInfo pi, ThemeVo tv) {
+
+		return rDao.rResultMoreList(pi, tv);
 	}
 
 	

@@ -95,5 +95,31 @@
 		]]>
 	</select>
 
+	<select id="listCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM THEME_LIST
+		WHERE T_STATUS = 'Y'
+			AND TCODE=#{ tcode }
+			AND (TKEYWORD like '%' || #{ keywords.keyword1 } || '%')
+		    AND (TKEYWORD like '%' || #{ keywords.keyword2 } || '%')
+		    AND (TKEYWORD like '%' || #{ keywords.keyword3 } || '%')
+		    AND (TKEYWORD like '%' || #{ keywords.keyword4 } || '%')
+		    AND (TKEYWORD like '%' || #{ keywords.keyword5 } || '%')
+	</select>
+	
+	<select id="selectMoreList" resultMap="themeResultSet">
+		SELECT L.TID, L.TTITLE, L.TCODE, C.TNAME, L.T_STATUS, F.T_MODIFY_FILE
+		FROM THEME_LIST L
+		LEFT JOIN THEME_CODE C ON(L.TCODE = C.TCODE)
+		JOIN THEME_FILES F ON(L.TID = F.T_CODE_NUMBER)
+		WHERE L.T_STATUS = 'Y'
+		    AND L.TCODE=#{ tcode }
+		    AND (L.TKEYWORD like '%' || #{ keywords.keyword1 } || '%')
+		    AND (L.TKEYWORD like '%' || #{ keywords.keyword2 } || '%')
+		    AND (L.TKEYWORD like '%' || #{ keywords.keyword3 } || '%')
+		    AND (L.TKEYWORD like '%' || #{ keywords.keyword4 } || '%')
+		    AND (L.TKEYWORD like '%' || #{ keywords.keyword5 } || '%')
+		ORDER BY L.T_CREATE_DATE DESC
+	</select>
 
 </mapper>

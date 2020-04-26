@@ -37,8 +37,8 @@ public class ThemeDao {
 		return sqlSession.insert("themeMapper.insertTheme",t);
 	}
 
-	public Theme selectTheme(int bId) {
-		return sqlSession.selectOne("themeMapper.selectTheme",bId);
+	public Theme selectTheme(int tId) {
+		return sqlSession.selectOne("themeMapper.selectTheme",tId);
 	}
 
 	public int insertImg(TFile tf) {
@@ -61,9 +61,9 @@ public class ThemeDao {
 		return sqlSession.selectOne("themeMapper.checkFile",tNum);
 	}
 
-	public int updateCount(int bId) {
-		return sqlSession.update("themeMapper.updateViewCount",bId) +
-			   sqlSession.update("themeMapper.updateTagCount",bId);
+	public int updateCount(int tId) {
+		return sqlSession.update("themeMapper.updateViewCount",tId) +
+			   sqlSession.update("themeMapper.updateTagCount",tId);
 	}
 
 	public String findKeywordArea(SearchCondition sc) {
@@ -120,5 +120,24 @@ public class ThemeDao {
 
 	public int deleteMyLike(HashMap<String, String> map) {
 		return sqlSession.delete("themeMapper.deleteMyLike",map);
+	}
+
+	public int deleteTheme(int tId) {
+		return sqlSession.update("themeMapper.deleteTheme",tId);
+	}
+
+	public int deleteTReply(int trId) {
+		return sqlSession.update("themeMapper.deleteTReply",trId);
+	}
+
+	public int getRandomListCount(String tKeyword) {
+		return sqlSession.selectOne("themeMapper.getRandomListCount",tKeyword);
+	}
+
+	public ArrayList<Theme> selectTkeywordList(PageInfo pi, String tKeyword) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getThemeLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getThemeLimit());
+		
+		return (ArrayList)sqlSession.selectList("themeMapper.selectTkeywordList", tKeyword, rowBounds);
 	}
 }

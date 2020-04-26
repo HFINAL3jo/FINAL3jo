@@ -206,8 +206,6 @@ h4{
 			  var $img = $('<img>').attr('src',data[i].tModifyFile);
 			  var $span = $('<span>').text(data[i].tTitle);
 			  var $divd = $('<div>').addClass('single_product_item');
-			  //var $h3 = $('<h3>');
-			  //var $b  = $('<b>').css({"color":"rgba(121,125,237,0.9)"}).text(data[i].tName);
 				
 			  $div.append($diva);
 			  $diva.append($a);
@@ -216,8 +214,6 @@ h4{
 			  $divc.append($img);
 			  $divc.append($span);
 			  $divb.append($divd);
-			  //$divd.append($h3);
-			  //$h3.append($b);
 		   }
 		},error:function(){
 		   console.log("에러발생");

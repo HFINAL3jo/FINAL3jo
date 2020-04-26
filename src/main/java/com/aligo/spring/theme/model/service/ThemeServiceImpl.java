@@ -5,16 +5,15 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.aligo.spring.common.AligoException;
-import com.aligo.spring.theme.controller.ThemeController;
 import com.aligo.spring.theme.model.dao.ThemeDao;
 import com.aligo.spring.theme.model.vo.PageInfo;
 import com.aligo.spring.theme.model.vo.SearchCondition;
 import com.aligo.spring.theme.model.vo.TFile;
 import com.aligo.spring.theme.model.vo.TReply;
 import com.aligo.spring.theme.model.vo.Theme;
+import static com.aligo.spring.common.ThemeCommon.*;
 
 @Service("tService")
 public class ThemeServiceImpl implements ThemeService {
@@ -35,41 +34,46 @@ public class ThemeServiceImpl implements ThemeService {
 	@Override
 	public int insertTheme(Theme t,int tNum) throws AligoException{
 		
-		switch(t.gettCode()) {
-		case "NATURE":t.settCode("T1"); break;
-		case "RESTAURANT":t.settCode("T2"); break;
-		case "HISTORY":t.settCode("T3"); break;
-		case "SHOPPING":t.settCode("T4"); break;
-		case "BAR":t.settCode("T5"); break;
-		case "ACTIVITY":t.settCode("T6"); break;
-		case "EXHIBITION":t.settCode("T7"); break;
-		}
+//		switch(t.gettCode()) {
+//		case "NATURE":t.settCode("T1"); break;
+//		case "RESTAURANT":t.settCode("T2"); break;
+//		case "HISTORY":t.settCode("T3"); break;
+//		case "SHOPPING":t.settCode("T4"); break;
+//		case "BAR":t.settCode("T5"); break;
+//		case "ACTIVITY":t.settCode("T6"); break;
+//		case "EXHIBITION":t.settCode("T7"); break;
+//		}
+		 t = themeCode(t);
 		
 		int chk = tDao.checkFile(tNum);
 		
-		if(chk == 0) {
-			
-			String str = t.gettContent();
-			try {
-			str = str.substring(str.indexOf("src")+5,str.length());
-			str = str.substring(0,str.indexOf("\""));
-			}catch(Exception e){
-				throw new AligoException("At least Need One Image");
-			}
-			t.settOriginalFile(str);
-			t.settModifyFile(str);
-			TFile tf = new TFile();
-			tf.settCodeNumber(tNum);
-			tf.settOriginalFile(str);
-			tf.settModifyFile(str);
-			int insertLink = tDao.insertImg(tf);
-		}
+		TFile tf = fileCheck(t,tNum,chk);
+		
+//		if(chk == 0) {
+//			
+//			String str = t.gettContent();
+//			try {
+//			str = str.substring(str.indexOf("src")+5,str.length());
+//			str = str.substring(0,str.indexOf("\""));
+//			}catch(Exception e){
+//				throw new AligoException("At least Need One Image");
+//			}
+//			t.settOriginalFile(str);
+//			t.settModifyFile(str);
+//			TFile tf = new TFile();
+//			tf.settCodeNumber(tNum);
+//			tf.settOriginalFile(str);
+//			tf.settModifyFile(str);
+//			int insertLink = tDao.insertImg(tf);
+//		}
+		
+		if(chk == 0) tDao.insertImg(tf);
 		return tDao.insertTheme(t);
 	}
 
 	@Override
-	public Theme selectTheme(int bId) {
-		return tDao.selectTheme(bId);
+	public Theme selectTheme(int tId) {
+		return tDao.selectTheme(tId);
 	}
 
 	@Override
@@ -89,8 +93,8 @@ public class ThemeServiceImpl implements ThemeService {
 	}
 
 	@Override
-	public int updateCount(int bId) {
-		return tDao.updateCount(bId);
+	public int updateCount(int tId) {
+		return tDao.updateCount(tId);
 	}
 
 	@Override
@@ -114,7 +118,7 @@ public class ThemeServiceImpl implements ThemeService {
 	}
 
 	@Override
-	public ArrayList<TReply> slelctTReplyList(int tId){ 
+	public ArrayList<TReply> selectTReplyList(int tId){ 
 		return tDao.selectTReplyList(tId);
 	}
 
@@ -125,6 +129,8 @@ public class ThemeServiceImpl implements ThemeService {
 
 	@Override
 	public int updateTheme(Theme t) {
+		t = themeCode(t);
+		
 		return tDao.updateTheme(t);
 	}
 
@@ -156,5 +162,25 @@ public class ThemeServiceImpl implements ThemeService {
 	@Override
 	public int likeStatus(HashMap<String, String> map) {
 		return tDao.likeStatus(map);
+	}
+
+	@Override
+	public int deleteTheme(int tId) {
+		return tDao.deleteTheme(tId);
+	}
+
+	@Override
+	public int deleteTReply(int trId) {
+		return tDao.deleteTReply(trId);
+	}
+
+	@Override
+	public int getRandomListCount(String recommend) {
+		return tDao.getRandomListCount(recommend);
+	}
+
+	@Override
+	public ArrayList<Theme> selectTkeywordList(PageInfo pi, String recommend) {
+		return tDao.selectTkeywordList(pi,recommend);
 	}
 }
