@@ -41,6 +41,8 @@ public interface MemberService {
 	int nickCheck(String nickname);
 
 	int deleteAccount(Member m);
+	
+	public int pwdUpdate(Member m) throws Exception;
 
 
 

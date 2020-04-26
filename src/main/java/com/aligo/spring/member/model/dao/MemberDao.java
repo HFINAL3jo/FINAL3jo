@@ -49,6 +49,10 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.deteleAccount",m);
 	}
 
+	public int pwdUpdate(Member m) {
+		return sqlSession.update("memberMapper.pwdUpdate",m);
+	}
+
 	
 	
 

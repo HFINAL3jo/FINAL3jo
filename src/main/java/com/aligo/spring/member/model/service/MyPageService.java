@@ -15,6 +15,6 @@ public interface MyPageService {
 	/*
 	 * int memberDelete(Member m);
 	 */
-	int memberUpdate(Member m);
+	/* int memberUpdate(Member m); */
 
 }

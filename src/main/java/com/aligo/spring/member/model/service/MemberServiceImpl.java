@@ -62,6 +62,11 @@ public class MemberServiceImpl implements MemberService {
 		return memDao.deteleAccount(m);
 	}
 
+	@Override
+	public int pwdUpdate(Member m) throws Exception {
+		return	memDao.pwdUpdate(m);
+	}
+
 	
 	
 }

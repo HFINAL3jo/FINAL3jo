@@ -30,8 +30,9 @@ public class MypageDao {
 	 * public int memberDelete(Member m) { return
 	 * sqlSession.delete("memberMapper.deleteMember",m); }
 	 */
-	public int memberUpdate(Member m) {
-		return sqlSession.update("memberMapper.updateMember",m);
-	}
+	/*
+	 * public int memberUpdate(Member m) { return
+	 * sqlSession.update("memberMapper.updateMember",m); }
+	 */
 
 }

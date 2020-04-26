@@ -348,6 +348,32 @@ public class MemberController {
 			
 			return "redirect:/";
 		}
+		
+
+		
+		
+		  @RequestMapping("pwdUpdate.do")
+		  
+		  public String pwdUpdate(Member m, Model model) throws Exception {
+		  
+		  String encPwd = bcryptPasswordEncoder.encode(m.getpassword());
+		  m.setpassword(encPwd);
+		  
+		  int result = memService.pwdUpdate(m);
+		  
+		  if (result > 0) { 
+			  model.addAttribute("loginUser", m); 
+			  
+			  return "redirect:index.jsp"; 
+			  
+		  } else { 
+				  
+			  model.addAttribute("msg", "회원 수정 실패"); 
+				  
+			  return "common/errorPage"; 
+				  } 
+		  }
+		 
 	
 	
 }

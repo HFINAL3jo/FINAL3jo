@@ -142,21 +142,18 @@ public class MyPageController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("memUpdate.do")
-	public String memberUpdate(Member m, Model model) {
-
-		String encPwd = bcryptPasswordEncoder.encode(m.getpassword());
-		m.setpassword(encPwd);
-
-		int result = mpService.memberUpdate(m);
-
-		if (result > 0) {
-			model.addAttribute("loginUser", m);
-			return "redirect:index.jsp";
-		} else {
-			model.addAttribute("msg", "회원 수정 실패");
-			return "common/errorPage";
-		}
-	}
+	/*
+	 * @RequestMapping("memUpdate.do") public String memberUpdate(Member m, Model
+	 * model) {
+	 * 
+	 * String encPwd = bcryptPasswordEncoder.encode(m.getpassword());
+	 * m.setpassword(encPwd);
+	 * 
+	 * int result = mpService.memberUpdate(m);
+	 * 
+	 * if (result > 0) { model.addAttribute("loginUser", m); return
+	 * "redirect:index.jsp"; } else { model.addAttribute("msg", "회원 수정 실패"); return
+	 * "common/errorPage"; } }
+	 */
 
 }

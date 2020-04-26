@@ -56,9 +56,9 @@
       WHERE EMAIL=#{email}
    </update>
    
-   <update id="updateMember" parameterType="Member">
+   <update id="pwdUpdate" parameterType="Member">
       UPDATE MEMBER
-      SET PASSWORD=#{password},NICKNAME=#{nickname}
+      SET PASSWORD=#{password}
       WHERE EMAIL=#{email}
    </update>
    
