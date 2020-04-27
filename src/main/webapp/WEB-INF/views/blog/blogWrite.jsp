@@ -22,7 +22,7 @@
     <label>Writer&nbsp;
     <input type="text" name="BWriter" size="40" value="${loginUser.nickname }" style="border:none;" readonly></label>
     <br>
-    <input type="text" name="bTag">
+    <span style="float:left;">HashTag &nbsp;<input type="text" id="ht" name="bTag"></span>
     <br><br>
 	<textarea name="BContent" id="smarteditor" rows="30" cols="104"></textarea>
     <br><br>
@@ -50,10 +50,6 @@
 	<tr>
 		<td>상세 주소</td>
 		<td><input type="text" id="sample4_extraAddress" placeholder="참고항목"></td>
-	</tr>
-	<tr>
-		<td>HashTag</td>
-		<td><input type="text" id="ht" name="bTag"></td>
 	</tr>
 	<!-- <tr>
 		<td>Tel</td>

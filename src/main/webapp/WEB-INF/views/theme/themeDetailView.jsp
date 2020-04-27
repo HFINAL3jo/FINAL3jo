@@ -581,10 +581,11 @@
 				     $(function(){
 				    	
 				    	getTReplyList();
+				    	getRandomList();
 				    	
-				    	 setInterval(function(){
+				    	/*  setInterval(function(){
 				    		getTReplyList();
-						}, 30000); 
+						}, 30000);  */
 				     });
 				    	function getTReplyList(){
 				    		$tableBody = $('#trtl tbody');
@@ -695,17 +696,15 @@
 				    	
 					var recommend = '${t.tKeyword}';
 					
-					$(function(){
-						
-						getRandomList();
-					});				    			    
 				    function getRandomList(){
-				    	
+				    	console.log(recommend);
 				     $.ajax({
 				    	url:"getRandomlist.do",
 				    	data:{recommend:recommend},
 				    	type:"post",
+				    	dataType:"json",
 				    	success:function(data){
+				    		console.log(data);
 				    		var $ul = $('ul[class=cols4-element]');
 				    		var $li; 
 				    		var $a;
@@ -715,6 +714,7 @@
 				    		
 				    		$ul.html("");
 				    		$.each(data,function(index,item){
+				
 					    		$li = $('<li>');
 					    		$a = $('<a>').attr("href","postdetail.do?tId="+data[index].tId)
 					    		.attr("title",data[index].tTitle);
