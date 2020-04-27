@@ -24,13 +24,13 @@
                     <div class="single_footer_part">
                         <h4>Creators</h4>
                         <ul class="list-unstyled">
-                            <li><a href="">권 지안</a></li>
-                            <li><a href="">마 정훈</a></li>
-                            <li><a href="">성 진영</a></li>
-                            <li><a href="">서 하연</a></li>
-                            <li><a href="">이 윤성</a></li>
-                            <li><a href="">최 홍석</a></li>
-                            <li><a href="">한 재우</a></li>
+                            <li><a href="">권지안</a></li>
+                            <li><a href="">마정훈</a></li>
+                            <li><a href="">성진영</a></li>
+                            <li><a href="">서하연</a></li>
+                            <li><a href="">이윤성</a></li>
+                            <li><a href="">최홍석</a></li>
+                            <li><a href="">한재우</a></li>
                         </ul>
                     </div>
                 </div>

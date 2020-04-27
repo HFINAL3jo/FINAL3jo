@@ -57,7 +57,7 @@
                                         <label for="ha6">Activity</label>
                                         <div class="confirm-radio">
                                             <input type="checkbox" id="ha6" checked="checked">
-                                            <label for="ha5"></label>
+                                            <label for="ha6"></label>
                                         </div>
                                     </li>
                                     <li>
@@ -76,7 +76,6 @@
                             <div class="l_w_title">
                             </div>
                             <div class="widgets_inner">
-                             <button type="button" id="svf" class="btn btn-outline-primary" style="width:100%;">Reset Findings</button>
                              <br><br>
                              <c:if test="${!empty loginUser }">
                              <button id="wb" type="button" class="btn btn-outline-danger" style="width:200px; height:50px;">Write Post</button></c:if>
@@ -88,6 +87,8 @@
   	$('#wb').click(function(){
   		location.href="themeInsertView.do";
   	});
+  	
+  	
   </script>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.aligo.spring.recom.model.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.aligo.spring.member.model.vo.Member;
 import com.aligo.spring.recom.model.vo.Recommend;
 import com.aligo.spring.recom.model.vo.ThemeVo;
+import com.aligo.spring.theme.model.vo.PageInfo;
 
 @Repository("rDao")
 public class RecomDao {
@@ -58,6 +60,20 @@ public class RecomDao {
 	public ArrayList<ThemeVo> selectList(ThemeVo tv) {
 
 		return (ArrayList)sqlSession.selectList("recomMapper.selectListTheme", tv);
+	}
+
+	public int getListCount(ThemeVo tv) {
+
+		return sqlSession.selectOne("recomMapper.listCount", tv);
+	}
+
+	public ArrayList<ThemeVo> rResultMoreList(PageInfo pi, ThemeVo tv) {
+
+		int offset = (pi.getCurrentPage() - 1) * pi.getThemeLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,pi.getThemeLimit());
+		
+		return (ArrayList)sqlSession.selectList("recomMapper.selectMoreList",tv,rowBounds);
 	}
 	
 	

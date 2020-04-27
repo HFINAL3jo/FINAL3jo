@@ -211,6 +211,12 @@ input:checked+label:after {
 								<div class="col-md-12 form-group p_star">
 									<input type="text" class="form-control" id="nickname"
 										name="nickname" placeholder="Nickname">
+										
+										<span id="ok" style="display: none;" class="guide ok">
+										Your Nickname is Available</span> 
+										<span id="error" style="display: none;"
+										class="guide error">Your Nickname is Not Available</span> 
+										
 											<input type="hidden" name="nickDuplicateCheck" id="nickDuplicateCheck"
 										value="0">
 								</div>
@@ -272,34 +278,27 @@ input:checked+label:after {
 		});
 		
 		
-/* 		  $('.btn_3').click(function(){
-		    	$.ajax({
-		    		url:"nickCheck.do",
-		    		type:"post",
-		    		data:{
-		    			nickname:$('#nickname').val()
-		    		},
-		    		success:function(data){
-		    			console.log(data);
-		    			
-		    			if(data=='ok'){
-		    				alert("Your nickname is available");
-		    			}else{
-		    				alert("Your nickname is not available");
-		    				$('#nickname').select();
-		    			}
-		    		},error:function(){
-		    			console.log("---ERROR---");
-		    		}
-		    	});
-		    });
-		 */
 		
-			function validate() {
+		$("#password").change(function(){
+		    checkPassword($('#password').val());
+		});
+		function checkPassword(password){
+		    
+		    if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/.test(password)){            
+		        alert('8 digits in combination of numbers + alphabetic characters + special characters');
+		        $('#password').val('').focus();
+		        return false;
+		    } 
+		    }
+		
+
+		   var nickCheck = 0;
+			/*닉네임 중복체크*/
+		 	function validate() {
 
 				if ($("nickDuplicateCheck").val() == 0) {
 
-					alert("사용 가능한 이메일을 입력해주세요");
+					alert("Your Nickname is Not Available");
 					$("#nickname").focus();
 					return false;
 				} else {
@@ -313,17 +312,17 @@ input:checked+label:after {
 
 					var nickname = $(this).val();
 
-					if(data=='ok'){
-	    				alert("Your nickname is available");
-	    			}else{
-	    				alert("Your nickname is not available");
-	    				$('#nickname').select();
+					if (nickname.length < 6) {
+						$(".guide").hide();
+						$("#nickDuplicateCheck").val(0);
+
+						return;
 					}
 
 					$.ajax({
 						url : "nickCheck.do",
 						data : {
-							nick : nick
+							nickname : nickname
 						},
 						type : "post",
 						success : function(data) {
@@ -332,12 +331,17 @@ input:checked+label:after {
 								$(".error").hide();
 								$(".ok").show();
 								$("#nickDuplicateCheck").val(1);
+								$('.btn_3').attr('disabled',false); 
+
 								
 								
 							} else {
 								$(".ok").hide();
 								$(".error").show();
 								$("#nickDuplicateCheck").val(0);
+								$('.btn_3').attr('disabled',true); 
+
+								
 							}
 
 						},
@@ -347,8 +351,21 @@ input:checked+label:after {
 					});
 				});
 			});
-		
-		
+			
+			
+			$("#nickname").change(function(){
+			    checknickname($('#nickname').val());
+			});
+			function checknickname(nickname){
+			    
+			    if(!(/^.{4,12}$/).test(nickname)){            
+			        alert('Between 4 ~ 12');
+			        $('#nickname').val('').focus();
+			        return true;
+			    } 
+			    }
+			
+			
 		
 		
 	</script>

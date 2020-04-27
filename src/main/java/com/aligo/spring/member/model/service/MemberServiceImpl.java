@@ -1,6 +1,9 @@
 package com.aligo.spring.member.model.service;
 
+import java.io.PrintWriter;
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -44,22 +47,40 @@ public class MemberServiceImpl implements MemberService {
 		return loginUser;
 	}
 
-	@Override
-	public int findPwdFin(Member m) {
-		return memDao.findPwdFin(m);
-	}
 
-	@Override
-	public int deleteMember(String email) {
-		// TODO Auto-generated method stub
-		return memDao.deleteMember(email);
-	}
+
 
 	@Override
 	public int nickCheck(String nickname) {
 		return memDao.nickCheck(nickname);
 	}
 
+
+
+	@Override
+	public int pwdUpdate(Member m) throws Exception {
+		return	memDao.pwdUpdate(m);
+	}
+
+	@Override
+	public int deleteMember(Member m) throws Exception {
+		return memDao.deleteMember(m);
+	}
+
+	// 패스워드 체크
+	@Override
+	public int passChk(Member m) throws Exception {
+		int result = memDao.passChk(m);
+		return result;
+	}
 	
+
+
+
+
+
+
+	}
+
 	
-}
+

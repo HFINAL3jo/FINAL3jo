@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.aligo.spring.recom.model.vo.Recommend;
 import com.aligo.spring.recom.model.vo.ThemeVo;
+import com.aligo.spring.theme.model.vo.PageInfo;
 
 public interface RecomService {
 
@@ -54,6 +55,26 @@ public interface RecomService {
 	 */
 	int rUserUpdate(Object m);
 
+	/**
+	 * 	8.	recom 조건에 맞는 리스트 SELECT
+	 * @param tv
+	 * @return
+	 */
 	ArrayList<ThemeVo> selectList(ThemeVo tv);
+
+	/**
+	 * 	9.	조건에 맞는 list 갯수 반환
+	 * @param tv
+	 * @return
+	 */
+	int getListCount(ThemeVo tv);
+
+	/**
+	 *  10.	THEME_LIST 테이블 select
+	 * @param pi
+	 * @param tv
+	 * @return
+	 */
+	ArrayList<ThemeVo> rResultMoreList(PageInfo pi, ThemeVo tv);
 	
 }

@@ -40,6 +40,22 @@
   	background-image:url('${contextPath}/resources/images/qnaflowers.jpg');
     background-size: 100% 100%;
   }
+  
+  .btn {
+	  color: #0067b8 !important; 
+	  border:1px solid #0067b8 !important; 
+	  background: white !important; 
+	}
+	
+ .btn:hover {
+   color: snow !important;
+   border: 1px solid #0067b8 !important;
+   background: #0067b8 !important;
+ }
+ 
+ .mt-3 input:last-child{
+ float:right;
+}
 </style>
 </head>
 
@@ -118,7 +134,8 @@
 
             </div>
             <div class="form-group mt-3">
-              <input type="submit" class="btn_3 button-contactForm" value="보내기(send)">
+              <input type="submit" class="btn" value="send">
+              <input type="button" class="btn" value="back" onClick="location.href='javascript:history.back()'" >
             </div>
           </form>
         </div>

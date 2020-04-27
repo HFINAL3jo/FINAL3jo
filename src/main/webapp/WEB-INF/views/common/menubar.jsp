@@ -366,7 +366,10 @@
 												<i class="fas fa-user-circle" style="margin-left: 0px;"></i>
 										</span>
 										</a>
-										<a href="likedList.do"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+										<c:url var="like" value="likedList.do">
+											<c:param name="mId" value="${sessionScope.loginUser.mid }"/>
+										</c:url>
+										<a href="${like }"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
 											data-balloon="Likes" data-balloon-pos="down-right"> <i
 												class="far fa-heart" style="margin-left: 0px;"></i>
 										</span>

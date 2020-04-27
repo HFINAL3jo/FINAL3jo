@@ -3,12 +3,16 @@ package com.aligo.spring.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +22,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aligo.spring.member.model.service.MemberService;
 import com.aligo.spring.member.model.vo.Member;
@@ -46,13 +52,14 @@ import com.aligo.spring.member.model.vo.Member;
 @SessionAttributes("loginUser")
 @Controller
 public class MemberController {
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
 	@Inject
 	JavaMailSender mailSender;     //메일 서비스를 사용하기 위해 의존성을 주입함.
-	MemberService memberservice; 
+	MemberService memberservice;
+	BCryptPasswordEncoder pwdEncoder;
 
 	private static final Logger logger=
 			LoggerFactory.getLogger(MemberController.class);
@@ -65,10 +72,10 @@ public class MemberController {
 
 	@RequestMapping(value="signUp.do", method = RequestMethod.POST)
 	public String insertMember(Member m) {
-		
+
 		String encPwd = bcryptPasswordEncoder.encode(m.getpassword());
 		m.setpassword(encPwd);
-		
+
 		int result = memService.insertMember(m);
 
 		if(result >0) {
@@ -78,7 +85,6 @@ public class MemberController {
 		}
 
 	}
-
 
 	/**
 	 * @param email
@@ -98,11 +104,11 @@ public class MemberController {
 		}
 
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("nickCheck.do")
 	public String nickCheck(String nickname) {
-		
+
 		int result = memService.nickCheck(nickname);
 
 		if(result >0) {
@@ -111,17 +117,7 @@ public class MemberController {
 			return "ok";
 		}
 	}
-	
-	/*
-	 * 
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping("findPwd.do") public String findPwd(String password) {
-	 * 
-	 * int result = memService.findPwd(password);
-	 * 
-	 * if(result >0) { return "fail"; }else { return "ok"; } }
-	 */
+
 
 
 	/**
@@ -140,26 +136,26 @@ public class MemberController {
 
 		String setfrom = "noticealigo@gmail.com";
 		String tomail = request.getParameter("e_mail"); // 받는 사람 이메일
-		String title = "회원가입 인증 이메일 입니다."; // 제목
+		String title = "Welcome to Aligo"; // 제목
 		String content =
 
 				System.getProperty("line.separator")+ //한줄씩 줄간격을 두기위해 작성
 
 				System.getProperty("line.separator")+
 
-				"안녕하세요 회원님 저희 홈페이지를 찾아주셔서 감사합니다"
+				"Hello~"
 
         +System.getProperty("line.separator")+
 
         System.getProperty("line.separator")+
 
-        " 인증번호는 " +dice+ " 입니다. "
+        " Your number is " + dice
 
         +System.getProperty("line.separator")+
 
         System.getProperty("line.separator")+
 
-        "받으신 인증번호를 홈페이지에 입력해 주시면 다음으로 넘어갑니다."; // 내용
+        "Thank You!"; // 내용
 
 
 		try {
@@ -187,8 +183,8 @@ public class MemberController {
 
 		response_email.setContentType("text/html; charset=UTF-8");
 		PrintWriter out_email = response_email.getWriter();
-		  out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>"); 	
-		  out_email.flush();
+		out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>"); 	
+		out_email.flush();
 		mv.addObject(e_mail);
 		return mv;
 
@@ -212,7 +208,7 @@ public class MemberController {
 		System.out.println("마지막 : email_injeung : "+ email_injeung);
 
 		System.out.println("마지막 : dice : "+diceCheck);
-		
+
 		System.out.println("email : " + email);
 
 
@@ -280,7 +276,7 @@ public class MemberController {
 			return "common/errorPage";
 		}
 	}
-	
+
 	/** 로그아웃
 	 * @param status
 	 * @return
@@ -288,52 +284,69 @@ public class MemberController {
 	@RequestMapping("logout.do")
 	public String logout(SessionStatus status) {
 		// SessionStatus : 커맨드 객체로 세선의 상태를 관리할 수 있는 객체이다.
-		
+
 		// 세션의 상태를 확정지어주는 메소드 호출
 		status.setComplete();
-		
+
 		return "redirect:index.jsp";
 	}
-	
-	
-	@RequestMapping("findPwd.do")
-	public String findPwd() {
-		return "member/findPwd";
-	}
-	
-	@RequestMapping("findPwdFin.do")
-	public String findPwdFin(Member m, Model model) {		
-		System.out.println(m);
+
+
+
+	@RequestMapping("pwdUpdate.do")
+
+	public String pwdUpdate(Member m, Model model) throws Exception {
+
 		String encPwd = bcryptPasswordEncoder.encode(m.getpassword());
 		m.setpassword(encPwd);
-		System.out.println(m);
+
+		int result = memService.pwdUpdate(m);
+
+		if (result > 0) { 
+			model.addAttribute("loginUser", m); 
+
+			return "redirect:index.jsp"; 
+
+		} else { 
+
+			model.addAttribute("msg", "회원 수정 실패"); 
+
+			return "common/errorPage"; 
+		} 
+	}
+
+
+
+	@RequestMapping(value = "findPwd.do")
+	public String findPwd() throws Exception{
+		return "member/findPwd";
+	} 
+	
+
+	@RequestMapping(value = "deleteAccount.do")
+	public String deleteAccount() throws Exception{
+		return "member/deleteAccount";
+	} 
+	
+	// 회원 탈퇴 post
+	@RequestMapping(value="/deleteMember", method = RequestMethod.POST)
+	public String memberDelete(Member m, HttpSession session, RedirectAttributes rttr) throws Exception{
 		
-		int result = memService.findPwdFin(m);
+		memService.deleteMember(m);
+		session.invalidate();
 		
-		if(result > 0) {
-			return "member/loginView";
-		}else {
-			return "common/errorPage";
-		}
-		
-		
+		return "redirect:/";
 	}
 	
-	@RequestMapping("deleteAccount.do")
-	public String deleteMember(SessionStatus status, String email, Model model) {
-		
-		
-		int result = memService.deleteMember(email);
-		
-		if(result>0) {
-			status.setComplete();
-			return "redirect:index.jsp";
-		}else {
-			model.addAttribute("msg","회원탈퇴실패!");
-			return "common/errorPage";
-		}		
-	}
-		
+	// 패스워드 체크
+	@ResponseBody
+	@RequestMapping(value="passChk.do", method = RequestMethod.POST)
+	public boolean passChk(Member m) throws Exception {
+
+		Member login = memService.loginMember(m);
+		boolean pwdChk = bcryptPasswordEncoder.matches(m.getpassword(), login.getpassword());
+		return pwdChk;
 	}
 	
-	
+}
+

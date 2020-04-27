@@ -8,6 +8,8 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -112,7 +114,6 @@ public class ThemeController extends TFile{
 			if(t.gettTitle().length() > 16) {
 				t.settTitle(t.gettTitle().substring(0,15));
 			}
-			
 			if(t.gettModifyFile().length() <= 18) {
 				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
 			}else if(t.gettModifyFile().contains(",")){
@@ -155,12 +156,11 @@ public class ThemeController extends TFile{
 	
 	@RequestMapping("postdetail.do")
 	public ModelAndView themeDetailView(ModelAndView mv, 
-			@RequestParam(value="tId") int bId) {
+			@RequestParam(value="tId") int tId) {
 		
-		int uc = tService.updateCount(bId);
-		if(uc == 2) System.out.println("updateCount성공"); else System.out.println("실패"); 
+		int uc = tService.updateCount(tId);
 		
-		Theme t = tService.selectTheme(bId);
+		Theme t = tService.selectTheme(tId);
 		ArrayList list = new ArrayList();
 		if(t.gettModifyFile().length() > 18 && t.gettModifyFile().contains(",")) {
 			String str = t.gettModifyFile();
@@ -177,6 +177,7 @@ public class ThemeController extends TFile{
 		if(!list.isEmpty()) {
 			t.settFileList(list);
 		}
+		t.settAddress(t.gettAddress().substring(0,t.gettAddress().lastIndexOf(",")));
 		mv.addObject("t",t);
 		mv.setViewName("theme/themeDetailView");		
 		return mv;
@@ -223,7 +224,6 @@ public class ThemeController extends TFile{
 		
 		@RequestMapping("multiplePhotoUpload.do")
 		public void saveFile(HttpServletRequest request, MultipartFile file,HttpServletResponse response) {
-			
 			String sFileInfo = "";
 	        String originFilename = request.getHeader("file-name");
 	        String root = request.getSession().getServletContext().getRealPath("resources");
@@ -269,7 +269,6 @@ public class ThemeController extends TFile{
 		         TFile.tOriginalFile = originFilename;
 		         TFile.tModifyFile = renameFilename;
 		         TFile.tCodeNumber = tService.getTNum();
-		         System.out.println(tf);
 		         int result = tService.insertImg(tf);
 		         
 		    } catch (Exception e) {
@@ -281,7 +280,6 @@ public class ThemeController extends TFile{
 	@ResponseBody
 	public String addTReply(TReply r) {
 		String str = "";
-		System.out.println(r);
 		int result = tService.addTReply(r);
 		
 		if(result > 0) str="success"; else str="fail";
@@ -292,7 +290,7 @@ public class ThemeController extends TFile{
 	@RequestMapping("trList.do")
 	public void getTReplyList(HttpServletResponse response,int tId) throws JsonIOException, IOException {
 		
-		ArrayList<TReply> list = tService.slelctTReplyList(tId);
+		ArrayList<TReply> list = tService.selectTReplyList(tId);
 	
 		response.setContentType("application/json; charset=UTF-8");
 	
@@ -302,8 +300,17 @@ public class ThemeController extends TFile{
 	}
 	
 	@RequestMapping("themeModifyView.do")
-	public ModelAndView themeModifyView(Theme t,ModelAndView mv) {
-		mv.addObject("t",t).setViewName("board/boardModifyView");
+	public ModelAndView themeModifyView(int tId,ModelAndView mv) {
+		Theme t = tService.selectTheme(tId);
+		
+		String str = tService.getKeyword();
+		String strArr[] = str.split(",");
+		ArrayList<String> list = new ArrayList<>(); 
+		for(int i=0;i<strArr.length;i++) {
+			list.add(strArr[i]);
+		}
+		mv.addObject("list",list).addObject("tKlength",strArr.length).addObject("t",t)
+		.setViewName("board/boardModifyView");
 		return mv;
 	}
 	
@@ -311,7 +318,78 @@ public class ThemeController extends TFile{
 	public String updateTheme(Theme t) {
 		int result = tService.updateTheme(t);
 		
-		return "redirect:postdetail.do";
+		return "redirect:theme.do";
 	}
 
+	@RequestMapping("updateLike.do")
+	public String updateLike(int tId,String lv,String loginUser,String tCode,HttpServletResponse response) throws IOException {
+		HashMap<String,String> map = new HashMap<>();
+		map.put("loginUser",loginUser);
+		map.put("tCode",tCode);
+		map.put("tId",Integer.toString(tId));
+		map.put("lv",lv);
+		int result = tService.updateLike(map);
+		String str = "";
+		switch(result) {
+		case 3: str = "Saved mylike list!"; break;
+		case 2: str = "deleted!"; break;
+		case 0: str = "error!"; break;
+		default: str = "Contact the admin"; break;
+		}
+		return str;
+	}
+	
+	@RequestMapping("likeStatus.do")
+	@ResponseBody
+	public String likeStatus(String loginUser,int tId) {
+		HashMap<String,String> map = new HashMap<>();
+		map.put("loginUser",loginUser);
+		map.put("tId",Integer.toString(tId));
+		
+		int result = tService.likeStatus(map);
+		if(result > 0) return "true"; else return "false";
+	}
+	
+	@RequestMapping("deleteTheme.do")
+	public String deleteTheme(int tId) {
+		int result = tService.deleteTheme(tId);
+		return "redirect:theme.do";
+	}
+	
+	@RequestMapping("deleteTReply.do")
+	public String deleteTReply(int trId) {
+		int result = tService.deleteTReply(trId); 
+		if(result > 0) return "success"; else return "fail";
+	}
+	
+	@RequestMapping("getRandomlist.do")
+	public void getRandomList(String recommend,HttpServletResponse response) throws JsonIOException, IOException {
+		response.setContentType("application/json; charset=UTF-8");	
+		
+		int listCount = tService.getRandomListCount(recommend);
+		int currentPage = 1;
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		
+		ArrayList<Theme> randomList = tService.selectTkeywordList(pi,recommend);
+
+		for(Theme t: randomList) {
+			if(t.gettTitle().length() > 16) {
+				t.settTitle(t.gettTitle().substring(0,15));
+			}
+			
+			if(t.gettModifyFile().length() <= 18) {
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
+			}else if(t.gettModifyFile().contains(",")){
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile().substring(0,t.gettModifyFile().indexOf(",")));
+			}else {
+				t.settModifyFile(t.gettModifyFile().replace("amp;",""));
+			}
+			
+			Collections.shuffle(randomList);
+			
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			
+			gson.toJson(randomList,response.getWriter());
+		}
+	}
 }

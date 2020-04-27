@@ -20,7 +20,7 @@ window.createSEditor2 = function(elIRField, htParams, elSeAppContainer){
 		parent.document.body.innerHTML="진도 프레임웍이 필요합니다.<br>\n<a href='http://dev.naver.com/projects/jindo/download'>http://dev.naver.com/projects/jindo/download</a>에서 Jindo 1.5.3 버전의 jindo.min.js를 다운로드 받아 /js 폴더에 복사 해 주세요.\n(아직 Jindo 2 는 지원하지 않습니다.)";
 		return;
 	}
-	
+
 	var elAppContainer = (elSeAppContainer || jindo.$("smart_editor2"));	
 	var elEditingArea = jindo.$$.getSingle("DIV.husky_seditor_editing_area_container", elAppContainer);
 	var oWYSIWYGIFrame = jindo.$$.getSingle("IFRAME.se2_input_wysiwyg", elEditingArea);
@@ -55,7 +55,7 @@ window.createSEditor2 = function(elIRField, htParams, elSeAppContainer){
 
 	var htDimension = {
 		nMinHeight:205,
-		nMinWidth:parseInt(elIRField.style.minWidth, 10)||700,
+		nMinWidth:parseInt(elIRField.style.minWidth, 10)||570,
 		nHeight:elIRField.style.height||elIRField.offsetHeight,
 		nWidth:elIRField.style.width||elIRField.offsetWidth
 	};
@@ -97,7 +97,7 @@ window.createSEditor2 = function(elIRField, htParams, elSeAppContainer){
 	oEditor.registerPlugin(new nhn.husky.SE2M_LineStyler());								 
 	oEditor.registerPlugin(new nhn.husky.SE2M_ExecCommand(oWYSIWYGIFrame));
 	oEditor.registerPlugin(new nhn.husky.SE2M_LineHeightWithLayerUI(elAppContainer));		// 줄간격	
-	oEditor.registerPlugin(new nhn.husky.SE2M_AttachQuickPhoto(elAppContainer));
+
 	oEditor.registerPlugin(new nhn.husky.SE2M_Quote(elAppContainer));						// 인용구
 	oEditor.registerPlugin(new nhn.husky.SE2M_Hyperlink(elAppContainer));					// 링크
 	oEditor.registerPlugin(new nhn.husky.SE2M_SCharacter(elAppContainer));					// 특수문자
@@ -119,6 +119,6 @@ window.createSEditor2 = function(elIRField, htParams, elSeAppContainer){
 	
 	oEditor.registerPlugin(new nhn.husky.SE_ToolbarToggler(elAppContainer, htParams.bUseToolbar));
 	oEditor.registerPlugin(new nhn.husky.SE2M_Accessibility(elAppContainer, htParams.I18N_LOCALE));	// 에디터내의 웹접근성 관련 기능모음 플러그인 
-	oEditor.registerPlugin(new nhn.husky.SE2M_AttachQuickPhoto(elAppContainer));
+	
 	return oEditor;
 };

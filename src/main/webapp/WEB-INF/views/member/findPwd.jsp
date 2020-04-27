@@ -138,7 +138,7 @@ input:checked+label:after {
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>aranoz</title>
+<title>aligo</title>
 </head>
 
 <body>
@@ -154,10 +154,7 @@ input:checked+label:after {
 				<div class="col-lg-8">
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item">
-							<h2>Forgot your ACCOUNT?</h2>
-							<p>
-								Home <span>-</span> Sign Up
-							</p>
+							<h2>Forgot your password?</h2>
 						</div>
 					</div>
 				</div>
@@ -171,7 +168,7 @@ input:checked+label:after {
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-lg-6 col-md-6">
-					<img src="img/korea/mainpic/wctk.jpg">
+					<!-- <img src="img/korea/mainpic/wctk.jpg"> -->
 					<div class="login_part_text text-center"
 						style="padding: 5%; display: none;">
 					</div>
@@ -179,21 +176,20 @@ input:checked+label:after {
 				<div class="col-lg-6 col-md-6">
 					<div class="login_part_form">
 						<div class="login_part_form_iner">
-							<h3>CREATE YOUR NEW PASSWORD</h3>
-							<form class="row contact_form" id="fm1" method="post" >
-
+							<h3>Enter Your Email <br> Send New Password</h3>
+							<form class="row contact_form" id="findPwd">
 								<div class="col-md-12 form-group p_star">
-									<input type="text" class="form-control" id="findemail"
-										name="findemail" placeholder="Your email">
+									<input type="email" class="form-control" id="email"
+										name="email" placeholder="Your email">
+									<span id="ok" style="display: none;" class="guide ok">
+										Your Email is not joined</span> <span id="error"
+										style="display: none;" class="guide error">send password by email</span> 
+										<input type="hidden" name="idDuplicateCheck"
+										id="idDuplicateCheck" value="0">
 								</div>
 								
-								<div class="col-md-12 form-group p_star">
-									<input type="text" class="form-control" id="findnickname"
-										name="findnickname" placeholder="nickname">
-								</div>
-
 								<div class="col-md-12 form-group">
-									<button type="submit" value="submit" class="btn_3" id="findPwd" onclick="findPwd()">find password</button>
+									<button class="btn_3" onclick="findPwd()">find password</button>
 								</div>
 								<br>
 							</form>
@@ -204,37 +200,75 @@ input:checked+label:after {
 		</div>
 	</section>
 	<script type="text/javascript">
-	/* 	function resetPwd() {			
-			alert("Change completed. Please Log in.😉");
-			$("#fm1").attr("action","findPwdFin.do").submit();
-		} */
 		
-		
-        $("#findPwd").click(function(){
- 			$.ajax({
- 				
- 				url : "findPwd.do",
- 				type : "get",
- 				data :{
- 					findnickname:$('#findnickname').val(),
- 					findemail:$('findemail').val()
- 				}, success:function(result){
- 					 
- 					if(!result==""){
- 						alert("찾으시는 아이디는 [ " + result + " ] 입니다");
-						location.reload();
- 					}else{
- 						alert("해당하는 아이디가 없습니다");
-       					$('#findnickname').select();
- 					}
- 					
- 				},error :  function(request,errorcode,error){
- 					alert("페이지에러");
+    var idCheck = 0;
+	/*이메일 중복체크*/
+ 	function validate() {
 
- 				}
- 			});
- 		});
-		
+		if ($("idDuplicateCheck").val() == 0) {
+
+			alert("사용 가능한 이메일을 입력해주세요");
+			$("#email").focus();
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	$(function() {
+
+		$('#email').on("keyup", function() {
+
+			var email = $(this).val();
+
+			if (email.length < 10) {
+				$(".guide").hide();
+				$("#idDuplicateCheck").val(0);
+
+				return;
+			}
+
+			$.ajax({
+				url : "idCheck.do",
+				data : {
+					email : email
+				},
+				type : "post",
+				success : function(data) {
+					console.log(data);
+					if (data == "ok") {
+						$(".error").hide();
+						$(".ok").show();
+						$("#idDuplicateCheck").val(1);
+						$('.btn_3').attr('disabled',true); 
+
+						
+						
+					} else {
+						$(".ok").hide();
+						$(".error").show();
+						$("#idDuplicateCheck").val(0);
+						$('.btn_3').attr('disabled',false); 
+						
+
+						
+					}
+
+				},
+				error : function() {
+					console.log("ajax 처리 실패")
+				}
+			});
+		});
+	});
+	
+	function findPwd(){ 
+		alert("check your Email");
+		}
+	
+
+	
+	
 
 	</script>
 

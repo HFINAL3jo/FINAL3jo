@@ -22,16 +22,19 @@
     text-align: center;
   }
   thead tr {
-    background-color: #3B4CF7;
+    background-color: #0067b8;
     color: #ffffff;
   }
-  tbody tr:nth-child(2n) {
+  /* tbody tr:nth-child(2n) {
     background-color: #ffffff;
   }
   tbody tr:nth-child(2n+1) {
     background-color: #FAFAFA;
+  } */
+  td{
+  background-color:#ffffff !important;
   }
-
+  
   ul[id~=pagenation]>li{
   	display:inline;
   }
@@ -154,7 +157,7 @@
 						listText += "<tr>";
 						listText += "<td>"+data.list[i].qId+"</td>";
 						listText += "<td>";
-						listText += "<a href='qdetail.do?qId="+data.list[i].qId+"&currentPage="+data.pi.currentPage+"'>"+data.list[i].qTitle+"</a>";
+						listText += "<a style='color:black' href='qdetail.do?qId="+data.list[i].qId+"&currentPage="+data.pi.currentPage+"'>"+data.list[i].qTitle+"</a>";
 						listText += "</td>";
 						
 						listText += "<td>"+data.list[i].qWriter+"</td>";

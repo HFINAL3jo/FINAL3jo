@@ -38,7 +38,8 @@
                         <div class="col-lg-12">
                             <div class="product_top_bar d-flex justify-content-between align-items-center" style="align-self: center;">
                                 <h3>${loginUser.nickname }'s Information</h3>
-                                <form action="memUpdate.do" onsubmit="return pwdcheck()" style="margin-left: 5%; width: 45%;">
+                                <form action="pwdUpdate.do" method="post" style="margin-left: 5%; width: 45%;">
+                                
                                     <div class="mt-10">
                                         <input type="text" name="email" value="${ loginUser.email }" onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = 'Email address'" required class="single-input" readonly>
@@ -53,7 +54,7 @@
                                         onblur="this.placeholder = 'password'" required class="single-input" style="background-color: rgb(232, 240, 254);">
                                     </div>                                    
                                     <div class="mt-10">
-                                        <input type="password" id="password2" name="password2" placeholder="password check" onfocus="this.placeholder = ''"
+                                        <input type="password" id="passwordchk" name="passwordchk" placeholder="password check" onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = 'password check'" required class="single-input" style="background-color: rgb(232, 240, 254);">
                                     </div>
                                   
@@ -70,12 +71,35 @@
     <%@ include file="../common/footer.jsp" %>
     
      <script>		
-        function pwdcheck(){
-            if($('#password').val() != $('#password2').val()){
-            	alert("비밀번호가 맞지 않아유!");
-            	return false;
-            }
-        }
+
+
+		$(function() {
+
+			//비밀번호 확인
+			$('#passwordchk').blur(function() {
+				if ($('#password').val() != $('#passwordchk').val()) {
+					if ($('#passwordchk').val() != '') {
+						alert("Password is not matched");
+						$('#passwordchk').val('');
+						$('#passwordchk').focus();
+					}
+				}
+			})
+		});
+		
+		
+		
+		$("#password").change(function(){
+		    checkPassword($('#password').val());
+		});
+		function checkPassword(password){
+		    
+		    if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/.test(password)){            
+		        alert('8 digits in combination of numbers + alphabetic characters + special characters');
+		        $('#password').val('').focus();
+		        return false;
+		    } 
+		    }
     </script>
     
     <script src="resources/js/stellar.js"></script>

@@ -50,22 +50,33 @@
    
    
    
-   <update id="deleteMember" parameterType="Member">
+   <update id="deteleMember" parameterType="Member">
       UPDATE MEMBER
       SET M_STATUS='N'
-      WHERE EMAIL=#{email},PASSWORD={password}
+      WHERE EMAIL=#{email}
    </update>
    
-   <update id="updateMember" parameterType="Member">
+   <update id="pwdUpdate" parameterType="Member">
       UPDATE MEMBER
-      SET PASSWORD=#{password},NICKNAME=#{nickname}
+      SET PASSWORD=#{password}
+      WHERE EMAIL=#{email}
+   </update>
+  
+   <update id="findPwd" parameterType="Member">
+      UPDATE MEMBER
+      SET PASSWORD=#{password}
       WHERE EMAIL=#{email}
    </update>
    
-   <update id="findPwdFin">
-      UPDATE MEMBER SET
-      PASSWORD=#{password}
-      WHERE EMAIL=#{email}
-   </update>
+   	<!-- 패스워드 체크 -->
+	<select id="passChk" resultType="int">
+		SELECT COUNT(*) 
+		FROM MEMBER
+		WHERE EMAIL = #{EMAIL}
+		  AND PASSWORD = #{password}
+	</select>
+   
+   
+   
 
 </mapper>

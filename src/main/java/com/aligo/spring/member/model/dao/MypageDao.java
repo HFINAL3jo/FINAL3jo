@@ -16,22 +16,23 @@ public class MypageDao {
 	
 	@Autowired SqlSessionTemplate sqlSession;
 
-	public int getListCount() {
-		return sqlSession.selectOne("myPageMapper.getMyListCount");
+	public int getListCount(String mId) {
+		return sqlSession.selectOne("myPageMapper.getMyListCount",mId);
 	}
 
-	public ArrayList<Theme> selectMyList(PageInfo pi) {
+	public ArrayList<Theme> selectMyList(PageInfo pi,String mId) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getThemeLimit();		
 		RowBounds rowBounds = new RowBounds(offset,pi.getThemeLimit());
-		return (ArrayList)sqlSession.selectList("myPageMapper.selectMyList",null,rowBounds);
+		return (ArrayList)sqlSession.selectList("myPageMapper.selectMyList",mId,rowBounds);
 	}
 
-	public int memberDelete(Member m) {
-		return sqlSession.delete("memberMapper.deleteMember",m);
-	}
-
-	public int memberUpdate(Member m) {
-		return sqlSession.update("memberMapper.updateMember",m);
-	}
+	/*
+	 * public int memberDelete(Member m) { return
+	 * sqlSession.delete("memberMapper.deleteMember",m); }
+	 */
+	/*
+	 * public int memberUpdate(Member m) { return
+	 * sqlSession.update("memberMapper.updateMember",m); }
+	 */
 
 }

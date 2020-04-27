@@ -14,11 +14,11 @@
 </head>
 <body>
 	<c:if test="${!empty loginUser}">
-    <form action="themeUpdate.do" method="POST" id="gosubmit" enctype="multipart/form-data" onsubmit="return false;">
+    <form action="updateTheme.do" method="POST" id="gosubmit" enctype="multipart/form-data" onsubmit="return false;">
     <div id="editor">
     <br>
     <label for="tt" style="margin:10px;">Title&nbsp;&nbsp;
-    <input type="text" size="40" name="tTitle" id="tt"></label>&nbsp;&nbsp;
+    <input type="text" size="40" name="tTitle" id="tt" value="${t.tTitle }"></label>&nbsp;&nbsp;
     <label>Writer&nbsp;
     <input type="text" name="tWriter" size="40" value="${loginUser.nickname }" style="border:none;" readonly></label>
     <br><br>
@@ -33,7 +33,7 @@
     	<option value="ACTIVITY">ACTIVITY</option>
     	<option value="EXHIBITION">EXHIBITION</option>
     </select>&nbsp;&nbsp;&nbsp;
-    Keyword &nbsp;&nbsp;<input type="text" id="tkv" name="tKeyword" readonly style="margin-right:-10px;"></span><br><br>
+    Keyword &nbsp;&nbsp;<input type="text" id="tkv" name="tKeyword" value="${t.tKeyword }"readonly style="margin-right:-10px;"></span><br><br>
     	<c:if test="${!empty list}">
     	<div id="selectVal" style="border:1px lightblue solid; display:inline-block; float:left; margin:10px; padding:10px; text-align:left;">
     		<label><input type="radio" name="f1" value="${list[0]}">&nbsp;${list[0] }</label>
@@ -51,9 +51,8 @@
     	</div>
     	<br>
     	</c:if>
-   	
     <br><br>
-	<textarea name="tContent" id="smarteditor" rows="30" cols="104"></textarea>
+	<textarea name="tContent" id="smarteditor" rows="30" cols="104">${t.tContent }</textarea>
     <br><br>
     
     <table align="center">
@@ -66,11 +65,11 @@
 	</tr>
 	<tr>
 		<td>도로명 주소</td>
-		<td><input type="text" id="da" name="tAddressH" placeholder="도로명주소" class="adi"></td>
+		<td><input type="text" id="da" name="tAddressH" placeholder="도로명주소" class="adi" value="${t.tAddressH }"></td>
 	</tr>
 	<tr>
 		<td>ADDRESS</td>
-		<td><input type="text" id="ja" name="tAddress" placeholder="영문 도로명 주소" class="adi"></td>
+		<td><input type="text" id="ja" name="tAddress" placeholder="영문 도로명 주소" class="adi" value="${t.tAddress }"></td>
 	</tr>
 	<tr>
 		<td>영문 지번 주소</td>
@@ -82,23 +81,24 @@
 	</tr>
 	<tr>
 		<td>Tel</td>
-		<td><input type="text" id="tel" name="tTel"></td>
+		<td><input type="text" id="tel" name="tTel" value="${t.tTel }"></td>
 	</tr>
 	<tr>
 		<td>Fee</td>
-		<td><input type="text" id="fee" name="tFee"></td>
+		<td><input type="text" id="fee" name="tFee" value="${t.tFee }"></td>
 	</tr>
 	<tr>
 		<td>transportation</td>
-		<td><input type="text" id="trans" name="tTrans"></td>
+		<td><input type="text" id="trans" name="tTrans" value="${t.tTrans }"></td>
 	</tr>
 	<tr>
 		<td>Opening hours</td>
-		<td><input type="text" id="oh" name="tHours">
+		<td><input type="text" id="oh" name="tHours" value="${t.tHours }">
 	</tr>
 	</table>
     <button id="cancel" class="btn btn-light" type="reset">Cancle</button>
-    <input type="button" class="btn btn-light" id="sbtn" value="Write"> 
+    <input type="button" class="btn btn-light" id="sbtn" value="Write">
+    <input type="hidden" name="tId" value="${t.tId }"> 
 	</div>
     </form>
     </c:if>
@@ -118,7 +118,6 @@ nhn.husky.EZCreator.createInIFrame({
    oEditors.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD",[]);
    
    if(validation()) {
-	   console.log("으앙");
 	   $('#gosubmit').attr('onsubmit','true');
 	   $('#gosubmit').submit();
 	   }

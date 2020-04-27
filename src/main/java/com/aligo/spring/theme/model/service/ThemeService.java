@@ -1,6 +1,7 @@
 package com.aligo.spring.theme.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.aligo.spring.common.AligoException;
 import com.aligo.spring.theme.controller.ThemeController;
@@ -36,10 +37,10 @@ public interface ThemeService {
 
 	/**
 	 * 테마글 상세보기
-	 * @param bId
+	 * @param tId
 	 * @return
 	 */
-	Theme selectTheme(int bId);
+	Theme selectTheme(int tId);
 
 	/**
 	 * theme img 삽입
@@ -55,10 +56,10 @@ public interface ThemeService {
 
 	/**
 	 * 게시물 조회 수 증가
-	 * @param bId
+	 * @param tId
 	 * @return
 	 */
-	int updateCount(int bId);
+	int updateCount(int tId);
 
 	/**
 	 * 키워드 검색 횟수 데이터 적재
@@ -79,7 +80,7 @@ public interface ThemeService {
 	 * @param tId
 	 * @return
 	 */
-	ArrayList<TReply> slelctTReplyList(int tId);
+	ArrayList<TReply> selectTReplyList(int tId);
 
 	/**
 	 * DB에서 recommend keyword 값 가져오기
@@ -93,4 +94,48 @@ public interface ThemeService {
 	 * @return
 	 */
 	int updateTheme(Theme t);
+
+	/**
+	 * 게시물 좋아요 횟수 증가
+	 * @param tId
+	 * @return
+	 */
+	int updateLike(HashMap<String,String> map);
+
+	/**
+	 * 좋아요 체크
+	 * @param map
+	 * @return
+	 */
+	int likeStatus(HashMap<String, String> map);
+
+	/**
+	 * 테마 포스트 삭제
+	 * @param tId
+	 * @return
+	 */
+	int deleteTheme(int tId);
+
+	/**
+	 * 댓글 삭제
+	 * @param trId
+	 * @return
+	 */
+	int deleteTReply(int trId);
+
+	/**
+	 * recommand keyword 랜덤리스트 카운트
+	 * @param list
+	 * @return
+	 */
+	int getRandomListCount(String recommend);
+
+	/**
+	 * 리스트 출력
+	 * @param pi
+	 * @param tKeyword
+	 * @return
+	 */
+	ArrayList<Theme> selectTkeywordList(PageInfo pi, String recommend);
+	
 }

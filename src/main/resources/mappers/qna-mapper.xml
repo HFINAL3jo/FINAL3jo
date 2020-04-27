@@ -65,4 +65,62 @@
 		AND R_STATUS='Y'
 		ORDER BY RID DESC
 	</select>
+	
+	<insert id="insertReply" parameterType="QnaReply">
+		INSERT INTO QNAREPLY VALUES
+		(SEQ_RID.NEXTVAL,#{rContent},#{refQid},#{rWriter},SYSDATE,SYSDATE,DEFAULT)
+	</insert>
+	
+	<!--  -->
+	<select id="getSearchQnaDataTotal" resultType="_int" parameterType="hashMap">
+		SELECT COUNT(*)
+		<choose>
+			<when test="search1 == 'ALL'">	
+			FROM QNA
+				<if test="search2 == 'TITLE'">
+					where QTITLE LIKE '%' || #{search3} || '%'
+				</if>
+				<if test="search2 == 'QWRITER'">
+					where QWRITER LIKE '%' || #{search3} || '%'
+				</if>
+			</when>
+			<otherwise>
+				FROM QNA
+				WHERE Q_STATUS = #{search1}
+				<if test="search2 == 'TITLE'">
+					AND QTITLE LIKE '%' || #{search3} || '%'
+				</if>
+				<if test="search2 == 'QWRITER'">
+					AND QWRITER LIKE '%' || #{search3} || '%'
+				</if>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<!--  -->
+	<select id="getSearchQnaData" resultMap="qnaResultSet" parameterType="hashMap">
+		SELECT *
+		<choose>
+			<when test="search1 == 'ALL'">	
+			FROM QNA
+				<if test="search2 == 'TITLE'">
+					where QTITLE LIKE '%' || #{search3} || '%'
+				</if>
+				<if test="search2 == 'QWRITER'">
+					where QWRITER LIKE '%' || #{search3} || '%'
+				</if>
+			</when>
+			<otherwise>
+				FROM QNA
+				WHERE Q_STATUS = #{search1}
+				<if test="search2 == 'TITLE'">
+					AND QTITLE LIKE '%' || #{search3} || '%'
+				</if>
+				<if test="search2 == 'QWRITER'">
+					AND QWRITER LIKE '%' || #{search3} || '%'
+				</if>
+			</otherwise>
+		</choose>
+	</select>	
+	
 </mapper>

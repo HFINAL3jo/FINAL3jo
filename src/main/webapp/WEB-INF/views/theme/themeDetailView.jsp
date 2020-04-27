@@ -248,11 +248,13 @@
           }
           
           .cols4-element li a img {
-              width: 100%
+              width: 100%;
+              height:100%;
           }
           
           .cols4-element li a span {
               display: block;
+              height:100%;
           }
           
           .cols4-element li a .cont {
@@ -262,7 +264,7 @@
           .cols4-element li a .cont .title {
               font-size: 16px;
               color: #333;
-              font-weight: 900
+              font-weight: 900;
           }
           
           .cols4-element li a .cont .content {
@@ -277,7 +279,7 @@
               left: 0px;
               right: 0px;
               bottom: 0px;
-              height: 20px;
+              height: 50px;
               padding: 10px 0px;
               text-align: center;
               background-color: #ececec
@@ -361,16 +363,13 @@
                 <!-- location  -->
 
                 <section class="infor-element">
-                    <div class="text-type">
-                       		공원&amp;정원</div>
                     <h3 class="h3 textcenter">${t.tTitle }</h3>
                     <br>                    
-					<span style="float:right;">Views : ${t.tViews }<br></span>
+					<span style="float:right;">Views : ${t.tViews }</span><br>
+					<span style="float:right;">Likes : ${t.tLikes }</span><br>
 					<c:if test="${loginUser.nickname eq t.tWriter || loginUser.nickname eq 'ADMIN'}">
-					<c:url var="mo" value="themeModifyView.do">
-						<c:param name="t" value="${t }"/>
-					</c:url>
-					<br><button id="mp" value="${mo }" style="float:right;">Modify</button>					
+					<br><button id="dp" style="float:right; margin-left:20px;">Delete</button>					
+					<button id="mp" style="float:right;">Modify</button>
 					</c:if>
                     <div class="post-element">
                         <span>Posted : ${t.tCreateDate } / Modified : ${t.tModifyDate }</span>
@@ -382,7 +381,7 @@
                             <dl><dt>Address</dt>
                                 <dd>${t.tAddress }</dd>
                             </dl>
-                            <dl><dt>Transportation</dt>
+                            <dl><dt>Traffic</dt>
                                 <dd>${t.tTrans }</dd>
                             </dl>
                             <dl><dt>Fee</dt>
@@ -392,7 +391,7 @@
                             <dl><dt>Tel</dt>
                                 <dd>${t.tTel }</dd>
                             </dl>
-                            <dl><dt>Opening Hours</dt>
+                            <dl><dt>Opening</dt>
                                 <dd>${t.tHours }</dd>
                             </dl>
                         </div>
@@ -403,10 +402,9 @@
 						<span>
     					Did you like this review? Press like to make it easier for others to see!
   						</span>
-  
-  						<button class="btn-secondary like-review" id="likeBtn" name="likeBtn" value="0" onclick="return like()">
-    					<i class="fa fa-heart" aria-hidden="true"></i> Like ${t.tLikes}
-  						</button>
+  						<c:if test="${!empty loginUser }">
+  						<button class="btn-secondary like-review" id="likeBtn" name="likeBtn" value="0">
+    					<i class="fa fa-heart" aria-hidden="true"></i> Like </button></c:if>
 					</div>
 					<br><br><br>
 					<div>
@@ -434,35 +432,20 @@
 						</table>
 					</div>
                         <br><br><br>
-                        <h3 class="black"># ${t.tKeyword}</h3>
+                
+                <section class="tag-element detail">
+                    <p>
+                        <c:if test="${!empty t.tKeyword }"><h3 class="black"><a href="">#${t.tKeyword }</a></h3></c:if>
+                    </p>
+                </section>
+                    </div>
                         <br><br>
                         <ul class="cols4-element">
                             <li>
-                                <a href="http://me2.do/xDAyqdMi" title="서울야경 스릴 있게 즐기기!"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27505&amp;fileTy=MEDIA&amp;fileNo=1" alt="서울야경 스릴 있게 즐기기!"><span class="cont"><span class="title">서울야경 스릴 있게 즐기기!</span><span class="content">                    국내 최고 높이의 롯데타워 전망대에서                    아찔한 인증샷을 남겨보자.</span></span><span class="link"><span>랜드마크 서울스카이</span></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://me2.do/5e04rj8z" title="비가와도 걱정 없는 이곳!"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27506&amp;fileTy=MEDIA&amp;fileNo=1" alt="비가와도 걱정 없는 이곳!"><span class="cont"><span class="title">비가와도 걱정 없는 이곳!</span><span class="content">아이들과의 여행에서 비가 온다면?걱정 없이 즐길 수 있는 잠실 여행코스.</span></span><span class="link"><span>하루 종일 놀 수 있는 실내코스 </span></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://me2.do/GcbukJyo" title="  낮과밤 모두 완벽한 석촌호수"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27507&amp;fileTy=MEDIA&amp;fileNo=1" alt="  낮과밤 모두 완벽한 석촌호수"><span class="cont"><span class="title">                    낮과밤 모두 완벽한 석촌호수</span><span class="content">                    도심 속에서 즐기는 특별한 여유!                    고요한 호수 산책과                    여유를 즐겨보는 코스.</span></span><span class="link"><span>                    석촌호수 힐링여행</span></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://me2.do/GXmjSWe1" title="자동차 극장은 처음이지?"><img src="//comm/getImage?srvcId=MEDIA&amp;parentSn=27508&amp;fileTy=MEDIA&amp;fileNo=1" alt="자동차 극장은 처음이지?"><span class="cont"><span class="title">자동차 극장은 처음이지?</span><span class="content">                    색다른 경험과 즐거움이 가득한                    자동차 극장 백배 즐기는 방법.</span></span><span class="link"><span>잠실 자동차 극장</span></span>
-                                </a>
                             </li>
                         </ul>
-                    </div>
 					
-                </section>
-                <section class="tag-element detail">
-                    <span class="title">태그</span>
-                    <p>
-                        <a href="/search?search_radio=T&amp;lang=ko&amp;searchTerm=낮과-밤-모두-완벽한-이곳-석촌호수">#${t.tKeyword }</a>
-                    </p>
-                </section>
+                
                
             </div>
             <div class="heart heart-unliked"></div>
@@ -501,7 +484,7 @@
 
 				        // 인포윈도우로 장소에 대한 설명을 표시합니다
 				        var infowindow = new kakao.maps.InfoWindow({
-				            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+adrs+'</div>'
+				            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+'${t.tAddress}'+'</div>'
 				        });
 				        infowindow.open(map, marker);
 
@@ -511,73 +494,58 @@
 				});
 				
 				
-				
-				//--------------------------------
-                            //		jQuery.noConflict();
-                            var locale = 'ko';
-                            var current_url_ = 'http://korean.visitseoul.net/nature/낮과-밤-모두-완벽한-이곳-석촌호수_/33228';
-                            var current_url = location.href;
-                            /* 		if(current_url.indexOf("&WT.ac") != -1){
-                            			//current_url=current_url.replace(current_url.slice(current_url.indexOf("&WT"), current_url.length),"");
-                            		}else{
-                            			current_url=current_url+"&WT.ac=MainBanner1-1";
-                            			current_url_=current_url_+"&WT.ac=MainBanner1-1";
-                            		} */
-
-                            var consumer_seq = "744";
-                            var smartlogin_seq = "";
-
-                            if (locale == 'ko') {
-                                smartlogin_seq = "879";
-                            } else if (locale == 'en') {
-                                smartlogin_seq = "879";
-                            } else if (locale == 'ja') {
-                                smartlogin_seq = "880";
-                            } else if (locale == 'zh-CN') {
-                                smartlogin_seq = "881";
-                            } else {
-                                smartlogin_seq = "881";
-                            }
-
-                            var title = '낮과 밤 모두 완벽한 이곳, 석촌호수!';
-
-                            var refer = "evt_event_id=N_" + 33228;
-
-                            refer = refer.replace("http://", "");
-
-                        $(function() {
-                        	  $(".heart").on("click", function() {
-                        	    $(this).toggleClass("is-active");
-                        	  });
-                        	});
 				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
+				    <%if(request.getSession().getAttribute("loginUser") != null){%>
 				    $(function(){
+				    	var loginUser = '${loginUser.nickname}';
+				    	var tId = '${t.tId}';
+				    	$.ajax({
+				    		url:"likeStatus.do",
+				    		type:"post",
+				    		data:{loginUser:loginUser,tId:tId},
+				    		success:function(data){
+				    			if(data =='true'){
+				    			 var btn = $('#likeBtn');
+				    			 btn.val(1);
+				    			 btn.html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this ');
+								 btn.children('.fa-heart').addClass('animate-like');
+				    			}
+				    		},error:function(){
+				    			
+				    		}
+				    	});
+				    	
 						$(document).on('click', '.like-review', function(e) {
 							if( $('#likeBtn').val() == 0 ){
-								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this '+${t.tLikes});
+								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> You liked this ');
 								$(this).children('.fa-heart').addClass('animate-like');
 								$(this).val(1);
-								
+								like(this);
 							}else{
-								console.log();
-								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> Like '+${t.tLikes});
+								$(this).html('<i class="fa fa-heart" aria-hidden="true"></i> Like ');
 								$(this).children('.fa-heart').addClass('animate-like');
 								$(this).val(0);
+								like(this);
 							}
 						});
 					});
-				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
-				    function like() {
-						/* $.ajax({
-							url:  ,
-							type:  ,
-							dataType:"json"
-							data:
-						}); */
+				   <%}%>
+				    function like(data) {
+				   		var lv = data.value;
+				   		var tId = '${t.tId}';
+				   		var loginUser = '${loginUser.nickname}';
+				   		var tCode = '${t.tCode}';
+				    		
+						 $.ajax({
+							url: "updateLike.do",
+							type:"post",
+							data:{tId:tId,lv:lv,loginUser:loginUser,tCode:tCode},
+							success:function(data){
+								console.log(data);
+							},error:function(){
+							}
+						});
 					}
-				    
-				    
-				    
 				    
 				    //theme > themename 링크
 				    $('.loction span').mouseenter(function(){
@@ -590,15 +558,11 @@
 				    	}
 				    });
 				   
-				    
-				    
-				    
-				    
 				    //댓글 submit
 				    $('#rSubmit').click(function(){
 				    	var trWriter = '${loginUser.nickname}';
 				    	var trContent = $('#trc').val();
-				    	var refTid = ${t.tId};
+				    	var refTid = '${t.tId}';
 				    	
 				    	$.ajax({
 				    		url:"addTReply.do",
@@ -607,6 +571,7 @@
 				    		success:function(data){	
 				    			if(data=="success"){
 				    				getTReplyList();
+				    				$('#trc').val('');
 				    			}
 				    		},error:function(){
 				    			console.log("댓글전송실패");
@@ -614,14 +579,14 @@
 				    	});
 				    });
 				    
-				    $(function(){
+				     $(function(){
 				    	
 				    	getTReplyList();
 				    	
-				    	setInterval(function(){
+				    	 setInterval(function(){
 				    		getTReplyList();
-						}, 30000);
-				    	
+						}, 30000); 
+				     });
 				    	function getTReplyList(){
 				    		$tableBody = $('#trtl tbody');
 				    		$tableBody.html("");
@@ -632,8 +597,9 @@
 				    		var $trContent;
 				    		var $trCreatedate;
 				    		var $input;
+				    		var $input2;
 				    		
-				    		var tId = ${t.tId};
+				    		var tId = '${t.tId}';
 				    		$.ajax({
 				    			url:"trList.do",
 				    			data:{tId:tId},
@@ -653,14 +619,16 @@
 					    				$trCreateDate = $('<td>').text(data[i].trCreateDate);
 					    				var $br = $('<br>');
 					    				$input = $('<input type="button" value="Delete">').css('font-size','0.8em')
-					    				.attr('onclick','window.confirm("Are you sure?");');
-					    				
+					    				.attr('onclick','delReply(this);').addClass('delThis');
+					    				$input2 = $('<input type="hidden">').val(data[i].trId).addClass('deltrId');
+
 					    				$tr.append($trWriter);
 					    				$tr.append($td);
 					    				$td.append($trContent);
 					    				$tr.append($trCreateDate);
 					    				$trCreateDate.append($br);
 					    				$trCreateDate.append($input);
+					    				$trCreateDate.append($input2);
 					    				
 					    				$tableBody.append($tr);
 				    					}else{
@@ -693,8 +661,80 @@
 				    			}
 				    		});
 				    	}
+				    //포스트 수정
+				    $('#mp').click(function(){
+				    	location.href="themeModifyView.do?tId="+'${t.tId}';
 				    });
 				    
+				    //포스트 삭제
+				    $('#dp').click(function(){
+				    	var e = window.confirm("Are you delete your post?");
+				    	if(e){
+				    		location.href="deleteTheme.do?tId="+'${t.tId}';
+				    	}
+				    });
+				  	
+				    //댓글 삭제
+				    function delReply(value){
+				    	var trId = $(value).siblings('input').val();
+				    	var e = window.confirm("Are you delete your reply?");
+				    	if(e){
+				    		$.ajax({
+				    			 url:"deleteTReply.do",
+				    			type:"get",
+				    			data:{trId:trId},
+				    			success:function(data){
+				    				if(data == 'success') getTReplyList();
+				    				alert("Delete Success");
+				    			},error:function(){
+				    				
+				    			}
+				    		});
+				    	}
+				    } 
+				    //랜덤으로 keyword 게시물 보여주기
+				    	
+					var recommend = '${t.tKeyword}';
+					
+					$(function(){
+						
+						getRandomList();
+					});				    			    
+				    function getRandomList(){
+				    	
+				     $.ajax({
+				    	url:"getRandomlist.do",
+				    	data:{recommend:recommend},
+				    	type:"post",
+				    	success:function(data){
+				    		var $ul = $('ul[class=cols4-element]');
+				    		var $li; 
+				    		var $a;
+				    		var $img;
+				    		var $span; 
+				    		var $span2;
+				    		
+				    		$ul.html("");
+				    		$.each(data,function(index,item){
+					    		$li = $('<li>');
+					    		$a = $('<a>').attr("href","postdetail.do?tId="+data[index].tId)
+					    		.attr("title",data[index].tTitle);
+					    		$img = $('<img>').attr('src',data[index].tModifyFile);
+					    		$span = $('<span>').addClass('link');
+					    		$span2 = $('<span>').text(data[index].tTitle);
+				    			
+					    		$li.append($a);
+					    		$a.append($img);
+					    		$a.append($span);
+					    		$span.append($span2);
+					    		
+					    		$ul.append($li);
+				    		});
+				    	},error:function(){
+				    		
+				    	}
+				     });
+				    }
 					</script>
 </body>
 
