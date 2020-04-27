@@ -51,7 +51,7 @@
                         <div class="col-lg-12">
                             <div class="product_top_bar d-flex justify-content-between align-items-center" style="align-self: center;">
                         		<h3>Are you sure you want to unsubscribe😢</h3>                        		
-                                <form role="form" method="post" action="/member/deleteMember" id="delForm" autocomplete="off" style="margin-left: 5%; width: 45%;">
+                                <form role="form" method="post" action="deleteMember.do" id="delForm" onsubmit="return false;" autocomplete="off" style="margin-left: 5%; width: 45%;">
                                     <label style="margin-bottom: 0; margin-top: 5%;">email</label>
                                     <div class="mt-10">
                                         <input type="text" name="email" value="${ loginUser.email }" onfocus="this.placeholder = ''"
@@ -66,7 +66,7 @@
                                     <br><br>
                                   
                                <!-- <button type="submit" id="submit" name="submit" class="genric-btn primary-border small" style="margin-left: 30%;">Delete Account</button> -->
-                               				<button class="genric-btn primary-border small" style="margin-left: 30%;" type="button" id="submit">회원탈퇴</button>
+                               				<button class="genric-btn primary-border small" style="margin-left: 30%;" type="button" id="ee">submit</button>
                                
                                 </form> 
                             </div>
@@ -96,7 +96,7 @@
         }  */
         
 		
-			$("#submit").on("click", function(){
+			$('#ee').click(function(){
 				if($("#password").val()==""){
 					alert("enter your password");
 					$("#password").focus();
@@ -108,17 +108,17 @@
 					dateType : "json",
 					data : $("#delForm").serializeArray(),
 					success: function(data){
-						
 						if(data==true){
 							if(confirm("want withdraw?")){
+								$('#delForm').attr('onsubmit','true');
 								$("#delForm").submit();
 							}
 						}else{
 							alert("not matched password");
-							return;
+							return false;
 						}
 					}
-				})
+				});
 				
 			});
    
