@@ -189,7 +189,7 @@ input:checked+label:after {
 								</div>
 								
 								<div class="col-md-12 form-group">
-									<button type="submit" class="btn_3">find password</button>
+									<button type="submit" class="btn_3" onclick="javascript:btn()">find password</button>
 								</div>
 								<br>
 							</form>
@@ -261,6 +261,12 @@ input:checked+label:after {
 			});
 		});
 	});
+ 	
+
+
+	function btn(){ 
+		alert('Right Now Check Your Email!'); 
+		}
 
 	
 	

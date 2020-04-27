@@ -77,7 +77,7 @@ public class MemberController {
 		int result = memService.insertMember(m);
 
 		if(result >0) {
-			return "redirect:index.jsp";
+			return "redirect:main.do";
 		} else {
 			return "common/errorPage.jsp";
 		}
@@ -267,7 +267,7 @@ public class MemberController {
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getpassword(), loginUser.getpassword())) {			
 			//	로그인 성공 시 세션에 정보를 담아야 되기 때문에 세션이 필요하다.
 			model.addAttribute("loginUser", loginUser);
-			return "redirect:index.jsp";
+			return "redirect:main.do";
 		}else {			
 			//	로그인 실패
 			model.addAttribute("msg", "로그인 실패!!");
@@ -286,7 +286,7 @@ public class MemberController {
 		// 세션의 상태를 확정지어주는 메소드 호출
 		status.setComplete();
 
-		return "redirect:index.jsp";
+		return "redirect:main.do";
 	}
 
 
@@ -303,7 +303,7 @@ public class MemberController {
 		if (result > 0) { 
 			model.addAttribute("loginUser", m); 
 
-			return "redirect:index.jsp"; 
+			return "redirect:main.do"; 
 
 		} else { 
 
@@ -334,7 +334,7 @@ public class MemberController {
 		status.setComplete();
 
 		
-		return "redirect:index.jsp";
+		return "redirect:main.do";
 	}
 	
 	// 패스워드 체크
@@ -363,25 +363,20 @@ public class MemberController {
 	
 	
 	@RequestMapping("findPwdfin.do")
-	public void findPwdfin(Member m, HttpSession session,HttpServletResponse response_email,HttpServletRequest request) throws Exception{
+	public String findPwdfin(Member m, HttpSession session,HttpServletResponse response_email,HttpServletRequest request) throws Exception{
 		
 
 		m = findPwd(m);
 		String newpass = m.getpassword();
 		
-		
-		
-		
-		
-		
 		String setfrom = "noticealigo@gmail.com";
 		String tomail = request.getParameter("email"); // 받는 사람 이메일
-		String title = "your temporary password"; // 제목
+		String title = "[Aligo] Your temporary password"; // 제목
 		String content =
-				"Hello~ your temporary password is" + newpass
-		+ "you must change your password after login"; // 내용
+				"Hello~ your temporary password is [ " + newpass
+		+ " ] you must change your password after login"; // 내용
 
-
+		
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message,
@@ -398,14 +393,17 @@ public class MemberController {
 			
 		} catch (Exception e) {
 			System.out.println(e);
+			
 		}
 	
-		response_email.setContentType("text/html; charset=UTF-8");
+
+/*		response_email.setContentType("text/html; charset=UTF-8");
 		PrintWriter out_email = response_email.getWriter();
 		out_email.println("<script>alert('check your email');</script>"); 	
-		out_email.flush();
-		
-		
+		out_email.flush(); */
+		return "redirect:loginView.do";
+
+
+	} 
 	
-	}
 }
