@@ -48,8 +48,7 @@ public class MemberDao {
 
 	
 	// 비밀번호 변경
-		@Transactional
-		public void findPwd(Member m) throws Exception{
+		public void findPwd(Member m){
 			String password = m.getpassword();
 			m.setpassword(password);
 			sqlSession.update("memberMapper.findPwd", m);

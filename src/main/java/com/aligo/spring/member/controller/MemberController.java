@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -66,7 +67,6 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memService;
-
 
 	@RequestMapping(value="signUp.do", method = RequestMethod.POST)
 	public String insertMember(Member m) {
@@ -347,79 +347,38 @@ public class MemberController {
 		return pwdChk;
 	}
 	
-	@RequestMapping(value="findPwd.do",method=RequestMethod.POST)
-	public String findPwd(Member m, HttpSession session) throws Exception{
+	
+	
+
+	public Member findPwd(Member m) throws Exception{
 		Random r = new Random();
 		int num = r.nextInt(4589362) + 49311; //이메일로 받는 인증코드 부분 (난수)
+		System.out.println(num);
 		String newpass = Integer.toString(num);
+		System.out.println(newpass);
 		m.setpassword(newpass);
-		session.setAttribute("m", m);
-		memService.findPwd(m);
-		return "/findPwdfin";
-		
-/*		
-		String setfrom = "noticealigo@gmail.com";
-		String tomail = request.getParameter("e_mail"); // 받는 사람 이메일
-		String title = "your temporary password"; // 제목
-		String content =
-
-				System.getProperty("line.separator")+ //한줄씩 줄간격을 두기위해 작성
-
-				System.getProperty("line.separator")+
-
-				"Hello~"
-
-        +System.getProperty("line.separator")+
-
-        System.getProperty("line.separator")+
-
-        "your temporary password is" + newpass
-
-        +System.getProperty("line.separator")+
-
-        System.getProperty("line.separator")+
-
-        "you must change your password after login"; // 내용
-
-
-		try {
-			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper messageHelper = new MimeMessageHelper(message,
-					true, "UTF-8");
-
-			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
-			messageHelper.setTo(tomail); // 받는사람 이메일
-			messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-			messageHelper.setText(content); // 메일 내용
-
-			mailSender.send(message);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-
-		
-
-		response_email.setContentType("text/html; charset=UTF-8");
-		PrintWriter out_email = response_email.getWriter();
-		out_email.println("<script>alert('check your email');</script>"); 	
-		out_email.flush();
-		
-
-	
-	}
-*/		
-
+	//	memService.findPwd(m);
+		return m;
 }
 	
 	
 	@RequestMapping("findPwdfin.do")
 	public void findPwdfin(Member m, HttpSession session,HttpServletResponse response_email,HttpServletRequest request) throws Exception{
 		
+
+		m = findPwd(m);
+		String newpass = m.getpassword();
+		
+		
+		
+		
+		
+		
 		String setfrom = "noticealigo@gmail.com";
-		String tomail = request.getParameter("e_mail"); // 받는 사람 이메일
+		String tomail = request.getParameter("email"); // 받는 사람 이메일
 		String title = "your temporary password"; // 제목
 		String content =
-				"Hello~ your temporary password is" + m.getpassword()
+				"Hello~ your temporary password is" + newpass
 		+ "you must change your password after login"; // 내용
 
 
@@ -434,16 +393,19 @@ public class MemberController {
 			messageHelper.setText(content); // 메일 내용
 
 			mailSender.send(message);
+			m.setpassword(bcryptPasswordEncoder.encode(m.getpassword()));
+			memService.findPwd(m);
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-
-		
-
+	
 		response_email.setContentType("text/html; charset=UTF-8");
 		PrintWriter out_email = response_email.getWriter();
 		out_email.println("<script>alert('check your email');</script>"); 	
 		out_email.flush();
+		
+		
 	
 	}
 }
