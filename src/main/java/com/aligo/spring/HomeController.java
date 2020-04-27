@@ -60,7 +60,7 @@ public class HomeController {
 	
 	@RequestMapping("adminView.do")
 	public String adminView() {
-		return "admin/adminView";
+		return "admin/QnA";
 	}
 	
 	@RequestMapping("qna.do")
