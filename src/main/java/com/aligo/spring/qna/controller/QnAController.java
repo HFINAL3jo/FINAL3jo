@@ -149,16 +149,27 @@ public class QnAController {
 	}
 	
 	@RequestMapping("addReply.do")
-	@ResponseBody
-	public String addReply(QnaReply r) {
+	public ModelAndView addReply(ModelAndView mv, String rContent, int refQid, String rWriterNickname) {
 		
-		int result = qService.insertReply(r);
+		System.out.println(rContent + refQid + rWriterNickname);
+		QnaReply qr = new QnaReply();
+		qr.setrContent(rContent);
+		qr.setRefQid(refQid);
+		qr.setrWriter(rWriterNickname);
+		
+		int result = qService.insertReply(qr);
+		
+		System.out.println("result : " + result);
 		
 		if(result > 0) {
-			return "success";
+			
+			mv.addObject("qId", refQid).setViewName("redirect:qdetail.do");
 		}else {
-			return "fail";
+			
+			mv.addObject("msg", "fail!").setViewName("common/errorPage");
 		}
+
+		return mv;
 	}
 	
 	// =================ADMIN 문의 사항==========================

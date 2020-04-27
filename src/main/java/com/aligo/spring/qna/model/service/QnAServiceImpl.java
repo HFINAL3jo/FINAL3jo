@@ -61,8 +61,8 @@ public class QnAServiceImpl implements QnAService{
 
 
 	@Override
-	public int insertReply(QnaReply r) {
-		return qDao.insertReply(r);
+	public int insertReply(QnaReply qr) {
+		return qDao.insertReply(qr);
 	}
 // =========================== ============================
 	@Override
