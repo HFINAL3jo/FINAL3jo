@@ -174,4 +174,10 @@
 		SELECT RQKEYWORD2 FROM RECOMMEND_Q WHERE R_STATUS='Y')
 		SELECT LISTAGG(RQKEYWORD1,',') WITHIN GROUP (ORDER BY ROWNUM) TKEYWORD FROM TEMP_TABLE
 	</select>
+	
+	<update id="updateTheme" parameterType="Theme">
+		UPDATE THEME_LIST SET TTITLE=#{tTitle},TCONTENT=#{tContent},TADDRESS=#{tAddress},
+		TADDRESSH=#{tAddressH},T_MODIFYDATE=SYSDATE,TKEYWORD=#{tKeyword},TCODE=#{tCode},TTEL=#{tTel},
+		TFEE=#{tFee},THOURS=#{tHours},TTRANS=#{tTrans} WHERE TID=#{tId} 
+	</update>
 </mapper>

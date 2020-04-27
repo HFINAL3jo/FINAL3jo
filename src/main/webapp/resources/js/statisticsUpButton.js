@@ -27,13 +27,13 @@
 	google.charts.load("current", {packages:["corechart"]});
 	google.charts.setOnLoadCallback(drawChart);
 									
-	// 데이터 처리
 	function drawChart() {
-//		var data = [
+//		var data = [	차트를 쓰기 위한 json 데이터를 이런 식으로 바꾸어 주어야 한다.는 것을 표시 
 //			['성별', '값'],
 //			['남', 65],
 //			['여', 45]
 //		];		
+		// ---- json 데이터를 차트형식에 맞게 바꾸어 주는 코드 ----
 		var jsonObject = JSON.parse(document.getElementById('list_1').value);
 		
 		var keyName = new Array();
@@ -50,29 +50,32 @@
 			
 			data.push(value);
 		}
-						  
+		// --------------------------------------------
+		
+		// 차트에 표시할 옵션 정의
 		var options = {
-				title: '전체 회원 남여 비율',
-				is3D: true,
-				width: 420, 
-				height: 390,
-				margin: 0,
-				animation:{
-				duration: 1000,
+				title: '전체 회원 남여 비율',		// 차트에 나타낼 제목
+				is3D: true,					//	3d 형식으로 차트를 표현
+				width: 420, 				//	넓이 420px
+				height: 390,				//	높이 390px
+				margin: 0,					//	마진 0px
+				animation:{					// 차트를 구현식 애니메이션 적용
+				duration: 1000,				//	1초 대기
 				easing: 'out',
 				}
 			}
-		var chart = new google.visualization.PieChart(document.getElementById('chart1'));
-		chart.draw(new google.visualization.arrayToDataTable(data), options);
+		//
+		var chart = new google.visualization.PieChart(document.getElementById('chart1'));	// 차트 형식(바, 원 등)과 위치 지정
+		chart.draw(new google.visualization.arrayToDataTable(data), options);				// 옵션과 데이터를 넣고 구글 차트 구현
 	}
 }
  // =====================
  var charOption = {
 	    	title: '',
-	        width: 550,
+	        width: 500,
 	        height: 500,
-	        padding: 50,
-	        legend: { position: 'left', maxLines: 3 },
+	        padding: 40,
+	        legend: { position: 'left', maxLines: 4 },
 	        bar: { groupWidth: '75%' },
 	        isStacked: true,
 	     };
@@ -81,9 +84,8 @@
 		google.charts.load("current", {packages:["corechart"]});
 		google.charts.setOnLoadCallback(drawChart);
 										
-		// 데이터 처리
 	function drawChart() {
-//[
+//[	차트를 쓰기 위한 json 데이터를 이런 식으로 바꾸어 주어야 한다.는 것을 표시 
 //	['Genre', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General','Western', 'Literature', { role: 'annotation' } ],
 //	['테바별(1차)', 10, 				24, 		20, 			32, 		18, 		5, 			''],];
 			
@@ -145,11 +147,12 @@
 		keyName.push('조회수');
 		data.push(keyName);
 		
-		var likeMax = 0;
-		var likeMin = 0;
-		var T_viewsMax = 0;
-		var T_viewsMin = 0;
-		
+		// 차트 x, y축을 동적으로 표시 하기 위해 것 ---
+		var likeMax = 0;			// like 최대값
+		var likeMin = 0;			// like 최소값
+		var T_viewsMax = 0;			// T_views 최대값
+		var T_viewsMin = 0;			// T_views 최소값
+		// ----------------------------------
 		for(key in jsonObject1){
 			var value = new Array();
 			value.push((jsonObject1[key]*1));
@@ -196,11 +199,14 @@
 	 // XMLHttpRequest을 이용해서 AJAX 작성 
 	//var xhr = new XMLHttpRequest();
 	var xhr;
+	
+	// XMLHttpRequest()를 지원이 안되는 경우를 대비하여 작성
 	if (window.XMLHttpRequest) { // 모질라, 사파리, IE7+ ...
 		xhr = new XMLHttpRequest();
 	} else if (window.ActiveXObject) { // IE 6 이하
 		xhr = new ActiveXObject("Microsoft.XMLHTTP");
 	}
+	
 	 xhr.open('POST','SurplusAjax.do?value='+value);
 	 xhr.send(null);
 	 	

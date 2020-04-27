@@ -273,7 +273,7 @@ public class StatisticController {
 		list = serviceStatics.StatisticAjax(temp);
 		
 		// 데이터가 잘 들어 왔는지 확인
-		System.out.println(list);
+//		System.out.println(list);
 		
 		reverseSort(reverTableData = cut(limit, list),  td); //(오름 차순)역순 정렬	
 		JsonReverseList = ConvertJson(reverTableData, td);
@@ -368,19 +368,40 @@ public class StatisticController {
 			}else if(property.equals("2")) {
 //				JsonData.put("테마", "값");
 				
+				if(list.isEmpty()) {	// 데이터가 없을 시에 처리하는 로직 
+					list.add(new Statistics());
+					list.get(0).setColumnTKeywordName("데이터가 없습니다.");
+					list.get(0).setColumnTKeywordNumber(1);
+				}
 				for (Statistics out : list) {
 					JsonData.put(out.getColumnTKeywordName().replaceAll(" ", ""), out.getColumnTKeywordNumber());
 				}
 				
 			}else if(property.equals("3")){
-//				JsonData.put("조아요", "조회수");
+//				JsonData.put("TKeywordName", "좋아요");
+				
+				if(list.isEmpty()) {
+					list.add(new Statistics());
+					list.get(0).setColumnTKeywordName("데이터가 없습니다.");
+					list.get(0).setColumnTlikeValue("0");
+				}
+				
 				for (Statistics out : list) {
+					
 					JsonData.put(out.getColumnTKeywordName().replaceAll(" ", ""), out.getColumnTlikeValue());
 				}
 
 			}else if(property.equals("4")){
-//				JsonData.put("조아요", "조회수");
+//				JsonData.put("TKeywordName", "조회수");
+				
+				if(list.isEmpty()) {
+					list.add(new Statistics());
+					list.get(0).setColumnTKeywordName("데이터가 없습니다.");
+					list.get(0).setColumnTviewsValue("0");
+				}
+				
 				for (Statistics out : list) {
+					
 					JsonData.put(out.getColumnTKeywordName().replaceAll(" ", ""), out.getColumnTviewsValue());
 				}
 
@@ -402,9 +423,6 @@ public class StatisticController {
 		ArrayList<Statistics> c = new ArrayList<Statistics>();
 
 		for (int i = 0; i <= list1.size() - 1; i++) {
-			
-			// ===== 여기서 주소를 서울시 '~~구' 로나누어 저장한다. 
-			//String[] str = list1.get(i).getColumnAddressName().split(" ");
 			
 			if (i <= limit) {
 				c.add(list1.get(i));
@@ -451,6 +469,13 @@ public class StatisticController {
 	} //end reverseSort
 
 	
+	/**
+	 * list를 json으로 바꾼다.
+	 * @param list, 
+	 * @param property : address/themaName 등에 따라서 json 데이터를 다르게 처리
+	 * @param property
+	 * @return
+	 */
 	public JSONArray ConvertJsonArray(ArrayList<Statistics> list, String property) {
 
 		JSONArray jArr = new JSONArray();
@@ -478,6 +503,12 @@ public class StatisticController {
 		}
 	}
 	
+	/**
+	 * 구글 차트에 맞게 변형(일부 차트에서 쓸수 있게)
+	 * @param list
+	 * @param property
+	 * @return
+	 */
 	public JSONObject GoogletJson(ArrayList<Statistics> list, String property) {
 		//json의 칼럼 객체
         JSONObject col1 = new JSONObject();

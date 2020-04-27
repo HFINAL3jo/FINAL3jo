@@ -43,6 +43,10 @@ public class MemberDao {
 
 	}
 
+	public int nickCheck(String nickname) {
+		return sqlSession.selectOne("memberMapper.nickCheck",nickname);
+	}
+
 	
 	
 

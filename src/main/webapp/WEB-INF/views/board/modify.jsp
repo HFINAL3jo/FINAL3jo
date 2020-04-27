@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Write Post</title>
+<title>Modify Post</title>
  <style>
  	input[class~=adi]{
  		width:150%;
@@ -13,7 +13,8 @@
  </style>
 </head>
 <body>
-    <form action="themeInsert.do" method="POST" id="gosubmit" enctype="multipart/form-data">
+	<c:if test="${!empty loginUser}">
+    <form action="themeUpdate.do" method="POST" id="gosubmit" enctype="multipart/form-data" onsubmit="return false;">
     <div id="editor">
     <br>
     <label for="tt" style="margin:10px;">Title&nbsp;&nbsp;
@@ -32,23 +33,26 @@
     	<option value="ACTIVITY">ACTIVITY</option>
     	<option value="EXHIBITION">EXHIBITION</option>
     </select>&nbsp;&nbsp;&nbsp;
-    Keyword &nbsp;&nbsp;<input type="text" id="tkv" name="tKeyword" style="margin-right:-10px;" readonly></span>
-    	<c:if test="${!empty list}">	
-    		<select id="tk1">
-    			<option>--</option>
-    	  <c:forEach var="kv" begin="0" end="4" items="${list }">
-    		 	<option value="${kv }">${kv}</option>
-    	  </c:forEach>
-    		</select>
-    		<select id="tk2">
-    			<option>--</option>
-    	  <c:forEach var="kv" begin="5" end="9" items="${list }">
-    		 	<option value="${kv }">${kv}</option>
-    	  </c:forEach>
-    	  </select>
+    Keyword &nbsp;&nbsp;<input type="text" id="tkv" name="tKeyword" readonly style="margin-right:-10px;"></span><br><br>
+    	<c:if test="${!empty list}">
+    	<div id="selectVal" style="border:1px lightblue solid; display:inline-block; float:left; margin:10px; padding:10px; text-align:left;">
+    		<label><input type="radio" name="f1" value="${list[0]}">&nbsp;${list[0] }</label>
+    		&nbsp;&nbsp;<label><input type="radio" name="f1" value="${list[5]}">&nbsp;${list[5] }</label><br>
+    		<label><input type="radio" name="f2" value="${list[1]}">&nbsp;${list[1] }</label>
+    		&nbsp;&nbsp;<label><input type="radio" name="f2" value="${list[6]}">&nbsp;${list[6] }</label><br> 
+    		<label><input type="radio" name="f3" value="${list[2]}">&nbsp;${list[2] }</label>
+    		&nbsp;&nbsp;<label><input type="radio" name="f3" value="${list[7]}">&nbsp;${list[7] }</label><br>
+    		<label><input type="radio" name="f4" value="${list[3]}">&nbsp;${list[3] }</label>
+    		&nbsp;&nbsp;<label><input type="radio" name="f4" value="${list[8]}">&nbsp;${list[8] }</label><br>
+    		<label><input type="radio" name="f5" value="${list[4]}">&nbsp;${list[4] }</label>
+    		&nbsp;&nbsp;<label><input type="radio" name="f5" value="${list[9]}">&nbsp;${list[9] }</label><br>
+    		<input type="button" id="tkvinsert" value="Ok">&nbsp;&nbsp;
+    		<input type="button" id="tkvreset" value="Reset">
+    	</div>
+    	<br>
     	</c:if>
    	
-    <br><br>  
+    <br><br>
 	<textarea name="tContent" id="smarteditor" rows="30" cols="104"></textarea>
     <br><br>
     
@@ -94,10 +98,10 @@
 	</tr>
 	</table>
     <button id="cancel" class="btn btn-light" type="reset">Cancle</button>
-    <button class="btn btn-light" id="sbtn">Write</button>
+    <input type="button" class="btn btn-light" id="sbtn" value="Write"> 
 	</div>
     </form>
-    
+    </c:if>
 <script type="text/javascript" src="resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false&autoMapping=false"></script>
 <script>
@@ -111,28 +115,85 @@ nhn.husky.EZCreator.createInIFrame({
 });
   	
    $('#sbtn').click(function(){
-    
    oEditors.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD",[]);
    
    if(validation()) {
-	   
-	   
-	   $('#sbtn').submit();
-	   
+	   console.log("으앙");
+	   $('#gosubmit').attr('onsubmit','true');
+	   $('#gosubmit').submit();
 	   }
    });
    
-   function validation(){ 
-	   var contents = $.trim(oEditors[0].getContents()); 
-	   if(contents === '<p>&bnsp;</p>' || contents === ''){ // 기본적으로 아무것도 입력하지 않아도 값이 입력되어 있음. 
-		   alert("내용을 입력하세요."); 
+   function validation(){
+	   var title = document.getElementById('tt').value;
+	   var theme = document.getElementById('tcl').value;
+	   var keyword = document.getElementById('tkv').value;
+	   var contents = document.getElementById('smarteditor').value;
+	   var tel = document.getElementById('tel').value;
+	   var fee = document.getElementById('fee').value;
+	   var oh = document.getElementById('oh').value;
+	   var trans = document.getElementById('trans').value;
+	   var da = document.getElementById('da').value;
+	   var ja = document.getElementById('ja').value;
+	   var ad = document.getElementById('ad').value;
+	   
+	   if(!chk(contents == '<p>&nbsp;</p>' || contents == '' || contents == null || contents == '<p><br></p>' || contents == '<br>',"Insert Content")){ // 기본적으로 아무것도 입력하지 않아도 값이 입력되어 있음. 
 	   
 	   oEditors.getById['smarteditor'].exec('FOCUS'); 
-	   return false; 
-	 }else{
-	   return true;
+	   return false;
+	   }
+	   
+	   if(!chk(title == '',"Fill out title")){
+		   return false;
+	   }
+	   
+	   if(!chk(theme == '--',"Select theme")){
+		   return false;
+	   }
+	   
+	   if(!chk(keyword == '',"Fill out keyword")){
+		   return false;
+	   }
+	   
+	   if(!chk(tel == '','Fill out tel')){
+		   return false;
+	   }
+	   
+	   if(!chk(fee == '','Fill out fee')){
+		   return false;
+	   }
+	   
+	   if(!chk(oh== '','Fill out opeinghours')){
+		   return false;
+	   }
+	   
+	   if(!chk(trans=='','Fill out transportation')){
+		   return false;
+	   }
+	   
+	   if(!chk(da=='','Fill out address')){
+		   return false;
+	   }
+	   
+	   if(!chk(ja=='','Fill out address')){
+		   return false;
+	   }
+	   
+	   if(!chk(ad=='','Fill out address')){
+		   return false;
+	   }
+		return true; 
 	 }
-  }
+   
+   function chk(ele,msg){
+	   if(ele){
+		 alert(msg);
+		 return false;
+	   }
+	   return true;
+		   
+	   }
+    
 
 	$('#ars').click(function(){
     daum.postcode.load(function(){
@@ -202,9 +263,39 @@ nhn.husky.EZCreator.createInIFrame({
         });
     });
 	});
-	$('#tk1').change(function(){
-		alert("으앙");
-		console.log($('#tk1').val());
+	var tkv = $('#tkv');
+	var chkn = 0;
+	$('#tkvinsert').click(function(e){
+		tkv.val("");
+		
+		for(var i=0;i<10;i++){
+		 var chk = $('#selectVal').children('label').children('input').eq(i);
+		 if(chkn < 5){
+			 
+		 if(chk.is(":checked") == true && chkn == 4){
+			 tkv.val(tkv.val() + chk.val());
+			 chkn++;
+		 }else if(chk.is(":checked") == true){
+			 tkv.val(tkv.val() + chk.val() + ",");
+			 chkn++;
+		 }
+		 }else{
+			 break;
+			 }
+		 }
+		 if(chkn != 5){
+			 alert("Check five options");
+			 $('#tkvreset').trigger('click');
+		}
+	});
+	$('#tkvreset').click(function(){
+		chkn = 0;
+		tkv.val("");
+		for(var i=0;i<10;i++){
+		$('#selectVal').children('label').children('input').eq(i).removeAttr("checked");
+			
+		}
+		
 	});
 </script>
 </body>

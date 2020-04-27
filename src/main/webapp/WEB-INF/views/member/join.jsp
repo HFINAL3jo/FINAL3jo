@@ -139,7 +139,7 @@ input:checked+label:after {
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>aranoz</title>
+<title>aligo</title>
 </head>
 
 <body>
@@ -211,6 +211,8 @@ input:checked+label:after {
 								<div class="col-md-12 form-group p_star">
 									<input type="text" class="form-control" id="nickname"
 										name="nickname" placeholder="Nickname">
+											<input type="hidden" name="nickDuplicateCheck" id="nickDuplicateCheck"
+										value="0">
 								</div>
 								<div class="col-md-12 form-group p_star">
 									<input type="number" max="99" min="10" class="form-control"
@@ -268,6 +270,86 @@ input:checked+label:after {
 				}
 			})
 		});
+		
+		
+/* 		  $('.btn_3').click(function(){
+		    	$.ajax({
+		    		url:"nickCheck.do",
+		    		type:"post",
+		    		data:{
+		    			nickname:$('#nickname').val()
+		    		},
+		    		success:function(data){
+		    			console.log(data);
+		    			
+		    			if(data=='ok'){
+		    				alert("Your nickname is available");
+		    			}else{
+		    				alert("Your nickname is not available");
+		    				$('#nickname').select();
+		    			}
+		    		},error:function(){
+		    			console.log("---ERROR---");
+		    		}
+		    	});
+		    });
+		 */
+		
+			function validate() {
+
+				if ($("nickDuplicateCheck").val() == 0) {
+
+					alert("사용 가능한 이메일을 입력해주세요");
+					$("#nickname").focus();
+					return false;
+				} else {
+					return true;
+				}
+			}
+
+			$(function() {
+
+				$('#nickname').on("keyup", function() {
+
+					var nickname = $(this).val();
+
+					if(data=='ok'){
+	    				alert("Your nickname is available");
+	    			}else{
+	    				alert("Your nickname is not available");
+	    				$('#nickname').select();
+					}
+
+					$.ajax({
+						url : "nickCheck.do",
+						data : {
+							nick : nick
+						},
+						type : "post",
+						success : function(data) {
+							console.log(data);
+							if (data == "ok") {
+								$(".error").hide();
+								$(".ok").show();
+								$("#nickDuplicateCheck").val(1);
+								
+								
+							} else {
+								$(".ok").hide();
+								$(".error").show();
+								$("#nickDuplicateCheck").val(0);
+							}
+
+						},
+						error : function() {
+							console.log("ajax 처리 실패")
+						}
+					});
+				});
+			});
+		
+		
+		
 		
 	</script>
 </body>

@@ -366,9 +366,9 @@
                     <h3 class="h3 textcenter">${t.tTitle }</h3>
                     <br>                    
 					<span style="float:right;">Views : ${t.tViews }<br></span>
-					<c:if test="${loginUser eq t.tWriter || loginUser.nickname eq 'ADMIN'}">
-					<c:url var="mo" value="themeModify.do">
-						<c:param name="${t }"/>
+					<c:if test="${loginUser.nickname eq t.tWriter || loginUser.nickname eq 'ADMIN'}">
+					<c:url var="mo" value="themeModifyView.do">
+						<c:param name="t" value="${t }"/>
 					</c:url>
 					<br><button id="mp" value="${mo }" style="float:right;">Modify</button>					
 					</c:if>
@@ -483,7 +483,7 @@
 				
 				// 주소-좌표 변환 객체 생성
 				var geocoder = new daum.maps.services.Geocoder();
-				var adrs = '${t.tAddress}';
+				var adrs = '${t.tAddressH}';
 				
 				// 주소로 좌표를 검색합니다
 				geocoder.addressSearch(adrs , function(result, status) {
@@ -565,8 +565,6 @@
 								$(this).val(0);
 							}
 						});
-						
-						
 					});
 				    /*~~~~~~~~~~~~조아요 ㅜㅜ~~~~~~~~~~~~~~~~~~*/
 				    function like() {

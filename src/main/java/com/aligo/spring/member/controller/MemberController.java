@@ -98,6 +98,30 @@ public class MemberController {
 		}
 
 	}
+	
+	@ResponseBody
+	@RequestMapping("nickCheck.do")
+	public String nickCheck(String nickname) {
+		
+		int result = memService.nickCheck(nickname);
+
+		if(result >0) {
+			return "fail";
+		}else {
+			return "ok";
+		}
+	}
+	
+	/*
+	 * 
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping("findPwd.do") public String findPwd(String password) {
+	 * 
+	 * int result = memService.findPwd(password);
+	 * 
+	 * if(result >0) { return "fail"; }else { return "ok"; } }
+	 */
 
 
 	/**
@@ -163,8 +187,8 @@ public class MemberController {
 
 		response_email.setContentType("text/html; charset=UTF-8");
 		PrintWriter out_email = response_email.getWriter();
-		out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>");
-		out_email.flush();
+		  out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>"); 	
+		  out_email.flush();
 		mv.addObject(e_mail);
 		return mv;
 

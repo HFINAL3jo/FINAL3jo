@@ -12,6 +12,12 @@
     <!-- owl carousel CSS -->
     <link rel="stylesheet" href="resources/css/nice-select.css">
     <link rel="stylesheet" href="resources/css/card.css">
+    <style type="text/css">
+	.breadcrumb{
+		background-image:url('${contextPath}/resources/images/sung.jpg');
+		background-size: 100% 100%;
+	 }
+	</style>
 </head>
 
 <body>

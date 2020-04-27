@@ -93,9 +93,22 @@ tbody tr:nth-child(2n+1) {
 </style>
 
 <!-- 
-	c3가 기본으로 제공하는 디자인 형식인 c3.min.css 파일을 <head> 부분에 추가한다. 
-	그리고 c3.js는 d3.js 기반에서 돌아가므로 d3.min.js를 먼저 자바스크립트 파트에 추가해 준 뒤에 c3.min.js를 추가하면 될 것이다. 
-	CDN을 이용해서 간편하게 사용하겠다면 다음과 같이 추가하면 될 것이다.
+	--간단한 공지-- 
+	ALIGO에서 THEME_LIST 테이블에서 데이터를 가져와 구글 차트를 이용해서 처리 하고, 차트 검색과 데이터 검색에 따른 조건에 따라서 ajax처리를 이용해서 처리 
+	여기서 기타 정보는 따로 'THEME_LIST' 테이블을 이용하지 못해 따로 jsp페이지를 만들어서 처리 하였다.
+	차트는 구글 차트이고 데이터는 com.aligo.spring.statistics.controller.StatisticsController.java 에서 컨트롤러에 보내지고
+	json형태로 보내져 input태그에 type ='hidden' 형태로 String 타입으로 저장 된다. 그래서 이를 다시 JSON.parse()을 이용해서 json형태로 만들어서
+	사용 한다.
+	showChart() : 구글 차트 처리 하는 함수
+	
+	drawShowChart() : 데이터 검색과 차트 검색 에 따른 결과(비동기 식으로) 처리하는 함수
+	
+	showTopList() : 데이터의 자료를 표에 나타내는 주는 함수
+	
+	statisticsButtonRegist.js : drawShowChart(), showTopList() 함수의 코드 등록
+								
+	statistics.js : showChart() 함수의 코드 등록
+ 								
  -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" />
@@ -127,13 +140,9 @@ tbody tr:nth-child(2n+1) {
 	<input type="hidden" id="choose" value=${choose} ><!-- StatisticController의 조아요/조회수.키워트 중 하나에 대한 데이터를 값을 가져왔는 확인. -->
 	<input type="hidden" id="chartValue" value=${chartValue} ><!-- StatisticController에서 어떤 차트를 섰는지 표시 가져온다. -->
 	
-<!--	<input type="hidden" id="tableValue" value="1"> 테이블의 형식(오름/내림/average)을 변경(기본 1: 내림차군, 2:오름 차순, 3:average)-->
-
 	<%-- 	<c:set var ="listTest" value="${list}" />
-	<c:set var ="jObjTest" value="${jObj}" />
-	
-	<input type="hidden" id="clist" value=${list} >
-	<input type="hidden" id="cjObj" value=${jObj} > --%>
+			<c:set var ="jObjTest" value="${jObj}" />
+	 --%>
 
 
 	<!-- 통계를 보여주는 공간 -->
@@ -172,7 +181,6 @@ tbody tr:nth-child(2n+1) {
 							<option value="themaName">테 마</option>
 						</datalist>
 						&nbsp;&nbsp;&nbsp;
-						<!--  onclick="drawShowChart()" -->
 						<button onclick="drawShowChart()">변 경</button>
 						<!-- 적용 차트 그리는 공간-->
 						<div style="align-content: left;">
@@ -181,10 +189,7 @@ tbody tr:nth-child(2n+1) {
 					</div>
 
 					<div class="div_right">
-						<!-- c3.js 예제 1 -->
-						<!--  <div id="linechart"></div> -->
 						<div style="height: 50px; padding-bottom: 5px;">
-						<!-- genric-btn success large button_body_chart -->
 							<button class="mybtn2" id="btn1">Low list</button> &nbsp;&nbsp;
 							<button class="mybtn2" id="btn2">TOP list</button> &nbsp;&nbsp;
 						</div>
@@ -196,6 +201,7 @@ tbody tr:nth-child(2n+1) {
 									<th></th>
 								</tr>
 							</thead>
+							<!-- showTopList()에 의해 변경 되는 통계 자료 표 -->
 							<tbody id="chartDataTable">
 
 							</tbody>
@@ -204,21 +210,24 @@ tbody tr:nth-child(2n+1) {
 				</div>
 			</div>
 
-			<!-- 게시판, 통계 자료 페이징 처리한 게시판 -->
+			
 	</section>
 	<%@ include file="../common/footer.jsp"%>
 
-<!-- 버튼 상단 -->
+<!-- 버튼 상단 이벤트 및 ajax 코드 -->
 <script src="resources/js/statisticsButtonRegist.js"></script>
-<!-- 버튼 상단 이벤트 처리 -->
+<!-- showChart() 코드 -->
 <script src="resources/js/statistics.js"></script>
 
 <script>
 
+// 구글 차트 모형
 showChart();
 
-// 차트를 뷰에서 띄우기 위한 차트 모형 || 데이터 검색 메소드
+// 데이터 검색과 차트 검색 에 따른 결과(비동기 식으로) 처리하는 함수
 drawShowChart();
+
+// id="chartDataTable" 를 가진 표를 데이터 검색에 따른 데이터 변경시 마다 변경
 showTopList(1);
 
 

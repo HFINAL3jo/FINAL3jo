@@ -2,6 +2,8 @@ package com.aligo.spring.theme.model.service;
 
 import java.util.ArrayList;
 
+import com.aligo.spring.common.AligoException;
+import com.aligo.spring.theme.controller.ThemeController;
 import com.aligo.spring.theme.model.vo.PageInfo;
 import com.aligo.spring.theme.model.vo.SearchCondition;
 import com.aligo.spring.theme.model.vo.TFile;
@@ -28,8 +30,9 @@ public interface ThemeService {
 	 * @param t
 	 * @param tNum 
 	 * @return
+	 * @throws ThemeController 
 	 */
-	int insertTheme(Theme t, int tNum);
+	int insertTheme(Theme t, int tNum) throws AligoException;
 
 	/**
 	 * 테마글 상세보기
@@ -83,4 +86,11 @@ public interface ThemeService {
 	 * @return
 	 */
 	String getKeyword();
+
+	/**
+	 * 테마글 수정
+	 * @param t
+	 * @return
+	 */
+	int updateTheme(Theme t);
 }

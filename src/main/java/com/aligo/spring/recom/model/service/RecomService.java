@@ -3,7 +3,7 @@ package com.aligo.spring.recom.model.service;
 import java.util.ArrayList;
 
 import com.aligo.spring.recom.model.vo.Recommend;
-import com.aligo.spring.theme.model.vo.Theme;
+import com.aligo.spring.recom.model.vo.ThemeVo;
 
 public interface RecomService {
 
@@ -54,6 +54,6 @@ public interface RecomService {
 	 */
 	int rUserUpdate(Object m);
 
-	ArrayList<Theme> selectList(String tCode);
+	ArrayList<ThemeVo> selectList(ThemeVo tv);
 	
 }

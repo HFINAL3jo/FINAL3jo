@@ -39,6 +39,8 @@ public interface MemberService {
 
 	int deleteMember(String email);
 
+	int nickCheck(String nickname);
+
 
 
 	

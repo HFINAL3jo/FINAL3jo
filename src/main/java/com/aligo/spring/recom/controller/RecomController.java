@@ -19,7 +19,7 @@ import com.aligo.spring.member.model.vo.Member;
 import com.aligo.spring.recom.model.service.RecomService;
 import com.aligo.spring.recom.model.vo.RecomKeyword;
 import com.aligo.spring.recom.model.vo.Recommend;
-import com.aligo.spring.theme.model.vo.Theme;
+import com.aligo.spring.recom.model.vo.ThemeVo;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 
@@ -53,23 +53,29 @@ public class RecomController {
 		
 		System.out.println("rk2 : " + rk);
 		
-		Map<String, ArrayList<Theme>> map = new HashMap<String, ArrayList<Theme>>();
+		ThemeVo tv = new ThemeVo();
+		tv.setKeywords(rk);
+		
+		System.out.println(tv.getKeywords().getKeyword1());
+		System.out.println(tv.getKeywords().getKeyword2());
+		System.out.println(tv.getKeywords().getKeyword3());
+		System.out.println(tv.getKeywords().getKeyword4());
+		System.out.println(tv.getKeywords().getKeyword5());
+		
+		Map<Integer, ArrayList<ThemeVo>> map = new HashMap<Integer, ArrayList<ThemeVo>>();
 		
 		for(int i = 1; i < 8; i++) {
 			
 			String code = "T" + i;
 			
-			Theme t = new Theme();
-			t.settCode(code);
-			// t.settKeyword(rk);
+			tv.setTcode(code);
 			
-			ArrayList<Theme> list = rService.selectList(code);
+			ArrayList<ThemeVo> list = rService.selectList(tv);
 			
-			map.put(code,list);
+			map.put(i, list);
 		}
 		
-		
-		
+		mv.addObject("map", map);
 		mv.setViewName("recommend/recomResultList");
 		return mv;
 	}

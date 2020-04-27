@@ -30,6 +30,10 @@ h4{
 	text-align:center;
 }
 
+.breadcrumb{
+  	background-image:url('${contextPath}/resources/images/nightview.jpg');
+    background-size: 100% 100%;
+  }
 
 </style>
 
@@ -51,7 +55,7 @@ h4{
 						<div class="breadcrumb_iner_item">
 							<h2>THEME</h2>
 							<p>
-								Home <span>-</span> Theme
+								Theme <span>-</span> keyword
 							</p>
 						</div>
 					</div>
@@ -107,9 +111,9 @@ h4{
             					<img src="${t.tModifyFile }"/>
             					<span>${t.tTitle }</span>
          					</div>
-					<div class="single_product_item">
+					<!-- <div class="single_product_item">
 							<h3><b style="color:rgba(121,125,237,0.9)">#${t.tName}</b></h3>
-					</div>
+					</div> -->
 					</div>
 				</a>
 				</div>
@@ -180,8 +184,8 @@ h4{
 			  var $img = $('<img>').attr('src',data[i].tModifyFile);
 			  var $span = $('<span>').text(data[i].tTitle);
 			  var $divd = $('<div>').addClass('single_product_item');
-			  var $h3 = $('<h3>');
-			  var $b  = $('<b>').css({"color":"rgba(121,125,237,0.9)"}).text(data[i].tName);
+			  //var $h3 = $('<h3>');
+			  //var $b  = $('<b>').css({"color":"rgba(121,125,237,0.9)"}).text(data[i].tName);
 				
 			  $div.append($diva);
 			  $diva.append($a);
@@ -190,8 +194,8 @@ h4{
 			  $divc.append($img);
 			  $divc.append($span);
 			  $divb.append($divd);
-			  $divd.append($h3);
-			  $h3.append($b);
+			  //$divd.append($h3);
+			  //$h3.append($b);
 		   }
 		},error:function(){
 		   console.log("에러발생");

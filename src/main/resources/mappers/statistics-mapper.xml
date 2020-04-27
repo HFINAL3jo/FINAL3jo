@@ -113,7 +113,12 @@
 	</select>
 	
 	<select id="list_2" resultMap="themeStatisticsResult">
-		SELECT TKEYWORD as TKeyworTNAME, COUNT(TKEYWORD) AS ColumnTKeywordNumber
+<!-- 		SELECT TKEYWORD as TKeyworTNAME, COUNT(TKEYWORD) AS ColumnTKeywordNumber
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		WHERE TCODE = #{number}
+		GROUP BY TKEYWORD -->
+		SELECT NVL2(TKEYWORD, TKEYWORD,'notSelectTKeyworTNAME') as TKeyworTNAME, COUNT(TCODE) AS ColumnTKeywordNumber
 		FROM THEME_LIST
 		JOIN THEME_CODE USING(TCODE)
 		WHERE TCODE = #{number}
@@ -121,7 +126,7 @@
 	</select>
 	
 	<select id="list_3" resultMap="themeStatisticsResult">
-		SELECT TKEYWORD as TKeyworTNAME, SUM(T_VIEWS) AS value2, SUM(T_LIKES) AS value1
+		SELECT NVL2(TKEYWORD, TKEYWORD,'notSelectTKeyworTNAME') as TKeyworTNAME, SUM(T_VIEWS) AS value2, SUM(T_LIKES) AS value1
 		FROM THEME_LIST
 		JOIN THEME_CODE USING(TCODE)
 		WHERE TCODE = #{number}

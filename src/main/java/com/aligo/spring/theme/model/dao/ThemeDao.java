@@ -92,4 +92,8 @@ public class ThemeDao {
 	public String getKeyword() {
 		return sqlSession.selectOne("themeMapper.getKeyword");
 	}
+
+	public int updateTheme(Theme t) {
+		return sqlSession.update("themeMapper.updateTheme",t);
+	}
 }

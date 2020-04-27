@@ -183,17 +183,17 @@ input:checked+label:after {
 							<form class="row contact_form" id="fm1" method="post" >
 
 								<div class="col-md-12 form-group p_star">
-									<input type="text" class="form-control" id="email"
-										name="email" placeholder="Your email">
+									<input type="text" class="form-control" id="findemail"
+										name="findemail" placeholder="Your email">
 								</div>
 								
 								<div class="col-md-12 form-group p_star">
-									<input type="password" class="form-control" id="password"
-										name="password" placeholder="Password">
+									<input type="text" class="form-control" id="findnickname"
+										name="findnickname" placeholder="nickname">
 								</div>
 
 								<div class="col-md-12 form-group">
-									<button type="submit" value="submit" class="btn_3" id="findPwd" onclick="resetPwd()">RESET PASSWORD</button>
+									<button type="submit" value="submit" class="btn_3" id="findPwd" onclick="findPwd()">find password</button>
 								</div>
 								<br>
 							</form>
@@ -204,10 +204,37 @@ input:checked+label:after {
 		</div>
 	</section>
 	<script type="text/javascript">
-		function resetPwd() {			
+	/* 	function resetPwd() {			
 			alert("Change completed. Please Log in.😉");
 			$("#fm1").attr("action","findPwdFin.do").submit();
-		}
+		} */
+		
+		
+        $("#findPwd").click(function(){
+ 			$.ajax({
+ 				
+ 				url : "findPwd.do",
+ 				type : "get",
+ 				data :{
+ 					findnickname:$('#findnickname').val(),
+ 					findemail:$('findemail').val()
+ 				}, success:function(result){
+ 					 
+ 					if(!result==""){
+ 						alert("찾으시는 아이디는 [ " + result + " ] 입니다");
+						location.reload();
+ 					}else{
+ 						alert("해당하는 아이디가 없습니다");
+       					$('#findnickname').select();
+ 					}
+ 					
+ 				},error :  function(request,errorcode,error){
+ 					alert("페이지에러");
+
+ 				}
+ 			});
+ 		});
+		
 
 	</script>
 

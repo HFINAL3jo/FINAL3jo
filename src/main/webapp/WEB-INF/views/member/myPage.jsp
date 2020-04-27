@@ -5,6 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	.breadcrumb{
+		background-image:url('${contextPath}/resources/images/knocker.jpg');
+		background-size: 100% 100%;
+	 }
+</style>
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
@@ -26,7 +32,7 @@
   <!-- breadcrumb start-->
 	<%@ include file="../common/assideMyPage.jsp" %>
 	 <div class="col-lg-9" >
-                    <h3 style="align-self: center;">Edit Profile</h3>
+                    <h3 style="align-self: center;">change password</h3>
                     <hr>
                     <div class="row">
                         <div class="col-lg-12">
@@ -37,6 +43,11 @@
                                         <input type="text" name="email" value="${ loginUser.email }" onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = 'Email address'" required class="single-input" readonly>
                                     </div>
+                                     <div class="mt-10">
+                                        <input type="text" name="nickname" value="${loginUser.nickname }" <%-- placeholder="${ loginUser.nickname }" --%> onfocus="this.placeholder = ''"
+                                        onblur="this.placeholder = '${ loginUser.nickname }'" required class="single-input" style="background-color: rgb(232, 240, 254);" readonly>
+                                    </div>
+                                    
                                     <div class="mt-10">
                                         <input type="password" id="password" name="password" placeholder="password" onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = 'password'" required class="single-input" style="background-color: rgb(232, 240, 254);">
@@ -45,10 +56,7 @@
                                         <input type="password" id="password2" name="password2" placeholder="password check" onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = 'password check'" required class="single-input" style="background-color: rgb(232, 240, 254);">
                                     </div>
-                                    <div class="mt-10">
-                                        <input type="text" name="nickname" value="${loginUser.nickname }" <%-- placeholder="${ loginUser.nickname }" --%> onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = '${ loginUser.nickname }'" required class="single-input" style="background-color: rgb(232, 240, 254);">
-                                    </div>
+                                  
 									<br>
                                     <input class="genric-btn success-border small" type="submit" value="submit" style="margin-left: 40%;">                                             
                                 </form> 
