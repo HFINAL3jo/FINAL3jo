@@ -59,12 +59,10 @@ public class MemberController {
 	@Inject
 	JavaMailSender mailSender;     //메일 서비스를 사용하기 위해 의존성을 주입함.
 	MemberService memberservice;
-	BCryptPasswordEncoder pwdEncoder;
 
 	private static final Logger logger=
 			LoggerFactory.getLogger(MemberController.class);
 	private static final String String = null;
-
 
 	@Autowired
 	private MemberService memService;
@@ -329,13 +327,14 @@ public class MemberController {
 	} 
 	
 	// 회원 탈퇴 post
-	@RequestMapping(value="/deleteMember", method = RequestMethod.POST)
-	public String memberDelete(Member m, HttpSession session, RedirectAttributes rttr) throws Exception{
-		
+	@RequestMapping(value="deleteMember.do", method = RequestMethod.POST)
+	public String memberDelete(Member m, HttpSession session, RedirectAttributes rttr,SessionStatus status) throws Exception{
 		memService.deleteMember(m);
 		session.invalidate();
+		status.setComplete();
+
 		
-		return "redirect:/";
+		return "redirect:index.jsp";
 	}
 	
 	// 패스워드 체크
@@ -347,6 +346,5 @@ public class MemberController {
 		boolean pwdChk = bcryptPasswordEncoder.matches(m.getpassword(), login.getpassword());
 		return pwdChk;
 	}
-	
 }
 
