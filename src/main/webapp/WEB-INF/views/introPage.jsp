@@ -88,7 +88,7 @@
 	<div class="container">
 		<div class="col-md-12 main-content">
 			<div class="text-center">
-                    <img src="./logo2.png" id="logo" alt="">
+                    <img src="/spring/resources/images/logo2.png" id="logo" alt="">
                     <h1>welcome to aligo!</h1>
                     <!-- <p>This is a fully responsive, auto-play, auto-loop YouTube Video Background. You can use any video, just edit the JavaScript file. Try the sound icon below to enable/disable sound. The video running is from channel Space Videos and you can check the original <a href="https://www.youtube.com/watch?v=ddFvjfvPnqk">here</a>.</p>
                     -->
