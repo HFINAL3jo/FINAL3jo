@@ -142,6 +142,19 @@ public class QnAController {
 		gson.toJson(rList,response.getWriter());
 	}
 	
+	@RequestMapping("addReply.do")
+	@ResponseBody
+	public String addReply(QnaReply r) {
+		
+		int result = qService.insertReply(r);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
 	// =================ADMIN 문의 사항==========================
 	@RequestMapping(value="goSearchQnaData.do", method=RequestMethod.POST)
 	@ResponseBody

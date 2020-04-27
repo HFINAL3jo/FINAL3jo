@@ -58,15 +58,21 @@ public interface QnAService {
 
 
 	/**
-	 * 문의글에 댓글
+	 * 문의글 댓글 불러오기 
 	 * @param qId
 	 * @return
 	 */
 	ArrayList<QnaReply> selectReplyList(int qId);
 
-
 	/**
-	 * 검색 조건에 따른 페이징 처리를 위한 갯수를 구한다.
+	 * 댓글 작성
+	 * @param r
+	 * @return
+	 */
+	int insertReply(QnaReply r);
+	
+	/**
+	 * 검색 조건에 따른 페이징 처리를 위한 개수를 구한다.
 	 * @param map : 검색 조건를 저장
 	 * @return
 	 */
@@ -81,5 +87,4 @@ public interface QnAService {
 	 */
 	ArrayList<QnA> getSearchQnaData(Map<String, String> map, QnAPageInfo pi);
 
-	
 }

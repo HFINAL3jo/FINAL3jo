@@ -22,16 +22,19 @@
     text-align: center;
   }
   thead tr {
-    background-color: #3B4CF7;
+    background-color: #0067b8;
     color: #ffffff;
   }
-  tbody tr:nth-child(2n) {
+  /* tbody tr:nth-child(2n) {
     background-color: #ffffff;
   }
   tbody tr:nth-child(2n+1) {
     background-color: #FAFAFA;
+  } */
+  td{
+  background-color:#ffffff !important;
   }
-
+  
   ul[id~=pagenation]>li{
   	display:inline;
   }

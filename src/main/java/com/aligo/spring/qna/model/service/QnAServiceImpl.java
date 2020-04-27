@@ -60,6 +60,10 @@ public class QnAServiceImpl implements QnAService{
 	}
 
 
+	@Override
+	public int insertReply(QnaReply r) {
+		return qDao.insertReply(r);
+	}
 // =========================== ============================
 	@Override
 	public int getSearchQnaDataTotal(Map<String, String> map) {
@@ -72,6 +76,7 @@ public class QnAServiceImpl implements QnAService{
 		
 		return qDao.getSearchQnaData(map, pi);
 	}
+
 	
 	
 }
