@@ -42,65 +42,60 @@ table {
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
+	<section class="cat_product_area section_padding">
+		<div class="container" style="margin-bottom: 15px;">
+			<div class="row" style="margin-left: 0px; width:">
+				<%@ include file="assideAdmin.jsp"%>
+				
+				<div style="width:930px; height:850px;">
+					<div style="margin-top: 4%;">			
+					<h1>신고 내역 게시판</h1>
+				</div>
+			
+					<!-- 검색 처리 -->
+
+						<div style="margin: 1%;">
+							처리 여부 : 
+							<select name="checkSearch" style="width:150px; margin-right:3%; margin-left: 1%;">
+								<option value="Y">완 료</option>
+								<option value="X">해당 없음</option>
+								<option value="N">처 리 중</option>
+								<option value="ALL">전부 다</option>
+							</select> 
+							검색 조건  : 
+							<select name="checkSearch" style="width:150px; margin-right:3%; margin-left: 1%;">
+								<option value="TITLE">제 목</option>
+								<option value="QWRITER">작 성 자</option>
+								<option value="NOT">검색 조건 없음</option>
+							</select>
+							<input type="text" name="checkSearch" value="" style="width:300px; margin-right:2% font-size:12pt; font-weight:bold;">
+							<input type="button" onclick="injectionHiddenValue()" value="검 색">
+						</div>
+
+				   	<table align="center" class="table table-striped" id="qtb">
+				        <thead align="center">
+					        <tr>
+					            <th>글번호</th>
+					            <th>제목</th>
+					            <th>작성자</th>
+					            <th>날짜</th>
+					            <th>처리 여부</th>
+					        </tr>
+				    	</thead>
+				    	<tbody id="tbody">
+				    		<c:forEach var="rlist" items="${list}">
+				    			<tr>
+				    				<td>${rlist.rCode}</td>
+				    				<td>${rlist}</td>
+				    			</tr>
+				    		</c:forEach>
+				    	</tbody>
+				    </table>
+				</div>
+			</div>
+		</div>
+	</section>
 	
-	<%@ include file="assideAdmin.jsp" %>
-    <div class="reportPage">
-
-      <h2>신고내역</h2>
-      <hr>
-
-        <div class="reportTable">
-
-    <table>
-        <thead>
-        <tr>
-            <th>썸네일</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>신고사유</th>
-            <th>삭제</th>
-
-        </tr>
-    </thead>
-
-    <tbody>
-        <tr>
-            <td>이미지</td>
-            <td>어쩌고저쩌고</td>
-            <td>유승제</td>
-            <td>악의적내용</td>
-            <td><input type="checkbox"></td>
-        </tr>
-
-        <tr>
-            <td>이미지</td>
-            <td>어쩌고 저쩌고333</td>
-            <td>유승제</td>
-            <td>거짓된내용</td>
-            <td><input type="checkbox"></td>
-        </tr>
-
-    </tbody>
-    </table>
-
-    <br>
-    
-    <div class="button" align="right">
-    <button>삭제하기</button>
-    </div>
-    <div class=Pagenation>
-
-      <ul id="pagenation" align="center" style="margin-left:-90px; display:inline-block">
-        <li><button class="listbtn" value="-1">&lt;</button></li>
-        <li><button class="listbtn" value="1">1</button></li>
-        <li><button class="listbtn" value="2">2</button></li>
-        <li><button class="listbtn" value="3">3</button></li>
-        <li><button class="listbtn" value="+1">&gt;</button></li>
-    </ul>
-
-</div>
-</div>
-</div>
 	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

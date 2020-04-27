@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -67,7 +68,6 @@ public class MemberController {
 	@Autowired
 	private MemberService memService;
 
-
 	@RequestMapping(value="signUp.do", method = RequestMethod.POST)
 	public String insertMember(Member m) {
 
@@ -77,7 +77,7 @@ public class MemberController {
 		int result = memService.insertMember(m);
 
 		if(result >0) {
-			return "redirect:index.jsp";
+			return "redirect:main.do";
 		} else {
 			return "common/errorPage.jsp";
 		}
@@ -267,7 +267,7 @@ public class MemberController {
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getpassword(), loginUser.getpassword())) {			
 			//	로그인 성공 시 세션에 정보를 담아야 되기 때문에 세션이 필요하다.
 			model.addAttribute("loginUser", loginUser);
-			return "redirect:index.jsp";
+			return "redirect:main.do";
 		}else {			
 			//	로그인 실패
 			model.addAttribute("msg", "로그인 실패!!");
@@ -286,7 +286,7 @@ public class MemberController {
 		// 세션의 상태를 확정지어주는 메소드 호출
 		status.setComplete();
 
-		return "redirect:index.jsp";
+		return "redirect:main.do";
 	}
 
 
@@ -303,7 +303,7 @@ public class MemberController {
 		if (result > 0) { 
 			model.addAttribute("loginUser", m); 
 
-			return "redirect:index.jsp"; 
+			return "redirect:main.do"; 
 
 		} else { 
 
@@ -334,7 +334,7 @@ public class MemberController {
 		status.setComplete();
 
 		
-		return "redirect:index.jsp";
+		return "redirect:main.do";
 	}
 	
 	// 패스워드 체크
@@ -346,5 +346,64 @@ public class MemberController {
 		boolean pwdChk = bcryptPasswordEncoder.matches(m.getpassword(), login.getpassword());
 		return pwdChk;
 	}
-}
+	
+	
+	
 
+	public Member findPwd(Member m) throws Exception{
+		Random r = new Random();
+		int num = r.nextInt(4589362) + 49311; //이메일로 받는 인증코드 부분 (난수)
+		System.out.println(num);
+		String newpass = Integer.toString(num);
+		System.out.println(newpass);
+		m.setpassword(newpass);
+	//	memService.findPwd(m);
+		return m;
+}
+	
+	
+	@RequestMapping("findPwdfin.do")
+	public String findPwdfin(Member m, HttpSession session,HttpServletResponse response_email,HttpServletRequest request) throws Exception{
+		
+
+		m = findPwd(m);
+		String newpass = m.getpassword();
+		
+		String setfrom = "noticealigo@gmail.com";
+		String tomail = request.getParameter("email"); // 받는 사람 이메일
+		String title = "[Aligo] Your temporary password"; // 제목
+		String content =
+				"Hello~ your temporary password is [ " + newpass
+		+ " ] you must change your password after login"; // 내용
+
+		
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message,
+					true, "UTF-8");
+
+			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
+			messageHelper.setTo(tomail); // 받는사람 이메일
+			messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+			messageHelper.setText(content); // 메일 내용
+
+			mailSender.send(message);
+			m.setpassword(bcryptPasswordEncoder.encode(m.getpassword()));
+			memService.findPwd(m);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+			
+		}
+	
+
+/*		response_email.setContentType("text/html; charset=UTF-8");
+		PrintWriter out_email = response_email.getWriter();
+		out_email.println("<script>alert('check your email');</script>"); 	
+		out_email.flush(); */
+		return "redirect:loginView.do";
+
+
+	} 
+	
+}

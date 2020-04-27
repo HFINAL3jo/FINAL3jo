@@ -51,8 +51,8 @@ public class QnADao {
 		return (ArrayList)sqlSession.selectList("qnaMapper.selectReplyList",qId);
 	}
 	
-	public int insertReply(QnaReply r) {
-		return sqlSession.insert("qnaMapper.insertReply",r);
+	public int insertReply(QnaReply qr) {
+		return sqlSession.insert("qnaMapper.insertReply",qr);
 	}
 // =============================================================
 	public int getSearchQnaDataTotal(Map<String, String> map) {
