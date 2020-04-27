@@ -49,7 +49,7 @@ table {
 				
 				<div style="width:930px; height:850px;">
 					<div style="margin-top: 4%;">			
-					<h1>문의 내역 게시판</h1>
+					<h1>신고 내역 게시판</h1>
 				</div>
 			
 					<!-- 검색 처리 -->
@@ -83,7 +83,12 @@ table {
 					        </tr>
 				    	</thead>
 				    	<tbody id="tbody">
-				    		
+				    		<c:forEach var="rlist" items="${list}">
+				    			<tr>
+				    				<td>${rlist.rCode}</td>
+				    				<td>${rlist}</td>
+				    			</tr>
+				    		</c:forEach>
 				    	</tbody>
 				    </table>
 				</div>
