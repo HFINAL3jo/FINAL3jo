@@ -25,6 +25,7 @@ DROP SEQUENCE SEQ_MNO;
 DROP SEQUENCE SEQ_QID;
 DROP SEQUENCE SEQ_RID;
 DROP SEQUENCE SEQ_TRNO;
+DROP SEQUENCE SEQ_REPORTS;
 
 CREATE SEQUENCE SEQ_QID
 START WITH 1
@@ -56,11 +57,7 @@ INCREMENT BY 1
 NOCYCLE
 NOCACHE;
 
-<<<<<<< HEAD
 -- ½Å°í ½ÃÄö½º
-=======
--- ì‹ ê³  ì‹œí€€ìŠ¤
->>>>>>> branch 'master' of https://github.com/HFINAL3jo/FINAL3jo.git
 CREATE SEQUENCE SEQ_REPORTS
 START WITH 1
 INCREMENT BY 1
@@ -198,7 +195,7 @@ CREATE TABLE QNA(
    Q_STATUS VARCHAR2(1) DEFAULT 'N' CHECK (Q_STATUS IN('Y','N','X'))
 );
 
---QNAï¿½ï¿½ ï¿½ï¿½ï¿½ REPLY
+--QNAÀÇ ´ñ±Û REPLY
 CREATE TABLE QNAREPLY(
   RID NUMBER PRIMARY KEY,
   RCONTENT VARCHAR2(2000),
@@ -283,7 +280,7 @@ BEGIN
 end ;
 /
 
---THEME_LIST ï¿½×½ï¿½Æ®ï¿½ï¿½ THEME_CODE ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½ 
+--THEME_LIST Å×½ºÆ®¿ë THEME_CODE ¸ÕÀú ÀÔ·ÂÇØ¾ßÇÔ 
 INSERT INTO THEME_CODE VALUES('T1','NATURE',DEFAULT,DEFAULT);
 INSERT INTO THEME_CODE VALUES('T2','RESTAURANT',DEFAULT,DEFAULT);
 INSERT INTO THEME_CODE VALUES('T3','HISTORY',DEFAULT,DEFAULT);
@@ -293,8 +290,6 @@ INSERT INTO THEME_CODE VALUES('T6','ACTIVITY',DEFAULT,DEFAULT);
 INSERT INTO THEME_CODE VALUES('T7','EXHIBITION',DEFAULT,DEFAULT);
 
 --THEME LIST
---sdf
-
 
 --UPDATE THEME_CODE SET (TCOUNT,TLIKE) =(SELECT SUM(T_VIEWS),SUM(T_LIKES) FROM THEME_LIST JOIN THEME_CODE USING(TCODE) WHERE TNAME='NATURE') WHERE TNAME='NATURE';
 --UPDATE THEME_CODE SET (TCOUNT,TLIKE) =(SELECT SUM(T_VIEWS),SUM(T_LIKES) FROM THEME_LIST JOIN THEME_CODE USING(TCODE) WHERE TNAME='RESTAURANT') WHERE TNAME='RESTAURANT';
@@ -308,21 +303,21 @@ INSERT INTO THEME_CODE VALUES('T7','EXHIBITION',DEFAULT,DEFAULT);
 
 
 --QNA
-INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'ï¿½Ä»ï¿½ï¿½Ï¼Ì¾ï¿½ï¿½?','ï¿½Ä»ï¿½ ï¿½Ï¼Ì´ï¿½ï¿½ï¿½ ï¿½Ã±ï¿½ï¿½Õ´Ï´ï¿½.','hyhihi',DEFAULT,NULL,DEFAULT);
-INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'ï¿½Ñ°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½?','ï¿½Ñ°ï¿½ ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½Ê¾Æ¿ï¿½?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.','hooni',DEFAULT,NULL,DEFAULT);
-INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'ï¿½ï¿½ï¿½ï¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½?','ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½','mama',DEFAULT,NULL,DEFAULT);
-INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'ï¿½Ä»ï¿½ï¿½Ï¼Ì¾ï¿½ï¿½?','ï¿½Ä»ï¿½ ï¿½Ï¼Ì´ï¿½ï¿½ï¿½ ï¿½Ã±ï¿½ï¿½Õ´Ï´ï¿½.','hyhihi',DEFAULT,NULL,DEFAULT);
-INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'ï¿½Ñ°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½?','ï¿½Ñ°ï¿½ ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½Ê¾Æ¿ï¿½?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.','hooni',DEFAULT,NULL,DEFAULT);
-INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'ï¿½È³ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½?','ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½','ma8ma',DEFAULT,NULL,DEFAULT);
-INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½','ï¿½ï¿½ï¿½ï¿½ï¿½Õ½Ã´ï¿½!^^','ma7ma',DEFAULT,NULL,DEFAULT);
-INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Åºï¿½ï¿½Ì¾ï¿½ï¿½?','ï¿½ï¿½ï¿½ï¿½ï¿½ó±¸¿ï¿½~^^','ma6ma',DEFAULT,NULL,DEFAULT);
-INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'ï¿½ï¿½ï¿½ Ä¡Å²ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½?','ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½','ma5ma',DEFAULT,NULL,DEFAULT);
-INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½?','ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¾ï¿½ï¿½~^^','mama',DEFAULT,NULL,DEFAULT);
-INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?','ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½','ma4ma',DEFAULT,NULL,DEFAULT);
-INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Æ¿ï¿½?','ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½','mama',DEFAULT,NULL,DEFAULT);
-INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Æ¿ï¿½?','ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.^^','ma2ma',DEFAULT,NULL,DEFAULT);
-INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ù¼Ì¾ï¿½ï¿½?','ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â°¡ ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½.','ma3ma',DEFAULT,NULL,DEFAULT);
-INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?','ï¿½ï¿½ï¿½ï¿½ 16ï¿½ï¿½ï¿½Ì¿ï¿½','ma1ma',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'½Ä»çÇÏ¼Ì¾î¿ä?','½Ä»ç ÇÏ¼Ì´ÂÁö ±Ã±ÝÇÕ´Ï´Ù.','hyhihi',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'ÇÑ°­ ÁÁ¾ÆÇÏ¼¼¿ä?','ÇÑ°­ ÀÌ»ÚÁö ¾Ê¾Æ¿ä?¤¾¤¾¤¾.','hooni',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'¼­¿ï¿¡¼­ ¾îµô Á¦ÀÏ ÁÁ¾ÆÇÏ¼¼¿ä?','Àú´Â ÇÑ°­ÀÌ Á¦ÀÏ ÁÁ¾Æ¿ä','mama',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'½Ä»çÇÏ¼Ì¾î¿ä?','½Ä»ç ÇÏ¼Ì´ÂÁö ±Ã±ÝÇÕ´Ï´Ù.','hyhihi',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'ÇÑ°­ ÁÁ¾ÆÇÏ¼¼¿ä?','ÇÑ°­ ÀÌ»ÚÁö ¾Ê¾Æ¿ä?¤¾¤¾¤¾.','hooni',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'¾È³çÇÏ¼¼¿ä?','Àú´Â ÇÑ°­ÀÌ Á¦ÀÏ ÁÁ¾Æ¿ä','ma8ma',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'°¨»çÇÔÀ» ´À³§´Ï´Ù','°¨»çÇÕ½Ã´Ù!^^','ma7ma',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'¸¶¶óÇâ±Å ¸¶¶óÅÁ µå¼Åº¸¼Ì¾î¿ä?','ÁÁ´õ¶ó±¸¿ä~^^','ma6ma',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'¾îµð Ä¡Å²ÀÌ Á¦ÀÏ ÁÁ¾Æ¿ä?','Àú´Â Ã³°«ÁýÀÌ Á¦ÀÏ ÁÁ¾Æ¿ä','ma5ma',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'¾Æµû¸¾¸¶ º¸¼Ì¾î¿ä?','Á¶±Ý ºÃ¾î¿ä~^^','mama',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'¾î´À °ø¿øÀÌ Á¦ÀÏ ÁÁÀº°¡¿ä?','Àú´Â ÇÑ°­ÀÌ Á¦ÀÏ ÁÁ¾Æ¿ä','ma4ma',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'¹è°íÇÁÁö ¾Ê¾Æ¿ä?','¹è°íÆÄ¿ä','mama',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'Á¤¸» °¨»çÇÏÁö ¾Ê¾Æ¿ä?','Àú´Â °¨»çÇÔÀ» ´À³§´Ï´Ù.^^','ma2ma',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'¹«½¼ ²Þ ²Ù¼Ì¾î¿ä?','µþ±â ÄÉÀÍ À§ÀÇ µþ±â°¡ ½Ãµé¾ú¾î¿ä.','ma3ma',DEFAULT,NULL,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QID.NEXTVAL,'¸î »ì·Î µ¹¾Æ°¡°í ½ÍÀ¸¼¼¿ä?','Àú´Â 16»ìÀÌ¿ä','ma1ma',DEFAULT,NULL,DEFAULT);
 
 --RECOMMEND
 INSERT INTO RECOMMEND_Q VALUES('RQ001', 'Choose your travel inclination', 'Something familiar', 
@@ -340,7 +335,7 @@ INSERT INTO RECOMMEND_Q VALUES('RQ004', 'Choose your personality', 'Calm',
 INSERT INTO RECOMMEND_Q VALUES('RQ005', 'Choose the destination you want to go', 'Urban', 
                 'An urban destination', 'Natural', 'Natural destination', DEFAULT);
 
---SEARCH ï¿½ï¿½ï¿½ï¿½
+--SEARCH °ü·Ã
 INSERT INTO SEARCH_AREA VALUES ('DOBONG-GU',1);
 INSERT INTO SEARCH_AREA VALUES ('NOWON-GU',2);
 INSERT INTO SEARCH_AREA VALUES ('GANGBUK-GU',3);
