@@ -14,46 +14,17 @@
 </head>
 <body>
 	<c:if test="${!empty loginUser}">
-    <form action="themeInsert.do" method="POST" id="gosubmit" enctype="multipart/form-data" onsubmit="return false;">
+    <form action="blogInsert.do" method="POST" id="gosubmit" enctype="multipart/form-data" onsubmit="return false;">
     <div id="editor">
     <br>
     <label for="tt" style="margin:10px;">Title&nbsp;&nbsp;
     <input type="text" size="40" name="tTitle" id="tt"></label>&nbsp;&nbsp;
     <label>Writer&nbsp;
-    <input type="text" name="tWriter" size="40" value="${loginUser.nickname }" style="border:none;" readonly></label>
+    <input type="text" name="BWriter" size="40" value="${loginUser.nickname }" style="border:none;" readonly></label>
+    <br>
+    <input type="text" name="bTag">
     <br><br>
-    <span style="float:left;">Theme &nbsp;
-    <select id="tcl" name="tCode">
-    	<option>--</option>
-    	<option value="NATURE">NATURE</option>
-    	<option value="RESTAURANT">RESTAURANT</option>
-    	<option value="HISTORY">HISTORY</option>
-    	<option value="SHOPPING">SHOPPING</option>
-    	<option value="BAR">BAR</option>
-    	<option value="ACTIVITY">ACTIVITY</option>
-    	<option value="EXHIBITION">EXHIBITION</option>
-    </select>&nbsp;&nbsp;&nbsp;
-    Keyword &nbsp;&nbsp;<input type="text" id="tkv" name="tKeyword" readonly style="margin-right:-10px;"></span><br><br>
-    	<c:if test="${!empty list}">
-    	<div id="selectVal" style="border:1px lightblue solid; display:inline-block; float:left; margin:10px; padding:10px; text-align:left;">
-    		<label><input type="radio" name="f1" value="${list[0]}">&nbsp;${list[0] }</label>
-    		&nbsp;&nbsp;<label><input type="radio" name="f1" value="${list[5]}">&nbsp;${list[5] }</label><br>
-    		<label><input type="radio" name="f2" value="${list[1]}">&nbsp;${list[1] }</label>
-    		&nbsp;&nbsp;<label><input type="radio" name="f2" value="${list[6]}">&nbsp;${list[6] }</label><br> 
-    		<label><input type="radio" name="f3" value="${list[2]}">&nbsp;${list[2] }</label>
-    		&nbsp;&nbsp;<label><input type="radio" name="f3" value="${list[7]}">&nbsp;${list[7] }</label><br>
-    		<label><input type="radio" name="f4" value="${list[3]}">&nbsp;${list[3] }</label>
-    		&nbsp;&nbsp;<label><input type="radio" name="f4" value="${list[8]}">&nbsp;${list[8] }</label><br>
-    		<label><input type="radio" name="f5" value="${list[4]}">&nbsp;${list[4] }</label>
-    		&nbsp;&nbsp;<label><input type="radio" name="f5" value="${list[9]}">&nbsp;${list[9] }</label><br>
-    		<input type="button" id="tkvinsert" value="Ok">&nbsp;&nbsp;
-    		<input type="button" id="tkvreset" value="Reset">
-    	</div>
-    	<br>
-    	</c:if>
-   	
-    <br><br>
-	<textarea name="tContent" id="smarteditor" rows="30" cols="104"></textarea>
+	<textarea name="BContent" id="smarteditor" rows="30" cols="104"></textarea>
     <br><br>
     
     <table align="center">
@@ -66,11 +37,11 @@
 	</tr>
 	<tr>
 		<td>도로명 주소</td>
-		<td><input type="text" id="da" name="tAddressH" placeholder="도로명주소" class="adi"></td>
+		<td><input type="text" id="da" name="BAddressH" placeholder="도로명주소" class="adi"></td>
 	</tr>
 	<tr>
 		<td>ADDRESS</td>
-		<td><input type="text" id="ja" name="tAddress" placeholder="영문 도로명 주소" class="adi"></td>
+		<td><input type="text" id="ja" name="BAddress" placeholder="영문 도로명 주소" class="adi"></td>
 	</tr>
 	<tr>
 		<td>영문 지번 주소</td>
@@ -81,6 +52,10 @@
 		<td><input type="text" id="sample4_extraAddress" placeholder="참고항목"></td>
 	</tr>
 	<tr>
+		<td>HashTag</td>
+		<td><input type="text" id="ht" name="bTag"></td>
+	</tr>
+	<!-- <tr>
 		<td>Tel</td>
 		<td><input type="text" id="tel" name="tTel"></td>
 	</tr>
@@ -95,7 +70,7 @@
 	<tr>
 		<td>Opening hours</td>
 		<td><input type="text" id="oh" name="tHours">
-	</tr>
+	</tr> -->
 	</table>
     <button id="cancel" class="btn btn-light" type="reset">Cancle</button>
     <input type="button" class="btn btn-light" id="sbtn" value="Write"> 
@@ -146,42 +121,7 @@ nhn.husky.EZCreator.createInIFrame({
 		   return false;
 	   }
 	   
-	   if(!chk(theme == '--',"Select theme")){
-		   return false;
-	   }
-	   
-	   if(!chk(keyword == '',"Fill out keyword")){
-		   return false;
-	   }
-	   
-	   if(!chk(tel == '','Fill out tel')){
-		   return false;
-	   }
-	   
-	   if(!chk(fee == '','Fill out fee')){
-		   return false;
-	   }
-	   
-	   if(!chk(oh== '','Fill out opeinghours')){
-		   return false;
-	   }
-	   
-	   if(!chk(trans=='','Fill out transportation')){
-		   return false;
-	   }
-	   
-	   if(!chk(da=='','Fill out address')){
-		   return false;
-	   }
-	   
-	   if(!chk(ja=='','Fill out address')){
-		   return false;
-	   }
-	   
-	   if(!chk(ad=='','Fill out address')){
-		   return false;
-	   }
-		return true; 
+ 		return true; 
 	 }
    
    function chk(ele,msg){
@@ -261,40 +201,6 @@ nhn.husky.EZCreator.createInIFrame({
             }
         });
     });
-	});
-	var tkv = $('#tkv');
-	var chkn = 0;
-	$('#tkvinsert').click(function(e){
-		tkv.val("");
-		
-		for(var i=0;i<10;i++){
-		 var chk = $('#selectVal').children('label').children('input').eq(i);
-		 if(chkn < 5){
-			 
-		 if(chk.is(":checked") == true && chkn == 4){
-			 tkv.val(tkv.val() + chk.val());
-			 chkn++;
-		 }else if(chk.is(":checked") == true){
-			 tkv.val(tkv.val() + chk.val() + ",");
-			 chkn++;
-		 }
-		 }else{
-			 break;
-			 }
-		 }
-		 if(chkn != 5){
-			 alert("Check five options");
-			 $('#tkvreset').trigger('click');
-		}
-	});
-	$('#tkvreset').click(function(){
-		chkn = 0;
-		tkv.val("");
-		for(var i=0;i<10;i++){
-		$('#selectVal').children('label').children('input').eq(i).removeAttr("checked");
-			
-		}
-		
 	});
 </script>
 </body>

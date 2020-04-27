@@ -22,7 +22,7 @@
 	
 	<%@ include file="../common/footer.jsp" %>
 	<script>
-		$('#titlebar').text('Write');
+		$('#titlebar').text('BlogWrite');
 	</script>
 </body>
 </html>

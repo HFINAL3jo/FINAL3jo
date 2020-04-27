@@ -91,7 +91,7 @@
 	<insert id="insertTheme" parameterType="Theme">
 		INSERT INTO THEME_LIST VALUES(SEQ_TNO.NEXTVAL,#{tWriter},#{tTitle},
 		#{tContent},#{tAddress},#{tAddressH},DEFAULT,DEFAULT,DEFAULT,DEFAULT,
-		#{tKeyword},DEFAULT,#{tCode},#{tTel},#{tFee},#{tHours},#{tTrans})
+		#{tKeyword},DEFAULT,#{tCode},NVL(#{tTel},' '),NVL(#{tFee},' '),NVL(#{tHours},' '),NVL(#{tTrans},' '))
 	</insert>
 	
 	<insert id="insertImg" parameterType="TFile">
@@ -177,8 +177,8 @@
 	
 	<update id="updateTheme" parameterType="Theme">
 		UPDATE THEME_LIST SET TTITLE=#{tTitle},TCONTENT=#{tContent},TADDRESS=#{tAddress},
-		TADDRESSH=#{tAddressH},T_MODIFY_DATE=SYSDATE,TKEYWORD=#{tKeyword},TCODE=#{tCode},TTEL=#{tTel},
-		TFEE=#{tFee},THOURS=#{tHours},TTRANS=#{tTrans} WHERE TID=#{tId} 
+		TADDRESSH=#{tAddressH},T_MODIFY_DATE=SYSDATE,TKEYWORD=#{tKeyword},TCODE=#{tCode},TTEL=NVL(#{tTel},' '),
+		TFEE=NVL(#{tFee},' '),THOURS=NVL(#{tHours},' '),TTRANS=NVL(#{tTrans},' ') WHERE TID=#{tId} 
 	</update>
 	
 	<!-- Like -->

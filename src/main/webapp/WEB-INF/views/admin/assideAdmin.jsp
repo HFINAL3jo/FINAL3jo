@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
                 <div class="col-lg-2">
                     <div class="left_sidebar_area">
                         <aside class="left_widgets p_filter_widgets">
                             <div class="l_w_title">
-                                <h3>Admin</h3>
+    			<br><br><br><br><br>
+                                <h2>ADMIN</h2>
+                                <br>
                             </div>
                             <div class="widgets_inner">
                                 <ul class="list">
