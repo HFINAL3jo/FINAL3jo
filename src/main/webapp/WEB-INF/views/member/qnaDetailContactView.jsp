@@ -244,9 +244,9 @@ textarea{
         <div class="comment-post-header" id="rDivWriter">
           <div id="baro">
           <h5>
-                <strong></strong>
-                <small></small>
-              </h5>
+                <strong>asdf</strong>
+                <small>asdfasdf</small>
+          </h5>
           </div>
         </div>
         <div class="panel-body comment-post-body">
@@ -289,14 +289,16 @@ textarea{
     	
     	function getReplyList(){
     		var qId = ${ q.qId};
+    		var div = $('#baro');
     		
     		$.ajax({
     			url:"rList.do",
     			data:{qId:qId},
     			dataType:"json",
     			success:function(data){
+    				console.log(data);
     				$divHeadWriter = $("#rDivWriter div");
-    				$divHeadWriter.html("");//????이거 뭔가요?
+    				$divHeadWriter.html("");
     						
     				var $divOfWriter;
     				var $divOfContent;
@@ -305,15 +307,15 @@ textarea{
     				var $rCreateDate;
     				
     				for(var i in data){
-    					$divOfWriter = $("<div class='comment-post-header'>");
-    					$rWriter = $("<div id='baro'>").text(data[i].rWriter);
+    					/* $divOfWriter = $("<div class='comment-post-header'>");
+    					$rWriter = $div.siblings('h5').children('strong').text(data[i].rWriter);
     					$rCreateDate = $("<div id='baro'>").text(data[i].rCreateDate);
     					
     					//$rContent = $("<div id='rDivContent'").text(data[i].rContent);
     					
     					$divOfWriter.append($rWriter);
     					$divOfWriter.append($rCreateDate);
-    					$divHeadWriter.append($divOfWriter);
+    					$divHeadWriter.append($divOfWriter); */
     				}
     			},error:function(){
     				console.log("전송실패");

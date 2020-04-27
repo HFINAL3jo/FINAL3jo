@@ -48,7 +48,7 @@ public class QnADao {
 	}
 
 	public ArrayList<QnaReply> selectReplyList(int qId) {
-		return (ArrayList)sqlSession.selectList("boardMapper.selectReplyList",qId);
+		return (ArrayList)sqlSession.selectList("qnaMapper.selectReplyList",qId);
 	}
 	
 	public int insertReply(QnaReply r) {
