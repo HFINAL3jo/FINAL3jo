@@ -267,6 +267,7 @@
 								<!-- <li class="nav-item">
                                     <a class="nav-link" href="main.do">Home</a>
                                 </li> -->
+
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="" id="navbarDropdown_1"
 									role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -286,7 +287,7 @@
 											Theme</a>
 									</div></li>
 								<li class="nav-item"><a class="nav-link"
-									href="themeDetailView.do">Posting</a></li>
+									href="blogListView.do">Posting</a></li>
 								<li class="nav-item"><a class="nav-link"
 									href="recommend.do"> Recommended </a></li>
 								<li class="nav-item"><a class="nav-link"
@@ -397,119 +398,115 @@
 						<%--  <c:forEach var="" begin="" end="" items="">
                     	
                     	</c:forEach> --%>
-					</datalist>
-					<button type="submit" class="btn"></button>
-					<span class="ti-close" id="close_search" title="Close Search"></span>
-					<input type="hidden" name="searchValue" value="1">
-				</form>
-			</div>
-		</div>
+                    </datalist>
+                    <button type="submit" class="btn"></button>
+                    <span class="ti-close" id="close_search" title="Close Search"></span>
+                    <input type="hidden" name="searchValue" value="1">
+                </form>
+            </div>
+        </div>
+        
+        <script>
+        $(function(){
+        	$('.weather_container').hide();
+        	$('.weather_container').css('position','fixed');
+        	$('#weather_1').on("click",function(){
+        		$('.weather_container').slideToggle();
+        	});
+        	
+        	var apiURI1 = "https://api.openweathermap.org/data/2.5/onecall?lat=37.57&lon=126.98&appid="+"cbb2ea4f1ab7a72a57e98ecd56c439a3";
+        	var apiURI2 = "http://api.openweathermap.org/data/2.5/onecall/timemachine?lat=37.57&lon=126.98&dt=1587610800&appid=cbb2ea4f1ab7a72a57e98ecd56c439a3";
+        	getWeather(apiURI1);
+        	getWeather(apiURI2);
+        });
+	        
+        	function getWeather(apiURI){
+        		$.ajax({
+    	            url: apiURI,
+    	            dataType: "json",
+    	            type: "GET",
+    	            async: "false",
+    	            success: function(data) {
+    	                console.log(data);
+    	                console.log("현재온도 : "+ (data.current.temp- 273.15) );
+    	                
+    	                var weatherId = data.current.weather[0].id.toString();
+    	                var weatherName = data.current.weather[0].main;
+    	                var temp = (data.current.temp - 273.15).toFixed(1);
+    	                var tomorrowTemp = (data.daily[0].temp.day - 273.15).toFixed(1);
+    	                var yesterdayTemp = (data.hourly[5].temp - 273.15).toFixed(1);
+    	                
+    	                if(weatherId.charAt(0) == '2' || weatherId.charAt(0) == '3' || weatherId.charAt(0) == '5'){
+    	                	$('.weather-card').attr('class','weather-card rain');
+    	                	$('#weather_name').text(weatherName);
+    	                	$('#temp_value').text(temp+" ℃");
+    	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
+    	                	$('#yesterday_temp').text(yesterdayTemp+" ℃");
+    	                	
+    	                }else if(weatherId.charAt(0) == '6' || weatherId.charAt(0) == '7' ){
+    	                	$('.weather-card').attr('class','weather-card snow');
+    	                	$('#weather_name').text(weatherName);
+    	                	$('#temp_value').text(temp+" ℃");
+    	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
+    	                	$('#yesterday_temp').text(yesterdayTemp+" ℃");
+    	                	
+    	                }else if(weatherId == '800'){
+    	                	$('.weather-card').attr('class','weather-card sunny');
+    	                	$('#weather_name').text(weatherName);
+    	                	$('#temp_value').text(temp+" ℃");
+    	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
+    	                	$('#yesterday_temp').text(yesterdayTemp+" ℃");
+    	                	
+    	                }else if(weatherId.charAt(0) == '8' && weatherName.includes("cloud")){
+    	                	$('.weather-card').attr('class','weather-card cloudy');
+    	                	$('#weather_name').text(weatherName);
+    	                	$('#temp_value').text(temp+" ℃");
+    	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
+    	                	$('#yesterday_temp').text(yesterdayTemp+" ℃");
+    	                	
+    	                }else{
+    	                	$('.weather-card').attr('class','weather-card sunny');
+    	                	$('#weather_name').text(weatherName);
+    	                	$('#temp_value').text(temp+" ℃");
+    	                	$('#tomorrow_temp').text(tomorrowTemp+" ℃");
+    	                	$('#yesterday_temp').text(yesterdayTemp+" ℃");
+    	                	
+    	                }
+    	            }
+    	        });
+        	}
+        </script>
+    </header>
+        
+    <!-- Header part end-->
 
-		<script>
-			$(function() {
-				$('.weather_container').hide();
-				$('.weather_container').css('position', 'fixed');
-				$('#weather_1').on("click", function() {
-					$('.weather_container').slideToggle();
-				});
-
-			});
-			var apiURI = "https://api.openweathermap.org/data/2.5/onecall?lat=37.57&lon=126.98&appid="
-					+ "cbb2ea4f1ab7a72a57e98ecd56c439a3";
-			$
-					.ajax({
-						url : apiURI,
-						dataType : "json",
-						type : "GET",
-						async : "false",
-						success : function(data) {
-							console.log(data);
-							console.log("현재온도 : "
-									+ (data.current.temp - 273.15));
-
-							var weatherId = data.current.weather[0].id
-									.toString();
-							var weatherName = data.current.weather[0].main;
-							var temp = (data.current.temp - 273.15).toFixed(1);
-							var tomorrowTemp = (data.daily[0].temp.day - 273.15)
-									.toFixed(1);
-
-							if (weatherId.charAt(0) == '2'
-									|| weatherId.charAt(0) == '3'
-									|| weatherId.charAt(0) == '5') {
-								$('.weather-card').attr('class',
-										'weather-card rain');
-								$('#weather_name').text(weatherName);
-								$('#temp_value').text(temp + " ℃");
-								$('#tomorrow_temp').text(tomorrowTemp + " ℃");
-
-							} else if (weatherId.charAt(0) == '6'
-									|| weatherId.charAt(0) == '7') {
-								$('.weather-card').attr('class',
-										'weather-card snow');
-								$('#weather_name').text(weatherName);
-								$('#temp_value').text(temp + " ℃");
-								$('#tomorrow_temp').text(tomorrowTemp + " ℃");
-
-							} else if (weatherId == '800') {
-								$('.weather-card').attr('class',
-										'weather-card sunny');
-								$('#weather_name').text(weatherName);
-								$('#temp_value').text(temp + " ℃");
-								$('#tomorrow_temp').text(tomorrowTemp + " ℃");
-
-							} else if (weatherId.charAt(0) == '8'
-									&& weatherName.includes("cloud")) {
-								$('.weather-card').attr('class',
-										'weather-card cloudy');
-								$('#weather_name').text(weatherName);
-								$('#temp_value').text(temp + " ℃");
-								$('#tomorrow_temp').text(tomorrowTemp + " ℃");
-
-							} else {
-								$('.weather-card').attr('class',
-										'weather-card sunny');
-								$('#weather_name').text(weatherName);
-								$('#temp_value').text(temp + " ℃");
-								$('#tomorrow_temp').text(tomorrowTemp + " ℃");
-
-							}
-						}
-					});
-		</script>
-
-
-	</header>
-
-	<!-- Header part end-->
-
-	<!-- jquery plugins here-->
-
-	<script src="resources/js/jquery-1.12.1.min.js"></script>
-	<!-- popper js -->
-	<script src="resources/js/popper.min.js"></script>
-	<!-- bootstrap js -->
-	<script src="resources/js/bootstrap.min.js"></script>
-	<!-- easing js -->
-	<script src="resources/js/jquery.magnific-popup.js"></script>
-	<!-- swiper js -->
-	<script src="resources/js/swiper.min.js"></script>
-	<!-- swiper js -->
-	<script src="resources/js/masonry.pkgd.js"></script>
-	<!-- particles js -->
-	<script src="resources/js/owl.carousel.min.js"></script>
-	<!-- <script src="resources/js/jquery.nice-select.min.js"></script> -->
-	<!-- slick js -->
-	<script src="resources/js/slick.min.js"></script>
-	<script src="resources/js/jquery.counterup.min.js"></script>
-	<script src="resources/js/waypoints.min.js"></script>
-	<script src="resources/js/contact.js"></script>
-	<script src="resources/js/jquery.ajaxchimp.min.js"></script>
-	<script src="resources/js/jquery.form.js"></script>
-	<script src="resources/js/jquery.validate.min.js"></script>
-	<script src="resources/js/mail-script.js"></script>
-	<!-- custom js -->
-	<script src="resources/js/custom.js"></script>
+    <!-- jquery plugins here-->
+    
+    <script src="resources/js/jquery-1.12.1.min.js"></script>
+    <!-- popper js -->
+    <script src="resources/js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="resources/js/bootstrap.min.js"></script>
+    <!-- easing js -->
+    <script src="resources/js/jquery.magnific-popup.js"></script>
+    <!-- swiper js -->
+    <script src="resources/js/swiper.min.js"></script>
+    <!-- swiper js -->
+    <script src="resources/js/masonry.pkgd.js"></script>
+    <!-- particles js -->
+    <script src="resources/js/owl.carousel.min.js"></script>
+    <!-- <script src="resources/js/jquery.nice-select.min.js"></script> -->
+    <!-- slick js -->
+    <script src="resources/js/slick.min.js"></script>
+    <script src="resources/js/jquery.counterup.min.js"></script>
+    <script src="resources/js/waypoints.min.js"></script>
+    <script src="resources/js/contact.js"></script>
+    <script src="resources/js/jquery.ajaxchimp.min.js"></script>
+    <script src="resources/js/jquery.form.js"></script>
+    <script src="resources/js/jquery.validate.min.js"></script>
+    <script src="resources/js/mail-script.js"></script>
+    <!-- custom js -->
+    <script src="resources/js/custom.js"></script>
 
 	<script>
 		//datalist 추가 예정
