@@ -26,6 +26,7 @@ public class MainController {
 	@RequestMapping("topList.do")
 	public void themeTopList(HttpServletResponse response) throws JsonIOException, IOException {
 		ArrayList<Theme> list = mService.selectTopList();
+		System.out.println("mainController : " + list);
 		
 		response.setContentType("application/json; charset=utf-8");
 		

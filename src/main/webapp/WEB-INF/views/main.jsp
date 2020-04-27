@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>Welcome to aligo!</title>
+	<title>Get inspired for your journey! - aligo</title>
   <style>
   	/* Showcase */
         .showcase {
@@ -40,40 +40,7 @@
         .showcase .btn {
         	margin-top: 20px;
         }
-
-        /* Home cards */
-        .home-cards {
-	        width: 80%;
-	        margin-left: auto;
-	        margin-right: auto;
-	        display: grid;
-	        grid-template-columns: repeat(3, 1fr);
-	        grid-gap: 20px;
-	        margin-bottom: 40px;
-	        margin-top: 2%;
-        }
-
-        .home-cards img {
-	        width: 90%;
-	        max-height: 220px;
-	        margin-bottom: 20px;
-        }
-
-        .home-cards h3 {
-       	 margin-bottom: 5px;
-        }
-
-        .home-cards a {
-	        display: inline-block;
-	        padding-top: 10px;
-	        color: #0067b8;
-	        text-transform: uppercase;
-	        font-weight: bold;
-        }
-
-        .home-cards a:hover i {
-        	margin-left: 10px;
-        }
+        
         /* card section css start */
         body { 
 	        color: #111;
@@ -340,6 +307,14 @@
             <img src="${ contextPath }/resources/images/recommend_place_hanriverpark.jpg"/>
             <span>테스트 일번</span>
           </div>
+          <div class="card" id="card7">
+            <img src="${ contextPath }/resources/images/recommend_place_hanriverpark.jpg"/>
+            <span>테스트 일번</span>
+          </div>
+          <div class="card" id="card8">
+            <img src="${ contextPath }/resources/images/recommend_place_hanriverpark.jpg"/>
+            <span>테스트 일번</span>
+          </div>
         </div>
       </div>
       <script>
@@ -352,6 +327,7 @@
       			url:"topList.do",
       			dataType:"json",
       			success:function(data){
+      				console.log(data);
       				$.each(data, function(index, value){
       					console.log(value);
       					var card = "#card" + (index + 1);	
@@ -481,6 +457,10 @@
             <span>테스트 일번</span>
           </div>
           <div class="card" id="theme6">
+            <img src="${ contextPath }/resources/images/recommend_place_hanriverpark.jpg"/>
+            <span>테스트 일번</span>
+          </div>
+          <div class="card" id="theme7">
             <img src="${ contextPath }/resources/images/recommend_place_hanriverpark.jpg"/>
             <span>테스트 일번</span>
           </div>
