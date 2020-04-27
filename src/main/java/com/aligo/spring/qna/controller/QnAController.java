@@ -1,6 +1,8 @@
 package com.aligo.spring.qna.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +40,7 @@ public class QnAController {
 	@RequestMapping("contactView.do")
 	public ModelAndView boardList(ModelAndView mv,
 			@RequestParam(value="currentPage",required=false,defaultValue="1")int currentPage){
-			
+		
 			mv.addObject("currentPage",currentPage);
 			mv.setViewName("member/contactView");
 		return mv;
@@ -47,7 +49,7 @@ public class QnAController {
 	@RequestMapping("contactListView.do")
 	public void boardList1(
 			HttpServletResponse response,
-			@RequestParam(value="currentPage",required=false,defaultValue="1")int currentPage) throws JsonIOException, IOException {
+			@RequestParam(value="currentPage",required=false,defaultValue="1")int currentPage) throws JsonIOException, IOException, ParseException {
 		//System.out.println(currentPage);
 		
 		
@@ -62,8 +64,8 @@ public class QnAController {
 		hmap.put("pi",pi);
 		
 		response.setContentType("application/json; charset=utf-8");
-		
-		Gson gson = new Gson().newBuilder().setDateFormat("yyyy.MM.dd hh:mm a").create();
+		//yyyy.MM.dd hh:mm a
+		Gson gson = new Gson().newBuilder().setDateFormat("yyyy.MM.dd").create();
 		gson.toJson(hmap,response.getWriter());
 	}
 	
@@ -90,7 +92,7 @@ public class QnAController {
 	
 	@RequestMapping("qinsert.do")
 	public String writeBoard(QnA q, HttpServletRequest request) {
-		
+
 		int result = qService.writeBoard(q);
 		if(result > 0) {
 			return "redirect:contactView.do";

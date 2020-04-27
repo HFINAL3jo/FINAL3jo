@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.aligo.spring.member.model.vo.Member"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="zxx">
 
@@ -155,6 +155,7 @@ textarea{
   background-size: 100% 100%;
 }
 </style>
+<script src="resources/js/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
@@ -183,53 +184,84 @@ textarea{
   <!-- ================ contact section start ================= -->
   <section class="contact-section padding_top">
     <div class="container">
- 	<div class="qnaPage">
-     
-      <h2>Q&A</h2>
-      <hr>
-        
-        <!-- 글 내용-->
-        <form id="BoardDelForm" name="" action="" method="post">
-            <div class="ec-base-table typeWrite ">
-                            <table border="1" summary="">
-                            <colgroup>
-            <col style="width:130px;">
-            <col style="width:auto;">
-            </colgroup>
-            <input type="hidden" name="qId" value="${ q.qId }">
-		<%-- <input type="hidden" name="qCreateDate;" value="${ q.qCreateDate }">
-		<input type="hidden" name="qAnswerDate;" value="${ q.qAnswerDate }">
-		<input type="hidden" name="qStatus;" value="${ q.qStatus }"> --%>
-            <tbody>
-            <tr id="qtitle">
-            <th colspan="2" align="left"><h4><strong>${ q.qTitle }</strong></h4></th>
-               </tr>
-            <tr id="qwriter">
-               <td>작성자&nbsp;&nbsp;&nbsp;<strong>${ q.qWriter }</strong></td>
-               <td><fmt:formatDate pattern="yyyy.MM.dd HH:mm " value="${q.qCreateDate }"/></td>
-            </tr>
-            <tr>
-            <td colspan="2">${q.qContent }</td>
-             	</tr>
-            </tbody>
-            </table>
-            </div>
-            <div class="ec-base-button" align="right">
-                            <span class="gRight">
-                           <!--      <a href="qupView.do?qId=">Edit</a>&nbsp;&nbsp;&nbsp; -->
-                           <a href='javascript:void(0);' onclick="edit();">Edit</a>&nbsp;&nbsp;&nbsp;
-                                <a href='javascript:void(0);' onclick="deleteQNA();">Delete</a>&nbsp;&nbsp;&nbsp;
-                            </span>
-                            <span class="gLeft">
-                                <span class="displaynone">
-                                </span>
-                                <a href="contactView.do">List</a>
-                            </span>
-                        </div>
-            </div>
-            </form>    
-  <!-- 여기부터 댓글 -->
-  <div class="col-md-9 comment-wrapper">
+	 	<div class="qnaPage">
+	     
+	      <h2>Q&A</h2>
+	      <hr>
+	        
+	        <!-- 글 내용-->
+	        <!-- <form id="BoardDelForm" name="" action="" method="post"> -->
+	            <div class="ec-base-table typeWrite ">
+					<table border="1" summary="">
+						<colgroup>
+							<col style="width: 130px;">
+							<col style="width: auto;">
+						</colgroup>
+						<input type="hidden" name="qId" value="${ q.qId }" />
+						<%-- <input type="hidden" name="qCreateDate;" value="${ q.qCreateDate }">
+			<input type="hidden" name="qAnswerDate;" value="${ q.qAnswerDate }">
+			<input type="hidden" name="qStatus;" value="${ q.qStatus }"> --%>
+						<tbody>
+							<tr id="qtitle">
+								<th colspan="2" align="left"><h4>
+									<strong>${ q.qTitle }</strong>
+								</h4></th>
+							</tr>
+							<tr id="qwriter">
+								<td>작성자&nbsp;&nbsp;&nbsp;<strong>${ q.qWriter }</strong></td>
+								<td>
+									<fmt:formatDate pattern="yyyy.MM.dd HH:mm "
+										value="${q.qCreateDate }" />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">${q.qContent }</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+	            <div class="ec-base-button" align="right">
+	                <span class="gRight">
+	               <!--      <a href="qupView.do?qId=">Edit</a>&nbsp;&nbsp;&nbsp; -->
+	               <a href='javascript:void(0);' onclick="edit();">Edit</a>&nbsp;&nbsp;&nbsp;
+	                    <a href='javascript:void(0);' onclick="deleteQNA();">Delete</a>&nbsp;&nbsp;&nbsp;
+	                </span>
+	                <span class="gLeft">
+	                    <span class="displaynone">
+	                    </span>
+	                    <a href="contactView.do">List</a>
+	                </span>
+	            </div>
+		</div>
+            <!-- </form>     -->
+	  <!-- 여기부터 댓글 -->
+		<div class="comments-area">
+		   <h4>Comments</h4>
+		   
+		</div>
+	
+		<div class="comment-form">
+		   <h4>Leave a Reply</h4>
+		   <form class="form-contact comment_form" action="addReply.do">
+		   		<input type="hidden" name="rWriterNickname" value="${ sessionScope.loginUser.nickname }"/>
+				<div class="row">
+				   <div class="col-12">
+				      <div class="form-group">
+				         <textarea class="form-control w-100" name="rContent" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+				      </div>
+				   </div>
+				</div>
+				<div class="form-group mt-3">
+				   <input type="submit" class="btn_3 button-contactForm"/>
+				</div>
+		   </form>
+		</div>
+	</div>
+</section>
+	
+  
+  
+  <%-- <div class="col-md-9 comment-wrapper">
   <div class="comment-border">
     <div class="comment-box">
       <textarea class="form-control comment-input" placeholder="Write a comment" id="comment-box" rows=""></textarea>
@@ -238,15 +270,16 @@ textarea{
       </div>
     </div>
   </div>
+  
   <div class="comment-body-box">
     <div class="comment-post-box">
       <div class="comment-post">
         <div class="comment-post-header" id="rDivWriter">
           <div id="baro">
-          <h5>
-                <strong>asdf</strong>
-                <small>asdfasdf</small>
-          </h5>
+	          <h5>
+	                <strong>asdf</strong>
+	                <small>asdfasdf</small>
+	          </h5>
           </div>
         </div>
         <div class="panel-body comment-post-body">
@@ -266,7 +299,7 @@ textarea{
     			getReplyList();
     		},3000); */
     		
-    		<%-- $("#rSubmit").on("click",function(){
+    		$("#rSubmit").on("click",function(){
     			var rContent = $("#comment-box").val();
     			var refQid = ${ q.qId };
     			var rWriter = "<%= ((Member)session.getAttribute("loginUser")).getnickname()%>"; /* id말고 닉네임으로 함 */
@@ -284,7 +317,7 @@ textarea{
     					console.log("전송실패");
     				}
     			});
-    		}); --%> 
+    		}); 
     	});
     	
     	function getReplyList(){
@@ -347,15 +380,15 @@ textarea{
       <small>Show less comments</small>
       <i class="fa fa-caret-up"></i>
     </button> -->
-  </div>
-</div>
-<div class="col-md-3 recent-wrapper no-padding">
+  </div> --%>
+  
+	<!-- </div>
+		<div class="col-md-3 recent-wrapper no-padding">
+		
+		
+		</div>
+	</div> -->
 
-
-</div>
-</div>
-
-  </section>
   <!--// 본문 -->
   <script>
   /* edit, delete 버튼 */
@@ -365,6 +398,105 @@ textarea{
 
 	var deleteQNA = function(){
 		location.href = "qDelete.do?qId="+document.getElementsByName('qId')[0].value;
+	}
+	
+	$(function(){
+		getReplyList();
+	});
+	
+	function getReplyList(){
+		
+		var qId = ${ q.qId};
+		$comments = $('.comments-area');
+		
+		/* 
+		<div class="desc">
+	        <p class="comment">
+	           Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+	           Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+	        </p>
+	        <div class="d-flex justify-content-between">
+	           <div class="d-flex align-items-center">
+	              <h5>
+	                 Emilly Blunt
+	              </h5>
+	              <p class="date">December 4, 2017 at 3:12 pm </p>
+	           </div>
+        	</div>
+     	</div>
+		 */
+		 
+		$.ajax({
+			url:"rList.do",
+			data:{qId:qId},
+			dataType:"json",
+			success:function(data){
+				
+				console.log(data);
+				
+				$.each(data, function(index, item){
+					
+					console.log(item.rCreateDate);
+					$diva = $('<div>').addClass('comment-list');
+					$divb = $('<div>').addClass('single-comment justify-content-between d-flex');
+					$divc = $('<div>').addClass('user justify-content-between d-flex');
+					$desc = $('<div>').addClass('desc');
+					$comment = $('<p>').addClass('comment');
+					$div1 = $("<div>").addClass('d-flex justify-content-between');
+					$div2 = $('<div>').addClass('d-flex align-items-center');
+					$h5 = $('<h5>');
+					$date = $('<p>').addClass('date');
+					$hr = $('<hr>');
+
+					console.log('확인');
+					console.log(item.rContent);
+					
+					$comment.text(item.rContent);
+					$h5.text(item.rWriterNickname);
+					$date.text(item.rCreateDate);
+					
+					$div1.append($div2);
+					$div2.append($h5);
+					$div2.append($date);
+					
+					$desc.append($comment);
+					$desc.append($div1);
+					
+					$divc.append($desc);
+					$divb.append($divc);
+					$diva.append($divb);
+					
+					$('.comments-area').append($diva);
+					
+					
+					
+				});
+			}
+					
+		});
+				
+				
+				
+				/* 
+				$divHeadWriter = $("#rDivWriter div");
+				$divHeadWriter.html("");
+						
+				var $divOfWriter;
+				var $divOfContent;
+				var $rWriter;
+				var $rContent;
+				var $rCreateDate;
+				
+				for(var i in data){
+					/* $divOfWriter = $("<div class='comment-post-header'>");
+					$rWriter = $div.siblings('h5').children('strong').text(data[i].rWriter);
+					$rCreateDate = $("<div id='baro'>").text(data[i].rCreateDate);
+					
+					//$rContent = $("<div id='rDivContent'").text(data[i].rContent);
+					
+					$divOfWriter.append($rWriter);
+					$divOfWriter.append($rCreateDate);
+					$divHeadWriter.append($divOfWriter); */
 	}
 
 	

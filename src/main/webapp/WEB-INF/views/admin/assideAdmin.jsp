@@ -18,16 +18,12 @@
                                         <a href="reportlist.do">신고내역</a>
                                         <span></span>
                                     </li>
-                                    <li>
-                                        <a href="blacklist.html">블랙리스트</a>
-                                        <span></span>
-                                    </li>
                                   	 <li>
-                                        <a href="statistics.do">통계 리스트</a>
+                                        <a href="statistics.do">사이트 통계</a>
                                         <span></span>
                                     </li>
                                     <li>
-                                        <a href="recomAdminView.do">Recommend 관리</a>
+                                        <a href="recomAdminView.do">추천 키워드 관리</a>
                                         <span></span>
                                     </li>
                                 </ul>
