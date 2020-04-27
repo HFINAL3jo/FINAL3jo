@@ -10,4 +10,9 @@ public class BlogController {
 	public String blogListView() {
 		return "blog/blogList";
 	}
+	
+	@RequestMapping("blogInsertView.do")
+	public String blogInsertView() {
+		return "blog/blogInsertView";
+	}
 }

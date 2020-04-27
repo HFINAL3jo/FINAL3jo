@@ -77,7 +77,7 @@
                             </div>
                             <div class="widgets_inner">
                              <br><br>
-                             <c:if test="${loginUser.nickname eq 'ADMIN' }">
+                             <c:if test="${!empty loginUser }">
                              <button id="wb" type="button" class="btn btn-outline-danger" style="width:200px; height:50px;">Write Post</button></c:if>
                             </div>
                         </aside>
@@ -85,7 +85,7 @@
                 </div>
   <script>
   	$('#wb').click(function(){
-  		location.href="themeInsertView.do";
+  		location.href="blogInsertView.do";
   	});
   	
   	
