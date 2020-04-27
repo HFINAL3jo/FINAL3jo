@@ -1,3 +1,4 @@
+<%@page import="com.aligo.spring.member.model.vo.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
@@ -10,32 +11,6 @@
   <title>aranaz</title>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
   <style>
-
-  table {
-    width: 100%;
-    border-top: 1px solid #444444;
-    border-collapse: collapse;
-  }
-  th, td {
-    border-bottom: 1px solid #444444;
-    padding: 10px;
-    text-align: center;
-  }
-  thead tr {
-    background-color: #3B4CF7;
-    color: #ffffff;
-  }
-  tbody tr:nth-child(2n) {
-    background-color: #ffffff;
-  }
-  tbody tr:nth-child(2n+1) {
-    background-color: #FAFAFA;
-  }
-
-  ul[id~=pagenation]>li{
-  	display:inline;
-  }
-
   .breadcrumb{
   	background-image:url('${contextPath}/resources/images/qnaflowers.jpg');
     background-size: 100% 100%;
@@ -91,8 +66,8 @@
 
                     <div class="col-12">
                         <div class="form-group">
-                          <input class="form-control" name="qWriter" id="name" type="text" onfocus="this.placeholder = ''"
-                            onblur="this.placeholder = '작성자(writer)'" placeholder='작성자(writer)'>
+                          <input class="form-control" name="${q.qWriter }" id="name" type="text" onfocus="this.placeholder = ''"
+                            onblur="this.placeholder = '작성자(writer)': ${q.qWriter}" disabled>
                         </div>
                       </div>
                       <!-- <div class="col-sm-6">

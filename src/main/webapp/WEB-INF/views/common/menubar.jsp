@@ -287,7 +287,7 @@
 											Theme</a>
 									</div></li>
 								<li class="nav-item"><a class="nav-link"
-									href="themeDetailView.do">Posting</a></li>
+									href="blogListView.do">Posting</a></li>
 								<li class="nav-item"><a class="nav-link"
 									href="recommend.do"> Recommended </a></li>
 								<li class="nav-item"><a class="nav-link"

@@ -157,17 +157,22 @@
 			url:"goSearchQnaData.do",
 			data: checkSearch,
 			dataType:"json",
+			timeout : 50000,	//제한시간 지정
 			type:"post",
 			success:function(data){
 				console.log(data);
-				
+				console.log(data.checkFail)
+				// 실패 -> fail 
+				if(data.checkFail == 'fail'){
+					location.href = "goErrorPage.do";
+				}
 				var listText = "";
 				
 					for(var i in data.list){
 						listText += "<tr>";
 						listText += "<td>"+data.list[i].qId+"</td>";
 						listText += "<td>";
-						listText += "<a style='color:black' href='qdetail.do?qId="+data.list[i].qId+"&currentPage="+data.pi.currentPage+"'>"+data.list[i].qTitle+"</a>";
+						listText += "<a style='height: 100%; color:black' href='qdetail.do?qId="+data.list[i].qId+"&currentPage="+data.pi.currentPage+"'>"+data.list[i].qTitle+"</a>";
 						listText += "</td>";
 						
 						listText += "<td>"+data.list[i].qWriter+"</td>";
@@ -206,9 +211,39 @@
 					   $("#qtb tbody").html(listText);
 					   
 					},error:function(){
+						
 						console.log("전송실패");
-					}
-				});
+						
+					}, beforeSend: function () {	// 데이터 전송시에 로딩시 보여줄 이미지 처리
+		              
+					  var width = 0;	//	넓이
+		              var height = 0;	//	놀이
+		              var left = 0;		//	이미지 배치 위치
+		              var top = 0;		//	이미지 배치 위치
+
+		              width = 50;
+		              height = 50;
+
+		              top = ( $(window).height() - height ) / 2 + $(window).scrollTop();	// y 측 위치 계산
+		              left = ( $(window).width() - width ) / 2 + $(window).scrollLeft();	// x 측 위치 계산	 
+
+		              if($("#div_ajax_load_image").length != 0) {
+		                     $("#div_ajax_load_image").css({
+		                            "top": top+"px",
+		                            "left": left+"px"
+		                     });
+		                     $("#div_ajax_load_image").show();
+		              }else {
+		                     $('body').append('<div id="div_ajax_load_image" style="position:absolute; top:' 
+		                     					+ top + 'px; left:' + left + 'px; width:' + width + 'px; height:' + height + 'px; z-index:9999; background:#f0f0f0; filter:alpha(opacity=50); opacity:alpha*0.5; margin:auto; padding:0; ">'
+		                     					+'<img src="${ contextPath }/resources/ajax-loader.gif" style="width:50px; height:50px;"></div>');
+		              }
+
+		       		}, complete: function () {
+		    	   			$("#div_ajax_load_image").hide();
+		       			}
+		                   	
+		       });
 	}
 </script>
 
