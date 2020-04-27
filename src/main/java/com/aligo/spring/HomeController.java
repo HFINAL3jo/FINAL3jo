@@ -23,11 +23,6 @@ public class HomeController {
 		return "main";
 	}
 	
-	@RequestMapping("post.do")
-	public String post() {
-		return "board/post";
-	}
-	
 	@RequestMapping("recommend.do")
 	public String recommend() {
 		return "recommend/recommendPage";
@@ -84,13 +79,4 @@ public class HomeController {
 		return "member/signUp";
 	}
 	
-	@RequestMapping("blogdetail.do")
-	public String postdetail() {
-		return "board/blogdetail";
-	}
-	
-	@RequestMapping("themeDetailView.do")
-	public String themeDetailView() {
-		return "theme/themeDetailView2";
-	}
 }
