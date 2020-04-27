@@ -184,6 +184,7 @@ textarea{
   <!-- ================ contact section start ================= -->
   <section class="contact-section padding_top">
     <div class="container">
+<<<<<<< HEAD
 	 	<div class="qnaPage">
 	     
 	      <h2>Q&A</h2>
@@ -262,6 +263,55 @@ textarea{
   
   
   <%-- <div class="col-md-9 comment-wrapper">
+=======
+ 	<div class="qnaPage">
+     
+      <h2>Q&A</h2>
+      <hr>
+        
+        <!-- 글 내용-->
+        <form id="BoardDelForm" name="" action="" method="post">
+            <div class="ec-base-table typeWrite ">
+                            <table border="1" summary="">
+                            <colgroup>
+            <col style="width:130px;">
+            <col style="width:auto;">
+            </colgroup>
+            <input type="hidden" name="qId" value="${ q.qId }">
+		<%-- <input type="hidden" name="qCreateDate;" value="${ q.qCreateDate }">
+		<input type="hidden" name="qAnswerDate;" value="${ q.qAnswerDate }">
+		<input type="hidden" name="qStatus;" value="${ q.qStatus }"> --%>
+            <tbody>
+            <tr id="qtitle">
+            <th colspan="2" align="left"><h4><strong>${ q.qTitle }</strong></h4></th>
+               </tr>
+            <tr id="qwriter">
+               <td style="width: 160px;">작성자&nbsp;&nbsp;&nbsp;<strong>${ q.qWriter }</strong></td>
+               <td><fmt:formatDate pattern="yyyy.MM.dd" value="${q.qCreateDate }"/></td>
+            </tr>
+            <tr>
+            <td colspan="2">${q.qContent }</td>
+             	</tr>
+            </tbody>
+            </table>
+            </div>
+            <div class="ec-base-button" align="right">
+                            <span class="gRight">
+                           <!--      <a href="qupView.do?qId=">Edit</a>&nbsp;&nbsp;&nbsp; -->
+                           <a href='javascript:void(0);' onclick="edit();">Edit</a>&nbsp;&nbsp;&nbsp;
+                                <a href='javascript:void(0);' onclick="deleteQNA();">Delete</a>&nbsp;&nbsp;&nbsp;
+                            </span>
+                            <span class="gLeft">
+                                <span class="displaynone">
+                                </span>
+                                <a href="contactView.do">List</a>
+                            </span>
+                        </div>
+            </div>
+            </form>    
+  <!-- 여기부터 댓글 -->
+  <div class="col-md-9 comment-wrapper">
+>>>>>>> branch 'master' of https://github.com/HFINAL3jo/FINAL3jo.git
   <div class="comment-border">
     <div class="comment-box">
       <textarea class="form-control comment-input" placeholder="Write a comment" id="comment-box" rows=""></textarea>
