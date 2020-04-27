@@ -69,7 +69,7 @@ public interface QnAService {
 	 * @param r
 	 * @return
 	 */
-	int insertReply(QnaReply r);
+	int insertReply(QnaReply qr);
 	
 	/**
 	 * 검색 조건에 따른 페이징 처리를 위한 개수를 구한다.

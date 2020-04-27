@@ -254,8 +254,8 @@ textarea {
 			<div class="comment-form">
 				<h4>Leave a Reply</h4>
 				<form class="form-contact comment_form" action="addReply.do">
-					<input type="hidden" name="rWriterNickname"
-						value="${ sessionScope.loginUser.nickname }" />
+					<input type="hidden" name="rWriterNickname" value="${ sessionScope.loginUser.nickname }" />
+					<input type="hidden" name="refQid" value="${ q.qId }"/>
 					<div class="row">
 						<div class="col-12">
 							<div class="form-group">
