@@ -205,8 +205,8 @@ textarea{
             <th colspan="2" align="left"><h4><strong>${ q.qTitle }</strong></h4></th>
                </tr>
             <tr id="qwriter">
-               <td>작성자&nbsp;&nbsp;&nbsp;<strong>${ q.qWriter }</strong></td>
-               <td><fmt:formatDate pattern="yyyy.MM.dd HH:mm " value="${q.qCreateDate }"/></td>
+               <td style="width: 160px;">작성자&nbsp;&nbsp;&nbsp;<strong>${ q.qWriter }</strong></td>
+               <td><fmt:formatDate pattern="yyyy.MM.dd" value="${q.qCreateDate }"/></td>
             </tr>
             <tr>
             <td colspan="2">${q.qContent }</td>

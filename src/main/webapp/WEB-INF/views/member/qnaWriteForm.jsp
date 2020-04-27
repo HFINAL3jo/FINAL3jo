@@ -65,10 +65,10 @@
                     </div>
 
                     <div class="col-12">
-                        <div class="form-group">
-                          <input class="form-control" name="${q.qWriter }" id="name" type="text" onfocus="this.placeholder = ''"
-                            onblur="this.placeholder = '작성자(writer)': ${q.qWriter}" disabled>
-                        </div>
+                        <div class="form-group"><!-- disabled -->
+                          <input class="form-control" name="qWriter" id="Writer" type="text" onfocus="this.placeholder = ''"
+                             value="${ loginUser.nickname }" readonly>
+                        </div><%-- //onblur="this.placeholder = '작성자(writer)': ${q.qWriter}" --%>
                       </div>
                       <!-- <div class="col-sm-6">
                         <div class="form-group">
