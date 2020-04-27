@@ -41,7 +41,12 @@ public interface MemberService {
 	
 	public int pwdUpdate(Member m) throws Exception;
 
-	int deleteMember(Member m);
+	public int deleteMember(Member m) throws Exception;
+	
+	public int passChk(Member m) throws Exception;
+
+
+
 
 
 	

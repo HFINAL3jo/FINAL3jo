@@ -43,7 +43,7 @@
                                         <a href="myPage.do">Edit Profile</a>
                                     </li>
                                     <li>
-                                        <a href="deleteMember.do">Delete Account</a>
+                                        <a href="deleteAccount.do">Delete Account</a>
                                     </li>                                    
                                 </ul>
                                 

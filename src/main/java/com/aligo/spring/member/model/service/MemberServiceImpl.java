@@ -63,9 +63,21 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int deleteMember(Member m) {
+	public int deleteMember(Member m) throws Exception {
 		return memDao.deleteMember(m);
 	}
+
+	// 패스워드 체크
+	@Override
+	public int passChk(Member m) throws Exception {
+		int result = memDao.passChk(m);
+		return result;
+	}
+	
+
+
+
+
 
 
 	}

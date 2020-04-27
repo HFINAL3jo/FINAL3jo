@@ -177,15 +177,19 @@ input:checked+label:after {
 					<div class="login_part_form">
 						<div class="login_part_form_iner">
 							<h3>Enter Your Email <br> Send New Password</h3>
-							<form class="row contact_form" id="findPwd" action="findPwd">
+							<form class="row contact_form" id="findPwd">
 								<div class="col-md-12 form-group p_star">
-									<input type="email" class="form-control" id="findemail"
-										name="findemail" placeholder="Your email">
+									<input type="email" class="form-control" id="email"
+										name="email" placeholder="Your email">
+									<span id="ok" style="display: none;" class="guide ok">
+										Your Email is not joined</span> <span id="error"
+										style="display: none;" class="guide error">send password by email</span> 
+										<input type="hidden" name="idDuplicateCheck"
+										id="idDuplicateCheck" value="0">
 								</div>
 								
-
 								<div class="col-md-12 form-group">
-									<button type="submit" value="submit" class="btn_3" id="findPwd">find password</button>
+									<button class="btn_3" onclick="findPwd()">find password</button>
 								</div>
 								<br>
 							</form>
@@ -197,7 +201,74 @@ input:checked+label:after {
 	</section>
 	<script type="text/javascript">
 		
+    var idCheck = 0;
+	/*이메일 중복체크*/
+ 	function validate() {
 
+		if ($("idDuplicateCheck").val() == 0) {
+
+			alert("사용 가능한 이메일을 입력해주세요");
+			$("#email").focus();
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	$(function() {
+
+		$('#email').on("keyup", function() {
+
+			var email = $(this).val();
+
+			if (email.length < 10) {
+				$(".guide").hide();
+				$("#idDuplicateCheck").val(0);
+
+				return;
+			}
+
+			$.ajax({
+				url : "idCheck.do",
+				data : {
+					email : email
+				},
+				type : "post",
+				success : function(data) {
+					console.log(data);
+					if (data == "ok") {
+						$(".error").hide();
+						$(".ok").show();
+						$("#idDuplicateCheck").val(1);
+						$('.btn_3').attr('disabled',true); 
+
+						
+						
+					} else {
+						$(".ok").hide();
+						$(".error").show();
+						$("#idDuplicateCheck").val(0);
+						$('.btn_3').attr('disabled',false); 
+						
+
+						
+					}
+
+				},
+				error : function() {
+					console.log("ajax 처리 실패")
+				}
+			});
+		});
+	});
+	
+	function findPwd(){ 
+		alert("check your Email");
+		}
+	
+
+	
+	
 
 	</script>
 

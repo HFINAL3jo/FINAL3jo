@@ -68,7 +68,13 @@
       WHERE EMAIL=#{email}
    </update>
    
-   
+   	<!-- 패스워드 체크 -->
+	<select id="passChk" resultType="int">
+		SELECT COUNT(*) 
+		FROM MEMBER
+		WHERE EMAIL = #{EMAIL}
+		  AND PASSWORD = #{password}
+	</select>
    
    
    

@@ -316,26 +316,37 @@ public class MemberController {
 	}
 
 
-	@RequestMapping("memdelete.do")
-	public String deleteMember(SessionStatus status, Member m, Model model) {
-
-
-		int result = memService.deleteMember(m);
-
-		if(result>0) {
-			status.setComplete();
-			return "redirect:index.jsp";
-		}else {
-			model.addAttribute("msg","회원탈퇴실패!");
-			return "common/errorPage";
-		}		
-	}
 
 	@RequestMapping(value = "findPwd.do")
 	public String findPwd() throws Exception{
-		return "findPwd";
+		return "member/findPwd";
 	} 
+	
+
+	@RequestMapping(value = "deleteAccount.do")
+	public String deleteAccount() throws Exception{
+		return "member/deleteAccount";
+	} 
+	
+	// 회원 탈퇴 post
+	@RequestMapping(value="/deleteMember", method = RequestMethod.POST)
+	public String memberDelete(Member m, HttpSession session, RedirectAttributes rttr) throws Exception{
 		
-	 
+		memService.deleteMember(m);
+		session.invalidate();
+		
+		return "redirect:/";
+	}
+	
+	// 패스워드 체크
+	@ResponseBody
+	@RequestMapping(value="passChk.do", method = RequestMethod.POST)
+	public boolean passChk(Member m) throws Exception {
+
+		Member login = memService.loginMember(m);
+		boolean pwdChk = bcryptPasswordEncoder.matches(m.getpassword(), login.getpassword());
+		return pwdChk;
+	}
+	
 }
 

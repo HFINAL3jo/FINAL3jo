@@ -46,10 +46,6 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.pwdUpdate",m);
 	}
 
-	public int deleteMember(Member m) {
-		return sqlSession.update("memberMapper.deteleMember",m);
-
-	}
 	
 	// 비밀번호 변경
 		@Transactional
@@ -57,7 +53,15 @@ public class MemberDao {
 			return sqlSession.update("memberMapper.findPwd", m);
 		}
 
-	
-	
+		public int deleteMember(Member m) {
+			return sqlSession.update("memberMapper.deteleMember",m);
+		}
+
+		public int passChk(Member m) {
+			int result = sqlSession.selectOne("memberMapper.passChk", m);
+			return result;
+
+		}
+
 
 }
