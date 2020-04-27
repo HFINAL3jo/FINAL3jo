@@ -114,7 +114,7 @@
 								$("#delForm").submit();
 							}
 						}else{
-							alert("패스워드가 틀렸습니다.");
+							alert("not matched password");
 							return;
 						}
 					}

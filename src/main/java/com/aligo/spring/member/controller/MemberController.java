@@ -59,7 +59,6 @@ public class MemberController {
 	@Inject
 	JavaMailSender mailSender;     //메일 서비스를 사용하기 위해 의존성을 주입함.
 	MemberService memberservice;
-	BCryptPasswordEncoder pwdEncoder;
 
 	private static final Logger logger=
 			LoggerFactory.getLogger(MemberController.class);
