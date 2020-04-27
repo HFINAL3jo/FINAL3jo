@@ -66,6 +66,11 @@
 		ORDER BY RID DESC
 	</select>
 	
+	<insert id="insertReply" parameterType="QnaReply">
+		INSERT INTO QNAREPLY VALUES
+		(SEQ_RID.NEXTVAL,#{rContent},#{refQid},#{rWriter},SYSDATE,SYSDATE,DEFAULT)
+	</insert>
+	
 	<!--  -->
 	<select id="getSearchQnaDataTotal" resultType="_int" parameterType="hashMap">
 		SELECT COUNT(*)

@@ -242,31 +242,31 @@ textarea{
     <div class="comment-post-box">
       <div class="comment-post">
         <div class="comment-post-header" id="rDivWriter">
-          <div>
+          <div id="baro">
           <h5>
-                <strong>Kendall</strong>
-                <small>Posted 12 hr ago</small>
+                <strong></strong>
+                <small></small>
               </h5>
           </div>
         </div>
         <div class="panel-body comment-post-body">
           <div class="comment-post-content" id="rDivContent">
             <div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <p></p>
             </div>
           </div>
         </div>
       </div>
     </div>
-   <%--  <script>
+   <script>
     	$(function(){
     		getReplyList();
     		
-    		setInterval(function(){
+    		/* setInterval(function(){
     			getReplyList();
-    		},3000);
+    		},3000); */
     		
-    		$("#rSubmit").on("click",function(){
+    		<%-- $("#rSubmit").on("click",function(){
     			var rContent = $("#comment-box").val();
     			var refQid = ${ q.qId };
     			var rWriter = "<%= ((Member)session.getAttribute("loginUser")).getnickname()%>"; /* id말고 닉네임으로 함 */
@@ -284,7 +284,7 @@ textarea{
     					console.log("전송실패");
     				}
     			});
-    		});
+    		}); --%> 
     	});
     	
     	function getReplyList(){
@@ -305,15 +305,22 @@ textarea{
     				var $rCreateDate;
     				
     				for(var i in data){
-    					$divOfWriter = $("<div>");
-    					$rWriter = $("<div>").text(data[i].rWriter);
+    					$divOfWriter = $("<div class='comment-post-header'>");
+    					$rWriter = $("<div id='baro'>").text(data[i].rWriter);
+    					$rCreateDate = $("<div id='baro'>").text(data[i].rCreateDate);
+    					
+    					//$rContent = $("<div id='rDivContent'").text(data[i].rContent);
+    					
+    					$divOfWriter.append($rWriter);
+    					$divOfWriter.append($rCreateDate);
+    					$divHeadWriter.append($divOfWriter);
     				}
     			},error:function(){
     				console.log("전송실패");
     			}
     		});
     	}
-    </script> --%>
+    </script>
     <!-- <div class="comment-post-box">
       <div class="comment-post">
         <div class="comment-post-header">
@@ -366,25 +373,6 @@ textarea{
   <!--::footer_part start::-->
   <%@ include file="../common/footer.jsp"%>
    <!--::footer_part end::-->
-
-<!-- <script>
-	function getReplyList(){
-		var prev = ${ prev };
-		var pageSelect = ${ p };
-		var next = ${ next };
-		
-		$.ajax({
-			url:"contactView.do",
-			data:{currentPage:currentPage},
-			dataType:"json",
-			success:function(data){
-				location.href="contactView.do";
-			},error:function(){
-				console.log("전송실패");
-			}
-		});
-	}
-</script> -->
 
 </body>
 </html>

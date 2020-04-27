@@ -50,6 +50,10 @@ public class QnADao {
 	public ArrayList<QnaReply> selectReplyList(int qId) {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectReplyList",qId);
 	}
+	
+	public int insertReply(QnaReply r) {
+		return sqlSession.insert("qnaMapper.insertReply",r);
+	}
 // =============================================================
 	public int getSearchQnaDataTotal(Map<String, String> map) {
 		
@@ -61,6 +65,7 @@ public class QnADao {
 		RowBounds rowBounds = new RowBounds(((pi.getCurrentPage() -1) * pi.getBoardLimit()), pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("qnaMapper.getSearchQnaData", map, rowBounds);
 	}
+
 
 	
 }
