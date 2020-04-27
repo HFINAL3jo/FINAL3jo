@@ -130,6 +130,7 @@
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
+	<c:if test="${ sessionScope.loginUser.email == 'ADMIN' }">
 	<section class="cat_product_area section_padding" style="padding-bottom: 65px;">
         <div class="container">
             <div class="row">
@@ -228,6 +229,14 @@
 			</div>
 		</div>
 	</section>
+	</c:if>
+	<c:if test="${ sessionScope.loginUser.email != 'ADMIN' }">
+		<br><br><br><br>    	<br><br><br><br>
+    	<div style="margin: auto; align-content: center; text-align: center;">
+	    	<h1 style="margin: auto; align-content: center; font-weight: bolder;">After login, you can use.</h1>
+    	</div>
+    	<br><br><br><br>    	<br><br><br><br>
+	</c:if>
 	
 	<%@ include file="../common/footer.jsp" %>
 	

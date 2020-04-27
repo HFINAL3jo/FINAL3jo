@@ -15,7 +15,7 @@ public class MainDao {
 	private SqlSessionTemplate sqlSession;
 	
 	public ArrayList<Theme> selectTopList() {
-
+		
 		return (ArrayList)sqlSession.selectList("mainMapper.selectTopList");
 	}
 

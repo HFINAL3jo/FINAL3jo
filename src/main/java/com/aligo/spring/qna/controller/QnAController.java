@@ -1,9 +1,12 @@
 package com.aligo.spring.qna.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,13 +31,16 @@ import com.google.gson.JsonIOException;
 @Controller
 public class QnAController {
 
+	// 특수문자 확인
+	private static final String InjectionCheckSecurity2 = "[!@#$%^&*(),.?\":{}|<>]";
+				
 	@Autowired
 	private QnAService qService;
 	
 	@RequestMapping("contactView.do")
 	public ModelAndView boardList(ModelAndView mv,
 			@RequestParam(value="currentPage",required=false,defaultValue="1")int currentPage){
-			
+		
 			mv.addObject("currentPage",currentPage);
 			mv.setViewName("member/contactView");
 		return mv;
@@ -43,7 +49,7 @@ public class QnAController {
 	@RequestMapping("contactListView.do")
 	public void boardList1(
 			HttpServletResponse response,
-			@RequestParam(value="currentPage",required=false,defaultValue="1")int currentPage) throws JsonIOException, IOException {
+			@RequestParam(value="currentPage",required=false,defaultValue="1")int currentPage) throws JsonIOException, IOException, ParseException {
 		//System.out.println(currentPage);
 		
 		
@@ -58,8 +64,8 @@ public class QnAController {
 		hmap.put("pi",pi);
 		
 		response.setContentType("application/json; charset=utf-8");
-		
-		Gson gson = new Gson().newBuilder().setDateFormat("yyyy.MM.dd hh:mm a").create();
+		//yyyy.MM.dd hh:mm a
+		Gson gson = new Gson().newBuilder().setDateFormat("yyyy.MM.dd").create();
 		gson.toJson(hmap,response.getWriter());
 	}
 	
@@ -86,7 +92,7 @@ public class QnAController {
 	
 	@RequestMapping("qinsert.do")
 	public String writeBoard(QnA q, HttpServletRequest request) {
-		
+
 		int result = qService.writeBoard(q);
 		if(result > 0) {
 			return "redirect:contactView.do";
@@ -138,7 +144,7 @@ public class QnAController {
 		
 		response.setContentType("application/json; charset=utf-8");
 		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd hh:mm a").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd").create();
 		gson.toJson(rList,response.getWriter());
 	}
 	
@@ -156,49 +162,42 @@ public class QnAController {
 	}
 	
 	// =================ADMIN 문의 사항==========================
-	@RequestMapping(value="goSearchQnaData.do", method=RequestMethod.POST)
+	@RequestMapping(value = "goSearchQnaData.do", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public void goSearchQnaData(HttpServletRequest request, HttpServletResponse response) {
-		
-		System.out.println(request.getParameterValues("value[]"));
-		System.out.println(request.getParameterValues("checkSearch"));
-		System.out.println(request.getParameter("checkSearch"));
-		System.out.println(request.getParameter("currentPage"));
-		
-		Map<String, String> map = new HashMap();
-		//checkSearch.value
-		
-		// String[] arrayParam = request.getParameterValues("value[]");
+	public String goSearchQnaData(HttpServletRequest request) throws Exception {
 
-		for(int i = 1; i <= request.getParameterValues("value[]").length; i++) {
-			map.put("search"+i, request.getParameterValues("value[]")[i-1]);
+		Map<String, String> map = new HashMap();
+		String checkFail = "";
+		for (int i = 1; i <= request.getParameterValues("value[]").length; i++) {
+			
+			System.out.println(request.getParameterValues("value[]")[i - 1]);
+			if (Pattern.compile(InjectionCheckSecurity2).matcher(request.getParameterValues("value[]")[i - 1]).find()) {
+				
+				checkFail = "fail";
+			}
+
+			map.put("search" + i, request.getParameterValues("value[]")[i - 1]);
 		}
-//		map.put("currentPage", request.getParameter("currentPage"));
-		
-//		int listCount = qService.getSearchQnaDataTotal(map);
-		
-//		int currentPage = 1;	// 검색시에 무조건 페이징 처리는 1부터 한다.
+
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
-//		QnAPageInfo pi = QnAPagination.getQnAPageInfo(currentPage, listCount);
+
 		QnAPageInfo pi = QnAPagination.getQnAPageInfo(currentPage, qService.getSearchQnaDataTotal(map));
-		
+
 		ArrayList<QnA> list = qService.getSearchQnaData(map, pi);
-		
-		response.setContentType("application/json; charset=utf-8");
-		
+
 		Map qnaMap = new HashMap();
 		qnaMap.put("list", list);
 		qnaMap.put("pi", pi);
+		qnaMap.put("checkFail", checkFail);
 		
 		Gson gson = new Gson().newBuilder().setDateFormat("yyyy.MM.dd hh:mm a").create();
-		
-		try {
-			gson.toJson(qnaMap, response.getWriter());
-		} catch (JsonIOException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+
+		return gson.toJson(qnaMap);
+
+	}
+
+	@RequestMapping(value = "goErrorPage.do", method = RequestMethod.GET)
+	public String goErrorPage(){
+		return "common/errorPage";
 	}
 }

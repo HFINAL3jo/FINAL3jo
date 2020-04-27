@@ -15,7 +15,7 @@
 		<result property="tOriginalFile" column="T_ORIGINAL_FILE"/>
 		<result property="tModifyFile" column="T_MODIFY_FILE"/>
 		
-		<collection property="tFileList" javaType="java.util.ArrayList" resultMap="themeFileResultSet"/>
+		<!-- <collection property="tFileList" javaType="java.util.ArrayList" resultMap="themeFileResultSet"/> -->
 		
 	</resultMap>
 	
@@ -32,7 +32,7 @@
 			  FROM THEME_LIST
 			  ORDER BY T_LIKES DESC)
 	    JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
-	    WHERE ROWNUM <= 6
+	    WHERE ROWNUM <= 8
 	    AND T_STATUS='Y']]>
 	</select>
 	

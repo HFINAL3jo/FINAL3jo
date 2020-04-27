@@ -60,7 +60,7 @@
 	
 	<select id="selectReplyList" resultMap="replyResultSet">
 		SELECT *
-		FROM REPLY
+		FROM QNAREPLY
 		WHERE REF_QID=#{qId}
 		AND R_STATUS='Y'
 		ORDER BY RID DESC

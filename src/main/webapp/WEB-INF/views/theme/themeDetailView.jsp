@@ -184,7 +184,7 @@
               padding: 0px 0px 0px 110px;
               box-sizing: border-box;
               height: 30px;
-              margin: 5px 0px
+              margin: 15px 0px;
           }
           
           .cnt-blockquote dl dt {
@@ -205,7 +205,6 @@
           .cnt-blockquote dl dd {
               font-size: 16px;
               color: #000;
-              padding-top: 3px
           }
           
           .count-element {
