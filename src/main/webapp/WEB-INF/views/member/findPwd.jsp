@@ -177,7 +177,7 @@ input:checked+label:after {
 					<div class="login_part_form">
 						<div class="login_part_form_iner">
 							<h3>Enter Your Email <br> Send New Password</h3>
-							<form class="row contact_form" id="findPwd">
+							<form class="row contact_form" id="findPwd" action="findPwd.do">
 								<div class="col-md-12 form-group p_star">
 									<input type="email" class="form-control" id="email"
 										name="email" placeholder="Your email">
@@ -207,7 +207,7 @@ input:checked+label:after {
 
 		if ($("idDuplicateCheck").val() == 0) {
 
-			alert("사용 가능한 이메일을 입력해주세요");
+			alert("enter available email");
 			$("#email").focus();
 			return false;
 		} else {

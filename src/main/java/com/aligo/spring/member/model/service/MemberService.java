@@ -45,6 +45,8 @@ public interface MemberService {
 	
 	public int passChk(Member m) throws Exception;
 
+	public void findPwd(Member m) throws Exception;
+
 
 
 

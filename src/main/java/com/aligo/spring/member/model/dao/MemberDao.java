@@ -49,8 +49,10 @@ public class MemberDao {
 	
 	// 비밀번호 변경
 		@Transactional
-		public int findPwd(Member m) throws Exception{
-			return sqlSession.update("memberMapper.findPwd", m);
+		public void findPwd(Member m) throws Exception{
+			String password = m.getpassword();
+			m.setpassword(password);
+			sqlSession.update("memberMapper.findPwd", m);
 		}
 
 		public int deleteMember(Member m) {
@@ -62,6 +64,7 @@ public class MemberDao {
 			return result;
 
 		}
+
 
 
 }
