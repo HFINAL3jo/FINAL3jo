@@ -39,7 +39,7 @@
 	<select id="selectBoard" resultMap="qnaResultSet">
 		SELECT *
 		FROM QNA
-		WHERE QID=#{qId}
+		WHERE QID=#{qId} AND QWRITER=#{qWriter}
 	</select>
 	
 	<insert id="writeBoard" parameterType="QnA">
