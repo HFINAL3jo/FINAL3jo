@@ -144,7 +144,7 @@ public class QnAController {
 		
 		response.setContentType("application/json; charset=utf-8");
 		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd hh:mm a").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd").create();
 		gson.toJson(rList,response.getWriter());
 	}
 	
