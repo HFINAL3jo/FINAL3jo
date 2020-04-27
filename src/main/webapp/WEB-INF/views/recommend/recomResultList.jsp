@@ -291,9 +291,12 @@
 					dataType : 'json',
 					success : function(data){
 						
+						console.log('확인');
+						console.log(data);
+						
 						$.each(data, function(index, value){
 							
-							if(index > 3){
+							if(index >= 3){
 								
 								$div1 = $('<div>').addClass('card');
 								$img1 = $('<img>').attr('src', data[index].tfile);
@@ -321,7 +324,10 @@
 		function viewmore(rkStr){
 			
 			console.log(rkStr);
+			var uri = "rResultList2.do?rkStr='"+rkStr+"'"
+			var deuri = encodeURI(uri);
 			//location.href="rResultList2.do?rkStr='"+rkStr+"';";
+			location.href = deuri;
 		}
 		
 		
