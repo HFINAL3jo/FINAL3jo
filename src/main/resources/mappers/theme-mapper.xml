@@ -78,8 +78,7 @@
 		WHERE T_STATUS='Y'
 		</if>
 		<if test="keyword != null">
-		WHERE (TNAME||TTITLE||TADDRESS||TADDRESSH||TKEYWORD||TCONTENT) 
-		LIKE UPPER('%'||#{keyword}||'%')
+		WHERE TNAME	LIKE UPPER('%'||#{keyword}) AND T_STATUS='Y'
 		</if>
 		<choose>
 			<when test="searchValue == 2">ORDER BY T_VIEWS DESC</when>
