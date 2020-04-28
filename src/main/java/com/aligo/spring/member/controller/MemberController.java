@@ -181,7 +181,7 @@ public class MemberController {
 
 		response_email.setContentType("text/html; charset=UTF-8");
 		PrintWriter out_email = response_email.getWriter();
-		out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>"); 	
+		out_email.println("<script>alert('Send the authentication no. to your Email');</script>"); 	
 		out_email.flush();
 		mv.addObject(e_mail);
 		return mv;
@@ -228,7 +228,7 @@ public class MemberController {
 
 			response_equals.setContentType("text/html; charset=UTF-8");
 			PrintWriter out_equals = response_equals.getWriter();
-			out_equals.println("<script>alert('인증번호가 일치하였습니다. 회원가입창으로 이동합니다.');</script>");
+			out_equals.println("<script>alert('Matched authentication no.');</script>");
 			out_equals.flush();
 
 			return mv;
@@ -242,7 +242,7 @@ public class MemberController {
 			mv2.setViewName("member/email_injeung");
 
 			response_equals.setContentType("text/html; charset=UTF-8"); PrintWriter out_equals = response_equals.getWriter();
-			out_equals.println("<script>alert('인증번호가 일치하지않습니다. 인증번호를 다시 입력해주세요.'); history.go(-1);</script>");
+			out_equals.println("<script>alert('Not matched authentication no. Try again'); history.go(-1);</script>");
 			out_equals.flush();
 
 
@@ -270,7 +270,7 @@ public class MemberController {
 			return "redirect:main.do";
 		}else {			
 			//	로그인 실패
-			model.addAttribute("msg", "로그인 실패!!");
+			model.addAttribute("msg", "login fail!!");
 			return "common/errorPage";
 		}
 	}
@@ -307,7 +307,7 @@ public class MemberController {
 
 		} else { 
 
-			model.addAttribute("msg", "회원 수정 실패"); 
+			model.addAttribute("msg", "Modify Fail"); 
 
 			return "common/errorPage"; 
 		} 

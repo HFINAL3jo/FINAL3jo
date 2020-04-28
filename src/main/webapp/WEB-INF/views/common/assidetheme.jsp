@@ -88,10 +88,11 @@
                     </div>
                 </div>
   <script>
-  window.setTimeout(function(){
+  
+  /* window.setTimeout(function(){
 		var offset=window.innerHeight;
 		$('html,body').stop().animate({scrollTop:'300'},600);
-		}, 200);
+		}, 200); */
   $('#wb').click(function(){
 	  location.href="themeInsertView.do"; 
   });

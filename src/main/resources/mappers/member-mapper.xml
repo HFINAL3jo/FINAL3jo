@@ -66,6 +66,7 @@
       UPDATE MEMBER
       SET PASSWORD=#{password}
       WHERE EMAIL=#{email}
+      AND M_STATUS='Y'
    </update>
    
    	<!-- 패스워드 체크 -->

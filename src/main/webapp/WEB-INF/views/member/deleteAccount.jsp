@@ -7,7 +7,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Aligo</title>
+    <title>Get inspired for your journey! - aligo</title>
     <link rel="stylesheet" href="resources/css/nice-select.css">
    
     <link rel="stylesheet" href="resources/css/price_rangs.css">

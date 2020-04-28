@@ -2,7 +2,6 @@ package com.aligo.spring.qna.controller;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +9,7 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aligo.spring.common.QnAPagination;
+import com.aligo.spring.member.model.vo.Member;
 import com.aligo.spring.qna.model.service.QnAService;
 import com.aligo.spring.qna.model.vo.QnA;
 import com.aligo.spring.qna.model.vo.QnAPageInfo;
@@ -49,15 +50,16 @@ public class QnAController {
 	@RequestMapping("contactListView.do")
 	public void boardList1(
 			HttpServletResponse response,
-			@RequestParam(value="currentPage",required=false,defaultValue="1")int currentPage) throws JsonIOException, IOException, ParseException {
+			@RequestParam(value="currentPage",required=false,defaultValue="1")int currentPage
+			,@RequestParam(value="nickname") String nickname) throws JsonIOException, IOException, ParseException {
 		//System.out.println(currentPage);
 		
 		
-		int listCount = qService.getListCount();
+		int listCount = qService.getListCount(nickname);
 		
 		QnAPageInfo pi = QnAPagination.getQnAPageInfo(currentPage, listCount);
 		
-		ArrayList<QnA> list = qService.selectList(pi);
+		ArrayList<QnA> list = qService.selectList(nickname,pi);
 		
 		Map hmap = new HashMap();
 		hmap.put("list",list);
@@ -70,9 +72,9 @@ public class QnAController {
 	}
 	
 	@RequestMapping("qdetail.do")
-	public ModelAndView boardDetail(ModelAndView mv, int qId, 
+	public ModelAndView boardDetail(ModelAndView mv, QnA q, 
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
-		QnA q = qService.selectBoard(qId);
+		q = qService.selectBoard(q);
 		if(q != null) {
 			mv.addObject("q",q)
 			  .addObject("currentPage",currentPage)
@@ -175,7 +177,7 @@ public class QnAController {
 	// =================ADMIN 문의 사항==========================
 	@RequestMapping(value = "goSearchQnaData.do", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String goSearchQnaData(HttpServletRequest request) throws Exception {
+	public String goSearchQnaData(HttpServletRequest request,HttpSession session) throws Exception {
 
 		Map<String, String> map = new HashMap();
 		String checkFail = "";
@@ -193,15 +195,21 @@ public class QnAController {
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 
 		QnAPageInfo pi = QnAPagination.getQnAPageInfo(currentPage, qService.getSearchQnaDataTotal(map));
-
-		ArrayList<QnA> list = qService.getSearchQnaData(map, pi);
+		String nickname = ((Member)session.getAttribute("loginUser")).getnickname();
+		
+		ArrayList<QnA> list = null;
+		if(nickname.equals("ADMIN")) {
+			list = qService.getSearchQnaAdmin(map,pi);
+		}else {
+			list = qService.getSearchQnaData(map, pi);
+		}
 
 		Map qnaMap = new HashMap();
 		qnaMap.put("list", list);
 		qnaMap.put("pi", pi);
 		qnaMap.put("checkFail", checkFail);
 		
-		Gson gson = new Gson().newBuilder().setDateFormat("yyyy.MM.dd hh:mm a").create();
+		Gson gson = new Gson().newBuilder().setDateFormat("yyyy.MM.dd").create();
 
 		return gson.toJson(qnaMap);
 

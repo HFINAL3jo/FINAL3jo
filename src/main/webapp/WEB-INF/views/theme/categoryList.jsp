@@ -104,8 +104,8 @@ h4{
 						<div class="single_product_menu d-flex">
 							<div class="input-group">
 
-								<button id="lastPost" class="genric-btn success"
-									style="width: 100%; height: 90%;">Latest Posting</button>
+								<button id="topviews" class="genric-btn success"
+									style="width: 100%; height: 90%;">Top views</button>
 
 							</div>
 							&nbsp;&nbsp;
@@ -230,10 +230,10 @@ h4{
 				}
 			}
 		
-	 $('#lastPost').click(function(){
+	 $('#topviews').click(function(){
 		 searchValue = 2;
 		 currentPage = 1;
-		 $('#titlebar').text('Newest');
+		 $('#titlebar').text('Top views');
 		 $('#aList').html("");
 		 ajaxPage();
 	 });

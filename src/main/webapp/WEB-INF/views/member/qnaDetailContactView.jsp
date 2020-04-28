@@ -18,11 +18,6 @@ table {
 	border-collapse: collapse;
 }
 
-th {
-	/* border-bottom: 1px dashed #444444; */
-	
-}
-
 td {
 	border-bottom: 1px solid #444444;
 }
@@ -60,31 +55,6 @@ textarea {
 	border: 0.5px solid #F8F8F8 !important;
 }
 
-.no-padding {
-	padding-right: 0;
-	padding-left: 0;
-}
-
-.comment-wrapper .comment-border {
-	margin: 70px 5px 0 5px;
-	border-top: 1px solid #CFD4D6;
-}
-
-.comment-wrapper .comment-border .comment-box .form-control {
-	margin: 20px 0 10px;
-	padding: 10px 10px;
-	font-size: 1em;
-	border: none;
-	border-radius: 0;
-}
-
-.comment-wrapper .comment-border .comment-box .btn {
-	padding: 5px;
-	font-size: 1.1em;
-	color: #fff;
-	background-color: #3B3E44;
-}
-
 .btn {
 	color: #0067b8 !important;
 	border: 1px solid #0067b8 !important;
@@ -95,78 +65,6 @@ textarea {
 	color: snow !important;
 	border: 1px solid #0067b8 !important;
 	background: #0067b8 !important;
-}
-
-.comment-wrapper .comment-post-box {
-	padding: 5px;
-	border-bottom: 2px solid #F4F4F1;
-}
-
-.comment-wrapper .comment-post-box .comment-post {
-	border-radius: 0;
-	margin-top: 10px;
-}
-
-.comment-wrapper .comment-post-box .comment-post .comment-post-header {
-	border-radius: 0;
-}
-
-.comment-wrapper .comment-post-box .comment-post .comment-post-header img
-	{
-	display: inline-block;
-	height: 30px;
-	width: 30px;
-}
-
-.comment-wrapper .comment-post-box .comment-post .comment-post-header h5
-	{
-	display: inline-block;
-	margin: 0;
-	padding-left: 6px;
-}
-
-.comment-wrapper .comment-post-box .comment-post .comment-post-header h5 a
-	{
-	color: #000;
-}
-
-.comment-wrapper .comment-post-box .comment-post .comment-post-header h5 small
-	{
-	margin-top: 5px;
-	padding: 8px;
-}
-
-.comment-wrapper .comment-post-box .comment-post .comment-post-header .fa
-	{
-	color: #8A8B8F;
-}
-
-.comment-wrapper .show {
-	border-radius: 5px;
-}
-
-.recent-wrapper .center {
-	text-align: center;
-}
-
-.recent-wrapper .recent-act .glyphicon {
-	font-size: 4em;
-}
-
-.recent-wrapper .recent-act .title {
-	padding: 20px 0;
-	font-weight: 400;
-}
-
-.recent-wrapper .recent-act .notif-list {
-	height: 300px;
-	overflow: scroll;
-}
-
-.recent-wrapper .recent-act .per-notif {
-	margin: 0 36px 0 36px;
-	padding: 13px;
-	font-size: 0.9em;
 }
 
 .breadcrumb {
@@ -251,6 +149,7 @@ textarea {
 
 			</div>
 
+			<%-- <c:if test='${ sessionScope.loginUser.email = "ADMIN" }'> --%>
 			<div class="comment-form">
 				<h4>Leave a Reply</h4>
 				<form class="form-contact comment_form" action="addReply.do">
@@ -265,10 +164,11 @@ textarea {
 						</div>
 					</div>
 					<div class="form-group mt-3">
-						<input type="submit" class="btn_3 button-contactForm" value="submit" />
+						<input type="submit" class="btn" value="submit" />
 					</div>
 				</form>
 			</div>
+			<%-- </c:if> --%>
 		</div>
 	</section>
 

@@ -66,8 +66,7 @@ public class ThemeController extends TFile{
 	@RequestMapping("theme.do")
 	public ModelAndView themeList(ModelAndView mv,
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
-			SearchCondition sc, @RequestParam(value="keyword") String keyword) {
-		
+			SearchCondition sc, @RequestParam(value="keyword",required=false) String keyword) {
 		int listCount = tService.getListCount(sc);
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
@@ -92,7 +91,7 @@ public class ThemeController extends TFile{
 				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile().substring(0,t.gettModifyFile().indexOf(",")));
 			}
 		}
-		System.out.println(list);
+		
 		mv.addObject("list",list);
 		mv.addObject("pi",pi);
 		mv.addObject("sc",sc);
@@ -141,7 +140,9 @@ public class ThemeController extends TFile{
 	}
 	
 	@RequestMapping("themeInsert.do")
-	public String insertTheme(Theme t,HttpServletRequest request) throws ServletException, IOException {
+	public String insertTheme(
+			Theme t,HttpServletRequest request)
+			 throws ServletException, IOException {
 		int tNum = tService.getTNum();
 		int result = 0;
 		try {
@@ -394,5 +395,11 @@ public class ThemeController extends TFile{
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		
 		gson.toJson(randomList,response.getWriter());
+	}
+	
+	@RequestMapping("search.do")
+	public String searchTheme() {
+	
+		return null;
 	}
 }
