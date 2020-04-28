@@ -1,16 +1,29 @@
+
 package com.aligo.spring.blog.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-@Controller("bcController")
+import com.aligo.spring.blog.model.service.BlogService;
+import com.aligo.spring.blog.model.vo.BlogVo;
+import com.aligo.spring.common.Pagination;
+import com.aligo.spring.theme.model.service.ThemeService;
+import com.aligo.spring.theme.model.vo.PageInfo;
+import com.aligo.spring.theme.model.vo.SearchCondition;
+
+@Controller
 public class BlogController {
 
+	//@Autowired private BlogService blService;
+	
 	@RequestMapping("blogListView.do")
-	public String blogListView() {
+	public String blogList() {
 		return "blog/blogList";
 	}
-	
+
 	@RequestMapping("blogInsertView.do")
 	public String blogInsertView() {
 		return "blog/blogInsertView";

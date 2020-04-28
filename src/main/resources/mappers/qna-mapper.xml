@@ -33,13 +33,16 @@
 	<select id="selectList" resultMap="qnaResultSet">
 		SELECT *
 		FROM QNA 
+		<if test="_parameter != null">
+			where qWriter = #{nickname}
+		</if>
 		ORDER BY QID DESC
 	</select>
 	
 	<select id="selectBoard" resultMap="qnaResultSet">
 		SELECT *
 		FROM QNA
-		WHERE QID=#{qId}
+		WHERE QID=#{qId} AND QWRITER=#{qWriter}
 	</select>
 	
 	<insert id="writeBoard" parameterType="QnA">

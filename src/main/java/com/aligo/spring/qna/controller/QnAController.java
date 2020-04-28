@@ -49,15 +49,16 @@ public class QnAController {
 	@RequestMapping("contactListView.do")
 	public void boardList1(
 			HttpServletResponse response,
-			@RequestParam(value="currentPage",required=false,defaultValue="1")int currentPage) throws JsonIOException, IOException, ParseException {
+			@RequestParam(value="currentPage",required=false,defaultValue="1")int currentPage
+			,@RequestParam(value="nickname") String nickname) throws JsonIOException, IOException, ParseException {
 		//System.out.println(currentPage);
 		
 		
-		int listCount = qService.getListCount();
+		int listCount = qService.getListCount(nickname);
 		
 		QnAPageInfo pi = QnAPagination.getQnAPageInfo(currentPage, listCount);
 		
-		ArrayList<QnA> list = qService.selectList(pi);
+		ArrayList<QnA> list = qService.selectList(nickname,pi);
 		
 		Map hmap = new HashMap();
 		hmap.put("list",list);
@@ -70,9 +71,9 @@ public class QnAController {
 	}
 	
 	@RequestMapping("qdetail.do")
-	public ModelAndView boardDetail(ModelAndView mv, int qId, 
+	public ModelAndView boardDetail(ModelAndView mv, QnA q, 
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
-		QnA q = qService.selectBoard(qId);
+		q = qService.selectBoard(q);
 		if(q != null) {
 			mv.addObject("q",q)
 			  .addObject("currentPage",currentPage)

@@ -389,16 +389,11 @@
 		</div>
 		<div class="search_input" id="search_input_box">
 			<div class="container ">
-				<form action="theme.do"
+				<form action="search.do"
 					class="d-flex justify-content-between search-inner">
 					<input type="text" name="keyword" class="form-control"
 						id="search_input" list="sl"
 						placeholder="Search Here and Press Enter Key">
-					<datalist id="sl">
-						<%--  <c:forEach var="" begin="" end="" items="">
-                    	
-                    	</c:forEach> --%>
-                    </datalist>
                     <button type="submit" class="btn"></button>
                     <span class="ti-close" id="close_search" title="Close Search"></span>
                     <input type="hidden" name="searchValue" value="1">
@@ -509,14 +504,8 @@
     <script src="resources/js/custom.js"></script>
 
 	<script>
-		//datalist 추가 예정
-		$('#search_input').on('click keyup', function() {
-			ajax({
-
-			});
-		});
 		$('#navbarDropdown_1').click(function() {
-			location.href = "theme.do?keyword=";
+			location.href = "theme.do";
 		});
 	</script>
 </body>

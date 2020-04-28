@@ -15,6 +15,19 @@
   	background-image:url('${contextPath}/resources/images/qnaflowers.jpg');
     background-size: 100% 100%;
   }
+  
+  .btn {
+	color: #0067b8 !important;
+	border: 1px solid #0067b8 !important;
+	background: white !important;
+}
+
+.btn:hover {
+	color: snow !important;
+	border: 1px solid #0067b8 !important;
+	background: #0067b8 !important;
+}
+  
 </style>
 </head>
 
@@ -88,7 +101,7 @@
 
             </div>
             <div class="form-group mt-3">
-              <input type="submit" class="btn_3 button-contactForm" value="보내기(send)">
+              <input type="submit" class="btn" value="Send">
             </div>
           </form>
         </div>
@@ -105,7 +118,7 @@
             <span class="contact-info__icon"><i class="ti-email"></i></span>
             <div class="media-body">
               <h3>noticealigo@gmail.com</h3>
-  				<p>우리 존재 화이팅,,,</p>
+  				<p></p>
             </div>
           </div>
         </div>

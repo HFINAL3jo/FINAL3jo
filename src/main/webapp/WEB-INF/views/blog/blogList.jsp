@@ -146,7 +146,7 @@
 			
 			    <c:forEach var="t" items="${ list }" begin="0" end="${ pi.themeLimit }">
 				<div class="col-lg-4 col-sm-6" style="max-width:50% !important;">
-				    <c:url var="post" value="postdetail.do">
+				    <c:url var="post" value="blogdetail.do">
 					 <c:param name="tId" value="${ t.tId }"/>
 					</c:url>
 					<a href="${ post }">
