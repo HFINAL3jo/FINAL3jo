@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="reportMappers">
+
+	<resultMap type="Report" id="ReportResultSet">
+		<!-- <id property="rCode" column="RCODE"/> -->
+		<result property="rCode" column="RCODE"/>
+		<result property="dDcodeNumber" column="DCODE_NUMBER"/>
+		<result property="reporter" column="REPORTER"/>
+		<result property="reportContent" column="REPORT_CONTENT"/>
+		<result property="reportSdate" column="REPORT_SDATE"/>
+		<result property="reportEdate" column="REPORT_EDATE"/>
+		<result property="rStatus" column="R_STATUS"/>
+	</resultMap>
+	
+	<select id="selectTotalInt" resultType="_int" parameterType="hashMap">
+		SELECT COUNT(*)
+		<choose>
+			<when test="checkValue1 == 'ALL'">	
+			FROM REPORTS
+				<if test="checkValue2 == 'TITLE'">
+					where RCODE LIKE '%' || #{checkValue3} || '%'
+				</if>
+				<if test="checkValue2 == 'WRITER'">
+					where REPORTER LIKE '%' || #{checkValue3} || '%'
+				</if>
+				<if test="checkValue2 == 'CONTENT'">
+					where REPORT_CONTENT LIKE '%' || #{checkValue3} || '%'
+				</if>
+			</when>
+			<otherwise>
+				FROM REPORTS
+				WHERE R_STATUS = #{checkValue1}
+				<if test="checkValue2 == 'TITLE'">
+					AND RCODE LIKE '%' || #{checkValue3} || '%'
+				</if>
+				<if test="checkValue2 == 'WRITER'">
+					AND REPORTER LIKE '%' || #{checkValue3} || '%'
+				</if>
+				<if test="checkValue2 == 'CONTENT'">
+					AND REPORT_CONTENT LIKE '%' || #{checkValue3} || '%'
+				</if>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="selectTotalList" resultMap="ReportResultSet" parameterType="hashMap">
+		SELECT *
+		<choose>
+			<when test="checkValue1 == 'ALL'">	
+			FROM REPORTS
+				<if test="checkValue2 == 'TITLE'">
+					where RCODE LIKE '%' || #{checkValue3} || '%'
+				</if>
+				<if test="checkValue2 == 'WRITER'">
+					where REPORTER LIKE '%' || #{checkValue3} || '%'
+				</if>
+				<if test="checkValue2 == 'CONTENT'">
+					where REPORT_CONTENT LIKE '%' || #{checkValue3} || '%'
+				</if>
+			</when>
+			<otherwise>
+				FROM REPORTS
+				WHERE R_STATUS = #{checkValue1}
+				<if test="checkValue2 == 'TITLE'">
+					AND RCODE LIKE '%' || #{checkValue3} || '%'
+				</if>
+				<if test="checkValue2 == 'WRITER'">
+					AND REPORTER LIKE '%' || #{checkValue3} || '%'
+				</if>
+				<if test="checkValue2 == 'CONTENT'">
+					AND REPORT_CONTENT LIKE '%' || #{checkValue3} || '%'
+				</if>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="reportDetail" resultMap="ReportResultSet"  parameterType="String">
+		SELECT *
+		FROM REPORTS
+		WHERE DCODE_NUMBER = #{number}
+	</select>
+</mapper>
