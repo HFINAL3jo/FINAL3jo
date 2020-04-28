@@ -82,7 +82,7 @@
 		LIKE UPPER('%'||#{keyword}||'%')
 		</if>
 		<choose>
-			<when test="searchValue == 2">ORDER BY TO_NUMBER(TO_CHAR(T_MODIFY_DATE,'YYMMDD')) DESC</when>
+			<when test="searchValue == 2">ORDER BY T_VIEWS DESC</when>
 			<when test="searchValue == 3">ORDER BY T_LIKES DESC</when>
 			<otherwise>ORDER BY TID DESC</otherwise>
 		</choose>
