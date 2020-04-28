@@ -270,7 +270,7 @@ public class MemberController {
 			return "redirect:main.do";
 		}else {			
 			//	로그인 실패
-			model.addAttribute("msg", "로그인 실패!!");
+			model.addAttribute("msg", "login fail!!");
 			return "common/errorPage";
 		}
 	}

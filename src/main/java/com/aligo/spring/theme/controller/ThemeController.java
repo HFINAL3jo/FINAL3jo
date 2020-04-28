@@ -67,7 +67,6 @@ public class ThemeController extends TFile{
 	public ModelAndView themeList(ModelAndView mv,
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
 			SearchCondition sc, @RequestParam(value="keyword",required=false) String keyword) {
-		
 		int listCount = tService.getListCount(sc);
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
@@ -396,5 +395,11 @@ public class ThemeController extends TFile{
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		
 		gson.toJson(randomList,response.getWriter());
+	}
+	
+	@RequestMapping("search.do")
+	public String searchTheme() {
+	
+		return null;
 	}
 }

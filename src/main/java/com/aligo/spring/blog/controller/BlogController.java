@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aligo.spring.blog.model.service.BlogService;
 import com.aligo.spring.blog.model.vo.BlogVo;
 import com.aligo.spring.common.Pagination;
 import com.aligo.spring.theme.model.service.ThemeService;
@@ -16,16 +17,7 @@ import com.aligo.spring.theme.model.vo.SearchCondition;
 @Controller
 public class BlogController {
 
-//  @Autowired private BlogService bService;
-
-	@Autowired
-	private ThemeService tService;
-
-	/*
-	 * @RequestMapping("blogListView.do") public ModelAndView blogList(ModelAndView
-	 * mv, @RequestParam(value="currentPage", required=false, defaultValue="1") int
-	 * currentPage, SearchCondition sc) { return "blog/blogList"; }
-	 */
+	//@Autowired private BlogService blService;
 	
 	@RequestMapping("blogListView.do")
 	public String blogList() {

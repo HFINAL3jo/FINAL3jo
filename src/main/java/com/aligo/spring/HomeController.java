@@ -23,6 +23,11 @@ public class HomeController {
 		return "main";
 	}
 	
+	@RequestMapping("post.do")
+	public String post() {
+		return "board/post";
+	}
+	
 	@RequestMapping("recommend.do")
 	public String recommend() {
 		return "recommend/recommendPage";
@@ -63,10 +68,11 @@ public class HomeController {
 		return "admin/QnA";
 	}
 	
-	@RequestMapping("reportlist.do")
-	public String reportList() {
-		return "admin/reportlist";
-	}
+	// 신고 페이지 이동 reportlist.do
+//	@RequestMapping("reportlist.do")
+//	public String reportList() {
+//		return "reportlist.do?currentPage=1";
+//	}
 	
 	@RequestMapping("statistics.do")
 	public String statistics() {
@@ -79,4 +85,13 @@ public class HomeController {
 		return "member/signUp";
 	}
 	
+	@RequestMapping("blogdetail.do")
+	public String postdetail() {
+		return "board/blogdetail";
+	}
+	
+	@RequestMapping("themeDetailView.do")
+	public String themeDetailView() {
+		return "theme/themeDetailView2";
+	}
 }
