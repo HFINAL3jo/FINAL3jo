@@ -92,7 +92,7 @@ public class ThemeController extends TFile{
 				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile().substring(0,t.gettModifyFile().indexOf(",")));
 			}
 		}
-		System.out.println(list);
+		
 		mv.addObject("list",list);
 		mv.addObject("pi",pi);
 		mv.addObject("sc",sc);

@@ -257,6 +257,10 @@
 		.button-cool {background: #0D47A1;}
 		.button-cold {background: #1A237E;}
 		.button404 {background: black;}
+		
+	.card span{
+		background-color:rgb(0,0,0,.5);
+	}
   </style>
 </head>
 <body>
@@ -285,35 +289,35 @@
         <div class="card-list">
           <div class="card" id="card1">
             <img src="${ contextPath }/resources/images/recommend_place_bibimbab.jpg"/>
-            <span>테스트 일번</span>
+            <span>Please check out the latest travel</span>
           </div>
           <div class="card" id="card2">
             <img src="${ contextPath }/resources/images/recommend_place_lottetower.jpg"/>
-            <span>테스트 일번</span>
+            <span>Please check out the latest travel</span>
           </div>
           <div class="card" id="card3">
             <img src="${ contextPath }/resources/images/recommend_place_chunggyechun.jpg"/>
-            <span>테스트 일번</span>
+            <span>Please check out the latest travel</span>
           </div>
           <div class="card" id="card4">
             <img src="${ contextPath }/resources/images/recommend_place_gyungbokgung.jpg"/>
-            <span>테스트 일번</span>
+            <span>Please check out the latest travel</span>
           </div>
           <div class="card" id="card5">
             <img src="${ contextPath }/resources/images/recommend_place_hanriverpark.jpg"/>
-            <span>테스트 일번</span>
+            <span>Please check out the latest travel</span>
           </div>
           <div class="card" id="card6">
             <img src="${ contextPath }/resources/images/recommend_place_hanriverpark.jpg"/>
-            <span>테스트 일번</span>
+            <span>Please check out the latest travel</span>
           </div>
           <div class="card" id="card7">
             <img src="${ contextPath }/resources/images/recommend_place_hanriverpark.jpg"/>
-            <span>테스트 일번</span>
+            <span>Please check out the latest travel</span>
           </div>
           <div class="card" id="card8">
             <img src="${ contextPath }/resources/images/recommend_place_hanriverpark.jpg"/>
-            <span>테스트 일번</span>
+            <span>Please check out the latest travel</span>
           </div>
         </div>
       </div>
@@ -331,8 +335,8 @@
       				$.each(data, function(index, value){
       					console.log(value);
       					var card = "#card" + (index + 1);	
-      					
-      					$(card).children('img').attr('src',"/spring/resources/tuploadFiles/"+value.tModifyFile);
+      					console.log(value.tModifyFile);
+      					$(card).children('img').attr('src',value.tModifyFile);
       					$(card).children('span').html(value.tTitle);
       					$(card).on("click",function(){
       						location.href="topListDetail.do?tId="+value.tId;
@@ -438,31 +442,31 @@
         <div class="card-list">
           <div class="card" id="theme1">
             <img src="${ contextPath }/resources/images/recommend_place_bibimbab.jpg"/>
-            <span>테스트 일번</span>
+            <span>Please check out the latest travel</span>
           </div>
           <div class="card" id="theme2">
             <img src="${ contextPath }/resources/images/recommend_place_lottetower.jpg"/>
-            <span>테스트 일번</span>
+            <span>Please check out the latest travel</span>
           </div>
           <div class="card" id="theme3">
             <img src="${ contextPath }/resources/images/recommend_place_chunggyechun.jpg"/>
-            <span>테스트 일번</span>
+            <span>Please check out the latest travel</span>
           </div>
           <div class="card" id="theme4">
             <img src="${ contextPath }/resources/images/recommend_place_gyungbokgung.jpg"/>
-            <span>테스트 일번</span>
+            <span>Please check out the latest travel</span>
           </div>
           <div class="card" id="theme5">
             <img src="${ contextPath }/resources/images/recommend_place_hanriverpark.jpg"/>
-            <span>테스트 일번</span>
+            <span>Please check out the latest travel</span>
           </div>
           <div class="card" id="theme6">
             <img src="${ contextPath }/resources/images/recommend_place_hanriverpark.jpg"/>
-            <span>테스트 일번</span>
+            <span>Please check out the latest travel</span>
           </div>
           <div class="card" id="theme7">
             <img src="${ contextPath }/resources/images/recommend_place_hanriverpark.jpg"/>
-            <span>테스트 일번</span>
+            <span>Please check out the latest travel</span>
           </div>
         </div>
       </div>
@@ -479,7 +483,7 @@
       				$.each(data, function(index, value){
 						var theme = "#theme" + (index + 1);
       					
-      					$(theme).children('img').attr('src','/spring/resources/tuploadFiles/'+value.tModifyFile);
+      					$(theme).children('img').attr('src',value.tModifyFile);
       					$(theme).children('span').html(value.tTitle);
       					$(theme).on("click",function(){
       						location.href="themeDetail.do?tId="+value.tId;;

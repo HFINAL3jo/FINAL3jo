@@ -28,6 +28,21 @@ public class MainController {
 		ArrayList<Theme> list = mService.selectTopList();
 		System.out.println("mainController : " + list);
 		
+		for(Theme t: list) {
+			if(t.gettTitle().length() > 16) {
+				t.settTitle(t.gettTitle().substring(0,15));
+			}
+			
+			if(t.gettModifyFile().length() <= 18) {
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
+			}else if(t.gettModifyFile().contains(",")){
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile().substring(0,t.gettModifyFile().indexOf(",")));
+			}else {
+				t.settModifyFile(t.gettModifyFile().replace("amp;",""));
+			}
+			
+		}
+		
 		response.setContentType("application/json; charset=utf-8");
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
@@ -39,6 +54,21 @@ public class MainController {
 	@RequestMapping("themeList.do")
 	public void themeList(HttpServletResponse response) throws JsonIOException, IOException {
 		ArrayList<Theme> list = mService.selectThemeList();
+		
+		for(Theme t: list) {
+			if(t.gettTitle().length() > 16) {
+				t.settTitle(t.gettTitle().substring(0,15));
+			}
+			
+			if(t.gettModifyFile().length() <= 18) {
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
+			}else if(t.gettModifyFile().contains(",")){
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile().substring(0,t.gettModifyFile().indexOf(",")));
+			}else {
+				t.settModifyFile(t.gettModifyFile().replace("amp;",""));
+			}
+			
+		}
 		
 		response.setContentType("application/json; charset=utf-8");
 		
