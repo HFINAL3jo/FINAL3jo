@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>aligo</title>
+<title>Get inspired for your journey! - aligo</title>
 
 <!-- nice select CSS -->
 <link rel="stylesheet" href="resources/css/nice-select.css">
@@ -16,46 +16,70 @@
 <link rel="stylesheet" href="resources/css/card.css">
 
 <style type="text/css">
-.floatdiv {
-	position: fixed;
-	width: 80px;
-	display: inline-block;
-	right: 0px; /* 창에서 오른쪽 길이 */
-	top: 80%; /* 창에서 위에서 부터의 높이 */
-	background-color: transparent;
-	margin: 0;
-}
-
-h4{
-	text-align:center;
-}
-
-.breadcrumb{
-  	background-image:url('${contextPath}/resources/images/nightview.jpg');
-    background-size: 100% 100%;
+	.floatdiv {
+		position: fixed;
+		width: 80px;
+		display: inline-block;
+		right: 0px; /* 창에서 오른쪽 길이 */
+		top: 80%; /* 창에서 위에서 부터의 높이 */
+		background-color: transparent;
+		margin: 0;
+	}
+	
+	h4{
+		text-align:center;
+	}
+	
+	.breadcrumb{
+	  	background-image:url('${contextPath}/resources/images/blog_theme.jpg');
+	    background-size: 100% 100%;
   }
-  
- .genric-btn.primary:hover {
-  background:#0067b8 !important;
-  color: white !important;
-  border: 1px solid #0067b8 !important;
-}
- .genric-btn.primary{
-  color: black !important;
-  border: 1px solid #0067b8 !important;
-  background:white;
-}
-.genric-btn.success {
-  color: black !important;
-  background: rgba(227, 227, 227,1) !important;
-  border: 1px solid transparent;
-}
-
-.genric-btn.success:hover {
-  color: white !important;
-  border: 1px solid #c1e3f7 !important;
-  background: #c1e3f7 !important;
-}
+	  
+	 .genric-btn.primary:hover {
+		  background:#0067b8 !important;
+		  color: white !important;
+		  border: 1px solid #0067b8 !important;
+	}
+	 .genric-btn.primary{
+		  color: #0067b8 !important;
+		  border: 1px solid #0067b8 !important;
+		  background:white;
+	}
+	.genric-btn.success {
+		  color: black !important;
+		  background: rgba(227, 227, 227,1) !important;
+		  border: 1px solid transparent;
+	}
+	
+	.genric-btn.success:hover {
+	  color: white !important;
+	  border: 1px solid #c1e3f7 !important;
+	  background: #c1e3f7 !important;
+	}
+	.side_bar{
+		display:flex;
+	    align-items: flex-start;
+	    position: fixed;
+	    z-index: 1;
+	    width: 96.2px;
+	    top: 264px;
+	    left: 0px;
+	}
+	/* .mybtn {
+	  color: #0067b8; 
+	  border:1px solid #0067b8; 
+	  background: white; 
+	  width: 8em;
+	  height: 2.3em; 
+	  font-size: 13px; 
+	  margin-bottom: 10%;
+	}
+	
+	.mybtn:hover {
+	  color: snow;
+	  border: 1px solid #0067b8;
+	  background: #0067b8;
+	} */
 
 </style>
 
@@ -69,16 +93,13 @@ h4{
 
 	<!--================Home Banner Area =================-->
 	<!-- breadcrumb start-->
-	<section class="breadcrumb breadcrumb_bg">
+	<section class="breadcrumb breadcrumb_bg" style="height:760px;">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item">
-							<h2>THEME</h2>
-							<p>
-								Theme <span id="kk">-</span> 
-							</p>
+							<h2 style="font-size:4em; padding-top:100px; position:relative; left:-10%;">Travel Reviews</h2>
 						</div>
 					</div>
 				</div>
@@ -86,10 +107,11 @@ h4{
 		</div>
 	</section>
 	<!-- breadcrumb start-->
-
+	
 	<!--================Category Product Area =================-->
 	<section class="cat_product_area section_padding"
 		style="padding-top: 3%; padding-bottom: 0%;">
+		
 		<!-- 인클루드 asside -->
 		<jsp:include page="../common/assideblog.jsp"/>
 		<div id="tList" class="col-lg-9">
@@ -122,22 +144,22 @@ h4{
 			</div>
 			<div id="aList" class="row align-items-center latest_product_inner">
 			
-			    <c:forEach var="t" items="${list }" begin="0" end="${pi.themeLimit}">
+			    <c:forEach var="t" items="${ list }" begin="0" end="${ pi.themeLimit }">
 				<div class="col-lg-4 col-sm-6" style="max-width:50% !important;">
 				    <c:url var="post" value="postdetail.do">
-					 <c:param name="tId" value="${t.tId }"/>
+					 <c:param name="tId" value="${ t.tId }"/>
 					</c:url>
-				<a href="${post }">
-        				<div class="card-list">        				
-          					<div class="card">          					
-            					<img src="${t.tModifyFile }"/>
-            					<span>${t.tTitle }</span>
-         					</div>
-					<!-- <div class="single_product_item">
-							<h3><b style="color:rgba(121,125,237,0.9)">#${t.tName}</b></h3>
-					</div> -->
-					</div>
-				</a>
+					<a href="${ post }">
+	       				<div class="card-list">        				
+	       					<div class="card">          					
+	         					<img src="${t.tModifyFile }"/>
+	         					<span>${t.tTitle }</span>
+	      					</div>
+						<!-- <div class="single_product_item">
+								<h3><b style="color:rgba(121,125,237,0.9)">#${t.tName}</b></h3>
+						</div> -->
+						</div>
+					</a>
 				</div>
 				</c:forEach>
 			</div>
@@ -148,6 +170,7 @@ h4{
 			<input id="lc" type="hidden" value="${pi.listCount }">
 			<div align="center">
 				<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:white;">Lord More..</button></a>
+				<!-- <input type="submit" value="WRITE" class="mybtn e-large"> -->
 			</div>
 			
 		</div>

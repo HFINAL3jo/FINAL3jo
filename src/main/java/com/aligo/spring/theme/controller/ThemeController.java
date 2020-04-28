@@ -66,7 +66,7 @@ public class ThemeController extends TFile{
 	@RequestMapping("theme.do")
 	public ModelAndView themeList(ModelAndView mv,
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
-			SearchCondition sc) {
+			SearchCondition sc, @RequestParam(value="keyword") String keyword) {
 		
 		int listCount = tService.getListCount(sc);
 		
@@ -92,10 +92,11 @@ public class ThemeController extends TFile{
 				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile().substring(0,t.gettModifyFile().indexOf(",")));
 			}
 		}
-		
+		System.out.println(list);
 		mv.addObject("list",list);
 		mv.addObject("pi",pi);
 		mv.addObject("sc",sc);
+		mv.addObject("keyword",keyword);
 		mv.setViewName("theme/categoryList");
 		return mv;
 	}
