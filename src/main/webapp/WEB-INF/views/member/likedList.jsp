@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<!doctype html>
+<!doctype html>
 <html lang="ko">
 
 <head>
@@ -17,6 +17,17 @@
 		background-image:url('${contextPath}/resources/images/sung.jpg');
 		background-size: 100% 100%;
 	 }
+
+.genric-btn.primary:hover {
+  background:#0067b8 !important;
+  color: white !important;
+  border: 1px solid #0067b8 !important;
+}
+ .genric-btn.primary{
+  color: black !important;
+  border: 1px solid #0067b8 !important;
+  background:white !important;
+  }
 	</style>
 </head>
 
@@ -83,7 +94,7 @@
 					<input id="tc" type="hidden" value="${pi.currentPage }">
 					<input id="tm" type="hidden" value="${pi.maxPage }">
 					<div align="center">
-						<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:#ebc5e4;">Lord More..</button></a>
+						<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px;">Lord More..</button></a>
 					</div>			
 					</div>					
 					<!-- 내가 좋아요한 리스트 -->

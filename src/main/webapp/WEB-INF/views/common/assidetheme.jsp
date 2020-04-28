@@ -6,6 +6,35 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.list{
+	border-top:none !important;
+	border:1px solid lightgray !important;
+	padding:20px; 
+	border-radius:5px; 
+	color:gray;
+	size:1em;
+	margin-bottom:0px !important;
+	}
+	
+	.list li a:hover{
+		font-size:2em !important;
+		color:black !important;
+	}
+	
+	#wb{
+	width:200px; 
+	height:50px;
+	border:0.5px dashed black;
+	color:black;
+	}
+	
+	#wb:hover{
+		border:none;
+		color:white;
+		background:lightgray;
+	}
+</style>
 </head>
 <body>
 	<span style="text-align: center;"><h2 id="titlebar" style="margin-left:8%;">
@@ -16,79 +45,53 @@
                     <div class="left_sidebar_area">
                         <aside class="left_widgets p_filter_widgets">
                             <div class="widgets_inner">
-                                    <!-- <h5>Theme</h5> -->
+									<br><br>                                   
                                 <ul class="list">
                                     <li>
-                                        <label for="ha">Nature</label>
-                                        <div class="confirm-radio">
-                                            <input type="checkbox" id="ha" checked="checked">
-                                            <label for="ha"></label>
-                                        </div>
+                                        <a href="theme.do?keyword=Nature">Nature</a>
                                     </li>
                                     <li>
-                                        <label for="ha2">Restaurant</label>
-                                        <div class="confirm-radio">
-                                            <input type="checkbox" id="ha2" checked="checked">
-                                            <label for="ha2"></label>
-                                        </div>
+                                        <a href="theme.do?keyword=Restaurant">Restaurant</a>
                                     </li>
                                     <li>
-                                        <label for="ha3">History</label>
-                                        <div class="confirm-radio">
-                                            <input type="checkbox" id="ha3" checked="checked">
-                                            <label for="ha3"></label>
-                                        </div>
+                                        <a href="theme.do?keyword=History">History</a>
                                     </li>
                                     <li>
-                                        <label for="ha4">Shopping</label>
-                                        <div class="confirm-radio">
-                                            <input type="checkbox" id="ha4" checked="checked">
-                                            <label for="ha4"></label>
-                                        </div>
+                                        <a href="theme.do?keyword=Shopping">Shopping</a>
                                     </li>
                                     <li>
-                                        <label for="ha5">Bar</label>
-                                        <div class="confirm-radio">
-                                            <input type="checkbox" id="ha5" checked="checked">
-                                            <label for="ha5"></label>
-                                        </div>
+                                        <a href="theme.do?keyword=Bar">Bar</a>
                                     </li>
                                     <li>
-                                        <label for="ha6">Activity</label>
-                                        <div class="confirm-radio">
-                                            <input type="checkbox" id="ha6" checked="checked">
-                                            <label for="ha6"></label>
-                                        </div>
+                                        <a href="theme.do?keyword=Activity">Activity</a>
                                     </li>
                                     <li>
-                                        <label for="ha7" >Exhibition</label>
-                                        <div class="confirm-radio">
-                                            <input type="checkbox" id="ha7" checked="checked">
-                                            <label for="ha7"></label>
-                                        </div>
+                                        <a href="theme.do?keyword=Exhibition">Exhibition</a>
+                                    </li>
+                                    <li>
+                                        <a href="theme.do?keyword=">All</a>
                                     </li>
                                 </ul>
+                                <br>
+                                <c:if test="${loginUser.nickname eq 'ADMIN' }">
+                             <button id="wb" type="button" class="btn btn-outline-danger">Write Post</button></c:if>
                             </div>
                         </aside>
                         
                         <aside class="left_widgets p_filter_widgets">
-                        <hr>
                             <div class="l_w_title">
                             </div>
                             <div class="widgets_inner">
-                             <br><br>
-                             <c:if test="${loginUser.nickname eq 'ADMIN' }">
-                             <button id="wb" type="button" class="btn btn-outline-danger" style="width:200px; height:50px;">Write Post</button></c:if>
+                             
                             </div>
                         </aside>
                     </div>
                 </div>
   <script>
-  	$('#wb').click(function(){
-  		location.href="themeInsertView.do";
-  	});
-  	
-  	
+  window.setTimeout(function(){
+		var offset=window.innerHeight;
+		$('html,body').stop().animate({scrollTop:'300'},600);
+		}, 200);
   </script>
 </body>
 </html>

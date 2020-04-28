@@ -10,7 +10,7 @@
 <body>
 	<%@ include file="../common/menubar.jsp" %>
 	<br><br><br><br><br>
-	<%@ include file="../common/assidetheme.jsp" %>
+	<%@ include file="../common/assideblog.jsp" %>
 	
 	<div align="center">
 	<%@ include file="blogWrite.jsp" %>

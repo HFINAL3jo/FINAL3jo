@@ -7,6 +7,13 @@
 <% 
 	Map<Integer, ArrayList<ThemeVo>> map = (Map)request.getAttribute("map");
 	System.out.println(map.size());
+	System.out.println(map.get(0));
+	System.out.println(map.get(1));
+	System.out.println(map.get(2));
+	System.out.println(map.get(3));
+	System.out.println(map.get(4));
+	System.out.println(map.get(5));
+	System.out.println(map.get(6));
 %>
 <!DOCTYPE html>
 <html>
@@ -291,14 +298,17 @@
 					dataType : 'json',
 					success : function(data){
 						
+						console.log('확인');
+						console.log(data);
+						
 						$.each(data, function(index, value){
 							
-							if(index > 3){
+							if(index >= 3){
 								
 								$div1 = $('<div>').addClass('card');
-								$img1 = $('<img>').attr('src', data[index].tfile);
-								$img1.attr('onclick',"location.href='postdetail.do?tId='+"+data[index].tid+";")
-								$span1 = $('<span>').text(data[index].ttitle);
+								$img1 = $('<img>').attr('src', value.tfile);
+								$img1.attr('onclick',"location.href='postdetail.do?tId='+"+value.tid+";")
+								$span1 = $('<span>').text(value.ttitle);
 								
 								$div1.append($img1);
 								$div1.append($span1);
@@ -320,8 +330,13 @@
 		
 		function viewmore(rkStr){
 			
+			location.reload();
+			/* 
 			console.log(rkStr);
-			//location.href="rResultList2.do?rkStr='"+rkStr+"';";
+			var uri = "rResultList2.do?rkStr='"+rkStr+"'"
+			var deuri = encodeURI(uri);
+			location.href = deuri;
+			 */
 		}
 		
 		
