@@ -26,10 +26,10 @@ public interface QnAService {
 
 	/**
 	 * 게시판 상세조회
-	 * @param qId
+	 * @param q
 	 * @return
 	 */
-	QnA selectBoard(int qId);
+	QnA selectBoard(QnA q);
 
 
 	/**

@@ -29,9 +29,9 @@ public class QnAServiceImpl implements QnAService{
 	}
 
 	@Override
-	public QnA selectBoard(int qId) {
+	public QnA selectBoard(QnA q) {
 		
-		return qDao.selectBoard(qId);
+		return qDao.selectBoard(q);
 	}
 
 	@Override
@@ -41,7 +41,8 @@ public class QnAServiceImpl implements QnAService{
 
 	@Override
 	public QnA selectUpdateBoard(int qId) {
-		return qDao.selectBoard(qId);
+		//return qDao.selectBoard(qId);
+		return null;
 	}
 
 	@Override

@@ -70,9 +70,9 @@ public class QnAController {
 	}
 	
 	@RequestMapping("qdetail.do")
-	public ModelAndView boardDetail(ModelAndView mv, int qId, 
+	public ModelAndView boardDetail(ModelAndView mv, QnA q, 
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
-		QnA q = qService.selectBoard(qId);
+		q = qService.selectBoard(q);
 		if(q != null) {
 			mv.addObject("q",q)
 			  .addObject("currentPage",currentPage)
