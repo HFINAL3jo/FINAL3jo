@@ -73,7 +73,7 @@
                                     </li>
                                 </ul>
                                 <br>
-                                <c:if test="${loginUser.nickname eq 'ADMIN' }">
+                                <c:if test="${loginUser.nickname eq 'ADMIN'}">
                              <button id="wb" type="button" class="btn btn-outline-danger">Write Post</button></c:if>
                             </div>
                         </aside>
@@ -92,6 +92,9 @@
 		var offset=window.innerHeight;
 		$('html,body').stop().animate({scrollTop:'300'},600);
 		}, 200);
+  $('#wb').click(function(){
+	  location.href="themeInsertView.do"; 
+  });
   </script>
 </body>
 </html>
