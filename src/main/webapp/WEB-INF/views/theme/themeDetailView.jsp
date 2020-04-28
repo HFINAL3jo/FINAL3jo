@@ -367,7 +367,7 @@
 					<span style="float:right;">Views : ${t.tViews }</span><br>
 					<span style="float:right;">Likes : ${t.tLikes }</span><br>
 					<c:if test="${loginUser.nickname eq t.tWriter || loginUser.nickname eq 'ADMIN'}">
-					<br><button id="dp" style="float:right; margin-left:20px;">Delete</button>					
+					<br><button id="dp" style="float:right; margin-left:10px;">Delete</button>					
 					<button id="mp" style="float:right;">Modify</button>
 					</c:if>
                     <div class="post-element">
