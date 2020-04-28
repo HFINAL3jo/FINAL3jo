@@ -138,7 +138,7 @@ input:checked+label:after {
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>aligo</title>
+<title>Get inspired for your journey! - aligo</title>
 </head>
 
 <body>
@@ -189,7 +189,7 @@ input:checked+label:after {
 								</div>
 								
 								<div class="col-md-12 form-group">
-									<button type="submit" class="btn_3" onclick="javascript:btn()">find password</button>
+									<button type="submit" class="btn_3" id="fipw" onclick="javascript:btn()">find password</button>
 								</div>
 								<br>
 							</form>
@@ -248,7 +248,7 @@ input:checked+label:after {
 						$(".ok").hide();
 						$(".error").show();
 						$("#idDuplicateCheck").val(0);
-						$('.btn_3').attr('disabled',false); 
+						$('#.btn_3').attr('disabled',false); 
 						
 
 						

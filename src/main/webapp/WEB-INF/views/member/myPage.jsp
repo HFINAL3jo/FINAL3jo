@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Get inspired for your journey! - aligo</title>
 <style type="text/css">
 	.breadcrumb{
 		background-image:url('${contextPath}/resources/images/knocker.jpg');
