@@ -19,16 +19,16 @@ public class QnADao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public int getListCount() {
+	public int getListCount(String nickname) {
 		return sqlSession.selectOne("qnaMapper.getListCount");
 	}
 	
-	public ArrayList<QnA> selectList(QnAPageInfo pi) {
+	public ArrayList<QnA> selectList(String nickname, QnAPageInfo pi) {
 		
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("qnaMapper.selectList",null,rowBounds);
+		return (ArrayList)sqlSession.selectList("qnaMapper.selectList",nickname,rowBounds);
 	}
 
 	public QnA selectBoard(QnA q) {

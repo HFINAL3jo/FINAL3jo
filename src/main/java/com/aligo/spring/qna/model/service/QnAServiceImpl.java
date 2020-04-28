@@ -19,13 +19,13 @@ public class QnAServiceImpl implements QnAService{
 	private QnADao qDao;
 	
 	@Override
-	public int getListCount() {
-		return qDao.getListCount();
+	public int getListCount(String nickname) {
+		return qDao.getListCount(nickname);
 	}
 	
 	@Override
-	public ArrayList<QnA> selectList(QnAPageInfo pi) {
-		return qDao.selectList(pi);
+	public ArrayList<QnA> selectList(String nickname,QnAPageInfo pi) {
+		return qDao.selectList(nickname,pi);
 	}
 
 	@Override

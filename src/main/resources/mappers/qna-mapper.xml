@@ -33,6 +33,9 @@
 	<select id="selectList" resultMap="qnaResultSet">
 		SELECT *
 		FROM QNA 
+		<if test="_parameter != null">
+			where qWriter = #{nickname}
+		</if>
 		ORDER BY QID DESC
 	</select>
 	
