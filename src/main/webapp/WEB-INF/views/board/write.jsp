@@ -146,13 +146,8 @@ nhn.husky.EZCreator.createInIFrame({
 	   var theme = document.getElementById('tcl').value;
 	   var keyword = document.getElementById('tkv').value;
 	   var contents = document.getElementById('smarteditor').value;
-	   var tel = document.getElementById('tel').value;
-	   var fee = document.getElementById('fee').value;
-	   var oh = document.getElementById('oh').value;
-	   var trans = document.getElementById('trans').value;
 	   var da = document.getElementById('da').value;
 	   var ja = document.getElementById('ja').value;
-	   var ad = document.getElementById('ad').value;
 	   
 	   if(!chk(contents == '<p>&nbsp;</p>' || contents == '' || contents == null || contents == '<p><br></p>' || contents == '<br>',"Insert Content")){ // 기본적으로 아무것도 입력하지 않아도 값이 입력되어 있음. 
 	   

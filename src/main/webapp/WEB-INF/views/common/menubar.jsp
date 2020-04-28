@@ -287,7 +287,7 @@
 											Theme</a>
 									</div></li>
 								<li class="nav-item"><a class="nav-link"
-									href="blogListView.do">Posting</a></li>
+									href="blog.do">Posting</a></li>
 								<li class="nav-item"><a class="nav-link"
 									href="recommend.do"> Recommended </a></li>
 								<li class="nav-item"><a class="nav-link"
@@ -391,7 +391,7 @@
 			<div class="container ">
 				<form action="search.do"
 					class="d-flex justify-content-between search-inner">
-					<input type="text" name="keyword" class="form-control"
+					<input type="text" name="searchVal" class="form-control"
 						id="search_input" list="sl"
 						placeholder="Search Here and Press Enter Key">
                     <button type="submit" class="btn"></button>

@@ -183,4 +183,14 @@ public class ThemeServiceImpl implements ThemeService {
 	public ArrayList<Theme> selectTkeywordList(PageInfo pi, String recommend) {
 		return tDao.selectTkeywordList(pi,recommend);
 	}
+
+	@Override
+	public ArrayList<Theme> selectSearchList(PageInfo pi, SearchCondition sc) {
+		return tDao.selectSearchList(pi,sc);
+	}
+
+	@Override
+	public int getSearchListCount(SearchCondition sc) {
+		return tDao.getSearchListCount(sc);
+	}
 }

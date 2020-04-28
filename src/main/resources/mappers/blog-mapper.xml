@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="blogMapper">
+	<resultMap type="Blog" id="BlogResultSet">
+	 <id property="bId" column="BID"/>
+	 
+	 <result property="bWriter" column="BWRITER" />
+	 <result property="bTitle" column="BTITLE" />
+	 <result property="bContent" column="BCONTENT" />
+	 <result property="bAddress" column="BADDRESS" />
+	 <result property="bAddressH" column="BADDRESSH" />
+	 <result property="bCreateDate" column="B_CREATE_DATE" />
+	 <result property="bModifyDate" column="B_MODIFY_DATE" />
+	 <result property="bViews" column="B_VIEWS" />
+	 <result property="bLikes" column="B_LIKES" />
+	 <result property="bStatus" column="B_STATUS" />
+	 <result property="bCode" column="BCODE" />
+	 <result property="bOriginalFile" column="B_ORIGINAL_FILE"/>
+	 <result property="bModifyFile" column="B_MODIFY_FILE"/>
+	 <result property="category" column="BNAME"/>
+	 <result property="bTel" column="BTEL"/>
+	 <result property="bFee" column="BFEE"/>
+	 <result property="bHours" column="BHOURS"/>
+	 <result property="bTrans" column="BTRANS"/>
+	 <result property="bTag" column="BTAG"/>
+	 
+	</resultMap>
+	
+	<!-- <resultMap type="TReply" id="themeReplyResultSet">
+		<id property="trId" column="TRID"/>
+		
+		<result property="trId" column="TRID"/>
+		<result property="trContent" column="TRCONTENT"/>
+		<result property="refTid" column="REF_TID"/>
+		<result property="trWriter" column="TRWIRTER"/>
+		<result property="trCreateDate" column="TR_CREATE_DATE"/>
+		<result property="trModifyDate" column="TR_MODIFY_DATE"/>
+		<result property="trStatus" column="TR_STATUS"/>
+	
+	</resultMap> -->
+	
+	<resultMap type="BFile" id="BFileResultSet">
+		<id property="bCodeNumber" column="BCODE_NUMBER"/>
+		
+		<result property="bOriginalFile" column="B_ORIGINAL_FILE"/>
+		<result property="bModifyFile" column="B_MODIFY_FILE"/>
+	
+	</resultMap>
+	
+	<resultMap type="BName" id="BCategoryResultSet">
+		<id property="bCode" column="BCODE" />
+		
+		<result property="bName" column="BNAME"/>	
+	</resultMap>
+
+	<select id="getBNum" resultType="_int">
+		SELECT LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME = 'SEQ_BNO'
+	</select>
+	
+	<insert id="insertImg" parameterType="BFile">
+		INSERT INTO BLOG_FILES VALUES(#{bCodeNumber},#{bOriginalFile},#{bModifyFile})
+	</insert>
+	
+	<select id="getBCount" resultType="_int">
+		SELECT COUNT(*) FROM BLOG_FILES WHERE BCODE_NUMBER = #{bCodeNumber}
+	</select>
+	
+	<update id="updateImg" parameterType="BFile">
+		UPDATE BLOG_FILES SET B_ORIGINAL_FILE 
+		= B_ORIGINAL_FILE ||','|| #{bOriginalFile}, 
+		B_MODIFY_FILE = B_MODIFY_FILE ||','|| #{bModifyFile}
+		WHERE BCODE_NUMBER = #{bCodeNumber}
+	</update>
+	
+	<select id="checkFile" resultType="_int">
+		SELECT COUNT(*) FROM BLOG_FILES WHERE BCODE_NUMBER = #{bNum}
+	</select>
+	
+	<insert id="insertBlog" parameterType="Blog">
+		INSERT INTO BLOG_LIST VALUES(SEQ_BNO.NEXTVAL,#{bWriter},#{bTitle},
+		#{bContent},#{bAddress},#{bAddressH},DEFAULT,DEFAULT,DEFAULT,DEFAULT,
+		DEFAULT,NVL(#{bTel},' '),NVL(#{bFee},' '),NVL(#{bHours},' '),NVL(#{bTag},' '),NVL(#{bTrans},' '),#{bCode})
+	</insert>
+		
+	<!-- <select id="getListCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		<if test="keyword == null">
+		WHERE T_STATUS='Y'
+		</if>
+		<if test="keyword != null">
+		WHERE TNAME LIKE UPPER('%'||#{keyword}||'%')
+		</if>
+	</select>
+	
+	<select id="selectList" resultMap="themeResultSet">		
+		SELECT *
+		FROM THEME_LIST 
+		JOIN THEME_CODE USING(TCODE)
+		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
+		<if test="keyword == null">
+		WHERE T_STATUS='Y'
+		</if>
+		<if test="keyword != null">
+		WHERE TNAME	LIKE UPPER('%'||#{keyword}) AND T_STATUS='Y'
+		</if>
+		<choose>
+			<when test="searchValue == 2">ORDER BY T_VIEWS DESC</when>
+			<when test="searchValue == 3">ORDER BY T_LIKES DESC</when>
+			<otherwise>ORDER BY TID DESC</otherwise>
+		</choose>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectTheme" resultMap="themeResultSet">
+		SELECT * 
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
+		WHERE TID=#{tId}	
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	<update id="updateViewCount">
+		UPDATE THEME_LIST SET T_VIEWS = T_VIEWS + 1	WHERE TID = #{tId}
+	</update>
+	
+	<update id="updateTagCount">
+		UPDATE THEME_CODE 
+		SET TCOUNT = TCOUNT + 1
+		WHERE TCODE = (SELECT TCODE FROM THEME_LIST WHERE TID = #{tID})
+	</update>
+	
+	<select id="findKeywordArea" resultType="string">
+		SELECT AREA
+		FROM SEARCH_AREA
+		WHERE AREA LIKE UPPER('%'||#{keyword}||'%')
+	</select>
+	
+	<select id="findKeywordTheme" resultType="string">
+		SELECT TCODE 
+		FROM SEARCH_THEME
+		JOIN THEME_CODE USING(TCODE)
+		WHERE TNAME LIKE UPPER('%'||#{keyword}||'%') 
+	</select>
+	
+	<update id="updateCountKwT">
+		UPDATE SEARCH_THEME SET ST_COUNT = ST_COUNT + 1 WHERE TCODE = #{key}
+	</update>
+	
+	<update id="updateCountKwA">
+		UPDATE SEARCH_AREA SET SA_COUNT = SA_COUNT + 1 WHERE AREA = #{key}
+	</update>
+	
+	<insert id="insertTReply">
+		INSERT INTO THEME_REPLY VALUES
+		(SEQ_TRNO.NEXTVAL,#{trContent},#{refTid},#{trWriter},DEFAULT,DEFAULT,DEFAULT)
+	</insert>
+	
+	<select id="selectTReplyList" resultMap="themeReplyResultSet" parameterType="TReply">
+		SELECT * 
+		FROM THEME_REPLY 
+		WHERE REF_TID = #{tId} AND TR_STATUS = 'Y'
+		ORDER BY TRID DESC
+	</select>
+	
+	<select id="getKeyword" resultType="string">
+		WITH TEMP_TABLE AS(
+		SELECT RQKEYWORD1 FROM RECOMMEND_Q WHERE R_STATUS='Y' UNION ALL
+		SELECT RQKEYWORD2 FROM RECOMMEND_Q WHERE R_STATUS='Y')
+		SELECT LISTAGG(RQKEYWORD1,',') WITHIN GROUP (ORDER BY ROWNUM) TKEYWORD FROM TEMP_TABLE
+	</select>
+	
+	<update id="updateTheme" parameterType="Theme">
+		UPDATE THEME_LIST SET TTITLE=#{tTitle},TCONTENT=#{tContent},TADDRESS=#{tAddress},
+		TADDRESSH=#{tAddressH},T_MODIFY_DATE=SYSDATE,TKEYWORD=#{tKeyword},TCODE=#{tCode},TTEL=NVL(#{tTel},' '),
+		TFEE=NVL(#{tFee},' '),THOURS=NVL(#{tHours},' '),TTRANS=NVL(#{tTrans},' ') WHERE TID=#{tId} 
+	</update>
+	
+	Like
+	<update id="updateLike">
+		<if test="lv == 0">
+		UPDATE THEME_LIST SET T_LIKES = T_LIKES - 1 WHERE TID= TO_NUMBER(#{tId})
+		</if>
+		<if test="lv == 1">
+		UPDATE THEME_LIST SET T_LIKES = T_LIKES + 1 WHERE TID= TO_NUMBER(#{tId})
+		</if>
+	</update>
+	
+	<update id="updateThemeLikeCount">
+		<if test="lv == 0">
+		UPDATE THEME_CODE SET TLIKE= TLIKE - 1 WHERE TCODE=#{tCode}
+		</if>
+		<if test="lv == 1">
+		UPDATE THEME_CODE SET TLIKE= TLIKE + 1 WHERE TCODE=#{tCode}
+		</if>
+	</update>
+	
+	<insert id="insertMyLike" parameterType="map">
+		INSERT INTO THEME_LIKES VALUES((
+		SELECT MID FROM MEMBER WHERE NICKNAME=#{loginUser}),TO_NUMBER(#{tId}))
+	</insert>
+	
+	<select id="checkLike" resultType="_int">
+		SELECT COUNT(*) FROM THEME_LIKES 
+		WHERE MID = (SELECT MID 
+					FROM MEMBER 
+					WHERE NICKNAME=#{loginUser})
+        AND T_CODE_NUM = TO_NUMBER(#{tId})
+	</select>
+	
+	<select id="selectStatus" parameterType="map" resultType="_int">
+		SELECT COUNT(*) FROM THEME_LIKES 
+		WHERE T_CODE_NUM = TO_NUMBER(#{tId}) AND 
+		MID = (SELECT MID 
+			   FROM MEMBER 
+			   WHERE NICKNAME=#{loginUser}) 
+	</select>
+	
+	<delete id="deleteMyLike">
+		DELETE FROM THEME_LIKES WHERE MID = 
+		(SELECT MID FROM MEMBER WHERE NICKNAME=#{loginUser})
+	</delete>
+	
+	<update id="deleteTheme">
+		UPDATE THEME_LIST SET T_STATUS='N' WHERE TID=#{tId} 
+	</update>
+	
+	<update id="deleteTReply">
+		UPDATE THEME_REPLY SET TR_STATUS='N' WHERE TRID=#{trId}
+	</update>
+	
+	<select id="getRandomListCount" resultType="_int"> 
+		SELECT COUNT(*) 
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		WHERE T_STATUS='Y' AND
+		TKEYWORD LIKE '%'||#{recommend}||'%'
+		ORDER BY TID DESC
+	</select>
+	
+	<select id="selectTkeywordList" resultMap="themeResultSet">
+		SELECT * 
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
+		WHERE T_STATUS='Y' AND
+		TKEYWORD LIKE '%'||#{recommend}||'%'
+		ORDER BY TID DESC
+	</select>
+	
+	<select id="getSearchListCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
+		WHERE T_STATUS='Y' AND
+		REGEXP_LIKE(
+        UPPER(TTITLE||TADDRESS||TADDRESSH||TCONTENT
+		||TKEYWORD||TNAME||TTRANS),UPPER(#{searchVal}))
+		ORDER BY TID DESC
+	</select>
+	
+	<select id="selectSearchList" resultMap="themeResultSet">
+		SELECT * 
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
+		WHERE T_STATUS='Y' AND
+		REGEXP_LIKE(
+        UPPER(TTITLE||TADDRESS||TADDRESSH||TCONTENT
+		||TKEYWORD||TNAME||TTRANS),UPPER(#{searchVal}))
+		ORDER BY TID DESC
+	</select> -->
+</mapper>

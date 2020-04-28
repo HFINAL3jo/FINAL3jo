@@ -140,4 +140,14 @@ public class ThemeDao {
 		
 		return (ArrayList)sqlSession.selectList("themeMapper.selectTkeywordList", tKeyword, rowBounds);
 	}
+
+	public int getSearchListCount(SearchCondition sc) {
+		return sqlSession.selectOne("themeMapper.getSearchListCount",sc);
+	}
+
+	public ArrayList<Theme> selectSearchList(PageInfo pi, SearchCondition sc) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getThemeLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getThemeLimit());
+		return (ArrayList)sqlSession.selectList("themeMapper.selectSearchList",sc, rowBounds);
+	}
 }
