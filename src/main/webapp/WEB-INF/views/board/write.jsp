@@ -10,6 +10,32 @@
  	input[class~=adi]{
  		width:150%;
  	}
+ 	#tt{
+    height: 30px;
+    font-family: "Montserrat";
+    margin-left:-100px;
+    font-size: 18px;
+    letter-spacing: 2px;
+    padding: 0px 45px 0px 18px;
+    caret-color: #000;
+    background: transparent;
+    z-index: 5;
+}
+	table>td{
+		width:120%;
+	}
+ 	#tss{
+ 		size:2em;
+ 	}
+ 	
+ 	.single-input{
+ 		background:#f0f0f7;
+ 	}
+ 	
+ 	table tr td{
+ 		width:500px;
+ 	}
+ 	
  </style>
 </head>
 <body>
@@ -17,13 +43,10 @@
     <form action="themeInsert.do" method="POST" id="gosubmit" enctype="multipart/form-data" onsubmit="return false;">
     <div id="editor">
     <br>
-    <label for="tt" style="margin:10px;">Title&nbsp;&nbsp;
-    <input type="text" size="40" name="tTitle" id="tt"></label>&nbsp;&nbsp;
-    <label>Writer&nbsp;
-    <input type="text" name="tWriter" size="40" value="${loginUser.nickname }" style="border:none;" readonly></label>
+    <div><input type="text" size="40" name="tTitle" id="tt" placeholder="Title.." style="border-radius:5px;"></div>&nbsp;&nbsp;
     <br><br>
-    <span style="float:left;">Theme &nbsp;
-    <select id="tcl" name="tCode">
+    <span style="float:left;" id="tss">Theme &nbsp;
+    <select id="tcl" name="tCode" style="border-radius:5px;">
     	<option>--</option>
     	<option value="NATURE">NATURE</option>
     	<option value="RESTAURANT">RESTAURANT</option>
@@ -32,10 +55,12 @@
     	<option value="BAR">BAR</option>
     	<option value="ACTIVITY">ACTIVITY</option>
     	<option value="EXHIBITION">EXHIBITION</option>
-    </select>&nbsp;&nbsp;&nbsp;
-    Keyword &nbsp;&nbsp;<input type="text" id="tkv" name="tKeyword" readonly style="margin-right:-10px;"></span><br><br>
+    </select></span>&nbsp;&nbsp;&nbsp;
+    <span>Keyword &nbsp;&nbsp;<input type="text" id="tkv" name="tKeyword" readonly style="margin-right:-10px; border-radius:5px;"></span>
+    <div style="display:inline-block; float:right; padding-left:50px;">Writer&nbsp;<input type="text" name="tWriter" value="${loginUser.nickname }" style="border:none; width:180px;" readonly></div>
+    <br><br>
     	<c:if test="${!empty list}">
-    	<div id="selectVal" style="border:1px lightblue solid; display:inline-block; float:left; margin:10px; padding:10px; text-align:left;">
+    	<div id="selectVal" style="border:1px lightblue solid; display:inline-block; float:left; margin:10px; padding:20px; text-align:left;">
     		<label><input type="radio" name="f1" value="${list[0]}">&nbsp;${list[0] }</label>
     		&nbsp;&nbsp;<label><input type="radio" name="f1" value="${list[5]}">&nbsp;${list[5] }</label><br>
     		<label><input type="radio" name="f2" value="${list[1]}">&nbsp;${list[1] }</label>
@@ -53,52 +78,45 @@
     	</c:if>
    	
     <br><br>
-	<textarea name="tContent" id="smarteditor" rows="30" cols="104"></textarea>
+	<textarea name="tContent" id="smarteditor" rows="30" cols="95"></textarea>
     <br><br>
     
-    <table align="center">
+    <table align="center" id="at">
+	    <thead>
+	    <tr><button type="button" id="ars">search</button></tr>
+    </thead>
     <tr>
-		<td>ZIP CODE</td>
-		<td>
-			<input type="text" id="postcode" placeholder="우편번호" size="6">
-			<button type="button" id="ars">search</button>
+		<td><input type="text" id="postcode" placeholder="ZIPCODE" class="single-input" size="6">
 		</td>
 	</tr>
 	<tr>
-		<td>도로명 주소</td>
-		<td><input type="text" id="da" name="tAddressH" placeholder="도로명주소" class="adi"></td>
+		<td><input type="text" id="da" class="single-input" name="tAddressH" placeholder="도로명주소" class="adi"></td>
 	</tr>
 	<tr>
-		<td>ADDRESS</td>
-		<td><input type="text" id="ja" name="tAddress" placeholder="영문 도로명 주소" class="adi"></td>
+		<td><input type="text" id="ja" class="single-input" name="tAddress" placeholder="ADDRESS" class="adi"></td>
 	</tr>
 	<tr>
-		<td>영문 지번 주소</td>
-		<td><input type="text" id="ad" placeholder="영문 지번 주소" class="adi"></td>
+		<td><input type="text" id="ad" class="single-input" placeholder="영문 지번 주소" class="adi"></td>
 	</tr>
 	<tr>
-		<td>상세 주소</td>
-		<td><input type="text" id="sample4_extraAddress" placeholder="참고항목"></td>
+		<td><input type="text" class="single-input" id="sample4_extraAddress" placeholder="상세 주소"></td>
 	</tr>
 	<tr>
-		<td>Tel</td>
-		<td><input type="text" id="tel" name="tTel"></td>
+		<td><input type="text" placeholder="Tel" class="single-input" id="tel" name="tTel"></td>
 	</tr>
 	<tr>
-		<td>Fee</td>
-		<td><input type="text" id="fee" name="tFee"></td>
+		<td><input type="text" class="single-input" placeholder="Fee" id="fee" name="tFee"></td>
 	</tr>
 	<tr>
-		<td>transportation</td>
-		<td><input type="text" id="trans" name="tTrans"></td>
+		<td><input type="text" class="single-input" placeholder="Transportation" id="trans" name="tTrans"></td>
 	</tr>
 	<tr>
-		<td>Opening hours</td>
-		<td><input type="text" id="oh" name="tHours">
+		<td><input type="text" class="single-input" placeholder="Opening hours" id="oh" name="tHours">
 	</tr>
 	</table>
+	<br>
     <button id="cancel" class="btn btn-light" type="reset">Cancle</button>
-    <input type="button" class="btn btn-light" id="sbtn" value="Write"> 
+    <input type="button" class="btn btn-light" id="sbtn" value="Submit"> 
 	</div>
     </form>
     </c:if>

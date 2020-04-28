@@ -66,7 +66,7 @@ public class ThemeController extends TFile{
 	@RequestMapping("theme.do")
 	public ModelAndView themeList(ModelAndView mv,
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
-			SearchCondition sc) {
+			SearchCondition sc, @RequestParam(value="keyword",required=false) String keyword) {
 		
 		int listCount = tService.getListCount(sc);
 		
@@ -96,6 +96,7 @@ public class ThemeController extends TFile{
 		mv.addObject("list",list);
 		mv.addObject("pi",pi);
 		mv.addObject("sc",sc);
+		mv.addObject("keyword",keyword);
 		mv.setViewName("theme/categoryList");
 		return mv;
 	}
@@ -140,7 +141,9 @@ public class ThemeController extends TFile{
 	}
 	
 	@RequestMapping("themeInsert.do")
-	public String insertTheme(Theme t,HttpServletRequest request) throws ServletException, IOException {
+	public String insertTheme(
+			Theme t,HttpServletRequest request)
+			 throws ServletException, IOException {
 		int tNum = tService.getTNum();
 		int result = 0;
 		try {

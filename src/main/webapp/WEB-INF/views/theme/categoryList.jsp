@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>aligo</title>
+<title>Get inspired for your journey! - aligo</title>
 
 <!-- nice select CSS -->
 <link rel="stylesheet" href="resources/css/nice-select.css">
@@ -41,7 +41,7 @@ h4{
   border: 1px solid #0067b8 !important;
 }
  .genric-btn.primary{
-  color: black !important;
+  /* color: #0067b8; !important; */
   border: 1px solid #0067b8 !important;
   background:white;
 }
@@ -69,16 +69,13 @@ h4{
 
 	<!--================Home Banner Area =================-->
 	<!-- breadcrumb start-->
-	<section class="breadcrumb breadcrumb_bg">
+	<section class="breadcrumb breadcrumb_bg" style="height:760px;">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item">
-							<h2>THEME</h2>
-							<p>
-								Theme <span id="kk">-</span> 
-							</p>
+							<h2 style="font-size:4em; padding-top:100px; position:relative; left:-10%;">${ param.keyword } Theme</h2>
 						</div>
 					</div>
 				</div>
@@ -107,8 +104,8 @@ h4{
 						<div class="single_product_menu d-flex">
 							<div class="input-group">
 
-								<button id="lastPost" class="genric-btn success"
-									style="width: 100%; height: 90%;">Latest Posting</button>
+								<button id="topviews" class="genric-btn success"
+									style="width: 100%; height: 90%;">Top views</button>
 
 							</div>
 							&nbsp;&nbsp;
@@ -147,7 +144,7 @@ h4{
 			<input id="kw" type="hidden" name="keyword" value="${sc.keyword}">
 			<input id="lc" type="hidden" value="${pi.listCount }">
 			<div align="center">
-				<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:white;">Lord More..</button></a>
+				<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:white; color:#0067b8;">Lord More..</button></a>
 			</div>
 			
 		</div>
@@ -233,10 +230,10 @@ h4{
 				}
 			}
 		
-	 $('#lastPost').click(function(){
+	 $('#topviews').click(function(){
 		 searchValue = 2;
 		 currentPage = 1;
-		 $('#titlebar').text('Newest');
+		 $('#titlebar').text('Top views');
 		 $('#aList').html("");
 		 ajaxPage();
 	 });

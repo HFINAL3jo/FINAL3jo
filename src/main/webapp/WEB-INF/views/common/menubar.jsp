@@ -516,7 +516,7 @@
 			});
 		});
 		$('#navbarDropdown_1').click(function() {
-			location.href = "theme.do?keyword=";
+			location.href = "theme.do";
 		});
 	</script>
 </body>
