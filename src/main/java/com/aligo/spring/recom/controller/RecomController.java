@@ -79,54 +79,58 @@ public class RecomController {
 		return mv;
 	}
 	
-	@RequestMapping("rResultList2.do")
-	public ModelAndView recomResultList2(ModelAndView mv, String rkStr) {
-		
-		System.out.println("확인");
-		
-		ThemeVo tv = new ThemeVo();
-		
-		String[] keywords = new String[5];
-		
-		String[] strArr1 = rkStr.split("=");
-		for(int i = 1; i < strArr1.length; i++) {
-
-			if(i != strArr1.length-1) {
-				
-				String str = strArr1[i].split(", ")[0];
-				keywords[i-1] = str;
-			}else {
-				
-				String str = strArr1[i].substring(0, strArr1[i].length()-1);
-				keywords[i-1] = str;
-			}
-		}
-		
-		RecomKeyword rk = new RecomKeyword(keywords[0], keywords[1], keywords[2], keywords[3], keywords[4]);
-		tv.setKeywords(rk);
-		
-		Map<Integer, ArrayList<ThemeVo>> map = new HashMap<Integer, ArrayList<ThemeVo>>();
-		
-		for(int i = 1; i < 8; i++) {
-			
-			String code = "T" + i;
-			
-			tv.setTcode(code);
-			
-			ArrayList<ThemeVo> list = rService.selectList(tv);
-
-			for(int j = 0 ; j < list.size(); j++) {
-				
-				list.get(j).setKeywords(rk);
-			}
-			
-			map.put(i, list);
-		}
-		
-		mv.addObject("map", map);
-		mv.setViewName("recommend/recomResultList");
-		return mv;
-	}
+//	@RequestMapping("rResultList2.do")
+//	public ModelAndView recomResultList2(ModelAndView mv, String rkStr) {
+//		
+//		System.out.println("확인");
+//		System.out.println("rkStr : " + rkStr);
+//		
+//		ThemeVo tv = new ThemeVo();
+//		
+//		String[] keywords = new String[5];
+//		
+//		String[] strArr1 = rkStr.split("=");
+//		for(int i = 1; i < strArr1.length; i++) {
+//
+//			if(i != strArr1.length-1) {
+//				
+//				String str = strArr1[i].split(", ")[0];
+//				keywords[i-1] = str;
+//			}else {
+//				
+//				String str = strArr1[i].substring(0, strArr1[i].length()-2);
+//				keywords[i-1] = str;
+//			}
+//		}
+//		
+//		RecomKeyword rk = new RecomKeyword(keywords[0], keywords[1], keywords[2], keywords[3], keywords[4]);
+//		tv.setKeywords(rk);
+//
+//		System.out.println("!!!tv : ");
+//		System.out.println(tv);
+//		
+//		Map<Integer, ArrayList<ThemeVo>> map = new HashMap<Integer, ArrayList<ThemeVo>>();
+//		
+//		for(int i = 1; i < 8; i++) {
+//			
+//			String code = "T" + i;
+//			
+//			tv.setTcode(code);
+//			
+//			ArrayList<ThemeVo> list = rService.selectList(tv);
+//
+//			for(int j = 0 ; j < list.size(); j++) {
+//				
+//				list.get(j).setKeywords(rk);
+//			}
+//			System.out.println(list);
+//			map.put(i, list);
+//		}
+//		
+//		mv.addObject("map", map);
+//		mv.setViewName("recommend/recomResultList");
+//		return mv;
+//	}
 	
 	/**
 	 * 	tcode와 rk를 가지고 THEME 리스트를 전송함

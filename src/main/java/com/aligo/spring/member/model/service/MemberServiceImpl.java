@@ -73,6 +73,11 @@ public class MemberServiceImpl implements MemberService {
 		int result = memDao.passChk(m);
 		return result;
 	}
+
+	@Override
+	public void findPwd(Member m) throws Exception {
+		memDao.findPwd(m);
+	}
 	
 
 

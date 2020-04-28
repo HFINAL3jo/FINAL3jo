@@ -13,7 +13,7 @@
  </style>
 </head>
 <body>
-	<c:if test="${!empty loginUser}">
+	<c:if test="${loginUser.nickname eq 'ADMIN'}">
     <form action="themeInsert.do" method="POST" id="gosubmit" enctype="multipart/form-data" onsubmit="return false;">
     <div id="editor">
     <br>
@@ -154,21 +154,6 @@ nhn.husky.EZCreator.createInIFrame({
 		   return false;
 	   }
 	   
-	   if(!chk(tel == '','Fill out tel')){
-		   return false;
-	   }
-	   
-	   if(!chk(fee == '','Fill out fee')){
-		   return false;
-	   }
-	   
-	   if(!chk(oh== '','Fill out opeinghours')){
-		   return false;
-	   }
-	   
-	   if(!chk(trans=='','Fill out transportation')){
-		   return false;
-	   }
 	   
 	   if(!chk(da=='','Fill out address')){
 		   return false;
@@ -178,9 +163,6 @@ nhn.husky.EZCreator.createInIFrame({
 		   return false;
 	   }
 	   
-	   if(!chk(ad=='','Fill out address')){
-		   return false;
-	   }
 		return true; 
 	 }
    

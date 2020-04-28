@@ -68,7 +68,7 @@
 	
 	<insert id="insertReply" parameterType="QnaReply">
 		INSERT INTO QNAREPLY VALUES
-		(SEQ_RID.NEXTVAL,#{rContent},#{refQid},#{rWriter},SYSDATE,SYSDATE,DEFAULT)
+		(SEQ_RID.NEXTVAL,#{rContent},#{refQid},#{rWriterNickname},DEFAULT,DEFAULT,DEFAULT)
 	</insert>
 	
 	<!--  -->

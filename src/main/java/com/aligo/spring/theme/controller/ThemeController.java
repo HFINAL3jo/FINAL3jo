@@ -20,6 +20,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,6 +38,8 @@ import com.aligo.spring.theme.model.vo.Theme;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+
+import oracle.jdbc.proxy.annotation.Methods;
 
 @Controller
 public class ThemeController extends TFile{
@@ -363,8 +366,8 @@ public class ThemeController extends TFile{
 		if(result > 0) return "success"; else return "fail";
 	}
 	
-	@RequestMapping("getRandomlist.do")
-	public void getRandomList(String recommend,HttpServletResponse response) throws JsonIOException, IOException {
+	@RequestMapping(value="getRandomlist.do",method=RequestMethod.POST)
+	public void getRandomList(@RequestParam(value="recommend")String recommend,HttpServletResponse response) throws JsonIOException, IOException {
 		response.setContentType("application/json; charset=UTF-8");	
 		
 		int listCount = tService.getRandomListCount(recommend);
@@ -372,7 +375,7 @@ public class ThemeController extends TFile{
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
 		ArrayList<Theme> randomList = tService.selectTkeywordList(pi,recommend);
-
+		System.out.println(randomList);
 		for(Theme t: randomList) {
 			if(t.gettTitle().length() > 16) {
 				t.settTitle(t.gettTitle().substring(0,15));
@@ -386,11 +389,10 @@ public class ThemeController extends TFile{
 				t.settModifyFile(t.gettModifyFile().replace("amp;",""));
 			}
 			
-			Collections.shuffle(randomList);
-			
-			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-			
-			gson.toJson(randomList,response.getWriter());
 		}
+		Collections.shuffle(randomList);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		gson.toJson(randomList,response.getWriter());
 	}
 }

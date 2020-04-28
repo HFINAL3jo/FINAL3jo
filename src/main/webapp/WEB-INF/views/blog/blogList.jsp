@@ -113,7 +113,7 @@
 		style="padding-top: 3%; padding-bottom: 0%;">
 		
 		<!-- 인클루드 asside -->
-		<jsp:include page="../common/assidetheme.jsp"/>
+		<jsp:include page="../common/assideblog.jsp"/>
 		<div id="tList" class="col-lg-9">
 			<div class="row">
 				<div class="col-lg-12">
