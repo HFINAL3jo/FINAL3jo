@@ -4,7 +4,7 @@
 <html lang="ko" class="ko">
 
 <head>
-    <title>aligo</title>
+    <title>Get inspired for your journey! - aligo</title>
     <meta charset="UTF-8">
     <!-- Google Analytics -->
     <!-- Global site tag (gtag.js) - Google Analytics -->

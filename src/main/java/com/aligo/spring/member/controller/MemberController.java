@@ -77,7 +77,7 @@ public class MemberController {
 		int result = memService.insertMember(m);
 
 		if(result >0) {
-			return "redirect:index.jsp";
+			return "redirect:views/main.jsp";
 		} else {
 			return "common/errorPage.jsp";
 		}
@@ -267,7 +267,7 @@ public class MemberController {
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getpassword(), loginUser.getpassword())) {			
 			//	로그인 성공 시 세션에 정보를 담아야 되기 때문에 세션이 필요하다.
 			model.addAttribute("loginUser", loginUser);
-			return "redirect:index.jsp";
+			return "redirect:main.do";
 		}else {			
 			//	로그인 실패
 			model.addAttribute("msg", "로그인 실패!!");
