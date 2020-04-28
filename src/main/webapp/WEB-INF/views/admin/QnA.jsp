@@ -85,9 +85,9 @@
 						<div style="margin: 1%;">
 							처리 여부 : 
 							<select name="checkSearch" style="width:150px; margin-right:3%; margin-left: 1%;">
+								<option value="N">처 리 중</option>
 								<option value="Y">완 료</option>
 								<option value="X">해당 없음</option>
-								<option value="N">처 리 중</option>
 								<option value="ALL">전부 다</option>
 							</select> 
 							검색 조건  : 
@@ -172,7 +172,7 @@
 						listText += "<tr>";
 						listText += "<td>"+data.list[i].qId+"</td>";
 						listText += "<td>";
-						listText += "<a style='height: 100%; color:black' href='qdetail.do?qId="+data.list[i].qId+"&currentPage="+data.pi.currentPage+"'>"+data.list[i].qTitle+"</a>";
+						listText += "<a style='height: 100%; color:black' href='qdetail.do?qId="+data.list[i].qId+"&currentPage="+data.pi.currentPage+"&qWriter=" + data.list[i].qWriter+"'>"+data.list[i].qTitle+"</a>";
 						listText += "</td>";
 						
 						listText += "<td>"+data.list[i].qWriter+"</td>";

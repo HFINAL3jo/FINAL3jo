@@ -89,4 +89,7 @@ public interface QnAService {
 	 */
 	ArrayList<QnA> getSearchQnaData(Map<String, String> map, QnAPageInfo pi);
 
+
+	ArrayList<QnA> getSearchQnaAdmin(Map<String, String> map, QnAPageInfo pi);
+
 }

@@ -66,6 +66,11 @@ public class QnADao {
 		return (ArrayList)sqlSession.selectList("qnaMapper.getSearchQnaData", map, rowBounds);
 	}
 
+	public ArrayList<QnA> getSearchQnaAdmin(Map<String, String> map, QnAPageInfo pi) {
+		RowBounds rowBounds = new RowBounds(((pi.getCurrentPage() -1) * pi.getBoardLimit()), pi.getBoardLimit());
+		return  (ArrayList)sqlSession.selectList("qnaMapper.getSearchQnaAdmin", map, rowBounds);
+	}
+
 
 	
 }

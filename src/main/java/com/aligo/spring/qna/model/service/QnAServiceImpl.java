@@ -78,6 +78,11 @@ public class QnAServiceImpl implements QnAService{
 		return qDao.getSearchQnaData(map, pi);
 	}
 
+	@Override
+	public ArrayList<QnA> getSearchQnaAdmin(Map<String, String> map, QnAPageInfo pi) {
+		return qDao.getSearchQnaAdmin(map,pi);
+	}
+
 	
 	
 }
