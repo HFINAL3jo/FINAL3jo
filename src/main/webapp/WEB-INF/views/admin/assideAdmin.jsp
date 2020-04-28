@@ -16,7 +16,7 @@
                                         </span>
                                     </li>
                                     <li>
-                                        <a href="reportlist.do">신고내역</a>
+                                        <a href="reportlist.do?currentPage=1">신고내역</a>
                                         <span></span>
                                     </li>
                                   	 <li>
