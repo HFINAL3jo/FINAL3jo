@@ -83,18 +83,18 @@
     <div class="container">
  	<div class="qnaPage">
      
-      <h2>문의게시판</h2>
+      <h2>Inquiry board</h2>
       <hr>
         <div class="qnaPageTable">
 
     <table align="center" class="table table-striped" id="qtb">
         <thead align="center">
         <tr>
-            <th>글번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>날짜</th>
-            <th>답변 여부</th>
+            <th>No.</th>
+            <th>Title</th>
+            <th>Writer</th>
+            <th>Date</th>
+            <th>Answer Status</th>
         </tr>
     </thead>
     <tbody id="tbody">
