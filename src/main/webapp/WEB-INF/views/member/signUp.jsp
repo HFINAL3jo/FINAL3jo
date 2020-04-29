@@ -15,8 +15,8 @@ font-family: 'Dosis' !important;
 <style>
 input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus
 	{
-	border-bottom: 2px solid #ff3368 !important;
-	color: #ff3368 !important;
+	border-bottom: 2px solid #0067b8 !important;
+	color: #0067b8 !important;
 	transition: 0.2s ease;
 }
 
@@ -138,7 +138,7 @@ input:checked+label:after {
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>aligo</title>
+<title>Get inspired for your journey! - aligo</title>
 </head>
 
 <body>
@@ -199,7 +199,7 @@ input:checked+label:after {
 										is Already Joined</span> <input type="hidden" name="idDuplicateCheck"
 										id="idDuplicateCheck" value="0">
 									<button type="submit" name="submit" class="btn_3"
-										id="emailCheck">send a mail</button>
+										id="emailCheck" background-color="#0067b8">send a mail</button>
 									
 
 								</div>
@@ -232,7 +232,7 @@ input:checked+label:after {
 
 		if ($("idDuplicateCheck").val() == 0) {
 
-			alert("사용 가능한 이메일을 입력해주세요");
+			alert("Please enter available email");
 			$("#email").focus();
 			return false;
 		} else {
@@ -244,14 +244,14 @@ input:checked+label:after {
 
 		$('#email').on("keyup", function() {
 
-			var email = $(this).val();
+			 var email = $(this).val();
 
-			if (email.length < 10) {
+				if (email.length < 10) {
 				$(".guide").hide();
 				$("#idDuplicateCheck").val(0);
 
 				return;
-			}
+			} 
 
 			$.ajax({
 				url : "idCheck.do",
@@ -286,6 +286,7 @@ input:checked+label:after {
 		});
 	});
 	
+
 	
 	
 	

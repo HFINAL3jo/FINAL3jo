@@ -2,10 +2,6 @@ package com.aligo.spring.theme.model.vo;
 
 public class TFile{
 
-	/**
-	 * 
-	 */
-
 	public TFile() {
 	}
 

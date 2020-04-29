@@ -39,15 +39,15 @@ input, input[type="radio"]+label, input[type="checkbox"]+label:before,
 /* 지워도 되나 */
 input:focus {
 	outline: 0;
-	border-color: #64ac15;
+	border-color: #848484;
 }
 /* 지워도 되나 */
 input:focus+.input-icon i {
-	color: #7ed321;
+	color: #adadad;
 }
 /* 지워도 되나 */
 input:focus+.input-icon:after {
-	border-right-color: #7ed321;
+	border-right-color: #cccccc;
 }
 /* 꼭 필요 */
 input[type="radio"] {
@@ -78,9 +78,9 @@ input[type="radio"]+label i {
 /* 색 주는 거 */
 input[type="radio"]:checked+label, input:checked+label:before, select:focus,
 	select:active {
-	background-color: #7ed321;
+	background-color: #cccccc;
 	color: #fff;
-	border-color: #64ac15;
+	border-color: #848484;
 }
 /* 꼭 필요 */
 input[type="checkbox"] {
@@ -139,7 +139,7 @@ input:checked+label:after {
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>aligo</title>
+<title>Get inspired for your journey! - aligo</title>
 </head>
 
 <body>
@@ -269,7 +269,7 @@ input:checked+label:after {
 			$('#passwordchk').blur(function() {
 				if ($('#password').val() != $('#passwordchk').val()) {
 					if ($('#passwordchk').val() != '') {
-						alert("비밀번호가 일치하지 않습니다.");
+						alert("not matched password");
 						$('#passwordchk').val('');
 						$('#passwordchk').focus();
 					}

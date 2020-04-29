@@ -19,20 +19,20 @@ public class QnADao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public int getListCount() {
+	public int getListCount(String nickname) {
 		return sqlSession.selectOne("qnaMapper.getListCount");
 	}
 	
-	public ArrayList<QnA> selectList(QnAPageInfo pi) {
+	public ArrayList<QnA> selectList(String nickname, QnAPageInfo pi) {
 		
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("qnaMapper.selectList",null,rowBounds);
+		return (ArrayList)sqlSession.selectList("qnaMapper.selectList",nickname,rowBounds);
 	}
 
-	public QnA selectBoard(int qId) {
-		return sqlSession.selectOne("qnaMapper.selectBoard",qId);
+	public QnA selectBoard(QnA q) {
+		return sqlSession.selectOne("qnaMapper.selectBoard",q);
 	}
 
 	public int writeBoard(QnA q) {
@@ -64,6 +64,11 @@ public class QnADao {
 		
 		RowBounds rowBounds = new RowBounds(((pi.getCurrentPage() -1) * pi.getBoardLimit()), pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("qnaMapper.getSearchQnaData", map, rowBounds);
+	}
+
+	public ArrayList<QnA> getSearchQnaAdmin(Map<String, String> map, QnAPageInfo pi) {
+		RowBounds rowBounds = new RowBounds(((pi.getCurrentPage() -1) * pi.getBoardLimit()), pi.getBoardLimit());
+		return  (ArrayList)sqlSession.selectList("qnaMapper.getSearchQnaAdmin", map, rowBounds);
 	}
 
 

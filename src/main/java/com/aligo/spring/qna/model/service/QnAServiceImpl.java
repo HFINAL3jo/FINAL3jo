@@ -19,19 +19,19 @@ public class QnAServiceImpl implements QnAService{
 	private QnADao qDao;
 	
 	@Override
-	public int getListCount() {
-		return qDao.getListCount();
+	public int getListCount(String nickname) {
+		return qDao.getListCount(nickname);
 	}
 	
 	@Override
-	public ArrayList<QnA> selectList(QnAPageInfo pi) {
-		return qDao.selectList(pi);
+	public ArrayList<QnA> selectList(String nickname,QnAPageInfo pi) {
+		return qDao.selectList(nickname,pi);
 	}
 
 	@Override
-	public QnA selectBoard(int qId) {
+	public QnA selectBoard(QnA q) {
 		
-		return qDao.selectBoard(qId);
+		return qDao.selectBoard(q);
 	}
 
 	@Override
@@ -41,7 +41,8 @@ public class QnAServiceImpl implements QnAService{
 
 	@Override
 	public QnA selectUpdateBoard(int qId) {
-		return qDao.selectBoard(qId);
+		//return qDao.selectBoard(qId);
+		return null;
 	}
 
 	@Override
@@ -75,6 +76,11 @@ public class QnAServiceImpl implements QnAService{
 	public ArrayList<QnA> getSearchQnaData(Map<String, String> map, QnAPageInfo pi) {
 		
 		return qDao.getSearchQnaData(map, pi);
+	}
+
+	@Override
+	public ArrayList<QnA> getSearchQnaAdmin(Map<String, String> map, QnAPageInfo pi) {
+		return qDao.getSearchQnaAdmin(map,pi);
 	}
 
 	

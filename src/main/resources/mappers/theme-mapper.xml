@@ -78,11 +78,10 @@
 		WHERE T_STATUS='Y'
 		</if>
 		<if test="keyword != null">
-		WHERE (TNAME||TTITLE||TADDRESS||TADDRESSH||TKEYWORD||TCONTENT) 
-		LIKE UPPER('%'||#{keyword}||'%')
+		WHERE TNAME	LIKE UPPER('%'||#{keyword}) AND T_STATUS='Y'
 		</if>
 		<choose>
-			<when test="searchValue == 2">ORDER BY TO_NUMBER(TO_CHAR(T_MODIFY_DATE,'YYMMDD')) DESC</when>
+			<when test="searchValue == 2">ORDER BY T_VIEWS DESC</when>
 			<when test="searchValue == 3">ORDER BY T_LIKES DESC</when>
 			<otherwise>ORDER BY TID DESC</otherwise>
 		</choose>
@@ -138,14 +137,14 @@
 	<select id="findKeywordArea" resultType="string">
 		SELECT AREA
 		FROM SEARCH_AREA
-		WHERE AREA LIKE UPPER('%'||#{keyword}||'%')
+		WHERE AREA LIKE UPPER('%'||#{searchVal}||'%')
 	</select>
 	
 	<select id="findKeywordTheme" resultType="string">
 		SELECT TCODE 
 		FROM SEARCH_THEME
 		JOIN THEME_CODE USING(TCODE)
-		WHERE TNAME LIKE UPPER('%'||#{keyword}||'%') 
+		WHERE TNAME LIKE UPPER('%'||#{searchVal}||'%') 
 	</select>
 	
 	<update id="updateCountKwT">
@@ -250,6 +249,30 @@
 		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
 		WHERE T_STATUS='Y' AND
 		TKEYWORD LIKE '%'||#{recommend}||'%'
+		ORDER BY TID DESC
+	</select>
+	
+	<select id="getSearchListCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
+		WHERE T_STATUS='Y' AND
+		REGEXP_LIKE(
+        UPPER(TTITLE||TADDRESS||TADDRESSH||TCONTENT
+		||TKEYWORD||TNAME||TTRANS),UPPER(#{searchVal}))
+		ORDER BY TID DESC
+	</select>
+	
+	<select id="selectSearchList" resultMap="themeResultSet">
+		SELECT * 
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
+		WHERE T_STATUS='Y' AND
+		REGEXP_LIKE(
+        UPPER(TTITLE||TADDRESS||TADDRESSH||TCONTENT
+		||TKEYWORD||TNAME||TTRANS),UPPER(#{searchVal}))
 		ORDER BY TID DESC
 	</select>
 </mapper>

@@ -15,8 +15,17 @@ public class PageInfo implements Serializable {
 	private int pageLimit;
 	private int currentPage;
 	private int themeLimit;
-
+	private int endPage;
+	
 	public PageInfo() {
+	}
+
+	public int getEndPage() {
+		return endPage;
+	}
+
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
 	}
 
 	public int getStartPage() {
@@ -77,6 +86,17 @@ public class PageInfo implements Serializable {
 		this.themeLimit = themeLimit;
 	}
 
+	public PageInfo(int startPage, int maxPage, int listCount, int pageLimit, int currentPage, int themeLimit, int endPage) {
+		super();
+		this.startPage = startPage;
+		this.maxPage = maxPage;
+		this.listCount = listCount;
+		this.pageLimit = pageLimit;
+		this.currentPage = currentPage;
+		this.themeLimit = themeLimit;
+		this.endPage = endPage;
+	}
+	
 	@Override
 	public String toString() {
 		return "PageInfo [startPage=" + startPage + ", maxPage=" + maxPage + ", listCount="

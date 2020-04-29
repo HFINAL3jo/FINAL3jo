@@ -66,18 +66,11 @@ public class ThemeController extends TFile{
 	@RequestMapping("theme.do")
 	public ModelAndView themeList(ModelAndView mv,
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
-			SearchCondition sc, @RequestParam(value="keyword") String keyword) {
+			SearchCondition sc, @RequestParam(value="keyword",required=false) String keyword) {
 		
 		int listCount = tService.getListCount(sc);
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		
-		//키워드 관련 검색 횟수 증가
-		if(sc.getKeyword() == "" || sc.getKeyword() == null) {
-			sc.setKeyword(null);
-		}else {
-			int usk = tService.updateSearchKeywordCount(sc);
-		}
 		
 		ArrayList<Theme> list = tService.selectList(pi,sc);
 		
@@ -141,7 +134,9 @@ public class ThemeController extends TFile{
 	}
 	
 	@RequestMapping("themeInsert.do")
-	public String insertTheme(Theme t,HttpServletRequest request) throws ServletException, IOException {
+	public String insertTheme(
+			Theme t,HttpServletRequest request)
+			 throws ServletException, IOException {
 		int tNum = tService.getTNum();
 		int result = 0;
 		try {
@@ -375,7 +370,7 @@ public class ThemeController extends TFile{
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
 		ArrayList<Theme> randomList = tService.selectTkeywordList(pi,recommend);
-		System.out.println(randomList);
+		
 		for(Theme t: randomList) {
 			if(t.gettTitle().length() > 16) {
 				t.settTitle(t.gettTitle().substring(0,15));
@@ -394,5 +389,39 @@ public class ThemeController extends TFile{
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		
 		gson.toJson(randomList,response.getWriter());
+	}
+	
+	@RequestMapping("search.do")
+	public ModelAndView searchTheme(ModelAndView mv,SearchCondition sc) {
+		
+		int listCount = tService.getSearchListCount(sc);
+		int currentPage = 1;
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		//키워드 관련 검색 횟수 증가
+				if(sc.getSearchVal() == "" || sc.getSearchVal() == null) {
+					sc.setSearchVal(null);
+				}else {
+					int usk = tService.updateSearchKeywordCount(sc);
+				}		
+				
+		ArrayList<Theme> list = tService.selectSearchList(pi,sc);
+		
+		for(Theme t: list) {
+			if(t.gettTitle().length() > 16) {
+				t.settTitle(t.gettTitle().substring(0,15));
+			}
+			
+			if(t.gettModifyFile().length() <= 18) {
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
+			}else if(t.gettModifyFile().contains(",")){
+				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile().substring(0,t.gettModifyFile().indexOf(",")));
+			}
+		}
+		System.out.println(list);
+		mv.addObject("list",list);
+		mv.addObject("pi",pi);
+		mv.addObject("sc",sc);
+		mv.setViewName("theme/categoryList");
+		return mv;
 	}
 }

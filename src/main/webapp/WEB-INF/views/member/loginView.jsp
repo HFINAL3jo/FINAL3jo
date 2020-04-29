@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>aligo</title>
+<title>Get inspired for your journey! - aligo</title>
 <style>
 ul[class~=social-icons]>li {
 	font-size: 2em;
@@ -82,7 +82,7 @@ ul[class~=social-icons]>li {
 										log in</button>
 										
 										
-									<input type="button" class="btn_3" id="bs" value="Sign up">
+									<input type="button" class="btn_3" style="width:100%;" id="bs" value="Sign up">
 									  
 									<a class="lost_pass" id="find" style="cursor: pointer;">forgot your password?</a>
 								</div>

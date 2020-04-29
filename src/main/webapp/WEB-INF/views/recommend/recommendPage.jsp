@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%
+    	request.setCharacterEncoding("UTF-8");
+    %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Get inspired for your journey! - aligo</title>
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
@@ -133,6 +136,10 @@
 		  filter: alpha(opacity=50);
     }
     
+    .breadcrumb{
+    	background-image: url('${contextPath}/resources/images/Recom_showcase6.jpg');
+    }
+    
     .showcase {
         margin-top: 1%;
         width: 100%;
@@ -207,7 +214,21 @@
 	
 
 	<c:if test="${ !empty sessionScope.loginUser }">
-	<div class="showcase">
+	<section class="breadcrumb breadcrumb_bg" style="height:760px;">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<div class="breadcrumb_iner">
+						<div class="breadcrumb_iner_item">
+							<h2 style="font-size:4em; padding-top:100px; position:relative; left:-10%;">Recommend</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<!-- <div class="showcase">
 		<div class="showcase_content">
 		    <div class="row justify-content-center margin-center" style="margin-top: 20%;">
 		    	<h1 data-aos="zoom-in">Recommend</h1>
@@ -216,7 +237,7 @@
 				<i class="fas fa-angle-double-down fa-5x down" data-aos="zoom-in"></i>
 	        </div>
     	</div>
-	</div>
+	</div> -->
 	
 
     <!-- survey part start -->
@@ -391,6 +412,13 @@
     <!-- custom js -->
     <script>
         $(function(){
+        	
+        	if($(document).scrollTop()==0){
+        		
+	        	var startset = $('.feature_part').offset();
+	            
+	            $('html').animate({scrollTop : startset.top-180}, 1000);
+        	}
         	
         	// ajax로 질문/ 답변 DB에서 꺼내옴
             $.ajax({

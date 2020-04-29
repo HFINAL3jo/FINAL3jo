@@ -21,8 +21,19 @@
     background: transparent;
     z-index: 5;
 }
+	table>td{
+		width:120%;
+	}
  	#tss{
  		size:2em;
+ 	}
+ 	
+ 	.single-input{
+ 		background:#f0f0f7;
+ 	}
+ 	
+ 	table tr td{
+ 		width:500px;
  	}
  	
  </style>
@@ -70,45 +81,37 @@
 	<textarea name="tContent" id="smarteditor" rows="30" cols="95"></textarea>
     <br><br>
     
-    <table align="center" width="50%" id="at">
+    <table align="center" id="at">
+	    <thead>
+	    <tr><button type="button" id="ars">search</button></tr>
+    </thead>
     <tr>
-		<td>ZIP CODE</td>
-		<td>
-			<input type="text" id="postcode" placeholder="우편번호" size="6">
-			<button type="button" id="ars">search</button>
+		<td><input type="text" id="postcode" placeholder="ZIPCODE" class="single-input" size="6">
 		</td>
 	</tr>
 	<tr>
-		<td>도로명 주소</td>
-		<td><input type="text" id="da" name="tAddressH" placeholder="도로명주소" class="adi"></td>
+		<td><input type="text" id="da" class="single-input" name="tAddressH" placeholder="도로명주소" class="adi"></td>
 	</tr>
 	<tr>
-		<td>ADDRESS</td>
-		<td><input type="text" id="ja" name="tAddress" placeholder="영문 도로명 주소" class="adi"></td>
+		<td><input type="text" id="ja" class="single-input" name="tAddress" placeholder="ADDRESS" class="adi"></td>
 	</tr>
 	<tr>
-		<td>영문 지번 주소</td>
-		<td><input type="text" id="ad" placeholder="영문 지번 주소" class="adi"></td>
+		<td><input type="text" id="ad" class="single-input" placeholder="영문 지번 주소" class="adi"></td>
 	</tr>
 	<tr>
-		<td>상세 주소</td>
-		<td><input type="text" id="sample4_extraAddress" placeholder="참고항목"></td>
+		<td><input type="text" class="single-input" id="sample4_extraAddress" placeholder="상세 주소"></td>
 	</tr>
 	<tr>
-		<td>Tel</td>
-		<td><input type="text" id="tel" name="tTel"></td>
+		<td><input type="text" placeholder="Tel" class="single-input" id="tel" name="tTel"></td>
 	</tr>
 	<tr>
-		<td>Fee</td>
-		<td><input type="text" id="fee" name="tFee"></td>
+		<td><input type="text" class="single-input" placeholder="Fee" id="fee" name="tFee"></td>
 	</tr>
 	<tr>
-		<td>transportation</td>
-		<td><input type="text" id="trans" name="tTrans"></td>
+		<td><input type="text" class="single-input" placeholder="Transportation" id="trans" name="tTrans"></td>
 	</tr>
 	<tr>
-		<td>Opening hours</td>
-		<td><input type="text" id="oh" name="tHours">
+		<td><input type="text" class="single-input" placeholder="Opening hours" id="oh" name="tHours">
 	</tr>
 	</table>
 	<br>
@@ -143,13 +146,8 @@ nhn.husky.EZCreator.createInIFrame({
 	   var theme = document.getElementById('tcl').value;
 	   var keyword = document.getElementById('tkv').value;
 	   var contents = document.getElementById('smarteditor').value;
-	   var tel = document.getElementById('tel').value;
-	   var fee = document.getElementById('fee').value;
-	   var oh = document.getElementById('oh').value;
-	   var trans = document.getElementById('trans').value;
 	   var da = document.getElementById('da').value;
 	   var ja = document.getElementById('ja').value;
-	   var ad = document.getElementById('ad').value;
 	   
 	   if(!chk(contents == '<p>&nbsp;</p>' || contents == '' || contents == null || contents == '<p><br></p>' || contents == '<br>',"Insert Content")){ // 기본적으로 아무것도 입력하지 않아도 값이 입력되어 있음. 
 	   

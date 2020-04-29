@@ -8,7 +8,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>aranaz</title>
+  <title>aligo</title>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
   <style>
 
@@ -51,7 +51,15 @@
   <!--::header part start::-->
   <%@ include file="../common/menubar.jsp"%>
   <!-- Header part end-->
-
+	<c:if test="${ empty sessionScope.loginUser }">
+    	<br><br><br><br>    	<br><br><br><br>
+    	<div style="margin: auto; align-content: center; text-align: center;">
+	    	<h1 style="margin: auto; align-content: center; font-weight: bolder;">After login, you can use.</h1>
+    	</div>
+    	<br><br><br><br>    	<br><br><br><br>
+    </c:if>
+    <c:if test="${ !empty sessionScope.loginUser }">
+    
   <!--================Home Banner Area =================-->
   <!-- breadcrumb start-->
   <section class="breadcrumb breadcrumb_bg">
@@ -145,7 +153,7 @@
 	function getList(pageNo){
 		$.ajax({
 			url:"contactListView.do",
-			data:{currentPage:pageNo},
+			data:{currentPage:pageNo, nickname:"${loginUser.nickname}"},
 			dataType:"json",
 			type:"post",
 			success:function(data){
@@ -158,7 +166,7 @@
 						listText += "<tr>";
 						listText += "<td>"+data.list[i].qId+"</td>";
 						listText += "<td>";
-						listText += "<a style='color:black' href='qdetail.do?qId="+data.list[i].qId+"&currentPage="+data.pi.currentPage+"'>"+data.list[i].qTitle+"</a>";
+						listText += "<a style='color:black' href='qdetail.do?qId="+data.list[i].qId+"&currentPage="+data.pi.currentPage+"&qWriter=${loginUser.nickname}'>"+data.list[i].qTitle+"</a>";
 						listText += "</td>";
 						
 						listText += "<td>"+data.list[i].qWriter+"</td>";
@@ -166,6 +174,7 @@
 						listText += "<td>"+data.list[i].qStatus+"</td>";
 
 						listText +="</tr>";
+				
 					}
 				
 					   // 페이징 처리
@@ -204,6 +213,7 @@
 
 		
 		</script>
+		</c:if>
 	
 </body>
 </html>

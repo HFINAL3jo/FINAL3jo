@@ -11,25 +11,27 @@ import com.aligo.spring.qna.model.vo.QnaReply;
 public interface QnAService {
 
 	/**1_1.게시글 수 조회
+	 * @param nickname 
 	 * @return
 	 */
-	int getListCount();
+	int getListCount(String nickname);
 	
 	
 	/**
 	 * 1_2.게시판 리스트 조회
+	 * @param nickname 
 	 * @param pi
 	 * @return
 	 */
-	ArrayList<QnA> selectList(QnAPageInfo pi);
+	ArrayList<QnA> selectList(String nickname, QnAPageInfo pi);
 
 
 	/**
 	 * 게시판 상세조회
-	 * @param qId
+	 * @param q
 	 * @return
 	 */
-	QnA selectBoard(int qId);
+	QnA selectBoard(QnA q);
 
 
 	/**
@@ -86,5 +88,8 @@ public interface QnAService {
 	 * @return
 	 */
 	ArrayList<QnA> getSearchQnaData(Map<String, String> map, QnAPageInfo pi);
+
+
+	ArrayList<QnA> getSearchQnaAdmin(Map<String, String> map, QnAPageInfo pi);
 
 }
