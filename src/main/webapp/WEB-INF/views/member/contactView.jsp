@@ -139,9 +139,7 @@
   </section>
   <!-- ================ contact section end ================= -->
 
-  <!--::footer_part start::-->
-  <%@ include file="../common/footer.jsp"%>
-   <!--::footer_part end::-->
+  
 
 <script>
 	$(function(){
@@ -214,6 +212,8 @@
 		
 		</script>
 		</c:if>
-	
+	<!--::footer_part start::-->
+  <%@ include file="../common/footer.jsp"%>
+   <!--::footer_part end::-->
 </body>
 </html>
