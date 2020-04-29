@@ -15,8 +15,8 @@ font-family: 'Dosis' !important;
 <style>
 input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus
 	{
-	border-bottom: 2px solid #ff3368 !important;
-	color: #ff3368 !important;
+	border-bottom: 2px solid #0067b8 !important;
+	color: #0067b8 !important;
 	transition: 0.2s ease;
 }
 
@@ -132,6 +132,10 @@ input:checked+label:after {
 	font-size: 22px;
 	cursor: pointer;
 }
+.breadcrumb{
+  	background-image:url('${contextPath}/resources/images/hanbok.jpg');
+    background-size: 100% 100%;
+  }
 </style>
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
