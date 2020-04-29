@@ -84,19 +84,19 @@
 
 						<div style="margin: 1%;">
 							처리 여부 : 
-							<select name="checkSearch" style="width:150px; margin-right:3%; margin-left: 1%;">
+							<select name="checkSearch" style="width:150px; margin-right:1%; margin-left: 1%;">
 								<option value="N">처 리 중</option>
 								<option value="Y">완 료</option>
 								<option value="X">해당 없음</option>
 								<option value="ALL">전부 다</option>
 							</select> 
 							검색 조건  : 
-							<select name="checkSearch" style="width:150px; margin-right:3%; margin-left: 1%;">
+							<select name="checkSearch" style="width:150px; margin-right:1%; margin-left: 1%;">
 								<option value="TITLE">제 목</option>
 								<option value="QWRITER">작 성 자</option>
 								<option value="NOT">검색 조건 없음</option>
 							</select>
-							<input type="text" name="checkSearch" value="" style="width:300px; margin-right:2% font-size:12pt; font-weight:bold;">
+							<input type="text" name="checkSearch" value="" style="width:300px; margin-right:1% font-size:12pt; font-weight:bold;">
 							<input type="button" onclick="injectionHiddenValue()" value="검 색">
 						</div>
 

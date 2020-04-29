@@ -9,7 +9,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Get inspired for your journey! - aligo</title>
+<title>aranaz</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
 <style>
 table {
@@ -226,12 +226,36 @@ textarea {
 								<td width="500">답변 상태 ㅣ <strong id="check">${ b.rStatus }</strong></td>
 								<td align="right">작성일 ㅣ <strong>${ b.reportSdate }</strong></td>
 							</tr>
-							<tr>
-								<td colspan="2">${b.reportContent}</td>
+							<tr id="qwriter">
+								<td colspan="2">
+									<strong><h3>내 용</h3></strong>
+									${b.reportContent}
+								</td>
 							</tr>
+							<c:if test="${b.rStatus != 'Y'}">
+								<tr id="qwriter">
+									<td colspan="2">
+										<textarea id="reportContentEnsure" name="contents" style="width: 100%; height: 450px;"></textarea>
+									</td>
+								</tr>
+								<tr id="qwriter">
+									<td colspan="2" style="text-align: right;">
+										<button onclick="ContentEnsure()">답 변 달기</button> 
+									</td>
+								</tr>
+							</c:if>
+							<c:if test="${b.rStatus  == 'Y'}">
+								<tr id="qwriter">
+									<td id="qwriter" colspan="2">
+										<strong><h3>답 변</h3></strong>
+										${b.reportContentEnsure}
+									</td>
+								</tr>
+							</c:if>
 							<tr>
 								<td style="text-align: right;" colspan="2"><a href="#" onclick="back()">이전으로 돌아가기</a></td>
 							</tr>
+							
 						</tbody>
 					</table>
 				</div>
@@ -239,6 +263,13 @@ textarea {
 			<!-- </form>     -->
 		</div>
 	</section>
+<%-- 	<c:set var="check3" value="${rCode}"/>
+	<c:out value=check3/> --%>
+	
+	<form id="updateEnsure">
+		<input type="hidden" id="check1" name="value" value = '${rCode}'>
+		<input type="hidden" name="value">
+	</form>
 
 	<%@ include file="../common/footer.jsp"%>
 	<!--::footer_part end::-->
@@ -246,8 +277,26 @@ textarea {
 		function back(){
 			history.back();
 		}
+		
 		var ensure = document.getElementById('check').innerText;
 		document.getElementById('check').innerText = (ensure == 'Y')? '답변 완 료':(ensure == 'N')? '처 리 중':'해당 없음';
+		
+		
+		var num = "<c:out value='${b.rCode}'/>";
+		document.getElementById('check1').value = num;
+		
+		console.log("num : "+num);
+		
+		var go = document.getElementById('updateEnsure');
+		go.action = "reportContentEnsure.do";
+		go.method = "post";
+		var ContentEnsure = function(){
+			// 개행 처리 를 해야 한다.
+			var str = document.getElementById('reportContentEnsure').value;
+			document.getElementsByName('value')[1].value = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+			go.submit();
+		}
+		
 	</script>
 </body>
 </html>

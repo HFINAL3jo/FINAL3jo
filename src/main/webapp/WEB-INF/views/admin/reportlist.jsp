@@ -55,14 +55,14 @@ table {
 					<form action="reportlist.do" action="get">
 						<div style="margin: 1%;">
 							처리 여부 : 
-							<select name="checkSearch" style="width:150px; margin-right:3%; margin-left: 1%;" value="${checkValue1}">
+							<select name="checkSearch" style="width:150px; margin-right:1%; margin-left: 1%;" value="${checkValue1}">
 								<option value="Y">완 료</option>
 								<option value="X">해당 없음</option>
 								<option value="N">처 리 중</option>
 								<option value="ALL">전부 다</option>
 							</select> 
 							검색 조건  : 
-							<select name="checkSearch" style="width:150px; margin-right:3%; margin-left: 1%;" value="${checkValue2}">
+							<select name="checkSearch" style="width:150px; margin-right:1%; margin-left: 1%;" value="${checkValue2}">
 								<option value="TITLE">신고 된 유형</option>
 								<option value="WRITER">작 성 자</option>
 								<option value="CONTENT">내 용</option>
@@ -76,7 +76,7 @@ table {
 				        <thead align="center">
 					        <tr>
 					            <th>글번호</th>
-					            <th>유형</th>
+					            <th>제 목</th>
 					            <th>작성자</th>
 					            <th>날짜</th>
 					            <th>처리 여부</th>
@@ -85,8 +85,8 @@ table {
 				    	<tbody id="tbody">
 				    		<c:forEach var="rlist" items="${ list }">
 				    			<tr class="trs">
-					    			<td class="num">${rlist.dDcodeNumber}</td>
-					    			<td>${rlist.rCode}</td>
+					    			<td class="num">${rlist.rCode}</td>
+					    			<td>${rlist.tTitle}</td>
 					    			<td>${rlist.reporter}</td>
 					    			<td>${rlist.reportSdate}</td>
 					    			<td>${rlist.rStatus}</td>
@@ -154,25 +154,6 @@ table {
 	
 	<%@ include file="../common/footer.jsp" %>
 	<script>
-	/* var node = document.getElementById('tbody').getElementsByTagName('tr');
-	
-	var go = document.paging;
-	
-	for(var i = 0; i<node.length-1; i++){
-		
-	    node[i].onclick = function(){
-	    	//location.href = "reportDetail.do?number="+node[i].children[0].textContent;
-	    	 alert(i);
-	    	//var s = node[i].children[0].textContent;
-	    	go.num.value = node[i].children[0].innerHTML;
-	    	
-	    	go.action = "reportDetail.do";
-	    	go.method = "post";
-	    	go.submit(); 
-	    	
-	    }
-	    
-	} */
 	
 	$(function(){
 		
