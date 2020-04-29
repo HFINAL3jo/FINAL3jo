@@ -74,10 +74,14 @@
 		    font-weight: 800;
 		    font-size: 1.5em;
 		    line-height: 50px;
-		    border-radius: 5px;
+		    border-radius: 15px;
 		}
 		#video-foreground{
 		    opacity: 0.6;
+		}
+		#go_to_index:hover{
+			background-color:#fff;
+			color:rgb(0,0,0,0.5);
 		}
     </style>
 </head>
