@@ -31,8 +31,8 @@ public class QnADao {
 		return (ArrayList)sqlSession.selectList("qnaMapper.selectList",nickname,rowBounds);
 	}
 
-	public QnA selectBoard(QnA q) {
-		return sqlSession.selectOne("qnaMapper.selectBoard",q);
+	public QnA selectBoard(int qId) {
+		return sqlSession.selectOne("qnaMapper.selectBoard",qId);
 	}
 
 	public int writeBoard(QnA q) {
@@ -69,6 +69,11 @@ public class QnADao {
 	public ArrayList<QnA> getSearchQnaAdmin(Map<String, String> map, QnAPageInfo pi) {
 		RowBounds rowBounds = new RowBounds(((pi.getCurrentPage() -1) * pi.getBoardLimit()), pi.getBoardLimit());
 		return  (ArrayList)sqlSession.selectList("qnaMapper.getSearchQnaAdmin", map, rowBounds);
+	}
+
+	public int updateStatus(QnaReply qr) {
+
+		return sqlSession.update("qnaMapper.updateStatus", qr);
 	}
 
 
