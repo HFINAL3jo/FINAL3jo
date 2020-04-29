@@ -357,7 +357,6 @@ public class MemberController {
 		String newpass = Integer.toString(num);
 		System.out.println(newpass);
 		m.setpassword(newpass);
-	//	memService.findPwd(m);
 		return m;
 }
 	
@@ -370,11 +369,11 @@ public class MemberController {
 		String newpass = m.getpassword();
 		
 		String setfrom = "noticealigo@gmail.com";
-		String tomail = request.getParameter("email"); // 받는 사람 이메일
-		String title = "[Aligo] Your temporary password"; // 제목
+		String tomail = request.getParameter("email"); 
+		String title = "[Aligo] Your temporary password"; 
 		String content =
 				"Hello~ your temporary password is [ " + newpass
-		+ " ] you must change your password after login"; // 내용
+		+ " ] you must change your password after login"; 
 
 		
 		try {
@@ -382,10 +381,10 @@ public class MemberController {
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message,
 					true, "UTF-8");
 
-			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
-			messageHelper.setTo(tomail); // 받는사람 이메일
-			messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-			messageHelper.setText(content); // 메일 내용
+			messageHelper.setFrom(setfrom); 
+			messageHelper.setTo(tomail); 
+			messageHelper.setSubject(title); 
+			messageHelper.setText(content); 
 
 			mailSender.send(message);
 			m.setpassword(bcryptPasswordEncoder.encode(m.getpassword()));
@@ -396,11 +395,6 @@ public class MemberController {
 			
 		}
 	
-
-/*		response_email.setContentType("text/html; charset=UTF-8");
-		PrintWriter out_email = response_email.getWriter();
-		out_email.println("<script>alert('check your email');</script>"); 	
-		out_email.flush(); */
 		return "redirect:loginView.do";
 
 

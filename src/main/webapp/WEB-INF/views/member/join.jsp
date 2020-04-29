@@ -172,7 +172,7 @@ input:checked+label:after {
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-lg-6 col-md-6">
-					<img src="img/korea/mainpic/wctk.jpg">
+					<img src="resources/images/seoul-5.jpg"> 
 					<div class="login_part_text text-center"
 						style="padding: 5%; display: none;">
 						<!-- <div class="login_part_text_iner">
