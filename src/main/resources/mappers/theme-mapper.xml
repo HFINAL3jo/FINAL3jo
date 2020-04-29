@@ -137,14 +137,14 @@
 	<select id="findKeywordArea" resultType="string">
 		SELECT AREA
 		FROM SEARCH_AREA
-		WHERE AREA LIKE UPPER('%'||#{keyword}||'%')
+		WHERE AREA LIKE UPPER('%'||#{searchVal}||'%')
 	</select>
 	
 	<select id="findKeywordTheme" resultType="string">
 		SELECT TCODE 
 		FROM SEARCH_THEME
 		JOIN THEME_CODE USING(TCODE)
-		WHERE TNAME LIKE UPPER('%'||#{keyword}||'%') 
+		WHERE TNAME LIKE UPPER('%'||#{searchVal}||'%') 
 	</select>
 	
 	<update id="updateCountKwT">
@@ -249,6 +249,30 @@
 		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
 		WHERE T_STATUS='Y' AND
 		TKEYWORD LIKE '%'||#{recommend}||'%'
+		ORDER BY TID DESC
+	</select>
+	
+	<select id="getSearchListCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
+		WHERE T_STATUS='Y' AND
+		REGEXP_LIKE(
+        UPPER(TTITLE||TADDRESS||TADDRESSH||TCONTENT
+		||TKEYWORD||TNAME||TTRANS),UPPER(#{searchVal}))
+		ORDER BY TID DESC
+	</select>
+	
+	<select id="selectSearchList" resultMap="themeResultSet">
+		SELECT * 
+		FROM THEME_LIST
+		JOIN THEME_CODE USING(TCODE)
+		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
+		WHERE T_STATUS='Y' AND
+		REGEXP_LIKE(
+        UPPER(TTITLE||TADDRESS||TADDRESSH||TCONTENT
+		||TKEYWORD||TNAME||TTRANS),UPPER(#{searchVal}))
 		ORDER BY TID DESC
 	</select>
 </mapper>

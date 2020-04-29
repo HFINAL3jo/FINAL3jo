@@ -20,6 +20,11 @@
 		<typeAlias type="com.aligo.spring.recom.model.vo.ThemeVo" alias="ThemeVo"/>
 		<typeAlias type="com.aligo.spring.qna.model.vo.QnaReply" alias="QnaReply"/>
 		<typeAlias type="com.aligo.spring.report.model.vo.Report" alias="Report"/>
+		
+		<typeAlias type="com.aligo.spring.blog.model.vo.Blog" alias="Blog"/>
+		<typeAlias type="com.aligo.spring.blog.model.vo.BFile" alias="BFile"/>
+		<typeAlias type="com.aligo.spring.blog.model.vo.BName" alias="BName"/>
+		
 	</typeAliases>
 	
 	<mappers>
@@ -31,6 +36,7 @@
 		<mapper resource="mappers/qna-mapper.xml"/>
 		<mapper resource="mappers/statistics-mapper.xml"/> 
 		<mapper resource="mappers/report-mapper.xml"/> 
+		<mapper resource="mappers/blog-mapper.xml"/> 
 	</mappers>
 	
 </configuration>

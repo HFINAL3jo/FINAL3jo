@@ -5,6 +5,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% 
+	request.setCharacterEncoding("UTF-8");
+
 	Map<Integer, ArrayList<ThemeVo>> map = (Map)request.getAttribute("map");
 	System.out.println(map.size());
 	System.out.println(map.get(0));
@@ -19,7 +21,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Get inspired for your journey! - aligo</title>
 
 	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -72,8 +74,7 @@
 		display: flex;
 		flex-direction: column;
 		margin:1% auto;
-		max-width: 70%;
-		border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+		max-width: 77%;
 	}
 	.card-section h2 {
 	    font-size: 36px;
@@ -182,6 +183,18 @@
        margin-right: 0px !important;
        margin-left: 0px !important;
 	}
+	
+	hr{
+		width: 90%;
+		height: 3px !important;
+		border: 2px !important;
+		border-top: 1px solid darkblue !important;
+		
+	}
+	
+	.breadcrumb{
+    	background-image: url('${contextPath}/resources/images/Recom_showcase6.jpg');
+    }
 	</style>
 
 <script src="resources/js/jquery-3.4.1.min.js"></script>
@@ -196,88 +209,132 @@
 	<%@ include file="../common/menubar.jsp"%>
 	<!-- Header part end-->
 
-	<div class="showcase">
-		<div class="showcase_content">
-		    <div class="row justify-content-center margin-center" style="margin-top: 20%;">
-		    	<h1 data-aos="zoom-in">Recommend List</h1>
+	<c:if test="${ !empty sessionScope.loginUser }">
+	<section class="breadcrumb breadcrumb_bg" style="height:760px;">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<div class="breadcrumb_iner">
+						<div class="breadcrumb_iner_item">
+							<h2 style="font-size:4em; padding-top:100px; position:relative; left:-10%;">Recommend <br>List</h2>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="row justify-content-center margin-center" style="margin-top: 15%; margin-bottom:10%;">
-				<i class="fas fa-angle-double-down fa-5x down" data-aos="zoom-in"></i>
-	        </div>
-    	</div>
-	</div>
+		</div>
+	</section>
 
-	<%! 
-		int count = 0;
-	%>
-	<% for(int i=1; i<8; i++){ %>
-		<% count=count+1; %>
+	<% for(int i=0; i<7; i++){ %>
 		<div class="card-section">
-		<% if( !map.get(count).isEmpty() ){ %>
-			<h2><%= map.get(count).get(0).getTname() %> LIST
-				<% if( map.get(count).size() == 3 ){ %>
+		<% if( !map.get(i).isEmpty() ){ %>
+			<h2><%= map.get(i).get(0).getTname() %> LIST
+				<% if( map.get(i).size() == 3 ){ %>
 				<span class="moreView">View more...</span>
 				<%} %>
 			</h2>
-			<input type="hidden" value="<%= map.get(count).get(0).getTcode() %>" class="cardTcode"/>
-			<input type="hidden" value="<%= map.get(count).get(0).getKeywords() %>" class="keywords"/>
+			<input type="hidden" value="<%= map.get(i).get(0).getTcode() %>" class="cardTcode"/>
+			<input type="hidden" value="<%= map.get(i).get(0).getKeywords() %>" class="keywords"/>
 				<div class="card-list">
-			<% for(int j = 0; j < map.get(count).size(); j++){ %>
-				<% if( map.get(count).get(j) != null ){ %>
+			<% for(int j = 0; j < map.get(i).size(); j++){ %>
+				<% if( map.get(i).get(j) != null ){ %>
 					<div class="card">
-						<img src="<%= map.get(count).get(j).getTfile() %>" 
-							onclick="location.href='postdetail.do?tId='+<%= map.get(count).get(j).getTid() %>;">
-						<span><%= map.get(count).get(j).getTtitle() %></span>
+						<img src="<%= map.get(i).get(j).getTfile() %>" 
+							onclick="location.href='postdetail.do?tId='+<%= map.get(i).get(j).getTid() %>;">
+						<span> <%= map.get(i).get(j).getTtitle() %> </span>
 					</div>
 				<%} %>
 			<%} %>
 				</div>
+				<br><hr>
 		<%}else{ %>
 			<% switch(i){
-			case 1 : %>
+			case 0 : %>
 				<h2>NATURE LIST</h2>
 				<%break;
-			case 2 : %>
+			case 1 : %>
 				<h2>RESTAURANT LIST</h2>
 				<%break;
-			case 3 : %>
+			case 2 : %>
 				<h2>HISTORY LIST</h2>
 				<%break;
-			case 4 : %>
+			case 3 : %>
 				<h2>SHOPPING LIST</h2>
 				<%break;
-			case 5 : %>
+			case 4 : %>
 				<h2>BAR LIST</h2>
 				<%break;
-			case 6 : %>
+			case 5 : %>
 				<h2>ACTIVITY LIST</h2>
 				<%break;
-			case 7 : %>
+			case 6 : %>
 				<h2>EXHIBITION LIST</h2>
 				<%break;
 			}%>
-			<div class="card-list" style="height: 150px;">
+			<div class="card-list" style="height: 200px;">
 				<h4>There is no list.</h4>
 			</div>
-			
+			<hr>
 		<%} %>
 		</div>
-	<%} %>
 		
+	<%} %>
+	</c:if>
+	<c:if test="${ empty sessionScope.loginUser }">
+	   	<br><br><br><br>    	<br><br><br><br>
+	   	<div style="margin: auto; align-content: center; text-align: center;">
+	    	<h1 style="margin: auto; align-content: center; font-weight: bolder;">After login, you can use.</h1>
+	   	</div>
+	   	<br><br><br><br>    	<br><br><br><br>
+    </c:if>
+    
+    <input type="hidden" value="0" id="viewCheck"/>
+    <input type="hidden" value="1" id="currentPage"/>
+    
+    
+    
 	<!--::footer_part start::-->
 	<%@ include file="../common/footer.jsp"%>
 	<!--::footer_part end::-->
 	
 	<script>
-		$(function(){
-			//	페이지 이동 animate script
-		    $('.down').on('click',function(){
-		        
-		        var offset = $(this).parent().parent().parent().next().children().offset();
-		        
-		        $('html').animate({scrollTop : offset.top - 110}, 1000);
-		    });
+		window.onmousewheel = function(e) {
+			e.preventDefault;
+			var aa = $(window).height();
+			var bb = $(document).height();
+			var cc = $(window).scrollTop();
 			
+			if (Math.floor((aa / (bb - cc)) * 100 > 60 && e.deltaY === 100)) {
+				
+				console.log('확인!');
+				rpagination();
+			}
+		}
+		
+		function rpagination(){
+			
+			$.ajax({
+				url : "rPagination.do",
+				data : {
+					currentPage : $('#currentPage')+1,
+					rkStr : $('.keywords').val(),
+					tcode : $('.cardTcode').val()
+				},
+				dataType:"json",
+				success:function(data){
+				
+				   console.log(data);
+				   
+				   if(data==false){
+					   
+					   $('.card-section').after('<h4>There is no more data.</h4>');
+				   }
+				   
+				   
+			   	}
+			});
+		}
+		
+		$(function(){
 			
 			$('.moreView').on('click', function(){
 				
@@ -305,6 +362,7 @@
 							
 							if(index >= 3){
 								
+								var imgs = value.tfile.replace('amp;','');
 								$div1 = $('<div>').addClass('card');
 								$img1 = $('<img>').attr('src', value.tfile);
 								$img1.attr('onclick',"location.href='postdetail.do?tId='+"+value.tid+";")
@@ -319,25 +377,15 @@
 						
 						$vmspan.remove();
 						$addspan = $('<span>').addClass('moreView').text('All theme...');
-						$addspan.attr('onclick', "viewmore('"+rkStr+"');");
+						$addspan.attr('onclick', "location.reload();");
 						$h2.append($addspan);
 						
+						$("#viewCheck").val(1);
 					}
 				});
 			});
 			
 		});
-		
-		function viewmore(rkStr){
-			
-			location.reload();
-			/* 
-			console.log(rkStr);
-			var uri = "rResultList2.do?rkStr='"+rkStr+"'"
-			var deuri = encodeURI(uri);
-			location.href = deuri;
-			 */
-		}
 		
 		
 	</script>

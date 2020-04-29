@@ -137,5 +137,20 @@ public interface ThemeService {
 	 * @return
 	 */
 	ArrayList<Theme> selectTkeywordList(PageInfo pi, String recommend);
+
+	/**
+	 * 검색 리스트목록
+	 * @param pi
+	 * @param sc
+	 * @return
+	 */
+	ArrayList<Theme> selectSearchList(PageInfo pi, SearchCondition sc);
+
+	/**
+	 * 검색 리스트 갯수
+	 * @param sc
+	 * @return
+	 */
+	int getSearchListCount(SearchCondition sc);
 	
 }

@@ -18,7 +18,7 @@
 	}
 	
 	.list li a:hover{
-		font-size:2em !important;
+		font-size:1.5em !important;
 		color:black !important;
 	}
 	
@@ -48,32 +48,29 @@
 									<br><br>                                   
                                 <ul class="list">
                                     <li>
-                                        <a href="theme.do?keyword=Nature">Nature</a>
+                                        <a href="blog.do?keyword=INFORMATION">Information</a>
                                     </li>
                                     <li>
-                                        <a href="theme.do?keyword=Restaurant">Restaurant</a>
+                                        <a href="blog.do?keyword=TRANSPORTATION">Transportation</a>
                                     </li>
                                     <li>
-                                        <a href="theme.do?keyword=History">History</a>
+                                        <a href="blog.do?keyword=TRAVEL GUIDE">Travel guide</a>
                                     </li>
                                     <li>
-                                        <a href="theme.do?keyword=Shopping">Shopping</a>
+                                        <a href="blog.do?keyword=ACCOMMODATION">Accommodation</a>
                                     </li>
                                     <li>
-                                        <a href="theme.do?keyword=Bar">Bar</a>
+                                        <a href="blog.do?keyword=REVIEWS">Reviews</a>
                                     </li>
                                     <li>
-                                        <a href="theme.do?keyword=Activity">Activity</a>
+                                        <a href="blog.do?keyword=ETC">etc</a>
                                     </li>
                                     <li>
-                                        <a href="theme.do?keyword=Exhibition">Exhibition</a>
-                                    </li>
-                                    <li>
-                                        <a href="theme.do?keyword=">All</a>
+                                        <a href="blog.do?keyword=">All</a>
                                     </li>
                                 </ul>
                                 <br>
-                                <c:if test="${loginUser.nickname eq 'ADMIN' }">
+                                <c:if test="${!empty loginUser}">
                              <button id="wb" type="button" class="btn btn-outline-danger">Write Post</button></c:if>
                             </div>
                         </aside>

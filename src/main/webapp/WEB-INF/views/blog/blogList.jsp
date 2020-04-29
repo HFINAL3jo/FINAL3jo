@@ -80,7 +80,22 @@
 	  border: 1px solid #0067b8;
 	  background: #0067b8;
 	} */
-
+	#bt tr{
+		background:white;
+	}
+	#bt tr:hover{
+		background:#f0f1f2;
+		cursor:pointer;
+	}
+	
+	ul li{
+		justify-content:center !important;
+		display:inline-block;
+	}
+	
+	#pag{
+		margin-left:250px !important;
+	}
 </style>
 
 </head>
@@ -123,14 +138,13 @@
 						<div class="single_product_menu">
 								Number of posts <span>${pi.listCount}</span>
 							</p>
-							<!-- <p>여행 테마 -> 전통 -> 고궁</p> -->
 						</div>
 
 						<div class="single_product_menu d-flex">
 							<div class="input-group">
 
-								<button id="lastPost" class="genric-btn success"
-									style="width: 100%; height: 90%;">Latest Posting</button>
+								<button id="topview" class="genric-btn success"
+									style="width: 100%; height: 90%;">Top Views</button>
 
 							</div>
 							&nbsp;&nbsp;
@@ -143,8 +157,51 @@
 				</div>
 			</div>
 			<div id="aList" class="row align-items-center latest_product_inner">
-			
-			    <c:forEach var="t" items="${ list }" begin="0" end="${ pi.themeLimit }">
+			<div class="table-responsive">
+        <table class="table table-striped table-sm" id="bt" style="text-align:center;">
+            <tr>
+              <th style="width:7%;">NO</th>
+              <th style="width:52%;">Subject</th>
+              <th style="widht:14%;">Writer</th>
+              <th style="width:12%;">Date</th>
+              <th style="widht:7%;">Views</th>
+              <th style="widht:8%;">Likes</th>
+            </tr>
+          <tbody>
+            <%-- <c:forEach var="b" items="${list }">
+           <c:url var=blog value="bDetailView.do">
+           		<c:param name="bId" value="${b.bId }"/>
+           		<c:param name="currentPage" value="${pi.currentPage }"/>
+           </c:url>
+            <a href="${blog }">
+            <tr>
+  				<td>${b.bId }</td>
+  				<td>${b.bTitle }</td>
+  				<td>${b.bWriter }</td>     
+  				<td>${b.bCreateDate }</td>
+  				<td>${b.bViews }</td>     
+  				<td>${b.bLikes }</td>     
+            </tr></a>
+            </c:forEach>
+            </tbody>
+        </table>
+	      </div>
+			      
+		  <ul id="pag">
+		  <li>
+		  	 <c:url var="bpc" value="bpagination.do">
+		  	 	<c:param name="currentPage" value="${ pi.currentPage}"></c:param>
+		  	 </c:url>
+		      <a class="page-link" href="${bpc }" tabindex="-1" aria-disabled="true">Previous</a>
+		    </li>
+		    <li class="page-item"><a class="page-link" href="${bpc }">1</a></li>
+		    <c:forEach var="bp" items="${list }" begin="">
+		    <li class="page-item"><a class="page-link" href="${bpc }">${bp}</a></li>
+		    </c:forEach>
+		    <li class="page-item"><a class="page-link" href="#">Next</a>
+		    </li>
+		  </ul> --%>
+			    <%-- <c:forEach var="t" items="${ list }" begin="0" end="${ pi.themeLimit }">
 				<div class="col-lg-4 col-sm-6" style="max-width:50% !important;">
 				    <c:url var="post" value="blogdetail.do">
 					 <c:param name="tId" value="${ t.tId }"/>
@@ -171,7 +228,7 @@
 			<div align="center">
 				<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:white;">Lord More..</button></a>
 				<!-- <input type="submit" value="WRITE" class="mybtn e-large"> -->
-			</div>
+			</div> --%>
 			
 		</div>
 		<div class="floatdiv">
@@ -256,7 +313,7 @@
 				}
 			}
 		
-	 $('#lastPost').click(function(){
+	 $('#topview').click(function(){
 		 searchValue = 2;
 		 currentPage = 1;
 		 $('#titlebar').text('Newest');

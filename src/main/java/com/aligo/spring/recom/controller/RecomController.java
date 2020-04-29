@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,8 +33,10 @@ public class RecomController {
 	private RecomService rService;
 	
 	@ResponseBody
-	@RequestMapping("rSelectQA.do")
+	@RequestMapping("/rSelectQA.do")
 	public void recomSelectQA(HttpServletResponse response) throws JsonIOException, IOException {
+		
+		response.setContentType("text/html; charset=UTF-8");
 		
 		//	DB에서 질문과 답 리스트 가져오기
 		ArrayList<Recommend> rList = rService.selectRecommendQA();
@@ -71,7 +74,20 @@ public class RecomController {
 				list.get(j).setKeywords(rk);
 			}
 			
-			map.put(i, list);
+			for(ThemeVo t: list) {
+				
+				if(t.getTtitle().length() > 16) {
+					t.setTtitle(t.getTtitle().substring(0,15));
+				}
+				
+				if(t.getTfile().length() <= 18) {
+					t.setTfile("resources/tuploadFiles/" + t.getTfile());
+				}else if(t.getTfile().contains(",")){
+					t.setTfile("resources/tuploadFiles/" + t.getTfile().substring(0,t.getTfile().indexOf(",")));
+				}
+			}
+			
+			map.put(i-1, list);
 		}
 		
 		mv.addObject("map", map);
@@ -79,58 +95,6 @@ public class RecomController {
 		return mv;
 	}
 	
-//	@RequestMapping("rResultList2.do")
-//	public ModelAndView recomResultList2(ModelAndView mv, String rkStr) {
-//		
-//		System.out.println("확인");
-//		System.out.println("rkStr : " + rkStr);
-//		
-//		ThemeVo tv = new ThemeVo();
-//		
-//		String[] keywords = new String[5];
-//		
-//		String[] strArr1 = rkStr.split("=");
-//		for(int i = 1; i < strArr1.length; i++) {
-//
-//			if(i != strArr1.length-1) {
-//				
-//				String str = strArr1[i].split(", ")[0];
-//				keywords[i-1] = str;
-//			}else {
-//				
-//				String str = strArr1[i].substring(0, strArr1[i].length()-2);
-//				keywords[i-1] = str;
-//			}
-//		}
-//		
-//		RecomKeyword rk = new RecomKeyword(keywords[0], keywords[1], keywords[2], keywords[3], keywords[4]);
-//		tv.setKeywords(rk);
-//
-//		System.out.println("!!!tv : ");
-//		System.out.println(tv);
-//		
-//		Map<Integer, ArrayList<ThemeVo>> map = new HashMap<Integer, ArrayList<ThemeVo>>();
-//		
-//		for(int i = 1; i < 8; i++) {
-//			
-//			String code = "T" + i;
-//			
-//			tv.setTcode(code);
-//			
-//			ArrayList<ThemeVo> list = rService.selectList(tv);
-//
-//			for(int j = 0 ; j < list.size(); j++) {
-//				
-//				list.get(j).setKeywords(rk);
-//			}
-//			System.out.println(list);
-//			map.put(i, list);
-//		}
-//		
-//		mv.addObject("map", map);
-//		mv.setViewName("recommend/recomResultList");
-//		return mv;
-//	}
 	
 	/**
 	 * 	tcode와 rk를 가지고 THEME 리스트를 전송함
@@ -176,12 +140,85 @@ public class RecomController {
 		
 		ArrayList<ThemeVo> list = rService.rResultMoreList(pi, tv);
 		
+		
 		if(list == null || list.size() == 0) {
 			
 			//	넘길 값이 없음
 			PrintWriter out = response.getWriter();
 			out.print(false);
 		}else {
+			
+			for(ThemeVo t: list) {
+				
+				if(t.getTfile().contains("amp;")) {
+					
+					t.setTfile(t.getTfile().replace("amp;", ""));
+				}
+			}
+			new Gson().toJson(list, response.getWriter());
+		}
+	}
+	
+	/**
+	 * 	rResultList 페이지네이션
+	 * @param session
+	 * @param response
+	 * @param tcode
+	 * @param rkStr
+	 * @param currentPage
+	 * @throws IOException 
+	 */
+	@ResponseBody
+	@RequestMapping("rPagination.do")
+	public void rpagination(HttpSession session, HttpServletResponse response, String tcode, String rkStr,
+			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) throws IOException {
+		
+		response.setContentType("application/json; charset=UTF-8");
+		ThemeVo tv = new ThemeVo();
+		tv.setTcode(tcode);
+		
+		String[] keywords = new String[5];
+		
+		String[] strArr1 = rkStr.split("=");
+		for(int i = 1; i < strArr1.length; i++) {
+
+			if(i != strArr1.length-1) {
+				
+				String str = strArr1[i].split(", ")[0];
+				keywords[i-1] = str;
+			}else {
+				
+				String str = strArr1[i].substring(0, strArr1[i].length()-1);
+				keywords[i-1] = str;
+			}
+		}
+		
+		RecomKeyword rk = new RecomKeyword(keywords[0], keywords[1], keywords[2], keywords[3], keywords[4]);
+		tv.setKeywords(rk);
+		
+		int listCount = rService.getListCount(tv);
+		System.out.println("여기 : " + listCount);
+		System.out.println("여기 : " + currentPage);
+		
+		PageInfo pi = Pagination.getPageInfo2(currentPage, listCount);
+		
+		ArrayList<ThemeVo> list = rService.rResultMoreList(pi, tv);
+		
+		
+		if(list == null || list.size() == 0) {
+			
+			//	넘길 값이 없음
+			PrintWriter out = response.getWriter();
+			out.print(false);
+		}else {
+			
+			for(ThemeVo t: list) {
+				
+				if(t.getTfile().contains("amp;")) {
+					
+					t.setTfile(t.getTfile().replace("amp;", ""));
+				}
+			}
 			
 			new Gson().toJson(list, response.getWriter());
 		}
@@ -250,6 +287,8 @@ public class RecomController {
 	@ResponseBody
 	@RequestMapping("rUpdateViewPi.do")
 	public void recomUpdateViewPi(HttpServletResponse response, int recomNum) throws JsonIOException, IOException {
+		
+		response.setContentType("text/html; charset=UTF-8");
 		
 		//	RQCODE 컬럼에서 recomNum 번째 데이터를 가져옴
 		Recommend r = rService.selectRecomNum(recomNum);
