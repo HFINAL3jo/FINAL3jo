@@ -97,7 +97,7 @@ public static PageInfo getPageInfo3(int currentPage, int listCount) {
 			endPage = maxPage;
 		}
 		
-		PageInfo pi = new PageInfo(startPage, maxPage, listCount, blogCursorLimit, currentPage, blogLimit);
+		PageInfo pi = new PageInfo(startPage, maxPage, listCount, blogCursorLimit, currentPage, blogLimit, endPage);
 		
 		return pi;
 	}

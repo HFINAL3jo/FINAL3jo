@@ -356,42 +356,42 @@
                 <!-- wide-inner-->
 				
                 <div class="loction">
-                    &gt;&nbsp;<span id="th" class="ar">Theme</span> 
-                    &gt;&nbsp;<span id="tn" class="ar">${t.tName }</span> 
+                    &gt;&nbsp;<span id="th" class="ar">Blog</span> 
+                    &gt;&nbsp;<span id="tn" class="ar">${b.bName }</span> 
                 </div>
                 <!-- location  -->
 
                 <section class="infor-element">
-                    <h3 class="h3 textcenter">${t.tTitle }</h3>
+                    <h3 class="h3 textcenter">${b.bTitle }</h3>
                     <br>                    
-					<span style="float:right;">Views : ${t.tViews }</span><br>
-					<span style="float:right;">Likes : ${t.tLikes }</span><br>
-					<c:if test="${loginUser.nickname eq t.tWriter || loginUser.nickname eq 'ADMIN'}">
+					<span style="float:right;">Views : ${b.bviews }</span><br>
+					<span style="float:right;">Likes : ${b.bLikes }</span><br>
+					<c:if test="${loginUser.nickname eq b.bWriter || loginUser.nickname eq 'ADMIN'}">
 					<br><button id="dp" style="float:right; margin-left:10px;">Delete</button>					
 					<button id="mp" style="float:right;">Modify</button>
 					</c:if>
                     <div class="post-element">
-                        <span>Posted : ${t.tCreateDate } / Modified : ${t.tModifyDate }</span>
+                        <span>Posted : ${b.bCreateDate } / Modified : ${b.bModifyDate }</span>
                     </div>
                     <div class="text-area" style="text-align:center;">
-                        ${t.tContent }
+                        ${b.bContent }
                         <br><br>
                         <div class="cnt-blockquote">
                             <dl><dt>Address</dt>
-                                <dd>${t.tAddress }</dd>
+                                <dd>${b.bAddress }</dd>
                             </dl>
                             <dl><dt>Traffic</dt>
-                                <dd>${t.tTrans }</dd>
+                                <dd>${b.bTrans }</dd>
                             </dl>
                             <dl><dt>Fee</dt>
-                                <c:if test="${!empty t.tFee  }">${t.tFee }<dd></dd></c:if>
-                                <c:if test="${empty t.tFee  }">Free<dd></dd></c:if>
+                                <c:if test="${!empty b.bFee  }">${t.tFee }<dd></dd></c:if>
+                                <c:if test="${empty b.bFee  }">Free<dd></dd></c:if>
                             </dl>
                             <dl><dt>Tel</dt>
-                                <dd>${t.tTel }</dd>
+                                <dd>${b.bTel }</dd>
                             </dl>
                             <dl><dt>Opening</dt>
-                                <dd>${t.tHours }</dd>
+                                <dd>${b.bHours }</dd>
                             </dl>
                         </div>
                         <p>&nbsp;</p>
@@ -411,18 +411,18 @@
 								<tr>
 									<td>Reply</td>
 									<c:if test="${empty loginUser }">
-									<td colspan="2" width="95%"><a href="loginView.do" id="lof"><textarea name="trContent" id="tr" align="center" rows="5" cols="95" style="resize: none;" placeholder="If you want leave a message..Please login First" readonly="readonly"></textarea></a></td>
+									<td colspan="2" width="95%"><a href="loginView.do" id="lof"><textarea name="brContent" id="tr" align="center" rows="5" cols="95" style="resize: none;" placeholder="If you want leave a message..Please login First" readonly="readonly"></textarea></a></td>
 									</c:if>
 									<c:if test="${!empty loginUser }">
-									<td colspan="2" width="95%"><textarea name="trContent" id="trc" align="center" rows="5" cols="95" style="resize: none;" placeholder=""></textarea></td>
+									<td colspan="2" width="95%"><textarea name="brContent" id="trc" align="center" rows="5" cols="95" style="resize: none;" placeholder=""></textarea></td>
 									</c:if>
 								</tr>
 						</table>
 						<c:if test="${!empty loginUser}">
-						<button id="rSubmit" style="float:right; margin-right:136px; border-radius:10px;">Add a Comment</button>
+						<button id="bSubmit" style="float:right; margin-right:136px; border-radius:10px;">Add a Comment</button>
 						</c:if>
 						<br><br>
-						<table class="reply" id="trtl" align="center">
+						<table class="reply" id="brtl" align="center">
 							<tbody>
 								<tr>
 								 	
@@ -434,7 +434,7 @@
                 
                 <section class="tag-element detail">
                     <p>
-                        <c:if test="${!empty t.tKeyword }"><h3 class="black"><a href="">#${t.tKeyword }</a></h3></c:if>
+                        <c:if test="${!empty b.bTag }"><h3 class="black"><a href="">#${b.bTag }</a></h3></c:if>
                     </p>
                 </section>
                     </div>
@@ -497,11 +497,11 @@
 				    <%if(request.getSession().getAttribute("loginUser") != null){%>
 				    $(function(){
 				    	var loginUser = '${loginUser.nickname}';
-				    	var tId = '${t.tId}';
+				    	var bId = '${b.bId}';
 				    	$.ajax({
-				    		url:"likeStatus.do",
+				    		url:"blikeStatus.do",
 				    		type:"post",
-				    		data:{loginUser:loginUser,tId:tId},
+				    		data:{loginUser:loginUser,bId:bId},
 				    		success:function(data){
 				    			if(data =='true'){
 				    			 var btn = $('#likeBtn');
@@ -531,14 +531,14 @@
 				   <%}%>
 				    function like(data) {
 				   		var lv = data.value;
-				   		var tId = '${t.tId}';
+				   		var tId = '${b.bId}';
 				   		var loginUser = '${loginUser.nickname}';
-				   		var tCode = '${t.tCode}';
+				   		var tCode = '${b.bCode}';
 				    		
 						 $.ajax({
-							url: "updateLike.do",
+							url: "bupdateLike.do",
 							type:"post",
-							data:{tId:tId,lv:lv,loginUser:loginUser,tCode:tCode},
+							data:{bId:bId,lv:lv,loginUser:loginUser,tCode:tCode},
 							success:function(data){
 								console.log(data);
 							},error:function(){
@@ -550,27 +550,27 @@
 				    $('.loction span').mouseenter(function(){
 				    	$(this).css('cursor','pointer');
 				    }).click(function(e){
-				    	if(e.target.innerText == "Theme"){
-				    		location.href="theme.do";
+				    	if(e.target.innerText == "Blog"){
+				    		location.href="blog.do";
 				    	}else{
-				    		location.href="theme.do?keyword="+e.target.innerText;
+				    		location.href="blog.do?keyword="+e.target.innerText;
 				    	}
 				    });
 				   
 				    //댓글 submit
-				    $('#rSubmit').click(function(){
-				    	var trWriter = '${loginUser.nickname}';
-				    	var trContent = $('#trc').val();
-				    	var refTid = '${t.tId}';
+				    $('#bSubmit').click(function(){
+				    	var brWriter = '${loginUser.nickname}';
+				    	var brContent = $('#brc').val();
+				    	var refTid = '${b.bId}';
 				    	
 				    	$.ajax({
 				    		url:"addTReply.do",
-				    		data:{trWriter:trWriter,trContent:trContent,refTid:refTid},
+				    		data:{brWriter:brWriter,brContent:brContent,refTid:refTid},
 				    		type:"post",
 				    		success:function(data){	
 				    			if(data=="success"){
 				    				getTReplyList();
-				    				$('#trc').val('');
+				    				$('#brc').val('');
 				    			}
 				    		},error:function(){
 				    			console.log("댓글전송실패");
@@ -588,7 +588,7 @@
 						}, 30000);  */
 				     });
 				    	function getTReplyList(){
-				    		$tableBody = $('#trtl tbody');
+				    		$tableBody = $('#brtl tbody');
 				    		$tableBody.html("");
 				    		
 				    		var $tr; 
@@ -599,9 +599,9 @@
 				    		var $input;
 				    		var $input2;
 				    		
-				    		var tId = '${t.tId}';
+				    		var bId = '${b.bId}';
 				    		$.ajax({
-				    			url:"trList.do",
+				    			url:"btrList.do",
 				    			data:{tId:tId},
 				    			dataType:"json",
 				    			success:function(data){
@@ -610,22 +610,22 @@
 				    				
 				    				for(var i in data){
 				    				
-					    				if(data[i].trWriter == '${loginUser.nickname}'){
+					    				if(data[i].brWriter == '${loginUser.nickname}'){
 					    					
 					    				$tr = $('<tr>');
-					    				$trWriter = $('<td>').text(data[i].trWriter);
+					    				$trWriter = $('<td>').text(data[i].brWriter);
 					    				$td = $('<td>').addClass('replyList');
-					    				$trContent = $('<div align="center">').addClass('trd').text(data[i].trContent);
-					    				$trCreateDate = $('<td>').text(data[i].trCreateDate);
+					    				$brContent = $('<div align="center">').addClass('trd').text(data[i].brContent);
+					    				$brCreateDate = $('<td>').text(data[i].brCreateDate);
 					    				var $br = $('<br>');
 					    				$input = $('<input type="button" value="Delete">').css('font-size','0.8em')
 					    				.attr('onclick','delReply(this);').addClass('delThis');
-					    				$input2 = $('<input type="hidden">').val(data[i].trId).addClass('deltrId');
+					    				$input2 = $('<input type="hidden">').val(data[i].brId).addClass('delbrId');
 
-					    				$tr.append($trWriter);
+					    				$tr.append($brWriter);
 					    				$tr.append($td);
-					    				$td.append($trContent);
-					    				$tr.append($trCreateDate);
+					    				$td.append($brContent);
+					    				$tr.append($brCreateDate);
 					    				$trCreateDate.append($br);
 					    				$trCreateDate.append($input);
 					    				$trCreateDate.append($input2);
@@ -633,15 +633,15 @@
 					    				$tableBody.append($tr);
 				    					}else{
 				    						$tr = $('<tr>');
-						    				$trWriter = $('<td>').text(data[i].trWriter);
+						    				$brWriter = $('<td>').text(data[i].brWriter);
 						    				$td = $('<td>').addClass('replyList');
-						    				$trContent = $('<div align="center">').addClass('trd').text(data[i].trContent);
-						    				$trCreateDate = $('<td colspan="10">').text(data[i].trCreateDate);
+						    				$brContent = $('<div align="center">').addClass('trd').text(data[i].brContent);
+						    				$brCreateDate = $('<td colspan="10">').text(data[i].brCreateDate);
 						    				
-						    				$tr.append($trWriter);
+						    				$tr.append($brWriter);
 						    				$tr.append($td);
-						    				$td.append($trContent);
-						    				$tr.append($trCreateDate);
+						    				$td.append($brContent);
+						    				$tr.append($brCreateDate);
 						    				
 						    				$tableBody.append($tr);
 				    					}	
@@ -650,10 +650,10 @@
 				    				}else{
 				    					$tr = $('<tr>');
 				    					$td = $('<td>').addClass('replayList');
-				    					$trContent = $('<div align="center">').addClass('trd').text('Leave First Reply Our Journey');
+				    					$brContent = $('<div align="center">').addClass('trd').text('Leave First Reply Our Journey');
 				    					
 				    					$tr.append($td);
-				    					$td.append($trContent);
+				    					$td.append($brContent);
 				    					$tableBody.append($tr);
 				    				}
 				    			},error:function(){
@@ -663,26 +663,26 @@
 				    	}
 				    //포스트 수정
 				    $('#mp').click(function(){
-				    	location.href="themeModifyView.do?tId="+'${t.tId}';
+				    	location.href="blogModifyView.do?tId="+'${b.bId}';
 				    });
 				    
 				    //포스트 삭제
 				    $('#dp').click(function(){
 				    	var e = window.confirm("Are you delete your post?");
 				    	if(e){
-				    		location.href="deleteTheme.do?tId="+'${t.tId}';
+				    		location.href="deleteBlog.do?bId="+'${b.bId}';
 				    	}
 				    });
 				  	
 				    //댓글 삭제
 				    function delReply(value){
-				    	var trId = $(value).siblings('input').val();
+				    	var brId = $(value).siblings('input').val();
 				    	var e = window.confirm("Are you delete your reply?");
 				    	if(e){
 				    		$.ajax({
-				    			 url:"deleteTReply.do",
+				    			 url:"deleteBReply.do",
 				    			type:"get",
-				    			data:{trId:trId},
+				    			data:{brId:brId},
 				    			success:function(data){
 				    				if(data == 'success') getTReplyList();
 				    				alert("Delete Success");
@@ -692,49 +692,7 @@
 				    		});
 				    	}
 				    } 
-				    //랜덤으로 keyword 게시물 보여주기
-				    	
-					var recommend = '${t.tKeyword}';
-					
-				    function getRandomList(){
-				    	console.log(recommend);
-				     $.ajax({
-				    	url:"getRandomlist.do",
-				    	data:{recommend:recommend},
-				    	type:"post",
-				    	dataType:"json",
-				    	success:function(data){
-				    		console.log(data);
-				    		var $ul = $('ul[class=cols4-element]');
-				    		var $li; 
-				    		var $a;
-				    		var $img;
-				    		var $span; 
-				    		var $span2;
-				    		
-				    		$ul.html("");
-				    		$.each(data,function(index,item){
-				
-					    		$li = $('<li>');
-					    		$a = $('<a>').attr("href","postdetail.do?tId="+data[index].tId)
-					    		.attr("title",data[index].tTitle);
-					    		$img = $('<img>').attr('src',data[index].tModifyFile);
-					    		$span = $('<span>').addClass('link');
-					    		$span2 = $('<span>').text(data[index].tTitle);
-				    			
-					    		$li.append($a);
-					    		$a.append($img);
-					    		$a.append($span);
-					    		$span.append($span2);
-					    		
-					    		$ul.append($li);
-				    		});
-				    	},error:function(){
-				    		
-				    	}
-				     });
-				    }
-					</script>
+</script>				    	
 </body>
 
 </html>

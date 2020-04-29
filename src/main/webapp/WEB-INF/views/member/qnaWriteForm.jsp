@@ -61,7 +61,7 @@
 </div>
       <div class="row">
         <div class="col-12">
-          <h2 class="contact-title">문의하기(Q&A)</h2>
+          <h2 class="contact-title">Write!</h2>
       <hr>
         </div>
         

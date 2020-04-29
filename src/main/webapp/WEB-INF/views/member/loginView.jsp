@@ -67,11 +67,11 @@ ul[class~=social-icons]>li {
 							</h3>
 							<form class="row contact_form" action="login.do" method="post">
 								<div class="col-md-12 form-group p_star">
-									<input type="text" class="form-control" id="email" name="email" placeholder="e-mail">
+									<input type="text" class="form-control" id="email" name="email" placeholder="e-mail" required>
 								</div>
 								<div class="col-md-12 form-group p_star">
 									<input type="password" class="form-control" id="password"
-										name="password" placeholder="Password">
+										name="password" placeholder="Password" required>
 								</div>
 								<div class="col-md-12 form-group">
 									<br>
