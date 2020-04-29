@@ -28,6 +28,9 @@
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM QNA
+		<if test="_parameter != null">
+			where qWriter = #{nickname}
+		</if>
 	</select>
 		
 	<select id="selectList" resultMap="qnaResultSet">

@@ -8,7 +8,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>aligo</title>
+  <title>Get inspired for your journey! - aligo</title>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
   <style>
   .breadcrumb{
