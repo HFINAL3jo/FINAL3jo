@@ -89,7 +89,7 @@
 </div>
       <div class="row">
         <div class="col-12">
-          <h2 class="contact-title">문의 수정(Q&A)</h2>
+          <h2 class="contact-title">Edit</h2>
       <hr>
         </div>
         
@@ -112,8 +112,8 @@
 
                     <div class="col-12">
                         <div class="form-group">
-                          <input class="form-control" name="qWriter" value="${ q.qWriter }" id="name" type="text" onfocus="this.placeholder = ''"
-                            onblur="this.placeholder = '작성자(writer)'" placeholder='작성자(writer)'>
+                          <input class="form-control" name="qWriter" id="Writer" type="text" onfocus="this.placeholder = ''"
+                             value="${ loginUser.nickname }" readonly>
                         </div>
                       </div>
                       <!-- <div class="col-sm-6">
