@@ -15,8 +15,8 @@ font-family: 'Dosis' !important;
 <style>
 input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus
 	{
-	border-bottom: 2px solid #ff3368 !important;
-	color: #ff3368 !important;
+	border-bottom: 2px solid #0067b8 !important;
+	color: #0067b8 !important;
 	transition: 0.2s ease;
 }
 
@@ -132,6 +132,10 @@ input:checked+label:after {
 	font-size: 22px;
 	cursor: pointer;
 }
+.breadcrumb{
+  	background-image:url('${contextPath}/resources/images/hanbok.jpg');
+    background-size: 100% 100%;
+  }
 </style>
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
@@ -201,16 +205,16 @@ input:checked+label:after {
 
 								<div class="col-md-12 form-group p_star">
 									<input type="password" class="form-control" id="password"
-										name="password" value="" placeholder="Password">
+										name="password" value="" placeholder="Password" required>
 								</div>
 
 								<div class="col-md-12 form-group p_star">
 									<input type="password" class="form-control" id="passwordchk"
-										name="passwordchk" value="" placeholder="Password check">
+										name="passwordchk" value="" placeholder="Password check" required>
 								</div>
 								<div class="col-md-12 form-group p_star">
 									<input type="text" class="form-control" id="nickname"
-										name="nickname" placeholder="Nickname">
+										name="nickname" placeholder="Nickname" required>
 										
 										<span id="ok" style="display: none;" class="guide ok">
 										Your Nickname is Available</span> 
@@ -218,17 +222,17 @@ input:checked+label:after {
 										class="guide error">Your Nickname is Not Available</span> 
 										
 											<input type="hidden" name="nickDuplicateCheck" id="nickDuplicateCheck"
-										value="0">
+										value="0" required>
 								</div>
 								<div class="col-md-12 form-group p_star">
 									<input type="number" max="99" min="10" class="form-control"
-										id="age" name="age" placeholder="age">
+										id="age" name="age" placeholder="age" required>
 								</div>
 
 								<div class="col-md-12 form-group p_star" id="input-group">
-									<input type="radio" name="gender" value="M" id="M" /> <label
+									<input type="radio" name="gender" value="M" id="M"/> <label
 										for="M">Male</label> <input type="radio" name="gender"
-										value="F" id="F" /> <label for="F">Female</label>
+										value="F" id="F"/> <label for="F">Female</label>
 								</div>
 
 <!-- 								<div class="col-md-12 form-group">

@@ -409,8 +409,10 @@
         		$('.weather_container').slideToggle();
         	});
         	
-        	var apiURI1 = "https://api.openweathermap.org/data/2.5/onecall?lat=37.57&lon=126.98&appid="+"cbb2ea4f1ab7a72a57e98ecd56c439a3";
-        	var apiURI2 = "http://api.openweathermap.org/data/2.5/onecall/timemachine?lat=37.57&lon=126.98&dt=1587610800&appid=cbb2ea4f1ab7a72a57e98ecd56c439a3";
+        	var apiURI1 = "https://api.openweathermap.org/data/2.5/onecall?lat=37.57&lon=126.98&appid="+
+        			"cbb2ea4f1ab7a72a57e98ecd56c439a3";
+        	var apiURI2 = "http://api.openweathermap.org/data/2.5/onecall/timemachine?lat=37.57&lon=126.98&dt=1587610800&appid="+
+        			"cbb2ea4f1ab7a72a57e98ecd56c439a3";
         	getWeather(apiURI1);
         	getWeather(apiURI2);
         });

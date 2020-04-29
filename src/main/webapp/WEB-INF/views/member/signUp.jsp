@@ -131,6 +131,10 @@ input:checked+label:after {
 	font-size: 22px;
 	cursor: pointer;
 }
+.breadcrumb{
+  	background-image:url('${contextPath}/resources/images/hanbok.jpg');
+    background-size: 100% 100%;
+  }
 </style>
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
