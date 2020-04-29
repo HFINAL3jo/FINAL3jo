@@ -110,12 +110,6 @@ public class QnAController {
 		return mv;	
 	}
 	
-	/**
-	 * 나중에 다시 
-	 * @param q
-	 * @param request
-	 * @return
-	 */
 	@RequestMapping("qupdate.do")
 	public String boardUpdate(QnA q, HttpServletRequest request) {
 		int result = qService.updateBoard(q);

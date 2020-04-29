@@ -34,5 +34,13 @@ public class ReportServiceImpl implements ReportService{
 		
 		return Rdao.reportDetail(str);
 	}
+
+	/**
+	 * 신고 게시판 답변 글 등록 하는 메소드
+	 */
+	@Override
+	public Report reportContentEnsure(Map<String, String> map) {
+		return Rdao.reportContentEnsure(map);
+	}
 	
 }

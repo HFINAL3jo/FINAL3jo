@@ -6,11 +6,13 @@
 <mapper namespace="reportMappers">
 
 	<resultMap type="Report" id="ReportResultSet">
-		<!-- <id property="rCode" column="RCODE"/> -->
+		<!-- <id property="rCode" column="RCODE"/> tTitle-->
 		<result property="rCode" column="RCODE"/>
-		<result property="dDcodeNumber" column="DCODE_NUMBER"/>
+		<result property="tTitle" column="RTITLE"/>
+		<!-- <result property="dDcodeNumber" column="DCODE_NUMBER"/> -->
 		<result property="reporter" column="REPORTER"/>
 		<result property="reportContent" column="REPORT_CONTENT"/>
+		<result property="reportContentEnsure" column="REPORT_CONTENT_ENSURE"/>
 		<result property="reportSdate" column="REPORT_SDATE"/>
 		<result property="reportEdate" column="REPORT_EDATE"/>
 		<result property="rStatus" column="R_STATUS"/>
@@ -81,6 +83,13 @@
 	<select id="reportDetail" resultMap="ReportResultSet"  parameterType="String">
 		SELECT *
 		FROM REPORTS
-		WHERE DCODE_NUMBER = #{number}
+		WHERE RCODE = #{number}
 	</select>
+	
+	<update id="reportContentEnsure" parameterType="hashMap">
+		UPDATE REPORTS SET REPORT_CONTENT_ENSURE = #{ensure}, R_STATUS = 'Y' WHERE RCODE = #{number}
+	</update>
+	
+	
 </mapper>
+

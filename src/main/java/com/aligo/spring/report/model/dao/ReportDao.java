@@ -33,5 +33,18 @@ public class ReportDao {
 		
 		return sqlSession.selectOne("reportMappers.reportDetail", number);
 	}
+
+	public Report reportContentEnsure(Map<String, String> map) {
+		
+		int num = sqlSession.update("reportMappers.reportContentEnsure", map);
+		
+		if(num >= 1) {
+			String number = map.get("number");
+			
+			return sqlSession.selectOne("reportMappers.reportDetail", number);
+		}
+		
+		return null;
+	}
 	
 }

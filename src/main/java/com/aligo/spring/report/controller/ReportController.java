@@ -70,7 +70,7 @@ public class ReportController {
 	
 	@RequestMapping(value="reportDetail.do", method=RequestMethod.POST)
 	public ModelAndView reportDetail(HttpServletRequest request, ModelAndView mav) {
-		String str = request.getParameter("num");
+		String str = request.getParameter("num");	// 시고 테이블의 번호
 		
 		Report b = Rservice.reportDetail(str);
 		
@@ -78,4 +78,26 @@ public class ReportController {
 			.setViewName("admin/reportDetail");
 		return mav;
 	}
+	
+	@RequestMapping(value="reportContentEnsure.do", method=RequestMethod.POST) 
+	public ModelAndView reportContentEnsure(HttpServletRequest request, ModelAndView mav) {
+		String[] str =  request.getParameterValues("value");
+		
+		Map<String, String> map = new HashMap();
+		
+		map.put("number", str[0]);	// 신고 게시판 테이블 번호
+		map.put("ensure", str[1]);	// 삽입할 답변 글
+		
+		Report b = Rservice.reportContentEnsure(map);
+		
+		if(b != null) {	// 데이터가 정확하게 들어오면 이동
+			mav.addObject("b", b)
+			.setViewName("admin/reportDetail");
+		}else {			// 실패시에 에러 페이지로 이동
+			mav.setViewName("common/errorPage");
+		}
+		
+		return mav;
+	}
+	
 }
