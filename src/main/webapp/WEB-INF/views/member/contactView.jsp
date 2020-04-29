@@ -8,7 +8,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>aligo</title>
+  <title>Get inspired for your journey! - aligo</title>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
   <style>
 
@@ -62,14 +62,14 @@
     
   <!--================Home Banner Area =================-->
   <!-- breadcrumb start-->
-  <section class="breadcrumb breadcrumb_bg">
+  <section class="breadcrumb breadcrumb_bg" style="height:760px;">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <div class="breadcrumb_iner">
             <div class="breadcrumb_iner_item">
-              <h2 style="color:white;">Q&A</h2>
-              <p style="color:white;"><strong>Ask Anything! </strong></p>
+              <h2 style="color:white; padding-top:100px; font-size:4em;">Q&A</h2>
+              <p style="color:white; font-size:2em;"><strong>Ask Anything! </strong></p>
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@
             <th>제목</th>
             <th>작성자</th>
             <th>날짜</th>
-            <th>처리 여부</th>
+            <th>답변 여부</th>
         </tr>
     </thead>
     <tbody id="tbody">
@@ -103,30 +103,6 @@
     
 
     </table>
-<!--     <div class="col-lg-12">
-    <div class="pageination">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <i class="ti-angle-double-left"></i>
-                    </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#">6</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <i class="ti-angle-double-right"></i>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</div> -->
 </div>
 </div>
 <div class="ec-base-button" align="right">
@@ -139,9 +115,7 @@
   </section>
   <!-- ================ contact section end ================= -->
 
-  <!--::footer_part start::-->
-  <%@ include file="../common/footer.jsp"%>
-   <!--::footer_part end::-->
+  
 
 <script>
 	$(function(){
@@ -214,6 +188,8 @@
 		
 		</script>
 		</c:if>
-	
+	<!--::footer_part start::-->
+  <%@ include file="../common/footer.jsp"%>
+   <!--::footer_part end::-->
 </body>
 </html>

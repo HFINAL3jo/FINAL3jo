@@ -8,7 +8,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>aligo</title>
+  <title>Get inspired for your journey! - aligo</title>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
   <style>
   .breadcrumb{
@@ -38,14 +38,14 @@
 
   <!--================Home Banner Area =================-->
   <!-- breadcrumb start-->
-  <section class="breadcrumb breadcrumb_bg">
+  <section class="breadcrumb breadcrumb_bg" style="height:760px;">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <div class="breadcrumb_iner">
             <div class="breadcrumb_iner_item">
-              <h2 style="color:white;">Q&A</h2>
-              <p style="color:white;"><strong>Ask Anything! </strong></p>
+              <h2 style="color:white; padding-top:100px; font-size:4em;">Q&A</h2>
+              <p style="color:white; font-size:2em;"><strong>Ask Anything! </strong></p>
             </div>
           </div>
         </div>

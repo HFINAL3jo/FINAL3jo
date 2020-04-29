@@ -31,7 +31,7 @@ public interface QnAService {
 	 * @param q
 	 * @return
 	 */
-	QnA selectBoard(QnA q);
+	QnA selectBoard(int qId);
 
 
 	/**
@@ -91,5 +91,8 @@ public interface QnAService {
 
 
 	ArrayList<QnA> getSearchQnaAdmin(Map<String, String> map, QnAPageInfo pi);
+
+
+	int updateStatus(QnaReply qr);
 
 }

@@ -72,9 +72,10 @@ public class QnAController {
 	}
 	
 	@RequestMapping("qdetail.do")
-	public ModelAndView boardDetail(ModelAndView mv, QnA q, 
+	public ModelAndView boardDetail(ModelAndView mv, int qId, 
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
-		q = qService.selectBoard(q);
+		
+		QnA q = qService.selectBoard(qId);
 		if(q != null) {
 			mv.addObject("q",q)
 			  .addObject("currentPage",currentPage)
@@ -110,12 +111,6 @@ public class QnAController {
 		return mv;	
 	}
 	
-	/**
-	 * 나중에 다시 
-	 * @param q
-	 * @param request
-	 * @return
-	 */
 	@RequestMapping("qupdate.do")
 	public String boardUpdate(QnA q, HttpServletRequest request) {
 		int result = qService.updateBoard(q);
@@ -165,7 +160,18 @@ public class QnAController {
 		
 		if(result > 0) {
 			
-			mv.addObject("qId", refQid).setViewName("redirect:qdetail.do");
+			result = qService.updateStatus(qr);
+			
+			System.out.println("Y변경 result : " + result);
+			
+			if(result > 0) {
+				
+				mv.addObject("qId", qr.getRefQid()).setViewName("redirect:qdetail.do");
+			}else {
+				
+				mv.addObject("msg", "fail!").setViewName("common/errorPage");
+			}
+			
 		}else {
 			
 			mv.addObject("msg", "fail!").setViewName("common/errorPage");

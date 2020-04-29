@@ -59,7 +59,7 @@
                                     </div>
                                   
 									<br>
-                                    <input class="genric-btn success-border small" type="submit" value="submit" style="margin-left: 40%;">                                             
+                                    <input class="genric-btn primary-border small" type="submit" value="submit" style="margin-left: 40%;">                                             
                                 </form> 
                             </div>
                         </div>
@@ -100,6 +100,10 @@
 		        return false;
 		    } 
 		    }
+		
+		
+		
+	
     </script>
     
     <script src="resources/js/stellar.js"></script>

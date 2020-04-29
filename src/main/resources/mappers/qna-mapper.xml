@@ -28,6 +28,9 @@
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM QNA
+		<if test="_parameter != null">
+			where qWriter = #{nickname}
+		</if>
 	</select>
 		
 	<select id="selectList" resultMap="qnaResultSet">
@@ -39,10 +42,10 @@
 		ORDER BY QID DESC
 	</select>
 	
-	<select id="selectBoard" resultMap="qnaResultSet">
+	<select id="selectBoard" parameterType="_int" resultMap="qnaResultSet">
 		SELECT *
 		FROM QNA
-		WHERE QID=#{qId} AND QWRITER=#{qWriter}
+		WHERE QID=#{qId}
 	</select>
 	
 	<insert id="writeBoard" parameterType="QnA">
@@ -146,5 +149,11 @@
 			</otherwise>
 		</choose>
 	</select>	
+	
+	<update id="updateStatus">
+		UPDATE QNA
+		SET Q_STATUS='Y'
+		WHERE QID=#{refQid}
+	</update>
 	
 </mapper>
