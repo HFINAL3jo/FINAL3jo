@@ -20,7 +20,7 @@ public class QnADao {
 	private SqlSessionTemplate sqlSession;
 
 	public int getListCount(String nickname) {
-		return sqlSession.selectOne("qnaMapper.getListCount");
+		return sqlSession.selectOne("qnaMapper.getListCount",nickname);
 	}
 	
 	public ArrayList<QnA> selectList(String nickname, QnAPageInfo pi) {
