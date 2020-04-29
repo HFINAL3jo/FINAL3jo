@@ -86,40 +86,21 @@
 		DEFAULT,NVL(#{bTel},' '),NVL(#{bFee},' '),NVL(#{bHours},' '),NVL(#{bTag},' '),NVL(#{bTrans},' '),#{bCode})
 	</insert>
 		
-	<!-- <select id="getListCount" resultType="_int">
+	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*) 
-		FROM THEME_LIST
-		JOIN THEME_CODE USING(TCODE)
-		<if test="keyword == null">
-		WHERE T_STATUS='Y'
-		</if>
-		<if test="keyword != null">
-		WHERE TNAME LIKE UPPER('%'||#{keyword}||'%')
-		</if>
+		FROM BLOG_LIST
+		WHERE B_STATUS='Y' 
 	</select>
 	
-	<select id="selectList" resultMap="themeResultSet">		
+	<select id="selectList" resultMap="BlogResultSet">		
 		SELECT *
-		FROM THEME_LIST 
-		JOIN THEME_CODE USING(TCODE)
-		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
-		<if test="keyword == null">
-		WHERE T_STATUS='Y'
-		</if>
-		<if test="keyword != null">
-		WHERE TNAME	LIKE UPPER('%'||#{keyword}) AND T_STATUS='Y'
-		</if>
-		<choose>
-			<when test="searchValue == 2">ORDER BY T_VIEWS DESC</when>
-			<when test="searchValue == 3">ORDER BY T_LIKES DESC</when>
-			<otherwise>ORDER BY TID DESC</otherwise>
-		</choose>
-	</select>
+		FROM BLOG_LIST
+		JOIN BCATEGORY USING(BCODE)
+		LEFT JOIN BLOG_FILES ON(BID=BCODE_NUMBER)
+		WHERE B_STATUS='Y'
+	</select> 
 	
-	
-	
-	
-	
+	<!-- 
 	<select id="selectTheme" resultMap="themeResultSet">
 		SELECT * 
 		FROM THEME_LIST
@@ -127,13 +108,6 @@
 		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
 		WHERE TID=#{tId}	
 	</select>
-	
-	
-	
-	
-	
-	
-	
 	
 	<update id="updateViewCount">
 		UPDATE THEME_LIST SET T_VIEWS = T_VIEWS + 1	WHERE TID = #{tId}
@@ -285,5 +259,5 @@
         UPPER(TTITLE||TADDRESS||TADDRESSH||TCONTENT
 		||TKEYWORD||TNAME||TTRANS),UPPER(#{searchVal}))
 		ORDER BY TID DESC
-	</select> -->
+	</select>-->
 </mapper>
