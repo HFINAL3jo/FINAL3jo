@@ -7,8 +7,11 @@ import com.aligo.spring.blog.model.dao.BlogDao;
 import com.aligo.spring.blog.model.vo.BFile;
 import com.aligo.spring.blog.model.vo.Blog;
 import com.aligo.spring.common.AligoException;
+import com.aligo.spring.theme.model.vo.PageInfo;
 
 import static com.aligo.spring.common.BlogCommon.*;
+
+import java.util.ArrayList;
 
 @Service("blService")
 public class BlogServiceImpl implements BlogService {
@@ -45,5 +48,15 @@ public class BlogServiceImpl implements BlogService {
 				}
 			}
 			return blDao.insertBlog(b);
+	}
+
+	@Override
+	public int getListCount() {
+		return blDao.getListCount();
+	}
+
+	@Override
+	public ArrayList<Blog> selectList(PageInfo pi) {
+		return blDao.selectList(pi);
 	}
 }

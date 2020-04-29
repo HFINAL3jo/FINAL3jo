@@ -26,7 +26,7 @@ public class MainController {
 	@RequestMapping("topList.do")
 	public void themeTopList(HttpServletResponse response) throws JsonIOException, IOException {
 		ArrayList<Theme> list = mService.selectTopList();
-		System.out.println("mainController : " + list);
+		//System.out.println("mainController : " + list);
 		
 		for(Theme t: list) {
 			if(t.gettModifyFile().length() <= 18) {

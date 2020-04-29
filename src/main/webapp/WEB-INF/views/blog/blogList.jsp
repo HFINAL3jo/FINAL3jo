@@ -168,11 +168,11 @@
               <th style="widht:8%;">Likes</th>
             </tr>
           <tbody>
-            <%-- <c:forEach var="b" items="${list }">
-           <c:url var=blog value="bDetailView.do">
+           <c:url var="blog" value="bDetailView.do">
            		<c:param name="bId" value="${b.bId }"/>
            		<c:param name="currentPage" value="${pi.currentPage }"/>
            </c:url>
+            <c:forEach var="b" items="${list }">
             <a href="${blog }">
             <tr>
   				<td>${b.bId }</td>
@@ -188,19 +188,43 @@
 	      </div>
 			      
 		  <ul id="pag">
+		  	 
+		  	 <c:if test="${pi.currentPage eq 1}">
 		  <li>
-		  	 <c:url var="bpc" value="bpagination.do">
-		  	 	<c:param name="currentPage" value="${ pi.currentPage}"></c:param>
-		  	 </c:url>
-		      <a class="page-link" href="${bpc }" tabindex="-1" aria-disabled="true">Previous</a>
+		      <a class="page-link" tabindex="-1" aria-disabled="true">Previous</a>
 		    </li>
-		    <li class="page-item"><a class="page-link" href="${bpc }">1</a></li>
-		    <c:forEach var="bp" items="${list }" begin="">
-		    <li class="page-item"><a class="page-link" href="${bpc }">${bp}</a></li>
+		    </c:if>
+		    <c:if test="${pi.currentPage ne 1}">
+		    <li>
+			  <c:url var="page" value="blog.do">
+			  	<c:param name="currentPage" value="${pi.currentPage -1}"/>
+			  </c:url>		      
+		      <a class="page-link" href="${page}" tabindex="-1" aria-disabled="true" disabled>Previous</a>
+		    </li>
+		    </c:if>
+		    <c:forEach var="b" items="${list }" begin="${pi.startPage}" end="${pi.endPage}">
+		    <c:if test="${b eq pi.currentPage }">
+		    <li class="page-item"><a class="page-link">${b}</a></li>
+		    </c:if>
+		    <c:if test="${b ne pi.currentPage}">
+		    	<c:url var="page" value="blog.do">
+		    		<c:param name="currentPage" value="${b}"/>
+		    	</c:url>
+		    	<li class="page-item"><a class="page-link" href="${page }">${b}</a></li>
+		    </c:if>
+		    
 		    </c:forEach>
-		    <li class="page-item"><a class="page-link" href="#">Next</a>
+		    <c:if test="${pi.currentPage eq pi.endPage}">
+		    <li class="page-item"><a class="page-link">Next</a>
 		    </li>
-		  </ul> --%>
+		    </c:if>
+		    <c:if test="${pi.currentPage ne pi.endPage}">
+		    <c:url var="page" value="blog.do">
+		    	<c:param name="currentPage" value="${pi.currentPage + 1}"/>
+		    </c:url>
+		    <li class="page-item"><a class="page-link" href="${page}">Next</a>
+		    </c:if>
+		  </ul>
 			    <%-- <c:forEach var="t" items="${ list }" begin="0" end="${ pi.themeLimit }">
 				<div class="col-lg-4 col-sm-6" style="max-width:50% !important;">
 				    <c:url var="post" value="blogdetail.do">
@@ -229,7 +253,6 @@
 				<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:white;">Lord More..</button></a>
 				<!-- <input type="submit" value="WRITE" class="mybtn e-large"> -->
 			</div> --%>
-			
 		</div>
 		<div class="floatdiv">
 			<a href="#goUp" class="fas fa-chevron-up" style="font-size: 50px;"></a>
@@ -238,7 +261,7 @@
 		</div>
 	</section>
 	<br>
-
+	
 	<!--::footer_part start::-->
 
 	<%@ include file="../common/footer.jsp"%>
