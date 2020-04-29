@@ -68,12 +68,6 @@ public class ThemeController extends TFile{
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
 			SearchCondition sc, @RequestParam(value="keyword",required=false) String keyword) {
 		
-		if(sc.getKeyword() == "" || sc.getKeyword() == null) {
-			sc.setKeyword(null);
-		}else {
-			int usk = tService.updateSearchKeywordCount(sc);
-		}
-		
 		int listCount = tService.getListCount(sc);
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
