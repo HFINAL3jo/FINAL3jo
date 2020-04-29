@@ -88,7 +88,7 @@ textarea {
 				<div class="col-lg-8">
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item">
-							<h2 style="color: white; font-size:4em;">Q&A</h2>
+							<h2 style="color:white; padding-top:100px; font-size:4em;">Q&A</h2>
 							<p style="color: white; font-size:2em;">
 								<strong>Ask Anything! </strong>
 							</p>
