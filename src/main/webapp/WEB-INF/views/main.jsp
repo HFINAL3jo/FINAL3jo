@@ -486,7 +486,7 @@
       					$(theme).children('img').attr('src',value.tModifyFile);
       					$(theme).children('span').html(value.tTitle);
       					$(theme).on("click",function(){
-      						location.href="themeDetail.do?tId="+value.tId;;
+      						location.href="topListDetail.do?tId="+value.tId;;
       					});
       				});
       			},error:function(){
