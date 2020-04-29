@@ -43,7 +43,7 @@
 		/* padding-bottom: 50px; */
 		/* margin-bottom: 20px; */
 		background-image:
-			url('${contextPath}/resources/images/Recom_showcase6.jpg');
+			url('${contextPath}/resources/images/korea-5001454_1920.jpg');
 		background-size: 100% 100%;
 	}
 	
@@ -193,8 +193,12 @@
 	}
 	
 	.breadcrumb{
-    	background-image: url('${contextPath}/resources/images/Recom_showcase6.jpg');
+    	background-image: url('${contextPath}/resources/images/korea-5001454_1920.jpg');
     }
+    
+    .card span {
+	    background-color: rgb(0,0,0,.5);
+	}
 	</style>
 
 <script src="resources/js/jquery-3.4.1.min.js"></script>
@@ -335,6 +339,13 @@
 		}
 		
 		$(function(){
+			
+			if($(document).scrollTop()==0){
+        		
+	        	var startset = $('.card-section').offset();
+	            
+	            $('html').animate({scrollTop : startset.top-100}, 1000);
+        	}
 			
 			$('.moreView').on('click', function(){
 				

@@ -137,7 +137,7 @@
     }
     
     .breadcrumb{
-    	background-image: url('${contextPath}/resources/images/Recom_showcase6.jpg');
+    	background-image: url('${contextPath}/resources/images/korea-5001454_1920.jpg');
     }
     
     .showcase {
