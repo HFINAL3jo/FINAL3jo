@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,12 +17,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.aligo.spring.blog.model.service.BlogService;
 import com.aligo.spring.blog.model.vo.BFile;
 import com.aligo.spring.blog.model.vo.Blog;
 import com.aligo.spring.common.AligoException;
+import com.aligo.spring.common.Pagination;
+import com.aligo.spring.theme.model.vo.PageInfo;
+import com.aligo.spring.theme.model.vo.Theme;
 
 @Controller
 public class BlogController extends BFile {
@@ -30,8 +36,29 @@ public class BlogController extends BFile {
 	private BlogService blService;
 	
 	@RequestMapping("blog.do")
-	public String blogList() {
-		return "blog/blogList";
+	public ModelAndView blogList(ModelAndView mv,
+			@RequestParam(value="currentPage",required=false,defaultValue="1")
+			int currentPage) {
+		
+		int listCount = blService.getListCount();
+		
+		PageInfo pi = Pagination.getPageInfo4(currentPage, listCount);
+		
+		ArrayList<Blog> list = blService.selectList(pi);
+		
+		for(Blog b: list) {
+			if(b.getbModifyFile() != null) {
+				if(b.getbModifyFile().length() <= 18) {
+					b.setbModifyFile("resources/buploadFiles/" + b.getbModifyFile());
+				}else if(b.getbModifyFile().contains(",")){
+					b.setbModifyFile("resources/buploadFiles/" + b.getbModifyFile().substring(0,b.getbModifyFile().indexOf(",")));
+				}
+			}
+		}
+		mv.addObject("list",list);
+		mv.addObject("pi",pi);
+		mv.setViewName("blog/blogList");
+		return mv;
 	}
 
 	@RequestMapping("blogInsertView.do")
@@ -110,5 +137,11 @@ public class BlogController extends BFile {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
+	}
+	
+	@RequestMapping("bDetailView.do")
+	public ModelAndView blogDetail(ModelAndView mv) {
+		
+		return mv;
 	}
 }

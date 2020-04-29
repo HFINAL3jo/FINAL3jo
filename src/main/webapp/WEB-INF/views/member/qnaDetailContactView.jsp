@@ -82,14 +82,14 @@ textarea {
 
 	<!--================Home Banner Area =================-->
 	<!-- breadcrumb start-->
-	<section class="breadcrumb breadcrumb_bg">
+	<section class="breadcrumb breadcrumb_bg" style="height:760px;">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item">
-							<h2 style="color: white;">Q&A</h2>
-							<p style="color: white;">
+							<h2 style="color:white; padding-top:100px; font-size:4em;">Q&A</h2>
+							<p style="color: white; font-size:2em;">
 								<strong>Ask Anything! </strong>
 							</p>
 						</div>
@@ -149,7 +149,7 @@ textarea {
 
 			</div>
 
-			<%-- <c:if test='${ sessionScope.loginUser.email = "ADMIN" }'> --%>
+			<c:if test='${ sessionScope.loginUser.email == "ADMIN" }'>
 			<div class="comment-form">
 				<h4>Leave a Reply</h4>
 				<form class="form-contact comment_form" action="addReply.do">
@@ -168,7 +168,7 @@ textarea {
 					</div>
 				</form>
 			</div>
-			<%-- </c:if> --%>
+			</c:if>
 		</div>
 	</section>
 

@@ -66,14 +66,14 @@
 
   <!--================Home Banner Area =================-->
   <!-- breadcrumb start-->
-  <section class="breadcrumb breadcrumb_bg">
+  <section class="breadcrumb breadcrumb_bg" style="height:760px;">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <div class="breadcrumb_iner">
             <div class="breadcrumb_iner_item">
-              <h2 style="color:white;">Q&A</h2>
-              <p style="color:white;"><strong>Ask Anything! </strong></p>
+              <h2 style="color:white; padding-top:100px; font-size:4em;">Q&A</h2>
+              <p style="color:white; font-size:2em;"><strong>Ask Anything! </strong></p>
             </div>
           </div>
         </div>
@@ -89,7 +89,7 @@
 </div>
       <div class="row">
         <div class="col-12">
-          <h2 class="contact-title">문의 수정(Q&A)</h2>
+          <h2 class="contact-title">Edit</h2>
       <hr>
         </div>
         
@@ -112,8 +112,8 @@
 
                     <div class="col-12">
                         <div class="form-group">
-                          <input class="form-control" name="qWriter" value="${ q.qWriter }" id="name" type="text" onfocus="this.placeholder = ''"
-                            onblur="this.placeholder = '작성자(writer)'" placeholder='작성자(writer)'>
+                          <input class="form-control" name="qWriter" id="Writer" type="text" onfocus="this.placeholder = ''"
+                             value="${ loginUser.nickname }" readonly>
                         </div>
                       </div>
                       <!-- <div class="col-sm-6">

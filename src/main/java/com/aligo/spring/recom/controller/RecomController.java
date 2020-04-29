@@ -76,10 +76,6 @@ public class RecomController {
 			
 			for(ThemeVo t: list) {
 				
-				if(t.getTtitle().length() > 16) {
-					t.setTtitle(t.getTtitle().substring(0,15));
-				}
-				
 				if(t.getTfile().length() <= 18) {
 					t.setTfile("resources/tuploadFiles/" + t.getTfile());
 				}else if(t.getTfile().contains(",")){

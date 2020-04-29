@@ -26,13 +26,9 @@ public class MainController {
 	@RequestMapping("topList.do")
 	public void themeTopList(HttpServletResponse response) throws JsonIOException, IOException {
 		ArrayList<Theme> list = mService.selectTopList();
-		System.out.println("mainController : " + list);
+		//System.out.println("mainController : " + list);
 		
 		for(Theme t: list) {
-			if(t.gettTitle().length() > 16) {
-				t.settTitle(t.gettTitle().substring(0,15));
-			}
-			
 			if(t.gettModifyFile().length() <= 18) {
 				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
 			}else if(t.gettModifyFile().contains(",")){
@@ -56,10 +52,6 @@ public class MainController {
 		ArrayList<Theme> list = mService.selectThemeList();
 		
 		for(Theme t: list) {
-			if(t.gettTitle().length() > 16) {
-				t.settTitle(t.gettTitle().substring(0,15));
-			}
-			
 			if(t.gettModifyFile().length() <= 18) {
 				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
 			}else if(t.gettModifyFile().contains(",")){

@@ -62,14 +62,14 @@
     
   <!--================Home Banner Area =================-->
   <!-- breadcrumb start-->
-  <section class="breadcrumb breadcrumb_bg">
+  <section class="breadcrumb breadcrumb_bg" style="height:760px;">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <div class="breadcrumb_iner">
             <div class="breadcrumb_iner_item">
-              <h2 style="color:white;">Q&A</h2>
-              <p style="color:white;"><strong>Ask Anything! </strong></p>
+              <h2 style="color:white; padding-top:100px; font-size:4em;">Q&A</h2>
+              <p style="color:white; font-size:2em;"><strong>Ask Anything! </strong></p>
             </div>
           </div>
         </div>
@@ -83,18 +83,18 @@
     <div class="container">
  	<div class="qnaPage">
      
-      <h2>문의게시판</h2>
+      <h2>Inquiry board</h2>
       <hr>
         <div class="qnaPageTable">
 
     <table align="center" class="table table-striped" id="qtb">
         <thead align="center">
         <tr>
-            <th>글번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>날짜</th>
-            <th>답변 여부</th>
+            <th>No.</th>
+            <th>Title</th>
+            <th>Writer</th>
+            <th>Date</th>
+            <th>Answer Status</th>
         </tr>
     </thead>
     <tbody id="tbody">

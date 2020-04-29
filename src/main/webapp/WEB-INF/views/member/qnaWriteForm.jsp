@@ -38,14 +38,14 @@
 
   <!--================Home Banner Area =================-->
   <!-- breadcrumb start-->
-  <section class="breadcrumb breadcrumb_bg">
+  <section class="breadcrumb breadcrumb_bg" style="height:760px;">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <div class="breadcrumb_iner">
             <div class="breadcrumb_iner_item">
-              <h2 style="color:white;">Q&A</h2>
-              <p style="color:white;"><strong>Ask Anything! </strong></p>
+              <h2 style="color:white; padding-top:100px; font-size:4em;">Q&A</h2>
+              <p style="color:white; font-size:2em;"><strong>Ask Anything! </strong></p>
             </div>
           </div>
         </div>
@@ -61,7 +61,7 @@
 </div>
       <div class="row">
         <div class="col-12">
-          <h2 class="contact-title">문의하기(Q&A)</h2>
+          <h2 class="contact-title">Write!</h2>
       <hr>
         </div>
         
