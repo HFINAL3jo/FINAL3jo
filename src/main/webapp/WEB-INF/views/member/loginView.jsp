@@ -33,11 +33,8 @@ ul[class~=social-icons]>li {
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
 					<div class="breadcrumb_iner">
-						<div class="breadcrumb_iner_item">
-							<h2>Login</h2>
-							<p>
-								Home <span>-</span> Login
-							</p>
+						<div class="breadcrumb_iner_item" style="height:760px;">
+							<h2 style="font-size:4em;">Login</h2>
 						</div>
 					</div>
 				</div>
@@ -112,9 +109,11 @@ ul[class~=social-icons]>li {
 			 location.href="findPwd.do";
 		 });
 		 
+		 var start = $('.login_part padding_top').offset();
+		 
 		 window.setTimeout(function(){
 				var offset=window.innerHeight;
-				$('html,body').stop().animate({scrollTop:'300'},600);
+				$('html,body').stop().animate({scrollTop:'800'},800);
 				$('#email').focus();	
 				}, 200);
 	</script>
