@@ -460,7 +460,7 @@
 				var map = new daum.maps.Map(mapContainer, mapOption); 
 				
 				//지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-				var zoomControl = new kakao.maps.ZoomControl();z
+				var zoomControl = new kakao.maps.ZoomControl();
 				map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 				
 				// 주소-좌표 변환 객체 생성

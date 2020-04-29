@@ -75,9 +75,6 @@ public class ThemeController extends TFile{
 		ArrayList<Theme> list = tService.selectList(pi,sc);
 		
 		for(Theme t: list) {
-			if(t.gettTitle().length() > 16) {
-				t.settTitle(t.gettTitle().substring(0,15));
-			}
 			
 			if(t.gettModifyFile().length() <= 18) {
 				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
@@ -108,9 +105,7 @@ public class ThemeController extends TFile{
 		JSONArray jArr = new JSONArray();
 		
 		for(Theme t: list) {
-			if(t.gettTitle().length() > 16) {
-				t.settTitle(t.gettTitle().substring(0,15));
-			}
+			
 			if(t.gettModifyFile().length() <= 18) {
 				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
 			}else if(t.gettModifyFile().contains(",")){
