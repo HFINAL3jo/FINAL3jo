@@ -20,4 +20,11 @@ public interface ReportService {
 	 */
 	Report reportDetail(String str);
 
+	/**
+	 * 신고 게시판 답변 글 등록
+	 * @param map : update 할 때 사용하는 매개변수 값을 map으로 전달
+	 * @return
+	 */
+	Report reportContentEnsure(Map<String, String> map);
+
 }
