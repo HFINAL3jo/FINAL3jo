@@ -50,4 +50,8 @@ public class BlogDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getPageLimit());
 		return (ArrayList)sqlSession.selectList("blogMapper.selectList",null,rowBounds);
 	}
+
+	public void insertMyReview(Blog b) {
+		sqlSession.insert("blogMapper.insertMyReview",b);
+	}
 }

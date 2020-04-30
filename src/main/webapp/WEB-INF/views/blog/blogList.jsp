@@ -94,14 +94,13 @@
 	}
 	
 	#pag{
-		margin-left:250px !important;
+		margin-left:270px !important;
 	}
 </style>
 
 </head>
 
 <body>
-	<div id="goUp" />
 	<!--::header part start::-->
 	<%@ include file="../common/menubar.jsp"%>
 	<!-- Header part end-->
@@ -188,7 +187,9 @@
 	      </div>
 			      
 		  <ul id="pag">
-		  	 
+		  	 <c:url var="page" value="blog.do">
+		  	 	<c:param name="currentPage" value="${pi.currentPage }"></c:param>
+		  	 </c:url>
 		  	 <c:if test="${pi.currentPage eq 1}">
 		  <li>
 		      <a class="page-link" tabindex="-1" aria-disabled="true">Previous</a>
@@ -196,68 +197,31 @@
 		    </c:if>
 		    <c:if test="${pi.currentPage ne 1}">
 		    <li>
-			  <c:url var="page" value="blog.do">
+			  <c:url var="prev" value="blog.do">
 			  	<c:param name="currentPage" value="${pi.currentPage -1}"/>
 			  </c:url>		      
-		      <a class="page-link" href="${page}" tabindex="-1" aria-disabled="true" disabled>Previous</a>
+		      <a class="page-link" href="${prev}" tabindex="-1" aria-disabled="true">Previous</a>
 		    </li>
 		    </c:if>
-		    <c:forEach var="b" items="${list }" begin="${pi.startPage}" end="${pi.endPage}">
-		    <c:if test="${b eq pi.currentPage }">
-		    <li class="page-item"><a class="page-link">${b}</a></li>
+		    <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
+		    <c:if test="${p eq pi.currentPage }">
+		    <li><a class="page-link" tabindex="-1" aria-disabled="true">${p}</a></li>
 		    </c:if>
-		    <c:if test="${b ne pi.currentPage}">
-		    	<c:url var="page" value="blog.do">
-		    		<c:param name="currentPage" value="${b}"/>
-		    	</c:url>
-		    	<li class="page-item"><a class="page-link" href="${page }">${b}</a></li>
+		    <c:if test="${p ne pi.currentPage}">
+		    	<li><a class="page-link" href="${page }" tabindex="-1" aria-disabled="true">${p}</a></li>
 		    </c:if>
-		    
 		    </c:forEach>
 		    <c:if test="${pi.currentPage eq pi.endPage}">
-		    <li class="page-item"><a class="page-link">Next</a>
+		    <li><a class="page-link" tabindex="-1" aria-disabled="true">Next</a>
 		    </li>
 		    </c:if>
 		    <c:if test="${pi.currentPage ne pi.endPage}">
-		    <c:url var="page" value="blog.do">
+		    <c:url var="next" value="blog.do">
 		    	<c:param name="currentPage" value="${pi.currentPage + 1}"/>
 		    </c:url>
-		    <li class="page-item"><a class="page-link" href="${page}">Next</a>
+		    <li><a class="page-link" tabindex="-1" aria-disabled="true" href="${next}">Next</a>
 		    </c:if>
 		  </ul>
-			    <%-- <c:forEach var="t" items="${ list }" begin="0" end="${ pi.themeLimit }">
-				<div class="col-lg-4 col-sm-6" style="max-width:50% !important;">
-				    <c:url var="post" value="blogdetail.do">
-					 <c:param name="tId" value="${ t.tId }"/>
-					</c:url>
-					<a href="${ post }">
-	       				<div class="card-list">        				
-	       					<div class="card">          					
-	         					<img src="${t.tModifyFile }"/>
-	         					<span>${t.tTitle }</span>
-	      					</div>
-						<!-- <div class="single_product_item">
-								<h3><b style="color:rgba(121,125,237,0.9)">#${t.tName}</b></h3>
-						</div> -->
-						</div>
-					</a>
-				</div>
-				</c:forEach>
-			</div>
-			<input id="tc" type="hidden" value="${pi.currentPage }">
-			<input id="tm" type="hidden" value="${pi.maxPage }">
-			<input id="sv" type="hidden" name="searchValue" value="${sc.searchValue}">
-			<input id="kw" type="hidden" name="keyword" value="${sc.keyword}">
-			<input id="lc" type="hidden" value="${pi.listCount }">
-			<div align="center">
-				<a href="javascript:void(0)" onclick="pagination();" ><button id="alb" class="genric-btn primary circle" style="width:50%; font-size:20px; background:white;">Lord More..</button></a>
-				<!-- <input type="submit" value="WRITE" class="mybtn e-large"> -->
-			</div> --%>
-		</div>
-		<div class="floatdiv">
-			<a href="#goUp" class="fas fa-chevron-up" style="font-size: 50px;"></a>
-			<a href="#goDown" class="fas fa-chevron-down"
-				style="font-size: 50px;"></a>
 		</div>
 	</section>
 	<br>
@@ -272,8 +236,6 @@
 
 	<script src="resources/js/stellar.js"></script>
 	<script src="resources/js/price_rangs.js"></script>
-
-	<div id="goDown" />
 
 	<script>
 		var currentPage = $('#tc').val();

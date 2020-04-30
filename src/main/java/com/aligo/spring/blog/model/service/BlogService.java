@@ -18,5 +18,7 @@ public interface BlogService {
 	public int getListCount();
 
 	public ArrayList<Blog> selectList(PageInfo pi);
+
+	public void insertMyReview(Blog b);
 	
 }

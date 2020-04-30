@@ -5,21 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="resources/css/radio.css">
 <title>Write Post</title>
  <style>
  	input[class~=adi]{
  		width:150%;
  	}
  	#tt{
-    height: 30px;
-    font-family: "Montserrat";
-    margin-left:-100px;
-    font-size: 18px;
-    letter-spacing: 2px;
-    padding: 0px 45px 0px 18px;
-    caret-color: #000;
-    background: transparent;
-    z-index: 5;
+    width:80%;
 }
 	table>td{
 		width:120%;
@@ -33,7 +26,7 @@
  	}
  	
  	table tr td{
- 		width:500px;
+ 		width:680px;
  	}
  	
  </style>
@@ -43,10 +36,10 @@
     <form action="themeInsert.do" method="POST" id="gosubmit" enctype="multipart/form-data" onsubmit="return false;">
     <div id="editor">
     <br>
-    <div><input type="text" size="40" name="tTitle" id="tt" placeholder="Title.." style="border-radius:5px;"></div>&nbsp;&nbsp;
+    <div><input type="text" class="form-control" size="40" name="tTitle" id="tt" placeholder="Title.." style="border-radius:5px;"></div>&nbsp;&nbsp;
     <br><br>
     <span style="float:left;" id="tss">Theme &nbsp;
-    <select id="tcl" name="tCode" style="border-radius:5px;">
+    <select id="tcl" name="tCode" style="border-radius:5px;" class="nice-select">
     	<option>--</option>
     	<option value="NATURE">NATURE</option>
     	<option value="RESTAURANT">RESTAURANT</option>
@@ -61,16 +54,16 @@
     <br><br>
     	<c:if test="${!empty list}">
     	<div id="selectVal" style="border:1px lightblue solid; display:inline-block; float:left; margin:10px; padding:20px; text-align:left;">
-    		<label><input type="radio" name="f1" value="${list[0]}">&nbsp;${list[0] }</label>
-    		&nbsp;&nbsp;<label><input type="radio" name="f1" value="${list[5]}">&nbsp;${list[5] }</label><br>
-    		<label><input type="radio" name="f2" value="${list[1]}">&nbsp;${list[1] }</label>
-    		&nbsp;&nbsp;<label><input type="radio" name="f2" value="${list[6]}">&nbsp;${list[6] }</label><br> 
-    		<label><input type="radio" name="f3" value="${list[2]}">&nbsp;${list[2] }</label>
-    		&nbsp;&nbsp;<label><input type="radio" name="f3" value="${list[7]}">&nbsp;${list[7] }</label><br>
-    		<label><input type="radio" name="f4" value="${list[3]}">&nbsp;${list[3] }</label>
-    		&nbsp;&nbsp;<label><input type="radio" name="f4" value="${list[8]}">&nbsp;${list[8] }</label><br>
-    		<label><input type="radio" name="f5" value="${list[4]}">&nbsp;${list[4] }</label>
-    		&nbsp;&nbsp;<label><input type="radio" name="f5" value="${list[9]}">&nbsp;${list[9] }</label><br>
+    		<label class="pure-material-radio"><input type="radio" name="f1" value="${list[0]}"><span>&nbsp;${list[0] }</span></label>
+    		&nbsp;&nbsp;<label class="pure-material-radio"><input type="radio" name="f1" value="${list[5]}"><span>&nbsp;${list[5] }</span></label><br>
+    		<label class="pure-material-radio"><input type="radio" name="f2" value="${list[1]}"><span>&nbsp;${list[1] }</span></label>
+    		&nbsp;&nbsp;<label class="pure-material-radio"><input type="radio" name="f2" value="${list[6]}"><span>&nbsp;${list[6] }</span></label><br> 
+    		<label class="pure-material-radio"><input type="radio" name="f3" value="${list[2]}"><span>&nbsp;${list[2] }</span></label>
+    		&nbsp;&nbsp;<label class="pure-material-radio"><input type="radio" name="f3" value="${list[7]}"><span>&nbsp;${list[7] }</span></label><br>
+    		<label class="pure-material-radio"><input type="radio" name="f4" value="${list[3]}"><span>&nbsp;${list[3] }</span></label>
+    		&nbsp;&nbsp;<label class="pure-material-radio"><input type="radio" name="f4" value="${list[8]}"><span>&nbsp;${list[8] }</span></label><br>
+    		<label class="pure-material-radio"><input type="radio" name="f5" value="${list[4]}"><span>&nbsp;${list[4] }</span></label>
+    		&nbsp;&nbsp;<label class="pure-material-radio"><input type="radio" name="f5" value="${list[9]}"><span>&nbsp;${list[9] }</span></label><br>
     		<input type="button" id="tkvinsert" value="Ok">&nbsp;&nbsp;
     		<input type="button" id="tkvreset" value="Reset">
     	</div>
@@ -290,6 +283,10 @@ nhn.husky.EZCreator.createInIFrame({
 			
 		}
 		
+	});
+	
+	$('#cancel').click(function(){
+		histroy.back(1);
 	});
 </script>
 </body>

@@ -38,7 +38,7 @@ table {
 </style>
 
 </head>
-<intput type="hidden" value="${checkValue1}">
+<input type="hidden" value="${checkValue1}">
 <body>
 	<%@ include file="../common/menubar.jsp" %>
 	<section class="cat_product_area section_padding">

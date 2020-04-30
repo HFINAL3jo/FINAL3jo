@@ -2,19 +2,17 @@ package com.aligo.spring.member.model.service;
 
 import java.util.ArrayList;
 
-import com.aligo.spring.member.model.vo.Member;
+import com.aligo.spring.blog.model.vo.Blog;
 import com.aligo.spring.theme.model.vo.PageInfo;
 import com.aligo.spring.theme.model.vo.Theme;
 
 public interface MyPageService {
 
 	int getListCount(String mId);
-
+	
+	int getListCountReview(String bWriter);
+	
 	ArrayList<Theme> selectList(PageInfo pi, String mId);
 
-	/*
-	 * int memberDelete(Member m);
-	 */
-	/* int memberUpdate(Member m); */
-
+	ArrayList<Blog> selectReviewList(PageInfo pi, String bWriter);
 }

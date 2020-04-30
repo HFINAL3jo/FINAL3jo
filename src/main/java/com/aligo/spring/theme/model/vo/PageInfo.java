@@ -20,14 +20,6 @@ public class PageInfo implements Serializable {
 	public PageInfo() {
 	}
 
-	public int getEndPage() {
-		return endPage;
-	}
-
-	public void setEndPage(int endPage) {
-		this.endPage = endPage;
-	}
-
 	public int getStartPage() {
 		return startPage;
 	}
@@ -76,6 +68,26 @@ public class PageInfo implements Serializable {
 		this.themeLimit = themeLimit;
 	}
 
+	public int getEndPage() {
+		return endPage;
+	}
+
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
+	}
+
+	public PageInfo(int startPage, int maxPage, int listCount, int pageLimit, int currentPage, int themeLimit,
+			int endPage) {
+		super();
+		this.startPage = startPage;
+		this.maxPage = maxPage;
+		this.listCount = listCount;
+		this.pageLimit = pageLimit;
+		this.currentPage = currentPage;
+		this.themeLimit = themeLimit;
+		this.endPage = endPage;
+	}
+
 	public PageInfo(int startPage, int maxPage, int listCount, int pageLimit, int currentPage, int themeLimit) {
 		super();
 		this.startPage = startPage;
@@ -86,21 +98,11 @@ public class PageInfo implements Serializable {
 		this.themeLimit = themeLimit;
 	}
 
-	public PageInfo(int startPage, int maxPage, int listCount, int pageLimit, int currentPage, int themeLimit, int endPage) {
-		super();
-		this.startPage = startPage;
-		this.maxPage = maxPage;
-		this.listCount = listCount;
-		this.pageLimit = pageLimit;
-		this.currentPage = currentPage;
-		this.themeLimit = themeLimit;
-		this.endPage = endPage;
-	}
-	
 	@Override
 	public String toString() {
-		return "PageInfo [startPage=" + startPage + ", maxPage=" + maxPage + ", listCount="
-				+ listCount + ", pageLimit=" + pageLimit + ", currentPage=" + currentPage + ", themeLimit=" + themeLimit + "]";
+		return "PageInfo [startPage=" + startPage + ", maxPage=" + maxPage + ", listCount=" + listCount + ", pageLimit="
+				+ pageLimit + ", currentPage=" + currentPage + ", themeLimit=" + themeLimit + ", endPage=" + endPage
+				+ "]";
 	}
 
 }

@@ -135,13 +135,13 @@
 	</update>
 	
 	<select id="findKeywordArea" resultType="string">
-		SELECT AREA
+		SELECT LISTAGG(AREA,',') WITHIN GROUP (ORDER BY AREA)
 		FROM SEARCH_AREA
 		WHERE AREA LIKE UPPER('%'||#{searchVal}||'%')
 	</select>
 	
 	<select id="findKeywordTheme" resultType="string">
-		SELECT TCODE 
+		SELECT LISTAGG(TCODE,',') WITHIN GROUP (ORDER BY TCODE) 
 		FROM SEARCH_THEME
 		JOIN THEME_CODE USING(TCODE)
 		WHERE TNAME LIKE UPPER('%'||#{searchVal}||'%') 

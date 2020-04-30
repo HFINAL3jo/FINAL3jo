@@ -48,11 +48,6 @@ public class HomeController {
 		return "member/myPage";
 	}
 	
-	@RequestMapping("myReview.do")
-	public String myReview() {
-		return "member/myReview";
-	}
-	
 	@RequestMapping("deleteMember.do")
 	public String deleteMember() {
 		return "member/deleteAccount";

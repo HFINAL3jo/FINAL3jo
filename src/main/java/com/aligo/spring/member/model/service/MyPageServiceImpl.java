@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aligo.spring.blog.model.vo.Blog;
 import com.aligo.spring.member.model.dao.MypageDao;
 import com.aligo.spring.member.model.vo.Member;
 import com.aligo.spring.theme.model.vo.PageInfo;
@@ -32,14 +33,14 @@ public class MyPageServiceImpl implements MyPageService {
 		return mpDao.selectMyList(pi,mId);
 	}
 
-	/**
-	 * 회원 탈퇴
-	 */
-	/*
-	 * @Override public int memberDelete(Member m) { return mpDao.memberDelete(m); }
-	 */
-	/*
-	 * @Override public int memberUpdate(Member m) { return mpDao.memberUpdate(m); }
-	 */
+	@Override
+	public int getListCountReview(String bWriter) {
+		return mpDao.getListCountReview(bWriter);
+	}
+
+	@Override
+	public ArrayList<Blog> selectReviewList(PageInfo pi, String bWriter) {
+		return mpDao.selectReviewList(pi,bWriter);
+	}
 
 }

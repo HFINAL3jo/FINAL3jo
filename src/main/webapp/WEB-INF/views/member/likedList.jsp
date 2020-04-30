@@ -55,7 +55,7 @@
     <!-- breadcrumb start-->
 
     <!--================Category Product Area =================-->
-    <%@ include file="../common/assideMyPage.jsp"%>                
+    <jsp:include page="../common/assideMyPage.jsp" flush="true"/>                
                 
 					<!-- 내가 좋아요한 리스트 -->
 					<div id="tList" class="col-lg-9">

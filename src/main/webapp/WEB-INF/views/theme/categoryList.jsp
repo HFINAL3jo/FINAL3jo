@@ -25,7 +25,18 @@
 	background-color: transparent;
 	margin: 0;
 }
-
+.card span {
+    background-color: rgb(0,0,0,.5);
+}
+.card > span {
+    text-align: center;
+    position: relative;
+    top: 175px;
+    color: white;
+    font-size: 1.4em;
+    font-weight: 600;
+    cursor: pointer;
+}
 h4{
 	text-align:center;
 }
@@ -233,14 +244,12 @@ h4{
 	 $('#topviews').click(function(){
 		 searchValue = 2;
 		 currentPage = 1;
-		 $('#titlebar').text('Top views');
 		 $('#aList').html("");
 		 ajaxPage();
 	 });
 	 $('#mostLiked').click(function(){
 		 searchValue = 3;
 		 currentPage = 1;
-		 $('#titlebar').text('Most Liked');
 		 $('#aList').html("");
 		 ajaxPage();
 	 });

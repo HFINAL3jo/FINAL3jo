@@ -10,21 +10,10 @@
  	input[class~=adi]{
  		width:150%;
  	}
- <style>
- 	input[class~=adi]{
- 		width:150%;
- 	}
- 	#tt{
-    height: 30px;
-    font-family: "Montserrat";
-    margin-left:-100px;
-    font-size: 18px;
-    letter-spacing: 2px;
-    padding: 0px 45px 0px 18px;
-    caret-color: #000;
-    background: transparent;
-    z-index: 5;
-}
+    
+    #tt{
+    width:80%;
+} 
 	table>td{
 		width:120%;
 	}
@@ -37,7 +26,7 @@
  	}
  	
  	table tr td{
- 		width:400px;
+ 		width:730px;
  	}
  	
  </style>
@@ -47,7 +36,7 @@
     <form action="blogInsert.do" method="POST" id="gosubmit" enctype="multipart/form-data" onsubmit="return false;">
     <div id="editor">
     <br>
-    <div><input type="text" size="40" name="bTitle" id="tt" placeholder="Title.." style="border-radius:5px;"></div>
+    <div><input type="text" size="40" class="form-control" name="bTitle" id="tt" placeholder="Title.." style="border-radius:5px;"></div>
     <br><br>
     <span style="float:left; padding-right:10px;">Category &nbsp;&nbsp;
     <select name="bCode" id="category">
@@ -224,6 +213,10 @@ nhn.husky.EZCreator.createInIFrame({
             }
         });
     });
+	});
+	
+	$('#cancel').click(function(){
+		histroy.back(1);
 	});
 </script>
 </body>

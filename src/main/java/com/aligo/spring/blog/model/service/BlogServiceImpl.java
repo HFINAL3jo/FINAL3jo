@@ -59,4 +59,9 @@ public class BlogServiceImpl implements BlogService {
 	public ArrayList<Blog> selectList(PageInfo pi) {
 		return blDao.selectList(pi);
 	}
+
+	@Override
+	public void insertMyReview(Blog b) {
+		blDao.insertMyReview(b);
+	}
 }

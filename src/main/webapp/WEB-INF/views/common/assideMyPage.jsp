@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Get inspired for your journey! - aligo</title>
 </head>
 <body>
 	<section class="cat_product_area section_padding">
@@ -27,8 +27,7 @@
                                         <span>(${pi.listCount})</span>
                                     </li>
                                     <li>
-                                        <a href="myReview.do">My Reveiw</a>
-                                        <span>(6)</span>
+                                        <a href="myReview.do">My Review</a>
                                     </li>
                                     
                                 </ul>

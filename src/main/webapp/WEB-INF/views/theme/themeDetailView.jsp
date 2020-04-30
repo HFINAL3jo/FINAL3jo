@@ -684,8 +684,9 @@
 				    			type:"get",
 				    			data:{trId:trId},
 				    			success:function(data){
-				    				if(data == 'success') getTReplyList();
-				    				alert("Delete Success");
+				    				if(data == 'success'){
+				    					getTReplyList();
+				    				} 
 				    			},error:function(){
 				    				
 				    			}

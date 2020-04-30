@@ -38,7 +38,7 @@
 </head>
 <body>
 	<span style="text-align: center;"><h2 id="titlebar" style="margin-left:8%;">
-		Your Interest</h2></span>
+		</h2></span>
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">

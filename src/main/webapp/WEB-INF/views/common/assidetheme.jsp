@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Get inspired for your journey! - aligo</title>
 <style>
 	.list{
 	border-top:none !important;
@@ -37,8 +37,8 @@
 </style>
 </head>
 <body>
-	<span style="text-align: center;"><h2 id="titlebar" style="margin-left:8%;">
-		Your Interest</h2></span>
+	<span style="text-align: center;"><h3 id="titlebar" style="margin-left:8%;">
+		</h3></span>
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">

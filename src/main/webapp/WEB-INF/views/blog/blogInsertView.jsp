@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Get inspired for your journey! - aligo</title>
 <script src="resources/js/jquery-3.4.1.min.js"></script>
 </head>
 <body>
@@ -22,7 +22,6 @@
 	
 	<%@ include file="../common/footer.jsp" %>
 	<script>
-		$('#titlebar').text('BlogWrite');
 	</script>
 </body>
 </html>

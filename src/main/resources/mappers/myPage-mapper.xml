@@ -25,6 +25,32 @@
 		<collection property="tFileList" javaType="java.util.ArrayList" resultMap="myFileResultSet"/>
 	</resultMap>
 	
+	<resultMap type="Blog" id="BlogResultSet">
+	 <id property="bId" column="BID"/>
+	 
+	 <result property="bWriter" column="BWRITER" />
+	 <result property="bTitle" column="BTITLE" />
+	 <result property="bContent" column="BCONTENT" />
+	 <result property="bAddress" column="BADDRESS" />
+	 <result property="bAddressH" column="BADDRESSH" />
+	 <result property="bCreateDate" column="B_CREATE_DATE" />
+	 <result property="bModifyDate" column="B_MODIFY_DATE" />
+	 <result property="bViews" column="B_VIEWS" />
+	 <result property="bLikes" column="B_LIKES" />
+	 <result property="bStatus" column="B_STATUS" />
+	 <result property="bCode" column="BCODE" />
+	 <result property="bOriginalFile" column="B_ORIGINAL_FILE"/>
+	 <result property="bModifyFile" column="B_MODIFY_FILE"/>
+	 <result property="category" column="BNAME"/>
+	 <result property="bTel" column="BTEL"/>
+	 <result property="bFee" column="BFEE"/>
+	 <result property="bHours" column="BHOURS"/>
+	 <result property="bTrans" column="BTRANS"/>
+	 <result property="bTag" column="BTAG"/>
+	 
+	</resultMap>
+	
+	
 	<resultMap type="TFile" id="myFileResultSet">
 		<id property="tCodeNumber" column="T_CODE_NUMBER"/>
 		
@@ -53,4 +79,19 @@
 		ORDER BY TID DESC
 	</select>
 
+	<select id="getListCountReview" resultType="_int">
+		SELECT COUNT(*)
+		FROM MY_REVIEW
+		JOIN BLOG_LIST USING(BWRITER,BID)
+		WHERE B_STATUS='Y' AND BWRITER=#{bWriter}
+	</select>
+	
+	<select id="selectReviewList" resultMap="BlogResultSet">
+		SELECT *
+		FROM BLOG_LIST
+		JOIN MY_REVIEW USING(BWRITER,BID)
+		JOIN BCATEGORY USING(BCODE)
+		LEFT JOIN BLOG_FILES ON(BID=BCODE_NUMBER)
+		WHERE B_STATUS='Y' AND BWRITER=#{bWriter} 
+	</select>
 </mapper>

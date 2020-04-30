@@ -82,7 +82,7 @@
 	
 	<insert id="insertBlog" parameterType="Blog">
 		INSERT INTO BLOG_LIST VALUES(SEQ_BNO.NEXTVAL,#{bWriter},#{bTitle},
-		#{bContent},#{bAddress},#{bAddressH},DEFAULT,DEFAULT,DEFAULT,DEFAULT,
+		#{bContent},NVL(#{bAddress},' '),NVL(#{bAddressH},' '),DEFAULT,DEFAULT,DEFAULT,DEFAULT,
 		DEFAULT,NVL(#{bTel},' '),NVL(#{bFee},' '),NVL(#{bHours},' '),NVL(#{bTag},' '),NVL(#{bTrans},' '),#{bCode})
 	</insert>
 		
@@ -98,7 +98,11 @@
 		JOIN BCATEGORY USING(BCODE)
 		LEFT JOIN BLOG_FILES ON(BID=BCODE_NUMBER)
 		WHERE B_STATUS='Y'
-	</select> 
+	</select>
+	
+	<insert id="insertMyReview">
+		INSERT INTO MY_REVIEW VALUES(#{bWriter},SEQ_BNO.CURRVAL)
+	</insert> 
 	
 	<!-- 
 	<select id="selectTheme" resultMap="themeResultSet">

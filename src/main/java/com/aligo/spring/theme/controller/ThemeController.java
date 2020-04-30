@@ -351,6 +351,7 @@ public class ThemeController extends TFile{
 	}
 	
 	@RequestMapping("deleteTReply.do")
+	@ResponseBody
 	public String deleteTReply(int trId) {
 		int result = tService.deleteTReply(trId); 
 		if(result > 0) return "success"; else return "fail";

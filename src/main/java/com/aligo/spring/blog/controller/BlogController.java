@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,6 @@ import com.aligo.spring.blog.model.vo.Blog;
 import com.aligo.spring.common.AligoException;
 import com.aligo.spring.common.Pagination;
 import com.aligo.spring.theme.model.vo.PageInfo;
-import com.aligo.spring.theme.model.vo.Theme;
 
 @Controller
 public class BlogController extends BFile {
@@ -77,6 +77,8 @@ public class BlogController extends BFile {
 			e.getMessage();
 		}
 		if(result >0) {
+			
+			blService.insertMyReview(b);
 			return "redirect:blog.do"; 
 		}else { 
 			request.setAttribute("msg",AligoException.getMsg());
