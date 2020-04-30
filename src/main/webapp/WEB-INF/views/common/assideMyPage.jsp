@@ -27,7 +27,10 @@
                                         <span>(${pi.listCount})</span>
                                     </li>
                                     <li>
-                                        <a href="myReview.do">My Review</a>
+                                    <c:url var="review" value="myReview.do">
+										<c:param name="bWriter" value="${sessionScope.loginUser.nickname }"/>
+									</c:url>
+                                        <a href="${review }">My Review</a>
                                     </li>
                                     
                                 </ul>

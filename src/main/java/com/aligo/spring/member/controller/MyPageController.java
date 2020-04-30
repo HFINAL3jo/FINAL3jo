@@ -98,21 +98,18 @@ public class MyPageController {
 	  	out.flush();
 	  	out.close(); 
 	}
-
-	@RequestMapping("myReviewList.do")
-	@ResponseBody
-	public void myReviewList(String bWriter,@RequestParam(value="currentPage",
-	defaultValue="1",required=false) int currentPage,HttpServletResponse response) throws JsonIOException, IOException {
-		int listCount = mpService.getListCountReview(bWriter);
-		
-		PageInfo pi = Pagination.getPageInfo4(currentPage, listCount);
-		
-		ArrayList<Blog> list = mpService.selectReviewList(pi,bWriter);
-		
-		for(Blog b: list) {
+	
+	@RequestMapping("myReview.do")
+		public ModelAndView myReviewList(ModelAndView mv,String bWriter,@RequestParam(value="currentPage",
+		defaultValue="1",required=false) int currentPage,HttpServletResponse response) throws JsonIOException, IOException {
+			int listCount = mpService.getListCountReview(bWriter);
+			PageInfo pi = Pagination.getPageInfo4(currentPage, listCount);
 			
-			if(b.getbModifyFile() != null) {
+			ArrayList<Blog> list = mpService.selectReviewList(pi,bWriter);
+			for(Blog b: list) {
 				
+			if(b.getbModifyFile() != null) {
+					
 				if(b.getbModifyFile().length() <= 18) {
 					b.setbModifyFile("resources/buploadFiles/" + b.getbModifyFile());
 				}else if(b.getbModifyFile().contains(",")){
@@ -121,14 +118,8 @@ public class MyPageController {
 					b.setbModifyFile(b.getbModifyFile().replace("amp;",""));
 				}
 			}
+		}
+		mv.addObject("pi",pi).addObject("list",list).setViewName("member/myReview");
+		return mv; 
 	}
-		response.setContentType("application/json; charset=UTF-8");
-		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-		gson.toJson(list,response.getWriter());
-	}
-	@RequestMapping("myReview.do")
-	public String myReview() {
-		return "member/myReview"; 
-}
 }

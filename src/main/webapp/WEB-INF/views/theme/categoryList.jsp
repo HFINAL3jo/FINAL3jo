@@ -108,8 +108,6 @@ h4{
 
 						<div class="single_product_menu">
 								Number of posts <span>${pi.listCount}</span>
-							</p>
-							<!-- <p>여행 테마 -> 전통 -> 고궁</p> -->
 						</div>
 
 						<div class="single_product_menu d-flex">
@@ -252,17 +250,6 @@ h4{
 		 currentPage = 1;
 		 $('#aList').html("");
 		 ajaxPage();
-	 });
-	 
-	 $(function(){
-		var str = document.URL.substr(document.URL.indexOf('keyword=')+8,document.URL.length);
-
-		if(str.charAt(0) =='%'){
-			str = decodeURI(str.substr(0,str.indexOf('&')));
-			$('#kk').text(' - ' + str);			
-		}else{
-			$('#kk').text(' - ' + str);
-		}
 	 });
 	</script>
 </body>

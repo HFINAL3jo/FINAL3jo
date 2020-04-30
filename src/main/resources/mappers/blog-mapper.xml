@@ -26,8 +26,7 @@
 	 <result property="bFee" column="BFEE"/>
 	 <result property="bHours" column="BHOURS"/>
 	 <result property="bTrans" column="BTRANS"/>
-	 <result property="bTag" column="BTAG"/>
-	 
+	 <result property="bFileStatus" column="BFILE_STATUS"/>
 	</resultMap>
 	
 	<!-- <resultMap type="TReply" id="themeReplyResultSet">
@@ -44,7 +43,7 @@
 	</resultMap> -->
 	
 	<resultMap type="BFile" id="BFileResultSet">
-		<id property="bCodeNumber" column="BCODE_NUMBER"/>
+		<id property="bCodeNumber" column="BID"/>
 		
 		<result property="bOriginalFile" column="B_ORIGINAL_FILE"/>
 		<result property="bModifyFile" column="B_MODIFY_FILE"/>
@@ -66,202 +65,130 @@
 	</insert>
 	
 	<select id="getBCount" resultType="_int">
-		SELECT COUNT(*) FROM BLOG_FILES WHERE BCODE_NUMBER = #{bCodeNumber}
+		SELECT COUNT(*) FROM BLOG_FILES WHERE BID = #{bCodeNumber}
 	</select>
 	
 	<update id="updateImg" parameterType="BFile">
 		UPDATE BLOG_FILES SET B_ORIGINAL_FILE 
 		= B_ORIGINAL_FILE ||','|| #{bOriginalFile}, 
 		B_MODIFY_FILE = B_MODIFY_FILE ||','|| #{bModifyFile}
-		WHERE BCODE_NUMBER = #{bCodeNumber}
+		WHERE BID = #{bCodeNumber}
 	</update>
-	
-	<select id="checkFile" resultType="_int">
-		SELECT COUNT(*) FROM BLOG_FILES WHERE BCODE_NUMBER = #{bNum}
-	</select>
 	
 	<insert id="insertBlog" parameterType="Blog">
 		INSERT INTO BLOG_LIST VALUES(SEQ_BNO.NEXTVAL,#{bWriter},#{bTitle},
 		#{bContent},NVL(#{bAddress},' '),NVL(#{bAddressH},' '),DEFAULT,DEFAULT,DEFAULT,DEFAULT,
-		DEFAULT,NVL(#{bTel},' '),NVL(#{bFee},' '),NVL(#{bHours},' '),NVL(#{bTag},' '),NVL(#{bTrans},' '),#{bCode})
+		DEFAULT,NVL(#{bTel},' '),NVL(#{bFee},' '),NVL(#{bHours},' '),NVL(#{bTrans},' '),#{bCode},#{bFileStatus})
 	</insert>
 		
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*) 
 		FROM BLOG_LIST
+		JOIN BCATEGORY USING(BCODE)
 		WHERE B_STATUS='Y' 
+		<if test="keyword != null">
+		AND BNAME=#{keyword}
+		</if>
 	</select>
 	
-	<select id="selectList" resultMap="BlogResultSet">		
+	<select id="selectList1" resultMap="BlogResultSet">
 		SELECT *
 		FROM BLOG_LIST
 		JOIN BCATEGORY USING(BCODE)
-		LEFT JOIN BLOG_FILES ON(BID=BCODE_NUMBER)
 		WHERE B_STATUS='Y'
+	<if test="keyword == null">		
+		ORDER BY BID DESC
+	</if>
+	<if test="keyword != null">
+		AND BNAME=#{keyword}
+		ORDER BY BID DESC
+	</if>
+	</select>
+	<select id="selectList2" resultMap="BlogResultSet">
+		SELECT *
+		FROM BLOG_LIST
+		JOIN BCATEGORY USING(BCODE)
+		WHERE B_STATUS='Y'
+	<if test="keyword == null">		
+		ORDER BY B_VIEWS DESC
+	</if>
+	<if test="keyword != null">
+		AND BNAME=#{keyword}
+		ORDER BY B_VIEWS DESC
+	</if>
+	</select>
+	<select id="selectList3" resultMap="BlogResultSet">
+		SELECT *
+		FROM BLOG_LIST
+		JOIN BCATEGORY USING(BCODE)
+		WHERE B_STATUS='Y'
+	<if test="keyword == null">		
+		ORDER BY B_LIKES DESC
+	</if>
+	<if test="keyword != null">
+		AND BNAME=#{keyword}
+		ORDER BY B_LIKES DESC
+	</if>
 	</select>
 	
 	<insert id="insertMyReview">
 		INSERT INTO MY_REVIEW VALUES(#{bWriter},SEQ_BNO.CURRVAL)
 	</insert> 
-	
-	<!-- 
-	<select id="selectTheme" resultMap="themeResultSet">
-		SELECT * 
-		FROM THEME_LIST
-		JOIN THEME_CODE USING(TCODE)
-		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
-		WHERE TID=#{tId}	
-	</select>
-	
-	<update id="updateViewCount">
-		UPDATE THEME_LIST SET T_VIEWS = T_VIEWS + 1	WHERE TID = #{tId}
-	</update>
-	
-	<update id="updateTagCount">
-		UPDATE THEME_CODE 
-		SET TCOUNT = TCOUNT + 1
-		WHERE TCODE = (SELECT TCODE FROM THEME_LIST WHERE TID = #{tID})
-	</update>
-	
-	<select id="findKeywordArea" resultType="string">
-		SELECT AREA
-		FROM SEARCH_AREA
-		WHERE AREA LIKE UPPER('%'||#{keyword}||'%')
-	</select>
-	
-	<select id="findKeywordTheme" resultType="string">
-		SELECT TCODE 
-		FROM SEARCH_THEME
-		JOIN THEME_CODE USING(TCODE)
-		WHERE TNAME LIKE UPPER('%'||#{keyword}||'%') 
-	</select>
-	
-	<update id="updateCountKwT">
-		UPDATE SEARCH_THEME SET ST_COUNT = ST_COUNT + 1 WHERE TCODE = #{key}
-	</update>
-	
-	<update id="updateCountKwA">
-		UPDATE SEARCH_AREA SET SA_COUNT = SA_COUNT + 1 WHERE AREA = #{key}
-	</update>
-	
-	<insert id="insertTReply">
-		INSERT INTO THEME_REPLY VALUES
-		(SEQ_TRNO.NEXTVAL,#{trContent},#{refTid},#{trWriter},DEFAULT,DEFAULT,DEFAULT)
-	</insert>
-	
-	<select id="selectTReplyList" resultMap="themeReplyResultSet" parameterType="TReply">
-		SELECT * 
-		FROM THEME_REPLY 
-		WHERE REF_TID = #{tId} AND TR_STATUS = 'Y'
-		ORDER BY TRID DESC
-	</select>
-	
-	<select id="getKeyword" resultType="string">
-		WITH TEMP_TABLE AS(
-		SELECT RQKEYWORD1 FROM RECOMMEND_Q WHERE R_STATUS='Y' UNION ALL
-		SELECT RQKEYWORD2 FROM RECOMMEND_Q WHERE R_STATUS='Y')
-		SELECT LISTAGG(RQKEYWORD1,',') WITHIN GROUP (ORDER BY ROWNUM) TKEYWORD FROM TEMP_TABLE
-	</select>
-	
-	<update id="updateTheme" parameterType="Theme">
-		UPDATE THEME_LIST SET TTITLE=#{tTitle},TCONTENT=#{tContent},TADDRESS=#{tAddress},
-		TADDRESSH=#{tAddressH},T_MODIFY_DATE=SYSDATE,TKEYWORD=#{tKeyword},TCODE=#{tCode},TTEL=NVL(#{tTel},' '),
-		TFEE=NVL(#{tFee},' '),THOURS=NVL(#{tHours},' '),TTRANS=NVL(#{tTrans},' ') WHERE TID=#{tId} 
-	</update>
-	
-	Like
-	<update id="updateLike">
-		<if test="lv == 0">
-		UPDATE THEME_LIST SET T_LIKES = T_LIKES - 1 WHERE TID= TO_NUMBER(#{tId})
-		</if>
-		<if test="lv == 1">
-		UPDATE THEME_LIST SET T_LIKES = T_LIKES + 1 WHERE TID= TO_NUMBER(#{tId})
-		</if>
-	</update>
-	
-	<update id="updateThemeLikeCount">
-		<if test="lv == 0">
-		UPDATE THEME_CODE SET TLIKE= TLIKE - 1 WHERE TCODE=#{tCode}
-		</if>
-		<if test="lv == 1">
-		UPDATE THEME_CODE SET TLIKE= TLIKE + 1 WHERE TCODE=#{tCode}
-		</if>
-	</update>
-	
-	<insert id="insertMyLike" parameterType="map">
-		INSERT INTO THEME_LIKES VALUES((
-		SELECT MID FROM MEMBER WHERE NICKNAME=#{loginUser}),TO_NUMBER(#{tId}))
-	</insert>
-	
-	<select id="checkLike" resultType="_int">
-		SELECT COUNT(*) FROM THEME_LIKES 
-		WHERE MID = (SELECT MID 
-					FROM MEMBER 
-					WHERE NICKNAME=#{loginUser})
-        AND T_CODE_NUM = TO_NUMBER(#{tId})
-	</select>
-	
-	<select id="selectStatus" parameterType="map" resultType="_int">
-		SELECT COUNT(*) FROM THEME_LIKES 
-		WHERE T_CODE_NUM = TO_NUMBER(#{tId}) AND 
-		MID = (SELECT MID 
-			   FROM MEMBER 
-			   WHERE NICKNAME=#{loginUser}) 
-	</select>
-	
-	<delete id="deleteMyLike">
-		DELETE FROM THEME_LIKES WHERE MID = 
-		(SELECT MID FROM MEMBER WHERE NICKNAME=#{loginUser})
-	</delete>
-	
-	<update id="deleteTheme">
-		UPDATE THEME_LIST SET T_STATUS='N' WHERE TID=#{tId} 
-	</update>
-	
-	<update id="deleteTReply">
-		UPDATE THEME_REPLY SET TR_STATUS='N' WHERE TRID=#{trId}
-	</update>
-	
-	<select id="getRandomListCount" resultType="_int"> 
-		SELECT COUNT(*) 
-		FROM THEME_LIST
-		JOIN THEME_CODE USING(TCODE)
-		WHERE T_STATUS='Y' AND
-		TKEYWORD LIKE '%'||#{recommend}||'%'
-		ORDER BY TID DESC
-	</select>
-	
-	<select id="selectTkeywordList" resultMap="themeResultSet">
-		SELECT * 
-		FROM THEME_LIST
-		JOIN THEME_CODE USING(TCODE)
-		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
-		WHERE T_STATUS='Y' AND
-		TKEYWORD LIKE '%'||#{recommend}||'%'
-		ORDER BY TID DESC
+	 
+	<select id="selectBlog" resultMap="BlogResultSet">
+		SELECT *
+		FROM BLOG_LIST
+		JOIN BCATEGORY USING(BCODE)
+		WHERE B_STATUS='Y' AND BID=#{bId}	
 	</select>
 	
 	<select id="getSearchListCount" resultType="_int">
-		SELECT COUNT(*) 
-		FROM THEME_LIST
-		JOIN THEME_CODE USING(TCODE)
-		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
-		WHERE T_STATUS='Y' AND
+		SELECT COUNT(*)
+		FROM BLOG_LIST
+		JOIN BCATEGORY USING(BCODE)
+		WHERE B_STATUS='Y' AND
 		REGEXP_LIKE(
-        UPPER(TTITLE||TADDRESS||TADDRESSH||TCONTENT
-		||TKEYWORD||TNAME||TTRANS),UPPER(#{searchVal}))
-		ORDER BY TID DESC
+        UPPER(BTITLE||BADDRESS||BADDRESSH||BCONTENT
+		||BNAME||BTRANS||BWRITER),UPPER(#{searchVal}))
+		ORDER BY BID DESC
 	</select>
 	
-	<select id="selectSearchList" resultMap="themeResultSet">
-		SELECT * 
-		FROM THEME_LIST
-		JOIN THEME_CODE USING(TCODE)
-		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
-		WHERE T_STATUS='Y' AND
+	<select id="getFile" resultMap="BFileResultSet">
+		SELECT * FROM BLOG_FILES WHERE BID=#{bId}
+	</select>
+	
+	<select id="selectSearchList" resultMap="BlogResultSet">
+		SELECT *
+		FROM BLOG_LIST
+		JOIN BCATEGORY USING(BCODE)
+		WHERE B_STATUS='Y' AND
 		REGEXP_LIKE(
-        UPPER(TTITLE||TADDRESS||TADDRESSH||TCONTENT
-		||TKEYWORD||TNAME||TTRANS),UPPER(#{searchVal}))
-		ORDER BY TID DESC
-	</select>-->
+        UPPER(BTITLE||BADDRESS||BADDRESSH||BCONTENT
+		||BNAME||BTRANS||BWRITER),UPPER(#{searchVal}))
+		ORDER BY BID DESC
+	</select>
+	
+	<update id="updateCount">
+		UPDATE BLOG_LIST SET B_VIEWS = B_VIEWS + 1	WHERE BID = #{bId}
+	</update>
+	
+	<update id="updateLike">
+		<if test="lv == 0">
+		UPDATE BLOG_LIST SET B_LIKES = B_LIKES - 1 WHERE BID= TO_NUMBER(#{bId})
+		</if>
+		<if test="lv == 1">
+		UPDATE BLOG_LIST SET B_LIKES = B_LIKES + 1 WHERE BID= TO_NUMBER(#{bId})
+		</if>
+	</update>
+	
+	<update id="updateBlog">
+		UPDATE BLOG_LIST SET BTITLE=#{bTitle},BCONTENT=#{bContent},BADDRESS=NVL(#{bAddress},' '),
+		BADDRESSH=NVL(#{bAddressH},' '),B_MODIFY_DATE=SYSDATE,BTEL=NVL(#{bTel},' '),BFEE=NVL(#{bFEE},' '),BHOURS
+		=NVL(#{bHours},' '),BTRANS=NVL(#{bTrans},' '),BCODE=#{bCode} WHERE BID=#{b.bId}
+	</update>
+	
+	<update id="deleteBlog">
+		UPDATE BLOG_LIST SET B_STATUS='N' WHERE BID=#{bId}
+	</update>
+	
 </mapper>

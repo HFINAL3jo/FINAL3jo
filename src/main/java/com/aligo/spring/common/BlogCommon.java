@@ -1,6 +1,5 @@
 package com.aligo.spring.common;
 
-import com.aligo.spring.blog.model.vo.BFile;
 import com.aligo.spring.blog.model.vo.Blog;
 
 public class BlogCommon {
@@ -15,30 +14,5 @@ public class BlogCommon {
 		case "etc":b.setbCode("B6"); break;
 		}
 		return b;
-	}
-	
-public static BFile fileCheck(Blog b,int bNum,int chk){
-			BFile bf = null;
-		
-			if(chk == 0) {
-			
-			String str = b.getbContent();
-			
-			if(str.indexOf("src") != -1) {
-				
-				str = str.substring(str.indexOf("src")+5,str.length());
-				str = str.substring(0,str.indexOf("\""));
-				
-				b.setbOriginalFile(str);
-				b.setbModifyFile(str);
-				bf = new BFile();
-				bf.setbCodeNumber(bNum);
-				bf.setbOriginalFile(str);
-				bf.setbModifyFile(str);
-			}
-		}
-			
-		return bf;
-		}
-
+	}	
 }

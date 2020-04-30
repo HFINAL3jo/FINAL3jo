@@ -96,6 +96,20 @@
 	#pag{
 		margin-left:270px !important;
 	}
+	#searchD{
+		width:40% !important; 
+		display:inline-block;
+		padding-top:30px;
+    	position: relative;
+	    display: -ms-flexbox;
+    	display: flex;
+    	-ms-flex-wrap: wrap;
+    	flex-wrap: wrap;
+    	-ms-flex-align: stretch;
+    	align-items: stretch;
+    	margin-left:250px;
+}
+	}
 </style>
 
 </head>
@@ -136,7 +150,6 @@
 
 						<div class="single_product_menu">
 								Number of posts <span>${pi.listCount}</span>
-							</p>
 						</div>
 
 						<div class="single_product_menu d-flex">
@@ -167,26 +180,22 @@
               <th style="widht:8%;">Likes</th>
             </tr>
           <tbody>
-           <c:url var="blog" value="bDetailView.do">
-           		<c:param name="bId" value="${b.bId }"/>
-           		<c:param name="currentPage" value="${pi.currentPage }"/>
-           </c:url>
             <c:forEach var="b" items="${list }">
-            <a href="${blog }">
             <tr>
   				<td>${b.bId }</td>
   				<td>${b.bTitle }</td>
   				<td>${b.bWriter }</td>     
   				<td>${b.bCreateDate }</td>
   				<td>${b.bViews }</td>     
-  				<td>${b.bLikes }</td>     
-            </tr></a>
+  				<td>${b.bLikes }</td>  
+            </tr>
             </c:forEach>
             </tbody>
         </table>
 	      </div>
 			      
 		  <ul id="pag">
+		  	
 		  	 <c:url var="page" value="blog.do">
 		  	 	<c:param name="currentPage" value="${pi.currentPage }"></c:param>
 		  	 </c:url>
@@ -198,31 +207,43 @@
 		    <c:if test="${pi.currentPage ne 1}">
 		    <li>
 			  <c:url var="prev" value="blog.do">
-			  	<c:param name="currentPage" value="${pi.currentPage -1}"/>
+			  	<c:param name="currentPage" value="${pi.currentPage - 5}"/>
 			  </c:url>		      
 		      <a class="page-link" href="${prev}" tabindex="-1" aria-disabled="true">Previous</a>
 		    </li>
 		    </c:if>
 		    <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
+		    <c:url var="pp" value="blog.do">
+		    	<c:param name="currentPage" value="${p }"/>
+		    </c:url>
 		    <c:if test="${p eq pi.currentPage }">
 		    <li><a class="page-link" tabindex="-1" aria-disabled="true">${p}</a></li>
 		    </c:if>
 		    <c:if test="${p ne pi.currentPage}">
-		    	<li><a class="page-link" href="${page }" tabindex="-1" aria-disabled="true">${p}</a></li>
+		    	<li><a class="page-link" href="${pp }" tabindex="-1" aria-disabled="true">${p}</a></li>
 		    </c:if>
 		    </c:forEach>
-		    <c:if test="${pi.currentPage eq pi.endPage}">
-		    <li><a class="page-link" tabindex="-1" aria-disabled="true">Next</a>
+		    <c:if test="${pi.currentPage eq pi.maxPage}">
+		    <li>
+		    <a class="page-link" tabindex="-1" aria-disabled="true">Next</a>
 		    </li>
 		    </c:if>
-		    <c:if test="${pi.currentPage ne pi.endPage}">
+		    <c:if test="${pi.currentPage ne pi.maxPage}">
 		    <c:url var="next" value="blog.do">
-		    	<c:param name="currentPage" value="${pi.currentPage + 1}"/>
+		    	<c:param name="currentPage" value="${pi.currentPage + 5}"/>
 		    </c:url>
-		    <li><a class="page-link" tabindex="-1" aria-disabled="true" href="${next}">Next</a>
+		    <li><a class="page-link" tabindex="-1" aria-disabled="true" href="${next}">Next</a></li>
 		    </c:if>
-		  </ul>
+		  </ul><br><br>
+		  
 		</div>
+<div class="input-group" id="searchD">
+<input type="text" name="bkeyword" id="ss" class="form-control" placeholder="search" aria-describedby="inputGroupPrepend">
+<div class="input-group-prepend" id="searchBlog">
+<span class="input-group-text" id="inputGroupPrepend"><i class="ti-search"></i></span>
+</div>
+</div>
+</div>
 	</section>
 	<br>
 	
@@ -238,91 +259,24 @@
 	<script src="resources/js/price_rangs.js"></script>
 
 	<script>
-		var currentPage = $('#tc').val();
-		var maxPage = $('#tm').val();
+		$('#bt tbody').find('tr').click(function(){
+			location.href="bDetailView.do?bId=" + $(this).children().eq(0).text();
+		});
+		
+		$('#searchBlog').mouseenter(function(){
+			$(this).css('cursor','pointer');			
+		}).click(function(){
+			location.href="searchBlog.do?bkeyword="+$('#ss').val();
+		});
+		
 		var searchValue = $('#sv').val();
-		var keyword = $('#kw').val();
-		var endb = $('#lc').val();
-	
-	function pagination(){
-		if(maxPage == currentPage){
-			$('#alb').text("End");
-		}else{ 
-		currentPage = (parseInt(currentPage) + 1);
-		ajaxPage();
-		}
-	}
-	function ajaxPage(){
-	searchValue = parseInt(searchValue);
-	currentPage = parseInt(currentPage);
-	$.ajax({
-		url:"pagination.do",
-		data:{currentPage:currentPage,searchValue:searchValue,keyword:keyword},
-		dataType:"json",
-		success:function(data){
-		
-		   $div = $('#aList');
-		   $div.addClass('row align-items-center latest_product_inner');
-		   for(var i in data){
-			  var $diva = $('<div>').addClass('col-lg-4 col-sm-6').css('max-width','50%'); 
-			  var $a = $('<a>').attr('href',"postdetail.do?tId="+data[i].tId);
-			  var $divb = $('<div>').addClass('card-list');
-			  var $divc = $('<div>').addClass('card');			  
-			  var $img = $('<img>').attr('src',data[i].tModifyFile);
-			  var $span = $('<span>').text(data[i].tTitle);
-			  var $divd = $('<div>').addClass('single_product_item');
-				
-			  $div.append($diva);
-			  $diva.append($a);
-			  $a.append($divb);
-			  $divb.append($divc);
-			  $divc.append($img);
-			  $divc.append($span);
-			  $divb.append($divd);
-		   }
-		},error:function(){
-		   console.log("에러발생");
-		}
-	});
-}
-		//스크롤 70% 스크립트 및 div 추가 
-		window.onmousewheel = function(e) {
-			e.preventDefault;
-			var aa = $(window).height();
-			var bb = $(document).height();
-			var cc = $(window).scrollTop();
-			
-			if (Math.floor((aa / (bb - cc)) * 100 > 75 && e.deltaY === 100)) {
-				
-				pagination();
-				}
-			}
-		
 	 $('#topview').click(function(){
-		 searchValue = 2;
-		 currentPage = 1;
-		 $('#titlebar').text('Newest');
-		 $('#aList').html("");
-		 ajaxPage();
+		 location.href="blog.do?searchValue=2";
 	 });
 	 $('#mostLiked').click(function(){
-		 searchValue = 3;
-		 currentPage = 1;
-		 $('#titlebar').text('Most Liked');
-		 $('#aList').html("");
-		 ajaxPage();
+		 location.href="blog.do?searchValue=3";
 	 });
 	 
-	 $(function(){
-		var str = document.URL.substr(document.URL.indexOf('keyword=')+8,document.URL.length);
-
-		if(str.charAt(0) =='%'){
-			str = decodeURI(str.substr(0,str.indexOf('&')));
-			$('#kk').text(' - ' + str);			
-		}else{
-			$('#kk').text(' - ' + str);
-		}
-	 });
 	</script>
 </body>
 </html>

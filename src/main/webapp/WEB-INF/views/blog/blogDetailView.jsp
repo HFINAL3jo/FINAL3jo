@@ -357,14 +357,14 @@
 				
                 <div class="loction">
                     &gt;&nbsp;<span id="th" class="ar">Blog</span> 
-                    &gt;&nbsp;<span id="tn" class="ar">${b.bName }</span> 
+                    &gt;&nbsp;<span id="tn" class="ar">${b.category }</span> 
                 </div>
                 <!-- location  -->
 
                 <section class="infor-element">
                     <h3 class="h3 textcenter">${b.bTitle }</h3>
                     <br>                    
-					<span style="float:right;">Views : ${b.bviews }</span><br>
+					<span style="float:right;">Views : ${b.bViews }</span><br>
 					<span style="float:right;">Likes : ${b.bLikes }</span><br>
 					<c:if test="${loginUser.nickname eq b.bWriter || loginUser.nickname eq 'ADMIN'}">
 					<br><button id="dp" style="float:right; margin-left:10px;">Delete</button>					
@@ -377,20 +377,24 @@
                         ${b.bContent }
                         <br><br>
                         <div class="cnt-blockquote">
-                            <dl><dt>Address</dt>
+                            <dl>
+                            	<dt>Address</dt>
                                 <dd>${b.bAddress }</dd>
                             </dl>
-                            <dl><dt>Traffic</dt>
+                            <dl>
+                            	<dt>Traffic</dt>
                                 <dd>${b.bTrans }</dd>
                             </dl>
-                            <dl><dt>Fee</dt>
-                                <c:if test="${!empty b.bFee  }">${t.tFee }<dd></dd></c:if>
-                                <c:if test="${empty b.bFee  }">Free<dd></dd></c:if>
+                            <dl>
+                            	<dt>Fee</dt>
+                            	<dd>${b.bFee }</dd>
                             </dl>
-                            <dl><dt>Tel</dt>
+                            <dl>
+                            	<dt>Tel</dt>
                                 <dd>${b.bTel }</dd>
                             </dl>
-                            <dl><dt>Opening</dt>
+                            <dl>
+                            	<dt>Opening</dt>
                                 <dd>${b.bHours }</dd>
                             </dl>
                         </div>
@@ -399,7 +403,7 @@
                					<br>
 					<div class="like-content" align="center">
 						<span>
-    					Did you like this review? Press like to make it easier for others to see!
+    					Did you like this blog? Press like to make it easier for others to see!
   						</span>
   						<c:if test="${!empty loginUser }">
   						<button class="btn-secondary like-review" id="likeBtn" name="likeBtn" value="0">
@@ -434,7 +438,6 @@
                 
                 <section class="tag-element detail">
                     <p>
-                        <c:if test="${!empty b.bTag }"><h3 class="black"><a href="">#${b.bTag }</a></h3></c:if>
                     </p>
                 </section>
                     </div>
@@ -499,9 +502,6 @@
 				    	var loginUser = '${loginUser.nickname}';
 				    	var bId = '${b.bId}';
 				    	$.ajax({
-				    		url:"blikeStatus.do",
-				    		type:"post",
-				    		data:{loginUser:loginUser,bId:bId},
 				    		success:function(data){
 				    			if(data =='true'){
 				    			 var btn = $('#likeBtn');
@@ -531,14 +531,13 @@
 				   <%}%>
 				    function like(data) {
 				   		var lv = data.value;
-				   		var tId = '${b.bId}';
+				   		var bId = '${b.bId}';
 				   		var loginUser = '${loginUser.nickname}';
-				   		var tCode = '${b.bCode}';
 				    		
 						 $.ajax({
 							url: "bupdateLike.do",
 							type:"post",
-							data:{bId:bId,lv:lv,loginUser:loginUser,tCode:tCode},
+							data:{bId:bId,lv:lv,loginUser:loginUser},
 							success:function(data){
 								console.log(data);
 							},error:function(){
@@ -546,7 +545,6 @@
 						});
 					}
 				    
-				    //theme > themename 링크
 				    $('.loction span').mouseenter(function(){
 				    	$(this).css('cursor','pointer');
 				    }).click(function(e){
@@ -581,7 +579,6 @@
 				     $(function(){
 				    	
 				    	getTReplyList();
-				    	getRandomList();
 				    	
 				    	/*  setInterval(function(){
 				    		getTReplyList();
@@ -663,7 +660,7 @@
 				    	}
 				    //포스트 수정
 				    $('#mp').click(function(){
-				    	location.href="blogModifyView.do?tId="+'${b.bId}';
+				    	location.href="blogModifyView.do?bId="+'${b.bId}';
 				    });
 				    
 				    //포스트 삭제

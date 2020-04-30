@@ -84,20 +84,21 @@ public static PageInfo getPageInfo3(int currentPage, int listCount) {
 		int startPage;
 		int maxPage;
 		int endPage;
-		int blogLimit = 10;
-		int blogCursorLimit = 5;
+		int blogLimit = 5;
+		int blogCursorLimit = 10;
+		
+		maxPage = (int)(Math.ceil((double)listCount/blogCursorLimit));
+		if(currentPage > maxPage) currentPage = maxPage;
 		
 		startPage = (currentPage - 1)/blogLimit * blogLimit + 1;
-		
-		maxPage = (int)Math.ceil((double)listCount/blogCursorLimit);
-		
-		endPage = startPage + blogCursorLimit - 1;
+
+		endPage = startPage + blogLimit - 1;
 		
 		if(endPage>maxPage) {
 			endPage = maxPage;
 		}
 		
-		PageInfo pi = new PageInfo(startPage, maxPage, listCount, blogCursorLimit, currentPage, blogLimit, endPage);
+		PageInfo pi = new PageInfo(startPage, maxPage, listCount, blogLimit, currentPage, blogCursorLimit, endPage);
 		
 		return pi;
 	}

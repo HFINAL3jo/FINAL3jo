@@ -66,7 +66,7 @@
                                         <a href="blog.do?keyword=ETC">etc</a>
                                     </li>
                                     <li>
-                                        <a href="blog.do?keyword=">All</a>
+                                        <a href="blog.do">All</a>
                                     </li>
                                 </ul>
                                 <br>

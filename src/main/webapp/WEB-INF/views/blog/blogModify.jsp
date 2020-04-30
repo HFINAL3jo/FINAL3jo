@@ -32,11 +32,11 @@
  </style>
 </head>
 <body>
-	<c:if test="${!empty loginUser}">
-    <form action="blogInsert.do" method="POST" id="gosubmit" enctype="multipart/form-data" onsubmit="return false;">
+	<c:if test="${!empty loginUser && loginUser.nickname eq b.bWriter}">
+    <form action="blogModify.do" method="POST" id="gosubmit" enctype="multipart/form-data" onsubmit="return false;">
     <div id="editor">
     <br>
-    <div><input type="text" size="40" class="form-control" name="bTitle" id="tt" placeholder="Title.." style="border-radius:5px;"></div>
+    <div><input type="text" size="40" class="form-control" value="${b.bTitle }" name="bTitle" id="tt" placeholder="Title.." style="border-radius:5px;"></div>
     <br><br>
     <span style="float:left; padding-right:10px;">Category &nbsp;&nbsp;
     <select name="bCode" id="category">
@@ -48,9 +48,9 @@
       <option value="Reviews">Reviews</option>
       <option value="etc">etc</option>
     </select></span>
-    <div style="display:inline-block; float:right; padding-left:50px;">Writer&nbsp;<input type="text" name="bWriter" value="${loginUser.nickname }" style="border:none; width:200px;" readonly></div>
+    <div style="display:inline-block; float:right; padding-left:50px;">Writer&nbsp;<input type="text" name="bWriter" value="${b.bWriter }" style="border:none; width:200px;" readonly></div>
     <br><br>
-	<textarea name="BContent" id="smarteditor2" rows="30" cols="104"></textarea>
+	<textarea name="BContent" id="smarteditor2" rows="30" cols="104">${b.bContent }</textarea>
     <br><br>
     
     <table align="center" id="at">
@@ -62,10 +62,10 @@
 		</td>
 	</tr>
 	<tr>
-		<td><input type="text" id="da" class="single-input" name="bAddressH" placeholder="도로명주소" class="adi"></td>
+		<td><input type="text" id="da" class="single-input" name="bAddressH" value="${b.bAddressH }" placeholder="도로명주소" class="adi"></td>
 	</tr>
 	<tr>
-		<td><input type="text" id="ja" class="single-input" name="bAddress" placeholder="ADDRESS" class="adi"></td>
+		<td><input type="text" id="ja" class="single-input" name="bAddress" value="${b.bAddress }" placeholder="ADDRESS" class="adi"></td>
 	</tr>
 	<tr>
 		<td><input type="text" id="ad" class="single-input" placeholder="영문 지번 주소" class="adi"></td>
@@ -74,21 +74,22 @@
 		<td><input type="text" class="single-input" id="sample4_extraAddress" placeholder="상세 주소"></td>
 	</tr>
 	<tr>
-		<td><input type="text" placeholder="Tel" class="single-input" id="tel" name="bTel"></td>
+		<td><input type="text" placeholder="Tel" value="${b.bTel }" class="single-input" id="tel" name="bTel"></td>
 	</tr>
 	<tr>
-		<td><input type="text" class="single-input" placeholder="Fee" id="fee" name="bFee"></td>
+		<td><input type="text" class="single-input" value="${b.bFee }" placeholder="Fee" id="fee" name="bFee"></td>
 	</tr>
 	<tr>
-		<td><input type="text" class="single-input" placeholder="Transportation" id="trans" name="bTrans"></td>
+		<td><input type="text" class="single-input" value="${b.bTrans }" placeholder="Transportation" id="trans" name="bTrans"></td>
 	</tr>
 	<tr>
-		<td><input type="text" class="single-input" placeholder="Opening hours" id="oh" name="bHours">
+		<td><input type="text" class="single-input" value="${b.bHours }" placeholder="Opening hours" id="oh" name="bHours"></td>
 	</tr>
 	</table>
 	<br>
     <button id="cancel" class="btn btn-light" type="reset">Cancle</button>
-    <input type="button" class="btn btn-light" id="sbtn" value="Submit"> 
+    <input type="button" class="btn btn-light" id="sbtn" value="Submit">
+    <input type="hidden" name="bId" value="${b.bId }"> 
 	</div>
     </form>
     </c:if>

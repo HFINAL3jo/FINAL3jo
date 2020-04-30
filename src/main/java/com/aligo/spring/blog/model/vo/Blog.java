@@ -18,7 +18,6 @@ public class Blog {
 	private Date bModifyDate;
 	private int bViews;
 	private int bLikes;
-	private String bTag;
 	private String bStatus;
 	private String bTel;
 	private String bHours;
@@ -30,6 +29,7 @@ public class Blog {
 	private ArrayList<BFile> bFileList;
 	private String bCode;
 	private String category;
+	private String bFileStatus;
 	
 	public int getbId() {
 		return bId;
@@ -105,14 +105,6 @@ public class Blog {
 
 	public void setbLikes(int bLikes) {
 		this.bLikes = bLikes;
-	}
-
-	public String getbTag() {
-		return bTag;
-	}
-
-	public void setbTag(String bTag) {
-		this.bTag = bTag;
 	}
 
 	public String getbStatus() {
@@ -203,14 +195,22 @@ public class Blog {
 		this.category = category;
 	}
 
+	public String getbFileStatus() {
+		return bFileStatus;
+	}
+
+	public void setbFileStatus(String bFileStatus) {
+		this.bFileStatus = bFileStatus;
+	}
+
 	public void setbId(int bId) {
 		this.bId = bId;
 	}
 
 	public Blog(int bId, String bWriter, String bTitle, String bContent, String bAddress, String bAddressH,
-			Date bCreateDate, Date bModifyDate, int bViews, int bLikes, String bTag, String bStatus, String bTel,
-			String bHours, String bFee, int bCodeNumber, String bTrans, String bOriginalFile, String bModifyFile,
-			ArrayList<BFile> bFileList, String bCode, String category) {
+			Date bCreateDate, Date bModifyDate, int bViews, int bLikes, String bStatus, String bTel, String bHours,
+			String bFee, int bCodeNumber, String bTrans, String bOriginalFile, String bModifyFile,
+			ArrayList<BFile> bFileList, String bCode, String category, String bFileStatus) {
 		super();
 		this.bId = bId;
 		this.bWriter = bWriter;
@@ -222,7 +222,6 @@ public class Blog {
 		this.bModifyDate = bModifyDate;
 		this.bViews = bViews;
 		this.bLikes = bLikes;
-		this.bTag = bTag;
 		this.bStatus = bStatus;
 		this.bTel = bTel;
 		this.bHours = bHours;
@@ -234,16 +233,18 @@ public class Blog {
 		this.bFileList = bFileList;
 		this.bCode = bCode;
 		this.category = category;
+		this.bFileStatus = bFileStatus;
 	}
 
 	@Override
 	public String toString() {
 		return "Blog [bId=" + bId + ", bWriter=" + bWriter + ", bTitle=" + bTitle + ", bContent=" + bContent
 				+ ", bAddress=" + bAddress + ", bAddressH=" + bAddressH + ", bCreateDate=" + bCreateDate
-				+ ", bModifyDate=" + bModifyDate + ", bViews=" + bViews + ", bLikes=" + bLikes + ", bTag=" + bTag
-				+ ", bStatus=" + bStatus + ", bTel=" + bTel + ", bHours=" + bHours + ", bFee=" + bFee + ", bCodeNumber="
-				+ bCodeNumber + ", bTrans=" + bTrans + ", bOriginalFile=" + bOriginalFile + ", bModifyFile="
-				+ bModifyFile + ", bFileList=" + bFileList + ", bCode=" + bCode + ", category=" + category + "]";
+				+ ", bModifyDate=" + bModifyDate + ", bViews=" + bViews + ", bLikes=" + bLikes + ", bStatus=" + bStatus
+				+ ", bTel=" + bTel + ", bHours=" + bHours + ", bFee=" + bFee + ", bCodeNumber=" + bCodeNumber
+				+ ", bTrans=" + bTrans + ", bOriginalFile=" + bOriginalFile + ", bModifyFile=" + bModifyFile
+				+ ", bFileList=" + bFileList + ", bCode=" + bCode + ", category=" + category + ", bFileStatus="
+				+ bFileStatus + "]";
 	}
 	
 }

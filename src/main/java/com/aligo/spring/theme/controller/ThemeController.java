@@ -403,9 +403,6 @@ public class ThemeController extends TFile{
 		ArrayList<Theme> list = tService.selectSearchList(pi,sc);
 		
 		for(Theme t: list) {
-			if(t.gettTitle().length() > 16) {
-				t.settTitle(t.gettTitle().substring(0,15));
-			}
 			
 			if(t.gettModifyFile().length() <= 18) {
 				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile());
@@ -413,7 +410,6 @@ public class ThemeController extends TFile{
 				t.settModifyFile("resources/tuploadFiles/" + t.gettModifyFile().substring(0,t.gettModifyFile().indexOf(",")));
 			}
 		}
-		System.out.println(list);
 		mv.addObject("list",list);
 		mv.addObject("pi",pi);
 		mv.addObject("sc",sc);

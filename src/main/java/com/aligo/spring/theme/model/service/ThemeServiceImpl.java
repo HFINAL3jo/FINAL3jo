@@ -34,38 +34,11 @@ public class ThemeServiceImpl implements ThemeService {
 	@Override
 	public int insertTheme(Theme t,int tNum) throws AligoException{
 		
-//		switch(t.gettCode()) {
-//		case "NATURE":t.settCode("T1"); break;
-//		case "RESTAURANT":t.settCode("T2"); break;
-//		case "HISTORY":t.settCode("T3"); break;
-//		case "SHOPPING":t.settCode("T4"); break;
-//		case "BAR":t.settCode("T5"); break;
-//		case "ACTIVITY":t.settCode("T6"); break;
-//		case "EXHIBITION":t.settCode("T7"); break;
-//		}
 		 t = themeCode(t);
 		
 		int chk = tDao.checkFile(tNum);
 		
 		TFile tf = fileCheck(t,tNum,chk);
-		
-//		if(chk == 0) {
-//			
-//			String str = t.gettContent();
-//			try {
-//			str = str.substring(str.indexOf("src")+5,str.length());
-//			str = str.substring(0,str.indexOf("\""));
-//			}catch(Exception e){
-//				throw new AligoException("At least Need One Image");
-//			}
-//			t.settOriginalFile(str);
-//			t.settModifyFile(str);
-//			TFile tf = new TFile();
-//			tf.settCodeNumber(tNum);
-//			tf.settOriginalFile(str);
-//			tf.settModifyFile(str);
-//			int insertLink = tDao.insertImg(tf);
-//		}
 		
 		if(chk == 0) tDao.insertImg(tf);
 		return tDao.insertTheme(t);

@@ -116,7 +116,7 @@
         </table>
 	      </div>
 			      
-		  <ul id="pag">
+		 <ul id="pag">
 		  	 <c:url var="page" value="blog.do">
 		  	 	<c:param name="currentPage" value="${pi.currentPage }"></c:param>
 		  	 </c:url>
@@ -128,28 +128,32 @@
 		    <c:if test="${pi.currentPage ne 1}">
 		    <li>
 			  <c:url var="prev" value="blog.do">
-			  	<c:param name="currentPage" value="${pi.currentPage -1}"/>
+			  	<c:param name="currentPage" value="${pi.currentPage - 5}"/>
 			  </c:url>		      
 		      <a class="page-link" href="${prev}" tabindex="-1" aria-disabled="true">Previous</a>
 		    </li>
 		    </c:if>
 		    <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
+		    <c:url var="pp" value="blog.do">
+		    	<c:param name="currentPage" value="${p }"/>
+		    </c:url>
 		    <c:if test="${p eq pi.currentPage }">
 		    <li><a class="page-link" tabindex="-1" aria-disabled="true">${p}</a></li>
 		    </c:if>
 		    <c:if test="${p ne pi.currentPage}">
-		    	<li><a class="page-link" href="${page }" tabindex="-1" aria-disabled="true">${p}</a></li>
+		    	<li><a class="page-link" href="${pp }" tabindex="-1" aria-disabled="true">${p}</a></li>
 		    </c:if>
 		    </c:forEach>
-		    <c:if test="${pi.currentPage eq pi.endPage}">
-		    <li><a class="page-link" tabindex="-1" aria-disabled="true">Next</a>
+		    <c:if test="${pi.currentPage eq pi.maxPage}">
+		    <li>
+		    <a class="page-link" tabindex="-1" aria-disabled="true">Next</a>
 		    </li>
 		    </c:if>
-		    <c:if test="${pi.currentPage ne pi.endPage}">
+		    <c:if test="${pi.currentPage ne pi.maxPage}">
 		    <c:url var="next" value="blog.do">
-		    	<c:param name="currentPage" value="${pi.currentPage + 1}"/>
+		    	<c:param name="currentPage" value="${pi.currentPage + 5}"/>
 		    </c:url>
-		    <li><a class="page-link" tabindex="-1" aria-disabled="true" href="${next}">Next</a>
+		    <li><a class="page-link" tabindex="-1" aria-disabled="true" href="${next}">Next</a></li>
 		    </c:if>
 		  </ul>
 		  </div>
@@ -168,7 +172,7 @@
      
      <script>
      	
-     	$(function(){
+     	/* $(function(){
      		var bWriter = '${sessionScope.loginUser.nickname}';
      		$.ajax({
      			url:"myReviewList.do",
@@ -217,7 +221,7 @@
      		$(this).css('cursor','pointer');
      	}).click(function(){
      		console.log($(this));
-     	});
+     	}); */
      </script>
 </body>
 </html>
