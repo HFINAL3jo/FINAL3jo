@@ -137,7 +137,9 @@
 				<if test="search2 == 'TITLE'">
 					where QTITLE LIKE '%' || #{search3} || '%'
 				</if>
-				
+				<if test="search2 == 'QWRITER'">
+					where QWRITER LIKE '%' || #{search3} || '%'
+				</if>
 			</when>
 			<otherwise>
 				FROM QNA
@@ -145,7 +147,9 @@
 				<if test="search2 == 'TITLE'">
 					AND QTITLE LIKE '%' || #{search3} || '%'
 				</if>
-				
+				<if test="search2 == 'QWRITER'">
+					AND QWRITER LIKE '%' || #{search3} || '%'
+				</if>
 			</otherwise>
 		</choose>
 	</select>	

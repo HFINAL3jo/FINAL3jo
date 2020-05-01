@@ -183,17 +183,17 @@ public class QnAController {
 	// =================ADMIN 문의 사항==========================
 	@RequestMapping(value = "goSearchQnaData.do", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String goSearchQnaData(HttpServletRequest request,HttpSession session) throws Exception {
-
+	public String goSearchQnaData(HttpServletRequest request,HttpSession session
+			,HttpServletResponse response) throws Exception {
 		Map<String, String> map = new HashMap();
 		String checkFail = "";
 		for (int i = 1; i <= request.getParameterValues("value[]").length; i++) {
 			
 			System.out.println(request.getParameterValues("value[]")[i - 1]);
-			if (Pattern.compile(InjectionCheckSecurity2).matcher(request.getParameterValues("value[]")[i - 1]).find()) {
-				
-				checkFail = "fail";
-			}
+//			if (Pattern.compile(InjectionCheckSecurity2).matcher(request.getParameterValues("value[]")[i - 1]).find()) {
+//				
+//				checkFail = "fail";
+//			}
 
 			map.put("search" + i, request.getParameterValues("value[]")[i - 1]);
 		}
@@ -201,15 +201,14 @@ public class QnAController {
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 
 		QnAPageInfo pi = QnAPagination.getQnAPageInfo(currentPage, qService.getSearchQnaDataTotal(map));
-		String nickname = ((Member)session.getAttribute("loginUser")).getnickname();
-		
+		String nickname = ((Member)request.getSession().getAttribute("loginUser")).getnickname();
 		ArrayList<QnA> list = null;
 		if(nickname.equals("ADMIN")) {
 			list = qService.getSearchQnaAdmin(map,pi);
 		}else {
 			list = qService.getSearchQnaData(map, pi);
 		}
-
+		response.setContentType("application/json; charset=UTF-8");
 		Map qnaMap = new HashMap();
 		qnaMap.put("list", list);
 		qnaMap.put("pi", pi);

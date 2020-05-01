@@ -50,7 +50,7 @@
     </select></span>
     <div style="display:inline-block; float:right; padding-left:50px;">Writer&nbsp;<input type="text" name="bWriter" value="${loginUser.nickname }" style="border:none; width:200px;" readonly></div>
     <br><br>
-	<textarea name="BContent" id="smarteditor2" rows="30" cols="104"></textarea>
+	<textarea name="BContent" id="smarteditor2" rows="30" cols="100"></textarea>
     <br><br>
     
     <table align="center" id="at">

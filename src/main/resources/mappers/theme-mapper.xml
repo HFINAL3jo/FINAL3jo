@@ -102,7 +102,7 @@
 		FROM THEME_LIST
 		JOIN THEME_CODE USING(TCODE)
 		JOIN THEME_FILES ON(TID=T_CODE_NUMBER)
-		WHERE TID=#{tId}	
+		WHERE TID=#{tId} AND TID=T_CODE_NUMBER	
 	</select>
 	
 	<select id="getTNum" resultType="_int">
