@@ -172,7 +172,7 @@
 
 		<!-- 스프링 시큐리티 모듈 추가 안함 . core, web, config -->
 		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-core</artifactId> 
-			<version>5.2.2.RELEASE</version> </dependency> https://mvnrepository.com/artifact/org.springframework.security/spring-security-web 
+			<version>5.2.5.RELEASE</version> </dependency> https://mvnrepository.com/artifact/org.springframework.security/spring-security-web 
 			<dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-web</artifactId> 
 			<version>5.2.2.RELEASE</version> </dependency> https://mvnrepository.com/artifact/org.springframework.security/spring-security-config 
 			<dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-config</artifactId> 
@@ -211,7 +211,7 @@
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-core</artifactId>
-		    <version>5.2.2.RELEASE</version>
+		    <version>5.2.5.RELEASE</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
 		<dependency>
